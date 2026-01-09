@@ -1,21 +1,27 @@
 {
-  "name": "Pedro Almagro - Actor & Performer",
+  "name": "Pedro Almagro - Actor Profesional",
   "short_name": "Pedro Almagro",
-  "description": "Official website of Pedro Almagro - Award-winning actor and performer",
+  "description": "Portfolio oficial de Pedro Almagro - Actor profesional especializado en teatro, cine y televisión",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0f172a",
+  "orientation": "portrait-primary",
+  "lang": "es-ES",
+  "dir": "ltr",
+  "categories": ["entertainment", "lifestyle"],
   "icons": [
     {
       "src": "/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable any"
     },
     {
       "src": "/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable any"
     }
   ]
 }
