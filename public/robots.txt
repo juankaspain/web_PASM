@@ -2,4 +2,11 @@
 User-agent: *
 Allow: /
 
+# Disallow admin paths (if any in the future)
+Disallow: /api/
+
+# Crawl delay
+Crawl-delay: 0
+
+# Sitemap
 Sitemap: https://pedroalmagro.com/sitemap.xml
