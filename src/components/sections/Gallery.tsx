@@ -1,104 +1,111 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Camera, ExternalLink } from 'lucide-react'
+import { Camera, ExternalLink, Play } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
 
-const galleryImages = [
+const galleryItems = [
   {
+    id: 1,
+    type: 'image',
     title: 'La Moderna - Íñigo Peñalver',
-    category: 'TV',
+    project: 'La Moderna (TVE)',
     year: '2023-2024',
-    description: 'Como el galán protagonista de la serie diaria de TVE',
     image: 'https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?q=80&w=1000',
-    size: 'large',
+    category: 'tv',
   },
   {
+    id: 2,
+    type: 'image',
     title: 'Vis a vis: El Oasis - Dieguito',
-    category: 'TV',
+    project: 'Vis a vis: El Oasis',
     year: '2020',
-    description: 'Mi primer papel protagonista en el spin-off de Fox España',
     image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1000',
-    size: 'large',
+    category: 'tv',
   },
   {
+    id: 3,
+    type: 'image',
     title: 'Hernán - Gonzalo de Sandoval',
-    category: 'TV',
+    project: 'Hernán (Prime Video)',
     year: '2019',
-    description: 'Superproducción histórica de Prime Video',
     image: 'https://images.unsplash.com/photo-1533613220915-609f661a6fe1?q=80&w=1000',
-    size: 'medium',
+    category: 'tv',
   },
   {
-    title: 'La Caza: Guadiana - Aurelio',
-    category: 'TV',
-    year: '2023',
-    description: 'Thriller policial de TVE',
-    image: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1000',
-    size: 'medium',
-  },
-  {
-    title: 'Teatro Clásico - Segismundo',
-    category: 'Teatro',
-    year: '2016',
-    description: 'La vida es sueño - Calderón de la Barca',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000',
-    size: 'medium',
-  },
-  {
-    title: 'Teatro Clásico - Othelo',
-    category: 'Teatro',
-    year: '2015',
-    description: 'Shakespeare con CNTC',
-    image: 'https://images.unsplash.com/photo-1503095396549-807759245b35?q=80&w=1000',
-    size: 'medium',
-  },
-  {
-    title: 'Estoy vivo - Mikel Uribe',
-    category: 'TV',
-    year: '2021',
-    description: 'Serie fantástica de TVE',
-    image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=1000',
-    size: 'small',
-  },
-  {
-    title: 'Honor - Federico Fede',
-    category: 'TV',
-    year: '2023',
-    description: 'Serie policial Atresplayer',
-    image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1000',
-    size: 'small',
-  },
-  {
+    id: 4,
+    type: 'image',
     title: 'Un fantasma en la batalla',
-    category: 'Cine',
+    project: 'Un fantasma en la batalla',
     year: '2025',
-    description: 'Película de Agustín Díaz Yanes',
     image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1000',
-    size: 'small',
+    category: 'film',
   },
   {
-    title: 'Behind the Scenes',
-    category: 'BTS',
+    id: 5,
+    type: 'image',
+    title: 'La Caza: Guadiana - Aurelio',
+    project: 'La Caza: Guadiana',
+    year: '2023',
+    image: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1000',
+    category: 'tv',
+  },
+  {
+    id: 6,
+    type: 'image',
+    title: 'Estoy vivo - Mikel Uribe',
+    project: 'Estoy vivo',
+    year: '2021',
+    image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=1000',
+    category: 'tv',
+  },
+  {
+    id: 7,
+    type: 'image',
+    title: 'Teatro Clásico - Segismundo',
+    project: 'La vida es sueño',
+    year: '2015',
+    image: 'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&w=1000',
+    category: 'theater',
+  },
+  {
+    id: 8,
+    type: 'image',
+    title: 'Oliver Twist - Jefe Duff',
+    project: 'Oliver Twist (Musical)',
+    year: '2016',
+    image: 'https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=1000',
+    category: 'theater',
+  },
+  {
+    id: 9,
+    type: 'video',
+    title: 'Behind the Scenes - La Moderna',
+    project: 'Making of',
     year: '2024',
-    description: 'En el set de La Moderna',
-    image: 'https://images.unsplash.com/photo-1594908900066-3f47337549d8?q=80&w=1000',
-    size: 'small',
+    image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1000',
+    category: 'bts',
   },
 ]
 
-const categories = ['Todas', 'TV', 'Cine', 'Teatro', 'BTS']
+const categories = [
+  { id: 'all', label: 'Todas', icon: Camera },
+  { id: 'tv', label: 'Televisión', icon: Play },
+  { id: 'film', label: 'Cine', icon: Camera },
+  { id: 'theater', label: 'Teatro', icon: Camera },
+  { id: 'bts', label: 'Behind the Scenes', icon: Camera },
+]
 
 export default function Gallery() {
-  const [activeCategory, setActiveCategory] = useState('Todas')
+  const [selectedCategory, setSelectedCategory] = useState('all')
 
-  const filteredImages = activeCategory === 'Todas'
-    ? galleryImages
-    : galleryImages.filter(img => img.category === activeCategory)
+  const filteredItems = selectedCategory === 'all'
+    ? galleryItems
+    : galleryItems.filter(item => item.category === selectedCategory)
 
   return (
-    <section id="gallery" className="py-20 bg-slate-900 text-white">
+    <section id="gallery" className="py-20 bg-slate-900">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -108,92 +115,99 @@ export default function Gallery() {
         >
           <div className="flex items-center justify-center gap-3 mb-4">
             <Camera className="w-8 h-8 text-yellow-400" />
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-center">
-              Galería Profesional
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-center text-white">
+              Galería de Imágenes
             </h2>
           </div>
-          <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
-            Una selección visual de mis trabajos en televisión, cine y teatro.
+          <p className="text-center text-gray-300 mb-12 max-w-2xl mx-auto">
+            Una selección visual de mis personajes y proyectos más destacados.
           </p>
 
           {/* Filter Buttons */}
           <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`px-6 py-2 rounded-full font-semibold transition-all ${
-                  activeCategory === category
-                    ? 'bg-yellow-400 text-slate-900 scale-105'
-                    : 'bg-white/10 text-white hover:bg-white/20'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-
-          {/* Gallery Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
-            {filteredImages.map((item, index) => {
-              const gridClass = item.size === 'large'
-                ? 'md:col-span-2 md:row-span-2'
-                : item.size === 'medium'
-                ? 'md:col-span-1 md:row-span-1'
-                : 'md:col-span-1'
-
+            {categories.map((category) => {
+              const Icon = category.icon
               return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  viewport={{ once: true }}
-                  className={`group relative overflow-hidden rounded-lg ${gridClass} h-80 cursor-pointer`}
+                <button
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all ${
+                    selectedCategory === category.id
+                      ? 'bg-yellow-400 text-slate-900'
+                      : 'bg-white/10 text-white hover:bg-white/20'
+                  }`}
                 >
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="px-3 py-1 bg-yellow-400 text-slate-900 text-xs font-bold rounded-full">
-                          {item.category}
-                        </span>
-                        <span className="text-xs text-gray-300">{item.year}</span>
-                      </div>
-                      <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                      <p className="text-sm text-gray-300">{item.description}</p>
-                    </div>
-                  </div>
-
-                  {/* Corner Icon */}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center">
-                      <ExternalLink className="w-5 h-5 text-slate-900" />
-                    </div>
-                  </div>
-                </motion.div>
+                  <Icon className="w-4 h-4" />
+                  {category.label}
+                </button>
               )
             })}
           </div>
 
-          {/* Info Footer */}
+          {/* Gallery Grid */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {filteredItems.map((item, index) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+                className="group relative aspect-[4/5] rounded-lg overflow-hidden cursor-pointer"
+              >
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <h3 className="text-white font-bold text-lg mb-1">{item.title}</h3>
+                    <p className="text-gray-300 text-sm mb-1">{item.project}</p>
+                    <p className="text-gray-400 text-xs">{item.year}</p>
+                  </div>
+                  {item.type === 'video' && (
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                      <div className="w-16 h-16 rounded-full bg-yellow-400 flex items-center justify-center">
+                        <Play className="w-8 h-8 text-slate-900 ml-1" />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Badge */}
+                <div className="absolute top-4 right-4">
+                  <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-bold text-slate-900">
+                    {item.category.toUpperCase()}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
-            className="mt-12 text-center text-gray-400 text-sm"
+            className="mt-12 text-center"
           >
-            <p>
-              📸 Las fotografías profesionales están disponibles bajo petición para prensa y castings.
+            <p className="text-gray-300 mb-4">
+              ¿Quieres ver más contenido detrás de las cámaras?
             </p>
+            <a
+              href="https://www.instagram.com/almagrosanmiguel/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full transition-all hover:scale-105 font-semibold"
+            >
+              Visítame en Instagram
+              <ExternalLink className="w-4 h-4" />
+            </a>
           </motion.div>
         </motion.div>
       </div>

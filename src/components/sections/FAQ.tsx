@@ -6,44 +6,44 @@ import { useState } from 'react'
 
 const faqs = [
   {
-    question: '¿Cómo empezaste en la actuación?',
-    answer: 'Mi madre me pagó las pruebas para Arte Dramático cuando yo quería estudiar Derecho. Entré "por los pelos" en la ESAD de Sevilla en 2008 y resultó ser la mejor decisión de mi vida. Mis inicios fueron haciendo teatro de calle por pueblos andaluces y trabajando en el Corral de Comedias de Isla Mágica.',
+    question: '¿Cómo empezaste en el mundo de la actuación?',
+    answer: 'Mi madre me pagó las pruebas de acceso a la ESAD de Sevilla cuando yo quería estudiar Derecho. Entré "por los pelos" y fue la mejor decisión de mi vida. Después de graduarme, empecé haciendo teatro de calle en pueblos andaluces y trabajando en Isla Mágica durante años antes de dar el salto a la televisión.',
   },
   {
-    question: '¿Cuál fue tu primer papel importante?',
-    answer: 'Mi primer papel protagonista fue Diego "Dieguito" Ramala en Vis a vis: El Oasis (2020). Fue un punto de inflexión en mi carrera. Antes tuve papeles episódicos en series como Centro Médico y Amar es para siempre, pero El Oasis me dio la oportunidad de demostrar mi rango como actor.',
+    question: '¿Cuál ha sido tu papel más importante hasta ahora?',
+    answer: 'Sin duda, mi papel protagonista de Íñigo Peñalver en "La Moderna" (TVE), donde interpreté 236 episodios consecutivos como el galán de las tardes. Fue un reto enorme por el ritmo frenético de grabación, pero también una experiencia increible que me permitió conectar con el público de forma muy especial.',
   },
   {
-    question: '¿Qué formación tienes?',
-    answer: 'Soy graduado en la Escuela Superior de Arte Dramático de Sevilla (ESAD). Formé parte de la Compañía Nacional de Teatro Clásico bajo la dirección de Helena Pimenta, donde interpreté obras como Fuente Ovejuna y La Villana de Getafe. También me formé en Work In Progress con Darío Facal y en NO-IDENTITY como especialista de cine.',
+    question: '¿Qué tipo de formación tienes?',
+    answer: 'Soy graduado en Arte Dramático por la ESAD de Sevilla. Formé parte de la Compañía Nacional de Teatro Clásico bajo la dirección de Helena Pimenta, donde trabajé obras como "Fuente Ovejuna" (por la que fui nominado a Mejor Actor Secundario). También he recibido formación en Work In Progress con Darío Facal y soy especialista de cine con el grupo NO-IDENTITY.',
   },
   {
-    question: '¿Qué habilidades especiales tienes?',
-    answer: 'Tengo formación en esgrima, equitación, lucha escénica y soy especialista de cine. También toco el violonchelo y la viola de forma autodidacta, canto, bailo (flamenco y danza contemporánea), hago mimo y pantomima. Además, estoy especializado en verso clásico español gracias a mi formación en teatro clásico.',
+    question: '¿Qué habilidades especiales tienes para roles?',
+    answer: 'Tengo formación especializada en esgrima, equitación, verso clásico español (Calderón, Lope de Vega, Shakespeare), lucha escénica y acrobacias. También toco violonchelo y viola como autodidacta, y tengo experiencia en danza, flamenco, mimo y teatro de calle.',
   },
   {
-    question: '¿Cuántos episodios has grabado en total?',
-    answer: 'He grabado más de 300 episodios de televisión en total. Solo en La Moderna fueron 236 episodios consecutivos como protagonista. Esto incluye series como Estoy vivo (12 episodios), La Caza: Guadiana (6 episodios), Honor (5 episodios), Operación Barrio Inglés (8 episodios), entre otras.',
+    question: '¿Cuál es tu disponibilidad actual?',
+    answer: 'Estoy disponible para nuevos proyectos a partir de mayo de 2026. Para fechas anteriores o proyectos urgentes, puedes consultar disponibilidad específica contactando directamente por email a info@almagrosanmiguel.com.',
   },
   {
-    question: '¿Has trabajado en producción internacional?',
-    answer: 'Sí, participé en Hernán (2019), la superproducción histórica de Amazon Prime Video sobre la conquista de México. Interpreté a Gonzalo de Sandoval en 8 episodios. Fue una experiencia increíble trabajar en una producción internacional de ese calibre.',
+    question: '¿Trabajaste con alguna plataforma internacional?',
+    answer: 'Sí, he trabajado con Prime Video en la superproducción "Hernán" (2019) interpretando a Gonzalo de Sandoval. También participé en "Vis a vis: El Oasis" para Fox España/Star Channel, que fue mi primer papel protagonista como Diego "Dieguito" Ramala.',
   },
   {
-    question: '¿Qué tipo de personajes prefieres?',
-    answer: 'Me atraen especialmente los papeles de época histórica. "Tengo cara de época", como dicen. Me apasionan los años 30 y 40 en España porque "cuando aprendes de tu pasado, no cometes los errores". Pero soy muy versátil y disfruto tanto del drama como de la comedia, del teatro clásico como de la televisión contemporánea.',
+    question: '¿Qué te gusta interpretar?',
+    answer: 'Me apasionan especialmente las producciones de época, los años 30-40 en España, y el teatro clásico. Me interesa interpretar personajes complejos con conflictos internos profundos. Como digo siempre, "cuando aprendes de tu pasado, no cometes los mismos errores", por eso me atraen tanto los proyectos históricos.',
   },
   {
-    question: '¿Estás disponible para nuevos proyectos?',
-    answer: 'Sí, estoy disponible para nuevos proyectos a partir de Mayo 2026. Para fechas anteriores o proyectos urgentes, puedes consultar mi disponibilidad específica contactando a través del formulario o email profesional (info@almagrosanmiguel.com).',
+    question: '¿Qué premios has ganado?',
+    answer: 'En 2016 gané el premio al Mejor Espectáculo del Año con el musical "Oliver Twist", interpretando al Jefe de Policía Duff. En 2015 fui nominado a Mejor Actor Secundario por la Unión de Actores por mi trabajo en "Fuente Ovejuna" con la Compañía Nacional de Teatro Clásico.',
   },
   {
-    question: '¿Has ganado algún premio?',
-    answer: 'Sí, en 2016 el musical Oliver Twist donde interpretaba al Jefe de Policía Duff ganó el premio al Mejor Espectáculo del Año con CIA La Tarasca. También estuve nominado como Mejor Actor Secundario por la Unión de Actores en 2015 por mi trabajo en Fuente Ovejuna con la Compañía Nacional de Teatro Clásico.',
+    question: '¿Cómo te preparas para un personaje?',
+    answer: 'Me gusta trabajar mucho las audiciones y separatas. Cuando me identifico con el personaje, la conexión es inmediata. Investigo el contexto histórico, leo sobre la época, y busco referencias visuales y emocionales. También trabajo codo con codo con directores y compañeros de reparto, porque creo que lo más importante es el trabajo en equipo.',
   },
   {
-    question: '¿Cómo describen tu trabajo los directores?',
-    answer: 'Soy conocido por mi profesionalismo, compromiso y versatilidad. Trabajo duro, respeto el oficio y me preparo exhaustivamente para cada papel. Como yo mismo digo: "Esto no es un jiji ni un jaja, esto es trabajo duro". Creo en la importancia de trabajar codo con codo con todo el equipo y en el respeto mutuo entre profesionales.',
+    question: '¿Qué consejo darías a actores que empiezan?',
+    answer: '"Si decides estar en esto, trabaja. Esto no es un jiji ni un jaja, esto es trabajo duro. Hay que respetarnos entre nosotros porque no todo vale." Es muy difícil llegar, pero luego hay que mantenerse: otro año, otro año, otro año. Yo estuve poniendo copas, trabajando en discotecas, pasando Navidades solo en Madrid... Lo haces porque tienes un plan y crees en él.',
   },
 ]
 
@@ -51,7 +51,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section id="faq" className="py-20 bg-gradient-to-b from-slate-50 to-white">
+    <section id="faq" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -66,7 +66,7 @@ export default function FAQ() {
             </h2>
           </div>
           <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
-            Respuestas a las preguntas más comunes sobre mi carrera y trayectoria.
+            Respuestas a las preguntas más comunes sobre mi carrera, formación y disponibilidad.
           </p>
 
           <div className="max-w-3xl mx-auto space-y-4">
@@ -77,15 +77,15 @@ export default function FAQ() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-lg border-2 border-slate-200 overflow-hidden hover:border-slate-400 transition-all"
+                className="border border-gray-200 rounded-lg overflow-hidden hover:border-slate-400 transition-colors"
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full flex items-center justify-between p-6 text-left hover:bg-slate-50 transition-colors"
+                  className="w-full flex items-center justify-between p-6 text-left bg-white hover:bg-slate-50 transition-colors"
                 >
-                  <span className="font-bold text-lg pr-8">{faq.question}</span>
+                  <span className="font-bold text-lg pr-4">{faq.question}</span>
                   <ChevronDown
-                    className={`w-6 h-6 text-slate-700 flex-shrink-0 transition-transform duration-300 ${
+                    className={`w-5 h-5 text-slate-700 flex-shrink-0 transition-transform duration-300 ${
                       openIndex === index ? 'rotate-180' : ''
                     }`}
                   />
@@ -99,7 +99,7 @@ export default function FAQ() {
                   transition={{ duration: 0.3 }}
                   className="overflow-hidden"
                 >
-                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                  <div className="p-6 pt-0 text-gray-700 leading-relaxed">
                     {faq.answer}
                   </div>
                 </motion.div>
@@ -111,18 +111,18 @@ export default function FAQ() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
-            className="mt-16 text-center"
+            className="mt-12 text-center"
           >
             <p className="text-gray-600 mb-4">
-              ¿Tienes más preguntas? No dudes en contactarme.
+              ¿No encuentras la respuesta que buscas?
             </p>
             <a
               href="#contact"
-              className="inline-block px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-full transition-all hover:scale-105 font-bold"
+              className="inline-block px-8 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-full transition-colors font-semibold"
             >
-              Enviar Consulta
+              Contáctame Directamente
             </a>
           </motion.div>
         </motion.div>
