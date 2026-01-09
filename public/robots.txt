@@ -1,12 +1,35 @@
-# https://www.robotstxt.org/robotstxt.html
+# Robots.txt for Almagro San Miguel Portfolio
+# https://almagrosanmiguel.com
+
 User-agent: *
 Allow: /
 
-# Disallow admin paths (if any in the future)
+# Disallow admin/api routes
 Disallow: /api/
-
-# Crawl delay
-Crawl-delay: 0
+Disallow: /_next/
 
 # Sitemap
-Sitemap: https://pedroalmagro.com/sitemap.xml
+Sitemap: https://almagrosanmiguel.com/sitemap.xml
+
+# Crawl delay (optional, in seconds)
+Crawl-delay: 1
+
+# Specific bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
