@@ -2,7 +2,9 @@ import Navbar from '@/components/Navbar'
 import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import Stats from '@/components/sections/Stats'
+import SkillsVisual from '@/components/sections/SkillsVisual'
 import Portfolio from '@/components/sections/Portfolio'
+import Gallery from '@/components/sections/Gallery'
 import Timeline from '@/components/sections/Timeline'
 import Awards from '@/components/sections/Awards'
 import Showreel from '@/components/sections/Showreel'
@@ -18,7 +20,9 @@ export default function Home() {
       <Hero />
       <About />
       <Stats />
+      <SkillsVisual />
       <Portfolio />
+      <Gallery />
       <Timeline />
       <Awards />
       <Showreel />
