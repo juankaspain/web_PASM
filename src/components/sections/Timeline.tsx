@@ -1,128 +1,194 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Calendar, Tv, Film, Theater, GraduationCap, Award } from 'lucide-react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { Calendar, MapPin, Award, Briefcase, GraduationCap, Star, TrendingUp } from 'lucide-react'
+import { useRef } from 'react'
 
-const timelineEvents = [
+interface TimelineEvent {
+  year: string
+  title: string
+  subtitle: string
+  description: string
+  icon: any
+  color: string
+  gradient: string
+  type: 'education' | 'work' | 'award' | 'milestone'
+}
+
+const events: TimelineEvent[] = [
   {
-    year: '1990',
-    icon: Calendar,
-    title: 'Nacimiento',
-    description: 'Nace en Sevilla el 7 de marzo',
-    color: 'bg-blue-500',
-  },
-  {
-    year: '2008',
+    year: '2008-2012',
+    title: 'ESAD Sevilla',
+    subtitle: 'Graduación en Arte Dramático',
+    description: 'Formación completa en interpretación, voz, movimiento y técnicas teatrales en la Escuela Superior de Arte Dramático de Sevilla.',
     icon: GraduationCap,
-    title: 'Ingreso en ESAD Sevilla',
-    description: 'Entra "por los pelos" en la Escuela Superior de Arte Dramático después de que su madre pagara las pruebas',
-    color: 'bg-purple-500',
+    color: 'text-blue-500',
+    gradient: 'from-blue-500 to-cyan-500',
+    type: 'education',
   },
   {
     year: '2009-2012',
-    icon: Theater,
-    title: 'Teatro de Calle & Isla Mágica',
-    description: 'Trabajos en teatro de calle por pueblos andaluces y en el Corral de Comedias de Isla Mágica durante años',
-    color: 'bg-green-500',
+    title: 'Teatro de Calle',
+    subtitle: 'Andalucía & Corral de Comedias',
+    description: 'Experiencia en teatro de calle por diversos pueblos andaluces y actuaciones regulares en el Corral de Comedias de Isla Mágica.',
+    icon: Briefcase,
+    color: 'text-purple-500',
+    gradient: 'from-purple-500 to-pink-500',
+    type: 'work',
   },
   {
     year: '2013',
-    icon: Film,
-    title: 'Primeros Cortometrajes',
-    description: 'Debuta en cine con "Lapso" (8.6 IMDb) interpretando a Rodolfo',
-    color: 'bg-yellow-500',
+    title: 'Lapso (Cortometraje)',
+    subtitle: 'Debut en Cine',
+    description: 'Protagonista Rodolfo. Rating IMDb: 8.6/10. Primer trabajo profesional en cine que marcó el inicio de mi carrera audiovisual.',
+    icon: Star,
+    color: 'text-yellow-500',
+    gradient: 'from-yellow-500 to-orange-500',
+    type: 'milestone',
+  },
+  {
+    year: '2014-2015',
+    title: 'Work In Progress',
+    subtitle: 'Formación con Darío Facal',
+    description: 'Especialización en técnicas interpretativas avanzadas con uno de los formadores más reconocidos de España.',
+    icon: GraduationCap,
+    color: 'text-green-500',
+    gradient: 'from-green-500 to-emerald-500',
+    type: 'education',
+  },
+  {
+    year: '2015',
+    title: 'Fuente Ovejuna (CNTC)',
+    subtitle: 'Nominación Mejor Actor Secundario',
+    description: 'Compañía Nacional de Teatro Clásico bajo dirección de Helena Pimenta. Nominación de la Unión de Actores.',
+    icon: Award,
+    color: 'text-amber-500',
+    gradient: 'from-amber-500 to-yellow-500',
+    type: 'award',
   },
   {
     year: '2015-2017',
-    icon: Theater,
-    title: 'Compañía Nacional Teatro Clásico',
-    description: 'Formación con Helena Pimenta. Fuente Ovejuna, La Villana de Getafe. Nominado a Mejor Actor Secundario',
-    color: 'bg-red-500',
+    title: 'CNTC',
+    subtitle: 'Compañía Nacional Teatro Clásico',
+    description: 'Formación y trabajo con la Compañía Nacional dirigida por Helena Pimenta. Especialización en verso clásico español.',
+    icon: Star,
+    color: 'text-red-500',
+    gradient: 'from-red-500 to-rose-500',
+    type: 'milestone',
   },
   {
     year: '2016',
+    title: 'Oliver Twist (Musical)',
+    subtitle: 'Premio Mejor Espectáculo del Año',
+    description: 'Jefe de Policía Duff en producción de CIA La Tarasca. Premio al Mejor Espectáculo del Año.',
     icon: Award,
-    title: 'Premio Mejor Espectáculo',
-    description: 'Oliver Twist (Musical) gana premio al mejor espectáculo del año con CIA La Tarasca',
-    color: 'bg-yellow-600',
+    color: 'text-purple-500',
+    gradient: 'from-purple-500 to-pink-500',
+    type: 'award',
   },
   {
-    year: '2017-2018',
-    icon: Tv,
-    title: 'Primeras Apariciones TV',
-    description: 'Papeles episódicos en Centro Médico, Grupo 2: Homicidios y Amar es para siempre',
-    color: 'bg-indigo-500',
+    year: '2017',
+    title: 'Debut en Televisión',
+    subtitle: 'Centro Médico & Grupo 2',
+    description: 'Primeros papeles en televisión nacional con La 1 (TVE). Inicio de carrera en series de televisión.',
+    icon: TrendingUp,
+    color: 'text-indigo-500',
+    gradient: 'from-indigo-500 to-blue-500',
+    type: 'milestone',
   },
   {
     year: '2019',
-    icon: Tv,
     title: 'Hernán (Prime Video)',
-    description: 'Interpreta a Gonzalo de Sandoval en la superproducción histórica de Amazon',
-    color: 'bg-orange-500',
+    subtitle: 'Gonzalo de Sandoval',
+    description: 'Primera producción internacional para Amazon Prime Video. Serie histórica distribuida en toda Latinoamérica.',
+    icon: Star,
+    color: 'text-teal-500',
+    gradient: 'from-teal-500 to-cyan-500',
+    type: 'milestone',
   },
   {
     year: '2020',
-    icon: Tv,
     title: 'Vis a vis: El Oasis',
-    description: 'PRIMER PROTAGONISTA: Diego "Dieguito" Ramala en el spin-off de Fox España',
-    color: 'bg-pink-500',
-    highlight: true,
+    subtitle: 'Primer Papel Protagonista',
+    description: 'Diego "Dieguito" Ramala. Primera vez como protagonista en serie de Fox/Star Channel. Spin-off de la exitosa "Vis a vis".',
+    icon: Star,
+    color: 'text-yellow-500',
+    gradient: 'from-yellow-500 to-orange-500',
+    type: 'milestone',
   },
   {
     year: '2021',
-    icon: Tv,
-    title: 'Estoy vivo',
-    description: 'Mikel Uribe en 12 episodios de la serie de TVE',
-    color: 'bg-cyan-500',
+    title: 'Estoy vivo (TVE)',
+    subtitle: 'Mikel Uribe',
+    description: '12 episodios en una de las series más vistas de La 1. Consolidación en televisión nacional.',
+    icon: Briefcase,
+    color: 'text-blue-500',
+    gradient: 'from-blue-500 to-cyan-500',
+    type: 'work',
   },
   {
     year: '2022',
-    icon: Tv,
-    title: 'Desconocidas',
-    description: 'Ramón en la serie de Canal Sur (8 episodios)',
-    color: 'bg-teal-500',
+    title: 'Desconocidas (Canal Sur)',
+    subtitle: 'Ramón',
+    description: '8 episodios en producción andaluza. Colaboración con Canal Sur Televisión.',
+    icon: Briefcase,
+    color: 'text-green-500',
+    gradient: 'from-green-500 to-emerald-500',
+    type: 'work',
   },
   {
     year: '2023',
-    icon: Tv,
-    title: 'La Caza: Guadiana & Honor',
-    description: 'Doble proyectos: Aurelio en La Caza (TVE) y Federico en Honor (Atresplayer)',
-    color: 'bg-blue-600',
+    title: 'La Caza: Guadiana (TVE)',
+    subtitle: 'Aurelio Santana',
+    description: 'Papel destacado en thriller de éxito de La 1. Rating IMDb: 7.3/10.',
+    icon: Briefcase,
+    color: 'text-red-500',
+    gradient: 'from-red-500 to-rose-500',
+    type: 'work',
   },
   {
     year: '2023-2024',
-    icon: Tv,
-    title: 'La Moderna - PROTAGONISTA',
-    description: '236 EPISODIOS como Íñigo Peñalver, el galán de las tardes de La 1',
-    color: 'bg-red-600',
-    highlight: true,
+    title: 'La Moderna (TVE)',
+    subtitle: 'Protagonista - 236 Episodios',
+    description: 'Íñigo Peñalver, galán protagonista en serie diaria de éxito de La 1. Más de 230 episodios consecutivos como protagonista.',
+    icon: Star,
+    color: 'text-amber-500',
+    gradient: 'from-amber-500 to-yellow-500',
+    type: 'milestone',
   },
   {
     year: '2024',
-    icon: Tv,
     title: 'Operación Barrio Inglés',
-    description: 'Toni en la serie de espías de TVE (8 episodios)',
-    color: 'bg-slate-600',
+    subtitle: 'Toni - Serie de Espionaje',
+    description: '8 episodios en serie de época ambientada en los años 40. Producción TVE.',
+    icon: Briefcase,
+    color: 'text-purple-500',
+    gradient: 'from-purple-500 to-pink-500',
+    type: 'work',
   },
   {
     year: '2025',
-    icon: Film,
     title: 'Un fantasma en la batalla',
-    description: 'Antonio en la película de Agustín Díaz Yanes sobre ETA',
-    color: 'bg-gray-700',
-  },
-  {
-    year: '2026',
-    icon: Calendar,
-    title: 'Nuevos Proyectos',
-    description: 'Disponible para castings y colaboraciones desde Mayo',
-    color: 'bg-green-600',
+    subtitle: 'Próximo Estreno',
+    description: 'Antonio. Película dirigida por Agustín Díaz Yanes sobre ETA basada en hechos reales. En postproducción.',
+    icon: Star,
+    color: 'text-indigo-500',
+    gradient: 'from-indigo-500 to-blue-500',
+    type: 'milestone',
   },
 ]
 
 export default function Timeline() {
+  const containerRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start center', 'end center'],
+  })
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
+
   return (
-    <section id="timeline" className="py-20 bg-white">
+    <section id="timeline" className="py-20 bg-gradient-to-b from-slate-50 via-white to-slate-50 overflow-hidden">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -130,88 +196,131 @@ export default function Timeline() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Calendar className="w-8 h-8 text-slate-700" />
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-center">
-              Línea de Tiempo
+          {/* Header */}
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-slate-100 to-gray-100 rounded-full mb-4"
+            >
+              <Calendar className="w-4 h-4 text-slate-700" />
+              <span className="text-slate-700 text-sm font-semibold">Cronología</span>
+            </motion.div>
+            
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+              Trayectoria Profesional
             </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Un recorrido de 13+ años desde la formación en ESAD Sevilla hasta convertirme
+              en protagonista de series de éxito en televisión nacional.
+            </p>
           </div>
-          <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
-            El recorrido de mi carrera desde los inicios hasta el presente.
-          </p>
 
           {/* Timeline */}
-          <div className="max-w-4xl mx-auto relative">
-            {/* Vertical Line */}
-            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gray-200" />
+          <div ref={containerRef} className="relative max-w-5xl mx-auto">
+            {/* Center Line */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gray-200 -translate-x-1/2 hidden md:block" />
+            
+            {/* Animated Progress Line */}
+            <motion.div
+              className="absolute left-1/2 top-0 w-1 bg-gradient-to-b from-slate-900 to-yellow-500 -translate-x-1/2 hidden md:block"
+              style={{ height: lineHeight }}
+            />
 
-            {timelineEvents.map((event, index) => {
-              const Icon = event.icon
-              const isLeft = index % 2 === 0
+            {/* Events */}
+            <div className="space-y-12">
+              {events.map((event, index) => {
+                const Icon = event.icon
+                const isLeft = index % 2 === 0
 
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.05 }}
-                  viewport={{ once: true }}
-                  className={`relative mb-12 md:flex md:items-center ${isLeft ? 'md:flex-row-reverse' : ''}`}
-                >
-                  {/* Content */}
-                  <div className={`md:w-5/12 ${isLeft ? 'md:text-right' : 'md:text-left'} ml-20 md:ml-0`}>
-                    <div className={`bg-white rounded-lg border-2 p-6 shadow-lg hover:shadow-xl transition-all ${
-                      event.highlight ? 'border-yellow-400 bg-yellow-50' : 'border-gray-200'
-                    }`}>
-                      <div className={`flex items-center gap-2 mb-2 ${isLeft ? 'md:justify-end' : 'md:justify-start'}`}>
-                        <span className="text-2xl font-bold text-slate-700">{event.year}</span>
-                        {event.highlight && (
-                          <span className="px-2 py-1 bg-yellow-400 text-xs font-bold rounded-full">HITO</span>
-                        )}
-                      </div>
-                      <h3 className="text-xl font-bold mb-2">{event.title}</h3>
-                      <p className="text-gray-600 text-sm">{event.description}</p>
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    viewport={{ once: true, margin: '-100px' }}
+                    className={`relative flex items-center ${
+                      isLeft ? 'md:justify-end' : 'md:justify-start'
+                    }`}
+                  >
+                    {/* Desktop Layout */}
+                    <div className="hidden md:block md:w-1/2 pr-8 md:pr-12">
+                      {isLeft && (
+                        <div className="text-right">
+                          <TimelineCard event={event} Icon={Icon} />
+                        </div>
+                      )}
                     </div>
-                  </div>
 
-                  {/* Icon */}
-                  <div className="absolute left-8 md:left-1/2 -translate-x-1/2 flex items-center justify-center">
-                    <div className={`w-16 h-16 rounded-full ${event.color} flex items-center justify-center shadow-lg border-4 border-white`}>
-                      <Icon className="w-8 h-8 text-white" />
+                    {/* Center Icon */}
+                    <div className="absolute left-0 md:left-1/2 -translate-x-0 md:-translate-x-1/2 z-10">
+                      <motion.div
+                        whileHover={{ scale: 1.2, rotate: 360 }}
+                        transition={{ duration: 0.5 }}
+                        className="relative"
+                      >
+                        <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${event.gradient} flex items-center justify-center shadow-xl`}>
+                          <Icon className="w-8 h-8 text-white" />
+                        </div>
+                        {/* Glow */}
+                        <div className={`absolute inset-0 bg-gradient-to-br ${event.gradient} rounded-full blur-xl opacity-40 -z-10`} />
+                      </motion.div>
                     </div>
-                  </div>
-                </motion.div>
-              )
-            })}
+
+                    <div className="hidden md:block md:w-1/2 pl-8 md:pl-12">
+                      {!isLeft && (
+                        <div className="text-left">
+                          <TimelineCard event={event} Icon={Icon} />
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Mobile Layout */}
+                    <div className="md:hidden pl-24 w-full">
+                      <TimelineCard event={event} Icon={Icon} />
+                    </div>
+                  </motion.div>
+                )
+              })}
+            </div>
           </div>
-
-          {/* Summary Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="mt-16 grid md:grid-cols-4 gap-6 max-w-4xl mx-auto"
-          >
-            <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-6 text-white text-center">
-              <div className="text-4xl font-bold mb-2">18</div>
-              <div className="text-sm opacity-90">Años de carrera</div>
-            </div>
-            <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg p-6 text-white text-center">
-              <div className="text-4xl font-bold mb-2">12+</div>
-              <div className="text-sm opacity-90">Series de TV</div>
-            </div>
-            <div className="bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg p-6 text-white text-center">
-              <div className="text-4xl font-bold mb-2">300+</div>
-              <div className="text-sm opacity-90">Episodios grabados</div>
-            </div>
-            <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg p-6 text-white text-center">
-              <div className="text-4xl font-bold mb-2">10+</div>
-              <div className="text-sm opacity-90">Obras de teatro</div>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>
+  )
+}
+
+function TimelineCard({ event, Icon }: { event: TimelineEvent; Icon: any }) {
+  return (
+    <motion.div
+      whileHover={{ y: -5, scale: 1.02 }}
+      className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all border border-gray-100 relative overflow-hidden"
+    >
+      {/* Background gradient on hover */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${event.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
+      
+      {/* Type Badge */}
+      <div className="flex items-center gap-2 mb-3">
+        <span className={`px-3 py-1 rounded-full text-xs font-bold ${event.color} bg-opacity-10`} style={{ backgroundColor: `${event.color}15` }}>
+          {event.type === 'education' && '🎓 Formación'}
+          {event.type === 'work' && '💼 Trabajo'}
+          {event.type === 'award' && '🏆 Premio'}
+          {event.type === 'milestone' && '⭐ Hito'}
+        </span>
+        <span className="text-sm text-gray-500 font-semibold">{event.year}</span>
+      </div>
+
+      <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-slate-700 transition-colors">
+        {event.title}
+      </h3>
+      <p className={`font-semibold mb-2 ${event.color}`}>{event.subtitle}</p>
+      <p className="text-gray-600 text-sm leading-relaxed">{event.description}</p>
+
+      {/* Bottom accent */}
+      <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${event.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`} />
+    </motion.div>
   )
 }
