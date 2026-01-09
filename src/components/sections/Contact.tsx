@@ -1,9 +1,19 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mail, MapPin, Calendar, Instagram, Facebook, ExternalLink, CheckCircle, AlertCircle } from 'lucide-react'
-import { FaXTwitter } from 'react-icons/fa6'
+import {
+  Mail,
+  MapPin,
+  Calendar,
+  Instagram,
+  Facebook,
+  ExternalLink,
+  CheckCircle,
+  AlertCircle,
+  Twitter,
+} from 'lucide-react'
 import { useState } from 'react'
+
 
 const categories = [
   'Casting / Audición',
@@ -44,7 +54,7 @@ const socialLinks = [
     color: 'from-pink-500 to-purple-500',
   },
   {
-    icon: FaXTwitter,
+    icon: Twitter,
     label: 'Twitter / X',
     handle: '@almagroSM',
     url: 'https://x.com/almagroSM',
