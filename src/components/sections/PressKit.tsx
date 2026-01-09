@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Download, FileText, Image as ImageIcon, Video, Award, Info } from 'lucide-react'
+import { useState } from 'react'
 
 const downloadItems = [
   {
@@ -11,6 +12,7 @@ const downloadItems = [
     size: '250 KB',
     format: 'PDF',
     color: 'from-red-500 to-red-600',
+    type: 'bio',
   },
   {
     icon: ImageIcon,
@@ -19,6 +21,7 @@ const downloadItems = [
     size: '45 MB',
     format: 'ZIP',
     color: 'from-blue-500 to-blue-600',
+    type: 'photos',
   },
   {
     icon: Video,
@@ -27,6 +30,7 @@ const downloadItems = [
     size: '120 MB',
     format: 'MP4',
     color: 'from-purple-500 to-purple-600',
+    type: 'showreel',
   },
   {
     icon: Award,
@@ -35,6 +39,7 @@ const downloadItems = [
     size: '180 KB',
     format: 'PDF',
     color: 'from-yellow-500 to-yellow-600',
+    type: 'awards',
   },
   {
     icon: FileText,
@@ -43,6 +48,7 @@ const downloadItems = [
     size: '320 KB',
     format: 'PDF',
     color: 'from-green-500 to-green-600',
+    type: 'filmography',
   },
   {
     icon: Info,
@@ -51,6 +57,7 @@ const downloadItems = [
     size: '150 KB',
     format: 'PDF',
     color: 'from-pink-500 to-pink-600',
+    type: 'techsheet',
   },
 ]
 
@@ -68,6 +75,21 @@ const techSpecs = [
 ]
 
 export default function PressKit() {
+  const [downloading, setDownloading] = useState<string | null>(null)
+
+  const handleDownload = async (type: string, title: string) => {
+    setDownloading(type)
+    try {
+      const response = await fetch(`/api/download?type=${type}`)
+      const data = await response.json()
+      alert(`${data.message}\n\n${data.note}`)
+    } catch (error) {
+      alert('Error al descargar. Inténtalo de nuevo.')
+    } finally {
+      setDownloading(null)
+    }
+  }
+
   return (
     <section id="presskit" className="py-20 bg-gradient-to-b from-slate-50 to-white">
       <div className="container mx-auto px-4">
@@ -98,7 +120,7 @@ export default function PressKit() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="group bg-white rounded-lg p-6 border-2 border-gray-200 hover:border-slate-400 hover:shadow-xl transition-all cursor-pointer"
+                  className="group bg-white rounded-lg p-6 border-2 border-gray-200 hover:border-slate-400 hover:shadow-xl transition-all"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center`}>
@@ -111,9 +133,13 @@ export default function PressKit() {
                   </div>
                   <h3 className="font-bold text-lg mb-2">{item.title}</h3>
                   <p className="text-sm text-gray-600 mb-4">{item.description}</p>
-                  <button className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-slate-100 group-hover:bg-slate-900 text-slate-700 group-hover:text-white rounded-lg transition-all font-semibold text-sm">
+                  <button
+                    onClick={() => handleDownload(item.type, item.title)}
+                    disabled={downloading === item.type}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-slate-100 group-hover:bg-slate-900 text-slate-700 group-hover:text-white rounded-lg transition-all font-semibold text-sm disabled:opacity-50"
+                  >
                     <Download className="w-4 h-4" />
-                    Descargar
+                    {downloading === item.type ? 'Descargando...' : 'Descargar'}
                   </button>
                 </motion.div>
               )
@@ -128,9 +154,13 @@ export default function PressKit() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <button className="px-8 py-4 bg-gradient-to-r from-slate-900 to-slate-700 text-white rounded-full hover:scale-105 transition-transform font-bold text-lg inline-flex items-center gap-3">
+            <button
+              onClick={() => handleDownload('complete', 'Press Kit Completo')}
+              disabled={downloading === 'complete'}
+              className="px-8 py-4 bg-gradient-to-r from-slate-900 to-slate-700 text-white rounded-full hover:scale-105 transition-transform font-bold text-lg inline-flex items-center gap-3 disabled:opacity-50"
+            >
               <Download className="w-5 h-5" />
-              Descargar Press Kit Completo
+              {downloading === 'complete' ? 'Descargando...' : 'Descargar Press Kit Completo'}
               <span className="text-sm font-normal opacity-75">(120 MB)</span>
             </button>
           </motion.div>
