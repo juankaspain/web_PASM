@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, Instagram, Twitter, Facebook } from 'lucide-react'
 import { useState } from 'react'
 
 type FormStatus = 'idle' | 'loading' | 'success' | 'error'
@@ -48,26 +48,43 @@ export default function Contact() {
   const contactInfo = [
     {
       icon: Mail,
-      label: 'Email',
-      value: 'info@pedroalmagro.com',
-      link: 'mailto:info@pedroalmagro.com',
-    },
-    {
-      icon: Phone,
-      label: 'Teléfono',
-      value: '+34 600 123 456',
-      link: 'tel:+34600123456',
+      label: 'Email Profesional',
+      value: 'info@almagrosanmiguel.com',
+      link: 'mailto:info@almagrosanmiguel.com',
+      description: 'Para propuestas profesionales y castings'
     },
     {
       icon: MapPin,
       label: 'Ubicación',
-      value: 'Sevilla, España',
+      value: 'Sevilla, Andalucía',
       link: '#',
+      description: 'Disponible para proyectos en toda España'
+    },
+  ]
+
+  const socialLinks = [
+    {
+      name: 'Instagram',
+      icon: Instagram,
+      url: 'https://www.instagram.com/almagrosanmiguel/',
+      color: 'hover:text-pink-600'
+    },
+    {
+      name: 'Twitter / X',
+      icon: Twitter,
+      url: 'https://x.com/almagroSM',
+      color: 'hover:text-blue-400'
+    },
+    {
+      name: 'Facebook',
+      icon: Facebook,
+      url: 'https://www.facebook.com/almagrosanmiguel/',
+      color: 'hover:text-blue-600'
     },
   ]
 
   return (
-    <section id="contact" className="py-24">
+    <section id="contact" className="py-24 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -77,11 +94,11 @@ export default function Contact() {
           className="mb-12 text-center"
         >
           <h2 className="mb-4 font-serif text-4xl font-bold lg:text-5xl">
-            Contacto
+            Contacto Profesional
           </h2>
-          <div className="mx-auto h-1 w-24 bg-primary" />
-          <p className="mx-auto mt-6 max-w-2xl text-muted-foreground">
-            ¿Tienes un proyecto en mente? Hablemos
+          <div className="mx-auto h-1 w-24 bg-slate-700" />
+          <p className="mx-auto mt-6 max-w-2xl text-gray-600">
+            Abierto a nuevos proyectos, castings y colaboraciones artísticas
           </p>
         </motion.div>
 
@@ -98,10 +115,9 @@ export default function Contact() {
               <h3 className="mb-4 font-serif text-2xl font-bold">
                 Información de Contacto
               </h3>
-              <p className="text-muted-foreground">
-                Estoy abierto a nuevos proyectos y colaboraciones. No dudes en
-                contactarme para castings, propuestas o simplemente para
-                conversar sobre el arte de la actuación.
+              <p className="text-gray-600 leading-relaxed">
+                Para propuestas profesionales, castings, entrevistas o colaboraciones artísticas, 
+                puedes contactarme a través de los siguientes medios. Respondo personalmente a todas las consultas.
               </p>
             </div>
 
@@ -109,35 +125,74 @@ export default function Contact() {
               {contactInfo.map((info, index) => {
                 const Icon = info.icon
                 return (
-                  <motion.a
+                  <motion.div
                     key={index}
-                    href={info.link}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    className="flex items-center gap-4 rounded-lg bg-muted/50 p-4 transition-colors hover:bg-muted"
+                    className="flex items-start gap-4 rounded-lg bg-white border border-gray-200 p-5 transition-all hover:shadow-lg"
                   >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-700 text-white flex-shrink-0">
                       <Icon size={20} />
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-muted-foreground">
+                      <p className="text-sm font-semibold text-slate-700 mb-1">
                         {info.label}
                       </p>
-                      <p className="font-semibold">{info.value}</p>
+                      {info.link !== '#' ? (
+                        <a href={info.link} className="font-bold text-lg hover:text-slate-700 transition-colors">
+                          {info.value}
+                        </a>
+                      ) : (
+                        <p className="font-bold text-lg">{info.value}</p>
+                      )}
+                      <p className="text-sm text-gray-500 mt-1">{info.description}</p>
                     </div>
-                  </motion.a>
+                  </motion.div>
                 )
-              })}
+              })}}
+            </div>
+
+            {/* Social Media */}
+            <div className="rounded-lg bg-slate-50 border border-slate-200 p-6">
+              <h4 className="font-bold mb-4 text-lg">Sígueme en Redes Sociales</h4>
+              <div className="flex gap-4">
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 border-gray-200 transition-all hover:scale-110 hover:border-slate-700 ${social.color}`}
+                    aria-label={social.name}
+                  >
+                    <social.icon size={20} />
+                  </a>
+                ))}
+              </div>
+              <p className="text-sm text-gray-600 mt-4">
+                @almagrosanmiguel en Instagram • @almagroSM en Twitter
+              </p>
             </div>
 
             {/* Availability */}
-            <div className="rounded-lg bg-primary/10 p-6">
-              <h4 className="mb-2 font-semibold">Disponibilidad</h4>
-              <p className="text-sm text-muted-foreground">
-                Actualmente disponible para proyectos desde Mayo 2026. Para
-                fechas anteriores, consultar disponibilidad.
+            <div className="rounded-lg bg-green-50 border border-green-200 p-6">
+              <h4 className="font-bold mb-2 text-green-900">✅ Disponibilidad Actual</h4>
+              <p className="text-sm text-green-800">
+                Disponible para nuevos proyectos a partir de <strong>Mayo 2026</strong>.
+              </p>
+              <p className="text-xs text-green-700 mt-2">
+                Para fechas anteriores o proyectos urgentes, consultar disponibilidad específica.
+              </p>
+            </div>
+
+            {/* Representation */}
+            <div className="rounded-lg bg-slate-100 border border-slate-200 p-6">
+              <h4 className="font-bold mb-2">🎬 Representación</h4>
+              <p className="text-sm text-gray-700">
+                Para consultas de representación, casting directo o colaboraciones con productoras, 
+                contactar a través del email profesional.
               </p>
             </div>
           </motion.div>
@@ -151,11 +206,18 @@ export default function Contact() {
           >
             <form
               onSubmit={handleSubmit}
-              className="space-y-6 rounded-xl bg-card p-8 shadow-lg"
+              className="space-y-6 rounded-xl bg-white border border-gray-200 p-8 shadow-xl"
             >
+              <div className="mb-6">
+                <h3 className="font-serif text-2xl font-bold mb-2">Envíame un Mensaje</h3>
+                <p className="text-sm text-gray-600">
+                  Completa el formulario y me pondré en contacto contigo lo antes posible.
+                </p>
+              </div>
+
               {/* Success Message */}
               {status === 'success' && (
-                <div className="flex items-center gap-3 rounded-lg bg-green-50 p-4 text-green-800 dark:bg-green-900/20 dark:text-green-400">
+                <div className="flex items-center gap-3 rounded-lg bg-green-50 border border-green-200 p-4 text-green-800">
                   <CheckCircle2 size={20} />
                   <p className="text-sm font-medium">
                     ¡Mensaje enviado correctamente! Te responderé pronto.
@@ -165,7 +227,7 @@ export default function Contact() {
 
               {/* Error Message */}
               {status === 'error' && (
-                <div className="flex items-center gap-3 rounded-lg bg-red-50 p-4 text-red-800 dark:bg-red-900/20 dark:text-red-400">
+                <div className="flex items-center gap-3 rounded-lg bg-red-50 border border-red-200 p-4 text-red-800">
                   <AlertCircle size={20} />
                   <p className="text-sm font-medium">{errorMessage}</p>
                 </div>
@@ -174,9 +236,9 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="name"
-                  className="mb-2 block text-sm font-medium"
+                  className="mb-2 block text-sm font-semibold text-gray-700"
                 >
-                  Nombre Completo
+                  Nombre Completo *
                 </label>
                 <input
                   type="text"
@@ -186,7 +248,7 @@ export default function Contact() {
                   onChange={(e) =>
                     setFormState({ ...formState, name: e.target.value })
                   }
-                  className="w-full rounded-lg border border-input bg-background px-4 py-3 transition-colors focus:border-primary focus:outline-none"
+                  className="w-full rounded-lg border-2 border-gray-200 bg-white px-4 py-3 transition-colors focus:border-slate-700 focus:outline-none"
                   placeholder="Tu nombre"
                   disabled={status === 'loading'}
                 />
@@ -195,9 +257,9 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="email"
-                  className="mb-2 block text-sm font-medium"
+                  className="mb-2 block text-sm font-semibold text-gray-700"
                 >
-                  Email
+                  Email *
                 </label>
                 <input
                   type="email"
@@ -207,7 +269,7 @@ export default function Contact() {
                   onChange={(e) =>
                     setFormState({ ...formState, email: e.target.value })
                   }
-                  className="w-full rounded-lg border border-input bg-background px-4 py-3 transition-colors focus:border-primary focus:outline-none"
+                  className="w-full rounded-lg border-2 border-gray-200 bg-white px-4 py-3 transition-colors focus:border-slate-700 focus:outline-none"
                   placeholder="tu@email.com"
                   disabled={status === 'loading'}
                 />
@@ -216,30 +278,35 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="subject"
-                  className="mb-2 block text-sm font-medium"
+                  className="mb-2 block text-sm font-semibold text-gray-700"
                 >
-                  Asunto
+                  Asunto *
                 </label>
-                <input
-                  type="text"
+                <select
                   id="subject"
                   required
                   value={formState.subject}
                   onChange={(e) =>
                     setFormState({ ...formState, subject: e.target.value })
                   }
-                  className="w-full rounded-lg border border-input bg-background px-4 py-3 transition-colors focus:border-primary focus:outline-none"
-                  placeholder="Motivo del contacto"
+                  className="w-full rounded-lg border-2 border-gray-200 bg-white px-4 py-3 transition-colors focus:border-slate-700 focus:outline-none"
                   disabled={status === 'loading'}
-                />
+                >
+                  <option value="">Selecciona un motivo</option>
+                  <option value="casting">Casting / Audición</option>
+                  <option value="proyecto">Propuesta de Proyecto</option>
+                  <option value="entrevista">Entrevista / Prensa</option>
+                  <option value="colaboracion">Colaboración Artística</option>
+                  <option value="otro">Otro</option>
+                </select>
               </div>
 
               <div>
                 <label
                   htmlFor="message"
-                  className="mb-2 block text-sm font-medium"
+                  className="mb-2 block text-sm font-semibold text-gray-700"
                 >
-                  Mensaje
+                  Mensaje *
                 </label>
                 <textarea
                   id="message"
@@ -249,8 +316,8 @@ export default function Contact() {
                     setFormState({ ...formState, message: e.target.value })
                   }
                   rows={6}
-                  className="w-full rounded-lg border border-input bg-background px-4 py-3 transition-colors focus:border-primary focus:outline-none"
-                  placeholder="Cuéntame sobre tu proyecto..."
+                  className="w-full rounded-lg border-2 border-gray-200 bg-white px-4 py-3 transition-colors focus:border-slate-700 focus:outline-none"
+                  placeholder="Cuéntame sobre tu proyecto, casting o propuesta..."
                   disabled={status === 'loading'}
                 />
               </div>
@@ -258,11 +325,11 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-all hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-6 py-4 font-bold text-white transition-all hover:bg-slate-800 hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
               >
                 {status === 'loading' ? (
                   <>
-                    <div className="h-5 w-5 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent" />
+                    <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
                     Enviando...
                   </>
                 ) : (
@@ -272,6 +339,10 @@ export default function Contact() {
                   </>
                 )}
               </button>
+
+              <p className="text-xs text-gray-500 text-center">
+                * Campos obligatorios. Tus datos serán tratados con total confidencialidad.
+              </p>
             </form>
           </motion.div>
         </div>
