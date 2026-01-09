@@ -7,9 +7,11 @@ import Portfolio from '@/components/sections/Portfolio'
 import Gallery from '@/components/sections/Gallery'
 import Timeline from '@/components/sections/Timeline'
 import Awards from '@/components/sections/Awards'
+import Collaborators from '@/components/sections/Collaborators'
 import Showreel from '@/components/sections/Showreel'
 import Press from '@/components/sections/Press'
 import Testimonials from '@/components/sections/Testimonials'
+import FAQ from '@/components/sections/FAQ'
 import Contact from '@/components/sections/Contact'
 import Footer from '@/components/Footer'
 
@@ -25,9 +27,11 @@ export default function Home() {
       <Gallery />
       <Timeline />
       <Awards />
+      <Collaborators />
       <Showreel />
       <Press />
       <Testimonials />
+      <FAQ />
       <Contact />
       <Footer />
     </main>
