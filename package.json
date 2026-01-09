@@ -1,7 +1,7 @@
 {
-  "name": "web-pasm",
+  "name": "almagro-san-miguel-portfolio",
   "version": "2.0.0",
-  "description": "Professional actor portfolio for Almagro San Miguel",
+  "description": "Portfolio profesional de Almagro San Miguel - Actor con 13+ años de experiencia en TV, cine y teatro",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,35 +11,40 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "next": "^14.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "framer-motion": "^11.0.0",
-    "lucide-react": "^0.300.0",
-    "tailwindcss": "^3.4.0",
-    "typescript": "^5.3.0"
+    "next": "15.5.9",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "framer-motion": "^11.15.0",
+    "lucide-react": "^0.468.0",
+    "react-icons": "^5.4.0"
   },
   "devDependencies": {
-    "@types/node": "^20.10.0",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "autoprefixer": "^10.4.0",
-    "postcss": "^8.4.0",
-    "eslint": "^8.55.0",
-    "eslint-config-next": "^14.0.0"
-  },
-  "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=9.0.0"
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "eslint": "^8",
+    "eslint-config-next": "15.5.9"
   },
   "keywords": [
     "actor",
     "portfolio",
-    "almagro-san-miguel",
+    "Almagro San Miguel",
+    "La Moderna",
+    "Vis a vis",
+    "TVE",
+    "teatro",
+    "cine",
     "next.js",
-    "typescript",
+    "react",
     "tailwind"
   ],
   "author": "Almagro San Miguel",
-  "license": "MIT"
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
 }

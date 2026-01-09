@@ -83,11 +83,12 @@ const nextConfig = {
   // Power optimization
   poweredByHeader: false,
 
+  // Server external packages (moved from experimental in Next.js 15+)
+  serverExternalPackages: [],
+
   // Experimental features for better performance
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
-    // Enable faster server components
-    serverComponentsExternalPackages: [],
   },
 
   // Compiler optimizations
