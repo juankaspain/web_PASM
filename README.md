@@ -1,456 +1,448 @@
-# 🌐 Web PASM - Modern Web Application
+# 🎭 Web PASM - Portfolio de Actor Profesional
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Security](https://img.shields.io/badge/security-A%2B-brightgreen)](https://github.com/juankaspain/web_PASM)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38bdf8)](https://tailwindcss.com/)
 
-Modern, secure, and performant web application built with cutting-edge technologies and best practices.
-
----
-
-## 📋 Table of Contents
-
-- [Architecture Overview](#architecture-overview)
-- [Technology Stack](#technology-stack)
-- [Project Structure](#project-structure)
-- [Security Features](#security-features)
-- [Performance Optimization](#performance-optimization)
-- [SEO Strategy](#seo-strategy)
-- [Development Workflow](#development-workflow)
-- [Deployment Strategy](#deployment-strategy)
-- [Monitoring & Analytics](#monitoring--analytics)
-- [Getting Started](#getting-started)
+Portfolio moderno, elegante y optimizado para actores profesionales. Construido con las últimas tecnologías web y mejores prácticas de la industria.
 
 ---
 
-## 🏗️ Architecture Overview
+## 📋 Tabla de Contenidos
 
-### Design Philosophy
+- [Sobre el Proyecto](#sobre-el-proyecto)
+- [Características](#características)
+- [Stack Tecnológico](#stack-tecnológico)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [Inicio Rápido](#inicio-rápido)
+- [Personalización](#personalización)
+- [Despliegue](#despliegue)
+- [SEO y Performance](#seo-y-performance)
 
-This project follows a **modern JAMstack architecture** with focus on:
+---
 
-- **Performance First**: Sub-second load times, optimized assets, lazy loading
-- **Security by Design**: CSP headers, HTTPS enforcement, input sanitization
-- **SEO Optimized**: Server-side rendering, semantic HTML, structured data
-- **Accessibility**: WCAG 2.1 AA compliant, ARIA labels, keyboard navigation
-- **Mobile First**: Responsive design, touch-optimized, PWA capabilities
+## 🎬 Sobre el Proyecto
 
-### Architecture Pattern
+### Filosofía de Diseño
+
+Este proyecto es un **portfolio estático** optimizado para actores, con enfoque en:
+
+- **🚀 Performance**: Carga ultra-rápida, optimización de assets
+- **🎨 Diseño Moderno**: Inspirado en portfolios de actores profesionales
+- **📱 Mobile First**: Responsive y táctil-optimizado
+- **🔍 SEO Optimizado**: Meta tags, sitemap, structured data
+- **♿ Accesibilidad**: WCAG 2.1 AA compliant
+- **🎭 Storytelling**: Diseñado para contar historias visualmente
+
+### Arquitectura Simplificada
 
 ```
-┌─────────────────────────────────────────────────┐
-│                   CDN Layer                      │
-│         (Cloudflare / CloudFront)                │
-└─────────────────────────────────────────────────┘
-                      ↓
-┌─────────────────────────────────────────────────┐
-│              Static Site Generator               │
-│           (Next.js / Astro / Vite)              │
-└─────────────────────────────────────────────────┘
-                      ↓
-┌─────────────────────────────────────────────────┐
-│         API Layer (Serverless Functions)         │
-│          (Vercel / Netlify / AWS Lambda)        │
-└─────────────────────────────────────────────────┘
-                      ↓
-┌─────────────────────────────────────────────────┐
-│              Database & Storage                  │
-│        (PostgreSQL / MongoDB / S3)              │
-└─────────────────────────────────────────────────┘
+┌─────────────────────────────────────────┐
+│          CDN (Vercel Edge)              │
+│     Contenido estático cacheado         │
+└─────────────────────────────────────────┘
+                  ↓
+┌─────────────────────────────────────────┐
+│         Next.js 15 (SSG/SSR)            │
+│    Genera páginas estáticas             │
+└─────────────────────────────────────────┘
+                  ↓
+┌─────────────────────────────────────────┐
+│      Datos Estáticos en Código          │
+│   (Arrays, objetos en componentes)      │
+└─────────────────────────────────────────┘
 ```
 
----
-
-## 🚀 Technology Stack
-
-### Frontend Core
-
-- **Framework**: Next.js 15 (App Router) with React 19
-  - Server Components for optimal performance
-  - Streaming SSR and Suspense
-  - Incremental Static Regeneration (ISR)
-
-- **Styling**: 
-  - Tailwind CSS 4.0 (utility-first approach)
-  - CSS Modules for component-specific styles
-  - Framer Motion for animations
-
-- **Type Safety**: TypeScript 5.x with strict mode
-  - Full type coverage
-  - Zod for runtime validation
-
-### State Management
-
-- **React Context** for global state
-- **Zustand** for complex client state
-- **TanStack Query (React Query)** for server state
-- **React Hook Form** with Zod validation
-
-### Backend & APIs
-
-- **API Routes**: Next.js API routes / Serverless functions
-- **Database ORM**: Prisma / Drizzle ORM
-- **Authentication**: NextAuth.js v5 / Clerk
-- **API Validation**: Zod schemas
-- **Rate Limiting**: Upstash Redis
-
-### DevOps & Infrastructure
-
-- **Hosting**: Vercel (primary) / Netlify (alternative)
-- **Database**: 
-  - Vercel Postgres / Supabase (PostgreSQL)
-  - Upstash Redis for caching
-- **Storage**: Cloudinary / S3 for assets
-- **CI/CD**: GitHub Actions
-- **Monitoring**: Sentry + Vercel Analytics
-
-### Development Tools
-
-- **Package Manager**: pnpm (fast, disk-efficient)
-- **Code Quality**: 
-  - ESLint (Airbnb + Next.js config)
-  - Prettier for formatting
-  - Husky for git hooks
-  - Commitlint for conventional commits
-- **Testing**: 
-  - Vitest for unit tests
-  - Playwright for E2E tests
-  - React Testing Library
-  - Jest for integration tests
+**✅ SIN base de datos**: Todo el contenido está en el código, fácil de editar y mantener.
 
 ---
 
-## 📁 Project Structure
+## ✨ Características
+
+### Secciones Implementadas
+
+- 🎭 **Hero Section**: Presentación impactante con animaciones
+- 👤 **Sobre Mí**: Biografía con estadísticas animadas
+- 🎥 **Portfolio**: 6 proyectos con filtros (Cine/TV/Teatro)
+- 🎬 **Showreel**: Sección de video y materiales descargables
+- 📰 **Prensa**: Artículos de medios y testimonios
+- 📧 **Contacto**: Formulario y datos de contacto
+
+### Características Técnicas
+
+✅ **Animaciones Fluidas**: Framer Motion para transiciones elegantes  
+✅ **Navegación Sticky**: Header fijo con efecto blur  
+✅ **Filtros Interactivos**: Portfolio filtrable por categoría  
+✅ **Responsive Design**: Optimizado para todos los dispositivos  
+✅ **Imágenes Optimizadas**: Next.js Image con WebP/AVIF  
+✅ **Code Splitting**: Carga solo lo necesario  
+✅ **PWA Ready**: Manifest y service worker preparados  
+✅ **SEO Completo**: Meta tags, OG, sitemap, robots.txt  
+
+---
+
+## 🚀 Stack Tecnológico
+
+### Frontend
+
+- **Framework**: Next.js 15.1 (App Router)
+- **UI Library**: React 19
+- **Lenguaje**: TypeScript 5.7 (strict mode)
+- **Estilos**: Tailwind CSS 4.0
+- **Animaciones**: Framer Motion 12
+- **Iconos**: Lucide React
+- **Fuentes**: Inter + Playfair Display (Google Fonts)
+
+### Gestión de Datos
+
+- **Datos Estáticos**: Arrays y objetos en componentes
+- **Formularios**: React Hook Form + Zod validation
+- **Estado**: React Context (mínimo necesario)
+
+### DevOps & Tooling
+
+- **Package Manager**: pnpm 8.x (o npm como alternativa)
+- **Linting**: ESLint + Prettier
+- **Git Hooks**: Husky + Commitlint
+- **Testing**: Vitest (unit) + Playwright (E2E)
+- **CI/CD**: GitHub Actions (manual trigger)
+- **Hosting**: Vercel / Netlify
+- **Monitoring**: Vercel Analytics
+
+---
+
+## 📁 Estructura del Proyecto
 
 ```
 web_PASM/
 ├── .github/
-│   ├── workflows/          # GitHub Actions CI/CD
-│   └── ISSUE_TEMPLATE/
+│   └── workflows/          # CI/CD manual
 ├── public/
-│   ├── assets/
-│   │   ├── images/
-│   │   ├── fonts/
-│   │   └── icons/
-│   ├── robots.txt
-│   ├── sitemap.xml
-│   └── manifest.json       # PWA manifest
+│   ├── robots.txt          # SEO
+│   ├── sitemap.xml         # SEO
+│   ├── manifest.json       # PWA
+│   └── grid.svg            # Background pattern
 ├── src/
-│   ├── app/                # Next.js App Router
-│   │   ├── (marketing)/    # Route group
-│   │   ├── (dashboard)/
-│   │   ├── api/
-│   │   ├── layout.tsx
-│   │   └── page.tsx
+│   ├── app/
+│   │   ├── layout.tsx      # Layout principal
+│   │   ├── page.tsx        # Página home
+│   │   └── globals.css     # Estilos globales
 │   ├── components/
-│   │   ├── ui/             # Reusable UI components
-│   │   ├── forms/
 │   │   ├── layouts/
-│   │   └── sections/
-│   ├── lib/
-│   │   ├── utils/          # Utility functions
-│   │   ├── hooks/          # Custom React hooks
-│   │   ├── constants/
-│   │   └── validations/    # Zod schemas
-│   ├── services/           # API services
-│   ├── stores/             # State management
-│   ├── styles/
-│   │   └── globals.css
-│   └── types/              # TypeScript types
-├── prisma/
-│   ├── schema.prisma
-│   └── migrations/
+│   │   │   ├── Header.tsx  # Navegación
+│   │   │   └── Footer.tsx  # Footer
+│   │   ├── sections/
+│   │   │   ├── Hero.tsx
+│   │   │   ├── About.tsx
+│   │   │   ├── Portfolio.tsx
+│   │   │   ├── Showreel.tsx
+│   │   │   ├── Press.tsx
+│   │   │   └── Contact.tsx
+│   │   └── ui/             # Componentes reutilizables
+│   │       ├── Button.tsx
+│   │       └── Card.tsx
+│   └── lib/
+│       └── utils.ts        # Utilidades
 ├── tests/
-│   ├── unit/
-│   ├── integration/
+│   ├── setup.ts
 │   └── e2e/
-├── docs/                   # Documentation
-├── .env.example
-├── .eslintrc.json
-├── .prettierrc
-├── next.config.js
-├── tailwind.config.ts
-├── tsconfig.json
+│       └── home.spec.ts
 ├── package.json
+├── tsconfig.json
+├── tailwind.config.ts
+├── next.config.js
+├── vitest.config.ts
+├── playwright.config.ts
 └── README.md
 ```
 
 ---
 
-## 🔒 Security Features
+## 🚀 Inicio Rápido
 
-### Implementation Checklist
+### Requisitos Previos
 
-- ✅ **Content Security Policy (CSP)** - Prevents XSS attacks
-- ✅ **HTTPS Enforcement** - All traffic encrypted
-- ✅ **CORS Configuration** - Controlled cross-origin requests
-- ✅ **Rate Limiting** - DDoS protection and abuse prevention
-- ✅ **Input Sanitization** - DOMPurify for user-generated content
-- ✅ **SQL Injection Prevention** - Parameterized queries with Prisma
-- ✅ **Authentication** - Secure session management with httpOnly cookies
-- ✅ **CSRF Protection** - Token-based validation
-- ✅ **Security Headers**: 
-  - X-Frame-Options: DENY
-  - X-Content-Type-Options: nosniff
-  - Referrer-Policy: strict-origin-when-cross-origin
-  - Permissions-Policy
+- **Node.js** 20.x o superior → [Descargar](https://nodejs.org/)
+- **npm** (incluido con Node.js) o **pnpm** (opcional)
+- **Git**
 
-### Environment Variables
-
-All sensitive data stored securely:
-- API keys in environment variables
-- Secrets in Vercel/GitHub Secrets
-- No credentials in codebase
-
----
-
-## ⚡ Performance Optimization
-
-### Strategies Implemented
-
-1. **Code Splitting**
-   - Dynamic imports for heavy components
-   - Route-based chunking
-   - Vendor bundle optimization
-
-2. **Image Optimization**
-   - Next.js Image component with automatic WebP
-   - Lazy loading with intersection observer
-   - Responsive images with srcset
-
-3. **Caching Strategy**
-   - Static assets: 1 year cache
-   - API responses: Redis caching
-   - CDN edge caching
-   - Service Worker for offline support
-
-4. **Bundle Optimization**
-   - Tree shaking
-   - Minification and compression
-   - Critical CSS extraction
-   - Preloading critical resources
-
-5. **Monitoring**
-   - Core Web Vitals tracking
-   - Lighthouse CI in pipeline
-   - Real User Monitoring (RUM)
-
-### Performance Targets
-
-- **Lighthouse Score**: 95+ across all metrics
-- **First Contentful Paint**: < 1.2s
-- **Largest Contentful Paint**: < 2.5s
-- **Time to Interactive**: < 3.8s
-- **Cumulative Layout Shift**: < 0.1
-
----
-
-## 🔍 SEO Strategy
-
-### Technical SEO
-
-- **Semantic HTML5** - Proper heading hierarchy
-- **Open Graph** - Social media optimization
-- **Twitter Cards** - Enhanced Twitter sharing
-- **Structured Data** - JSON-LD schema markup
-- **XML Sitemap** - Auto-generated and submitted
-- **Robots.txt** - Proper crawl directives
-- **Canonical URLs** - Duplicate content prevention
-- **Meta Tags** - Optimized titles and descriptions
-
-### On-Page SEO
-
-- Server-side rendering for crawlability
-- Mobile-first responsive design
-- Fast page load speeds
-- Clean URL structure
-- Internal linking strategy
-- Alt text for all images
-
-### Tools Integration
-
-- Google Search Console
-- Google Analytics 4
-- Bing Webmaster Tools
-- Schema.org markup validator
-
----
-
-## 🛠️ Development Workflow
-
-### Branch Strategy
-
-```
-main          → Production-ready code
-├── develop   → Integration branch
-└── feature/* → Feature branches
-└── hotfix/*  → Emergency fixes
-```
-
-### Commit Convention
-
-Following [Conventional Commits](https://www.conventionalcommits.org/):
-
-```
-feat: add new feature
-fix: bug fix
-docs: documentation changes
-style: formatting, missing semicolons
-refactor: code restructuring
-test: adding tests
-chore: maintenance tasks
-perf: performance improvements
-ci: CI/CD changes
-```
-
-### Pull Request Process
-
-1. Create feature branch from `develop`
-2. Implement changes with tests
-3. Pass all CI checks (lint, test, build)
-4. Code review by team member
-5. Merge to develop, then to main
-
----
-
-## 🚢 Deployment Strategy
-
-### Environments
-
-- **Development**: Local development server
-- **Preview**: Automatic deployment on PR
-- **Staging**: Pre-production testing
-- **Production**: Live application
-
-### Deployment Pipeline
-
-```
-Push to branch
-    ↓
-GitHub Actions triggered
-    ↓
-Run tests & linting
-    ↓
-Build application
-    ↓
-Deploy to Vercel
-    ↓
-Run E2E tests
-    ↓
-Health check
-    ↓
-Production live
-```
-
-### Rollback Strategy
-
-- Instant rollback via Vercel dashboard
-- Git revert for code-level rollbacks
-- Database migrations with down scripts
-
----
-
-## 📊 Monitoring & Analytics
-
-### Error Tracking
-
-- **Sentry**: Real-time error monitoring
-- Source maps for stack traces
-- User session replay
-- Performance monitoring
-
-### Analytics
-
-- **Google Analytics 4**: User behavior
-- **Vercel Analytics**: Web vitals
-- **Hotjar**: Heatmaps and recordings
-- Custom event tracking
-
-### Logging
-
-- Structured logging with Winston
-- Centralized log aggregation
-- Error alerting via Slack/Discord
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 20.x or higher
-- pnpm 8.x or higher
-- Git
-
-### Installation
+### Instalación en 3 Pasos
 
 ```bash
-# Clone repository
+# 1. Clonar el repositorio
 git clone https://github.com/juankaspain/web_PASM.git
 cd web_PASM
 
-# Install dependencies
-pnpm install
+# 2. Instalar dependencias (elige uno)
+npm install          # Con npm (más común)
+# o
+pnpm install         # Con pnpm (más rápido)
 
-# Set up environment variables
-cp .env.example .env.local
-
-# Run database migrations
-pnpm prisma migrate dev
-
-# Start development server
-pnpm dev
+# 3. Iniciar servidor de desarrollo
+npm run dev          # Con npm
+# o
+pnpm dev             # Con pnpm
 ```
 
-### Available Scripts
+**🌐 Abre tu navegador en:** http://localhost:3000
+
+### Scripts Disponibles
 
 ```bash
-pnpm dev          # Start development server
-pnpm build        # Build for production
-pnpm start        # Start production server
-pnpm lint         # Run ESLint
-pnpm lint:fix     # Fix linting issues
-pnpm format       # Format code with Prettier
-pnpm test         # Run unit tests
-pnpm test:e2e     # Run E2E tests
-pnpm type-check   # TypeScript type checking
+npm run dev          # Servidor de desarrollo (localhost:3000)
+npm run build        # Build para producción
+npm run start        # Servidor de producción
+npm run lint         # Ejecutar ESLint
+npm run lint:fix     # Corregir errores automáticamente
+npm run format       # Formatear código con Prettier
+npm run type-check   # Verificar tipos TypeScript
+npm run test         # Tests unitarios
+npm run test:e2e     # Tests end-to-end
 ```
 
 ---
 
-## 📚 Documentation
+## 🎨 Personalización
 
-- [Architecture Documentation](./docs/ARCHITECTURE.md)
-- [API Documentation](./docs/API.md)
-- [Component Library](./docs/COMPONENTS.md)
-- [Contributing Guide](./docs/CONTRIBUTING.md)
-- [Security Policy](./docs/SECURITY.md)
+### 1. Datos del Portfolio
+
+Edita `src/components/sections/Portfolio.tsx`:
+
+```typescript
+const projects = [
+  {
+    id: 1,
+    title: 'Tu Proyecto',
+    category: 'Cine', // 'Cine', 'TV', o 'Teatro'
+    role: 'Protagonista',
+    year: 2026,
+    image: '/images/tu-proyecto.jpg',
+    description: 'Descripción de tu proyecto...',
+    icon: Film,
+    awards: ['Premio ABC 2026'],
+  },
+  // ... más proyectos
+]
+```
+
+### 2. Información Personal
+
+Actualiza estos archivos:
+
+- **Hero**: `src/components/sections/Hero.tsx`
+- **Sobre Mí**: `src/components/sections/About.tsx`
+- **Contacto**: `src/components/sections/Contact.tsx`
+- **Footer**: `src/components/layouts/Footer.tsx`
+- **Metadata**: `src/app/layout.tsx`
+
+### 3. Imágenes
+
+**Opción A - Locales** (recomendado):
+```bash
+# Coloca tus imágenes en:
+public/images/
+  ├── hero.jpg
+  ├── about.jpg
+  └── projects/
+      ├── proyecto1.jpg
+      └── proyecto2.jpg
+```
+
+```tsx
+// Luego usa:
+<Image src="/images/hero.jpg" alt="..." />
+```
+
+**Opción B - Unsplash** (actual):
+Las imágenes actuales son de Unsplash para demo.
+
+### 4. Colores y Estilos
+
+Edita variables en `src/app/globals.css`:
+
+```css
+:root {
+  --primary: 240 5.9% 10%;      /* Color principal */
+  --background: 0 0% 100%;       /* Fondo */
+  --foreground: 240 10% 3.9%;    /* Texto */
+}
+```
+
+### 5. Redes Sociales
+
+Actualiza en `src/components/layouts/Footer.tsx`:
+
+```typescript
+const socialLinks = [
+  { name: 'Instagram', href: 'https://instagram.com/tu_usuario', icon: Instagram },
+  { name: 'Twitter', href: 'https://twitter.com/tu_usuario', icon: Twitter },
+  // ...
+]
+```
 
 ---
 
-## 🤝 Contributing
+## 🚢 Despliegue
 
-Contributions are welcome! Please read our [Contributing Guide](./docs/CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+### Vercel (Recomendado - 2 minutos)
+
+1. Sube tu código a GitHub (ya está)
+2. Ve a [vercel.com](https://vercel.com)
+3. Click en **"Add New Project"**
+4. Importa `juankaspain/web_PASM`
+5. Vercel detecta Next.js automáticamente
+6. Click en **"Deploy"**
+7. ¡Listo! 🎉
+
+**URL**: `https://tu-proyecto.vercel.app`
+
+### Netlify (Alternativa)
+
+1. Ve a [netlify.com](https://netlify.com)
+2. **"Add new site"** → **"Import from Git"**
+3. Selecciona tu repo
+4. Build settings:
+   - Build command: `npm run build`
+   - Publish directory: `.next`
+5. Deploy
+
+### Variables de Entorno (Opcional)
+
+Si necesitas configurar APIs:
+
+```bash
+# En Vercel/Netlify dashboard, añade:
+NEXT_PUBLIC_CONTACT_EMAIL=tu@email.com
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+```
 
 ---
 
-## 📄 License
+## 🔍 SEO y Performance
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+### SEO Implementado
+
+✅ **Meta Tags Optimizados**
+```tsx
+// src/app/layout.tsx
+export const metadata = {
+  title: 'Pedro Almagro | Actor',
+  description: '...',
+  openGraph: { ... },
+  twitter: { ... }
+}
+```
+
+✅ **Sitemap XML**: `public/sitemap.xml`  
+✅ **Robots.txt**: `public/robots.txt`  
+✅ **URLs Semánticas**: `/#about`, `/#portfolio`, etc.  
+✅ **Alt Text**: Todas las imágenes tienen descripción  
+✅ **Structured Data**: Preparado para JSON-LD  
+
+### Performance
+
+**Métricas Objetivo (Lighthouse):**
+- 🟢 Performance: 95+
+- 🟢 Accessibility: 95+
+- 🟢 Best Practices: 95+
+- 🟢 SEO: 95+
+
+**Optimizaciones:**
+- ⚡ Next.js Image optimization (WebP/AVIF)
+- ⚡ Code splitting automático
+- ⚡ Lazy loading de componentes
+- ⚡ CSS optimizado con Tailwind
+- ⚡ Minificación y compresión
+- ⚡ Edge caching en Vercel
 
 ---
 
-## 👥 Team
+## 🛠️ Desarrollo
 
-- **Lead Developer**: Pedro Almagro
-- **Organization**: juankaspain
+### Estructura de Datos
+
+Todos los datos están en los componentes:
+
+```typescript
+// src/components/sections/Portfolio.tsx
+const projects = [ /* 6 proyectos */ ]
+
+// src/components/sections/Press.tsx
+const pressItems = [ /* 3 artículos */ ]
+const testimonials = [ /* 2 testimonios */ ]
+
+// src/components/sections/About.tsx
+const stats = [ /* 4 estadísticas */ ]
+```
+
+### Añadir Nueva Sección
+
+1. Crea componente en `src/components/sections/`
+2. Añádelo a `src/app/page.tsx`
+3. Actualiza navegación en `Header.tsx`
+
+### Workflow de Git
+
+```bash
+# Crear rama para cambios
+git checkout -b feat/nueva-funcionalidad
+
+# Hacer commits (Conventional Commits)
+git commit -m "feat: añadir nueva sección"
+
+# Push
+git push origin feat/nueva-funcionalidad
+```
 
 ---
 
-## 🙏 Acknowledgments
+## 📚 Documentación Adicional
 
-Built with modern web technologies and industry best practices. Special thanks to the open-source community.
+- **[SETUP_LOCAL.md](./SETUP_LOCAL.md)** - Guía de instalación detallada
+- **[GUIA_COMPLETA.md](./GUIA_COMPLETA.md)** - Guía completa con FAQs
+- **[Next.js Docs](https://nextjs.org/docs)** - Documentación oficial
+- **[Tailwind CSS](https://tailwindcss.com/docs)** - Referencia de clases
 
 ---
 
-**Made with ❤️ in Sevilla, Spain** 🇪🇸
+## 🐛 Solución de Problemas
+
+### Error: Cannot find module
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+### Puerto 3000 ocupado
+```bash
+npm run dev -- -p 3001  # Usa puerto 3001
+```
+
+### Imágenes no cargan
+Verifica `next.config.js` → `remotePatterns`
+
+---
+
+## 📄 Licencia
+
+MIT License - Ver [LICENSE](LICENSE) para detalles.
+
+---
+
+## 👤 Autor
+
+**Pedro Almagro**
+- Portfolio: [pedroalmagro.com](https://pedroalmagro.com)
+- GitHub: [@juankaspain](https://github.com/juankaspain)
+- Ubicación: Sevilla, España 🇪🇸
+
+---
+
+## 🙏 Agradecimientos
+
+Construido con tecnologías modernas y mejores prácticas. Inspirado en portfolios de actores profesionales.
+
+---
+
+**Hecho con ❤️ en Sevilla** | **Built with Next.js 15 + React 19 + TypeScript**
