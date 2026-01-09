@@ -1,8 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Send } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle } from 'lucide-react'
 import { useState } from 'react'
+
+type FormStatus = 'idle' | 'loading' | 'success' | 'error'
 
 export default function Contact() {
   const [formState, setFormState] = useState({
@@ -11,12 +13,36 @@ export default function Contact() {
     subject: '',
     message: '',
   })
+  const [status, setStatus] = useState<FormStatus>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log('Form submitted:', formState)
-    alert('¡Gracias por tu mensaje! Te responderé pronto.')
+    setStatus('loading')
+    setErrorMessage('')
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setStatus('success')
+        setFormState({ name: '', email: '', subject: '', message: '' })
+      } else {
+        setStatus('error')
+        setErrorMessage(data.message || 'Error al enviar el mensaje')
+      }
+    } catch (error) {
+      setStatus('error')
+      setErrorMessage('Error de conexión. Intenta de nuevo.')
+    }
   }
 
   const contactInfo = [
@@ -127,6 +153,24 @@ export default function Contact() {
               onSubmit={handleSubmit}
               className="space-y-6 rounded-xl bg-card p-8 shadow-lg"
             >
+              {/* Success Message */}
+              {status === 'success' && (
+                <div className="flex items-center gap-3 rounded-lg bg-green-50 p-4 text-green-800 dark:bg-green-900/20 dark:text-green-400">
+                  <CheckCircle2 size={20} />
+                  <p className="text-sm font-medium">
+                    ¡Mensaje enviado correctamente! Te responderé pronto.
+                  </p>
+                </div>
+              )}
+
+              {/* Error Message */}
+              {status === 'error' && (
+                <div className="flex items-center gap-3 rounded-lg bg-red-50 p-4 text-red-800 dark:bg-red-900/20 dark:text-red-400">
+                  <AlertCircle size={20} />
+                  <p className="text-sm font-medium">{errorMessage}</p>
+                </div>
+              )}
+
               <div>
                 <label
                   htmlFor="name"
@@ -144,6 +188,7 @@ export default function Contact() {
                   }
                   className="w-full rounded-lg border border-input bg-background px-4 py-3 transition-colors focus:border-primary focus:outline-none"
                   placeholder="Tu nombre"
+                  disabled={status === 'loading'}
                 />
               </div>
 
@@ -164,6 +209,7 @@ export default function Contact() {
                   }
                   className="w-full rounded-lg border border-input bg-background px-4 py-3 transition-colors focus:border-primary focus:outline-none"
                   placeholder="tu@email.com"
+                  disabled={status === 'loading'}
                 />
               </div>
 
@@ -184,6 +230,7 @@ export default function Contact() {
                   }
                   className="w-full rounded-lg border border-input bg-background px-4 py-3 transition-colors focus:border-primary focus:outline-none"
                   placeholder="Motivo del contacto"
+                  disabled={status === 'loading'}
                 />
               </div>
 
@@ -204,15 +251,26 @@ export default function Contact() {
                   rows={6}
                   className="w-full rounded-lg border border-input bg-background px-4 py-3 transition-colors focus:border-primary focus:outline-none"
                   placeholder="Cuéntame sobre tu proyecto..."
+                  disabled={status === 'loading'}
                 />
               </div>
 
               <button
                 type="submit"
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-transform hover:scale-105"
+                disabled={status === 'loading'}
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-all hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
               >
-                Enviar Mensaje
-                <Send size={18} />
+                {status === 'loading' ? (
+                  <>
+                    <div className="h-5 w-5 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent" />
+                    Enviando...
+                  </>
+                ) : (
+                  <>
+                    Enviar Mensaje
+                    <Send size={18} />
+                  </>
+                )}
               </button>
             </form>
           </motion.div>
