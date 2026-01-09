@@ -1,126 +1,78 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
+import { ArrowDown } from 'lucide-react'
 import Image from 'next/image'
 
 export default function Hero() {
   return (
     <section
-      id="hero"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
+      id="home"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20" />
-
-      <div className="container relative z-10 mx-auto px-6 py-32">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          {/* Text Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-white"
-          >
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="mb-4 text-sm font-medium uppercase tracking-widest text-slate-300"
-            >
-              Actor & Performer
-            </motion.p>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="mb-6 font-serif text-5xl font-bold leading-tight lg:text-7xl"
-            >
-              Pedro Almagro
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="mb-8 text-lg leading-relaxed text-slate-300 lg:text-xl"
-            >
-              Contando historias que conmueven, inspiran y transforman.
-              Especializado en teatro, cine y televisión.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="flex flex-wrap gap-4"
-            >
-              <a
-                href="#portfolio"
-                className="rounded-full bg-white px-8 py-3 font-semibold text-slate-900 transition-transform hover:scale-105"
-              >
-                Ver Portafolio
-              </a>
-              <a
-                href="#contact"
-                className="rounded-full border-2 border-white px-8 py-3 font-semibold text-white transition-all hover:bg-white hover:text-slate-900"
-              >
-                Contactar
-              </a>
-            </motion.div>
-          </motion.div>
-
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-2xl">
-              <Image
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop"
-                alt="Pedro Almagro"
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent" />
-            </div>
-
-            {/* Floating Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1 }}
-              className="absolute -bottom-6 -right-6 rounded-xl bg-white p-6 shadow-xl"
-            >
-              <p className="text-sm font-semibold text-slate-900">
-                15+ Años
-              </p>
-              <p className="text-xs text-slate-600">Experiencia</p>
-            </motion.div>
-          </motion.div>
-        </div>
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974"
+          alt="Almagro San Miguel - Actor profesional"
+          fill
+          className="object-cover brightness-[0.3]"
+          priority
+        />
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <a href="#about" className="text-white" aria-label="Scroll down">
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
+      {/* Content */}
+      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-6">
+            Almagro San Miguel
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-200 mb-4">
+            Actor & Performer
+          </p>
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
+            Actor sevillano con más de 10 años de experiencia en televisión, cine y teatro.
+            Protagonista de La Moderna, Vis a vis: El Oasis, Estoy vivo y La Caza.
+          </p>
+
+          {/* Social Links */}
+          <div className="flex justify-center gap-4 mb-12">
+            <a
+              href="https://www.imdb.com/name/nm9017709/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-full transition-colors"
+            >
+              IMDb
+            </a>
+            <a
+              href="https://es.wikipedia.org/wiki/Almagro_San_Miguel"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-sm transition-colors"
+            >
+              Wikipedia
+            </a>
+          </div>
+
+          <motion.a
+            href="#about"
+            className="inline-block"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.8 }}
           >
-            <ChevronDown size={32} />
-          </motion.div>
-        </a>
-      </motion.div>
+            <ArrowDown className="w-8 h-8 text-white animate-bounce" />
+          </motion.a>
+        </motion.div>
+      </div>
+
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/70 z-[1]" />
     </section>
   )
 }
