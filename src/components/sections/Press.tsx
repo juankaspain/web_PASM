@@ -1,10 +1,21 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ExternalLink, Calendar, Newspaper } from 'lucide-react'
+import { ExternalLink, Calendar, Newspaper, Video } from 'lucide-react'
 import Image from 'next/image'
 
 const pressArticles = [
+  {
+    title: 'Almagro San Miguel: la pasión por actuar y aprender del pasado',
+    outlet: 'El Plural TV',
+    date: '23 de diciembre de 2024',
+    excerpt:
+      'Entrevista en el Teatro de la Maestranza sobre sus nuevos retos tras La Moderna, su interés por la historia de España y la irrupción de influencers en la industria.',
+    url: 'https://www.youtube.com/watch?v=ts2qSZpSO_I',
+    image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=1000',
+    featured: true,
+    type: 'video',
+  },
   {
     title: 'Almagro San Miguel, el galán de "La Moderna": "El amor tiende a no caber en definiciones"',
     outlet: 'RTVE',
@@ -23,7 +34,7 @@ const pressArticles = [
       'El actor sevillano habla sobre el síndrome del impostor, su última película "Un fantasma en la batalla" de Díaz Yanes y cómo superó sus inseguridades.',
     url: 'https://www.lavanguardia.com/gente/20251017/11166920/almagro-san-miguel-principio-tenia-voz-cabeza-me-decia-mal-actor-me-fustiga',
     image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=1000',
-    featured: true,
+    featured: false,
   },
   {
     title: 'De "La Moderna" a la película sobre ETA de Díaz Yanes',
@@ -33,6 +44,16 @@ const pressArticles = [
       '"Es un privilegio trabajar con Díaz Yanes. Crea un ambiente muy tranquilo, se percibe su experiencia", afirma el actor sobre su trabajo en "Un fantasma en la batalla".',
     url: 'https://www.diariodesevilla.es/television/almagro-san-miguel-moderna-pelicula_0_2004995240.html',
     image: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?q=80&w=1000',
+    featured: false,
+  },
+  {
+    title: 'Almagro San Miguel, un actor todoterreno con doblete en TVE',
+    outlet: 'Diario Crítico',
+    date: '25 de abril de 2024',
+    excerpt:
+      'Graduado en la ESAD de Sevilla, Almagro San Miguel comienza su carrera en los escenarios con proyectos teatrales que le llevan hasta la Compañía Nacional de Teatro Clásico.',
+    url: 'https://www.diariocritico.com/almagro-san-miguel-series-tv',
+    image: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1000',
     featured: false,
   },
   {
@@ -64,6 +85,7 @@ const pressArticles = [
     url: 'https://www.youtube.com/watch?v=mll_3Sj8kjg',
     image: 'https://images.unsplash.com/photo-1574267432644-f74f8ec9cfd0?q=80&w=1000',
     featured: false,
+    type: 'video',
   },
   {
     title: 'Entrevista exclusiva: "Me podréis ver en Honor, una serie sobre el poder y la corrupción"',
@@ -127,7 +149,8 @@ export default function Press() {
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-300"
                     />
-                    <div className="absolute top-4 left-4 bg-slate-900 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                    <div className="absolute top-4 left-4 bg-slate-900 text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2">
+                      {article.type === 'video' && <Video className="w-4 h-4" />}
                       DESTACADO
                     </div>
                   </div>
@@ -149,7 +172,7 @@ export default function Press() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 text-slate-700 hover:text-slate-900 font-semibold transition-colors"
                     >
-                      Leer artículo completo
+                      {article.type === 'video' ? 'Ver entrevista' : 'Leer artículo completo'}
                       <ExternalLink className="w-4 h-4" />
                     </a>
                   </div>
@@ -177,6 +200,11 @@ export default function Press() {
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-300"
                     />
+                    {article.type === 'video' && (
+                      <div className="absolute top-2 right-2 bg-red-600 text-white p-2 rounded-full">
+                        <Video className="w-4 h-4" />
+                      </div>
+                    )}
                   </div>
                   <div className="p-5">
                     <div className="flex items-center justify-between mb-3 text-xs text-gray-500">
@@ -193,7 +221,7 @@ export default function Press() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 text-slate-700 hover:text-slate-900 text-sm font-semibold transition-colors"
                     >
-                      Leer más
+                      {article.type === 'video' ? 'Ver' : 'Leer más'}
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   </div>
@@ -201,7 +229,7 @@ export default function Press() {
               ))}
           </div>
 
-          {/* Video Interview */}
+          {/* Radio Interview */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -209,6 +237,7 @@ export default function Press() {
             viewport={{ once: true }}
             className="mt-12 bg-slate-100 rounded-lg p-8 text-center"
           >
+            <Video className="w-12 h-12 text-slate-700 mx-auto mb-4" />
             <h3 className="text-2xl font-serif font-bold mb-3">Entrevista en Radio</h3>
             <p className="text-gray-700 mb-4">
               Entrevista completa en Rumbera Sevilla 93.4 FM sobre "Vis a Vis: El Oasis" y "Hernán"

@@ -14,25 +14,25 @@ const testimonials = [
   },
   {
     quote:
-      '"El amor tiende a no caber en definiciones. El que ama sabe que ama y punto. Yo me veo muy así, cuando ama Íñigo, yo también soy así."',
+      '"Entré por los pelos en la carrera de Arte Dramático. Mi madre me pagó las pruebas cuando yo quería estudiar Derecho. Fue la mejor decisión de mi vida."',
     author: 'Almagro San Miguel',
-    role: 'Reflexionando sobre el amor y su personaje',
-    source: 'Entrevista RTVE',
-    url: 'https://www.rtve.es/television/20231202/moderna-entrevista-almagro-san-miguel-inigo-penalver/2463590.shtml',
+    role: 'Sobre sus inicios',
+    source: 'El Plural TV',
+    url: 'https://www.youtube.com/watch?v=ts2qSZpSO_I',
+  },
+  {
+    quote:
+      '"Mis inicios fueron haciendo teatro de calle. No nos contrataba ni Cristo, entonces dijimos: vamos a juntarnos y nos íbamos a las plazas de los pueblos a actuar."',
+    author: 'Almagro San Miguel',
+    role: 'Sobre sus primeros trabajos',
+    source: 'El Plural TV',
+    url: 'https://www.youtube.com/watch?v=ts2qSZpSO_I',
   },
   {
     quote:
       '"Al principio tenía una voz en la cabeza que me decía que era muy mal actor y me fustigaba mucho. Me paran señoras mayores y me hablan como a mi personaje de La Moderna."',
     author: 'Almagro San Miguel',
     role: 'Sobre el síndrome del impostor',
-    source: 'La Vanguardia',
-    url: 'https://www.lavanguardia.com/gente/20251017/11166920/almagro-san-miguel-principio-tenia-voz-cabeza-me-decia-mal-actor-me-fustiga',
-  },
-  {
-    quote:
-      '"No me pongo intenso solamente con la historia, también soy un intenso de la vida. Soy muy friki, a mí me gusta Star Wars y El Señor de los Anillos."',
-    author: 'Almagro San Miguel',
-    role: 'Sobre su personalidad',
     source: 'La Vanguardia',
     url: 'https://www.lavanguardia.com/gente/20251017/11166920/almagro-san-miguel-principio-tenia-voz-cabeza-me-decia-mal-actor-me-fustiga',
   },
@@ -46,31 +46,47 @@ const testimonials = [
   },
   {
     quote:
-      '"Cada vez que me vienen nuevos guiones me sorprendo. Me encanta que sea así, no te puedes quedar tranquilo pensando que todo está bien o mal, porque en un segundo cambia."',
+      '"Me llama mucho la atención los años 40 y 30 en España. Al parecer tengo cara de época. Cuando aprendes de tu pasado, no cometes los errores."',
     author: 'Almagro San Miguel',
-    role: 'Sobre trabajar en La Moderna',
+    role: 'Sobre su pasión por la época',
+    source: 'El Plural TV',
+    url: 'https://www.youtube.com/watch?v=ts2qSZpSO_I',
+  },
+  {
+    quote:
+      '"El amor tiende a no caber en definiciones. El que ama sabe que ama y punto. Yo me veo muy así, cuando ama Íñigo, yo también soy así."',
+    author: 'Almagro San Miguel',
+    role: 'Reflexionando sobre el amor',
     source: 'Entrevista RTVE',
     url: 'https://www.rtve.es/television/20231202/moderna-entrevista-almagro-san-miguel-inigo-penalver/2463590.shtml',
   },
   {
     quote:
-      '"Lo más importante para que todo salga bien es trabajar codo con codo con todas las personas que conformamos la serie y a partir de ahí sumando siempre y aportando."',
+      '"No me pongo intenso solamente con la historia, también soy un intenso de la vida. Soy muy friki, a mí me gusta Star Wars y El Señor de los Anillos."',
     author: 'Almagro San Miguel',
-    role: 'Sobre el trabajo en equipo',
-    source: 'Entrevista RTVE',
-    url: 'https://www.rtve.es/television/20231202/moderna-entrevista-almagro-san-miguel-inigo-penalver/2463590.shtml',
+    role: 'Sobre su personalidad',
+    source: 'La Vanguardia',
+    url: 'https://www.lavanguardia.com/gente/20251017/11166920/almagro-san-miguel-principio-tenia-voz-cabeza-me-decia-mal-actor-me-fustiga',
   },
   {
     quote:
-      '"España es muy rica en historia y tenemos mucho que enseñar al mundo, que aprender de nosotros mismo, de lo que enorgullecernos y otras en las que mirarnos y reflexionar."',
+      '"Lo más importante es trabajar codo con codo con todas las personas que conformamos la serie. Es muy difícil llegar, pero luego mantente: otro año, otro año, otro año."',
     author: 'Almagro San Miguel',
-    role: 'Sobre su pasión por proyectos históricos',
-    source: 'Entrevista RTVE',
-    url: 'https://www.rtve.es/television/20231202/moderna-entrevista-almagro-san-miguel-inigo-penalver/2463590.shtml',
+    role: 'Sobre el trabajo en equipo y la perseverancia',
+    source: 'El Plural TV',
+    url: 'https://www.youtube.com/watch?v=ts2qSZpSO_I',
   },
   {
     quote:
-      '"Cada proyecto, personaje, es otra historia, otro mundo, otros conflictos, debilidades… La posibilidad también de aprender de la historia de tu país me llena mucho."',
+      '"Si decides estar en esto, trabaja. Esto no es un jiji ni un jaja, esto es trabajo duro. Hay que respetarnos entre nosotros porque no todo vale."',
+    author: 'Almagro San Miguel',
+    role: 'Sobre los influencers en la actuación',
+    source: 'El Plural TV',
+    url: 'https://www.youtube.com/watch?v=ts2qSZpSO_I',
+  },
+  {
+    quote:
+      '"Cada proyecto, personaje, es otra historia, otro mundo, otros conflictos. La posibilidad de aprender de la historia de tu país me llena mucho."',
     author: 'Almagro San Miguel',
     role: 'Sobre su amor por la interpretación',
     source: 'Entrevista RTVE',
@@ -78,11 +94,11 @@ const testimonials = [
   },
   {
     quote:
-      '"Me trabajé mucho las audiciones porque la oportunidad así lo requería. Recuerdo que cuando leí las separatas, me sentía muy en sintonía con lo que ahí se reflejaba."',
+      '"Estuve poniendo copas y trabajando de lo que fuera. Me mamé muchas Navidades en Madrid solito, trabajando en discotecas mientras mi familia estaba de fiesta. Lo haces porque tienes un plan."',
     author: 'Almagro San Miguel',
-    role: 'Sobre conseguir el papel de Íñigo',
-    source: 'Entrevista RTVE',
-    url: 'https://www.rtve.es/television/20231202/moderna-entrevista-almagro-san-miguel-inigo-penalver/2463590.shtml',
+    role: 'Sobre sacrificios antes del éxito',
+    source: 'El Plural TV',
+    url: 'https://www.youtube.com/watch?v=ts2qSZpSO_I',
   },
 ]
 
