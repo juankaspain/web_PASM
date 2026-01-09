@@ -1,77 +1,99 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Users, Star, Award, Film } from 'lucide-react'
+import { Star, ExternalLink, Sparkles } from 'lucide-react'
+import Image from 'next/image'
+import { useState } from 'react'
 
-const directors = [
+interface Collaborator {
+  name: string
+  role: string
+  project: string
+  image: string
+  description: string
+  imdb?: string
+  highlight: string
+}
+
+const collaborators: Collaborator[] = [
   {
     name: 'Agustín Díaz Yanes',
+    role: 'Director',
     project: 'Un fantasma en la batalla',
-    year: '2025',
-    quote: '"Es un privilegio trabajar con él. Crea un ambiente muy tranquilo, se percibe su experiencia."',
-    category: 'Cine',
-    notable: true,
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400',
+    description: 'Prestigioso director y guionista español, ganador del Goya al Mejor Guión Adaptado. Ha dirigido películas como "Alatriste" y "Nadie conoce a nadie".',
+    highlight: 'Director Goya',
+    imdb: 'https://www.imdb.com/name/nm0227009/',
   },
   {
     name: 'Helena Pimenta',
-    project: 'Compañía Nacional Teatro Clásico',
-    year: '2015-2017',
-    quote: 'Directora de la CNTC que forjó las bases de su técnica interpretativa en teatro clásico.',
-    category: 'Teatro',
-    notable: true,
+    role: 'Directora CNTC',
+    project: 'Fuente Ovejuna',
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400',
+    description: 'Directora de la Compañía Nacional de Teatro Clásico. Referente en la dirección de obras del Siglo de Oro español.',
+    highlight: 'CNTC',
   },
   {
-    name: 'Carlos Sedes',
+    name: 'Maggie Civantos',
+    role: 'Co-protagonista',
     project: 'Vis a vis: El Oasis',
-    year: '2020',
-    quote: 'Director del spin-off que le dio su primer papel protagonista como Dieguito Ramala.',
-    category: 'Televisión',
-    notable: true,
+    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=400',
+    description: 'Actriz española conocida por su papel protagonista en "Vis a vis". Nominada a los Premios Feroz y Premios Unión de Actores.',
+    highlight: 'Protagonista Vis a vis',
+    imdb: 'https://www.imdb.com/name/nm3677974/',
   },
   {
-    name: 'Jordi Frades',
-    project: 'Hernán (Prime Video)',
-    year: '2019',
-    quote: 'Dirección de la superproducción histórica internacional de Amazon.',
-    category: 'Televisión',
+    name: 'Óscar Jaenada',
+    role: 'Protagonista',
+    project: 'Hernán',
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400',
+    description: 'Actor internacional con carrera en Hollywood. Conocido por "Piratas del Caribe", "Cantinflas" y "Luis Miguel: La Serie".',
+    highlight: 'Actor Internacional',
+    imdb: 'https://www.imdb.com/name/nm0415320/',
   },
   {
-    name: 'Joaquín Llamas',
-    project: 'La Moderna',
-    year: '2023-2024',
-    quote: 'Dirección de la serie diaria donde interpretó a Íñigo durante 236 episodios.',
-    category: 'Televisión',
+    name: 'Javier Gutiérrez',
+    role: 'Protagonista',
+    project: 'Estoy vivo',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400',
+    description: 'Actor ganador del Goya por "La isla mínima". Una de las figuras más reconocidas del cine español contemporáneo.',
+    highlight: 'Goya Mejor Actor',
+    imdb: 'https://www.imdb.com/name/nm1126861/',
   },
   {
-    name: 'Darío Facal',
-    project: 'Work In Progress (Formación)',
-    year: '2014-2015',
-    quote: 'Formación actoral intensiva en Madrid que complementó sus estudios en ESAD.',
-    category: 'Formación',
+    name: 'Najwa Nimri',
+    role: 'Actriz',
+    project: 'Vis a vis: El Oasis',
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400',
+    description: 'Actriz y cantante española, reconocida internacionalmente por su papel en "La Casa de Papel" y "Vis a vis".',
+    highlight: 'La Casa de Papel',
+    imdb: 'https://www.imdb.com/name/nm0632047/',
   },
-]
-
-const castmates = [
-  { name: 'Maggie Civantos', project: 'Vis a vis: El Oasis' },
-  { name: 'Najwa Nimri', project: 'Vis a vis: El Oasis' },
-  { name: 'Óscar Jaénada', project: 'Hernán' },
-  { name: 'Michel Brown', project: 'Hernán' },
-  { name: 'Javier Gutiérrez', project: 'Estoy vivo' },
-  { name: 'Anna Castillo', project: 'Estoy vivo' },
-  { name: 'Adriana Torrebejano', project: 'La Moderna' },
-  { name: 'Carmen Arriás', project: 'La Moderna' },
-]
-
-const stats = [
-  { icon: Users, value: '50+', label: 'Directores' },
-  { icon: Star, value: '100+', label: 'Compañeros de Reparto' },
-  { icon: Film, value: '15+', label: 'Productoras' },
-  { icon: Award, value: '6', label: 'Plataformas' },
+  {
+    name: 'Anna Castillo',
+    role: 'Actriz',
+    project: 'Estoy vivo',
+    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400',
+    description: 'Joven actriz española ganadora del Goya por "El olivo". Reconocida por su trabajo en cine y televisión.',
+    highlight: 'Goya Revelación',
+    imdb: 'https://www.imdb.com/name/nm3641894/',
+  },
+  {
+    name: 'Michel Brown',
+    role: 'Actor',
+    project: 'Hernán',
+    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400',
+    description: 'Actor argentino-estadounidense conocido por telenovelas y series internacionales. Carrera en EE.UU. y Latinoamérica.',
+    highlight: 'Actor Internacional',
+    imdb: 'https://www.imdb.com/name/nm0114440/',
+  },
 ]
 
 export default function Collaborators() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+
   return (
-    <section id="collaborators" className="py-20 bg-white">
+    <section id="collaborators" className="py-20 bg-gradient-to-b from-slate-50 via-white to-slate-50">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -79,108 +101,116 @@ export default function Collaborators() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Users className="w-8 h-8 text-slate-700" />
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-center">
-              Colaboraciones
-            </h2>
-          </div>
-          <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
-            Directores, actores y profesionales con los que he tenido el honor de trabajar.
-          </p>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 max-w-4xl mx-auto">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="bg-slate-50 rounded-lg p-6 text-center border border-slate-200 hover:border-slate-400 transition-all"
-                >
-                  <Icon className="w-8 h-8 mx-auto mb-3 text-slate-700" />
-                  <div className="text-3xl font-bold text-slate-900 mb-1">{stat.value}</div>
-                  <div className="text-sm text-gray-600">{stat.label}</div>
-                </motion.div>
-              )
-            })}
-          </div>
-
-          {/* Directors */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-serif font-bold mb-8 text-center">
-              Directores Destacados
-            </h3>
-            <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-              {directors.map((director, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className={`p-6 rounded-lg border-2 ${
-                    director.notable
-                      ? 'bg-gradient-to-br from-yellow-50 to-orange-50 border-yellow-400'
-                      : 'bg-white border-gray-200'
-                  } hover:shadow-lg transition-all`}
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <h4 className="text-xl font-bold text-slate-900">{director.name}</h4>
-                      <p className="text-sm text-gray-600">{director.project}</p>
-                    </div>
-                    {director.notable && (
-                      <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
-                    )}
-                  </div>
-                  <p className="text-sm text-gray-700 italic mb-3">{director.quote}</p>
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="px-2 py-1 bg-slate-200 rounded-full font-semibold">
-                      {director.category}
-                    </span>
-                    <span className="text-gray-500">{director.year}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Castmates */}
-          <div>
-            <h3 className="text-2xl font-serif font-bold mb-8 text-center">
-              Compañeros de Reparto
-            </h3>
+          {/* Header */}
+          <div className="text-center mb-16">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="max-w-4xl mx-auto bg-slate-50 rounded-lg p-8 border border-slate-200"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-slate-100 to-gray-100 rounded-full mb-4"
             >
-              <div className="grid md:grid-cols-2 gap-4">
-                {castmates.map((castmate, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200"
-                  >
-                    <div>
-                      <p className="font-bold text-slate-900">{castmate.name}</p>
-                      <p className="text-sm text-gray-600">{castmate.project}</p>
-                    </div>
-                    <Star className="w-5 h-5 text-gray-300" />
-                  </div>
-                ))}
-              </div>
-              <p className="text-center text-sm text-gray-500 mt-6">
-                Y muchos más talentosos actores y actrices a lo largo de mi carrera...
-              </p>
+              <Sparkles className="w-4 h-4 text-slate-700" />
+              <span className="text-slate-700 text-sm font-semibold">Colaboraciones</span>
             </motion.div>
+            
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+              Directores y Actores
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              He tenido el privilegio de trabajar con algunos de los profesionales más talentosos
+              del cine y la televisión española e internacional.
+            </p>
           </div>
+
+          {/* Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {collaborators.map((person, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                whileHover={{ y: -10, scale: 1.02 }}
+                className="group relative"
+              >
+                {/* Card */}
+                <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-gray-100">
+                  {/* Image */}
+                  <div className="relative h-64 overflow-hidden">
+                    <Image
+                      src={person.image}
+                      alt={person.name}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    
+                    {/* Hover overlay with description */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute inset-0 bg-black/90 p-4 flex flex-col justify-end"
+                    >
+                      <p className="text-white text-sm leading-relaxed">{person.description}</p>
+                      {person.imdb && (
+                        <a
+                          href={person.imdb}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="mt-3 inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 text-sm font-semibold"
+                        >
+                          Ver IMDb
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      )}
+                    </motion.div>
+
+                    {/* Bottom info */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="px-2 py-1 bg-yellow-500 text-white text-xs font-bold rounded-full">
+                          {person.highlight}
+                        </span>
+                      </div>
+                      <h3 className="text-white font-bold text-lg">{person.name}</h3>
+                      <p className="text-gray-200 text-sm">{person.role}</p>
+                    </div>
+                  </div>
+
+                  {/* Project */}
+                  <div className="p-4 bg-gradient-to-r from-slate-50 to-white">
+                    <div className="flex items-center gap-2">
+                      <Star className="w-4 h-4 text-yellow-500" />
+                      <span className="text-sm font-semibold text-slate-700">{person.project}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 -z-10" />
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Bottom note */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            viewport={{ once: true }}
+            className="mt-16 text-center"
+          >
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Estas colaboraciones han sido fundamentales en mi desarrollo profesional,
+              permitiéndome aprender de los mejores y elevar la calidad de mis interpretaciones.
+            </p>
+          </motion.div>
         </motion.div>
       </div>
     </section>
