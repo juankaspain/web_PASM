@@ -1,84 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Film, TvMinimal, Theater, Calendar } from 'lucide-react'
+import { Calendar, User, Award } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
-
-const categories = ['Todos', 'Cine', 'TV', 'Teatro']
-
-const projects = [
-  {
-    id: 1,
-    title: 'El Último Adiós',
-    category: 'Cine',
-    role: 'Protagonista',
-    year: 2024,
-    image:
-      'https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800',
-    description:
-      'Drama intenso sobre pérdida y redención en la España contemporánea.',
-    icon: Film,
-    awards: ['Mejor Actor - Festival de Málaga 2024'],
-  },
-  {
-    id: 2,
-    title: 'Sombras de Medianoche',
-    category: 'TV',
-    role: 'Personaje Recurrente',
-    year: 2023,
-    image:
-      'https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?q=80&w=800',
-    description:
-      'Serie de suspense que cautivó a millones de espectadores.',
-    icon: TvMinimal,
-  },
-  {
-    id: 3,
-    title: 'Hamlet',
-    category: 'Teatro',
-    role: 'Hamlet',
-    year: 2023,
-    image:
-      'https://images.unsplash.com/photo-1503095396549-807759245b35?q=80&w=800',
-    description: 'Adaptación moderna del clásico de Shakespeare.',
-    icon: Theater,
-    awards: ['Nominación Mejor Actor - Premios Max 2023'],
-  },
-  {
-    id: 4,
-    title: 'Caminos Cruzados',
-    category: 'Cine',
-    role: 'Secundario',
-    year: 2023,
-    image:
-      'https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800',
-    description: 'Comedia dramática sobre encuentros fortuitos.',
-    icon: Film,
-  },
-  {
-    id: 5,
-    title: 'La Casa de Bernarda Alba',
-    category: 'Teatro',
-    role: 'Pepe el Romano',
-    year: 2022,
-    image:
-      'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&w=800',
-    description: 'Clásico de Lorca en el Teatro Lope de Vega.',
-    icon: Theater,
-  },
-  {
-    id: 6,
-    title: 'Código Rojo',
-    category: 'TV',
-    role: 'Protagonista',
-    year: 2022,
-    image:
-      'https://images.unsplash.com/photo-1574267432644-f046462e8e4d?q=80&w=800',
-    description: 'Thriller policial con altos ratings.',
-    icon: TvMinimal,
-  },
-]
+import { projects, categories } from '@/lib/data/projects'
 
 export default function Portfolio() {
   const [activeCategory, setActiveCategory] = useState('Todos')
@@ -142,50 +68,76 @@ export default function Portfolio() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative overflow-hidden rounded-xl bg-card shadow-lg transition-transform hover:scale-105"
+                className="group relative overflow-hidden rounded-xl bg-card shadow-lg transition-all hover:shadow-2xl hover:scale-[1.02]"
               >
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 
-                  {/* Badge */}
-                  <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 backdrop-blur-sm">
+                  {/* Category Badge */}
+                  <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-white/95 px-3 py-1 backdrop-blur-sm">
                     <Icon size={14} />
                     <span className="text-xs font-semibold">
                       {project.category}
                     </span>
                   </div>
+
+                  {/* Year Badge */}
+                  <div className="absolute right-4 top-4 flex items-center gap-1 rounded-full bg-black/70 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+                    <Calendar size={12} />
+                    {project.year}
+                  </div>
                 </div>
 
                 <div className="p-6">
-                  <div className="mb-2 flex items-center justify-between">
-                    <h3 className="font-serif text-xl font-bold">
-                      {project.title}
-                    </h3>
-                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                      <Calendar size={14} />
-                      {project.year}
-                    </div>
+                  <h3 className="mb-2 font-serif text-xl font-bold">
+                    {project.title}
+                  </h3>
+
+                  <div className="mb-3 flex items-start gap-2 text-sm text-primary">
+                    <User size={16} className="mt-0.5 flex-shrink-0" />
+                    <p className="font-medium">{project.role}</p>
                   </div>
 
-                  <p className="mb-2 text-sm font-medium text-primary">
-                    {project.role}
-                  </p>
-
-                  <p className="text-sm text-muted-foreground">
+                  <p className="mb-4 line-clamp-3 text-sm text-muted-foreground">
                     {project.description}
                   </p>
 
-                  {project.awards && (
-                    <div className="mt-4 rounded-lg bg-muted/50 p-3">
-                      <p className="text-xs font-semibold">Premios:</p>
+                  {/* Director & Production */}
+                  {(project.director || project.production) && (
+                    <div className="mb-4 space-y-1 text-xs text-muted-foreground">
+                      {project.director && (
+                        <p>
+                          <span className="font-semibold">Dirección:</span>{' '}
+                          {project.director}
+                        </p>
+                      )}
+                      {project.production && (
+                        <p>
+                          <span className="font-semibold">Producción:</span>{' '}
+                          {project.production}
+                        </p>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Awards */}
+                  {project.awards && project.awards.length > 0 && (
+                    <div className="rounded-lg bg-amber-50 p-3 dark:bg-amber-950/30">
+                      <div className="mb-1 flex items-center gap-1 text-xs font-semibold text-amber-700 dark:text-amber-400">
+                        <Award size={14} />
+                        Premios
+                      </div>
                       {project.awards.map((award, i) => (
-                        <p key={i} className="text-xs text-muted-foreground">
+                        <p
+                          key={i}
+                          className="text-xs text-amber-600 dark:text-amber-300"
+                        >
                           • {award}
                         </p>
                       ))}
@@ -196,6 +148,17 @@ export default function Portfolio() {
             )
           })}
         </div>
+
+        {/* Project Count */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          viewport={{ once: true }}
+          className="mt-12 text-center text-sm text-muted-foreground"
+        >
+          Mostrando {filteredProjects.length} de {projects.length} proyectos
+        </motion.div>
       </div>
     </section>
   )
