@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 
 export default function Hero() {
   const { scrollY } = useScroll()
-  // Scroll muy suave para que no “colapse” al hacer zoom
+  // Scroll muy suave para que no "colapse" al hacer zoom
   const opacity = useTransform(scrollY, [0, 200], [1, 0.95])
   const scale = useTransform(scrollY, [0, 200], [1, 0.98])
   const [mounted, setMounted] = useState(false)
@@ -75,14 +75,14 @@ export default function Hero() {
         <div className="grid lg:grid-cols-[1.05fr_1.15fr] gap-10 xl:gap-16 items-center">
           {/* COLUMNA FOTO */}
           <div className="order-2 lg:order-1 flex justify-center lg:justify-start">
-            <div className="relative w-full max-w-[520px] lg:max-w-[560px]">
-              <div className="relative aspect-[3/4] rounded-[32px] lg:rounded-[40px] overflow-hidden border border-white/7 shadow-[0_40px_140px_rgba(0,0,0,0.9)] bg-black/60">
+            <div className="relative w-full max-w-[580px] lg:max-w-[620px]">
+              <div className="relative aspect-[4/5] rounded-[32px] lg:rounded-[40px] overflow-hidden border border-white/7 shadow-[0_40px_140px_rgba(0,0,0,0.9)] bg-black/60">
                 <Image
-                  src="https://private-user-images.githubusercontent.com/30146558/534179896-43e8482d-f288-4cd0-b1ad-31e054eafdf4.png?raw=1"
+                  src="https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4"
                   alt="Almagro San Miguel - Actor profesional de televisión, cine y teatro"
                   fill
-                  className="object-cover object-center"
-                  sizes="(min-width: 1024px) 520px, 90vw"
+                  className="object-cover object-[center_20%]"
+                  sizes="(min-width: 1024px) 620px, 90vw"
                   priority
                 />
                 {/* Gradiente para asegurar lectura siempre correcta */}
@@ -115,32 +115,6 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, ease: 'easeOut' }}
           >
-            {/* BADGE PROFESIONAL */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.15, duration: 0.5 }}
-              className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-yellow-600/15 to-orange-600/15 border border-yellow-500/40 px-5 py-2.5 backdrop-blur-md shadow-[0_12px_40px_rgba(250,204,21,0.25)]"
-            >
-              <svg
-                className="w-5 h-5 text-yellow-300"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-                  fill="currentColor"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                />
-                <circle cx="12" cy="12" r="3" fill="#020617" stroke="currentColor" strokeWidth="0.6" />
-              </svg>
-              <span className="text-xs sm:text-sm font-semibold tracking-[0.16em] text-yellow-100 uppercase">
-                Actor profesional certificado
-              </span>
-            </motion.div>
-
             {/* NOMBRE EN UNA SOLA LÍNEA */}
             <div className="space-y-2">
               <motion.h1
