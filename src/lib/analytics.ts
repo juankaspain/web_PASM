@@ -7,7 +7,22 @@ type GTagEvent = {
   label: string
   value?: number
 }
+  
+  if (typeof window === 'undefined' || !(window as any).gtag) return
 
+  ;(window as any).gtag('event', action, {
+    event_category: category,
+    event_label: label,
+    value,
+  })
+}
+// src/lib/analytics.ts
+export const trackEvent = (
+  action: string,
+  category: string,
+  label?: string,
+  value?: number
+) => {
 // Log page views
 export const pageview = (url: string) => {
   if (typeof window !== 'undefined' && window.gtag) {
