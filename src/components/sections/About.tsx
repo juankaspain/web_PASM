@@ -164,7 +164,7 @@ export default function About() {
               </div>
             </motion.div>
 
-            {/* Right: Bio Only (Skills moved to separate section below) */}
+            {/* Right: Bio Only */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
@@ -179,25 +179,27 @@ export default function About() {
                 </h3>
                 <div className="prose prose-slate max-w-none space-y-4 text-sm sm:text-base text-gray-600 leading-relaxed">
                   <p>
-                    Nacido en <strong>Sevilla</strong> el 7 de marzo de 1990, Pedro Francisco Almagro Gordillo,
-                    conocido artísticamente como <strong>Almagro San Miguel</strong>, es un actor que ha
-                    construido su carrera sobre bases sólidas de formación clásica y experiencia diversa.
+                    Nacido en <strong>Sevilla</strong> el 7 de marzo de 1990, <strong>Pedro Francisco Almagro Gordillo</strong>,
+                    conocido artísticamente como <strong>Almagro San Miguel</strong>, es un actor profesional que ha
+                    construido una sólida carrera en televisión, cine y teatro.
                   </p>
                   <p>
                     Graduado por la <strong>Escuela Superior de Arte Dramático de Sevilla (ESAD)</strong> entre
-                    2008 y 2012, su pasión por el teatro le llevó a formar parte de la <strong>Compañía Nacional
-                    de Teatro Clásico</strong> entre 2015 y 2017, donde trabajó bajo la dirección de Helena Pimenta,
-                    especializándose en verso clásico español.
+                    2008 y 2012, completó su formación con <strong>Darío Facal</strong> en Work In Progress (2014-2015)
+                    y en la <strong>Compañía Nacional de Teatro Clásico (CNTC)</strong> bajo la dirección de 
+                    <strong>Helena Pimenta</strong> (2015-2017), donde se especializó en verso clásico español.
                   </p>
                   <p>
-                    Su debut en televisión llegó en 2017, y desde entonces ha participado en más de <strong>300
-                    episodios</strong> en series de plataformas como TVE, Prime Video, Fox, Atresplayer y Canal Sur.
-                    Destacan sus roles protagonistas en <strong>“La Moderna”</strong> (236 episodios) y <strong>“Vis
-                    a vis: El Oasis”</strong>.
+                    Su debut televisivo llegó en 2019 con <strong>“Hernán”</strong> (Amazon Prime Video), interpretando
+                    a Gonzalo de Sandoval junto a Óscar Jaenada. Desde entonces ha participado en <strong>más de 300 episodios</strong>
+                    en series como <strong>“Vis a vis: El Oasis”</strong>, <strong>“La Moderna”</strong> (236 episodios como protagonista),
+                    <strong>“Operación Barrio Inglés”</strong> y <strong>“La caza: Guadiana”</strong>.
                   </p>
                   <p>
-                    Además de su trabajo actoral, domina habilidades como <strong>esgrima</strong>, <strong>equitación</strong>,
-                    y música (<strong>violonchelo y viola</strong>), que aportan versatilidad a sus interpretaciones.
+                    En 2025 protagoniza la película <strong>“Un fantasma en la batalla”</strong>, dirigida por
+                    Agustín Díaz Yanes, actualmente en cines y Netflix. Además de su trabajo actoral, domina
+                    habilidades como <strong>esgrima</strong>, <strong>equitación</strong>, <strong>violonchelo</strong>
+                    y <strong>viola</strong>, que enriquecen su versatilidad interpretativa.
                   </p>
                 </div>
               </div>
