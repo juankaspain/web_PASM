@@ -2,7 +2,7 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
-import { Tv, Film, Award, TrendingUp, Users, Calendar, Star, Sparkles } from 'lucide-react'
+import { Tv, Film, Award, Calendar, Users, Star, TrendingUp, Sparkles } from 'lucide-react'
 
 interface StatProps {
   value: number
@@ -16,12 +16,12 @@ interface StatProps {
 function AnimatedCounter({ value, suffix = '', delay }: { value: number; suffix?: string; delay: number }) {
   const [count, setCount] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-50px' })
 
   useEffect(() => {
     if (isInView) {
-      const duration = 2000
-      const steps = 60
+      const duration = 1800
+      const steps = 50
       const increment = value / steps
       let current = 0
       
@@ -48,59 +48,57 @@ function AnimatedCounter({ value, suffix = '', delay }: { value: number; suffix?
 
 function StatCard({ value, label, suffix, icon: Icon, description, delay }: StatProps) {
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-50px' })
+  const isInView = useInView(ref, { once: true, margin: '-30px' })
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.7, delay, ease: 'easeOut' }}
-      whileHover={{ y: -8, scale: 1.02 }}
-      className="group relative"
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.5, delay, ease: 'easeOut' }}
+      whileHover={{ y: -6 }}
+      className="group"
     >
-      {/* Resplandor de fondo */}
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-500/30 via-orange-500/30 to-yellow-500/30 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      
-      {/* Card principal */}
-      <div className="relative h-full rounded-3xl bg-gradient-to-br from-slate-900/90 via-slate-950/90 to-black/90 border border-slate-700/50 backdrop-blur-xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.9)] overflow-hidden">
-        {/* Gradiente decorativo */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-500/10 to-transparent rounded-bl-full" />
+      <div className="relative h-full">
+        {/* Resplandor sutil en hover */}
+        <div className="absolute -inset-[1px] bg-gradient-to-br from-yellow-400/0 via-yellow-400/20 to-amber-500/0 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         
-        {/* Icono */}
-        <motion.div
-          className="relative mb-6 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-500/20 to-orange-500/20 border border-yellow-500/30"
-          whileHover={{ rotate: 360, scale: 1.1 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl blur-lg opacity-30" />
-          <Icon className="relative w-8 h-8 text-yellow-300" strokeWidth={2} />
-        </motion.div>
+        {/* Card */}
+        <div className="relative h-full bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-8 hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300 shadow-lg">
+          {/* Icono minimalista */}
+          <motion.div
+            className="inline-flex items-center justify-center w-14 h-14 mb-6 rounded-xl bg-gradient-to-br from-yellow-400/10 to-amber-500/10 border border-yellow-500/20"
+            whileHover={{ scale: 1.05, rotate: 5 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Icon className="w-7 h-7 text-yellow-400" strokeWidth={2} />
+          </motion.div>
 
-        {/* Número */}
-        <div className="mb-3">
-          <h3 className="text-5xl sm:text-6xl font-bold bg-gradient-to-br from-white via-yellow-100 to-yellow-300 bg-clip-text text-transparent">
-            <AnimatedCounter value={value} suffix={suffix} delay={delay} />
-          </h3>
+          {/* Número animado */}
+          <div className="mb-3">
+            <h3 className="text-5xl font-bold bg-gradient-to-br from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+              <AnimatedCounter value={value} suffix={suffix} delay={delay} />
+            </h3>
+          </div>
+
+          {/* Label */}
+          <p className="text-xl font-semibold text-white mb-2 group-hover:text-yellow-300 transition-colors">
+            {label}
+          </p>
+
+          {/* Descripción */}
+          <p className="text-sm text-slate-400 leading-relaxed">
+            {description}
+          </p>
+
+          {/* Línea decorativa inferior */}
+          <motion.div 
+            className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-yellow-400 to-amber-500 rounded-b-2xl"
+            initial={{ width: 0 }}
+            whileHover={{ width: '100%' }}
+            transition={{ duration: 0.4 }}
+          />
         </div>
-
-        {/* Label */}
-        <p className="text-lg sm:text-xl font-semibold text-slate-100 mb-2 group-hover:text-yellow-300 transition-colors">
-          {label}
-        </p>
-
-        {/* Descripción */}
-        <p className="text-sm text-slate-400 leading-relaxed">
-          {description}
-        </p>
-
-        {/* Línea decorativa */}
-        <motion.div 
-          className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-yellow-500 to-orange-500"
-          initial={{ width: 0 }}
-          whileHover={{ width: '100%' }}
-          transition={{ duration: 0.4 }}
-        />
       </div>
     </motion.div>
   )
@@ -113,7 +111,7 @@ export default function Stats() {
       label: 'Episodios',
       suffix: '+',
       icon: Tv,
-      description: 'En series nacionales e internacionales de máxima audiencia',
+      description: 'En series de televisión nacionales e internacionales',
       delay: 0.1,
     },
     {
@@ -121,7 +119,7 @@ export default function Stats() {
       label: 'Producciones',
       suffix: '+',
       icon: Film,
-      description: 'Entre series, películas y obras de teatro profesionales',
+      description: 'Series, películas y obras teatrales profesionales',
       delay: 0.2,
     },
     {
@@ -129,7 +127,7 @@ export default function Stats() {
       label: 'Años',
       suffix: '+',
       icon: Calendar,
-      description: 'De experiencia profesional consolidada en el sector',
+      description: 'De experiencia profesional en el sector audiovisual',
       delay: 0.3,
     },
     {
@@ -137,7 +135,7 @@ export default function Stats() {
       label: 'Premios',
       suffix: '',
       icon: Award,
-      description: 'Y nominaciones en festivales y certamînes teatrales',
+      description: 'Y nominaciones en festivales de prestigio',
       delay: 0.4,
     },
     {
@@ -145,7 +143,7 @@ export default function Stats() {
       label: 'Directores',
       suffix: '+',
       icon: Users,
-      description: 'Colaboraciones con directores de prestigio nacional',
+      description: 'Colaboraciones con directores de renombre',
       delay: 0.5,
     },
     {
@@ -153,93 +151,75 @@ export default function Stats() {
       label: 'Satisfacción',
       suffix: '%',
       icon: Star,
-      description: 'Valoración positiva de directores y productores',
+      description: 'Valoración de directores y productores',
       delay: 0.6,
     },
   ]
 
   return (
-    <section id="stats" className="relative py-24 sm:py-32 overflow-hidden bg-black">
-      {/* Fondo cinematográfico */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black" />
-      
-      {/* Partículas doradas flotantes */}
-      <div className="absolute inset-0 opacity-20">
-        {[...Array(25)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-yellow-400 rounded-full"
-            initial={{
-              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920),
-              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080),
-              opacity: 0,
-            }}
-            animate={{
-              y: [null, Math.random() * -500],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: Math.random() * 8 + 6,
-              repeat: Infinity,
-              ease: 'linear',
-              delay: Math.random() * 5,
-            }}
-          />
-        ))}
+    <section id="stats" className="relative py-32 overflow-hidden bg-gradient-to-b from-black via-slate-950 to-slate-900">
+      {/* Elementos decorativos */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-1/4 right-0 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[120px]" />
       </div>
 
-      {/* Contenido */}
+      {/* Patrón sutil de fondo */}
+      <div 
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        }}
+      />
+
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* Header minimalista */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16 sm:mb-20"
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/20 mb-6">
-            <Sparkles className="w-4 h-4 text-yellow-300" />
-            <span className="text-sm font-semibold text-yellow-300 uppercase tracking-wider">Trayectoria Profesional</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+            <Sparkles className="w-4 h-4 text-yellow-400" strokeWidth={2} />
+            <span className="text-sm font-medium text-slate-300 tracking-wide">Trayectoria Profesional</span>
           </div>
           
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-white via-yellow-100 to-yellow-300 bg-clip-text text-transparent">
+          <h2 className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+            <span className="bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
               Números que Hablan
             </span>
           </h2>
           
-          <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Más de una década dedicada al arte dramático con resultados excepcionales
+          <p className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed">
+            Más de una década de dedicación profesional al arte dramático con resultados consolidados
           </p>
         </motion.div>
 
         {/* Grid de estadísticas */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {stats.map((stat) => (
             <StatCard key={stat.label} {...stat} />
           ))}
         </div>
 
-        {/* Decoración inferior */}
+        {/* Footer badge */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
           className="mt-20 text-center"
         >
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-900/60 border border-slate-700/50 backdrop-blur-md">
-            <TrendingUp className="w-5 h-5 text-yellow-300" />
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm">
+            <TrendingUp className="w-5 h-5 text-yellow-400" />
             <span className="text-sm font-medium text-slate-300">
-              En constante crecimiento profesional
+              Trayectoria en constante crecimiento
             </span>
           </div>
         </motion.div>
       </div>
-
-      {/* Vignette inferior */}
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
     </section>
   )
 }

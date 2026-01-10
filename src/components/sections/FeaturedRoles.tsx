@@ -1,8 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Tv, Play, Star, ExternalLink, Film, Award, Calendar, Globe } from 'lucide-react'
-import Image from 'next/image'
+import { Tv, Play, Star, ExternalLink, Film, Calendar, Globe, Award, Sparkles } from 'lucide-react'
 import { useRef } from 'react'
 
 const featuredRoles = [
@@ -13,12 +12,12 @@ const featuredRoles = [
     platform: 'TVE',
     episodes: '236 episodios',
     year: '2023-2024',
-    description: 'Galán protagonista en la serie diaria de época de TVE que ha cautivado a millones de espectadores. Papel que le dio reconocimiento masivo en España.',
-    gradient: 'from-amber-500 via-orange-500 to-red-600',
+    description: 'Galán protagonista en la serie diaria de época de máxima audiencia en TVE. Personaje que consolidó mi reconocimiento a nivel nacional.',
+    gradient: 'from-amber-500 to-orange-600',
+    accentColor: 'amber',
     imdb: 'https://www.imdb.com/title/tt21867896/',
     wikipedia: 'https://es.wikipedia.org/wiki/La_Moderna_(serie_de_televisi%C3%B3n)',
     filmaffinity: 'https://www.filmaffinity.com/es/film481753.html',
-    imageUrl: '/roles/la-moderna.jpg',
   },
   {
     title: 'Vis a vis: El Oasis',
@@ -27,12 +26,12 @@ const featuredRoles = [
     platform: 'Fox/Star Channel',
     episodes: '8 episodios',
     year: '2020',
-    description: 'Spin-off de la exitosa serie "Vis a vis". Papel protagónico en producción internacional con gran repercusión mediática.',
-    gradient: 'from-blue-600 via-purple-600 to-pink-600',
+    description: 'Papel protagónico en el spin-off de la exitosa serie "Vis a vis". Producción internacional de alto nivel con distribución global.',
+    gradient: 'from-blue-600 to-purple-600',
+    accentColor: 'blue',
     imdb: 'https://www.imdb.com/title/tt11566954/',
     wikipedia: 'https://es.wikipedia.org/wiki/Vis_a_vis:_El_Oasis',
     filmaffinity: 'https://www.filmaffinity.com/es/film596738.html',
-    imageUrl: '/roles/vis-a-vis.jpg',
   },
   {
     title: 'Hernán',
@@ -41,12 +40,12 @@ const featuredRoles = [
     platform: 'Amazon Prime Video',
     episodes: '8 episodios',
     year: '2019',
-    description: 'Serie histórica sobre Hernán Cortés protagonizada por Óscar Jaenada. Producción internacional de Amazon Prime con presupuesto millonario.',
-    gradient: 'from-red-600 via-orange-600 to-yellow-600',
+    description: 'Serie histórica protagonizada por Óscar Jaenada. Producción internacional de Amazon Prime con presupuesto millonario y distribución en más de 240 países.',
+    gradient: 'from-red-600 to-orange-600',
+    accentColor: 'red',
     imdb: 'https://www.imdb.com/title/tt9140786/',
     wikipedia: 'https://es.wikipedia.org/wiki/Hern%C3%A1n_(serie_de_televisi%C3%B3n)',
     filmaffinity: 'https://www.filmaffinity.com/es/film549817.html',
-    imageUrl: '/roles/hernan.jpg',
   },
   {
     title: 'Operación Barrio Inglés',
@@ -55,59 +54,61 @@ const featuredRoles = [
     platform: 'TVE',
     episodes: '8 episodios',
     year: '2024',
-    description: 'Serie de acción y drama sobre una operación policial en Sevilla. Papel de alto nivel técnico con escenas de acción y drama intenso.',
-    gradient: 'from-green-600 via-teal-600 to-cyan-600',
+    description: 'Serie de acción y thriller policial ambientada en Sevilla. Papel con alto nivel de exigencia física y dramática.',
+    gradient: 'from-green-600 to-teal-600',
+    accentColor: 'green',
     imdb: 'https://www.imdb.com/title/tt28106426/',
     wikipedia: null,
     filmaffinity: 'https://www.filmaffinity.com/es/film634421.html',
-    imageUrl: '/roles/barrio-ingles.jpg',
   },
 ]
 
 export default function FeaturedRoles() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="featured-roles" className="relative py-24 sm:py-32 overflow-hidden bg-black">
-      {/* Fondo cinematográfico con gradiente */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black" />
-      
-      {/* Grid de puntos decorativo */}
-      <div className="absolute inset-0 opacity-10" 
-           style={{
-             backgroundImage: 'radial-gradient(circle, rgba(251,191,36,0.5) 1px, transparent 1px)',
-             backgroundSize: '50px 50px'
-           }} 
+    <section id="featured-roles" className="relative py-32 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-black">
+      {/* Elementos decorativos */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[100px]" />
+      </div>
+
+      {/* Patrón de fondo */}
+      <div 
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        }}
       />
 
-      {/* Contenido */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6 }}
         >
-          {/* Header Premium */}
-          <div className="text-center mb-16 sm:mb-20">
+          {/* Header */}
+          <div className="text-center mb-20">
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/30 rounded-full mb-6 backdrop-blur-sm"
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
             >
-              <Star className="w-4 h-4 text-yellow-300" />
-              <span className="text-yellow-300 text-sm font-bold uppercase tracking-wider">Roles Destacados</span>
+              <Star className="w-4 h-4 text-yellow-400" strokeWidth={2} />
+              <span className="text-sm font-medium text-slate-300 tracking-wide">Roles Destacados</span>
             </motion.div>
             
             <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6"
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight"
             >
-              <span className="bg-gradient-to-r from-white via-yellow-100 to-yellow-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
                 Personajes Principales
               </span>
             </motion.h2>
@@ -115,182 +116,168 @@ export default function FeaturedRoles() {
             <motion.p 
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed"
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
             >
-              Protagonista y papeles principales en series de TVE, Amazon Prime Video, 
-              Fox y otras plataformas nacionales e internacionales de prestigio
+              Protagonista y papeles principales en producciones de TVE, Amazon Prime Video, Fox y otras plataformas de prestigio internacional
             </motion.p>
           </div>
 
-          {/* Grid de Roles - Diseño Premium */}
-          <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-7xl mx-auto">
+          {/* Grid de roles - Diseño limpio y profesional */}
+          <div className="grid md:grid-cols-2 gap-8">
             {featuredRoles.map((role, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 40 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-                transition={{ duration: 0.7, delay: 0.5 + index * 0.15 }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="group relative"
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                whileHover={{ y: -8 }}
+                className="group"
               >
-                {/* Resplandor exterior */}
-                <div className={`absolute -inset-0.5 bg-gradient-to-r ${role.gradient} rounded-3xl blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-500`} />
-                
-                {/* Card Principal */}
-                <div className="relative bg-gradient-to-br from-slate-900/95 via-slate-950/95 to-black/95 rounded-3xl overflow-hidden border border-slate-700/50 backdrop-blur-xl shadow-[0_25px_70px_rgba(0,0,0,0.95)]">
-                  {/* Imagen / Placeholder */}
-                  <div className="relative h-72 sm:h-80 overflow-hidden">
-                    {/* Gradiente de fondo */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${role.gradient} opacity-70`} />
-                    
-                    {/* Icono central */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center text-white/40">
-                        <Tv className="w-20 h-20 mx-auto mb-3" strokeWidth={1.5} />
-                        <p className="text-lg font-bold opacity-60">{role.title}</p>
-                      </div>
-                    </div>
-                    
-                    {/* Overlay con Play */}
-                    <motion.div 
-                      className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                      initial={false}
-                    >
-                      <motion.div 
-                        className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(251,191,36,0.6)]"
-                        whileHover={{ scale: 1.1, rotate: 90 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <Play className="w-10 h-10 text-black ml-1" fill="currentColor" />
-                      </motion.div>
-                    </motion.div>
-
-                    {/* Badges superiores */}
-                    <div className="absolute top-4 left-4 right-4 flex items-start justify-between gap-3">
-                      {/* Tipo de papel */}
-                      <div className={`px-4 py-1.5 bg-gradient-to-r ${role.gradient} rounded-full text-white text-xs font-bold shadow-lg backdrop-blur-sm`}>
-                        {role.type}
+                <div className="relative h-full">
+                  {/* Resplandor sutil */}
+                  <div className={`absolute -inset-[1px] bg-gradient-to-br ${role.gradient} rounded-2xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500`} />
+                  
+                  {/* Card */}
+                  <div className="relative h-full bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300 shadow-xl">
+                    {/* Header visual con gradiente */}
+                    <div className="relative h-48 overflow-hidden">
+                      <div className={`absolute inset-0 bg-gradient-to-br ${role.gradient} opacity-60`} />
+                      
+                      {/* Icono central */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <Tv className="w-16 h-16 text-white/30" strokeWidth={1.5} />
                       </div>
                       
-                      {/* Plataforma */}
-                      <div className="px-4 py-1.5 bg-black/80 backdrop-blur-md rounded-full text-white text-xs font-semibold border border-white/20">
-                        {role.platform}
+                      {/* Overlay con play en hover */}
+                      <motion.div 
+                        className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                        initial={false}
+                      >
+                        <motion.div 
+                          className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center"
+                          whileHover={{ scale: 1.1 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <Play className="w-8 h-8 text-black ml-1" fill="currentColor" />
+                        </motion.div>
+                      </motion.div>
+
+                      {/* Badges */}
+                      <div className="absolute top-4 left-4 right-4 flex items-start justify-between gap-3">
+                        <div className={`px-3 py-1 bg-gradient-to-r ${role.gradient} rounded-full text-white text-xs font-bold backdrop-blur-sm`}>
+                          {role.type}
+                        </div>
+                        <div className="px-3 py-1 bg-black/60 backdrop-blur-sm rounded-full text-white text-xs font-semibold border border-white/20">
+                          {role.platform}
+                        </div>
                       </div>
+
+                      {/* Gradiente inferior */}
+                      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black to-transparent" />
                     </div>
 
-                    {/* Gradiente inferior */}
-                    <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/90 to-transparent" />
-                  </div>
-
-                  {/* Contenido de la card */}
-                  <div className="p-7">
-                    {/* Título y rol */}
-                    <div className="mb-4">
-                      <h3 className="font-bold text-2xl sm:text-3xl text-white mb-2 group-hover:text-yellow-300 transition-colors">
+                    {/* Contenido */}
+                    <div className="p-7">
+                      {/* Título */}
+                      <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-yellow-300 transition-colors">
                         {role.title}
                       </h3>
-                      <p className="text-lg text-slate-300">
-                        <span className="font-semibold text-yellow-300">{role.role}</span>
+                      <p className="text-lg text-slate-300 mb-4">
+                        <span className="font-semibold text-yellow-400">{role.role}</span>
                       </p>
-                    </div>
 
-                    {/* Metadatos */}
-                    <div className="flex flex-wrap items-center gap-3 text-sm text-slate-400 mb-4">
-                      <div className="flex items-center gap-1.5">
-                        <Calendar className="w-4 h-4" />
-                        <span>{role.year}</span>
+                      {/* Meta */}
+                      <div className="flex items-center gap-3 text-sm text-slate-400 mb-4">
+                        <div className="flex items-center gap-1.5">
+                          <Calendar className="w-4 h-4" />
+                          <span>{role.year}</span>
+                        </div>
+                        <span>•</span>
+                        <div className="flex items-center gap-1.5">
+                          <Film className="w-4 h-4" />
+                          <span>{role.episodes}</span>
+                        </div>
                       </div>
-                      <span className="text-slate-600">•</span>
-                      <div className="flex items-center gap-1.5">
-                        <Film className="w-4 h-4" />
-                        <span>{role.episodes}</span>
-                      </div>
-                    </div>
 
-                    {/* Descripción */}
-                    <p className="text-sm sm:text-base text-slate-400 leading-relaxed mb-5">
-                      {role.description}
-                    </p>
+                      {/* Descripción */}
+                      <p className="text-slate-400 leading-relaxed mb-6">
+                        {role.description}
+                      </p>
 
-                    {/* Botones de enlaces profesionales */}
-                    <div className="flex flex-wrap gap-3">
-                      {/* IMDb */}
-                      <motion.a
-                        href={role.imdb}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full text-sm font-bold text-black shadow-lg hover:shadow-[0_0_30px_rgba(251,191,36,0.5)] transition-all group/link"
-                      >
-                        <ExternalLink className="w-4 h-4 group-hover/link:rotate-45 transition-transform" />
-                        IMDb
-                      </motion.a>
-
-                      {/* Wikipedia */}
-                      {role.wikipedia && (
+                      {/* Enlaces */}
+                      <div className="flex flex-wrap gap-3">
                         <motion.a
-                          href={role.wikipedia}
+                          href={role.imdb}
                           target="_blank"
                           rel="noopener noreferrer"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
-                          className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-600/50 rounded-full text-sm font-bold text-white shadow-lg transition-all group/link"
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-lg text-sm font-bold text-black shadow-lg hover:shadow-yellow-500/30 transition-all"
                         >
-                          <Globe className="w-4 h-4 group-hover/link:rotate-12 transition-transform" />
-                          Wiki
+                          <ExternalLink className="w-4 h-4" />
+                          IMDb
                         </motion.a>
-                      )}
 
-                      {/* FilmAffinity */}
-                      {role.filmaffinity && (
-                        <motion.a
-                          href={role.filmaffinity}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="inline-flex items-center gap-2 px-4 py-2.5 bg-red-900/40 hover:bg-red-800/60 border border-red-700/50 rounded-full text-sm font-bold text-white shadow-lg transition-all group/link"
-                        >
-                          <Film className="w-4 h-4 group-hover/link:scale-110 transition-transform" />
-                          FA
-                        </motion.a>
-                      )}
+                        {role.wikipedia && (
+                          <motion.a
+                            href={role.wikipedia}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-sm font-semibold text-white transition-all"
+                          >
+                            <Globe className="w-4 h-4" />
+                            Wiki
+                          </motion.a>
+                        )}
+
+                        {role.filmaffinity && (
+                          <motion.a
+                            href={role.filmaffinity}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-sm font-semibold text-white transition-all"
+                          >
+                            <Film className="w-4 h-4" />
+                            FA
+                          </motion.a>
+                        )}
+                      </div>
                     </div>
+
+                    {/* Barra decorativa inferior */}
+                    <motion.div 
+                      className={`absolute bottom-0 left-0 h-[2px] bg-gradient-to-r ${role.gradient}`}
+                      initial={{ width: 0 }}
+                      whileHover={{ width: '100%' }}
+                      transition={{ duration: 0.4 }}
+                    />
                   </div>
-
-                  {/* Barra inferior decorativa */}
-                  <motion.div 
-                    className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${role.gradient}`}
-                    initial={{ width: 0 }}
-                    whileHover={{ width: '100%' }}
-                    transition={{ duration: 0.5 }}
-                  />
                 </div>
               </motion.div>
             ))}
           </div>
 
-          {/* Decoración inferior */}
+          {/* Footer */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-            className="mt-16 text-center"
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="mt-20 text-center"
           >
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-900/60 border border-slate-700/50 backdrop-blur-md">
-              <Award className="w-5 h-5 text-yellow-300" />
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm">
+              <Award className="w-5 h-5 text-yellow-400" />
               <span className="text-sm font-medium text-slate-300">
-                Roles que han marcado mi carrera profesional
+                Personajes que han definido mi trayectoria profesional
               </span>
             </div>
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Vignette inferior */}
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent pointer-events-none" />
     </section>
   )
 }
