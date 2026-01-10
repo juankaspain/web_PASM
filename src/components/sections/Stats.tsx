@@ -60,11 +60,11 @@ function StatCard({ value, label, suffix, icon: Icon, description, delay }: Stat
       className="group"
     >
       <div className="relative h-full">
-        <div className="absolute -inset-[1px] bg-gradient-to-br from-yellow-400/0 via-yellow-400/20 to-amber-500/0 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         
         <div className="relative h-full bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-8 hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300">
           <motion.div
-            className="inline-flex items-center justify-center w-14 h-14 mb-6 rounded-xl bg-gradient-to-br from-yellow-400/10 to-amber-500/10 border border-yellow-500/20"
+            className="inline-flex items-center justify-center w-14 h-14 mb-6 rounded-xl bg-yellow-400/10 border border-yellow-400/20"
             whileHover={{ scale: 1.05, rotate: 5 }}
             transition={{ duration: 0.3 }}
           >
@@ -72,12 +72,12 @@ function StatCard({ value, label, suffix, icon: Icon, description, delay }: Stat
           </motion.div>
 
           <div className="mb-3">
-            <h3 className="text-5xl font-bold bg-gradient-to-br from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+            <h3 className="text-5xl font-bold text-white">
               <AnimatedCounter value={value} suffix={suffix} delay={delay} />
             </h3>
           </div>
 
-          <p className="text-xl font-semibold text-white mb-2 group-hover:text-yellow-300 transition-colors">
+          <p className="text-xl font-semibold text-white mb-2">
             {label}
           </p>
 
@@ -86,7 +86,7 @@ function StatCard({ value, label, suffix, icon: Icon, description, delay }: Stat
           </p>
 
           <motion.div 
-            className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-yellow-400 to-amber-500 rounded-b-2xl"
+            className="absolute bottom-0 left-0 h-[2px] bg-yellow-400 rounded-b-2xl"
             initial={{ width: 0 }}
             whileHover={{ width: '100%' }}
             transition={{ duration: 0.4 }}
@@ -176,10 +176,8 @@ export default function Stats() {
             <span className="text-sm font-medium text-slate-300 tracking-wide">Trayectoria Profesional</span>
           </div>
           
-          <h2 className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-            <span className="bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
-              Números que Hablan
-            </span>
+          <h2 className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white">
+            Números que Hablan
           </h2>
           
           <p className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed">
