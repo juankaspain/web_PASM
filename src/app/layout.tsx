@@ -98,12 +98,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es">
-      <head>
+    <html lang="es" suppressHydrationWarning>
+      <body className={inter.className} suppressHydrationWarning>
+        {children}
+        <Analytics />
+        
         {/* Schema.org Person Markup */}
         <Script
           id="person-schema"
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
@@ -166,6 +170,7 @@ export default function RootLayout({
         <Script
           id="performance-schema"
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
@@ -183,14 +188,6 @@ export default function RootLayout({
             }),
           }}
         />
-
-        {/* Preconnect for performance */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-      </head>
-      <body className={inter.className}>
-        {children}
-        <Analytics />
       </body>
     </html>
   )
