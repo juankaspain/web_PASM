@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Play, MapPin, Calendar, ExternalLink, Award, Theater as TheaterIcon, GraduationCap, Film } from 'lucide-react'
+import { ArrowDown, Play, MapPin, Calendar, ExternalLink, Clapperboard, Tv, Star, Theater as TheaterIcon } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
@@ -44,24 +44,24 @@ export default function Hero() {
 
   const quickHighlights = [
     {
-      icon: Award,
-      title: 'Nominado Goya',
-      desc: 'Mejor Actor Revelación',
+      icon: Clapperboard,
+      title: 'Un fantasma en la batalla',
+      desc: 'Netflix 2025',
     },
     {
-      icon: Film,
-      title: 'Netflix',
-      desc: 'Un fantasma en la batalla',
+      icon: Tv,
+      title: 'La Moderna',
+      desc: '236 episodios TVE',
+    },
+    {
+      icon: Star,
+      title: 'Vis a vis: El Oasis',
+      desc: 'Protagonista Fox',
     },
     {
       icon: TheaterIcon,
-      title: 'Teatro',
-      desc: 'Gran Vía 0 y más',
-    },
-    {
-      icon: GraduationCap,
-      title: 'CNTC / ESAD',
-      desc: 'Formación profesional',
+      title: 'CNTC',
+      desc: 'Compañía Nacional',
     },
   ]
 
@@ -188,7 +188,7 @@ export default function Hero() {
 
             {/* Quick Highlights */}
             <motion.div
-              className="grid grid-cols-2 gap-2.5"
+              className="grid grid-cols-2 gap-3"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.55, duration: 0.6 }}
@@ -202,13 +202,13 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6 + index * 0.05, duration: 0.4 }}
                     whileHover={{ scale: 1.03, y: -2 }}
-                    className="rounded-xl bg-slate-900/80 border border-slate-700/60 px-3 py-2.5 backdrop-blur-md hover:border-white/20 transition-all"
+                    className="rounded-xl bg-slate-900/80 border border-slate-700/60 px-3.5 py-3 backdrop-blur-md hover:border-yellow-400/30 transition-all"
                   >
-                    <div className="flex items-center gap-2 mb-1">
-                      <Icon className="w-3.5 h-3.5 text-yellow-400" />
-                      <span className="text-xs font-bold text-white">{highlight.title}</span>
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <Icon className="w-4 h-4 text-yellow-400" />
+                      <span className="text-xs font-bold text-white leading-tight">{highlight.title}</span>
                     </div>
-                    <p className="text-[10px] text-slate-300">{highlight.desc}</p>
+                    <p className="text-[11px] text-slate-300 font-medium">{highlight.desc}</p>
                   </motion.div>
                 )
               })}
