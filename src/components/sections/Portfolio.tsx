@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import Image from 'next/image'
-import { Film, Tv, Theater, Play, Star, ExternalLink, Calendar, Users, Clapperboard, X, Award as AwardIcon, Sparkles } from 'lucide-react'
+import { Film, Tv, Theater, Play, Star, ExternalLink, Calendar, Clapperboard, X, Sparkles } from 'lucide-react'
 import { useState, useRef } from 'react'
 
 type Category = 'all' | 'tv' | 'film' | 'theater'
@@ -23,7 +23,6 @@ interface Project {
   director?: string
   coStars?: string[]
   highlights?: string[]
-  gradient: string
 }
 
 const projects: Project[] = [
@@ -42,7 +41,6 @@ const projects: Project[] = [
     director: 'Varios directores',
     coStars: ['Paula Ballesteros', 'Sebastián Haro', 'Sara Vidorreta'],
     highlights: ['Protagonista', '236 episodios', 'Prime Time'],
-    gradient: 'from-amber-500 to-orange-600',
   },
   {
     id: 'vis-a-vis',
@@ -59,7 +57,6 @@ const projects: Project[] = [
     director: 'Varios directores',
     coStars: ['Maggie Civantos', 'Najwa Nimri', 'Itziar Castro'],
     highlights: ['Protagonista', 'Fox/Star', 'Internacional'],
-    gradient: 'from-blue-600 to-purple-600',
   },
   {
     id: 'hernan',
@@ -76,7 +73,6 @@ const projects: Project[] = [
     director: 'Varios directores',
     coStars: ['Óscar Jaenada', 'Michel Brown', 'Víctor Clavijo'],
     highlights: ['Prime Video', '240+ países', 'Épica'],
-    gradient: 'from-red-600 to-pink-600',
   },
   {
     id: 'operacion-barrio',
@@ -91,7 +87,6 @@ const projects: Project[] = [
     category: 'tv',
     description: 'Thriller policial ambientado en Sevilla. Serie de acción con alto nivel de exigencia física y dramática.',
     highlights: ['Acción', 'TVE 2024', 'Sevilla'],
-    gradient: 'from-green-600 to-teal-600',
   },
   {
     id: 'la-caza',
@@ -106,7 +101,6 @@ const projects: Project[] = [
     category: 'tv',
     description: 'Thriller policíaco de la exitosa franquicia La Caza. Investigación de crímenes sin resolver.',
     highlights: ['Thriller', '7.3 IMDb', 'TVE'],
-    gradient: 'from-slate-600 to-gray-700',
   },
   {
     id: 'fantasma',
@@ -121,7 +115,6 @@ const projects: Project[] = [
     description: 'Thriller basado en hechos reales sobre ETA. Dirigida por Agustín Díaz Yanes.',
     director: 'Agustín Díaz Yanes',
     highlights: ['Estreno 2025', 'Hechos reales', 'Díaz Yanes'],
-    gradient: 'from-yellow-600 to-red-600',
   },
   {
     id: 'lapso',
@@ -135,7 +128,6 @@ const projects: Project[] = [
     category: 'film',
     description: 'Thriller psicológico con rating excepcional en IMDb. Debut cinematográfico.',
     highlights: ['8.6 IMDb', 'Thriller', 'Debut'],
-    gradient: 'from-purple-600 to-indigo-700',
   },
   {
     id: 'oliver-twist',
@@ -148,7 +140,6 @@ const projects: Project[] = [
     category: 'theater',
     description: 'Musical producido por Cía La Tarasca. Premio Mejor Espectáculo del Año 2016.',
     highlights: ['Premio 2016', 'Musical', 'La Tarasca'],
-    gradient: 'from-pink-500 to-rose-600',
   },
   {
     id: 'fuente-ovejuna',
@@ -162,7 +153,6 @@ const projects: Project[] = [
     description: 'Compañía Nacional de Teatro Clásico dirigida por Helena Pimenta. Nominación Mejor Actor Secundario.',
     director: 'Helena Pimenta',
     highlights: ['CNTC', 'Nominación', 'Pimenta'],
-    gradient: 'from-violet-600 to-purple-700',
   },
 ]
 
@@ -185,13 +175,11 @@ export default function Portfolio() {
 
   return (
     <section id="portfolio" className="relative py-32 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-black">
-      {/* Elementos decorativos */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[120px]" />
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-[100px]" />
       </div>
 
-      {/* Patrón de fondo */}
       <div 
         className="absolute inset-0 opacity-[0.02]"
         style={{
@@ -206,7 +194,6 @@ export default function Portfolio() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          {/* Header minimalista */}
           <div className="text-center mb-20">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -222,11 +209,9 @@ export default function Portfolio() {
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight"
+              className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white"
             >
-              <span className="bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
-                Portfolio Profesional
-              </span>
+              Portfolio Profesional
             </motion.h2>
             
             <motion.p 
@@ -235,12 +220,11 @@ export default function Portfolio() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
             >
-              Más de <span className="text-yellow-400 font-semibold">300 episodios</span> en televisión, cine y teatro. 
+              Más de <span className="text-white font-semibold">300 episodios</span> en televisión, cine y teatro. 
               Producciones nacionales e internacionales de máximo nivel profesional
             </motion.p>
           </div>
 
-          {/* Filtros - Diseño minimalista */}
           <motion.div 
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
@@ -274,7 +258,6 @@ export default function Portfolio() {
             })}
           </motion.div>
 
-          {/* Timeline de proyectos - Diseño limpio */}
           <div className="space-y-6">
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project, index) => (
@@ -290,17 +273,10 @@ export default function Portfolio() {
                   className="group cursor-pointer"
                 >
                   <div className="relative">
-                    {/* Línea decorativa izquierda */}
-                    <motion.div 
-                      className={`absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b ${project.gradient}`}
-                      initial={{ scaleY: 0 }}
-                      whileHover={{ scaleY: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
+                    <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                     
                     <div className="relative bg-white/[0.02] border border-white/10 rounded-xl hover:bg-white/[0.04] hover:border-white/20 transition-all duration-300 overflow-hidden">
                       <div className="flex flex-col lg:flex-row">
-                        {/* Imagen */}
                         <div className="relative w-full lg:w-80 h-48 lg:h-auto flex-shrink-0">
                           <Image
                             src={project.image}
@@ -310,19 +286,16 @@ export default function Portfolio() {
                           />
                           <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/80 lg:bg-gradient-to-r" />
                           
-                          {/* Play overlay */}
                           <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <div className={`w-14 h-14 bg-gradient-to-br ${project.gradient} rounded-full flex items-center justify-center shadow-lg`}>
-                              <Play className="w-6 h-6 text-white ml-0.5" fill="currentColor" />
+                            <div className="w-14 h-14 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg">
+                              <Play className="w-6 h-6 text-black ml-0.5" fill="currentColor" />
                             </div>
                           </div>
 
-                          {/* Badge */}
-                          <div className={`absolute top-4 left-4 px-3 py-1 bg-gradient-to-r ${project.gradient} rounded-full text-white text-xs font-bold shadow-lg`}>
+                          <div className="absolute top-4 left-4 px-3 py-1 bg-yellow-400 rounded-full text-black text-xs font-bold shadow-lg">
                             {project.platform}
                           </div>
 
-                          {/* Rating */}
                           {project.rating && (
                             <div className="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 bg-yellow-400 rounded-lg font-bold text-black text-xs shadow-lg">
                               <Star className="w-3 h-3 fill-black" />
@@ -331,10 +304,9 @@ export default function Portfolio() {
                           )}
                         </div>
 
-                        {/* Contenido */}
                         <div className="flex-1 p-6 lg:p-8">
                           <div className="flex items-start justify-between gap-4 mb-3">
-                            <h3 className="text-2xl font-bold text-white group-hover:text-yellow-300 transition-colors">
+                            <h3 className="text-2xl font-bold text-white">
                               {project.title}
                             </h3>
                             <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-slate-400 whitespace-nowrap">
@@ -343,7 +315,7 @@ export default function Portfolio() {
                           </div>
 
                           <p className="text-lg text-slate-300 mb-3">
-                            <span className="font-semibold text-yellow-400">{project.role}</span>
+                            <span className="font-semibold text-white">{project.role}</span>
                             {project.episodes && <span className="text-slate-500"> • {project.episodes}</span>}
                           </p>
 
@@ -351,7 +323,6 @@ export default function Portfolio() {
                             {project.description}
                           </p>
 
-                          {/* Highlights */}
                           {project.highlights && project.highlights.length > 0 && (
                             <div className="flex flex-wrap gap-2">
                               {project.highlights.map((highlight, i) => (
@@ -364,9 +335,8 @@ export default function Portfolio() {
                         </div>
                       </div>
 
-                      {/* Barra decorativa inferior */}
                       <motion.div 
-                        className={`absolute bottom-0 left-0 h-[2px] bg-gradient-to-r ${project.gradient}`}
+                        className="absolute bottom-0 left-0 h-[2px] bg-yellow-400"
                         initial={{ width: 0 }}
                         whileHover={{ width: '100%' }}
                         transition={{ duration: 0.4 }}
@@ -378,7 +348,6 @@ export default function Portfolio() {
             </AnimatePresence>
           </div>
 
-          {/* Footer badge */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
@@ -395,7 +364,6 @@ export default function Portfolio() {
         </motion.div>
       </div>
 
-      {/* Modal simplificado */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
@@ -430,11 +398,11 @@ export default function Portfolio() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
                 
                 <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <div className={`inline-block px-3 py-1 bg-gradient-to-r ${selectedProject.gradient} rounded-full text-white text-sm font-bold mb-3`}>
+                  <div className="inline-block px-3 py-1 bg-yellow-400 rounded-full text-black text-sm font-bold mb-3">
                     {selectedProject.platform}
                   </div>
                   <h3 className="text-4xl font-bold text-white mb-2">{selectedProject.title}</h3>
-                  <p className="text-xl text-yellow-300 font-semibold">{selectedProject.role}</p>
+                  <p className="text-xl text-slate-200 font-semibold">{selectedProject.role}</p>
                 </div>
               </div>
 
