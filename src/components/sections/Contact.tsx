@@ -11,9 +11,12 @@ import {
   CheckCircle,
   AlertCircle,
   Twitter,
+  Loader2,
 } from 'lucide-react'
 import { useState } from 'react'
 import { trackEvent } from '@/lib/analytics'
+
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xlggrndl'
 
 const categories = [
   'Casting / Audición',
@@ -87,10 +90,20 @@ export default function Contact() {
     setErrorMessage('')
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          category: formData.category,
+          message: formData.message,
+          _subject: `Nuevo mensaje de ${formData.name} - ${formData.category}`,
+          _replyto: formData.email,
+        }),
       })
 
       const data = await response.json()
@@ -98,19 +111,31 @@ export default function Contact() {
       if (response.ok) {
         setStatus('success')
         trackEvent('submit_contact_form', 'engagement', formData.category)
+        
+        // Reset form
         setFormData({
           name: '',
           email: '',
           category: categories[0],
           message: '',
         })
+
+        // Auto-hide success message after 5 seconds
+        setTimeout(() => {
+          setStatus('idle')
+        }, 5000)
       } else {
         setStatus('error')
-        setErrorMessage(data.error || 'Error al enviar el mensaje')
+        setErrorMessage(
+          data.error || data.errors?.[0]?.message || 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.'
+        )
       }
     } catch (error) {
       setStatus('error')
-      setErrorMessage('Error de conexión. Inténtalo de nuevo.')
+      setErrorMessage(
+        'Error de conexión. Verifica tu internet e inténtalo de nuevo.'
+      )
+      console.error('Contact form error:', error)
     }
   }
 
@@ -144,19 +169,23 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm font-semibold mb-2"
+                    className="block text-sm font-semibold mb-2 text-slate-700"
                   >
                     Nombre Completo *
                   </label>
                   <input
                     type="text"
                     id="name"
+                    name="name"
                     required
+                    minLength={2}
+                    maxLength={100}
                     value={formData.name}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all"
+                    disabled={status === 'sending'}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all disabled:bg-gray-100 disabled:cursor-not-allowed"
                     placeholder="Tu nombre"
                   />
                 </div>
@@ -164,19 +193,22 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-semibold mb-2"
+                    className="block text-sm font-semibold mb-2 text-slate-700"
                   >
                     Email *
                   </label>
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     required
+                    maxLength={100}
                     value={formData.email}
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all"
+                    disabled={status === 'sending'}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all disabled:bg-gray-100 disabled:cursor-not-allowed"
                     placeholder="tu@email.com"
                   />
                 </div>
@@ -184,18 +216,20 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="category"
-                    className="block text-sm font-semibold mb-2"
+                    className="block text-sm font-semibold mb-2 text-slate-700"
                   >
                     Categoría *
                   </label>
                   <select
                     id="category"
+                    name="category"
                     required
                     value={formData.category}
                     onChange={(e) =>
                       setFormData({ ...formData, category: e.target.value })
                     }
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all"
+                    disabled={status === 'sending'}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all disabled:bg-gray-100 disabled:cursor-not-allowed"
                   >
                     {categories.map((cat) => (
                       <option key={cat} value={cat}>
@@ -208,46 +242,72 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-semibold mb-2"
+                    className="block text-sm font-semibold mb-2 text-slate-700"
                   >
                     Mensaje *
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     required
+                    minLength={10}
+                    maxLength={2000}
                     rows={6}
                     value={formData.message}
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
                     }
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all resize-none"
+                    disabled={status === 'sending'}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all resize-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                     placeholder="Cuéntame sobre tu proyecto o consulta..."
                   />
+                  <p className="text-xs text-gray-500 mt-1">
+                    {formData.message.length} / 2000 caracteres
+                  </p>
                 </div>
 
                 {status === 'success' && (
-                  <div className="flex items-center gap-2 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
-                    <CheckCircle className="w-5 h-5" />
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center gap-2 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800"
+                  >
+                    <CheckCircle className="w-5 h-5 flex-shrink-0" />
                     <span className="text-sm font-semibold">
-                      ¡Mensaje enviado! Te responderé pronto.
+                      ¡Mensaje enviado correctamente! Te responderé en menos de 48 horas.
                     </span>
-                  </div>
+                  </motion.div>
                 )}
 
                 {status === 'error' && (
-                  <div className="flex items-center gap-2 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
-                    <AlertCircle className="w-5 h-5" />
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center gap-2 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800"
+                  >
+                    <AlertCircle className="w-5 h-5 flex-shrink-0" />
                     <span className="text-sm font-semibold">{errorMessage}</span>
-                  </div>
+                  </motion.div>
                 )}
 
                 <button
                   type="submit"
                   disabled={status === 'sending'}
-                  className="w-full px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-lg transition-colors font-bold disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-lg transition-colors font-bold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
-                  {status === 'sending' ? 'Enviando...' : 'Enviar Mensaje'}
+                  {status === 'sending' ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <span>Enviando...</span>
+                    </>
+                  ) : (
+                    'Enviar Mensaje'
+                  )}
                 </button>
+
+                <p className="text-xs text-center text-gray-500">
+                  Este formulario está protegido por Formspree. Tus datos son privados y seguros.
+                </p>
               </form>
             </motion.div>
 
@@ -304,6 +364,7 @@ export default function Contact() {
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => trackEvent('click_social', 'engagement', social.label)}
                         className="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200 hover:border-slate-400 transition-all group"
                       >
                         <div className="flex items-center gap-3">
@@ -328,12 +389,12 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="p-6 bg-slate-50 rounded-lg border border-slate-200">
-                <h4 className="font-bold mb-2">Tiempo de Respuesta</h4>
-                <p className="text-sm text-gray-600">
+              <div className="p-6 bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg border border-slate-200">
+                <h4 className="font-bold mb-2 text-slate-900">🕒 Tiempo de Respuesta</h4>
+                <p className="text-sm text-gray-700 leading-relaxed">
                   Respondo personalmente a todos los mensajes en un plazo
-                  máximo de 48 horas hábiles. Para consultas urgentes, puedes
-                  contactar directamente por email.
+                  máximo de <strong>48 horas hábiles</strong>. Para consultas urgentes, puedes
+                  contactar directamente por email o redes sociales.
                 </p>
               </div>
             </motion.div>
