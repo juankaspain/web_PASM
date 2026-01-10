@@ -162,7 +162,7 @@ const projects: Project[] = [
     yearSort: 2020,
     platform: 'Prime Video',
     episodes: '8 episodios',
-    image: 'https://images.unsplash.com/photo-1533613220915-609f661a6fe1?q=80&w=1000',
+    image: 'https://github.com/user-attachments/assets/992b31fe-c22d-4b9b-b522-f84ad34b6651',
     rating: '6.2',
     imdb: 'https://www.imdb.com/title/tt9645942/',
     youtube: 'https://www.youtube.com/watch?v=CRlE3_JI7ZY',
