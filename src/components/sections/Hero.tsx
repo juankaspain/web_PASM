@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Play, MapPin, Calendar, ExternalLink, Award, Film, Theater as TheaterIcon, Users } from 'lucide-react'
+import { ArrowDown, Play, MapPin, Calendar, ExternalLink, Award, Theater as TheaterIcon, GraduationCap, Film } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
@@ -50,7 +50,7 @@ export default function Hero() {
     },
     {
       icon: Film,
-      title: 'Netflix 2025',
+      title: 'Netflix',
       desc: 'Un fantasma en la batalla',
     },
     {
@@ -59,9 +59,9 @@ export default function Hero() {
       desc: 'Gran Vía 0 y más',
     },
     {
-      icon: Users,
-      title: '+30 Proyectos',
-      desc: 'TV, Cine y Teatro',
+      icon: GraduationCap,
+      title: 'CNTC / ESAD',
+      desc: 'Formación profesional',
     },
   ]
 
@@ -186,32 +186,12 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            <motion.div
-              className="flex flex-wrap gap-2"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.55, duration: 0.6 }}
-            >
-              {[
-                'ESAD Sevilla',
-                'CNTC Helena Pimenta',
-                'NO-IDENTITY Especialista',
-              ].map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-slate-600/70 bg-slate-900/80 px-3.5 py-1.5 text-[11px] font-semibold tracking-wide text-slate-100"
-                >
-                  {tag}
-                </span>
-              ))}
-            </motion.div>
-
             {/* Quick Highlights */}
             <motion.div
               className="grid grid-cols-2 gap-2.5"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
+              transition={{ delay: 0.55, duration: 0.6 }}
             >
               {quickHighlights.map((highlight, index) => {
                 const Icon = highlight.icon
@@ -220,7 +200,7 @@ export default function Hero() {
                     key={highlight.title}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.65 + index * 0.05, duration: 0.4 }}
+                    transition={{ delay: 0.6 + index * 0.05, duration: 0.4 }}
                     whileHover={{ scale: 1.03, y: -2 }}
                     className="rounded-xl bg-slate-900/80 border border-slate-700/60 px-3 py-2.5 backdrop-blur-md hover:border-white/20 transition-all"
                   >
@@ -321,7 +301,7 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      <div className="pointer-events-none absolute inset-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
     </section>
   )
 }
