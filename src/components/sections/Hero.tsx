@@ -76,34 +76,65 @@ export default function Hero() {
           {/* COLUMNA FOTO */}
           <div className="order-2 lg:order-1 flex justify-center lg:justify-start">
             <div className="relative w-full max-w-[580px] lg:max-w-[620px]">
-              <div className="relative aspect-[4/5] rounded-[32px] lg:rounded-[40px] overflow-hidden border border-white/7 shadow-[0_40px_140px_rgba(0,0,0,0.9)] bg-black/60">
+              {/* Resplandor dorado sutil detrás de la imagen */}
+              <div className="absolute inset-0 rounded-[32px] lg:rounded-[40px] bg-gradient-to-br from-yellow-500/20 via-orange-500/10 to-transparent blur-3xl" />
+              
+              <motion.div 
+                className="relative aspect-[3/4] rounded-[32px] lg:rounded-[40px] overflow-hidden shadow-[0_50px_150px_rgba(0,0,0,0.95)] ring-1 ring-white/5"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+              >
+                {/* Imagen principal con mejor encuadre */}
                 <Image
                   src="https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4"
                   alt="Almagro San Miguel - Actor profesional de televisión, cine y teatro"
                   fill
-                  className="object-cover object-[center_20%]"
+                  className="object-cover object-[center_15%] scale-105"
                   sizes="(min-width: 1024px) 620px, 90vw"
                   priority
+                  style={{
+                    filter: 'brightness(1.05) contrast(1.08) saturate(0.95)',
+                  }}
                 />
-                {/* Gradiente para asegurar lectura siempre correcta */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/40" />
-              </div>
+                
+                {/* Gradientes de superposición cinematográfica */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
+                
+                {/* Vignette cinematográfico */}
+                <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.7)]" />
+                
+                {/* Resplandor interno dorado muy sutil */}
+                <div className="absolute inset-0 bg-gradient-to-tl from-yellow-600/5 via-transparent to-transparent" />
+              </motion.div>
 
               {/* Pequeño badge flotando sobre la foto */}
               <div className="absolute -bottom-4 left-4 right-4 flex justify-between gap-3">
-                <div className="flex items-center gap-2 rounded-2xl bg-black/70 border border-yellow-500/30 px-3 py-2 backdrop-blur-md">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-yellow-500/20 text-yellow-300">
+                <motion.div 
+                  className="flex items-center gap-2 rounded-2xl bg-black/80 border border-yellow-500/40 px-3 py-2 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8, duration: 0.6 }}
+                >
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-yellow-500/25 text-yellow-300">
                     <Film className="w-4 h-4" />
                   </div>
                   <div className="leading-tight">
                     <p className="text-xs font-semibold text-yellow-200">En rodaje</p>
                     <p className="text-[11px] text-gray-300">Últimos proyectos 2025</p>
                   </div>
-                </div>
-                <div className="hidden sm:flex items-center gap-2 rounded-2xl bg-slate-900/80 border border-slate-600/60 px-3 py-2 backdrop-blur-md">
+                </motion.div>
+                
+                <motion.div 
+                  className="hidden sm:flex items-center gap-2 rounded-2xl bg-slate-900/90 border border-slate-600/70 px-3 py-2 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.9, duration: 0.6 }}
+                >
                   <Sparkles className="w-4 h-4 text-yellow-300" />
-                  <p className="text-[11px] text-gray-300">Representación internacional disponible</p>
-                </div>
+                  <p className="text-[11px] text-gray-200">Representación internacional disponible</p>
+                </motion.div>
               </div>
             </div>
           </div>
