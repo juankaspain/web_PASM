@@ -90,7 +90,7 @@ export default function PressKit() {
     <section id="presskit" className="relative py-32 overflow-hidden bg-gradient-to-b from-slate-950 via-black to-slate-900">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[120px]" />
       </div>
 
       <div 
@@ -150,7 +150,7 @@ export default function PressKit() {
                   className="relative group"
                 >
                   <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-6 hover:bg-white/[0.04] hover:border-white/20 transition-all">
+                  <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-6 hover:bg-white/[0.04] hover:border-white/20 transition-all backdrop-blur-sm">
                     <div className="flex items-start justify-between mb-4">
                       <div className="w-12 h-12 rounded-xl bg-yellow-400 flex items-center justify-center shadow-lg">
                         <Icon className="w-6 h-6 text-black" />
@@ -165,7 +165,7 @@ export default function PressKit() {
                     <button
                       onClick={() => handleDownload(item.type, item.title)}
                       disabled={downloading === item.type}
-                      className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-white/5 border border-white/10 hover:bg-yellow-400 hover:border-yellow-400 text-slate-300 hover:text-black rounded-lg transition-all font-semibold text-sm disabled:opacity-50"
+                      className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-slate-300 hover:text-white rounded-lg transition-all font-semibold text-sm disabled:opacity-50"
                     >
                       <Download className="w-4 h-4" />
                       {downloading === item.type ? 'Descargando...' : 'Descargar'}
@@ -185,7 +185,7 @@ export default function PressKit() {
             <button
               onClick={() => handleDownload('complete', 'Press Kit Completo')}
               disabled={downloading === 'complete'}
-              className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-amber-500 text-black rounded-xl hover:shadow-lg transition-all font-bold text-lg inline-flex items-center gap-3 disabled:opacity-50 hover:scale-105"
+              className="px-8 py-4 bg-yellow-400 text-black rounded-xl hover:shadow-lg hover:bg-yellow-300 transition-all font-bold text-lg inline-flex items-center gap-3 disabled:opacity-50 hover:scale-105"
             >
               <Download className="w-5 h-5" />
               {downloading === 'complete' ? 'Descargando...' : 'Descargar Press Kit Completo'}
@@ -193,10 +193,10 @@ export default function PressKit() {
             </button>
           </motion.div>
 
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto mb-16">
             <h3 className="text-2xl font-bold mb-8 text-center text-white">Ficha Técnica</h3>
             <div className="relative">
-              <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg" />
+              <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg opacity-50" />
               <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
                 <div className="grid md:grid-cols-2 gap-x-8 gap-y-4">
                   {techSpecs.map((spec, index) => (
@@ -205,10 +205,10 @@ export default function PressKit() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                       transition={{ duration: 0.5, delay: 0.9 + index * 0.05 }}
-                      className="flex items-center justify-between py-3 border-b border-white/10 last:border-0"
+                      className="flex items-center justify-between py-3 border-b border-white/5 last:border-0"
                     >
-                      <span className="font-semibold text-slate-300">{spec.label}:</span>
-                      <span className="text-slate-400">{spec.value}</span>
+                      <span className="font-semibold text-slate-300 text-sm">{spec.label}:</span>
+                      <span className="text-slate-400 text-sm text-right">{spec.value}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -220,9 +220,9 @@ export default function PressKit() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 1.2 }}
-            className="mt-16 relative"
+            className="relative max-w-4xl mx-auto"
           >
-            <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg" />
+            <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg opacity-50" />
             <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-8 text-center backdrop-blur-sm">
               <h3 className="text-2xl font-bold mb-3 text-white">Contacto para Prensa</h3>
               <p className="text-slate-400 mb-6">
@@ -230,7 +230,7 @@ export default function PressKit() {
               </p>
               <a
                 href="mailto:info@almagrosanmiguel.com"
-                className="inline-block px-8 py-3 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-black rounded-xl transition-all font-semibold shadow-lg hover:scale-105"
+                className="inline-block px-8 py-3 bg-yellow-400 hover:bg-yellow-300 text-black rounded-xl transition-all font-semibold shadow-lg hover:scale-105"
               >
                 info@almagrosanmiguel.com
               </a>
