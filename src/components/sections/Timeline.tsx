@@ -156,16 +156,16 @@ export default function Timeline() {
           viewport={{ once: true }}
         >
           <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-              <Calendar className="w-4 h-4 text-blue-400" strokeWidth={2} />
-              <span className="text-sm font-medium text-slate-300 tracking-wide">Cronología</span>
-            </div>
-            
-            <h2 className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+            <h2 className="text-5xl lg:text-6xl font-bold mb-8 tracking-tight">
               <span className="bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
                 Trayectoria Profesional
               </span>
             </h2>
+
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+              <Calendar className="w-4 h-4 text-blue-400" strokeWidth={2} />
+              <span className="text-sm font-medium text-slate-300 tracking-wide">Cronología</span>
+            </div>
             
             <p className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed">
               Un recorrido de 13+ años desde la formación en ESAD Sevilla hasta convertirme en protagonista de series de éxito en televisión nacional
