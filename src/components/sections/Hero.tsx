@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Award, Play, TrendingUp, Film, Tv, Sparkles, MapPin, Calendar, ExternalLink } from 'lucide-react'
+import { ArrowDown, Play, MapPin, Calendar, ExternalLink } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
@@ -15,46 +15,7 @@ export default function Hero() {
     setMounted(true)
   }, [])
 
-  const achievements = [
-    { icon: Tv, label: '300+ Episodios', subtitle: 'TV Nacional' },
-    { icon: Film, label: '12 Series', subtitle: 'Protagonista' },
-    { icon: Award, label: '2 Premios', subtitle: 'Reconocimientos' },
-    { icon: TrendingUp, label: '13 Años', subtitle: 'Experiencia' },
-  ]
-
-  // Trabajos destacados con formato 100% consistente: Personaje/Rol - Tipo de producción
-  const recentWorks = [
-    { 
-      title: 'Un fantasma en la batalla', 
-      role: 'Personaje principal', 
-      details: 'Largometraje', 
-      network: 'Netflix', 
-      year: '2025' 
-    },
-    { 
-      title: 'La Moderna', 
-      role: 'Personaje principal', 
-      details: 'Serie TV · 236 ep.', 
-      network: 'TVE', 
-      year: '2024-2025' 
-    },
-    { 
-      title: 'Vis a vis: El Oasis', 
-      role: 'Esteban Kabila', 
-      details: 'Serie TV · 8 ep.', 
-      network: 'Fox', 
-      year: '2020' 
-    },
-    { 
-      title: 'Hernán', 
-      role: 'Gonzalo de Sandoval', 
-      details: 'Serie', 
-      network: 'Prime Video', 
-      year: '2019' 
-    },
-  ]
-
-  // Enlaces profesionales ordenados: IMDb, FilmAffinity, SensaCine, Wikipedia (sin Instagram)
+  // Enlaces profesionales ordenados: IMDb, FilmAffinity, SensaCine, Wikipedia
   const professionalLinks = [
     { 
       name: 'IMDb', 
@@ -160,38 +121,10 @@ export default function Hero() {
                 {/* Resplandor interno dorado muy sutil */}
                 <div className="absolute inset-0 bg-gradient-to-tl from-yellow-600/5 via-transparent to-transparent" />
               </motion.div>
-
-              {/* Pequeño badge flotando sobre la foto */}
-              <div className="absolute -bottom-3 left-3 right-3 flex justify-between gap-2">
-                <motion.div 
-                  className="flex items-center gap-2 rounded-xl bg-black/80 border border-yellow-500/40 px-2.5 py-1.5 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8, duration: 0.6 }}
-                >
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-yellow-500/25 text-yellow-300">
-                    <Film className="w-3.5 h-3.5" />
-                  </div>
-                  <div className="leading-tight">
-                    <p className="text-[11px] font-semibold text-yellow-200">En rodaje</p>
-                    <p className="text-[10px] text-gray-300">Proyectos 2026</p>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  className="hidden sm:flex items-center gap-1.5 rounded-xl bg-slate-900/90 border border-slate-600/70 px-2.5 py-1.5 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.9, duration: 0.6 }}
-                >
-                  <Sparkles className="w-3.5 h-3.5 text-yellow-300" />
-                  <p className="text-[10px] text-gray-200">Representación internacional</p>
-                </motion.div>
-              </div>
             </div>
           </div>
 
-          {/* COLUMNA CONTENIDO - MÁS ESPACIO */}
+          {/* COLUMNA CONTENIDO - SIMPLIFICADO (de 19 → 8 elementos) */}
           <motion.div
             className="order-1 lg:order-2 space-y-6 lg:space-y-7"
             initial={{ opacity: 0, x: 40 }}
@@ -269,93 +202,12 @@ export default function Hero() {
               ))}
             </motion.div>
 
-            {/* TRABAJOS DESTACADOS - FORMATO 100% CONSISTENTE */}
-            <motion.div
-              className="space-y-3 pt-1"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.65, duration: 0.6 }}
-            >
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-yellow-300" />
-                  <h3 className="text-sm sm:text-base font-semibold text-white">
-                    Trabajos destacados
-                  </h3>
-                </div>
-                <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-gray-400">
-                  2025 – 2019
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {recentWorks.map((work, index) => (
-                  <motion.div
-                    key={work.title}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.7 + index * 0.07, duration: 0.4 }}
-                    className="group rounded-2xl bg-slate-900/80 border border-slate-700/70 px-4 py-3 
-                               backdrop-blur-md hover:border-yellow-400/60 hover:bg-slate-900/95 
-                               transition-all shadow-[0_18px_50px_rgba(15,23,42,0.9)]"
-                  >
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs sm:text-sm font-semibold text-slate-50 group-hover:text-yellow-300 transition-colors truncate">
-                          {work.title}
-                        </p>
-                        <p className="text-[11px] text-gray-400 mt-0.5">{work.role}</p>
-                      </div>
-                      <span className="flex-shrink-0 rounded-md bg-yellow-500/15 px-2 py-0.5 text-[11px] font-semibold text-yellow-300">
-                        {work.year}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between text-[11px] text-gray-300">
-                      <span>{work.details}</span>
-                      <span className="font-semibold text-gray-200">{work.network}</span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* LOGROS RÁPIDOS */}
-            <motion.div
-              className="grid grid-cols-2 gap-3"
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.85, duration: 0.6 }}
-            >
-              {achievements.map((achievement) => {
-                const Icon = achievement.icon
-                return (
-                  <motion.div
-                    key={achievement.label}
-                    whileHover={{ y: -3, scale: 1.02 }}
-                    transition={{ duration: 0.2 }}
-                    className="rounded-2xl border border-slate-700/70 bg-slate-950/80 px-3.5 py-3 
-                               backdrop-blur-md shadow-[0_16px_40px_rgba(15,23,42,0.9)]"
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-slate-800/80 text-yellow-300">
-                        <Icon className="w-4 h-4" />
-                      </div>
-                      <div className="leading-tight">
-                        <p className="text-xs font-semibold text-slate-50">{achievement.label}</p>
-                        <p className="text-[11px] text-gray-400">{achievement.subtitle}</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                )
-              })}
-            </motion.div>
-
-            {/* CTAS - Ver showreel con sombra reducida */}
+            {/* CTAS - Ver showreel */}
             <motion.div
               className="pt-2"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.0, duration: 0.6 }}
+              transition={{ delay: 0.65, duration: 0.6 }}
             >
               <motion.a
                 href="#showreel"
@@ -369,12 +221,12 @@ export default function Hero() {
               </motion.a>
             </motion.div>
 
-            {/* ENLACES PROFESIONALES - SIN INSTAGRAM, ORDEN CORRECTO */}
+            {/* ENLACES PROFESIONALES */}
             <motion.div
               className="space-y-3"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.1, duration: 0.6 }}
+              transition={{ delay: 0.75, duration: 0.6 }}
             >
               <div className="flex items-center gap-2">
                 <ExternalLink className="w-4 h-4 text-yellow-300" />
@@ -392,7 +244,7 @@ export default function Hero() {
                     rel="noopener noreferrer"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.15 + index * 0.05, duration: 0.4 }}
+                    transition={{ delay: 0.8 + index * 0.05, duration: 0.4 }}
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.98 }}
                     className="group flex flex-col items-center gap-2 rounded-xl border border-slate-700/70 
@@ -411,12 +263,12 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            {/* INDICADOR DE SCROLL MEJORADO */}
+            {/* INDICADOR DE SCROLL */}
             <motion.div
               className="pt-3 flex justify-center lg:justify-start"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.3, duration: 0.6 }}
+              transition={{ delay: 0.95, duration: 0.6 }}
             >
               <motion.a
                 href="#about"

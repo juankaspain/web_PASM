@@ -1,10 +1,8 @@
 import dynamic from 'next/dynamic'
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/sections/Hero'
-import LatestProject from '@/components/sections/LatestProject'
 import About from '@/components/sections/About'
 import Stats from '@/components/sections/Stats'
-import FeaturedRoles from '@/components/sections/FeaturedRoles'
 import Theater from '@/components/sections/Theater'
 import SkillsGraph from '@/components/sections/SkillsGraph'
 import Footer from '@/components/Footer'
@@ -12,7 +10,7 @@ import Footer from '@/components/Footer'
 // Lazy load heavy sections to improve initial page load
 const Portfolio = dynamic(() => import('@/components/sections/Portfolio'), {
   loading: () => (
-    <div className="flex items-center justify-center h-96 bg-gray-50">
+    <div className="flex items-center justify-center h-96 bg-black">
       <div className="animate-pulse text-gray-400">Cargando portfolio...</div>
     </div>
   ),
@@ -20,89 +18,45 @@ const Portfolio = dynamic(() => import('@/components/sections/Portfolio'), {
 
 const Timeline = dynamic(() => import('@/components/sections/Timeline'), {
   loading: () => (
-    <div className="flex items-center justify-center h-96 bg-white">
+    <div className="flex items-center justify-center h-96 bg-black">
       <div className="animate-pulse text-gray-400">Cargando timeline...</div>
     </div>
   ),
 })
 
 const Awards = dynamic(() => import('@/components/sections/Awards'))
-
-const Gallery = dynamic(() => import('@/components/sections/Gallery'), {
-  loading: () => (
-    <div className="flex items-center justify-center h-96 bg-gray-50">
-      <div className="animate-pulse text-gray-400">Cargando galería...</div>
-    </div>
-  ),
-})
-
-const Collaborators = dynamic(() => import('@/components/sections/Collaborators'))
-
-const Showreel = dynamic(() => import('@/components/sections/Showreel'), {
-  loading: () => (
-    <div className="flex items-center justify-center h-96 bg-white">
-      <div className="animate-pulse text-gray-400">Cargando showreel...</div>
-    </div>
-  ),
-})
-
-const News = dynamic(() => import('@/components/sections/News'))
-
-const Events = dynamic(() => import('@/components/sections/Events'))
-
-const Press = dynamic(() => import('@/components/sections/Press'), {
-  loading: () => (
-    <div className="flex items-center justify-center h-96 bg-gray-50">
-      <div className="animate-pulse text-gray-400">Cargando prensa...</div>
-    </div>
-  ),
-})
-
-const Testimonials = dynamic(() => import('@/components/sections/Testimonials'))
-
-const FAQ = dynamic(() => import('@/components/sections/FAQ'))
-
+const Gallery = dynamic(() => import('@/components/sections/Gallery'))
+const Showreel = dynamic(() => import('@/components/sections/Showreel'))
 const PressKit = dynamic(() => import('@/components/sections/PressKit'))
-
 const Contact = dynamic(() => import('@/components/sections/Contact'))
 
 export default function Home() {
   return (
-    <main className="relative">
+    <main className="relative bg-black">
       {/* Critical above-the-fold content - loaded immediately */}
       <Navbar />
       <Hero />
       
-      {/* NEW: Latest Project Highlight - Loaded immediately for impact */}
-      <LatestProject />
-      
+      {/* Core sections */}
       <About />
       <Stats />
       
-      {/* NEW: Featured Roles - Major productions */}
-      <FeaturedRoles />
-      
-      {/* NEW: Theater Experience */}
-      <Theater />
-      
-      <SkillsGraph />
-      
-      {/* Heavy sections - lazy loaded for better performance */}
+      {/* Portfolio sections */}
       <Portfolio />
+      <Theater />
+      <SkillsGraph />
       <Timeline />
       <Awards />
+      
+      {/* Media sections */}
       <Gallery />
-      <Collaborators />
       <Showreel />
-      <News />
-      <Events />
-      <Press />
-      <Testimonials />
-      <FAQ />
+      
+      {/* Professional sections */}
       <PressKit />
       <Contact />
       
-      {/* Footer always loads */}
+      {/* Footer */}
       <Footer />
     </main>
   )
