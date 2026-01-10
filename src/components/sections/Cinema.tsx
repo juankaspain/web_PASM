@@ -27,7 +27,7 @@ const films = [
     role: 'Legionario',
     type: 'Largometraje',
     platform: 'Cine',
-    poster: 'https://via.placeholder.com/400x600/1e293b/ffffff?text=Carta+Blanca',
+    poster: 'https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?q=80&w=1000',
     description: 'Film sobre la guerra en el Rif y el desastre de Annual. Rodaje en Ceuta con legionarios reales.',
   },
   {
@@ -39,7 +39,7 @@ const films = [
     role: 'Personaje Principal',
     type: 'Largometraje',
     platform: 'Cine',
-    poster: 'https://via.placeholder.com/400x600/1e293b/ffffff?text=Fueron+los+días',
+    poster: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1000',
     description: 'Largometraje estrenado en 2024.',
   },
   {
@@ -51,7 +51,7 @@ const films = [
     role: 'Kike',
     type: 'Cortometraje',
     platform: 'Festival',
-    poster: 'https://via.placeholder.com/400x600/334155/ffffff?text=Mario+Kike+David',
+    poster: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=1000',
     description: 'Cortometraje donde interpreto al personaje Kike.',
   },
   {
@@ -63,7 +63,7 @@ const films = [
     role: 'Rodolfo',
     type: 'Cortometraje',
     platform: 'Festival',
-    poster: 'https://via.placeholder.com/400x600/334155/ffffff?text=Lapso',
+    poster: 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=1000',
     description: 'Uno de mis primeros trabajos en cine, interpretando a Rodolfo.',
   },
 ].sort((a, b) => b.yearSort - a.yearSort)
