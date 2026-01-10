@@ -2,7 +2,7 @@
 
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Sword, Music, Languages, Dumbbell, Heart, Sparkles, Award, Star, Zap } from 'lucide-react'
+import { Sword, Music, Languages, Dumbbell, Heart, Sparkles, Award, Star, Zap, Crown, Trophy } from 'lucide-react'
 
 interface Skill {
   name: string
@@ -88,47 +88,75 @@ const skillsData: SkillCategory[] = [
   },
 ]
 
-const proficiencyColors = {
-  'Experto': 'bg-gradient-to-r from-yellow-500 to-orange-500 text-black',
-  'Avanzado': 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white',
-  'Competente': 'bg-slate-700 text-slate-200',
+const proficiencyInfo = {
+  'Experto': { color: 'from-yellow-400 to-amber-500', label: 'Especialización profesional' },
+  'Avanzado': { color: 'from-blue-500 to-cyan-500', label: 'Alto nivel técnico' },
+  'Competente': { color: 'from-slate-500 to-slate-600', label: 'Competencia funcional' },
 }
 
 export default function SkillsVisual() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="skills-visual" className="py-24 sm:py-32 bg-gradient-to-b from-white via-slate-50 to-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills-visual" className="relative py-32 overflow-hidden bg-gradient-to-b from-black via-slate-950 to-slate-900">
+      {/* Elementos decorativos */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[100px]" />
+      </div>
+
+      {/* Patrón de fondo */}
+      <div 
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        }}
+      />
+
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          {/* Header */}
-          <div className="text-center mb-16">
+          {/* Header minimalista */}
+          <div className="text-center mb-20">
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-slate-100 to-gray-100 rounded-full mb-4"
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
             >
-              <Zap className="w-4 h-4 text-slate-700" />
-              <span className="text-slate-700 text-sm font-semibold">Competencias Técnicas</span>
+              <Zap className="w-4 h-4 text-purple-400" strokeWidth={2} />
+              <span className="text-sm font-medium text-slate-300 tracking-wide">Competencias Técnicas</span>
             </motion.div>
             
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-              Habilidades Profesionales
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Capacidades desarrolladas a lo largo de 13+ años de formación y práctica profesional
-            </p>
+            <motion.h2 
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight"
+            >
+              <span className="bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+                Capacidades Artísticas
+              </span>
+            </motion.h2>
+            
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
+            >
+              Habilidades desarrolladas a través de más de <span className="text-purple-400 font-semibold">13 años</span> de formación 
+              y práctica profesional en las principales escuelas y compañías de España
+            </motion.p>
           </div>
 
-          {/* Grid de categorías */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
+          {/* Grid de categorías - Diseño limpio */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {skillsData.map((category, categoryIndex) => {
               const Icon = category.icon
               return (
@@ -136,106 +164,130 @@ export default function SkillsVisual() {
                   key={categoryIndex}
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                  transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="group relative"
+                  transition={{ duration: 0.5, delay: 0.4 + categoryIndex * 0.08 }}
+                  whileHover={{ y: -6 }}
+                  className="group"
                 >
-                  {/* Resplandor */}
-                  <div className={`absolute -inset-0.5 bg-gradient-to-r ${category.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500`} />
-                  
-                  {/* Card */}
-                  <div className="relative bg-white rounded-3xl shadow-lg p-6 border border-gray-100 hover:shadow-2xl transition-all h-full">
-                    {/* Header */}
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className={`w-14 h-14 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center shadow-lg`}>
-                        <Icon className="w-7 h-7 text-white" />
+                  <div className="relative h-full">
+                    {/* Resplandor sutil */}
+                    <div className={`absolute -inset-[1px] bg-gradient-to-br ${category.color} rounded-2xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500`} />
+                    
+                    {/* Card */}
+                    <div className="relative h-full bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300">
+                      {/* Header */}
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className={`w-12 h-12 bg-gradient-to-br ${category.color} rounded-xl flex items-center justify-center shadow-lg`}>
+                          <Icon className="w-6 h-6 text-white" strokeWidth={2} />
+                        </div>
+                        <h3 className="font-bold text-lg text-white">{category.category}</h3>
                       </div>
-                      <h3 className="font-bold text-lg text-slate-900">{category.category}</h3>
-                    </div>
 
-                    {/* Skills como badges */}
-                    <div className="flex flex-wrap gap-2">
-                      {category.skills.map((skill, skillIndex) => (
-                        <motion.div
-                          key={skillIndex}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                          transition={{ duration: 0.4, delay: categoryIndex * 0.1 + skillIndex * 0.05 }}
-                          whileHover={{ scale: 1.05 }}
-                          className="relative group/skill"
-                        >
-                          <div className="relative px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white transition-all">
-                            <div className="flex items-center gap-1.5">
-                              <span className="text-sm font-semibold text-slate-800">{skill.name}</span>
-                              {skill.featured && <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />}
-                            </div>
-                            <div className="mt-1">
-                              <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${proficiencyColors[skill.proficiency]}`}>
+                      {/* Skills list - Diseño vertical limpio */}
+                      <div className="space-y-3">
+                        {category.skills.map((skill, skillIndex) => (
+                          <motion.div
+                            key={skillIndex}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+                            transition={{ duration: 0.3, delay: 0.5 + categoryIndex * 0.08 + skillIndex * 0.03 }}
+                            className="group/skill"
+                          >
+                            <div className="flex items-center justify-between gap-3 py-2 px-3 rounded-lg bg-white/[0.02] hover:bg-white/[0.05] border border-white/5 hover:border-white/10 transition-all">
+                              <div className="flex items-center gap-2 flex-1">
+                                <span className="text-sm font-medium text-slate-300">
+                                  {skill.name}
+                                </span>
+                                {skill.featured && (
+                                  <Star className="w-3 h-3 text-yellow-400 fill-yellow-400 flex-shrink-0" />
+                                )}
+                              </div>
+                              <span className={`text-xs font-semibold px-2 py-0.5 rounded-full bg-gradient-to-r ${proficiencyInfo[skill.proficiency].color} text-white flex-shrink-0`}>
                                 {skill.proficiency}
                               </span>
                             </div>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
+                          </motion.div>
+                        ))}
+                      </div>
 
-                    {/* Barra decorativa inferior */}
-                    <motion.div 
-                      className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${category.color} rounded-b-3xl`}
-                      initial={{ width: 0 }}
-                      whileHover={{ width: '100%' }}
-                      transition={{ duration: 0.5 }}
-                    />
+                      {/* Línea decorativa inferior */}
+                      <motion.div 
+                        className={`absolute bottom-0 left-0 h-[2px] bg-gradient-to-r ${category.color} rounded-b-2xl`}
+                        initial={{ width: 0 }}
+                        whileHover={{ width: '100%' }}
+                        transition={{ duration: 0.4 }}
+                      />
+                    </div>
                   </div>
                 </motion.div>
               )
             })}
           </div>
 
-          {/* Leyenda de niveles */}
+          {/* Leyenda de niveles - Diseño horizontal minimalista */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-16 max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="max-w-5xl mx-auto mb-16"
           >
-            <div className="bg-slate-50 rounded-3xl p-6 border border-slate-200">
+            <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-6 backdrop-blur-sm">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Award className="w-5 h-5 text-slate-700" />
-                <h4 className="font-bold text-slate-900">Niveles de Competencia</h4>
+                <Trophy className="w-5 h-5 text-purple-400" />
+                <h4 className="font-semibold text-white">Niveles de Competencia</h4>
               </div>
-              <div className="flex flex-wrap justify-center gap-3">
-                <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-xl border border-slate-200">
-                  <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 text-black">Experto</span>
-                  <span className="text-sm text-slate-600">Especialización profesional</span>
-                </div>
-                <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-xl border border-slate-200">
-                  <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white">Avanzado</span>
-                  <span className="text-sm text-slate-600">Alto nivel técnico</span>
-                </div>
-                <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-xl border border-slate-200">
-                  <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-slate-700 text-slate-200">Competente</span>
-                  <span className="text-sm text-slate-600">Competencia funcional</span>
-                </div>
+              <div className="grid md:grid-cols-3 gap-4">
+                {Object.entries(proficiencyInfo).map(([level, info]) => (
+                  <div key={level} className="flex items-center gap-3 p-3 bg-white/[0.02] rounded-xl border border-white/5">
+                    <div className={`w-10 h-10 bg-gradient-to-br ${info.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                      <span className="text-xs font-bold text-white">{level.charAt(0)}</span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-white">{level}</p>
+                      <p className="text-xs text-slate-400 truncate">{info.label}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </motion.div>
 
-          {/* Resumen formativo */}
+          {/* Card formativa - Diseño premium */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 1 }}
-            className="mt-12 max-w-4xl mx-auto bg-gradient-to-r from-slate-900 to-slate-700 rounded-3xl p-8 text-white text-center shadow-2xl"
+            className="max-w-5xl mx-auto"
           >
-            <Award className="w-12 h-12 text-yellow-300 mx-auto mb-4" />
-            <h3 className="text-2xl font-serif font-bold mb-4">Formación Continua</h3>
-            <p className="text-gray-300 leading-relaxed">
-              Todas estas habilidades han sido desarrolladas a través de formación en <strong className="text-white">ESAD Sevilla</strong>, 
-              <strong className="text-white"> Compañía Nacional de Teatro Clásico</strong>, <strong className="text-white">Work In Progress</strong> (Darío Facal), 
-              y <strong className="text-white">NO-IDENTITY</strong> (Especialistas de Cine). Continúo formándome constantemente en nuevas 
-              técnicas y disciplinas para ofrecer versatilidad en cada proyecto.
-            </p>
+            <div className="group relative">
+              <div className="absolute -inset-[1px] bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-purple-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              
+              <div className="relative bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-8 lg:p-10 shadow-2xl">
+                <div className="flex flex-col lg:flex-row items-center gap-8">
+                  <div className="flex-shrink-0">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-to-br from-purple-400 to-blue-500 rounded-2xl blur-lg opacity-30" />
+                      <div className="relative w-20 h-20 bg-gradient-to-br from-purple-400 to-blue-500 rounded-2xl flex items-center justify-center">
+                        <Crown className="w-10 h-10 text-white" strokeWidth={2.5} />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex-1 text-center lg:text-left">
+                    <div className="flex items-center justify-center lg:justify-start gap-2 mb-3">
+                      <Award className="w-5 h-5 text-purple-400" />
+                      <h3 className="text-2xl font-bold text-white">Formación Continua</h3>
+                    </div>
+                    <p className="text-slate-300 leading-relaxed text-lg">
+                      Habilidades desarrolladas en <span className="text-purple-400 font-semibold">ESAD Sevilla</span>, 
+                      <span className="text-blue-400 font-semibold"> Compañía Nacional de Teatro Clásico</span>, 
+                      <span className="text-cyan-400 font-semibold"> Work In Progress</span> (Darío Facal) y 
+                      <span className="text-purple-400 font-semibold"> NO-IDENTITY</span> (Especialistas de Cine). 
+                      Formación continua en nuevas técnicas para ofrecer máxima versatilidad profesional.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </div>
