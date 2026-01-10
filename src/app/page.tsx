@@ -1,8 +1,11 @@
 import dynamic from 'next/dynamic'
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/sections/Hero'
+import LatestProject from '@/components/sections/LatestProject'
 import About from '@/components/sections/About'
 import Stats from '@/components/sections/Stats'
+import FeaturedRoles from '@/components/sections/FeaturedRoles'
+import Theater from '@/components/sections/Theater'
 import SkillsGraph from '@/components/sections/SkillsGraph'
 import Footer from '@/components/Footer'
 
@@ -69,8 +72,19 @@ export default function Home() {
       {/* Critical above-the-fold content - loaded immediately */}
       <Navbar />
       <Hero />
+      
+      {/* NEW: Latest Project Highlight - Loaded immediately for impact */}
+      <LatestProject />
+      
       <About />
       <Stats />
+      
+      {/* NEW: Featured Roles - Major productions */}
+      <FeaturedRoles />
+      
+      {/* NEW: Theater Experience */}
+      <Theater />
+      
       <SkillsGraph />
       
       {/* Heavy sections - lazy loaded for better performance */}
