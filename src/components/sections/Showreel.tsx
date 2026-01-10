@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Play, Download, Film, Clock, Sparkles } from 'lucide-react'
+import { Play, Download, Clock, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import { useRef } from 'react'
 
@@ -31,20 +31,10 @@ export default function Showreel() {
           transition={{ duration: 0.6 }}
         >
           <div className="text-center mb-20">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
-            >
-              <Film className="w-4 h-4 text-yellow-400" strokeWidth={2} />
-              <span className="text-sm font-medium text-slate-300 tracking-wide">Reel Profesional</span>
-            </motion.div>
-            
             <motion.h2 
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
               className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white"
             >
               Showreel
@@ -53,7 +43,7 @@ export default function Showreel() {
             <motion.p 
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
             >
               Un vistazo a mi trabajo en acción
@@ -64,7 +54,7 @@ export default function Showreel() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               className="relative"
             >
               <div className="group relative aspect-video overflow-hidden rounded-2xl bg-black shadow-2xl border border-white/10">
@@ -96,11 +86,10 @@ export default function Showreel() {
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
               className="space-y-6"
             >
               <div className="relative">
-                <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg" />
                 <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-6 backdrop-blur-sm">
                   <h3 className="mb-4 text-xl font-bold text-white">Materiales</h3>
                   <div className="space-y-3">
@@ -162,7 +151,7 @@ export default function Showreel() {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
             className="mt-16 text-center"
           >
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm">
