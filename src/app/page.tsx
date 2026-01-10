@@ -3,7 +3,6 @@ import Navbar from '@/components/Navbar'
 import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import LatestProject from '@/components/sections/LatestProject'
-import Stats from '@/components/sections/Stats'
 import Theater from '@/components/sections/Theater'
 import SkillsGraph from '@/components/sections/SkillsGraph'
 import Footer from '@/components/Footer'
@@ -43,7 +42,6 @@ export default function Home() {
       {/* Core sections */}
       <About />
       <LatestProject />
-      <Stats />
       
       {/* Featured work sections - ordered by priority */}
       <Cinema />
