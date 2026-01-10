@@ -36,11 +36,11 @@ export default function Hero() {
     >
       {/* Split Layout Background */}
       <div className="absolute inset-0 z-0 grid lg:grid-cols-2">
-        {/* Left Side - Actor Photo */}
+        {/* Left Side - NEW Professional Photo */}
         <div className="relative h-full">
           <Image
-            src="https://github.com/user-attachments/assets/0c09e17f-1983-4ad0-8926-a0d6ef6ae5cf"
-            alt="Almagro San Miguel - Actor profesional sevillano"
+            src="https://github.com/user-attachments/assets/95a668f0-2a97-4791-bd0d-ab2e835b4b88"
+            alt="Almagro San Miguel - Actor profesional de televisión, cine y teatro"
             fill
             className="object-cover object-center"
             sizes="50vw"
@@ -58,13 +58,13 @@ export default function Hero() {
       {/* Overlay gradient for mobile */}
       <div className="lg:hidden absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black z-[1]" />
 
-      {/* Particles Effect */}
+      {/* Enhanced Particles Effect */}
       {mounted && (
         <div className="absolute inset-0 opacity-20 z-[2]">
-          {[...Array(15)].map((_, i) => (
+          {[...Array(20)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-1 h-1 bg-yellow-400 rounded-full"
+              className="absolute w-1 h-1 bg-yellow-400 rounded-full blur-[1px]"
               initial={{
                 x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920),
                 y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080),
@@ -101,14 +101,25 @@ export default function Hero() {
             transition={{ duration: 1, ease: 'easeOut' }}
             className="space-y-6 lg:pl-8"
           >
-            {/* Premium Badge */}
+            {/* Premium Badge with Professional Icon */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.6 }}
               className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 border border-yellow-500/30 rounded-full backdrop-blur-sm"
             >
-              <Star className="w-4 h-4 text-yellow-400" />
+              <svg 
+                className="w-4 h-4 text-yellow-400" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              >
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                <circle cx="12" cy="12" r="3" fill="currentColor"/>
+              </svg>
               <span className="text-yellow-300 text-sm font-semibold">Actor Profesional Certificado</span>
             </motion.div>
 
@@ -140,14 +151,14 @@ export default function Hero() {
               transition={{ delay: 0.5, duration: 0.8 }}
               className="grid grid-cols-2 gap-3"
             >
-              <div className="bg-slate-800/60 backdrop-blur-md border border-slate-700/50 rounded-xl p-3">
+              <div className="bg-slate-800/60 backdrop-blur-md border border-slate-700/50 rounded-xl p-3 hover:border-yellow-500/30 transition-all">
                 <div className="flex items-center gap-2 mb-1">
                   <MapPin className="w-4 h-4 text-yellow-400" />
                   <span className="text-xs text-gray-400">Ubicación</span>
                 </div>
                 <p className="text-sm font-bold text-white">Sevilla, España</p>
               </div>
-              <div className="bg-slate-800/60 backdrop-blur-md border border-slate-700/50 rounded-xl p-3">
+              <div className="bg-slate-800/60 backdrop-blur-md border border-slate-700/50 rounded-xl p-3 hover:border-yellow-500/30 transition-all">
                 <div className="flex items-center gap-2 mb-1">
                   <Calendar className="w-4 h-4 text-yellow-400" />
                   <span className="text-xs text-gray-400">Nacimiento</span>
@@ -163,18 +174,18 @@ export default function Hero() {
               transition={{ delay: 0.6, duration: 0.8 }}
               className="flex flex-wrap gap-2"
             >
-              <span className="px-3 py-1.5 bg-blue-500/10 border border-blue-500/30 rounded-full text-xs font-semibold text-blue-300">
+              <span className="px-3 py-1.5 bg-blue-500/10 border border-blue-500/30 rounded-full text-xs font-semibold text-blue-300 hover:bg-blue-500/20 transition-colors">
                 ESAD Sevilla
               </span>
-              <span className="px-3 py-1.5 bg-purple-500/10 border border-purple-500/30 rounded-full text-xs font-semibold text-purple-300">
+              <span className="px-3 py-1.5 bg-purple-500/10 border border-purple-500/30 rounded-full text-xs font-semibold text-purple-300 hover:bg-purple-500/20 transition-colors">
                 CNTC Helena Pimenta
               </span>
-              <span className="px-3 py-1.5 bg-red-500/10 border border-red-500/30 rounded-full text-xs font-semibold text-red-300">
+              <span className="px-3 py-1.5 bg-red-500/10 border border-red-500/30 rounded-full text-xs font-semibold text-red-300 hover:bg-red-500/20 transition-colors">
                 NO-IDENTITY Especialista
               </span>
             </motion.div>
 
-            {/* Recent Works */}
+            {/* Recent Works Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -192,7 +203,7 @@ export default function Hero() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
-                    className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-lg p-3 hover:bg-slate-700/40 hover:border-yellow-500/30 transition-all group"
+                    className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-lg p-3 hover:bg-slate-700/40 hover:border-yellow-500/30 transition-all group cursor-pointer"
                   >
                     <p className="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">
                       {work.title}
@@ -210,7 +221,7 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            {/* Achievement Badges */}
+            {/* Achievement Badges - Enhanced */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -228,10 +239,10 @@ export default function Hero() {
                     whileHover={{ scale: 1.05, y: -3 }}
                     className="group relative"
                   >
-                    <div className={`${achievement.bgColor} ${achievement.borderColor} border backdrop-blur-sm rounded-xl p-3 transform transition-all duration-300 hover:shadow-lg`}>
+                    <div className={`${achievement.bgColor} ${achievement.borderColor} border backdrop-blur-sm rounded-xl p-3 transform transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10`}>
                       <div className="flex flex-col items-center text-center gap-1">
-                        <Icon className="w-5 h-5 text-white" />
-                        <span className="text-white font-bold text-sm">{achievement.label}</span>
+                        <Icon className="w-5 h-5 text-white group-hover:text-yellow-400 transition-colors" />
+                        <span className="text-white font-bold text-sm group-hover:text-yellow-400 transition-colors">{achievement.label}</span>
                         <span className="text-xs text-gray-400">{achievement.subtitle}</span>
                       </div>
                     </div>
@@ -240,7 +251,7 @@ export default function Hero() {
               })}
             </motion.div>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons - Enhanced */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -251,9 +262,9 @@ export default function Hero() {
                 href="#showreel"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group px-6 py-3 bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-500 hover:to-orange-500 text-white rounded-full transition-all font-bold shadow-xl hover:shadow-2xl flex items-center gap-2"
+                className="group px-6 py-3 bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-500 hover:to-orange-500 text-white rounded-full transition-all font-bold shadow-xl hover:shadow-2xl hover:shadow-yellow-500/30 flex items-center gap-2"
               >
-                <Play className="w-4 h-4 group-hover:animate-pulse" />
+                <Play className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 Ver Showreel
               </motion.a>
               
