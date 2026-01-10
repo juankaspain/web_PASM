@@ -59,6 +59,11 @@ export default function LatestProject() {
                   <Film className="w-5 h-5" />
                   <span>Cine</span>
                 </div>
+                <div className="flex items-center gap-2 bg-yellow-500/20 border border-yellow-500/30 px-3 py-1 rounded-full">
+                  <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                  <span className="text-yellow-200 font-bold">7.4/10</span>
+                  <span className="text-yellow-200/60 text-sm">IMDb</span>
+                </div>
               </div>
 
               <p className="text-xl text-slate-300 mb-6 leading-relaxed">
@@ -108,7 +113,7 @@ export default function LatestProject() {
                   Ver Tráiler
                 </motion.a>
                 <motion.a
-                  href="https://www.filmaffinity.com/es/film103750.html"
+                  href="https://www.imdb.com/title/tt32129665/"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
@@ -116,7 +121,7 @@ export default function LatestProject() {
                   className="inline-flex items-center gap-2 px-8 py-4 bg-white/[0.05] border border-white/10 hover:bg-white/[0.08] rounded-full font-bold transition-all text-white"
                 >
                   <ExternalLink className="w-5 h-5" />
-                  Más Info
+                  Ver en IMDb
                 </motion.a>
               </div>
             </motion.div>
@@ -150,10 +155,11 @@ export default function LatestProject() {
                 </a>
               </div>
 
-              <div className="absolute -bottom-6 -right-6 bg-red-600 text-white px-6 py-3 rounded-full font-bold shadow-xl">
+              <div className="absolute -bottom-6 -right-6 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-6 py-3 rounded-full font-bold shadow-xl">
                 <div className="flex items-center gap-2">
-                  <Star className="w-5 h-5" />
-                  <span>2025</span>
+                  <Star className="w-5 h-5 fill-white" />
+                  <span className="text-lg">7.4</span>
+                  <span className="text-sm opacity-80">IMDb</span>
                 </div>
               </div>
             </motion.div>
@@ -352,11 +358,11 @@ export default function LatestProject() {
             >
               <div className="inline-block bg-white/[0.03] border border-white/10 rounded-2xl px-8 py-6 max-w-3xl backdrop-blur-sm">
                 <p className="text-slate-300 text-lg leading-relaxed">
-                  <span className="text-white font-bold text-2xl">“</span>
+                  <span className="text-white font-bold text-2xl">"</span>
                   Es un proyecto que me gustó desde el primer momento. La historia sobre la lucha contra ETA es cruda. 
                   El trabajo de Susana Abaitua es de Goya. Ella tiene que rechazar la vida familiar que tenía previsto, 
                   soy su pareja.
-                  <span className="text-white font-bold text-2xl">”</span>
+                  <span className="text-white font-bold text-2xl">"</span>
                 </p>
                 <p className="text-slate-400 font-semibold mt-4">— Almagro San Miguel</p>
               </div>
