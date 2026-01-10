@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Play, Calendar, Film, Star, ExternalLink } from 'lucide-react'
+import { Play, Calendar, Film, Star, ExternalLink, Youtube } from 'lucide-react'
 import Image from 'next/image'
 import { useRef } from 'react'
 
@@ -67,13 +67,22 @@ export default function LatestProject() {
               {/* CTAs */}
               <div className="flex flex-wrap gap-4">
                 <a
-                  href="https://www.netflix.com"
+                  href="https://www.netflix.com/title/81700950"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-red-600 hover:bg-red-700 rounded-full font-bold transition-all shadow-xl hover:shadow-2xl hover:scale-105"
                 >
                   <Play className="w-5 h-5" />
                   Ver en Netflix
+                </a>
+                <a
+                  href="https://www.youtube.com/watch?v=R0ufJf5SFIU"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-red-700 hover:bg-red-800 rounded-full font-bold transition-all shadow-xl hover:shadow-2xl hover:scale-105"
+                >
+                  <Youtube className="w-5 h-5" />
+                  Ver Tráiler
                 </a>
                 <a
                   href="https://www.filmaffinity.com/es/film103750.html"
@@ -87,7 +96,7 @@ export default function LatestProject() {
               </div>
             </motion.div>
 
-            {/* Right: Image/Poster */}
+            {/* Right: Movie Poster */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
@@ -95,17 +104,30 @@ export default function LatestProject() {
               className="relative"
             >
               <div className="relative h-[500px] md:h-[600px] rounded-2xl overflow-hidden shadow-2xl group">
-                {/* Placeholder - Replace with actual movie poster */}
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <Film className="w-20 h-20 mx-auto mb-4 text-yellow-400" />
-                    <p className="text-gray-400">Poster de la película</p>
-                    <p className="text-sm text-gray-500 mt-2">"Un fantasma en la batalla"</p>
-                  </div>
-                </div>
+                {/* Real Movie Poster */}
+                <Image
+                  src="https://github.com/user-attachments/assets/64e9e876-5ecc-452e-8be4-d7d5f7968ec9"
+                  alt="Poster oficial de Un fantasma en la batalla"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                  priority
+                />
                 
-                {/* Glow effect */}
+                {/* Glow effect on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-red-600 to-orange-600 opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-2xl" />
+                
+                {/* Play button overlay on hover */}
+                <a
+                  href="https://www.youtube.com/watch?v=R0ufJf5SFIU"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                >
+                  <div className="w-20 h-20 bg-red-600/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                    <Play className="w-10 h-10 text-white ml-1" />
+                  </div>
+                </a>
               </div>
 
               {/* Floating badge */}
