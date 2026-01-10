@@ -142,7 +142,7 @@ export default function About() {
                 <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-100">
                   <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-slate-600 mb-2" />
                   <div className="text-xs sm:text-sm text-gray-500">Ubicación</div>
-                  <div className="font-bold text-sm sm:text-base text-slate-900">Sevilla, España</div>
+                  <div className="font-bold text-sm sm:text-base text-slate-900">Madrid / Sevilla</div>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-100">
                   <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-slate-600 mb-2" />
@@ -178,13 +178,13 @@ export default function About() {
                     <strong>Helena Pimenta</strong> (2015-2017), donde se especializó en verso clásico español.
                   </p>
                   <p>
-                    Su debut televisivo llegó en 2019 con <strong>"Hernán"</strong> (Amazon Prime Video), interpretando
+                    Su debut televisivo llegó en 2019 con <strong>“Hernán”</strong> (Amazon Prime Video), interpretando
                     a Gonzalo de Sandoval junto a Óscar Jaenada. Desde entonces ha participado en <strong>más de 300 episodios</strong>
-                    en series como <strong>"Vis a vis: El Oasis"</strong>, <strong>"La Moderna"</strong> (236 episodios como protagonista),
-                    <strong>"Operación Barrio Inglés"</strong> y <strong>"La caza: Guadiana"</strong>.
+                    en series como <strong>“Vis a vis: El Oasis”</strong>, <strong>“La Moderna”</strong> (236 episodios como protagonista),
+                    <strong>“Operación Barrio Inglés”</strong> y <strong>“La caza: Guadiana”</strong>.
                   </p>
                   <p>
-                    En 2025 protagoniza la película <strong>"Un fantasma en la batalla"</strong>, dirigida por
+                    En 2025 protagoniza la película <strong>“Un fantasma en la batalla”</strong>, dirigida por
                     Agustín Díaz Yanes, actualmente en cines y Netflix. Además de su trabajo actoral, domina
                     habilidades como <strong>esgrima</strong>, <strong>equitación</strong>, <strong>violonchelo</strong>
                     y <strong>viola</strong>, que enriquecen su versatilidad interpretativa.
@@ -194,54 +194,8 @@ export default function About() {
             </motion.div>
           </div>
 
-          {/* Skills Section - Rediseñadas sin porcentajes */}
+          {/* Education/Training PRIMERO - Todos con enlaces */}
           <div className="mb-12 md:mb-16">
-            <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 md:mb-10 flex items-center justify-center gap-2 px-4">
-              <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-500" />
-              Habilidades Especiales
-            </h3>
-            <div className="max-w-5xl mx-auto space-y-8">
-              {skillCategories.map((category, catIndex) => (
-                <motion.div
-                  key={catIndex}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.6, delay: 0.5 + catIndex * 0.1 }}
-                >
-                  <h4 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <Palette className="w-5 h-5 text-slate-600" />
-                    {category.title}
-                  </h4>
-                  <div className="flex flex-wrap gap-3">
-                    {category.skills.map((skill, skillIndex) => {
-                      const Icon = skill.icon
-                      return (
-                        <motion.div
-                          key={skillIndex}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                          transition={{ duration: 0.4, delay: 0.6 + catIndex * 0.1 + skillIndex * 0.05 }}
-                          whileHover={{ scale: 1.05, y: -2 }}
-                          className="group relative"
-                        >
-                          {/* Subtle glow on hover */}
-                          <div className="absolute -inset-0.5 bg-gradient-to-r from-slate-300 to-gray-300 rounded-full blur-sm opacity-0 group-hover:opacity-40 transition-opacity" />
-                          
-                          <div className="relative inline-flex items-center gap-2 px-4 py-2 bg-white border-2 border-slate-200 rounded-full text-sm font-semibold text-slate-700 hover:border-slate-400 hover:text-slate-900 transition-all shadow-sm">
-                            <Icon className="w-4 h-4" />
-                            {skill.name}
-                          </div>
-                        </motion.div>
-                      )
-                    })}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Education/Training - Todos con enlaces */}
-          <div>
             <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 md:mb-10 flex items-center justify-center gap-2 px-4">
               <GraduationCap className="w-6 h-6 sm:w-8 sm:h-8 text-slate-700" />
               Formación Profesional
@@ -301,6 +255,52 @@ export default function About() {
                   </motion.div>
                 )
               })}
+            </div>
+          </div>
+
+          {/* Skills Section DESPUÉS - Rediseñadas sin porcentajes */}
+          <div>
+            <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 md:mb-10 flex items-center justify-center gap-2 px-4">
+              <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-500" />
+              Habilidades Especiales
+            </h3>
+            <div className="max-w-5xl mx-auto space-y-8">
+              {skillCategories.map((category, catIndex) => (
+                <motion.div
+                  key={catIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.6, delay: 0.5 + catIndex * 0.1 }}
+                >
+                  <h4 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <Palette className="w-5 h-5 text-slate-600" />
+                    {category.title}
+                  </h4>
+                  <div className="flex flex-wrap gap-3">
+                    {category.skills.map((skill, skillIndex) => {
+                      const Icon = skill.icon
+                      return (
+                        <motion.div
+                          key={skillIndex}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                          transition={{ duration: 0.4, delay: 0.6 + catIndex * 0.1 + skillIndex * 0.05 }}
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          className="group relative"
+                        >
+                          {/* Subtle glow on hover */}
+                          <div className="absolute -inset-0.5 bg-gradient-to-r from-slate-300 to-gray-300 rounded-full blur-sm opacity-0 group-hover:opacity-40 transition-opacity" />
+                          
+                          <div className="relative inline-flex items-center gap-2 px-4 py-2 bg-white border-2 border-slate-200 rounded-full text-sm font-semibold text-slate-700 hover:border-slate-400 hover:text-slate-900 transition-all shadow-sm">
+                            <Icon className="w-4 h-4" />
+                            {skill.name}
+                          </div>
+                        </motion.div>
+                      )
+                    })}
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </motion.div>

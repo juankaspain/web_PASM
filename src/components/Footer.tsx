@@ -67,7 +67,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
-                <span>Sevilla, Andalucía, España</span>
+                <span>Madrid y Sevilla, España</span>
               </li>
             </ul>
           </div>
@@ -113,7 +113,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Almagro San Miguel. Todos los derechos reservados.
           </p>
           <p className="mt-2">
-            Actor profesional | Sevilla, España
+            Actor profesional | Madrid y Sevilla, España
           </p>
         </div>
       </div>
