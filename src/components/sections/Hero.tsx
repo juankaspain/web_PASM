@@ -22,26 +22,26 @@ export default function Hero() {
     { icon: TrendingUp, label: '13 Años', subtitle: 'Experiencia' },
   ]
 
-  // Trabajos destacados con información consistente y detallada
+  // Trabajos destacados con formato 100% consistente: Personaje/Rol - Tipo de producción
   const recentWorks = [
     { 
       title: 'Un fantasma en la batalla', 
-      role: 'Largometraje', 
-      details: 'Cine', 
+      role: 'Personaje principal', 
+      details: 'Largometraje', 
       network: 'Netflix', 
       year: '2025' 
     },
     { 
       title: 'La Moderna', 
-      role: 'Protagonista', 
-      details: '236 episodios', 
+      role: 'Personaje principal', 
+      details: 'Serie TV · 236 ep.', 
       network: 'TVE', 
       year: '2024-2025' 
     },
     { 
       title: 'Vis a vis: El Oasis', 
       role: 'Esteban Kabila', 
-      details: '8 episodios', 
+      details: 'Serie TV · 8 ep.', 
       network: 'Fox', 
       year: '2020' 
     },
@@ -130,8 +130,9 @@ export default function Hero() {
               {/* Resplandor dorado sutil detrás de la imagen */}
               <div className="absolute inset-0 rounded-[28px] lg:rounded-[36px] bg-gradient-to-br from-yellow-500/20 via-orange-500/10 to-transparent blur-3xl" />
               
+              {/* IMAGEN SIN RING PARA EVITAR LÍNEA BLANCA */}
               <motion.div 
-                className="relative aspect-[2.5/4] rounded-[28px] lg:rounded-[36px] overflow-hidden shadow-[0_50px_150px_rgba(0,0,0,0.95)] ring-1 ring-white/5"
+                className="relative aspect-[2.5/4] rounded-[28px] lg:rounded-[36px] overflow-hidden shadow-[0_50px_150px_rgba(0,0,0,0.95)]"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
               >
@@ -268,7 +269,7 @@ export default function Hero() {
               ))}
             </motion.div>
 
-            {/* TRABAJOS DESTACADOS - INFORMACIÓN CONSISTENTE */}
+            {/* TRABAJOS DESTACADOS - FORMATO 100% CONSISTENTE */}
             <motion.div
               className="space-y-3 pt-1"
               initial={{ opacity: 0, y: 16 }}
@@ -349,7 +350,7 @@ export default function Hero() {
               })}
             </motion.div>
 
-            {/* CTAS - Ver showreel destacado */}
+            {/* CTAS - Ver showreel con sombra reducida */}
             <motion.div
               className="pt-2"
               initial={{ opacity: 0, y: 16 }}
@@ -361,7 +362,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 
-                           px-7 py-3.5 text-base font-semibold text-black shadow-[0_22px_60px_rgba(250,204,21,0.45)]"
+                           px-7 py-3.5 text-base font-semibold text-black shadow-[0_10px_30px_rgba(250,204,21,0.35)]"
               >
                 <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 Ver Showreel Profesional
