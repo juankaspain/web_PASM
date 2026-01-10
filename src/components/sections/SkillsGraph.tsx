@@ -1,9 +1,9 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { useRef, useEffect, useState } from 'react'
+import { useRef } from 'react'
 import { 
-  Sparkles, Sword, Heart, Languages, Music, Activity, 
+  Sparkles, Sword, Heart, Languages, Music, CircleDot, 
   Bike, Drama, Mic, Dumbbell, Target, Zap 
 } from 'lucide-react'
 
@@ -24,7 +24,7 @@ const skills: Skill[] = [
   
   // Físico y combate
   { name: 'Esgrima Teatral', level: 88, category: 'Físico', icon: Sword, description: 'Combate escénico' },
-  { name: 'Equitación', level: 85, category: 'Físico', icon: Activity, description: 'Nivel avanzado' },
+  { name: 'Equitación', level: 85, category: 'Físico', icon: CircleDot, description: 'Nivel avanzado' },
   { name: 'Ciclismo', level: 80, category: 'Físico', icon: Bike, description: 'Escenas de acción' },
   { name: 'Condición Física', level: 90, category: 'Físico', icon: Dumbbell, description: 'Entrenamiento regular' },
   
@@ -204,7 +204,7 @@ export default function SkillsGraph() {
             <div className="grid sm:grid-cols-3 gap-6">
               {[
                 { icon: Sword, title: 'Combate Escénico', desc: 'Esgrima y peleas' },
-                { icon: Activity, title: 'Equitación', desc: 'Nivel avanzado' },
+                { icon: CircleDot, title: 'Equitación', desc: 'Nivel avanzado' },
                 { icon: Drama, title: 'Verso Clásico', desc: 'Especialista CNTC' },
               ].map((item, index) => {
                 const Icon = item.icon

@@ -1,6 +1,6 @@
 'use client'
 
-import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Film } from 'lucide-react'
+import { Mail, MapPin, Facebook, Instagram, X, Film } from 'lucide-react'
 
 const socialLinks = [
   {
@@ -9,9 +9,9 @@ const socialLinks = [
     icon: Instagram,
   },
   {
-    name: 'Twitter / X',
+    name: 'X',
     url: 'https://x.com/almagroSM',
-    icon: Twitter,
+    icon: X,
   },
   {
     name: 'Facebook',

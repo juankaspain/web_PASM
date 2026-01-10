@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Award, GraduationCap, Heart, MapPin, Calendar, Users, Briefcase, Sparkles, ExternalLink, Drama, Sword, Activity, Music, Languages, Palette } from 'lucide-react'
+import { Award, GraduationCap, Heart, MapPin, Calendar, Users, Briefcase, Sparkles, ExternalLink, Drama, Sword, CircleDot, Music, Languages, Palette } from 'lucide-react'
 import Image from 'next/image'
 import { useRef } from 'react'
 
@@ -22,8 +22,8 @@ const skillCategories = [
     skills: [
       { name: 'Esgrima Teatral', icon: Sword },
       { name: 'Combate Escénico', icon: Sword },
-      { name: 'Equitación', icon: Activity },
-      { name: 'Acrobacias', icon: Activity },
+      { name: 'Equitación', icon: CircleDot },
+      { name: 'Acrobacias', icon: CircleDot },
     ],
   },
   {
