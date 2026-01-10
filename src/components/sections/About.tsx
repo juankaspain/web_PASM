@@ -134,20 +134,10 @@ export default function About() {
               <span className="text-sm font-medium text-slate-300 tracking-wide">Sobre Mí</span>
             </motion.div>
             
-            <motion.h2 
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight"
-            >
-              <span className="text-white">Pedro Francisco Almagro </span>
-              <span className="text-yellow-400">San Miguel</span>
-            </motion.h2>
-            
             <motion.p 
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed"
             >
               Actor con vocación por el teatro clásico y amplia experiencia en TV y cine
@@ -158,7 +148,7 @@ export default function About() {
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
             >
               <div className="relative mb-8 group">
                 <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -192,7 +182,7 @@ export default function About() {
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col justify-center"
             >
               <div className="space-y-4 text-slate-300 leading-relaxed">
@@ -237,7 +227,7 @@ export default function About() {
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                    transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
                     whileHover={{ y: -6 }}
                     className="group relative"
                   >
