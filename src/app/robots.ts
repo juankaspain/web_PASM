@@ -6,17 +6,19 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/private/'],
+        disallow: ['/api/', '/admin/', '/_next/'],
       },
       {
-        userAgent: 'GPTBot',
-        disallow: '/',
+        userAgent: 'Googlebot',
+        allow: '/',
+        disallow: ['/api/', '/admin/'],
       },
       {
-        userAgent: 'ChatGPT-User',
-        disallow: '/',
+        userAgent: 'Googlebot-Image',
+        allow: '/',
       },
     ],
     sitemap: 'https://almagrosanmiguel.com/sitemap.xml',
+    host: 'https://almagrosanmiguel.com',
   }
 }
