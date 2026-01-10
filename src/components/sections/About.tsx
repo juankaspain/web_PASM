@@ -5,7 +5,6 @@ import { Award, GraduationCap, Heart, MapPin, Calendar, Sparkles, ExternalLink, 
 import Image from 'next/image'
 import { useRef } from 'react'
 
-// Habilidades organizadas por categorías
 const skillCategories = [
   {
     title: 'Interpretación',
@@ -44,7 +43,6 @@ const skillCategories = [
   },
 ]
 
-// Formación con enlaces oficiales
 const education = [
   {
     icon: Award,
@@ -52,7 +50,6 @@ const education = [
     period: '2015-2017',
     description: 'Formación especializada en verso clásico español con Helena Pimenta',
     url: 'https://teatroclasico.inaem.gob.es/',
-    gradient: 'from-purple-500 to-pink-500',
   },
   {
     icon: Sparkles,
@@ -60,7 +57,6 @@ const education = [
     period: '2014-2015',
     description: 'Formación avanzada en interpretación con Darío Facal',
     url: 'https://estudio-workinprogress.com/',
-    gradient: 'from-yellow-500 to-orange-500',
   },
   {
     icon: GraduationCap,
@@ -68,7 +64,6 @@ const education = [
     period: '2008-2012',
     description: 'Graduado en Arte Dramático - Escuela Superior de Arte Dramático de Sevilla',
     url: 'https://www.esadsevilla.org',
-    gradient: 'from-blue-500 to-cyan-500',
   },
   {
     icon: Crown,
@@ -76,7 +71,6 @@ const education = [
     period: 'Especialista',
     description: 'Formación especializada en acrobacias y lucha escénica',
     url: 'https://www.noidentity.es/',
-    gradient: 'from-red-500 to-rose-500',
   },
 ]
 
@@ -86,13 +80,11 @@ export default function About() {
 
   return (
     <section id="about" className="relative py-32 overflow-hidden bg-gradient-to-b from-slate-900 via-black to-slate-950">
-      {/* Elementos decorativos */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[100px]" />
-        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[120px]" />
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[120px]" />
       </div>
 
-      {/* Patrón de fondo */}
       <div 
         className="absolute inset-0 opacity-[0.02]"
         style={{
@@ -107,7 +99,6 @@ export default function About() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          {/* Header minimalista */}
           <div className="text-center mb-20">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -115,7 +106,7 @@ export default function About() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
             >
-              <Heart className="w-4 h-4 text-purple-400" strokeWidth={2} />
+              <Heart className="w-4 h-4 text-yellow-400" strokeWidth={2} />
               <span className="text-sm font-medium text-slate-300 tracking-wide">Sobre Mí</span>
             </motion.div>
             
@@ -123,11 +114,9 @@ export default function About() {
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight"
+              className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white"
             >
-              <span className="bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
-                Pedro Francisco Almagro
-              </span>
+              Pedro Francisco Almagro
             </motion.h2>
             
             <motion.p 
@@ -141,14 +130,13 @@ export default function About() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto mb-20">
-            {/* Imagen + Info */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <div className="relative mb-8 group">
-                <div className="absolute -inset-[1px] bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative h-[500px] rounded-2xl overflow-hidden">
                   <Image
                     src="https://github.com/user-attachments/assets/0c09e17f-1983-4ad0-8926-a0d6ef6ae5cf"
@@ -162,22 +150,20 @@ export default function About() {
                 </div>
               </div>
 
-              {/* Info cards */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-white/[0.03] border border-white/10 rounded-xl p-4 backdrop-blur-sm">
-                  <MapPin className="w-5 h-5 text-purple-400 mb-2" />
+                  <MapPin className="w-5 h-5 text-yellow-400 mb-2" />
                   <div className="text-xs text-slate-500">Ubicación</div>
                   <div className="font-bold text-white">Madrid / Sevilla</div>
                 </div>
                 <div className="bg-white/[0.03] border border-white/10 rounded-xl p-4 backdrop-blur-sm">
-                  <Calendar className="w-5 h-5 text-purple-400 mb-2" />
+                  <Calendar className="w-5 h-5 text-yellow-400 mb-2" />
                   <div className="text-xs text-slate-500">Nacimiento</div>
                   <div className="font-bold text-white">7 Marzo 1990</div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Biografía */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
@@ -187,23 +173,23 @@ export default function About() {
               <div className="space-y-4 text-slate-300 leading-relaxed">
                 <p>
                   Nacido en <span className="text-white font-semibold">Sevilla</span> el 7 de marzo de 1990, <span className="text-white font-semibold">Pedro Francisco Almagro Gordillo</span>,
-                  conocido artísticamente como <span className="text-purple-400 font-semibold">Almagro San Miguel</span>, es un actor profesional que ha
+                  conocido artísticamente como <span className="text-white font-semibold">Almagro San Miguel</span>, es un actor profesional que ha
                   construido una sólida carrera en televisión, cine y teatro.
                 </p>
                 <p>
-                  Graduado por la <span className="text-blue-400 font-semibold">Escuela Superior de Arte Dramático de Sevilla (ESAD)</span> entre
-                  2008 y 2012, completó su formación con <span className="text-yellow-400 font-semibold">Darío Facal</span> en Work In Progress (2014-2015)
-                  y en la <span className="text-purple-400 font-semibold">Compañía Nacional de Teatro Clásico (CNTC)</span> bajo la dirección de 
-                  <span className="text-purple-400 font-semibold"> Helena Pimenta</span> (2015-2017), donde se especializó en verso clásico español.
+                  Graduado por la <span className="text-white font-semibold">Escuela Superior de Arte Dramático de Sevilla (ESAD)</span> entre
+                  2008 y 2012, completó su formación con <span className="text-white font-semibold">Darío Facal</span> en Work In Progress (2014-2015)
+                  y en la <span className="text-white font-semibold">Compañía Nacional de Teatro Clásico (CNTC)</span> bajo la dirección de
+                  <span className="text-white font-semibold"> Helena Pimenta</span> (2015-2017), donde se especializó en verso clásico español.
                 </p>
                 <p>
-                  Su debut televisivo llegó en 2019 con <span className="text-cyan-400 font-semibold">"Hernán"</span> (Amazon Prime Video), interpretando
-                  a Gonzalo de Sandoval junto a Óscar Jaenada. Desde entonces ha participado en <span className="text-yellow-400 font-semibold">más de 300 episodios</span>
+                  Su debut televisivo llegó en 2019 con <span className="text-white font-semibold">"Hernán"</span> (Amazon Prime Video), interpretando
+                  a Gonzalo de Sandoval junto a Óscar Jaenada. Desde entonces ha participado en <span className="text-white font-semibold">más de 300 episodios</span>
                   en series como <span className="text-white font-semibold">"Vis a vis: El Oasis"</span>, <span className="text-white font-semibold">"La Moderna"</span> (236 episodios como protagonista),
                   <span className="text-white font-semibold"> "Operación Barrio Inglés"</span> y <span className="text-white font-semibold">"La caza: Guadiana"</span>.
                 </p>
                 <p>
-                  En 2025 protagoniza la película <span className="text-yellow-400 font-semibold">"Un fantasma en la batalla"</span>, dirigida por
+                  En 2025 protagoniza la película <span className="text-white font-semibold">"Un fantasma en la batalla"</span>, dirigida por
                   Agustín Díaz Yanes, actualmente en cines y Netflix. Además de su trabajo actoral, domina
                   habilidades como <span className="text-white font-semibold">esgrima</span>, <span className="text-white font-semibold">equitación</span>, <span className="text-white font-semibold">violonchelo</span>
                   y <span className="text-white font-semibold">viola</span>, que enriquecen su versatilidad interpretativa.
@@ -212,10 +198,9 @@ export default function About() {
             </motion.div>
           </div>
 
-          {/* Formación */}
           <div className="mb-20">
             <h3 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
-              <GraduationCap className="w-7 h-7 text-purple-400" />
+              <GraduationCap className="w-7 h-7 text-yellow-400" />
               <span className="text-white">Formación Profesional</span>
             </h3>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
@@ -233,20 +218,20 @@ export default function About() {
                     whileHover={{ y: -6 }}
                     className="group relative block"
                   >
-                    <div className={`absolute -inset-[1px] bg-gradient-to-br ${edu.gradient} rounded-2xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500`} />
+                    <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div className="relative h-full bg-white/[0.03] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:bg-white/[0.05] hover:border-white/20 transition-all">
                       <div className="flex items-start justify-between mb-4">
-                        <div className={`w-12 h-12 bg-gradient-to-br ${edu.gradient} rounded-xl flex items-center justify-center shadow-lg`}>
-                          <Icon className="w-6 h-6 text-white" />
+                        <div className="w-12 h-12 bg-yellow-400 rounded-xl flex items-center justify-center shadow-lg">
+                          <Icon className="w-6 h-6 text-black" />
                         </div>
-                        <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-purple-400 transition-colors" />
+                        <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-yellow-400 transition-colors" />
                       </div>
-                      <h4 className="font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">{edu.title}</h4>
+                      <h4 className="font-bold text-white mb-2">{edu.title}</h4>
                       <p className="text-sm text-slate-500 mb-2 font-semibold">{edu.period}</p>
                       <p className="text-sm text-slate-400 leading-relaxed">{edu.description}</p>
                       
                       <motion.div 
-                        className={`absolute bottom-0 left-0 h-[2px] bg-gradient-to-r ${edu.gradient} rounded-b-2xl`}
+                        className="absolute bottom-0 left-0 h-[2px] bg-yellow-400 rounded-b-2xl"
                         initial={{ width: 0 }}
                         whileHover={{ width: '100%' }}
                         transition={{ duration: 0.4 }}
@@ -258,7 +243,6 @@ export default function About() {
             </div>
           </div>
 
-          {/* Habilidades */}
           <div>
             <h3 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
               <Sparkles className="w-7 h-7 text-yellow-400" />
