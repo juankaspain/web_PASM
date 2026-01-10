@@ -29,7 +29,7 @@ const projects: Project[] = [
   {
     id: 'la-moderna',
     title: 'La Moderna',
-    role: 'Íñigo Peñalver',
+    role: 'Íñigo Peñalver (Protagonista)',
     year: '2023-2024',
     platform: 'TVE',
     episodes: '236 episodios',
@@ -38,25 +38,21 @@ const projects: Project[] = [
     imdb: 'https://www.imdb.com/title/tt28688509/',
     category: 'tv',
     description: 'Serie diaria de época ambientada en los años 40-50. Papel protagonista como galán durante más de 230 episodios en prime time de TVE.',
-    director: 'Varios directores',
-    coStars: ['Paula Ballesteros', 'Sebastián Haro', 'Sara Vidorreta'],
-    highlights: ['Protagonista', '236 episodios', 'Prime Time'],
+    highlights: ['Protagonista', '236 episodios', 'Prime Time TVE'],
   },
   {
     id: 'vis-a-vis',
     title: 'Vis a vis: El Oasis',
-    role: 'Diego Ramala',
+    role: 'Diego "Dieguito" Ramala (Protagonista)',
     year: '2020',
     platform: 'Fox/Star',
-    episodes: '8 episodios',
+    episodes: '6 episodios',
     image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1000',
     rating: '6.8',
     imdb: 'https://www.imdb.com/title/tt11177074/',
     category: 'tv',
     description: 'Papel protagonista en el spin-off de la exitosa serie "Vis a vis". Thriller carcelario con distribución internacional.',
-    director: 'Varios directores',
-    coStars: ['Maggie Civantos', 'Najwa Nimri', 'Itziar Castro'],
-    highlights: ['Protagonista', 'Fox/Star', 'Internacional'],
+    highlights: ['Protagonista', 'Fox/Star Channel', 'Internacional'],
   },
   {
     id: 'hernan',
@@ -70,8 +66,6 @@ const projects: Project[] = [
     imdb: 'https://www.imdb.com/title/tt8741704/',
     category: 'tv',
     description: 'Serie histórica de Amazon Prime Video sobre la conquista de México. Producción internacional de alto presupuesto.',
-    director: 'Varios directores',
-    coStars: ['Óscar Jaenada', 'Michel Brown', 'Víctor Clavijo'],
     highlights: ['Prime Video', '240+ países', 'Épica'],
   },
   {
@@ -91,7 +85,7 @@ const projects: Project[] = [
   {
     id: 'la-caza',
     title: 'La Caza: Guadiana',
-    role: 'Aurelio Santana',
+    role: 'Aurelio "Aure" Santana Mencía',
     year: '2023',
     platform: 'TVE',
     episodes: '6 episodios',
@@ -99,68 +93,74 @@ const projects: Project[] = [
     rating: '7.3',
     imdb: 'https://www.imdb.com/title/tt15398770/',
     category: 'tv',
-    description: 'Thriller policíaco de la exitosa franquicia La Caza. Investigación de crímenes sin resolver.',
+    description: 'Thriller policiaco de la exitosa franquicia La Caza. Investigación de crímenes sin resolver.',
     highlights: ['Thriller', '7.3 IMDb', 'TVE'],
   },
   {
-    id: 'fantasma',
-    title: 'Un fantasma en la batalla',
-    role: 'Antonio',
-    year: '2025',
-    platform: 'Cine',
-    type: 'Largometraje',
+    id: 'estoy-vivo',
+    title: 'Estoy vivo',
+    role: 'Mikel Uribe',
+    year: '2021',
+    platform: 'TVE',
+    episodes: '12 episodios',
+    image: 'https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?q=80&w=1000',
+    category: 'tv',
+    description: 'Temporada 4 de la popular serie de TVE. Interpreto a Mikel Uribe, un nuevo policía de la comisaría.',
+    highlights: ['12 episodios', 'TVE', 'Temporada 4'],
+  },
+  {
+    id: 'desconocidas',
+    title: 'Desconocidas',
+    role: 'Ramón',
+    year: '2022',
+    platform: 'Canal Sur',
+    episodes: '8 episodios',
+    image: 'https://images.unsplash.com/photo-1594908900066-3f47337549d8?q=80&w=1000',
+    category: 'tv',
+    description: 'Serie andaluza producida por Canal Sur. Papel destacado en los 8 episodios de la temporada.',
+    highlights: ['Canal Sur', '8 episodios', 'Andalucía'],
+  },
+  {
+    id: 'honor',
+    title: 'Honor',
+    role: 'Federico "Fede"',
+    year: '2023',
+    platform: 'Atresplayer',
+    episodes: '5 episodios',
     image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1000',
-    imdb: 'https://www.imdb.com/title/tt28278100/',
-    category: 'film',
-    description: 'Thriller basado en hechos reales sobre ETA. Dirigida por Agustín Díaz Yanes.',
-    director: 'Agustín Díaz Yanes',
-    highlights: ['Estreno 2025', 'Hechos reales', 'Díaz Yanes'],
+    category: 'tv',
+    description: 'Serie dramática de Atresplayer. Participación destacada como Federico en 5 episodios.',
+    highlights: ['Atresplayer', '5 episodios', 'Drama'],
   },
   {
-    id: 'lapso',
-    title: 'Lapso',
-    role: 'Rodolfo',
-    year: '2013',
-    platform: 'Cine',
-    type: 'Cortometraje',
-    image: 'https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?q=80&w=1000',
-    rating: '8.6',
-    category: 'film',
-    description: 'Thriller psicológico con rating excepcional en IMDb. Debut cinematográfico.',
-    highlights: ['8.6 IMDb', 'Thriller', 'Debut'],
+    id: 'centro-medico',
+    title: 'Centro médico',
+    role: 'Episodio invitado',
+    year: '2017',
+    platform: 'TVE',
+    episodes: '1 episodio',
+    image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000',
+    category: 'tv',
+    description: 'Uno de mis primeros trabajos en televisión. Debut en la serie médica de La 1.',
+    highlights: ['Debut TV', 'TVE', '2017'],
   },
   {
-    id: 'oliver-twist',
-    title: 'Oliver Twist',
-    role: 'Jefe Policía Duff',
-    year: '2016',
-    platform: 'Teatro',
-    type: 'Musical',
-    image: 'https://images.unsplash.com/photo-1503095396549-807759245b35?q=80&w=1000',
-    category: 'theater',
-    description: 'Musical producido por Cía La Tarasca. Premio Mejor Espectáculo del Año 2016.',
-    highlights: ['Premio 2016', 'Musical', 'La Tarasca'],
-  },
-  {
-    id: 'fuente-ovejuna',
-    title: 'Fuente Ovejuna',
-    role: 'Reparto CNTC',
-    year: '2015',
-    platform: 'Teatro',
-    type: 'Clásico',
-    image: 'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?q=80&w=1000',
-    category: 'theater',
-    description: 'Compañía Nacional de Teatro Clásico dirigida por Helena Pimenta. Nominación Mejor Actor Secundario.',
-    director: 'Helena Pimenta',
-    highlights: ['CNTC', 'Nominación', 'Pimenta'],
+    id: 'grupo2',
+    title: 'Grupo 2 Homicidios',
+    role: 'Jorge de Haro',
+    year: '2017',
+    platform: 'Aragón TV / Cuatro',
+    episodes: '1 episodio',
+    image: 'https://images.unsplash.com/photo-1551379840-f0dd5920233c?q=80&w=1000',
+    category: 'tv',
+    description: 'Serie policiaca donde interpreté a Jorge de Haro en un episodio destacado.',
+    highlights: ['Cuatro', 'Policiaca', '2017'],
   },
 ]
 
 const categories = [
-  { id: 'all' as Category, label: 'Todos', icon: Clapperboard, count: projects.length },
+  { id: 'all' as Category, label: 'Todas', icon: Clapperboard, count: projects.length },
   { id: 'tv' as Category, label: 'Televisión', icon: Tv, count: projects.filter(p => p.category === 'tv').length },
-  { id: 'film' as Category, label: 'Cine', icon: Film, count: projects.filter(p => p.category === 'film').length },
-  { id: 'theater' as Category, label: 'Teatro', icon: Theater, count: projects.filter(p => p.category === 'theater').length },
 ]
 
 export default function Portfolio() {
@@ -177,7 +177,7 @@ export default function Portfolio() {
     <section id="portfolio" className="relative py-32 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-black">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px]" />
       </div>
 
       <div 
@@ -201,8 +201,8 @@ export default function Portfolio() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
             >
-              <Clapperboard className="w-4 h-4 text-yellow-400" strokeWidth={2} />
-              <span className="text-sm font-medium text-slate-300 tracking-wide">Filmografía Completa</span>
+              <Tv className="w-4 h-4 text-yellow-400" strokeWidth={2} />
+              <span className="text-sm font-medium text-slate-300 tracking-wide">Series de Televisión</span>
             </motion.div>
             
             <motion.h2 
@@ -211,7 +211,7 @@ export default function Portfolio() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white"
             >
-              Portfolio Profesional
+              Portfolio Televisión
             </motion.h2>
             
             <motion.p 
@@ -220,8 +220,8 @@ export default function Portfolio() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
             >
-              Más de <span className="text-white font-semibold">300 episodios</span> en televisión, cine y teatro. 
-              Producciones nacionales e internacionales de máximo nivel profesional
+              Más de <span className="text-white font-semibold">300 episodios</span> en series de televisión. 
+              Plataformas: TVE, Prime Video, Fox/Star, Atresplayer, Canal Sur
             </motion.p>
           </div>
 
@@ -242,7 +242,7 @@ export default function Portfolio() {
                   whileTap={{ scale: 0.95 }}
                   className={`relative px-5 py-2.5 rounded-xl font-semibold transition-all flex items-center gap-2 ${
                     isActive
-                      ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-black shadow-lg'
+                      ? 'bg-yellow-400 text-black shadow-lg'
                       : 'bg-white/[0.03] text-slate-300 border border-white/10 hover:bg-white/[0.05] hover:border-white/20'
                   }`}
                 >
@@ -357,7 +357,7 @@ export default function Portfolio() {
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm">
               <Sparkles className="w-5 h-5 text-yellow-400" />
               <span className="text-sm font-medium text-slate-300">
-                Portfolio en constante crecimiento con nuevos proyectos
+                +300 episodios en televisión nacional e internacional
               </span>
             </div>
           </motion.div>
@@ -446,7 +446,7 @@ export default function Portfolio() {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-amber-500 text-black rounded-xl font-bold shadow-lg hover:shadow-xl transition-all"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-yellow-400 text-black rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-yellow-300 transition-all"
                   >
                     <Star className="w-5 h-5" />
                     Ver en IMDb

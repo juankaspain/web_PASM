@@ -9,6 +9,7 @@ import SkillsGraph from '@/components/sections/SkillsGraph'
 import Footer from '@/components/Footer'
 
 // Lazy load heavy sections to improve initial page load
+const Cinema = dynamic(() => import('@/components/sections/Cinema'))
 const Portfolio = dynamic(() => import('@/components/sections/Portfolio'), {
   loading: () => (
     <div className="flex items-center justify-center h-96 bg-black">
@@ -44,9 +45,12 @@ export default function Home() {
       <LatestProject />
       <Stats />
       
-      {/* Portfolio sections */}
-      <Portfolio />
+      {/* Featured work sections - ordered by priority */}
+      <Cinema />
       <Theater />
+      <Portfolio />
+      
+      {/* Career sections */}
       <SkillsGraph />
       <Timeline />
       <Milestones />
