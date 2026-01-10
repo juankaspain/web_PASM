@@ -8,13 +8,14 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://almagrosanmiguel.com'),
-  title: 'Almagro San Miguel - Actor Profesional | Sevilla, España',
+  title: 'Almagro San Miguel - Actor Profesional',
   description:
     'Actor profesional con 13+ años de experiencia en TV, cine y teatro. 300+ episodios en series como La Moderna, Vis a vis: El Oasis, Hernán. ESAD Sevilla, CNTC. Disponible para castings.',
   keywords: [
     'Almagro San Miguel',
     'actor español',
     'actor Sevilla',
+    'actor Madrid',
     'La Moderna',
     'Vis a vis El Oasis',
     'Hernán Prime Video',

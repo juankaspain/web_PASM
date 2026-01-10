@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Award, Play, TrendingUp, Film, Tv, Sparkles, MapPin, Calendar } from 'lucide-react'
+import { ArrowDown, Award, Play, TrendingUp, Film, Tv, Sparkles, MapPin, Calendar, ExternalLink, Instagram } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
@@ -28,7 +28,40 @@ export default function Hero() {
     { title: 'Un fantasma en la batalla', info: 'Cine', network: 'Netflix', year: '2025' },
     { title: 'La Moderna', info: '236 ep.', network: 'TVE', year: '2024-2025' },
     { title: 'Vis a vis: El Oasis', info: '8 ep.', network: 'Fox', year: '2020' },
-    { title: 'Hernán', info: 'Gonzalo de Sandoval', network: 'Prime', year: '2019' },
+    { title: 'Hernán', info: 'Gonzalo de Sandoval', network: 'Prime Video', year: '2019' },
+  ]
+
+  const professionalLinks = [
+    { 
+      name: 'IMDb', 
+      url: 'https://www.imdb.com/name/nm9017709/',
+      icon: '⭐',
+      description: 'Perfil profesional'
+    },
+    { 
+      name: 'Wikipedia', 
+      url: 'https://es.wikipedia.org/wiki/Almagro_San_Miguel',
+      icon: '📖',
+      description: 'Biografía completa'
+    },
+    { 
+      name: 'FilmAffinity', 
+      url: 'https://www.filmaffinity.com/es/search.php?stext=Almagro+San+Miguel',
+      icon: '🎬',
+      description: 'Filmografía'
+    },
+    { 
+      name: 'SensaCine', 
+      url: 'https://www.sensacine.com/buscar/?q=Almagro+San+Miguel',
+      icon: '🎭',
+      description: 'Proyectos'
+    },
+    { 
+      name: 'Instagram', 
+      url: 'https://www.instagram.com/almagrosanmiguel/',
+      icon: '📸',
+      description: '@almagrosanmiguel'
+    },
   ]
 
   return (
@@ -122,7 +155,7 @@ export default function Hero() {
                   </div>
                   <div className="leading-tight">
                     <p className="text-xs font-semibold text-yellow-200">En rodaje</p>
-                    <p className="text-[11px] text-gray-300">Últimos proyectos 2025</p>
+                    <p className="text-[11px] text-gray-300">Proyectos activos 2026</p>
                   </div>
                 </motion.div>
                 
@@ -183,7 +216,7 @@ export default function Hero() {
                     Ubicación
                   </span>
                 </div>
-                <p className="text-sm font-semibold text-white">Sevilla, España</p>
+                <p className="text-sm font-semibold text-white">Sevilla y Madrid</p>
               </div>
               <div className="rounded-2xl bg-slate-900/80 border border-slate-700/60 px-4 py-3.5 backdrop-blur-md">
                 <div className="flex items-center gap-2 mb-1.5">
@@ -295,9 +328,9 @@ export default function Hero() {
               })}
             </motion.div>
 
-            {/* CTAS */}
+            {/* CTAS - Ver showreel destacado */}
             <motion.div
-              className="flex flex-wrap gap-3 pt-3"
+              className="pt-3"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.0, duration: 0.6 }}
@@ -307,53 +340,80 @@ export default function Hero() {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 
-                           px-7 py-3.5 text-sm font-semibold text-black shadow-[0_22px_60px_rgba(250,204,21,0.45)]"
+                           px-8 py-4 text-base font-semibold text-black shadow-[0_22px_60px_rgba(250,204,21,0.45)]"
               >
-                <Play className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                Ver showreel
-              </motion.a>
-
-              <motion.a
-                href="https://www.imdb.com/name/nm9017709/"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center rounded-full border border-slate-500/70 bg-slate-900/80 
-                           px-6 py-3 text-sm font-semibold text-slate-50 hover:border-yellow-400/60 hover:bg-slate-900"
-              >
-                IMDb
-              </motion.a>
-
-              <motion.a
-                href="https://es.wikipedia.org/wiki/Almagro_San_Miguel"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center rounded-full border border-slate-500/70 bg-slate-900/80 
-                           px-6 py-3 text-sm font-semibold text-slate-50 hover:border-yellow-400/60 hover:bg-slate-900"
-              >
-                Wikipedia
+                <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                Ver Showreel Profesional
               </motion.a>
             </motion.div>
 
-            {/* INDICADOR DE SCROLL */}
-            <motion.a
-              href="#about"
-              className="inline-flex items-center gap-2 pt-3 text-xs font-medium text-gray-400 hover:text-yellow-300"
+            {/* ENLACES PROFESIONALES */}
+            <motion.div
+              className="space-y-3"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1, duration: 0.6 }}
+            >
+              <div className="flex items-center gap-2">
+                <ExternalLink className="w-4 h-4 text-yellow-300" />
+                <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400">
+                  Perfiles profesionales
+                </h3>
+              </div>
+              
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
+                {professionalLinks.map((link, index) => (
+                  <motion.a
+                    key={link.name}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.15 + index * 0.05, duration: 0.4 }}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="group flex flex-col items-center gap-2 rounded-xl border border-slate-700/70 
+                               bg-slate-900/80 px-3 py-3 backdrop-blur-md hover:border-yellow-400/60 
+                               hover:bg-slate-900/95 transition-all shadow-[0_12px_30px_rgba(15,23,42,0.8)]"
+                  >
+                    <span className="text-2xl">{link.icon}</span>
+                    <div className="text-center">
+                      <p className="text-xs font-semibold text-slate-50 group-hover:text-yellow-300 transition-colors">
+                        {link.name}
+                      </p>
+                      <p className="text-[10px] text-gray-400 mt-0.5">{link.description}</p>
+                    </div>
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* INDICADOR DE SCROLL MEJORADO */}
+            <motion.div
+              className="pt-4 flex justify-center lg:justify-start"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.15, duration: 0.6 }}
+              transition={{ delay: 1.3, duration: 0.6 }}
             >
-              Descubre más
-              <motion.div
-                animate={{ y: [0, 5, 0] }}
-                transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+              <motion.a
+                href="#about"
+                className="group inline-flex items-center gap-3 rounded-full border border-slate-600/70 
+                           bg-slate-900/60 px-5 py-3 backdrop-blur-md hover:border-yellow-400/60 
+                           hover:bg-slate-900/80 transition-all"
+                whileHover={{ scale: 1.03 }}
               >
-                <ArrowDown className="w-4 h-4" />
-              </motion.div>
-            </motion.a>
+                <span className="text-sm font-medium text-gray-300 group-hover:text-yellow-300 transition-colors">
+                  Explorar portfolio completo
+                </span>
+                <motion.div
+                  animate={{ y: [0, 5, 0] }}
+                  transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <ArrowDown className="w-4 h-4 text-yellow-300" />
+                </motion.div>
+              </motion.a>
+            </motion.div>
           </motion.div>
         </div>
       </motion.div>
