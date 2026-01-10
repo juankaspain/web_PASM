@@ -1,64 +1,41 @@
-# robots.txt for https://almagrosanmiguel.com
-# Generated: 2026-01-10
+# robots.txt para almagrosanmiguel.com
+# Optimizado para máxima visibilidad en buscadores
 
-# Allow all well-behaved bots
+# Permitir todos los crawlers principales
 User-agent: *
 Allow: /
-Disallow: /api/
-Disallow: /admin/
-Disallow: /_next/static/
-Disallow: /*.json$
 
-# Special rules for Googlebot
+# Optimización para Googlebot
 User-agent: Googlebot
 Allow: /
-Disallow: /api/
-Disallow: /admin/
+Crawl-delay: 0
 
-# Google Image Bot
+# Optimización para Googlebot Images
 User-agent: Googlebot-Image
 Allow: /
 
-# Bing Bot
+# Bingbot
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 0
+
+# No indexar archivos técnicos
 Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
 
-# Allow social media crawlers
-User-agent: facebookexternalhit
-Allow: /
+# Permitir explícitamente contenido importante
+Allow: /projects/
+Allow: /blog/
+Allow: /press/
+Allow: /gallery/
 
-User-agent: Twitterbot
-Allow: /
-
-User-agent: LinkedInBot
-Allow: /
-
-User-agent: WhatsApp
-Allow: /
-
-# Block bad bots
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: SemrushBot
-Disallow: /
-
-User-agent: DotBot
-Disallow: /
-
-User-agent: MJ12bot
-Disallow: /
-
-User-agent: BLEXBot
-Disallow: /
-
-# Sitemaps
+# Sitemap location
 Sitemap: https://almagrosanmiguel.com/sitemap.xml
+Sitemap: https://almagrosanmiguel.com/sitemap-0.xml
 
-# Host
+# Crawl rate (opcional, para servidores)
+Crawl-delay: 0
+
+# Host preferido (Google Search Console)
 Host: https://almagrosanmiguel.com
-
-# Crawl-delay for specific bots
-User-agent: *
-Crawl-delay: 1
