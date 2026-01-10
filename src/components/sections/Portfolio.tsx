@@ -125,7 +125,7 @@ const projects: Project[] = [
     yearSort: 2020,
     platform: 'Star Channel',
     episodes: '6 episodios',
-    image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1000',
+    image: 'https://github.com/user-attachments/assets/b5f1ac3c-fe6c-4a6f-b16e-e91a5881fd59',
     rating: '6.8',
     imdb: 'https://www.imdb.com/title/tt11177074/',
     category: 'tv',
