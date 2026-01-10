@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import Image from 'next/image'
-import { Film, Tv, Theater, Play, Star, ExternalLink, Calendar, Clapperboard, X, Sparkles } from 'lucide-react'
+import { Film, Tv, Theater, Play, Star, ExternalLink, Calendar, Clapperboard, X, Sparkles, Youtube } from 'lucide-react'
 import { useState, useRef } from 'react'
 
 type Category = 'all' | 'tv' | 'film' | 'theater'
@@ -19,6 +19,7 @@ interface Project {
   image: string
   rating?: string
   imdb?: string
+  youtube?: string
   category: 'tv' | 'film' | 'theater'
   description: string
   director?: string
@@ -38,6 +39,7 @@ const projects: Project[] = [
     image: 'https://images.unsplash.com/photo-1574267432644-f74f8ec9cfd0?q=80&w=1000',
     rating: '7.5',
     imdb: 'https://www.imdb.com/title/tt30321421/',
+    youtube: 'https://www.youtube.com/watch?v=1t0JcwYR-so',
     category: 'tv',
     description: 'Thriller de espionaje ambientado en la década de los 40 en Huelva. La serie narra las operaciones del servicio secreto británico en España durante la Segunda Guerra Mundial. Toni es un personaje clave en esta historia de espías.',
     highlights: ['Espionaje', 'Thriller', 'La 1'],
@@ -53,6 +55,7 @@ const projects: Project[] = [
     image: 'https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?q=80&w=1000',
     rating: '7.5',
     imdb: 'https://www.imdb.com/title/tt28688509/',
+    youtube: 'https://www.youtube.com/watch?v=ursuF5r4_Ms',
     category: 'tv',
     description: 'Serie diaria de época ambientada en el Madrid de los años 40-50. Interpreto a Íñigo Peñalver, uno de los protagonistas masculinos de la serie, un hombre honrado, generoso, bondadoso y muy romántico. Un papel que ha marcado un antes y un después en mi carrera.',
     highlights: ['Protagonista', '236 episodios', 'Prime Time La 1'],
@@ -68,6 +71,7 @@ const projects: Project[] = [
     image: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1000',
     rating: '7.2',
     imdb: 'https://www.imdb.com/title/tt15398770/',
+    youtube: 'https://www.youtube.com/watch?v=AHUe0aYf9S8',
     category: 'tv',
     description: 'Cuarta entrega de la exitosa franquicia "La Caza". Thriller policíaco que reabre casos sin resolver cuando una de las jóvenes desaparecidas hace cinco años en Monteperdido reaparece misteriosamente.',
     highlights: ['Thriller', '7.2 IMDb', 'La 1'],
@@ -83,6 +87,7 @@ const projects: Project[] = [
     image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1000',
     rating: '6.8',
     imdb: 'https://www.imdb.com/title/tt21064488/',
+    youtube: 'https://www.youtube.com/watch?v=grtiShqUAkg',
     category: 'tv',
     description: 'Thriller dramático sobre un juez honesto que debe proteger a su hijo tras un trágico accidente con la mafia. La serie plantea temas como el poder, la corrupción, la venganza y el honor.',
     highlights: ['Atresplayer', 'Drama', 'Thriller'],
@@ -98,6 +103,7 @@ const projects: Project[] = [
     image: 'https://images.unsplash.com/photo-1594908900066-3f47337549d8?q=80&w=1000',
     rating: '7.4',
     imdb: 'https://www.imdb.com/title/tt20851868/',
+    youtube: 'https://www.youtube.com/watch?v=Xel0dzOmHLA',
     category: 'tv',
     description: 'Serie andaluza producida por Canal Sur Televisión. Una historia de misterio y drama ambientada en Andalucía con gran acogida del público local.',
     highlights: ['Canal Sur', '8 episodios', 'Andalucía'],
@@ -113,6 +119,7 @@ const projects: Project[] = [
     image: 'https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?q=80&w=1000',
     rating: '7.1',
     imdb: 'https://www.imdb.com/title/tt6477380/',
+    youtube: 'https://www.youtube.com/watch?v=kw3SvwH4khQ',
     category: 'tv',
     description: 'Temporada 4 de la popular serie de TVE. Interpreto a Mikel Uribe, un nuevo policía que se incorpora a la comisaría del barrio. Serie que mezcla policíaco, drama y toques de fantasía.',
     highlights: ['12 episodios', 'La 1', 'Temporada 4'],
@@ -128,6 +135,7 @@ const projects: Project[] = [
     image: 'https://github.com/user-attachments/assets/b5f1ac3c-fe6c-4a6f-b16e-e91a5881fd59',
     rating: '6.8',
     imdb: 'https://www.imdb.com/title/tt11177074/',
+    youtube: 'https://www.youtube.com/watch?v=t4LYYroY5bo',
     category: 'tv',
     description: 'Spin-off de la exitosa serie "Vis a vis". Papel protagonista como Diego "Dieguito" Ramala en este thriller carcelario con distribución internacional en Fox/Star Channel. Una producción de alto nivel con gran seguimiento.',
     highlights: ['Protagonista', 'Star Channel', 'Internacional'],
@@ -143,6 +151,7 @@ const projects: Project[] = [
     image: 'https://images.unsplash.com/photo-1533613220915-609f661a6fe1?q=80&w=1000',
     rating: '6.2',
     imdb: 'https://www.imdb.com/title/tt8741704/',
+    youtube: 'https://www.youtube.com/watch?v=CRlE3_JI7ZY',
     category: 'tv',
     description: 'Serie histórica épica de Amazon Prime Video sobre la conquista de México. Interpreto a Gonzalo de Sandoval junto a Óscar Jaenada. Mi debut televisivo en una producción internacional de alto presupuesto, estrenada en más de 240 países.',
     highlights: ['Prime Video', '240+ países', 'Épica'],
@@ -429,20 +438,37 @@ export default function Portfolio() {
 
                 <p className="text-slate-300 leading-relaxed mb-6">{selectedProject.description}</p>
 
-                {selectedProject.imdb && (
-                  <motion.a
-                    href={selectedProject.imdb}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-yellow-400 text-black rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-yellow-300 transition-all"
-                  >
-                    <Star className="w-5 h-5" />
-                    Ver en IMDb
-                    <ExternalLink className="w-4 h-4" />
-                  </motion.a>
-                )}
+                <div className="flex flex-wrap gap-3">
+                  {selectedProject.youtube && (
+                    <motion.a
+                      href={selectedProject.youtube}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-red-700 transition-all"
+                    >
+                      <Youtube className="w-5 h-5" />
+                      Ver en YouTube
+                      <ExternalLink className="w-4 h-4" />
+                    </motion.a>
+                  )}
+                  
+                  {selectedProject.imdb && (
+                    <motion.a
+                      href={selectedProject.imdb}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-yellow-400 text-black rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-yellow-300 transition-all"
+                    >
+                      <Star className="w-5 h-5" />
+                      Ver en IMDb
+                      <ExternalLink className="w-4 h-4" />
+                    </motion.a>
+                  )}
+                </div>
               </div>
             </motion.div>
           </motion.div>
