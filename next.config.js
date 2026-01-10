@@ -1,3 +1,7 @@
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -93,8 +97,9 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
 
-  // Removed standalone output - only needed for Docker deployments
+  // Generate standalone output only for Docker/container deployments
+  // Uncomment if deploying to containers:
   // output: 'standalone',
 }
 
-module.exports = nextConfig
+module.exports = withBundleAnalyzer(nextConfig)
