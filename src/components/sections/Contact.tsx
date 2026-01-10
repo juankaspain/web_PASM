@@ -41,7 +41,7 @@ const contactInfo = [
   {
     icon: MapPin,
     label: 'Ubicación',
-    value: 'Sevilla, Andalucía, España',
+    value: 'Madrid y Sevilla, España',
     link: null,
     gradient: 'from-red-500 to-pink-500',
   },
@@ -64,7 +64,7 @@ const socialLinks = [
   },
   {
     icon: X,
-    label: 'X',
+    label: 'X (Twitter)',
     handle: '@almagroSM',
     url: 'https://x.com/almagroSM',
     color: 'from-slate-600 via-slate-700 to-black',
