@@ -1,17 +1,16 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Download, FileText, Image as ImageIcon, Video, Award, Info } from 'lucide-react'
-import { useState } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { Download, FileText, Image as ImageIcon, Video, Award, Info, Sparkles, Package } from 'lucide-react'
+import { useState, useRef } from 'react'
 
-const downloadItems = [
+const DOWNLOAD_ITEMS = [
   {
     icon: FileText,
     title: 'Biografía Completa',
     description: 'Bio profesional en formato PDF con trayectoria completa',
     size: '250 KB',
     format: 'PDF',
-    color: 'from-red-500 to-red-600',
     type: 'bio',
   },
   {
@@ -20,7 +19,6 @@ const downloadItems = [
     description: 'Pack de 10 fotografías profesionales (300 DPI)',
     size: '45 MB',
     format: 'ZIP',
-    color: 'from-blue-500 to-blue-600',
     type: 'photos',
   },
   {
@@ -29,7 +27,6 @@ const downloadItems = [
     description: 'Recopilatorio de escenas destacadas',
     size: '120 MB',
     format: 'MP4',
-    color: 'from-purple-500 to-purple-600',
     type: 'showreel',
   },
   {
@@ -38,7 +35,6 @@ const downloadItems = [
     description: 'Lista completa de premios y nominaciones',
     size: '180 KB',
     format: 'PDF',
-    color: 'from-yellow-500 to-yellow-600',
     type: 'awards',
   },
   {
@@ -47,7 +43,6 @@ const downloadItems = [
     description: 'TV, cine y teatro con fechas y personajes',
     size: '320 KB',
     format: 'PDF',
-    color: 'from-green-500 to-green-600',
     type: 'filmography',
   },
   {
@@ -56,7 +51,6 @@ const downloadItems = [
     description: 'Habilidades, formación y datos de contacto',
     size: '150 KB',
     format: 'PDF',
-    color: 'from-pink-500 to-pink-600',
     type: 'techsheet',
   },
 ]
@@ -76,6 +70,8 @@ const techSpecs = [
 
 export default function PressKit() {
   const [downloading, setDownloading] = useState<string | null>(null)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   const handleDownload = async (type: string, title: string) => {
     setDownloading(type)
@@ -91,73 +87,105 @@ export default function PressKit() {
   }
 
   return (
-    <section id="presskit" className="py-20 bg-gradient-to-b from-slate-50 to-white">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Download className="w-8 h-8 text-slate-700" />
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-center">
-              Press Kit
-            </h2>
-          </div>
-          <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
-            Material profesional para prensa, medios de comunicación y productoras. Descarga gratuita.
-          </p>
+    <section id="presskit" className="relative py-32 overflow-hidden bg-gradient-to-b from-slate-950 via-black to-slate-900">
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px]" />
+      </div>
 
-          {/* Download Items */}
+      <div 
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        }}
+      />
+
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="text-center mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
+            >
+              <Package className="w-4 h-4 text-yellow-400" strokeWidth={2} />
+              <span className="text-sm font-medium text-slate-300 tracking-wide">Material Promocional</span>
+            </motion.div>
+            
+            <motion.h2 
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white"
+            >
+              Press Kit
+            </motion.h2>
+            
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
+            >
+              Material profesional para prensa, medios de comunicación y productoras. Descarga gratuita
+            </motion.p>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 max-w-6xl mx-auto">
-            {downloadItems.map((item, index) => {
+            {DOWNLOAD_ITEMS.map((item, index) => {
               const Icon = item.icon
               return (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="group bg-white rounded-lg p-6 border-2 border-gray-200 hover:border-slate-400 hover:shadow-xl transition-all"
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                  whileHover={{ y: -4 }}
+                  className="relative group"
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center`}>
-                      <Icon className="w-6 h-6 text-white" />
+                  <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-6 hover:bg-white/[0.04] hover:border-white/20 transition-all">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="w-12 h-12 rounded-xl bg-yellow-400 flex items-center justify-center shadow-lg">
+                        <Icon className="w-6 h-6 text-black" />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-bold text-slate-400">{item.format}</span>
+                        <span className="text-xs text-slate-500">{item.size}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-gray-500">{item.format}</span>
-                      <span className="text-xs text-gray-400">{item.size}</span>
-                    </div>
+                    <h3 className="font-bold text-lg mb-2 text-white">{item.title}</h3>
+                    <p className="text-sm text-slate-400 mb-4">{item.description}</p>
+                    <button
+                      onClick={() => handleDownload(item.type, item.title)}
+                      disabled={downloading === item.type}
+                      className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-white/5 border border-white/10 hover:bg-yellow-400 hover:border-yellow-400 text-slate-300 hover:text-black rounded-lg transition-all font-semibold text-sm disabled:opacity-50"
+                    >
+                      <Download className="w-4 h-4" />
+                      {downloading === item.type ? 'Descargando...' : 'Descargar'}
+                    </button>
                   </div>
-                  <h3 className="font-bold text-lg mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-600 mb-4">{item.description}</p>
-                  <button
-                    onClick={() => handleDownload(item.type, item.title)}
-                    disabled={downloading === item.type}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-slate-100 group-hover:bg-slate-900 text-slate-700 group-hover:text-white rounded-lg transition-all font-semibold text-sm disabled:opacity-50"
-                  >
-                    <Download className="w-4 h-4" />
-                    {downloading === item.type ? 'Descargando...' : 'Descargar'}
-                  </button>
                 </motion.div>
               )
             })}
           </div>
 
-          {/* Download All */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
             className="text-center mb-16"
           >
             <button
               onClick={() => handleDownload('complete', 'Press Kit Completo')}
               disabled={downloading === 'complete'}
-              className="px-8 py-4 bg-gradient-to-r from-slate-900 to-slate-700 text-white rounded-full hover:scale-105 transition-transform font-bold text-lg inline-flex items-center gap-3 disabled:opacity-50"
+              className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-amber-500 text-black rounded-xl hover:shadow-lg transition-all font-bold text-lg inline-flex items-center gap-3 disabled:opacity-50 hover:scale-105"
             >
               <Download className="w-5 h-5" />
               {downloading === 'complete' ? 'Descargando...' : 'Descargar Press Kit Completo'}
@@ -165,50 +193,62 @@ export default function PressKit() {
             </button>
           </motion.div>
 
-          {/* Tech Specs */}
           <div className="max-w-4xl mx-auto">
-            <h3 className="text-2xl font-serif font-bold mb-8 text-center">
-              Ficha Técnica
-            </h3>
-            <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200">
-              <div className="grid md:grid-cols-2 gap-x-8 gap-y-4">
-                {techSpecs.map((spec, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.05 }}
-                    viewport={{ once: true }}
-                    className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0"
-                  >
-                    <span className="font-semibold text-slate-700">{spec.label}:</span>
-                    <span className="text-gray-600">{spec.value}</span>
-                  </motion.div>
-                ))}
+            <h3 className="text-2xl font-bold mb-8 text-center text-white">Ficha Técnica</h3>
+            <div className="relative">
+              <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg" />
+              <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
+                <div className="grid md:grid-cols-2 gap-x-8 gap-y-4">
+                  {techSpecs.map((spec, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                      transition={{ duration: 0.5, delay: 0.9 + index * 0.05 }}
+                      className="flex items-center justify-between py-3 border-b border-white/10 last:border-0"
+                    >
+                      <span className="font-semibold text-slate-300">{spec.label}:</span>
+                      <span className="text-slate-400">{spec.value}</span>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Contact for Press */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="mt-16 bg-slate-100 rounded-xl p-8 text-center"
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 1.2 }}
+            className="mt-16 relative"
           >
-            <h3 className="text-2xl font-serif font-bold mb-3">
-              Contacto para Prensa
-            </h3>
-            <p className="text-gray-600 mb-6">
-              Para entrevistas, solicitudes de material adicional o información específica:
-            </p>
-            <a
-              href="mailto:info@almagrosanmiguel.com"
-              className="inline-block px-8 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-full transition-colors font-semibold"
-            >
-              info@almagrosanmiguel.com
-            </a>
+            <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg" />
+            <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-8 text-center backdrop-blur-sm">
+              <h3 className="text-2xl font-bold mb-3 text-white">Contacto para Prensa</h3>
+              <p className="text-slate-400 mb-6">
+                Para entrevistas, solicitudes de material adicional o información específica:
+              </p>
+              <a
+                href="mailto:info@almagrosanmiguel.com"
+                className="inline-block px-8 py-3 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-black rounded-xl transition-all font-semibold shadow-lg hover:scale-105"
+              >
+                info@almagrosanmiguel.com
+              </a>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+            transition={{ duration: 0.6, delay: 1.3 }}
+            className="mt-16 text-center"
+          >
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm">
+              <Sparkles className="w-5 h-5 text-yellow-400" />
+              <span className="text-sm font-medium text-slate-300">
+                Material de alta calidad para uso profesional
+              </span>
+            </div>
           </motion.div>
         </motion.div>
       </div>

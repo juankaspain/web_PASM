@@ -1,9 +1,9 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { motion, AnimatePresence, useInView } from 'framer-motion'
+import { useState, useRef } from 'react'
 import Image from 'next/image'
-import { X, ZoomIn, ChevronLeft, ChevronRight, Download } from 'lucide-react'
+import { X, ZoomIn, ChevronLeft, ChevronRight, Image as ImageIcon, Sparkles } from 'lucide-react'
 
 type Category = 'Todas' | 'TV' | 'Cine' | 'Teatro' | 'Behind the Scenes'
 
@@ -120,6 +120,8 @@ const categories: Category[] = ['Todas', 'TV', 'Cine', 'Teatro', 'Behind the Sce
 export default function Gallery() {
   const [selectedCategory, setSelectedCategory] = useState<Category>('Todas')
   const [lightboxImage, setLightboxImage] = useState<GalleryImage | null>(null)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   const filteredImages = selectedCategory === 'Todas'
     ? images
@@ -140,51 +142,82 @@ export default function Gallery() {
   }
 
   return (
-    <section id="gallery" className="py-20 bg-gradient-to-b from-white via-slate-50 to-white">
-      <div className="container mx-auto px-4">
+    <section id="gallery" className="relative py-32 overflow-hidden bg-gradient-to-b from-black via-slate-950 to-slate-900">
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-1/4 left-1/4 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px]" />
+      </div>
+
+      <div 
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        }}
+      />
+
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <motion.div
+          ref={ref}
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
         >
-          {/* Header */}
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+          <div className="text-center mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
+            >
+              <ImageIcon className="w-4 h-4 text-yellow-400" strokeWidth={2} />
+              <span className="text-sm font-medium text-slate-300 tracking-wide">Galería Visual</span>
+            </motion.div>
+            
+            <motion.h2 
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white"
+            >
               Galería Profesional
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            </motion.h2>
+            
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
+            >
               Colección de momentos destacados de mi carrera en televisión, cine y teatro
-            </p>
+            </motion.p>
           </div>
 
-          {/* Enhanced Filter Buttons */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {categories.map((category) => (
-              <motion.button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`relative px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                  selectedCategory === category
-                    ? 'bg-gradient-to-r from-slate-900 to-slate-700 text-white shadow-xl scale-105'
-                    : 'bg-white text-slate-700 hover:bg-slate-100 shadow-md hover:shadow-lg border border-slate-200'
-                }`}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {selectedCategory === category && (
-                  <motion.div
-                    layoutId="activeCategory"
-                    className="absolute inset-0 bg-gradient-to-r from-slate-900 to-slate-700 rounded-full"
-                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-                <span className="relative z-10">{category}</span>
-              </motion.button>
-            ))}
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-wrap justify-center gap-3 mb-16"
+          >
+            {categories.map((category) => {
+              const isActive = selectedCategory === category
+              return (
+                <motion.button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`relative px-5 py-2.5 rounded-xl font-semibold transition-all ${
+                    isActive
+                      ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-black shadow-lg'
+                      : 'bg-white/[0.03] text-slate-300 border border-white/10 hover:bg-white/[0.05] hover:border-white/20'
+                  }`}
+                >
+                  {category}
+                </motion.button>
+              )
+            })}
+          </motion.div>
 
-          {/* Gallery Grid with Animation */}
           <motion.div 
             layout
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
@@ -209,21 +242,18 @@ export default function Gallery() {
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   
-                  {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute inset-0 flex flex-col justify-end p-4">
                       <h3 className="text-white font-bold text-lg mb-1">{image.title}</h3>
-                      <p className="text-gray-300 text-sm">{image.description}</p>
+                      <p className="text-slate-300 text-sm">{image.description}</p>
                     </div>
                     
-                    {/* Zoom Icon */}
-                    <div className="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                      <ZoomIn className="w-5 h-5 text-white" />
+                    <div className="absolute top-4 right-4 w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center">
+                      <ZoomIn className="w-5 h-5 text-black" />
                     </div>
                   </div>
 
-                  {/* Category Badge */}
-                  <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-slate-900">
+                  <div className="absolute top-4 left-4 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-xs font-semibold text-white border border-white/20">
                     {image.category}
                   </div>
                 </motion.div>
@@ -231,76 +261,85 @@ export default function Gallery() {
             </AnimatePresence>
           </motion.div>
 
-          {/* Lightbox */}
-          <AnimatePresence>
-            {lightboxImage && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
-                onClick={() => setLightboxImage(null)}
-              >
-                {/* Close Button */}
-                <button
-                  onClick={() => setLightboxImage(null)}
-                  className="absolute top-4 right-4 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors z-10"
-                >
-                  <X className="w-6 h-6 text-white" />
-                </button>
-
-                {/* Navigation Buttons */}
-                {currentIndex > 0 && (
-                  <button
-                    onClick={(e) => { e.stopPropagation(); prevImage(); }}
-                    className="absolute left-4 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors z-10"
-                  >
-                    <ChevronLeft className="w-6 h-6 text-white" />
-                  </button>
-                )}
-                
-                {currentIndex < images.length - 1 && (
-                  <button
-                    onClick={(e) => { e.stopPropagation(); nextImage(); }}
-                    className="absolute right-4 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors z-10"
-                  >
-                    <ChevronRight className="w-6 h-6 text-white" />
-                  </button>
-                )}
-
-                {/* Image Container */}
-                <motion.div
-                  initial={{ scale: 0.8, y: 50 }}
-                  animate={{ scale: 1, y: 0 }}
-                  exit={{ scale: 0.8, y: 50 }}
-                  className="relative max-w-5xl w-full"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <div className="relative aspect-[4/3] w-full">
-                    <Image
-                      src={lightboxImage.src}
-                      alt={lightboxImage.alt}
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                  
-                  {/* Image Info */}
-                  <div className="mt-6 text-center">
-                    <h3 className="text-2xl font-bold text-white mb-2">{lightboxImage.title}</h3>
-                    <p className="text-gray-300 mb-4">{lightboxImage.description}</p>
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
-                      <span className="text-sm text-white font-semibold">{lightboxImage.category}</span>
-                      <span className="text-gray-400">•</span>
-                      <span className="text-sm text-gray-300">{currentIndex + 1} / {images.length}</span>
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="mt-16 text-center"
+          >
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm">
+              <Sparkles className="w-5 h-5 text-yellow-400" />
+              <span className="text-sm font-medium text-slate-300">
+                {images.length} imágenes profesionales disponibles
+              </span>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {lightboxImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+            onClick={() => setLightboxImage(null)}
+          >
+            <button
+              onClick={() => setLightboxImage(null)}
+              className="absolute top-4 right-4 w-12 h-12 bg-white/10 hover:bg-yellow-400 backdrop-blur-md rounded-full flex items-center justify-center transition-colors z-10 border border-white/20 hover:border-yellow-400"
+            >
+              <X className="w-6 h-6 text-white hover:text-black" />
+            </button>
+
+            {currentIndex > 0 && (
+              <button
+                onClick={(e) => { e.stopPropagation(); prevImage(); }}
+                className="absolute left-4 w-12 h-12 bg-white/10 hover:bg-yellow-400 backdrop-blur-md rounded-full flex items-center justify-center transition-colors z-10 border border-white/20 hover:border-yellow-400"
+              >
+                <ChevronLeft className="w-6 h-6 text-white" />
+              </button>
+            )}
+            
+            {currentIndex < images.length - 1 && (
+              <button
+                onClick={(e) => { e.stopPropagation(); nextImage(); }}
+                className="absolute right-4 w-12 h-12 bg-white/10 hover:bg-yellow-400 backdrop-blur-md rounded-full flex items-center justify-center transition-colors z-10 border border-white/20 hover:border-yellow-400"
+              >
+                <ChevronRight className="w-6 h-6 text-white" />
+              </button>
+            )}
+
+            <motion.div
+              initial={{ scale: 0.8, y: 50 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.8, y: 50 }}
+              className="relative max-w-5xl w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="relative aspect-[4/3] w-full">
+                <Image
+                  src={lightboxImage.src}
+                  alt={lightboxImage.alt}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              
+              <div className="mt-6 text-center">
+                <h3 className="text-2xl font-bold text-white mb-2">{lightboxImage.title}</h3>
+                <p className="text-slate-300 mb-4">{lightboxImage.description}</p>
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+                  <span className="text-sm text-white font-semibold">{lightboxImage.category}</span>
+                  <span className="text-slate-400">•</span>
+                  <span className="text-sm text-slate-300">{currentIndex + 1} / {images.length}</span>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
