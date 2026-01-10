@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Award, GraduationCap, Heart, MapPin, Sparkles, Calendar, Users, Briefcase } from 'lucide-react'
+import { Award, GraduationCap, Heart, MapPin, Calendar, Users, Briefcase, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import { useRef } from 'react'
 
@@ -141,6 +141,7 @@ export default function About() {
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                    priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 </div>
@@ -163,14 +164,15 @@ export default function About() {
               </div>
             </motion.div>
 
-            {/* Right: Bio + Skills */}
+            {/* Right: Bio Only (Skills moved to separate section below) */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{ duration: 0.8 }}
+              className="flex flex-col justify-center"
             >
               {/* Bio */}
-              <div className="mb-8">
+              <div>
                 <h3 className="text-xl sm:text-2xl font-bold mb-4 flex items-center gap-2">
                   <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-red-500" />
                   Biografía
@@ -199,18 +201,20 @@ export default function About() {
                   </p>
                 </div>
               </div>
-
-              {/* Skills */}
-              <div>
-                <h3 className="text-xl sm:text-2xl font-bold mb-6 flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
-                  Habilidades Especiales
-                </h3>
-                {skills.map((skill, index) => (
-                  <SkillBar key={index} skill={skill} index={index} />
-                ))}
-              </div>
             </motion.div>
+          </div>
+
+          {/* Skills Section - Now standalone */}
+          <div className="mb-12 md:mb-16">
+            <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 md:mb-10 flex items-center justify-center gap-2 px-4">
+              <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-500" />
+              Habilidades Especiales
+            </h3>
+            <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-x-12 gap-y-2">
+              {skills.map((skill, index) => (
+                <SkillBar key={index} skill={skill} index={index} />
+              ))}
+            </div>
           </div>
 
           {/* Education/Training */}
