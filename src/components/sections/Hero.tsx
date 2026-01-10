@@ -67,9 +67,9 @@ export default function Hero() {
     {
       icon: TheaterIcon,
       title: 'CNTC',
-      character: 'Formación profesional',
-      year: 'Helena Pimenta',
-      detail: 'Compañía Nacional',
+      character: 'Verso clásico español',
+      year: '2015-2017',
+      detail: 'Compañía Nacional de Teatro Clásico',
     },
   ]
 
