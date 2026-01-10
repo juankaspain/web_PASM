@@ -136,7 +136,7 @@ export default function About() {
               <div className="relative mb-6 md:mb-8 group">
                 <div className="relative h-[400px] sm:h-[450px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
                   <Image
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800"
+                    src="https://github.com/user-attachments/assets/0c09e17f-1983-4ad0-8926-a0d6ef6ae5cf"
                     alt="Almagro San Miguel - Actor profesional"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -190,13 +190,13 @@ export default function About() {
                     <strong>Helena Pimenta</strong> (2015-2017), donde se especializó en verso clásico español.
                   </p>
                   <p>
-                    Su debut televisivo llegó en 2019 con <strong>“Hernán”</strong> (Amazon Prime Video), interpretando
+                    Su debut televisivo llegó en 2019 con <strong>"Hernán"</strong> (Amazon Prime Video), interpretando
                     a Gonzalo de Sandoval junto a Óscar Jaenada. Desde entonces ha participado en <strong>más de 300 episodios</strong>
-                    en series como <strong>“Vis a vis: El Oasis”</strong>, <strong>“La Moderna”</strong> (236 episodios como protagonista),
-                    <strong>“Operación Barrio Inglés”</strong> y <strong>“La caza: Guadiana”</strong>.
+                    en series como <strong>"Vis a vis: El Oasis"</strong>, <strong>"La Moderna"</strong> (236 episodios como protagonista),
+                    <strong>"Operación Barrio Inglés"</strong> y <strong>"La caza: Guadiana"</strong>.
                   </p>
                   <p>
-                    En 2025 protagoniza la película <strong>“Un fantasma en la batalla”</strong>, dirigida por
+                    En 2025 protagoniza la película <strong>"Un fantasma en la batalla"</strong>, dirigida por
                     Agustín Díaz Yanes, actualmente en cines y Netflix. Además de su trabajo actoral, domina
                     habilidades como <strong>esgrima</strong>, <strong>equitación</strong>, <strong>violonchelo</strong>
                     y <strong>viola</strong>, que enriquecen su versatilidad interpretativa.
