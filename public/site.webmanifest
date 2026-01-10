@@ -1,52 +1,92 @@
 {
   "name": "Almagro San Miguel - Actor Profesional",
   "short_name": "Almagro SM",
-  "description": "Portfolio profesional de Almagro San Miguel - Actor con 13+ años de experiencia en TV, cine y teatro",
+  "description": "Portfolio oficial del actor Almagro San Miguel. 13+ años de experiencia en TV, cine y teatro.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#1e293b",
+  "background_color": "#000000",
+  "theme_color": "#f59e0b",
   "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "es-ES",
+  "dir": "ltr",
+  "categories": ["entertainment", "portfolio", "business"],
   "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
     {
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any"
     },
     {
       "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any"
     },
     {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
-  "categories": ["entertainment", "lifestyle"],
-  "lang": "es-ES",
-  "dir": "ltr",
-  "scope": "/",
   "screenshots": [
     {
-      "src": "/screenshot-desktop.png",
+      "src": "/screenshots/desktop.jpg",
       "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide"
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Portfolio Desktop"
     },
     {
-      "src": "/screenshot-mobile.png",
+      "src": "/screenshots/mobile.jpg",
       "sizes": "750x1334",
-      "type": "image/png",
-      "form_factor": "narrow"
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Portfolio Mobile"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ver Portfolio",
+      "short_name": "Portfolio",
+      "description": "Ver filmografía completa",
+      "url": "/#portfolio",
+      "icons": [
+        {
+          "src": "/favicon.svg",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Contacto",
+      "short_name": "Contacto",
+      "description": "Formulario de contacto profesional",
+      "url": "/#contact",
+      "icons": [
+        {
+          "src": "/favicon.svg",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "iarc_rating_id": "",
+  "features": [
+    "Cross Platform",
+    "Responsive Design",
+    "Offline Support",
+    "Fast Performance",
+    "Accessible WCAG AA"
   ]
 }
