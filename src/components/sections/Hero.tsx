@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Play, MapPin, Calendar, ExternalLink } from 'lucide-react'
+import { ArrowDown, Play, MapPin, Calendar, ExternalLink, Award, Film, Theater as TheaterIcon, Users } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
@@ -39,6 +39,29 @@ export default function Hero() {
       url: 'https://es.wikipedia.org/wiki/Almagro_San_Miguel',
       icon: '📖',
       description: 'Biografía'
+    },
+  ]
+
+  const quickHighlights = [
+    {
+      icon: Award,
+      title: 'Nominado Goya',
+      desc: 'Mejor Actor Revelación',
+    },
+    {
+      icon: Film,
+      title: 'Netflix 2025',
+      desc: 'Un fantasma en la batalla',
+    },
+    {
+      icon: TheaterIcon,
+      title: 'Teatro',
+      desc: 'Gran Vía 0 y más',
+    },
+    {
+      icon: Users,
+      title: '+30 Proyectos',
+      desc: 'TV, Cine y Teatro',
     },
   ]
 
@@ -183,11 +206,39 @@ export default function Hero() {
               ))}
             </motion.div>
 
+            {/* Quick Highlights */}
+            <motion.div
+              className="grid grid-cols-2 gap-2.5"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+            >
+              {quickHighlights.map((highlight, index) => {
+                const Icon = highlight.icon
+                return (
+                  <motion.div
+                    key={highlight.title}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.65 + index * 0.05, duration: 0.4 }}
+                    whileHover={{ scale: 1.03, y: -2 }}
+                    className="rounded-xl bg-slate-900/80 border border-slate-700/60 px-3 py-2.5 backdrop-blur-md hover:border-white/20 transition-all"
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <Icon className="w-3.5 h-3.5 text-yellow-400" />
+                      <span className="text-xs font-bold text-white">{highlight.title}</span>
+                    </div>
+                    <p className="text-[10px] text-slate-300">{highlight.desc}</p>
+                  </motion.div>
+                )
+              })}
+            </motion.div>
+
             <motion.div
               className="pt-2"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.65, duration: 0.6 }}
+              transition={{ delay: 0.75, duration: 0.6 }}
             >
               <motion.a
                 href="#showreel"
@@ -205,7 +256,7 @@ export default function Hero() {
               className="space-y-3"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.75, duration: 0.6 }}
+              transition={{ delay: 0.85, duration: 0.6 }}
             >
               <div className="flex items-center gap-2">
                 <ExternalLink className="w-4 h-4 text-yellow-400" />
@@ -223,7 +274,7 @@ export default function Hero() {
                     rel="noopener noreferrer"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8 + index * 0.05, duration: 0.4 }}
+                    transition={{ delay: 0.9 + index * 0.05, duration: 0.4 }}
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.98 }}
                     className="group flex flex-col items-center gap-2 rounded-xl border border-slate-700/70 
@@ -246,7 +297,7 @@ export default function Hero() {
               className="pt-3 flex justify-center lg:justify-start"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.95, duration: 0.6 }}
+              transition={{ delay: 1.05, duration: 0.6 }}
             >
               <motion.a
                 href="#about"
@@ -270,7 +321,7 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
     </section>
   )
 }
