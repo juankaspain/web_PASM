@@ -59,11 +59,6 @@ export default function LatestProject() {
                   <Film className="w-5 h-5" />
                   <span>Cine</span>
                 </div>
-                <div className="flex items-center gap-2 bg-yellow-500/20 border border-yellow-500/30 px-3 py-1 rounded-full">
-                  <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                  <span className="text-yellow-200 font-bold">7.4/10</span>
-                  <span className="text-yellow-200/60 text-sm">IMDb</span>
-                </div>
               </div>
 
               <p className="text-xl text-slate-300 mb-6 leading-relaxed">
