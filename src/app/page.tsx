@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
+import LatestProject from '@/components/sections/LatestProject'
 import Stats from '@/components/sections/Stats'
 import Theater from '@/components/sections/Theater'
 import SkillsGraph from '@/components/sections/SkillsGraph'
@@ -39,6 +40,7 @@ export default function Home() {
       
       {/* Core sections */}
       <About />
+      <LatestProject />
       <Stats />
       
       {/* Portfolio sections */}
