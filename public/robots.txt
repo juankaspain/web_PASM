@@ -1,35 +1,22 @@
-# Robots.txt for Almagro San Miguel Portfolio
-# https://almagrosanmiguel.com
+# robots.txt para almagrosanmiguel.com
+# Generado: 2026-01-10
 
+# Permitir acceso a todos los crawlers
 User-agent: *
 Allow: /
 
-# Disallow admin/api routes
+# Disallow archivos administrativos y privados
 Disallow: /api/
 Disallow: /_next/
+Disallow: /admin/
+Disallow: /*.json$
+
+# Crawl-delay para bots más agresivos
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
 
 # Sitemap
 Sitemap: https://almagrosanmiguel.com/sitemap.xml
-
-# Crawl delay (optional, in seconds)
-Crawl-delay: 1
-
-# Specific bots
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Slurp
-Allow: /
-
-# Block bad bots
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: SemrushBot
-Disallow: /
-
-User-agent: DotBot
-Disallow: /
