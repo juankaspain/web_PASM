@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Play, Calendar, Film, Star, ExternalLink, Youtube } from 'lucide-react'
+import { Play, Calendar, Film, Star, ExternalLink, Youtube, Heart, Users } from 'lucide-react'
 import Image from 'next/image'
 import { useRef } from 'react'
 
@@ -30,7 +30,7 @@ export default function LatestProject() {
             <span className="text-sm font-semibold">AHORA EN CINES Y NETFLIX</span>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
             {/* Left: Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -60,7 +60,7 @@ export default function LatestProject() {
               <div className="mb-8">
                 <h3 className="text-lg font-bold mb-3 text-yellow-400">Reparto Destacado</h3>
                 <p className="text-gray-300">
-                  Junto a <strong>Aitor Luna</strong>, <strong>Luis Callejo</strong>, y <strong>Ruth Díaz</strong>
+                  Junto a <strong>Susana Abaitua</strong>, <strong>Aitor Luna</strong>, <strong>Luis Callejo</strong> y <strong>Ruth Díaz</strong>
                 </p>
               </div>
 
@@ -139,6 +139,122 @@ export default function LatestProject() {
               </div>
             </motion.div>
           </div>
+
+          {/* Character Section - NEW */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-16"
+          >
+            {/* Section Header */}
+            <div className="text-center mb-10">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-500/20 to-red-500/20 border border-orange-500/30 rounded-full mb-4">
+                <Users className="w-4 h-4 text-orange-400" />
+                <span className="text-orange-400 text-sm font-semibold">Mi Personaje</span>
+              </div>
+              <h3 className="text-3xl md:text-4xl font-serif font-bold mb-3">
+                Antonio
+              </h3>
+              <p className="text-gray-400 text-lg">Agente de apoyo en la Operación Santuario</p>
+            </div>
+
+            {/* Character Details Grid */}
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {/* Left Card - Character Description */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 shadow-xl"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-3 bg-gradient-to-br from-red-600 to-orange-600 rounded-xl">
+                    <Heart className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="text-xl font-bold">El Novio de Amaia</h4>
+                </div>
+                
+                <div className="space-y-4 text-gray-300 leading-relaxed">
+                  <p>
+                    Antonio es <strong>el novio de Amaia</strong>, la joven guardia civil que se infiltra en ETA 
+                    durante más de una década. Su personaje representa <strong>el amor incondicional</strong> y 
+                    el apoyo emocional en medio de una operación extremadamente peligrosa.
+                  </p>
+                  <p>
+                    Interpreta a un hombre que debe enfrentar la decisión más difícil: <strong>dejar ir al amor 
+                    de su vida</strong> por el bien de la misión y la seguridad nacional. Un papel cargado de 
+                    emoción, sacrificio y tensión dramática.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Right Card - Actor's Perspective */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
+                className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 shadow-xl"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-3 bg-gradient-to-br from-yellow-600 to-orange-600 rounded-xl">
+                    <Star className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="text-xl font-bold">Sobre el Personaje</h4>
+                </div>
+                
+                <div className="space-y-4">
+                  <blockquote className="border-l-4 border-orange-500 pl-4 italic text-gray-300">
+                    "Yo al amor de mi vida la esperaría lo que fuera necesario. Es un personaje que se mueve 
+                    entre la lealtad y la duda, con una presencia sobria y contenida."
+                  </blockquote>
+                  
+                  <div className="bg-slate-700/50 rounded-xl p-4 space-y-2">
+                    <div className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0" />
+                      <p className="text-sm text-gray-300">
+                        <strong>Contexto histórico:</strong> Basado en la Operación Santuario, la mayor operación 
+                        encubierta contra ETA
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0" />
+                      <p className="text-sm text-gray-300">
+                        <strong>Trabajo de investigación:</strong> Hablé con personas que vivieron los atentados 
+                        para entender el contexto emocional
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0" />
+                      <p className="text-sm text-gray-300">
+                        <strong>Reto interpretativo:</strong> Trabajar la química con Susana Abaitua para que se 
+                        viera que están muy enamorados
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Bottom Quote */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.9 }}
+              className="mt-8 text-center"
+            >
+              <div className="inline-block bg-gradient-to-r from-slate-800 to-slate-900 border border-slate-700 rounded-2xl px-8 py-6 max-w-3xl">
+                <p className="text-gray-300 text-lg leading-relaxed">
+                  <span className="text-yellow-400 font-bold">“</span>
+                  Es un proyecto que me gustó desde el primer momento. La historia sobre la lucha contra ETA es cruda. 
+                  El trabajo de Susana Abaitua es de Goya. Ella tiene que rechazar la vida familiar que tenía previsto, 
+                  soy su pareja.
+                  <span className="text-yellow-400 font-bold">”</span>
+                </p>
+                <p className="text-orange-400 font-semibold mt-3">— Almagro San Miguel</p>
+              </div>
+            </motion.div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
