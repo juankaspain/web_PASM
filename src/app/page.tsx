@@ -25,6 +25,7 @@ const Timeline = dynamic(() => import('@/components/sections/Timeline'), {
   ),
 })
 
+const Milestones = dynamic(() => import('@/components/sections/Milestones'))
 const Awards = dynamic(() => import('@/components/sections/Awards'))
 const Gallery = dynamic(() => import('@/components/sections/Gallery'))
 const Showreel = dynamic(() => import('@/components/sections/Showreel'))
@@ -48,6 +49,7 @@ export default function Home() {
       <Theater />
       <SkillsGraph />
       <Timeline />
+      <Milestones />
       <Awards />
       
       {/* Media sections */}
