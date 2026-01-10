@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Award, GraduationCap, Heart, MapPin, Calendar, Sparkles, ExternalLink, Drama, Sword, Music, Languages, Crown } from 'lucide-react'
+import { Award, GraduationCap, Heart, MapPin, Calendar, Sparkles, ExternalLink, Drama, Sword, Music, Languages, Crown, Clapperboard, Tv, Star } from 'lucide-react'
 import Image from 'next/image'
 import { useRef } from 'react'
 
@@ -40,6 +40,30 @@ const skillCategories = [
       { name: 'Inglés (Alto)', icon: Languages },
       { name: 'Francés (Medio)', icon: Languages },
     ],
+  },
+]
+
+const recentWorks = [
+  {
+    icon: Clapperboard,
+    title: 'Un fantasma en la batalla',
+    character: 'Antonio',
+    year: '2025',
+    detail: 'Netflix • Dir. Agustín Díaz Yanes',
+  },
+  {
+    icon: Tv,
+    title: 'La Moderna',
+    character: 'Íñigo Peñalver',
+    year: '2023-2024',
+    detail: '236 episodios • TVE',
+  },
+  {
+    icon: Star,
+    title: 'Vis a vis: El Oasis',
+    character: 'Diego Ramala',
+    year: '2020',
+    detail: 'Protagonista • Fox España',
   },
 ]
 
@@ -114,9 +138,10 @@ export default function About() {
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white"
+              className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight"
             >
-              Pedro Francisco Almagro
+              <span className="text-white">Pedro Francisco Almagro </span>
+              <span className="text-yellow-400">San Miguel</span>
             </motion.h2>
             
             <motion.p 
@@ -198,6 +223,52 @@ export default function About() {
             </motion.div>
           </div>
 
+          {/* Actuaciones Destacadas */}
+          <div className="mb-20">
+            <h3 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
+              <Drama className="w-7 h-7 text-yellow-400" />
+              <span className="text-white">Actuaciones Destacadas</span>
+            </h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {recentWorks.map((work, index) => {
+                const Icon = work.icon
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                    whileHover={{ y: -6 }}
+                    className="group relative"
+                  >
+                    <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="relative h-full bg-white/[0.03] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:bg-white/[0.05] hover:border-white/20 transition-all">
+                      <div className="flex items-start gap-3 mb-4">
+                        <div className="w-12 h-12 bg-yellow-400 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
+                          <Icon className="w-6 h-6 text-black" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-bold text-white mb-1 leading-tight">{work.title}</h4>
+                          <p className="text-sm text-yellow-400 font-semibold">{work.character}</p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-slate-500 mb-2 font-semibold">{work.year}</p>
+                      <p className="text-sm text-slate-400 leading-relaxed">{work.detail}</p>
+                      
+                      <motion.div 
+                        className="absolute bottom-0 left-0 h-[2px] bg-yellow-400 rounded-b-2xl"
+                        initial={{ width: 0 }}
+                        whileHover={{ width: '100%' }}
+                        transition={{ duration: 0.4 }}
+                      />
+                    </div>
+                  </motion.div>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Formación Profesional */}
           <div className="mb-20">
             <h3 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
               <GraduationCap className="w-7 h-7 text-yellow-400" />
@@ -214,7 +285,7 @@ export default function About() {
                     rel="noopener noreferrer"
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                    transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
                     whileHover={{ y: -6 }}
                     className="group relative block"
                   >
@@ -254,7 +325,7 @@ export default function About() {
                   key={catIndex}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.5, delay: 0.8 + catIndex * 0.1 }}
+                  transition={{ duration: 0.5, delay: 1.0 + catIndex * 0.1 }}
                 >
                   <h4 className="text-lg font-bold text-slate-300 mb-4">{category.title}</h4>
                   <div className="flex flex-wrap gap-3">
@@ -265,7 +336,7 @@ export default function About() {
                           key={skillIndex}
                           initial={{ opacity: 0, scale: 0.9 }}
                           animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-                          transition={{ duration: 0.3, delay: 0.9 + catIndex * 0.1 + skillIndex * 0.05 }}
+                          transition={{ duration: 0.3, delay: 1.1 + catIndex * 0.1 + skillIndex * 0.05 }}
                           whileHover={{ scale: 1.05, y: -2 }}
                           className="inline-flex items-center gap-2 px-4 py-2 bg-white/[0.05] border border-white/10 rounded-full text-sm font-medium text-slate-300 hover:bg-white/[0.08] hover:border-white/20 hover:text-white transition-all"
                         >
