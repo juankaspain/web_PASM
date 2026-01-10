@@ -15,7 +15,6 @@ export default function Hero() {
     setMounted(true)
   }, [])
 
-  // Enlaces profesionales ordenados: IMDb, FilmAffinity, SensaCine, Wikipedia
   const professionalLinks = [
     { 
       name: 'IMDb', 
@@ -48,10 +47,8 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
     >
-      {/* FONDO SENCILLO Y SÓLIDO */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black via-slate-950 to-slate-900" />
 
-      {/* Partículas muy suaves */}
       {mounted && (
         <div className="pointer-events-none absolute inset-0 opacity-10">
           {[...Array(18)].map((_, i) => (
@@ -78,26 +75,20 @@ export default function Hero() {
         </div>
       )}
 
-      {/* CONTENEDOR PRINCIPAL */}
       <motion.div
         className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20"
         style={{ opacity, scale }}
       >
-        {/* GRID OPTIMIZADO PARA MEJOR BALANCE IMAGEN/CONTENIDO */}
         <div className="grid lg:grid-cols-[0.95fr_1.25fr] gap-8 xl:gap-12 items-center">
-          {/* COLUMNA FOTO - TAMAÑO REDUCIDO PARA MEJOR PROPORCIÓN */}
           <div className="order-2 lg:order-1 flex justify-center lg:justify-start">
             <div className="relative w-full max-w-[480px] lg:max-w-[520px]">
-              {/* Resplandor dorado sutil detrás de la imagen */}
-              <div className="absolute inset-0 rounded-[28px] lg:rounded-[36px] bg-gradient-to-br from-yellow-500/20 via-orange-500/10 to-transparent blur-3xl" />
+              <div className="absolute inset-0 rounded-[28px] lg:rounded-[36px] bg-yellow-400/10 blur-3xl" />
               
-              {/* IMAGEN SIN RING PARA EVITAR LÍNEA BLANCA */}
               <motion.div 
                 className="relative aspect-[2.5/4] rounded-[28px] lg:rounded-[36px] overflow-hidden shadow-[0_50px_150px_rgba(0,0,0,0.95)]"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
               >
-                {/* Imagen principal con mejor encuadre */}
                 <Image
                   src="https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4"
                   alt="Almagro San Miguel - Actor profesional de televisión, cine y teatro"
@@ -110,33 +101,25 @@ export default function Hero() {
                   }}
                 />
                 
-                {/* Gradientes de superposición cinematográfica */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
-                
-                {/* Vignette cinematográfico */}
                 <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.7)]" />
-                
-                {/* Resplandor interno dorado muy sutil */}
                 <div className="absolute inset-0 bg-gradient-to-tl from-yellow-600/5 via-transparent to-transparent" />
               </motion.div>
             </div>
           </div>
 
-          {/* COLUMNA CONTENIDO - SIMPLIFICADO (de 19 → 8 elementos) */}
           <motion.div
             className="order-1 lg:order-2 space-y-6 lg:space-y-7"
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, ease: 'easeOut' }}
           >
-            {/* NOMBRE */}
             <div className="space-y-2">
               <motion.h1
                 className="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[60px] xl:text-[66px] 
-                           font-serif font-bold tracking-tight leading-[1.1]
-                           bg-gradient-to-r from-white via-yellow-100 to-yellow-300 bg-clip-text text-transparent"
+                           font-serif font-bold tracking-tight leading-[1.1] text-white"
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25, duration: 0.7 }}
@@ -145,7 +128,7 @@ export default function Hero() {
               </motion.h1>
 
               <motion.p
-                className="text-lg sm:text-xl md:text-2xl font-semibold text-yellow-300/95"
+                className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-300"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.35, duration: 0.6 }}
@@ -154,7 +137,6 @@ export default function Hero() {
               </motion.p>
             </div>
 
-            {/* INFO RÁPIDA */}
             <motion.div
               className="grid grid-cols-2 gap-3"
               initial={{ opacity: 0, y: 16 }}
@@ -163,7 +145,7 @@ export default function Hero() {
             >
               <div className="rounded-2xl bg-slate-900/80 border border-slate-700/60 px-4 py-3 backdrop-blur-md">
                 <div className="flex items-center gap-2 mb-1">
-                  <MapPin className="w-4 h-4 text-yellow-300" />
+                  <MapPin className="w-4 h-4 text-yellow-400" />
                   <span className="text-[11px] font-medium uppercase tracking-[0.16em] text-gray-400">
                     Ubicación
                   </span>
@@ -172,7 +154,7 @@ export default function Hero() {
               </div>
               <div className="rounded-2xl bg-slate-900/80 border border-slate-700/60 px-4 py-3 backdrop-blur-md">
                 <div className="flex items-center gap-2 mb-1">
-                  <Calendar className="w-4 h-4 text-yellow-300" />
+                  <Calendar className="w-4 h-4 text-yellow-400" />
                   <span className="text-[11px] font-medium uppercase tracking-[0.16em] text-gray-400">
                     Nacimiento
                   </span>
@@ -181,7 +163,6 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            {/* FORMACIÓN */}
             <motion.div
               className="flex flex-wrap gap-2"
               initial={{ opacity: 0 }}
@@ -202,7 +183,6 @@ export default function Hero() {
               ))}
             </motion.div>
 
-            {/* CTAS - Ver showreel */}
             <motion.div
               className="pt-2"
               initial={{ opacity: 0, y: 16 }}
@@ -213,15 +193,14 @@ export default function Hero() {
                 href="#showreel"
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 
-                           px-7 py-3.5 text-base font-semibold text-black shadow-[0_10px_30px_rgba(250,204,21,0.35)]"
+                className="group inline-flex items-center gap-2 rounded-full bg-yellow-400
+                           px-7 py-3.5 text-base font-semibold text-black shadow-[0_10px_30px_rgba(250,204,21,0.25)]"
               >
                 <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 Ver Showreel Profesional
               </motion.a>
             </motion.div>
 
-            {/* ENLACES PROFESIONALES */}
             <motion.div
               className="space-y-3"
               initial={{ opacity: 0, y: 16 }}
@@ -229,7 +208,7 @@ export default function Hero() {
               transition={{ delay: 0.75, duration: 0.6 }}
             >
               <div className="flex items-center gap-2">
-                <ExternalLink className="w-4 h-4 text-yellow-300" />
+                <ExternalLink className="w-4 h-4 text-yellow-400" />
                 <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400">
                   Perfiles profesionales
                 </h3>
@@ -248,12 +227,12 @@ export default function Hero() {
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.98 }}
                     className="group flex flex-col items-center gap-2 rounded-xl border border-slate-700/70 
-                               bg-slate-900/80 px-3 py-3 backdrop-blur-md hover:border-yellow-400/60 
+                               bg-slate-900/80 px-3 py-3 backdrop-blur-md hover:border-white/20
                                hover:bg-slate-900/95 transition-all shadow-[0_12px_30px_rgba(15,23,42,0.8)]"
                   >
                     <span className="text-2xl">{link.icon}</span>
                     <div className="text-center">
-                      <p className="text-xs font-semibold text-slate-50 group-hover:text-yellow-300 transition-colors">
+                      <p className="text-xs font-semibold text-slate-50 group-hover:text-white transition-colors">
                         {link.name}
                       </p>
                       <p className="text-[10px] text-gray-400 mt-0.5">{link.description}</p>
@@ -263,7 +242,6 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            {/* INDICADOR DE SCROLL */}
             <motion.div
               className="pt-3 flex justify-center lg:justify-start"
               initial={{ opacity: 0 }}
@@ -273,18 +251,18 @@ export default function Hero() {
               <motion.a
                 href="#about"
                 className="group inline-flex items-center gap-3 rounded-full border border-slate-600/70 
-                           bg-slate-900/60 px-5 py-2.5 backdrop-blur-md hover:border-yellow-400/60 
+                           bg-slate-900/60 px-5 py-2.5 backdrop-blur-md hover:border-white/20
                            hover:bg-slate-900/80 transition-all"
                 whileHover={{ scale: 1.03 }}
               >
-                <span className="text-sm font-medium text-gray-300 group-hover:text-yellow-300 transition-colors">
+                <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
                   Explorar portfolio completo
                 </span>
                 <motion.div
                   animate={{ y: [0, 5, 0] }}
                   transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
                 >
-                  <ArrowDown className="w-4 h-4 text-yellow-300" />
+                  <ArrowDown className="w-4 h-4 text-yellow-400" />
                 </motion.div>
               </motion.a>
             </motion.div>
@@ -292,7 +270,6 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* VIGNETTE INFERIOR */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
     </section>
   )
