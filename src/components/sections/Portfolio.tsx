@@ -20,6 +20,8 @@ interface Project {
   rating?: string
   imdb?: string
   youtube?: string
+  filmaffinity?: string
+  sensacine?: string
   category: 'tv' | 'film' | 'theater'
   description: string
   director?: string
@@ -40,6 +42,8 @@ const projects: Project[] = [
     rating: '7.5',
     imdb: 'https://www.imdb.com/title/tt27672403/',
     youtube: 'https://www.youtube.com/watch?v=1t0JcwYR-so',
+    filmaffinity: 'https://www.filmaffinity.com/es/film704765.html',
+    sensacine: 'https://www.sensacine.com/series/serie-36464/',
     category: 'tv',
     description: 'Thriller de espionaje ambientado en la década de los 40 en Huelva. La serie narra las operaciones del servicio secreto británico en España durante la Segunda Guerra Mundial. Toni es un personaje clave en esta historia de espías.',
     highlights: ['Espionaje', 'Thriller', 'La 1'],
@@ -56,6 +60,8 @@ const projects: Project[] = [
     rating: '7.5',
     imdb: 'https://www.imdb.com/title/tt28507389/',
     youtube: 'https://www.youtube.com/watch?v=ursuF5r4_Ms',
+    filmaffinity: 'https://www.filmaffinity.com/es/film141429.html',
+    sensacine: 'https://www.sensacine.com/series/serie-35252/',
     category: 'tv',
     description: 'Serie diaria de época ambientada en el Madrid de los años 40-50. Interpreto a Íñigo Peñalver, uno de los protagonistas masculinos de la serie, un hombre honrado, generoso, bondadoso y muy romántico. Un papel que ha marcado un antes y un después en mi carrera.',
     highlights: ['Protagonista', '236 episodios', 'Prime Time La 1'],
@@ -72,6 +78,8 @@ const projects: Project[] = [
     rating: '7.2',
     imdb: 'https://www.imdb.com/title/tt8787372/',
     youtube: 'https://www.youtube.com/watch?v=AHUe0aYf9S8',
+    filmaffinity: 'https://www.filmaffinity.com/es/film558512.html',
+    sensacine: 'https://www.sensacine.com/series/serie-30545/',
     category: 'tv',
     description: 'Cuarta entrega de la exitosa franquicia "La Caza". Thriller policíaco que reabre casos sin resolver cuando una de las jóvenes desaparecidas hace cinco años en Monteperdido reaparece misteriosamente.',
     highlights: ['Thriller', '7.2 IMDb', 'La 1'],
@@ -88,6 +96,8 @@ const projects: Project[] = [
     rating: '6.8',
     imdb: 'https://www.imdb.com/title/tt21374322/',
     youtube: 'https://www.youtube.com/watch?v=grtiShqUAkg',
+    filmaffinity: 'https://www.filmaffinity.com/es/film984464.html',
+    sensacine: 'https://www.sensacine.com/series/serie-32511/',
     category: 'tv',
     description: 'Thriller dramático sobre un juez honesto que debe proteger a su hijo tras un trágico accidente con la mafia. La serie plantea temas como el poder, la corrupción, la venganza y el honor.',
     highlights: ['Atresplayer', 'Drama', 'Thriller'],
@@ -120,6 +130,8 @@ const projects: Project[] = [
     rating: '7.1',
     imdb: 'https://www.imdb.com/title/tt7180852/',
     youtube: 'https://www.youtube.com/watch?v=kw3SvwH4khQ',
+    filmaffinity: 'https://www.filmaffinity.com/es/film269606.html',
+    sensacine: 'https://www.sensacine.com/series/serie-21983/',
     category: 'tv',
     description: 'Temporada 4 de la popular serie de TVE. Interpreto a Mikel Uribe, un nuevo policía que se incorpora a la comisaría del barrio. Serie que mezcla policíaco, drama y toques de fantasía.',
     highlights: ['12 episodios', 'La 1', 'Temporada 4'],
@@ -136,6 +148,8 @@ const projects: Project[] = [
     rating: '6.8',
     imdb: 'https://www.imdb.com/title/tt10375568/',
     youtube: 'https://www.youtube.com/watch?v=t4LYYroY5bo',
+    filmaffinity: 'https://www.filmaffinity.com/es/film894080.html',
+    sensacine: 'https://www.sensacine.com/series/serie-25156/',
     category: 'tv',
     description: 'Spin-off de la exitosa serie "Vis a vis". Papel protagonista como Diego "Dieguito" Ramala en este thriller carcelario con distribución internacional en Fox/Star Channel. Una producción de alto nivel con gran seguimiento.',
     highlights: ['Protagonista', 'Star Channel', 'Internacional'],
@@ -152,6 +166,8 @@ const projects: Project[] = [
     rating: '6.2',
     imdb: 'https://www.imdb.com/title/tt9645942/',
     youtube: 'https://www.youtube.com/watch?v=CRlE3_JI7ZY',
+    filmaffinity: 'https://www.filmaffinity.com/es/film530592.html',
+    sensacine: 'https://www.sensacine.com/series/serie-23708/',
     category: 'tv',
     description: 'Serie histórica épica de Amazon Prime Video sobre la conquista de México. Interpreto a Gonzalo de Sandoval junto a Óscar Jaenada. Mi debut televisivo en una producción internacional de alto presupuesto, estrenada en más de 240 países.',
     highlights: ['Prime Video', '240+ países', 'Épica'],
@@ -438,7 +454,7 @@ export default function Portfolio() {
 
                 <p className="text-slate-300 leading-relaxed mb-6">{selectedProject.description}</p>
 
-                <div className="flex flex-wrap gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {selectedProject.youtube && (
                     <motion.a
                       href={selectedProject.youtube}
@@ -446,7 +462,7 @@ export default function Portfolio() {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-red-700 transition-all"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-red-600 text-white rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-red-700 transition-all"
                     >
                       <Youtube className="w-5 h-5" />
                       Ver en YouTube
@@ -461,10 +477,46 @@ export default function Portfolio() {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-yellow-400 text-black rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-yellow-300 transition-all"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-yellow-400 text-black rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-yellow-300 transition-all"
                     >
                       <Star className="w-5 h-5" />
                       Ver en IMDb
+                      <ExternalLink className="w-4 h-4" />
+                    </motion.a>
+                  )}
+
+                  {selectedProject.filmaffinity && (
+                    <motion.a
+                      href={selectedProject.filmaffinity}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all"
+                      style={{ backgroundColor: '#FA6432', color: 'white' }}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#E55A2B'}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#FA6432'}
+                    >
+                      <Film className="w-5 h-5" />
+                      Ver en FilmAffinity
+                      <ExternalLink className="w-4 h-4" />
+                    </motion.a>
+                  )}
+
+                  {selectedProject.sensacine && (
+                    <motion.a
+                      href={selectedProject.sensacine}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all"
+                      style={{ backgroundColor: '#0066CC', color: 'white' }}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#0052A3'}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#0066CC'}
+                    >
+                      <Film className="w-5 h-5" />
+                      Ver en SensaCine
                       <ExternalLink className="w-4 h-4" />
                     </motion.a>
                   )}
