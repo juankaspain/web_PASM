@@ -3,12 +3,10 @@ import Navbar from '@/components/Navbar'
 import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import LatestProject from '@/components/sections/LatestProject'
-import Theater from '@/components/sections/Theater'
 import SkillsGraph from '@/components/sections/SkillsGraph'
 import Footer from '@/components/Footer'
 
 // Lazy load heavy sections to improve initial page load
-const Cinema = dynamic(() => import('@/components/sections/Cinema'))
 const Portfolio = dynamic(() => import('@/components/sections/Portfolio'), {
   loading: () => (
     <div className="flex items-center justify-center h-96 bg-black">
@@ -16,6 +14,9 @@ const Portfolio = dynamic(() => import('@/components/sections/Portfolio'), {
     </div>
   ),
 })
+
+const Cinema = dynamic(() => import('@/components/sections/Cinema'))
+const Theater = dynamic(() => import('@/components/sections/Theater'))
 
 const Timeline = dynamic(() => import('@/components/sections/Timeline'), {
   loading: () => (
@@ -43,10 +44,15 @@ export default function Home() {
       <About />
       <LatestProject />
       
-      {/* Featured work sections - ordered by priority */}
-      <Cinema />
-      <Theater />
+      {/* Filmography sections - reorganized order */}
+      {/* 1. Series de Televisión */}
       <Portfolio />
+      
+      {/* 2. Cine & Cortometrajes */}
+      <Cinema />
+      
+      {/* 3. Teatro Profesional */}
+      <Theater />
       
       {/* Career sections */}
       <SkillsGraph />
