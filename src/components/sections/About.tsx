@@ -44,7 +44,7 @@ const skillCategories = [
   },
 ]
 
-// Formación con enlaces oficiales actualizados
+// Formación con enlaces oficiales completos
 const education = [
   {
     icon: Award,
@@ -75,7 +75,7 @@ const education = [
     title: 'NO-IDENTITY',
     period: 'Especialista',
     description: 'Formación especializada en acrobacias y lucha escénica',
-    url: null,
+    url: 'https://www.noidentity.es/',
     gradient: 'from-red-500 to-rose-500',
   },
 ]
@@ -240,7 +240,7 @@ export default function About() {
             </div>
           </div>
 
-          {/* Education/Training con enlaces actualizados */}
+          {/* Education/Training - Todos con enlaces */}
           <div>
             <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 md:mb-10 flex items-center justify-center gap-2 px-4">
               <GraduationCap className="w-6 h-6 sm:w-8 sm:h-8 text-slate-700" />
