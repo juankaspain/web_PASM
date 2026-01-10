@@ -46,22 +46,30 @@ export default function Hero() {
     {
       icon: Clapperboard,
       title: 'Un fantasma en la batalla',
-      desc: 'Netflix 2025',
+      character: 'Antonio',
+      year: '2025',
+      detail: 'Netflix • Dir. Agustín Díaz Yanes',
     },
     {
       icon: Tv,
       title: 'La Moderna',
-      desc: '236 episodios TVE',
+      character: 'César',
+      year: '2023-2024',
+      detail: '236 episodios • TVE',
     },
     {
       icon: Star,
       title: 'Vis a vis: El Oasis',
-      desc: 'Protagonista Fox',
+      character: 'Triana',
+      year: '2020',
+      detail: 'Protagonista • Fox España',
     },
     {
       icon: TheaterIcon,
       title: 'CNTC',
-      desc: 'Compañía Nacional',
+      character: 'Formación profesional',
+      year: 'Helena Pimenta',
+      detail: 'Compañía Nacional',
     },
   ]
 
@@ -186,7 +194,7 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            {/* Quick Highlights */}
+            {/* Quick Highlights - Expandido */}
             <motion.div
               className="grid grid-cols-2 gap-3"
               initial={{ opacity: 0, y: 16 }}
@@ -202,13 +210,27 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6 + index * 0.05, duration: 0.4 }}
                     whileHover={{ scale: 1.03, y: -2 }}
-                    className="rounded-xl bg-slate-900/80 border border-slate-700/60 px-3.5 py-3 backdrop-blur-md hover:border-yellow-400/30 transition-all"
+                    className="rounded-xl bg-slate-900/80 border border-slate-700/60 px-3.5 py-3.5 backdrop-blur-md hover:border-yellow-400/30 transition-all"
                   >
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <Icon className="w-4 h-4 text-yellow-400" />
-                      <span className="text-xs font-bold text-white leading-tight">{highlight.title}</span>
+                    <div className="flex items-start gap-2 mb-2">
+                      <Icon className="w-4 h-4 text-yellow-400 flex-shrink-0 mt-0.5" />
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-xs font-bold text-white leading-tight line-clamp-2">
+                          {highlight.title}
+                        </h4>
+                      </div>
                     </div>
-                    <p className="text-[11px] text-slate-300 font-medium">{highlight.desc}</p>
+                    <div className="space-y-1">
+                      <p className="text-[11px] text-yellow-400/90 font-semibold">
+                        {highlight.character}
+                      </p>
+                      <p className="text-[10px] text-slate-400 font-medium">
+                        {highlight.year}
+                      </p>
+                      <p className="text-[10px] text-slate-500 leading-tight">
+                        {highlight.detail}
+                      </p>
+                    </div>
                   </motion.div>
                 )
               })}
