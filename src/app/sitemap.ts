@@ -3,8 +3,8 @@ import { MetadataRoute } from 'next'
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://almagrosanmiguel.com'
   const currentDate = new Date()
-
-  // Main pages with high priority
+  
+  // Main sections with high priority
   const mainPages = [
     {
       url: baseUrl,
@@ -22,50 +22,103 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/#portfolio`,
       lastModified: currentDate,
       changeFrequency: 'weekly' as const,
-      priority: 0.95,
-    },
-    {
-      url: `${baseUrl}/#timeline`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/#skills`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/#stats`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/#contact`,
+      url: `${baseUrl}/#training`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/#timeline`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/#theater`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/#awards`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/#gallery`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/#collaborators`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/#showreel`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.9,
     },
+    {
+      url: `${baseUrl}/#news`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/#events`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/#press`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/#testimonials`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/#faq`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/#contact`,
+      lastModified: currentDate,
+      changeFrequency: 'yearly' as const,
+      priority: 0.8,
+    },
   ]
 
-  // Project pages (TODO: Add individual project pages)
-  const projects = [
-    'la-moderna',
-    'vis-a-vis-el-oasis',
-    'hernan',
-    'operacion-barrio-ingles',
-    'la-caza-guadiana',
-    'un-fantasma-en-la-batalla',
+  // Additional static pages
+  const staticPages = [
+    {
+      url: `${baseUrl}/SECURITY.md`,
+      lastModified: new Date('2026-01-10'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.3,
+    },
   ]
 
-  const projectPages = projects.map((slug) => ({
-    url: `${baseUrl}/projects/${slug}`,
-    lastModified: currentDate,
-    changeFrequency: 'monthly' as const,
-    priority: 0.85,
-  }))
-
-  return [...mainPages, ...projectPages]
+  return [...mainPages, ...staticPages]
 }
