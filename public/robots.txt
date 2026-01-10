@@ -1,22 +1,64 @@
-# robots.txt para almagrosanmiguel.com
-# Generado: 2026-01-10
+# robots.txt for https://almagrosanmiguel.com
+# Generated: 2026-01-10
 
-# Permitir acceso a todos los crawlers
+# Allow all well-behaved bots
 User-agent: *
 Allow: /
-
-# Disallow archivos administrativos y privados
 Disallow: /api/
-Disallow: /_next/
 Disallow: /admin/
+Disallow: /_next/static/
 Disallow: /*.json$
 
-# Crawl-delay para bots más agresivos
+# Special rules for Googlebot
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Google Image Bot
+User-agent: Googlebot-Image
+Allow: /
+
+# Bing Bot
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+
+# Allow social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# Block bad bots
 User-agent: AhrefsBot
-Crawl-delay: 10
+Disallow: /
 
 User-agent: SemrushBot
-Crawl-delay: 10
+Disallow: /
 
-# Sitemap
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+# Sitemaps
 Sitemap: https://almagrosanmiguel.com/sitemap.xml
+
+# Host
+Host: https://almagrosanmiguel.com
+
+# Crawl-delay for specific bots
+User-agent: *
+Crawl-delay: 1

@@ -1,0 +1,15 @@
+# Security Policy
+# https://almagrosanmiguel.com/.well-known/security.txt
+
+Contact: mailto:info@almagrosanmiguel.com
+Expires: 2027-01-01T00:00:00.000Z
+Preferred-Languages: es, en
+Canonical: https://almagrosanmiguel.com/.well-known/security.txt
+
+# Security Disclosure
+# Please report security vulnerabilities responsibly.
+# We will acknowledge receipt within 48 hours.
+# We aim to resolve critical issues within 7 days.
+
+Policy: https://almagrosanmiguel.com/SECURITY.md
+Acknowledgments: https://almagrosanmiguel.com/SECURITY.md#hall-of-fame

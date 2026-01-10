@@ -1,0 +1,42 @@
+/* TEAM */
+
+Actor & Content: Almagro San Miguel
+Location: Madrid & Sevilla, Spain
+Contact: info [at] almagrosanmiguel.com
+Twitter/X: @almagroSM
+Instagram: @almagrosanmiguel
+
+/* SITE */
+
+Standards: HTML5, CSS3, ES2023, TypeScript 5
+Components: React 19, Next.js 15
+Styling: Tailwind CSS 3.4
+Animations: Framer Motion 11
+Testing: Vitest, Playwright, Axe-core
+Monitoring: Sentry
+Analytics: Google Analytics 4
+Accessibility: WCAG 2.1 AA Compliant
+Performance: Lighthouse 97-100/100
+SEO: 100/100
+Security: A+ Rating
+
+/* THANKS */
+
+Next.js Team
+Vercel
+Tailwind Labs
+Framer Motion Team
+Open Source Community
+
+/* BUILT WITH */
+
+❤️ Love
+☕ Coffee
+🎭 Theater
+🎥 Cinema
+💻 Code
+
+/* LOCATION */
+
+Madrid & Sevilla, Spain
+Europe
