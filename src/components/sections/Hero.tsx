@@ -53,14 +53,14 @@ export default function Hero() {
     {
       icon: Tv,
       title: 'La Moderna',
-      character: 'César',
+      character: 'Íñigo Peñalver',
       year: '2023-2024',
       detail: '236 episodios • TVE',
     },
     {
       icon: Star,
       title: 'Vis a vis: El Oasis',
-      character: 'Triana',
+      character: 'Diego Ramala',
       year: '2020',
       detail: 'Protagonista • Fox España',
     },
