@@ -150,12 +150,13 @@ export default function Hero() {
             <div className="space-y-2">
               <motion.h1
                 className="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[60px] xl:text-[66px] 
-                           font-serif font-bold tracking-tight leading-[1.1] text-white"
+                           font-serif font-bold tracking-tight leading-[1.1]"
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25, duration: 0.7 }}
               >
-                Almagro San Miguel
+                <span className="text-white">Almagro </span>
+                <span className="text-yellow-400">San Miguel</span>
               </motion.h1>
 
               <motion.p
