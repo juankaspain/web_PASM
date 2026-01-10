@@ -123,9 +123,9 @@ export default function About() {
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
+              className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed"
             >
-              Actor profesional sevillano con vocación por el teatro clásico y experiencia consolidada en televisión y cine
+              Actor con vocación por el teatro clásico y amplia experiencia en TV y cine
             </motion.p>
           </div>
 
