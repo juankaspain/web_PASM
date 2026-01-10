@@ -83,12 +83,9 @@ const nextConfig = {
   // Power optimization
   poweredByHeader: false,
 
-  // Server external packages (moved from experimental in Next.js 15+)
-  serverExternalPackages: [],
-
   // Experimental features for better performance
   experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
+    optimizePackageImports: ['lucide-react', 'framer-motion', 'react-icons'],
   },
 
   // Compiler optimizations
@@ -96,8 +93,8 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
 
-  // Output standalone for better performance
-  output: 'standalone',
+  // Removed standalone output - only needed for Docker deployments
+  // output: 'standalone',
 }
 
 module.exports = nextConfig
