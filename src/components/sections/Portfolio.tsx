@@ -39,8 +39,8 @@ const projects: Project[] = [
     rating: '7.5',
     imdb: 'https://www.imdb.com/title/tt30321421/',
     category: 'tv',
-    description: 'Thriller policial ambientado en Sevilla. Serie de acción con alto nivel de exigencia física y dramática.',
-    highlights: ['Acción', 'TVE 2024', 'Sevilla'],
+    description: 'Thriller de espionaje ambientado en la década de los 40 en Huelva. La serie narra las operaciones del servicio secreto británico en España durante la Segunda Guerra Mundial. Toni es un personaje clave en esta historia de espías.',
+    highlights: ['Espionaje', 'Thriller', 'La 1'],
   },
   {
     id: 'la-moderna',
@@ -54,8 +54,8 @@ const projects: Project[] = [
     rating: '7.5',
     imdb: 'https://www.imdb.com/title/tt28688509/',
     category: 'tv',
-    description: 'Serie diaria de época ambientada en los años 40-50. Papel protagonista como galán durante más de 230 episodios en prime time de TVE.',
-    highlights: ['Protagonista', '236 episodios', 'Prime Time TVE'],
+    description: 'Serie diaria de época ambientada en el Madrid de los años 40-50. Interpreto a Íñigo Peñalver, uno de los protagonistas masculinos de la serie, un hombre honrado, generoso, bondadoso y muy romántico. Un papel que ha marcado un antes y un después en mi carrera.',
+    highlights: ['Protagonista', '236 episodios', 'Prime Time La 1'],
   },
   {
     id: 'la-caza',
@@ -66,11 +66,11 @@ const projects: Project[] = [
     platform: 'TVE',
     episodes: '6 episodios',
     image: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1000',
-    rating: '7.3',
+    rating: '7.2',
     imdb: 'https://www.imdb.com/title/tt15398770/',
     category: 'tv',
-    description: 'Thriller policíaco de la exitosa franquicia La Caza. Investigación de crímenes sin resolver.',
-    highlights: ['Thriller', '7.3 IMDb', 'TVE'],
+    description: 'Cuarta entrega de la exitosa franquicia "La Caza". Thriller policíaco que reabre casos sin resolver cuando una de las jóvenes desaparecidas hace cinco años en Monteperdido reaparece misteriosamente.',
+    highlights: ['Thriller', '7.2 IMDb', 'La 1'],
   },
   {
     id: 'honor',
@@ -81,9 +81,11 @@ const projects: Project[] = [
     platform: 'Atresplayer',
     episodes: '5 episodios',
     image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1000',
+    rating: '6.8',
+    imdb: 'https://www.imdb.com/title/tt21064488/',
     category: 'tv',
-    description: 'Serie dramática de Atresplayer. Participación destacada como Federico en 5 episodios.',
-    highlights: ['Atresplayer', '5 episodios', 'Drama'],
+    description: 'Thriller dramático sobre un juez honesto que debe proteger a su hijo tras un trágico accidente con la mafia. La serie plantea temas como el poder, la corrupción, la venganza y el honor.',
+    highlights: ['Atresplayer', 'Drama', 'Thriller'],
   },
   {
     id: 'desconocidas',
@@ -94,8 +96,10 @@ const projects: Project[] = [
     platform: 'Canal Sur',
     episodes: '8 episodios',
     image: 'https://images.unsplash.com/photo-1594908900066-3f47337549d8?q=80&w=1000',
+    rating: '7.4',
+    imdb: 'https://www.imdb.com/title/tt20851868/',
     category: 'tv',
-    description: 'Serie andaluza producida por Canal Sur. Papel destacado en los 8 episodios de la temporada.',
+    description: 'Serie andaluza producida por Canal Sur Televisión. Una historia de misterio y drama ambientada en Andalucía con gran acogida del público local.',
     highlights: ['Canal Sur', '8 episodios', 'Andalucía'],
   },
   {
@@ -107,9 +111,11 @@ const projects: Project[] = [
     platform: 'TVE',
     episodes: '12 episodios',
     image: 'https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?q=80&w=1000',
+    rating: '7.1',
+    imdb: 'https://www.imdb.com/title/tt6477380/',
     category: 'tv',
-    description: 'Temporada 4 de la popular serie de TVE. Interpreto a Mikel Uribe, un nuevo policía de la comisaría.',
-    highlights: ['12 episodios', 'TVE', 'Temporada 4'],
+    description: 'Temporada 4 de la popular serie de TVE. Interpreto a Mikel Uribe, un nuevo policía que se incorpora a la comisaría del barrio. Serie que mezcla policíaco, drama y toques de fantasía.',
+    highlights: ['12 episodios', 'La 1', 'Temporada 4'],
   },
   {
     id: 'vis-a-vis',
@@ -117,55 +123,29 @@ const projects: Project[] = [
     role: 'Diego "Dieguito" Ramala (Protagonista)',
     year: '2020',
     yearSort: 2020,
-    platform: 'Fox/Star',
+    platform: 'Star Channel',
     episodes: '6 episodios',
     image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1000',
     rating: '6.8',
     imdb: 'https://www.imdb.com/title/tt11177074/',
     category: 'tv',
-    description: 'Papel protagonista en el spin-off de la exitosa serie "Vis a vis". Thriller carcelario con distribución internacional.',
-    highlights: ['Protagonista', 'Fox/Star Channel', 'Internacional'],
+    description: 'Spin-off de la exitosa serie "Vis a vis". Papel protagonista como Diego "Dieguito" Ramala en este thriller carcelario con distribución internacional en Fox/Star Channel. Una producción de alto nivel con gran seguimiento.',
+    highlights: ['Protagonista', 'Star Channel', 'Internacional'],
   },
   {
     id: 'hernan',
     title: 'Hernán',
     role: 'Gonzalo de Sandoval',
-    year: '2019',
-    yearSort: 2019,
+    year: '2020',
+    yearSort: 2020,
     platform: 'Prime Video',
     episodes: '8 episodios',
     image: 'https://images.unsplash.com/photo-1533613220915-609f661a6fe1?q=80&w=1000',
     rating: '6.2',
     imdb: 'https://www.imdb.com/title/tt8741704/',
     category: 'tv',
-    description: 'Serie histórica de Amazon Prime Video sobre la conquista de México. Producción internacional de alto presupuesto.',
+    description: 'Serie histórica épica de Amazon Prime Video sobre la conquista de México. Interpreto a Gonzalo de Sandoval junto a Óscar Jaenada. Mi debut televisivo en una producción internacional de alto presupuesto, estrenada en más de 240 países.',
     highlights: ['Prime Video', '240+ países', 'Épica'],
-  },
-  {
-    id: 'centro-medico',
-    title: 'Centro médico',
-    role: 'Episodio invitado',
-    year: '2017',
-    yearSort: 2017.5,
-    platform: 'TVE',
-    episodes: '1 episodio',
-    image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000',
-    category: 'tv',
-    description: 'Uno de mis primeros trabajos en televisión. Debut en la serie médica de La 1.',
-    highlights: ['Debut TV', 'TVE', '2017'],
-  },
-  {
-    id: 'grupo2',
-    title: 'Grupo 2 Homicidios',
-    role: 'Jorge de Haro',
-    year: '2017',
-    yearSort: 2017,
-    platform: 'Aragón TV / Cuatro',
-    episodes: '1 episodio',
-    image: 'https://images.unsplash.com/photo-1551379840-f0dd5920233c?q=80&w=1000',
-    category: 'tv',
-    description: 'Serie policíaca donde interpreté a Jorge de Haro en un episodio destacado.',
-    highlights: ['Cuatro', 'Policíaca', '2017'],
   },
 ].sort((a, b) => b.yearSort - a.yearSort)
 
@@ -231,8 +211,7 @@ export default function Portfolio() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
             >
-              Más de <span className="text-white font-semibold">300 episodios</span> en series de televisión. 
-              Plataformas: TVE, Prime Video, Fox/Star, Atresplayer, Canal Sur
+              Más de <span className="text-white font-semibold">300 episodios</span> en series de televisión nacional e internacional
             </motion.p>
           </div>
 
@@ -368,7 +347,7 @@ export default function Portfolio() {
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm">
               <Sparkles className="w-5 h-5 text-yellow-400" />
               <span className="text-sm font-medium text-slate-300">
-                +300 episodios en televisión nacional e internacional
+                8 series • +300 episodios • TVE, Prime Video, Star Channel, Atresplayer, Canal Sur
               </span>
             </div>
           </motion.div>
