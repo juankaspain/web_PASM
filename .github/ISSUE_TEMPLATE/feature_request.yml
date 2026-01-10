@@ -1,0 +1,50 @@
+name: ✨ Feature Request
+description: Sugerir una nueva funcionalidad
+labels: ["enhancement", "needs-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por sugerir una mejora para el proyecto.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: ¿Qué problema resolvería esta funcionalidad?
+      description: Una descripción clara del problema
+      placeholder: Siempre me resulta frustrante cuando...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solución propuesta
+      description: Una descripción clara de lo que quieres que suceda
+      placeholder: Me gustaría que...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+      description: Otras soluciones o funcionalidades que hayas considerado
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Prioridad
+      options:
+        - Baja
+        - Media
+        - Alta
+        - Crítica
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Contexto adicional
+      description: Cualquier otra información, screenshots o mockups relevantes
