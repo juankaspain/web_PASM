@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Tv, Play, Star, ExternalLink, Film, Award, Calendar } from 'lucide-react'
+import { Tv, Play, Star, ExternalLink, Film, Award, Calendar, Globe } from 'lucide-react'
 import Image from 'next/image'
 import { useRef } from 'react'
 
@@ -15,7 +15,9 @@ const featuredRoles = [
     year: '2023-2024',
     description: 'Galán protagonista en la serie diaria de época de TVE que ha cautivado a millones de espectadores. Papel que le dio reconocimiento masivo en España.',
     gradient: 'from-amber-500 via-orange-500 to-red-600',
-    imdb: 'https://www.imdb.com/title/tt27688432/',
+    imdb: 'https://www.imdb.com/title/tt21867896/',
+    wikipedia: 'https://es.wikipedia.org/wiki/La_Moderna_(serie_de_televisi%C3%B3n)',
+    filmaffinity: 'https://www.filmaffinity.com/es/film481753.html',
     imageUrl: '/roles/la-moderna.jpg',
   },
   {
@@ -28,6 +30,8 @@ const featuredRoles = [
     description: 'Spin-off de la exitosa serie "Vis a vis". Papel protagónico en producción internacional con gran repercusión mediática.',
     gradient: 'from-blue-600 via-purple-600 to-pink-600',
     imdb: 'https://www.imdb.com/title/tt11566954/',
+    wikipedia: 'https://es.wikipedia.org/wiki/Vis_a_vis:_El_Oasis',
+    filmaffinity: 'https://www.filmaffinity.com/es/film596738.html',
     imageUrl: '/roles/vis-a-vis.jpg',
   },
   {
@@ -40,6 +44,8 @@ const featuredRoles = [
     description: 'Serie histórica sobre Hernán Cortés protagonizada por Óscar Jaenada. Producción internacional de Amazon Prime con presupuesto millonario.',
     gradient: 'from-red-600 via-orange-600 to-yellow-600',
     imdb: 'https://www.imdb.com/title/tt9140786/',
+    wikipedia: 'https://es.wikipedia.org/wiki/Hern%C3%A1n_(serie_de_televisi%C3%B3n)',
+    filmaffinity: 'https://www.filmaffinity.com/es/film549817.html',
     imageUrl: '/roles/hernan.jpg',
   },
   {
@@ -52,6 +58,8 @@ const featuredRoles = [
     description: 'Serie de acción y drama sobre una operación policial en Sevilla. Papel de alto nivel técnico con escenas de acción y drama intenso.',
     gradient: 'from-green-600 via-teal-600 to-cyan-600',
     imdb: 'https://www.imdb.com/title/tt28106426/',
+    wikipedia: null,
+    filmaffinity: 'https://www.filmaffinity.com/es/film634421.html',
     imageUrl: '/roles/barrio-ingles.jpg',
   },
 ]
@@ -205,18 +213,51 @@ export default function FeaturedRoles() {
                       {role.description}
                     </p>
 
-                    {/* Botón IMDb */}
-                    <motion.a
-                      href={role.imdb}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full text-sm font-bold text-black shadow-lg hover:shadow-[0_0_30px_rgba(251,191,36,0.5)] transition-all group/link"
-                    >
-                      <ExternalLink className="w-4 h-4 group-hover/link:rotate-45 transition-transform" />
-                      Ver en IMDb
-                    </motion.a>
+                    {/* Botones de enlaces profesionales */}
+                    <div className="flex flex-wrap gap-3">
+                      {/* IMDb */}
+                      <motion.a
+                        href={role.imdb}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full text-sm font-bold text-black shadow-lg hover:shadow-[0_0_30px_rgba(251,191,36,0.5)] transition-all group/link"
+                      >
+                        <ExternalLink className="w-4 h-4 group-hover/link:rotate-45 transition-transform" />
+                        IMDb
+                      </motion.a>
+
+                      {/* Wikipedia */}
+                      {role.wikipedia && (
+                        <motion.a
+                          href={role.wikipedia}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-600/50 rounded-full text-sm font-bold text-white shadow-lg transition-all group/link"
+                        >
+                          <Globe className="w-4 h-4 group-hover/link:rotate-12 transition-transform" />
+                          Wiki
+                        </motion.a>
+                      )}
+
+                      {/* FilmAffinity */}
+                      {role.filmaffinity && (
+                        <motion.a
+                          href={role.filmaffinity}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="inline-flex items-center gap-2 px-4 py-2.5 bg-red-900/40 hover:bg-red-800/60 border border-red-700/50 rounded-full text-sm font-bold text-white shadow-lg transition-all group/link"
+                        >
+                          <Film className="w-4 h-4 group-hover/link:scale-110 transition-transform" />
+                          FA
+                        </motion.a>
+                      )}
+                    </div>
                   </div>
 
                   {/* Barra inferior decorativa */}
