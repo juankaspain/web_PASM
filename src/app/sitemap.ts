@@ -2,107 +2,62 @@ import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://almagrosanmiguel.com'
-  const lastModified = new Date()
+  const currentDate = new Date().toISOString()
 
-  // Páginas principales
-  const routes = [
+  return [
     {
       url: baseUrl,
-      lastModified,
-      changeFrequency: 'weekly' as const,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
       priority: 1.0,
     },
     {
       url: `${baseUrl}/#about`,
-      lastModified,
-      changeFrequency: 'monthly' as const,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/#portfolio`,
-      lastModified,
-      changeFrequency: 'weekly' as const,
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/#skills`,
-      lastModified,
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.95,
     },
     {
       url: `${baseUrl}/#timeline`,
-      lastModified,
-      changeFrequency: 'monthly' as const,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/#stats`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/#skills`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/#awards`,
-      lastModified,
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/#gallery`,
-      lastModified,
-      changeFrequency: 'weekly' as const,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
       priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#collaborators`,
-      lastModified,
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/#showreel`,
-      lastModified,
-      changeFrequency: 'monthly' as const,
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/#news`,
-      lastModified,
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#events`,
-      lastModified,
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/#press`,
-      lastModified,
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
     },
     {
       url: `${baseUrl}/#testimonials`,
-      lastModified,
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/#faq`,
-      lastModified,
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/#press-kit`,
-      lastModified,
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.75,
     },
     {
       url: `${baseUrl}/#contact`,
-      lastModified,
-      changeFrequency: 'yearly' as const,
-      priority: 0.9,
+      lastModified: currentDate,
+      changeFrequency: 'yearly',
+      priority: 0.85,
     },
   ]
-
-  return routes
 }
