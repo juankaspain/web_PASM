@@ -1,230 +1,245 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Tv, Film, Award, Users, Clock, Star, TrendingUp, Briefcase } from 'lucide-react'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
+import { Tv, Film, Award, TrendingUp, Users, Calendar, Star, Sparkles } from 'lucide-react'
 
-interface Stat {
-  icon: any
-  value: string
+interface StatProps {
+  value: number
   label: string
+  suffix?: string
+  icon: React.ElementType
   description: string
-  color: string
-  gradient: string
+  delay: number
 }
 
-const stats: Stat[] = [
-  {
-    icon: Tv,
-    value: '300+',
-    label: 'Episodios de TV',
-    description: '12 series en plataformas nacionales e internacionales',
-    color: 'text-blue-500',
-    gradient: 'from-blue-500 to-cyan-500',
-  },
-  {
-    icon: Film,
-    value: '12',
-    label: 'Series de TV',
-    description: 'TVE, Prime Video, Fox, Atresplayer, Canal Sur',
-    color: 'text-purple-500',
-    gradient: 'from-purple-500 to-pink-500',
-  },
-  {
-    icon: Award,
-    value: '2',
-    label: 'Premios & Nominaciones',
-    description: 'Mejor Espectáculo 2016, Nominación Unión Actores',
-    color: 'text-yellow-500',
-    gradient: 'from-yellow-500 to-orange-500',
-  },
-  {
-    icon: Clock,
-    value: '13+',
-    label: 'Años de Experiencia',
-    description: 'Desde 2013 en TV, cine y teatro profesional',
-    color: 'text-green-500',
-    gradient: 'from-green-500 to-emerald-500',
-  },
-  {
-    icon: Users,
-    value: '50+',
-    label: 'Directores',
-    description: 'Colaboraciones con profesionales de primer nivel',
-    color: 'text-red-500',
-    gradient: 'from-red-500 to-rose-500',
-  },
-  {
-    icon: Star,
-    value: '236',
-    label: 'Episodios "La Moderna"',
-    description: 'Protagonista galán en serie diaria de TVE',
-    color: 'text-amber-500',
-    gradient: 'from-amber-500 to-yellow-500',
-  },
-  {
-    icon: TrendingUp,
-    value: '6',
-    label: 'Plataformas',
-    description: 'TVE, Prime Video, Fox, Star, Atresplayer, Canal Sur',
-    color: 'text-indigo-500',
-    gradient: 'from-indigo-500 to-blue-500',
-  },
-  {
-    icon: Briefcase,
-    value: '4',
-    label: 'Películas',
-    description: 'Incluyendo "Un fantasma en la batalla" (2025)',
-    color: 'text-teal-500',
-    gradient: 'from-teal-500 to-cyan-500',
-  },
-]
-
-function AnimatedCounter({ end, duration = 2 }: { end: number; duration?: number }) {
+function AnimatedCounter({ value, suffix = '', delay }: { value: number; suffix?: string; delay: number }) {
   const [count, setCount] = useState(0)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   useEffect(() => {
-    if (!isInView) return
+    if (isInView) {
+      const duration = 2000
+      const steps = 60
+      const increment = value / steps
+      let current = 0
+      
+      const timer = setInterval(() => {
+        current += increment
+        if (current >= value) {
+          setCount(value)
+          clearInterval(timer)
+        } else {
+          setCount(Math.floor(current))
+        }
+      }, duration / steps)
 
-    let startTime: number
-    let animationFrame: number
-
-    const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime
-      const progress = Math.min((currentTime - startTime) / (duration * 1000), 1)
-
-      setCount(Math.floor(progress * end))
-
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate)
-      }
+      return () => clearInterval(timer)
     }
+  }, [isInView, value])
 
-    animationFrame = requestAnimationFrame(animate)
+  return (
+    <div ref={ref}>
+      {count}{suffix}
+    </div>
+  )
+}
 
-    return () => cancelAnimationFrame(animationFrame)
-  }, [isInView, end, duration])
+function StatCard({ value, label, suffix, icon: Icon, description, delay }: StatProps) {
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: '-50px' })
 
-  return <span ref={ref}>{count}</span>
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{ duration: 0.7, delay, ease: 'easeOut' }}
+      whileHover={{ y: -8, scale: 1.02 }}
+      className="group relative"
+    >
+      {/* Resplandor de fondo */}
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-500/30 via-orange-500/30 to-yellow-500/30 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      {/* Card principal */}
+      <div className="relative h-full rounded-3xl bg-gradient-to-br from-slate-900/90 via-slate-950/90 to-black/90 border border-slate-700/50 backdrop-blur-xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.9)] overflow-hidden">
+        {/* Gradiente decorativo */}
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-500/10 to-transparent rounded-bl-full" />
+        
+        {/* Icono */}
+        <motion.div
+          className="relative mb-6 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-500/20 to-orange-500/20 border border-yellow-500/30"
+          whileHover={{ rotate: 360, scale: 1.1 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl blur-lg opacity-30" />
+          <Icon className="relative w-8 h-8 text-yellow-300" strokeWidth={2} />
+        </motion.div>
+
+        {/* Número */}
+        <div className="mb-3">
+          <h3 className="text-5xl sm:text-6xl font-bold bg-gradient-to-br from-white via-yellow-100 to-yellow-300 bg-clip-text text-transparent">
+            <AnimatedCounter value={value} suffix={suffix} delay={delay} />
+          </h3>
+        </div>
+
+        {/* Label */}
+        <p className="text-lg sm:text-xl font-semibold text-slate-100 mb-2 group-hover:text-yellow-300 transition-colors">
+          {label}
+        </p>
+
+        {/* Descripción */}
+        <p className="text-sm text-slate-400 leading-relaxed">
+          {description}
+        </p>
+
+        {/* Línea decorativa */}
+        <motion.div 
+          className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-yellow-500 to-orange-500"
+          initial={{ width: 0 }}
+          whileHover={{ width: '100%' }}
+          transition={{ duration: 0.4 }}
+        />
+      </div>
+    </motion.div>
+  )
 }
 
 export default function Stats() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const stats: StatProps[] = [
+    {
+      value: 300,
+      label: 'Episodios',
+      suffix: '+',
+      icon: Tv,
+      description: 'En series nacionales e internacionales de máxima audiencia',
+      delay: 0.1,
+    },
+    {
+      value: 15,
+      label: 'Producciones',
+      suffix: '+',
+      icon: Film,
+      description: 'Entre series, películas y obras de teatro profesionales',
+      delay: 0.2,
+    },
+    {
+      value: 13,
+      label: 'Años',
+      suffix: '+',
+      icon: Calendar,
+      description: 'De experiencia profesional consolidada en el sector',
+      delay: 0.3,
+    },
+    {
+      value: 5,
+      label: 'Premios',
+      suffix: '',
+      icon: Award,
+      description: 'Y nominaciones en festivales y certamînes teatrales',
+      delay: 0.4,
+    },
+    {
+      value: 20,
+      label: 'Directores',
+      suffix: '+',
+      icon: Users,
+      description: 'Colaboraciones con directores de prestigio nacional',
+      delay: 0.5,
+    },
+    {
+      value: 95,
+      label: 'Satisfacción',
+      suffix: '%',
+      icon: Star,
+      description: 'Valoración positiva de directores y productores',
+      delay: 0.6,
+    },
+  ]
 
   return (
-    <section id="stats" className="py-20 bg-gradient-to-b from-white via-gray-50 to-white">
-      <div className="container mx-auto px-4">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
-        >
-          {/* Header */}
-          <div className="text-center mb-16">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-slate-100 to-gray-100 rounded-full mb-4"
-            >
-              <TrendingUp className="w-4 h-4 text-slate-700" />
-              <span className="text-slate-700 text-sm font-semibold">Trayectoria Profesional</span>
-            </motion.div>
-            
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-              Carrera en Números
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Más de una década de experiencia profesional en televisión, cine y teatro,
-              trabajando con las principales productoras y plataformas de España.
-            </p>
-          </div>
-
-          {/* Stats Grid Enhanced */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon
-              // Extract numeric value
-              const numericValue = parseInt(stat.value.replace(/\D/g, '')) || 0
-              const suffix = stat.value.replace(/\d/g, '')
-
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                  animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.9 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="group relative"
-                >
-                  {/* Card */}
-                  <div className="relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden">
-                    {/* Background Gradient on Hover */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
-                    
-                    {/* Icon */}
-                    <div className="relative mb-4">
-                      <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${stat.gradient} shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
-                        <Icon className="w-6 h-6 text-white" />
-                      </div>
-                      {/* Glow effect */}
-                      <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} rounded-xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300 -z-10`} />
-                    </div>
-
-                    {/* Value with Counter */}
-                    <div className={`text-5xl font-bold mb-2 ${stat.color} group-hover:scale-110 transition-transform duration-300`}>
-                      {isInView && numericValue > 0 ? (
-                        <>
-                          <AnimatedCounter end={numericValue} />
-                          {suffix}
-                        </>
-                      ) : (
-                        stat.value
-                      )}
-                    </div>
-
-                    {/* Label */}
-                    <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-slate-700 transition-colors">
-                      {stat.label}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                      {stat.description}
-                    </p>
-
-                    {/* Bottom accent line */}
-                    <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${stat.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`} />
-                  </div>
-                </motion.div>
-              )
-            })}
-          </div>
-
-          {/* Bottom CTA */}
+    <section id="stats" className="relative py-24 sm:py-32 overflow-hidden bg-black">
+      {/* Fondo cinematográfico */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black" />
+      
+      {/* Partículas doradas flotantes */}
+      <div className="absolute inset-0 opacity-20">
+        {[...Array(25)].map((_, i) => (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="text-center mt-16"
-          >
-            <p className="text-gray-600 mb-6">
-              ¿Interesado en colaborar? Descarga mi press kit completo
-            </p>
-            <a
-              href="#presskit"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-slate-900 to-slate-700 hover:from-slate-800 hover:to-slate-600 text-white rounded-full transition-all font-bold shadow-xl hover:shadow-2xl hover:scale-105"
-            >
-              <Award className="w-5 h-5" />
-              Ver Press Kit
-            </a>
-          </motion.div>
+            key={i}
+            className="absolute w-1 h-1 bg-yellow-400 rounded-full"
+            initial={{
+              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920),
+              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080),
+              opacity: 0,
+            }}
+            animate={{
+              y: [null, Math.random() * -500],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: Math.random() * 8 + 6,
+              repeat: Infinity,
+              ease: 'linear',
+              delay: Math.random() * 5,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Contenido */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16 sm:mb-20"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/20 mb-6">
+            <Sparkles className="w-4 h-4 text-yellow-300" />
+            <span className="text-sm font-semibold text-yellow-300 uppercase tracking-wider">Trayectoria Profesional</span>
+          </div>
+          
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-white via-yellow-100 to-yellow-300 bg-clip-text text-transparent">
+              Números que Hablan
+            </span>
+          </h2>
+          
+          <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+            Más de una década dedicada al arte dramático con resultados excepcionales
+          </p>
+        </motion.div>
+
+        {/* Grid de estadísticas */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {stats.map((stat) => (
+            <StatCard key={stat.label} {...stat} />
+          ))}
+        </div>
+
+        {/* Decoración inferior */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="mt-20 text-center"
+        >
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-900/60 border border-slate-700/50 backdrop-blur-md">
+            <TrendingUp className="w-5 h-5 text-yellow-300" />
+            <span className="text-sm font-medium text-slate-300">
+              En constante crecimiento profesional
+            </span>
+          </div>
         </motion.div>
       </div>
+
+      {/* Vignette inferior */}
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
     </section>
   )
 }
