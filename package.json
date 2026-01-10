@@ -1,6 +1,6 @@
 {
   "name": "almagro-san-miguel-portfolio",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Portfolio profesional de Almagro San Miguel - Actor con 13+ años de experiencia en TV, cine y teatro",
   "private": true,
   "scripts": {
@@ -33,7 +33,8 @@
     "react-hook-form": "^7.53.2",
     "zod": "^3.23.8",
     "@hookform/resolvers": "^3.9.1",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "@sentry/nextjs": "^8.42.0"
   },
   "devDependencies": {
     "typescript": "^5",
