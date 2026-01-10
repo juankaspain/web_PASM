@@ -39,7 +39,7 @@ const films = [
     role: 'Personaje Principal',
     type: 'Largometraje',
     platform: 'Cine',
-    poster: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1000',
+    poster: 'https://github.com/user-attachments/assets/c2fd3a19-ecb8-427c-ad8c-acfbc7a8df48',
     description: 'Largometraje estrenado en 2024.',
   },
   {
