@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Calendar, MapPin, Award, Briefcase, GraduationCap, Star, TrendingUp } from 'lucide-react'
+import { Calendar, Award, Briefcase, GraduationCap, Star, TrendingUp, Sparkles } from 'lucide-react'
 import { useRef } from 'react'
 
 interface TimelineEvent {
@@ -10,7 +10,6 @@ interface TimelineEvent {
   subtitle: string
   description: string
   icon: any
-  color: string
   gradient: string
   type: 'education' | 'work' | 'award' | 'milestone'
 }
@@ -22,7 +21,6 @@ const events: TimelineEvent[] = [
     subtitle: 'Graduación en Arte Dramático',
     description: 'Formación completa en interpretación, voz, movimiento y técnicas teatrales en la Escuela Superior de Arte Dramático de Sevilla.',
     icon: GraduationCap,
-    color: 'text-blue-500',
     gradient: 'from-blue-500 to-cyan-500',
     type: 'education',
   },
@@ -32,7 +30,6 @@ const events: TimelineEvent[] = [
     subtitle: 'Andalucía & Corral de Comedias',
     description: 'Experiencia en teatro de calle por diversos pueblos andaluces y actuaciones regulares en el Corral de Comedias de Isla Mágica.',
     icon: Briefcase,
-    color: 'text-purple-500',
     gradient: 'from-purple-500 to-pink-500',
     type: 'work',
   },
@@ -42,7 +39,6 @@ const events: TimelineEvent[] = [
     subtitle: 'Debut en Cine',
     description: 'Protagonista Rodolfo. Rating IMDb: 8.6/10. Primer trabajo profesional en cine que marcó el inicio de mi carrera audiovisual.',
     icon: Star,
-    color: 'text-yellow-500',
     gradient: 'from-yellow-500 to-orange-500',
     type: 'milestone',
   },
@@ -52,7 +48,6 @@ const events: TimelineEvent[] = [
     subtitle: 'Formación con Darío Facal',
     description: 'Especialización en técnicas interpretativas avanzadas con uno de los formadores más reconocidos de España.',
     icon: GraduationCap,
-    color: 'text-green-500',
     gradient: 'from-green-500 to-emerald-500',
     type: 'education',
   },
@@ -62,7 +57,6 @@ const events: TimelineEvent[] = [
     subtitle: 'Nominación Mejor Actor Secundario',
     description: 'Compañía Nacional de Teatro Clásico bajo dirección de Helena Pimenta. Nominación de la Unión de Actores.',
     icon: Award,
-    color: 'text-amber-500',
     gradient: 'from-amber-500 to-yellow-500',
     type: 'award',
   },
@@ -72,7 +66,6 @@ const events: TimelineEvent[] = [
     subtitle: 'Compañía Nacional Teatro Clásico',
     description: 'Formación y trabajo con la Compañía Nacional dirigida por Helena Pimenta. Especialización en verso clásico español.',
     icon: Star,
-    color: 'text-red-500',
     gradient: 'from-red-500 to-rose-500',
     type: 'milestone',
   },
@@ -82,7 +75,6 @@ const events: TimelineEvent[] = [
     subtitle: 'Premio Mejor Espectáculo del Año',
     description: 'Jefe de Policía Duff en producción de CIA La Tarasca. Premio al Mejor Espectáculo del Año.',
     icon: Award,
-    color: 'text-purple-500',
     gradient: 'from-purple-500 to-pink-500',
     type: 'award',
   },
@@ -92,7 +84,6 @@ const events: TimelineEvent[] = [
     subtitle: 'Centro Médico & Grupo 2',
     description: 'Primeros papeles en televisión nacional con La 1 (TVE). Inicio de carrera en series de televisión.',
     icon: TrendingUp,
-    color: 'text-indigo-500',
     gradient: 'from-indigo-500 to-blue-500',
     type: 'milestone',
   },
@@ -102,7 +93,6 @@ const events: TimelineEvent[] = [
     subtitle: 'Gonzalo de Sandoval',
     description: 'Primera producción internacional para Amazon Prime Video. Serie histórica distribuida en toda Latinoamérica.',
     icon: Star,
-    color: 'text-teal-500',
     gradient: 'from-teal-500 to-cyan-500',
     type: 'milestone',
   },
@@ -112,39 +102,8 @@ const events: TimelineEvent[] = [
     subtitle: 'Primer Papel Protagonista',
     description: 'Diego "Dieguito" Ramala. Primera vez como protagonista en serie de Fox/Star Channel. Spin-off de la exitosa "Vis a vis".',
     icon: Star,
-    color: 'text-yellow-500',
     gradient: 'from-yellow-500 to-orange-500',
     type: 'milestone',
-  },
-  {
-    year: '2021',
-    title: 'Estoy vivo (TVE)',
-    subtitle: 'Mikel Uribe',
-    description: '12 episodios en una de las series más vistas de La 1. Consolidación en televisión nacional.',
-    icon: Briefcase,
-    color: 'text-blue-500',
-    gradient: 'from-blue-500 to-cyan-500',
-    type: 'work',
-  },
-  {
-    year: '2022',
-    title: 'Desconocidas (Canal Sur)',
-    subtitle: 'Ramón',
-    description: '8 episodios en producción andaluza. Colaboración con Canal Sur Televisión.',
-    icon: Briefcase,
-    color: 'text-green-500',
-    gradient: 'from-green-500 to-emerald-500',
-    type: 'work',
-  },
-  {
-    year: '2023',
-    title: 'La Caza: Guadiana (TVE)',
-    subtitle: 'Aurelio Santana',
-    description: 'Papel destacado en thriller de éxito de La 1. Rating IMDb: 7.3/10.',
-    icon: Briefcase,
-    color: 'text-red-500',
-    gradient: 'from-red-500 to-rose-500',
-    type: 'work',
   },
   {
     year: '2023-2024',
@@ -152,27 +111,15 @@ const events: TimelineEvent[] = [
     subtitle: 'Protagonista - 236 Episodios',
     description: 'Íñigo Peñalver, galán protagonista en serie diaria de éxito de La 1. Más de 230 episodios consecutivos como protagonista.',
     icon: Star,
-    color: 'text-amber-500',
     gradient: 'from-amber-500 to-yellow-500',
     type: 'milestone',
-  },
-  {
-    year: '2024',
-    title: 'Operación Barrio Inglés',
-    subtitle: 'Toni - Serie de Espionaje',
-    description: '8 episodios en serie de época ambientada en los años 40. Producción TVE.',
-    icon: Briefcase,
-    color: 'text-purple-500',
-    gradient: 'from-purple-500 to-pink-500',
-    type: 'work',
   },
   {
     year: '2025',
     title: 'Un fantasma en la batalla',
     subtitle: 'Próximo Estreno',
-    description: 'Antonio. Película dirigida por Agustín Díaz Yanes sobre ETA basada en hechos reales. En postproducción.',
+    description: 'Antonio. Película dirigida por Agustín Díaz Yanes sobre ETA basada en hechos reales. Disponible en Netflix.',
     icon: Star,
-    color: 'text-indigo-500',
     gradient: 'from-indigo-500 to-blue-500',
     type: 'milestone',
   },
@@ -188,48 +135,51 @@ export default function Timeline() {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
 
   return (
-    <section id="timeline" className="py-20 bg-gradient-to-b from-slate-50 via-white to-slate-50 overflow-hidden">
-      <div className="container mx-auto px-4">
+    <section id="timeline" className="relative py-32 overflow-hidden bg-gradient-to-b from-slate-900 via-black to-slate-950">
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-1/4 left-0 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[120px]" />
+      </div>
+
+      <div 
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+        }}
+      />
+
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          {/* Header */}
-          <div className="text-center mb-16">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-slate-100 to-gray-100 rounded-full mb-4"
-            >
-              <Calendar className="w-4 h-4 text-slate-700" />
-              <span className="text-slate-700 text-sm font-semibold">Cronología</span>
-            </motion.div>
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+              <Calendar className="w-4 h-4 text-blue-400" strokeWidth={2} />
+              <span className="text-sm font-medium text-slate-300 tracking-wide">Cronología</span>
+            </div>
             
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-              Trayectoria Profesional
+            <h2 className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+              <span className="bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+                Trayectoria Profesional
+              </span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Un recorrido de 13+ años desde la formación en ESAD Sevilla hasta convertirme
-              en protagonista de series de éxito en televisión nacional.
+            
+            <p className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed">
+              Un recorrido de 13+ años desde la formación en ESAD Sevilla hasta convertirme en protagonista de series de éxito en televisión nacional
             </p>
           </div>
 
-          {/* Timeline */}
           <div ref={containerRef} className="relative max-w-5xl mx-auto">
-            {/* Center Line */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gray-200 -translate-x-1/2 hidden md:block" />
+            <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-white/10 -translate-x-1/2 hidden md:block" />
             
-            {/* Animated Progress Line */}
             <motion.div
-              className="absolute left-1/2 top-0 w-1 bg-gradient-to-b from-slate-900 to-yellow-500 -translate-x-1/2 hidden md:block"
+              className="absolute left-1/2 top-0 w-[2px] bg-gradient-to-b from-blue-400 to-purple-500 -translate-x-1/2 hidden md:block"
               style={{ height: lineHeight }}
             />
 
-            {/* Events */}
             <div className="space-y-12">
               {events.map((event, index) => {
                 const Icon = event.icon
@@ -246,16 +196,10 @@ export default function Timeline() {
                       isLeft ? 'md:justify-end' : 'md:justify-start'
                     }`}
                   >
-                    {/* Desktop Layout */}
-                    <div className="hidden md:block md:w-1/2 pr-8 md:pr-12">
-                      {isLeft && (
-                        <div className="text-right">
-                          <TimelineCard event={event} Icon={Icon} />
-                        </div>
-                      )}
+                    <div className="hidden md:block md:w-1/2 pr-12">
+                      {isLeft && <TimelineCard event={event} Icon={Icon} />}
                     </div>
 
-                    {/* Center Icon */}
                     <div className="absolute left-0 md:left-1/2 -translate-x-0 md:-translate-x-1/2 z-10">
                       <motion.div
                         whileHover={{ scale: 1.2, rotate: 360 }}
@@ -265,20 +209,14 @@ export default function Timeline() {
                         <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${event.gradient} flex items-center justify-center shadow-xl`}>
                           <Icon className="w-8 h-8 text-white" />
                         </div>
-                        {/* Glow */}
                         <div className={`absolute inset-0 bg-gradient-to-br ${event.gradient} rounded-full blur-xl opacity-40 -z-10`} />
                       </motion.div>
                     </div>
 
-                    <div className="hidden md:block md:w-1/2 pl-8 md:pl-12">
-                      {!isLeft && (
-                        <div className="text-left">
-                          <TimelineCard event={event} Icon={Icon} />
-                        </div>
-                      )}
+                    <div className="hidden md:block md:w-1/2 pl-12">
+                      {!isLeft && <TimelineCard event={event} Icon={Icon} />}
                     </div>
 
-                    {/* Mobile Layout */}
                     <div className="md:hidden pl-24 w-full">
                       <TimelineCard event={event} Icon={Icon} />
                     </div>
@@ -287,6 +225,21 @@ export default function Timeline() {
               })}
             </div>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-20 text-center"
+          >
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm">
+              <Sparkles className="w-5 h-5 text-blue-400" />
+              <span className="text-sm font-medium text-slate-300">
+                Historia en constante evolución
+              </span>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
@@ -296,31 +249,37 @@ export default function Timeline() {
 function TimelineCard({ event, Icon }: { event: TimelineEvent; Icon: any }) {
   return (
     <motion.div
-      whileHover={{ y: -5, scale: 1.02 }}
-      className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all border border-gray-100 relative overflow-hidden"
+      whileHover={{ y: -5 }}
+      className="group relative"
     >
-      {/* Background gradient on hover */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${event.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
+      <div className={`absolute -inset-[1px] bg-gradient-to-br ${event.gradient} rounded-2xl blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500`} />
       
-      {/* Type Badge */}
-      <div className="flex items-center gap-2 mb-3">
-        <span className={`px-3 py-1 rounded-full text-xs font-bold ${event.color} bg-opacity-10`} style={{ backgroundColor: `${event.color}15` }}>
-          {event.type === 'education' && '🎓 Formación'}
-          {event.type === 'work' && '💼 Trabajo'}
-          {event.type === 'award' && '🏆 Premio'}
-          {event.type === 'milestone' && '⭐ Hito'}
-        </span>
-        <span className="text-sm text-gray-500 font-semibold">{event.year}</span>
+      <div className="relative bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:bg-white/[0.05] hover:border-white/20 transition-all">
+        <div className="flex items-center gap-2 mb-3">
+          <span className={`px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r ${event.gradient} text-white`}>
+            {event.type === 'education' && '🎓 Formación'}
+            {event.type === 'work' && '💼 Trabajo'}
+            {event.type === 'award' && '🏆 Premio'}
+            {event.type === 'milestone' && '⭐ Hito'}
+          </span>
+          <span className="text-sm text-slate-500 font-semibold">{event.year}</span>
+        </div>
+
+        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-slate-200 transition-colors">
+          {event.title}
+        </h3>
+        <p className={`font-semibold mb-2 bg-gradient-to-r ${event.gradient} bg-clip-text text-transparent`}>
+          {event.subtitle}
+        </p>
+        <p className="text-slate-400 text-sm leading-relaxed">{event.description}</p>
+
+        <motion.div 
+          className={`absolute bottom-0 left-0 h-[2px] bg-gradient-to-r ${event.gradient} rounded-b-2xl`}
+          initial={{ width: 0 }}
+          whileHover={{ width: '100%' }}
+          transition={{ duration: 0.4 }}
+        />
       </div>
-
-      <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-slate-700 transition-colors">
-        {event.title}
-      </h3>
-      <p className={`font-semibold mb-2 ${event.color}`}>{event.subtitle}</p>
-      <p className="text-gray-600 text-sm leading-relaxed">{event.description}</p>
-
-      {/* Bottom accent */}
-      <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${event.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`} />
     </motion.div>
   )
 }

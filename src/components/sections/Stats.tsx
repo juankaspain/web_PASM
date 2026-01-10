@@ -60,12 +60,9 @@ function StatCard({ value, label, suffix, icon: Icon, description, delay }: Stat
       className="group"
     >
       <div className="relative h-full">
-        {/* Resplandor sutil en hover */}
         <div className="absolute -inset-[1px] bg-gradient-to-br from-yellow-400/0 via-yellow-400/20 to-amber-500/0 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         
-        {/* Card */}
-        <div className="relative h-full bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-8 hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300 shadow-lg">
-          {/* Icono minimalista */}
+        <div className="relative h-full bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-8 hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300">
           <motion.div
             className="inline-flex items-center justify-center w-14 h-14 mb-6 rounded-xl bg-gradient-to-br from-yellow-400/10 to-amber-500/10 border border-yellow-500/20"
             whileHover={{ scale: 1.05, rotate: 5 }}
@@ -74,24 +71,20 @@ function StatCard({ value, label, suffix, icon: Icon, description, delay }: Stat
             <Icon className="w-7 h-7 text-yellow-400" strokeWidth={2} />
           </motion.div>
 
-          {/* Número animado */}
           <div className="mb-3">
             <h3 className="text-5xl font-bold bg-gradient-to-br from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
               <AnimatedCounter value={value} suffix={suffix} delay={delay} />
             </h3>
           </div>
 
-          {/* Label */}
           <p className="text-xl font-semibold text-white mb-2 group-hover:text-yellow-300 transition-colors">
             {label}
           </p>
 
-          {/* Descripción */}
           <p className="text-sm text-slate-400 leading-relaxed">
             {description}
           </p>
 
-          {/* Línea decorativa inferior */}
           <motion.div 
             className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-yellow-400 to-amber-500 rounded-b-2xl"
             initial={{ width: 0 }}
@@ -158,13 +151,11 @@ export default function Stats() {
 
   return (
     <section id="stats" className="relative py-32 overflow-hidden bg-gradient-to-b from-black via-slate-950 to-slate-900">
-      {/* Elementos decorativos */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px]" />
         <div className="absolute bottom-1/4 right-0 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[120px]" />
       </div>
 
-      {/* Patrón sutil de fondo */}
       <div 
         className="absolute inset-0 opacity-[0.02]"
         style={{
@@ -173,7 +164,6 @@ export default function Stats() {
       />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header minimalista */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -197,14 +187,12 @@ export default function Stats() {
           </p>
         </motion.div>
 
-        {/* Grid de estadísticas */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {stats.map((stat) => (
             <StatCard key={stat.label} {...stat} />
           ))}
         </div>
 
-        {/* Footer badge */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
