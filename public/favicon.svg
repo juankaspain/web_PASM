@@ -1,26 +1,26 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Gradiente de fondo oscuro elegante -->
+    <!-- Gradiente de fondo oscuro premium -->
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0f0f0f;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#050505;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
     </linearGradient>
     
-    <!-- Gradiente dorado premium para letras -->
+    <!-- Gradiente dorado cinematográfico -->
     <linearGradient id="goldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
       <stop offset="50%" style="stop-color:#f59e0b;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
     </linearGradient>
     
-    <!-- Resplandor dorado sutil -->
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="1.2" result="blur"/>
+    <!-- Resplandor suave -->
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1" result="blur"/>
       <feColorMatrix in="blur" type="matrix" values="
         1 0 0 0 0
-        0.95 0 0 0 0
+        0.9 0 0 0 0
         0 0 0 0 0
-        0 0 0 0.6 0
+        0 0 0 0.5 0
       " result="glow"/>
       <feMerge>
         <feMergeNode in="glow"/>
@@ -29,30 +29,28 @@
     </filter>
   </defs>
   
-  <!-- Fondo negro premium con gradiente -->
+  <!-- Fondo negro con bordes redondeados -->
   <rect width="64" height="64" rx="12" fill="url(#bgGrad)"/>
   
   <!-- Borde sutil dorado -->
-  <rect x="0.5" y="0.5" width="63" height="63" rx="11.5" fill="none" stroke="url(#goldGrad)" stroke-width="0.5" opacity="0.3"/>
+  <rect x="1" y="1" width="62" height="62" rx="11" fill="none" stroke="url(#goldGrad)" stroke-width="0.5" opacity="0.25"/>
   
-  <!-- Iniciales ASM estilizadas con resplandor -->
-  <g filter="url(#glow)">
-    <!-- A -->
-    <text x="13" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif" 
-          font-size="28" font-weight="700" fill="url(#goldGrad)" letter-spacing="-1">A</text>
-    
-    <!-- S -->
-    <text x="30" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif" 
-          font-size="28" font-weight="700" fill="url(#goldGrad)" letter-spacing="-1">S</text>
-    
-    <!-- M -->
-    <text x="46" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif" 
-          font-size="28" font-weight="700" fill="url(#goldGrad)" letter-spacing="-1" opacity="0.95">M</text>
+  <!-- ASM perfectamente centrado con resplandor -->
+  <g filter="url(#softGlow)">
+    <text 
+      x="32" 
+      y="40" 
+      font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" 
+      font-size="24" 
+      font-weight="700" 
+      fill="url(#goldGrad)" 
+      text-anchor="middle"
+      letter-spacing="1">ASM</text>
   </g>
   
-  <!-- Acento decorativo minimalista en la parte superior -->
-  <line x1="20" y1="18" x2="44" y2="18" stroke="#fbbf24" stroke-width="1.5" opacity="0.4" stroke-linecap="round"/>
+  <!-- Línea decorativa superior -->
+  <line x1="18" y1="18" x2="46" y2="18" stroke="#fbbf24" stroke-width="1.5" opacity="0.35" stroke-linecap="round"/>
   
-  <!-- Detalle decorativo inferior -->
-  <circle cx="32" cy="52" r="1.5" fill="#fbbf24" opacity="0.5"/>
+  <!-- Punto decorativo inferior -->
+  <circle cx="32" cy="52" r="1.2" fill="#fbbf24" opacity="0.4"/>
 </svg>
