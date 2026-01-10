@@ -1,15 +1,20 @@
-# Security Policy
-# https://almagrosanmiguel.com/.well-known/security.txt
+# Security Policy for almagrosanmiguel.com
+# Last updated: 2026-01-10
 
 Contact: mailto:info@almagrosanmiguel.com
-Expires: 2027-01-01T00:00:00.000Z
+Expires: 2027-01-10T00:00:00.000Z
 Preferred-Languages: es, en
 Canonical: https://almagrosanmiguel.com/.well-known/security.txt
-
-# Security Disclosure
-# Please report security vulnerabilities responsibly.
-# We will acknowledge receipt within 48 hours.
-# We aim to resolve critical issues within 7 days.
-
 Policy: https://almagrosanmiguel.com/SECURITY.md
-Acknowledgments: https://almagrosanmiguel.com/SECURITY.md#hall-of-fame
+
+# Acknowledgments
+Acknowledgments: https://github.com/juankaspain/web_PASM/security/advisories
+
+# Encryption
+# Please use the contact email for security reports
+# We will provide encryption details upon request
+
+# Hiring
+Hiring: https://almagrosanmiguel.com/#contact
+
+# Thank you for helping keep our website secure!
