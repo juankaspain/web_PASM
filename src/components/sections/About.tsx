@@ -44,14 +44,14 @@ const skillCategories = [
   },
 ]
 
-// Formación con enlaces
+// Formación con enlaces oficiales actualizados
 const education = [
   {
     icon: Award,
     title: 'Compañía Nacional de Teatro Clásico',
     period: '2015-2017',
     description: 'Formación especializada en verso clásico español con Helena Pimenta',
-    url: 'http://teatroclasico.es',
+    url: 'https://teatroclasico.inaem.gob.es/',
     gradient: 'from-purple-500 to-pink-500',
   },
   {
@@ -59,7 +59,7 @@ const education = [
     title: 'Work In Progress',
     period: '2014-2015',
     description: 'Formación avanzada en interpretación con Darío Facal',
-    url: null,
+    url: 'https://estudio-workinprogress.com/',
     gradient: 'from-yellow-500 to-orange-500',
   },
   {
@@ -240,7 +240,7 @@ export default function About() {
             </div>
           </div>
 
-          {/* Education/Training con enlaces */}
+          {/* Education/Training con enlaces actualizados */}
           <div>
             <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 md:mb-10 flex items-center justify-center gap-2 px-4">
               <GraduationCap className="w-6 h-6 sm:w-8 sm:h-8 text-slate-700" />
