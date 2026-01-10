@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Sword, Music, Theater, Film, Languages, Dumbbell, Horse, BookOpen } from 'lucide-react'
+import { Sword, Music, Theater, Film, Languages, Dumbbell, Footprints, BookOpen } from 'lucide-react'
 
 const skills = [
   {
@@ -41,7 +41,7 @@ const skills = [
   },
   {
     name: 'Equitación',
-    icon: Horse,
+    icon: Footprints,
     level: 65,
     description: 'Para producciones de época histórica',
     color: 'from-orange-500 to-orange-600',
