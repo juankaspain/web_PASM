@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Play, Calendar, Film, Star, ExternalLink, Youtube, Heart, Users } from 'lucide-react'
+import { Play, Calendar, Film, Star, ExternalLink, Youtube, Heart, Users, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import { useRef } from 'react'
 
@@ -24,10 +24,10 @@ export default function LatestProject() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 rounded-full mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full mb-6 shadow-lg"
           >
-            <Star className="w-4 h-4" />
-            <span className="text-sm font-semibold">AHORA EN CINES Y NETFLIX</span>
+            <Sparkles className="w-4 h-4" />
+            <span className="text-sm font-semibold text-slate-900">ÚLTIMO TRABAJO</span>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
@@ -54,7 +54,7 @@ export default function LatestProject() {
 
               <p className="text-xl text-gray-300 mb-6 leading-relaxed">
                 Película dramática dirigida por <strong>Agustín Díaz Yanes</strong> sobre ETA y sus consecuencias. 
-                Estrenada en cines en octubre de 2025 y ahora disponible en Netflix.
+                Estrenada en cines en octubre de 2025 y disponible en Netflix.
               </p>
 
               <div className="mb-8">
@@ -140,7 +140,7 @@ export default function LatestProject() {
             </motion.div>
           </div>
 
-          {/* Character Section - NEW */}
+          {/* Character Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
