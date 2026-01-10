@@ -8,14 +8,21 @@ Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
 
   // Adjust this value in production, or use tracesSampler for greater control
-  tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
+  tracesSampleRate: 1.0,
 
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
   debug: false,
 
-  // Environment
-  environment: process.env.NODE_ENV,
+  // Note: if you want to override the automatic release value, do not set a
+  // `release` value here - use the environment variable `SENTRY_RELEASE`, so
+  // that it will also get attached to your source maps
 
-  // Release tracking
-  release: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || 'development',
+  beforeSend(event, hint) {
+    // Filter out errors in development
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Sentry Event:', event)
+      return null
+    }
+    return event
+  },
 })

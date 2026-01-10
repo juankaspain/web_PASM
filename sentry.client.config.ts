@@ -8,7 +8,7 @@ Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
 
   // Adjust this value in production, or use tracesSampler for greater control
-  tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
+  tracesSampleRate: 1.0,
 
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
   debug: false,
@@ -17,7 +17,7 @@ Sentry.init({
 
   // This sets the sample rate to be 10%. You may want this to be 100% while
   // in development and sample at a lower rate in production
-  replaysSessionSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
+  replaysSessionSampleRate: 0.1,
 
   // You can remove this option if you're not planning to use the Sentry Session Replay feature:
   integrations: [
@@ -26,36 +26,35 @@ Sentry.init({
       maskAllText: true,
       blockAllMedia: true,
     }),
+    Sentry.browserTracingIntegration(),
   ],
 
-  // Environment
-  environment: process.env.NODE_ENV,
+  // Note: if you want to override the automatic release value, do not set a
+  // `release` value here - use the environment variable `SENTRY_RELEASE`, so
+  // that it will also get attached to your source maps
 
-  // Release tracking
-  release: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA || 'development',
-
-  // Filter out non-error events
   beforeSend(event, hint) {
-    // Filter out development errors
+    // Filter out errors in development
     if (process.env.NODE_ENV === 'development') {
+      console.error('Sentry Event:', event)
       return null
     }
-
-    // Filter out known third-party errors
-    if (event.exception) {
-      const error = hint.originalException
-      if (error && typeof error === 'object' && 'message' in error) {
-        const message = String(error.message)
-        if (
-          message.includes('ResizeObserver') ||
-          message.includes('chrome-extension') ||
-          message.includes('webkit-masked-url')
-        ) {
-          return null
-        }
-      }
-    }
-
     return event
   },
+
+  ignoreErrors: [
+    // Browser extensions
+    'top.GLOBALS',
+    // Random plugins/extensions
+    'originalCreateNotification',
+    'canvas.contentDocument',
+    'MyApp_RemoveAllHighlights',
+    // Facebook errors
+    'fb_xd_fragment',
+    // ISP injected ads
+    'bmi_SafeAddOnload',
+    'EBCallBackMessageReceived',
+    // Ignore ResizeObserver errors (common and harmless)
+    'ResizeObserver loop',
+  ],
 })
