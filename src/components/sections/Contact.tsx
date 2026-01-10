@@ -13,7 +13,7 @@ import {
   Twitter,
 } from 'lucide-react'
 import { useState } from 'react'
-
+import { trackEvent } from '@/lib/analytics'
 
 const categories = [
   'Casting / Audición',
@@ -76,7 +76,9 @@ export default function Contact() {
     category: categories[0],
     message: '',
   })
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>(
+    'idle',
+  )
   const [errorMessage, setErrorMessage] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -95,7 +97,13 @@ export default function Contact() {
 
       if (response.ok) {
         setStatus('success')
-        setFormData({ name: '', email: '', category: categories[0], message: '' })
+        trackEvent('submit_contact_form', 'engagement', formData.category)
+        setFormData({
+          name: '',
+          email: '',
+          category: categories[0],
+          message: '',
+        })
       } else {
         setStatus('error')
         setErrorMessage(data.error || 'Error al enviar el mensaje')
@@ -126,7 +134,6 @@ export default function Contact() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -134,9 +141,11 @@ export default function Contact() {
               viewport={{ once: true }}
             >
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Name */}
                 <div>
-                  <label htmlFor="name" className="block text-sm font-semibold mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-semibold mb-2"
+                  >
                     Nombre Completo *
                   </label>
                   <input
@@ -144,15 +153,19 @@ export default function Contact() {
                     id="name"
                     required
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all"
                     placeholder="Tu nombre"
                   />
                 </div>
 
-                {/* Email */}
                 <div>
-                  <label htmlFor="email" className="block text-sm font-semibold mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-semibold mb-2"
+                  >
                     Email *
                   </label>
                   <input
@@ -160,22 +173,28 @@ export default function Contact() {
                     id="email"
                     required
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all"
                     placeholder="tu@email.com"
                   />
                 </div>
 
-                {/* Category */}
                 <div>
-                  <label htmlFor="category" className="block text-sm font-semibold mb-2">
+                  <label
+                    htmlFor="category"
+                    className="block text-sm font-semibold mb-2"
+                  >
                     Categoría *
                   </label>
                   <select
                     id="category"
                     required
                     value={formData.category}
-                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, category: e.target.value })
+                    }
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all"
                   >
                     {categories.map((cat) => (
@@ -186,9 +205,11 @@ export default function Contact() {
                   </select>
                 </div>
 
-                {/* Message */}
                 <div>
-                  <label htmlFor="message" className="block text-sm font-semibold mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-semibold mb-2"
+                  >
                     Mensaje *
                   </label>
                   <textarea
@@ -196,13 +217,14 @@ export default function Contact() {
                     required
                     rows={6}
                     value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, message: e.target.value })
+                    }
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all resize-none"
                     placeholder="Cuéntame sobre tu proyecto o consulta..."
                   />
                 </div>
 
-                {/* Status Messages */}
                 {status === 'success' && (
                   <div className="flex items-center gap-2 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
                     <CheckCircle className="w-5 h-5" />
@@ -219,7 +241,6 @@ export default function Contact() {
                   </div>
                 )}
 
-                {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={status === 'sending'}
@@ -230,14 +251,13 @@ export default function Contact() {
               </form>
             </motion.div>
 
-            {/* Contact Info */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-              className="space-y-8">
-              {/* Info Cards */}
+              className="space-y-8"
+            >
               <div className="space-y-4">
                 {contactInfo.map((info, index) => {
                   const Icon = info.icon
@@ -250,7 +270,9 @@ export default function Contact() {
                         <Icon className="w-6 h-6 text-slate-700" />
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-gray-500 mb-1">{info.label}</p>
+                        <p className="text-sm font-semibold text-gray-500 mb-1">
+                          {info.label}
+                        </p>
                         {info.link ? (
                           <a
                             href={info.link}
@@ -259,7 +281,9 @@ export default function Contact() {
                             {info.value}
                           </a>
                         ) : (
-                          <p className="text-slate-900 font-semibold">{info.value}</p>
+                          <p className="text-slate-900 font-semibold">
+                            {info.value}
+                          </p>
                         )}
                       </div>
                     </div>
@@ -267,9 +291,10 @@ export default function Contact() {
                 })}
               </div>
 
-              {/* Social Links */}
               <div>
-                <h3 className="text-xl font-serif font-bold mb-4">Redes Sociales</h3>
+                <h3 className="text-xl font-serif font-bold mb-4">
+                  Redes Sociales
+                </h3>
                 <div className="space-y-3">
                   {socialLinks.map((social, index) => {
                     const Icon = social.icon
@@ -282,12 +307,18 @@ export default function Contact() {
                         className="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200 hover:border-slate-400 transition-all group"
                       >
                         <div className="flex items-center gap-3">
-                          <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${social.color} flex items-center justify-center`}>
+                          <div
+                            className={`w-10 h-10 rounded-full bg-gradient-to-br ${social.color} flex items-center justify-center`}
+                          >
                             <Icon className="w-5 h-5 text-white" />
                           </div>
                           <div>
-                            <p className="font-bold text-slate-900">{social.label}</p>
-                            <p className="text-sm text-gray-600">{social.handle}</p>
+                            <p className="font-bold text-slate-900">
+                              {social.label}
+                            </p>
+                            <p className="text-sm text-gray-600">
+                              {social.handle}
+                            </p>
                           </div>
                         </div>
                         <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-slate-700 transition-colors" />
@@ -297,12 +328,12 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Additional Info */}
               <div className="p-6 bg-slate-50 rounded-lg border border-slate-200">
                 <h4 className="font-bold mb-2">Tiempo de Respuesta</h4>
                 <p className="text-sm text-gray-600">
-                  Respondo personalmente a todos los mensajes en un plazo máximo de 48 horas hábiles.
-                  Para consultas urgentes, puedes contactar directamente por email.
+                  Respondo personalmente a todos los mensajes en un plazo
+                  máximo de 48 horas hábiles. Para consultas urgentes, puedes
+                  contactar directamente por email.
                 </p>
               </div>
             </motion.div>
