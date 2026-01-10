@@ -10,6 +10,7 @@ const films = [
     id: 1,
     title: 'Un fantasma en la batalla',
     year: '2025',
+    yearSort: 2025,
     director: 'Agustín Díaz Yanes',
     role: 'Antonio',
     type: 'Largometraje',
@@ -21,6 +22,7 @@ const films = [
     id: 2,
     title: 'Carta Blanca',
     year: '2024',
+    yearSort: 2024,
     director: 'Gerardo Herrero',
     role: 'Legionario',
     type: 'Largometraje',
@@ -32,6 +34,7 @@ const films = [
     id: 3,
     title: 'Fueron los días',
     year: '2024',
+    yearSort: 2024,
     director: '-',
     role: 'Personaje Principal',
     type: 'Largometraje',
@@ -43,6 +46,7 @@ const films = [
     id: 4,
     title: 'Mario, Kike y David',
     year: '2016',
+    yearSort: 2016,
     director: '-',
     role: 'Kike',
     type: 'Cortometraje',
@@ -54,6 +58,7 @@ const films = [
     id: 5,
     title: 'Lapso',
     year: '2013',
+    yearSort: 2013,
     director: '-',
     role: 'Rodolfo',
     type: 'Cortometraje',
@@ -61,7 +66,7 @@ const films = [
     poster: 'https://via.placeholder.com/400x600/334155/ffffff?text=Lapso',
     description: 'Uno de mis primeros trabajos en cine, interpretando a Rodolfo.',
   },
-]
+].sort((a, b) => b.yearSort - a.yearSort)
 
 export default function Cinema() {
   const ref = useRef(null)
