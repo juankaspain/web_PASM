@@ -1,96 +1,84 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Award, GraduationCap, Heart, MapPin, Calendar, Users, Briefcase, Sparkles } from 'lucide-react'
+import { Award, GraduationCap, Heart, MapPin, Calendar, Users, Briefcase, Sparkles, ExternalLink, Drama, Sword, Activity, Music, Languages, Palette } from 'lucide-react'
 import Image from 'next/image'
 import { useRef } from 'react'
 
-const skills = [
-  { name: 'Verso Clásico Español', level: 95, color: 'from-blue-500 to-cyan-500' },
-  { name: 'Interpretación TV/Cine', level: 90, color: 'from-purple-500 to-pink-500' },
-  { name: 'Teatro Musical', level: 85, color: 'from-yellow-500 to-orange-500' },
-  { name: 'Esgrima & Combate', level: 90, color: 'from-red-500 to-rose-500' },
-  { name: 'Equitación', level: 80, color: 'from-green-500 to-emerald-500' },
-  { name: 'Música (Cello/Viola)', level: 75, color: 'from-indigo-500 to-blue-500' },
+// Habilidades reorganizadas sin porcentajes
+const skillCategories = [
+  {
+    title: 'Interpretación',
+    skills: [
+      { name: 'Verso Clásico Español', icon: Drama },
+      { name: 'TV & Cine', icon: Drama },
+      { name: 'Teatro Musical', icon: Music },
+      { name: 'Comedia', icon: Drama },
+      { name: 'Drama', icon: Drama },
+    ],
+  },
+  {
+    title: 'Habilidades Físicas',
+    skills: [
+      { name: 'Esgrima Teatral', icon: Sword },
+      { name: 'Combate Escénico', icon: Sword },
+      { name: 'Equitación', icon: Activity },
+      { name: 'Acrobacias', icon: Activity },
+    ],
+  },
+  {
+    title: 'Habilidades Artísticas',
+    skills: [
+      { name: 'Violonchelo', icon: Music },
+      { name: 'Viola', icon: Music },
+      { name: 'Canto', icon: Music },
+    ],
+  },
+  {
+    title: 'Idiomas',
+    skills: [
+      { name: 'Español (Nativo)', icon: Languages },
+      { name: 'Inglés (Alto)', icon: Languages },
+      { name: 'Francés (Medio)', icon: Languages },
+    ],
+  },
 ]
 
-// Ordenado por fecha (más reciente primero)
+// Formación con enlaces
 const education = [
   {
     icon: Award,
-    title: 'Compañía Nacional Teatro Clásico',
+    title: 'Compañía Nacional de Teatro Clásico',
     period: '2015-2017',
-    description: 'Formación con Helena Pimenta',
+    description: 'Formación especializada en verso clásico español con Helena Pimenta',
+    url: 'http://teatroclasico.es',
     gradient: 'from-purple-500 to-pink-500',
-    order: 1,
   },
   {
     icon: Sparkles,
     title: 'Work In Progress',
     period: '2014-2015',
-    description: 'Darío Facal',
+    description: 'Formación avanzada en interpretación con Darío Facal',
+    url: null,
     gradient: 'from-yellow-500 to-orange-500',
-    order: 2,
   },
   {
     icon: GraduationCap,
     title: 'ESAD Sevilla',
     period: '2008-2012',
-    description: 'Graduado en Arte Dramático',
+    description: 'Graduado en Arte Dramático - Escuela Superior de Arte Dramático de Sevilla',
+    url: 'https://www.esadsevilla.org',
     gradient: 'from-blue-500 to-cyan-500',
-    order: 3,
   },
   {
     icon: Briefcase,
     title: 'NO-IDENTITY',
     period: 'Especialista',
-    description: 'Acrobacias y lucha escénica',
+    description: 'Formación especializada en acrobacias y lucha escénica',
+    url: null,
     gradient: 'from-red-500 to-rose-500',
-    order: 4,
   },
 ]
-
-function SkillBar({ skill, index }: { skill: typeof skills[0]; index: number }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, x: -50 }}
-      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="mb-6"
-    >
-      <div className="flex justify-between items-center mb-2">
-        <span className="font-semibold text-slate-900 text-sm sm:text-base">{skill.name}</span>
-        <span className="text-xs sm:text-sm font-bold text-slate-600">{skill.level}%</span>
-      </div>
-      <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-          transition={{ duration: 1.5, delay: index * 0.1, ease: 'easeOut' }}
-          className={`h-full bg-gradient-to-r ${skill.color} rounded-full relative overflow-hidden`}
-        >
-          {/* Shimmer effect */}
-          <motion.div
-            animate={{
-              x: ['-100%', '200%'],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: 'linear',
-              delay: index * 0.1 + 1.5,
-            }}
-            className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent"
-          />
-        </motion.div>
-      </div>
-    </motion.div>
-  )
-}
 
 export default function About() {
   const ref = useRef(null)
@@ -206,20 +194,53 @@ export default function About() {
             </motion.div>
           </div>
 
-          {/* Skills Section - Now standalone */}
+          {/* Skills Section - Rediseñadas sin porcentajes */}
           <div className="mb-12 md:mb-16">
             <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 md:mb-10 flex items-center justify-center gap-2 px-4">
               <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-500" />
               Habilidades Especiales
             </h3>
-            <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-x-12 gap-y-2">
-              {skills.map((skill, index) => (
-                <SkillBar key={index} skill={skill} index={index} />
+            <div className="max-w-5xl mx-auto space-y-8">
+              {skillCategories.map((category, catIndex) => (
+                <motion.div
+                  key={catIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.6, delay: 0.5 + catIndex * 0.1 }}
+                >
+                  <h4 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <Palette className="w-5 h-5 text-slate-600" />
+                    {category.title}
+                  </h4>
+                  <div className="flex flex-wrap gap-3">
+                    {category.skills.map((skill, skillIndex) => {
+                      const Icon = skill.icon
+                      return (
+                        <motion.div
+                          key={skillIndex}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                          transition={{ duration: 0.4, delay: 0.6 + catIndex * 0.1 + skillIndex * 0.05 }}
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          className="group relative"
+                        >
+                          {/* Subtle glow on hover */}
+                          <div className="absolute -inset-0.5 bg-gradient-to-r from-slate-300 to-gray-300 rounded-full blur-sm opacity-0 group-hover:opacity-40 transition-opacity" />
+                          
+                          <div className="relative inline-flex items-center gap-2 px-4 py-2 bg-white border-2 border-slate-200 rounded-full text-sm font-semibold text-slate-700 hover:border-slate-400 hover:text-slate-900 transition-all shadow-sm">
+                            <Icon className="w-4 h-4" />
+                            {skill.name}
+                          </div>
+                        </motion.div>
+                      )
+                    })}
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>
 
-          {/* Education/Training */}
+          {/* Education/Training con enlaces */}
           <div>
             <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 md:mb-10 flex items-center justify-center gap-2 px-4">
               <GraduationCap className="w-6 h-6 sm:w-8 sm:h-8 text-slate-700" />
@@ -228,6 +249,32 @@ export default function About() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
               {education.map((edu, index) => {
                 const Icon = edu.icon
+                const isClickable = edu.url !== null
+                
+                const CardContent = (
+                  <>
+                    {/* Background gradient on hover */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${edu.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl`} />
+                    
+                    <div className="relative">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${edu.gradient} shadow-lg`}>
+                          <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                        </div>
+                        {isClickable && (
+                          <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-slate-700 transition-colors" />
+                        )}
+                      </div>
+                      <h4 className="font-bold text-base sm:text-lg mb-2 text-slate-900 group-hover:text-slate-700 transition-colors">{edu.title}</h4>
+                      <p className="text-xs sm:text-sm text-gray-500 mb-2 font-semibold">{edu.period}</p>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">{edu.description}</p>
+                    </div>
+
+                    {/* Bottom accent */}
+                    <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${edu.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-b-2xl`} />
+                  </>
+                )
+
                 return (
                   <motion.div
                     key={index}
@@ -235,22 +282,22 @@ export default function About() {
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                     transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
                     whileHover={{ y: -8, scale: 1.02 }}
-                    className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all border border-gray-100"
+                    className="group relative"
                   >
-                    {/* Background gradient on hover */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${edu.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl`} />
-                    
-                    <div className="relative">
-                      <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${edu.gradient} mb-4 shadow-lg`}>
-                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                    {isClickable ? (
+                      <a
+                        href={edu.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all border border-gray-100 cursor-pointer"
+                      >
+                        {CardContent}
+                      </a>
+                    ) : (
+                      <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all border border-gray-100">
+                        {CardContent}
                       </div>
-                      <h4 className="font-bold text-base sm:text-lg mb-2 text-slate-900">{edu.title}</h4>
-                      <p className="text-xs sm:text-sm text-gray-500 mb-2">{edu.period}</p>
-                      <p className="text-xs sm:text-sm text-gray-600">{edu.description}</p>
-                    </div>
-
-                    {/* Bottom accent */}
-                    <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${edu.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-b-2xl`} />
+                    )}
                   </motion.div>
                 )
               })}
