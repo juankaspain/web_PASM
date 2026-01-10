@@ -1,14 +1,15 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Award, Play, Star, TrendingUp, Film, Tv, Sparkles, MapPin, Calendar } from 'lucide-react'
+import { ArrowDown, Award, Play, TrendingUp, Film, Tv, Sparkles, MapPin, Calendar } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 export default function Hero() {
   const { scrollY } = useScroll()
-  const opacity = useTransform(scrollY, [0, 300], [1, 0])
-  const scale = useTransform(scrollY, [0, 300], [1, 0.8])
+  // Scroll muy suave para que no “colapse” al hacer zoom
+  const opacity = useTransform(scrollY, [0, 200], [1, 0.95])
+  const scale = useTransform(scrollY, [0, 200], [1, 0.98])
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -16,18 +17,18 @@ export default function Hero() {
   }, [])
 
   const achievements = [
-    { icon: Tv, label: '300+ Episodios', subtitle: 'TV Nacional', color: 'from-blue-500 to-cyan-500', bgColor: 'bg-blue-500/10', borderColor: 'border-blue-500/30' },
-    { icon: Film, label: '12 Series', subtitle: 'Protagonista', color: 'from-purple-500 to-pink-500', bgColor: 'bg-purple-500/10', borderColor: 'border-purple-500/30' },
-    { icon: Award, label: '2 Premios', subtitle: 'Reconocimientos', color: 'from-yellow-500 to-orange-500', bgColor: 'bg-yellow-500/10', borderColor: 'border-yellow-500/30' },
-    { icon: TrendingUp, label: '13 Años', subtitle: 'Experiencia', color: 'from-green-500 to-emerald-500', bgColor: 'bg-green-500/10', borderColor: 'border-green-500/30' },
+    { icon: Tv, label: '300+ Episodios', subtitle: 'TV Nacional' },
+    { icon: Film, label: '12 Series', subtitle: 'Protagonista' },
+    { icon: Award, label: '2 Premios', subtitle: 'Reconocimientos' },
+    { icon: TrendingUp, label: '13 Años', subtitle: 'Experiencia' },
   ]
 
-  // ORDENADO CRONOLÓGICAMENTE: Del más reciente (2025) al más antiguo (2019)
+  // Ordenado cronológicamente, del más nuevo al más antiguo
   const recentWorks = [
-    { title: 'Un fantasma en la batalla', type: 'Cine', network: 'Netflix', year: '2025', yearSort: 2025 },
-    { title: 'La Moderna', episodes: '236 ep.', network: 'TVE', year: '2024-2025', yearSort: 2024 },
-    { title: 'Vis a vis: El Oasis', episodes: '8 ep.', network: 'Fox', year: '2020', yearSort: 2020 },
-    { title: 'Hernán', role: 'Gonzalo de Sandoval', network: 'Prime', year: '2019', yearSort: 2019 },
+    { title: 'Un fantasma en la batalla', info: 'Cine', network: 'Netflix', year: '2025' },
+    { title: 'La Moderna', info: '236 ep.', network: 'TVE', year: '2024-2025' },
+    { title: 'Vis a vis: El Oasis', info: '8 ep.', network: 'Fox', year: '2020' },
+    { title: 'Hernán', info: 'Gonzalo de Sandoval', network: 'Prime', year: '2019' },
   ]
 
   return (
@@ -35,34 +36,13 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
     >
-      {/* Split Layout Background */}
-      <div className="absolute inset-0 z-0 grid lg:grid-cols-2">
-        {/* Left Side - NUEVA IMAGEN PROFESIONAL del Issue #4 */}
-        <div className="relative h-full">
-          <Image
-            src="https://private-user-images.githubusercontent.com/30146558/534179896-43e8482d-f288-4cd0-b1ad-31e054eafdf4.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjgwMTgwNjIsIm5iZiI6MTc2ODAxNzc2MiwicGF0aCI6Ii8zMDE0NjU1OC81MzQxNzk4OTYtNDNlODQ4MmQtZjI4OC00Y2QwLWIxYWQtMzFlMDU0ZWFmZGY0LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjAxMTAlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwMTEwVDA0MDI0MlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTc2YTBlYmQ3NTFmYzEzNTJlMzljMzE0YjlhY2I2N2JhNGNhMDZlNWExNjBmNmVjODJlZDVjOGE4YWE1Y2E1ZjcmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.YcJKj4jyXG_wpCloMMAR35ol_XRDxOnYQAYw3K_zsyc"
-            alt="Almagro San Miguel - Actor profesional de televisión, cine y teatro"
-            fill
-            className="object-cover object-center"
-            sizes="50vw"
-            priority
-          />
-          {/* Enhanced gradient overlay for better text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/50 to-black" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/90" />
-        </div>
-        
-        {/* Right Side - Professional gradient background */}
-        <div className="hidden lg:block bg-gradient-to-br from-slate-900 via-slate-800 to-black" />
-      </div>
+      {/* FONDO SENCILLO Y SÓLIDO */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black via-slate-950 to-slate-900" />
 
-      {/* Overlay gradient for mobile */}
-      <div className="lg:hidden absolute inset-0 bg-gradient-to-b from-black/70 via-black/85 to-black z-[1]" />
-
-      {/* Enhanced Particles Effect */}
+      {/* Partículas muy suaves */}
       {mounted && (
-        <div className="absolute inset-0 opacity-20 z-[2]">
-          {[...Array(20)].map((_, i) => (
+        <div className="pointer-events-none absolute inset-0 opacity-10">
+          {[...Array(18)].map((_, i) => (
             <motion.div
               key={i}
               className="absolute w-1 h-1 bg-yellow-400 rounded-full blur-[1px]"
@@ -76,189 +56,233 @@ export default function Hero() {
                 opacity: [0, 1, 0],
               }}
               transition={{
-                duration: Math.random() * 10 + 10,
+                duration: Math.random() * 12 + 14,
                 repeat: Infinity,
                 ease: 'linear',
-                delay: Math.random() * 5,
+                delay: Math.random() * 6,
               }}
             />
           ))}
         </div>
       )}
 
-      {/* Content Container */}
-      <motion.div 
-        className="relative z-10 w-full max-w-7xl mx-auto px-4 py-12 lg:py-0"
+      {/* CONTENEDOR PRINCIPAL */}
+      <motion.div
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20"
         style={{ opacity, scale }}
       >
-        <div className="grid lg:grid-cols-2 gap-8 items-center">
-          {/* Left Column - Empty on desktop (photo background) */}
-          <div className="hidden lg:block" />
-          
-          {/* Right Column - Content */}
+        {/* GRID ESTABLE QUE NO SE ROMPE CON ZOOM */}
+        <div className="grid lg:grid-cols-[1.05fr_1.15fr] gap-10 xl:gap-16 items-center">
+          {/* COLUMNA FOTO */}
+          <div className="order-2 lg:order-1 flex justify-center lg:justify-start">
+            <div className="relative w-full max-w-[520px] lg:max-w-[560px]">
+              <div className="relative aspect-[3/4] rounded-[32px] lg:rounded-[40px] overflow-hidden border border-white/7 shadow-[0_40px_140px_rgba(0,0,0,0.9)] bg-black/60">
+                <Image
+                  src="https://private-user-images.githubusercontent.com/30146558/534179896-43e8482d-f288-4cd0-b1ad-31e054eafdf4.png?raw=1"
+                  alt="Almagro San Miguel - Actor profesional de televisión, cine y teatro"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(min-width: 1024px) 520px, 90vw"
+                  priority
+                />
+                {/* Gradiente para asegurar lectura siempre correcta */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/40" />
+              </div>
+
+              {/* Pequeño badge flotando sobre la foto */}
+              <div className="absolute -bottom-4 left-4 right-4 flex justify-between gap-3">
+                <div className="flex items-center gap-2 rounded-2xl bg-black/70 border border-yellow-500/30 px-3 py-2 backdrop-blur-md">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-yellow-500/20 text-yellow-300">
+                    <Film className="w-4 h-4" />
+                  </div>
+                  <div className="leading-tight">
+                    <p className="text-xs font-semibold text-yellow-200">En rodaje</p>
+                    <p className="text-[11px] text-gray-300">Últimos proyectos 2025</p>
+                  </div>
+                </div>
+                <div className="hidden sm:flex items-center gap-2 rounded-2xl bg-slate-900/80 border border-slate-600/60 px-3 py-2 backdrop-blur-md">
+                  <Sparkles className="w-4 h-4 text-yellow-300" />
+                  <p className="text-[11px] text-gray-300">Representación internacional disponible</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* COLUMNA CONTENIDO */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            className="order-1 lg:order-2 space-y-7 lg:space-y-8"
+            initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: 'easeOut' }}
-            className="space-y-6 lg:pl-8"
+            transition={{ duration: 0.9, ease: 'easeOut' }}
           >
-            {/* Premium Badge with Professional SVG Icon */}
+            {/* BADGE PROFESIONAL */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 border border-yellow-500/40 rounded-full backdrop-blur-md shadow-lg shadow-yellow-500/10"
+              transition={{ delay: 0.15, duration: 0.5 }}
+              className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-yellow-600/15 to-orange-600/15 border border-yellow-500/40 px-5 py-2.5 backdrop-blur-md shadow-[0_12px_40px_rgba(250,204,21,0.25)]"
             >
-              {/* Professional Star Badge SVG */}
-              <svg 
-                className="w-5 h-5 text-yellow-400" 
-                viewBox="0 0 24 24" 
-                fill="none" 
+              <svg
+                className="w-5 h-5 text-yellow-300"
+                viewBox="0 0 24 24"
+                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path 
-                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" 
-                  fill="currentColor" 
-                  stroke="currentColor" 
-                  strokeWidth="1.5" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                />
-                <circle cx="12" cy="12" r="3" fill="#1e293b" stroke="currentColor" strokeWidth="0.5"/>
-                <path 
-                  d="M12 10.5L12.5 11.5L13.5 12L12.5 12.5L12 13.5L11.5 12.5L10.5 12L11.5 11.5L12 10.5Z" 
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
                   fill="currentColor"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
                 />
+                <circle cx="12" cy="12" r="3" fill="#020617" stroke="currentColor" strokeWidth="0.6" />
               </svg>
-              <span className="text-yellow-300 text-sm font-bold tracking-wide">Actor Profesional Certificado</span>
+              <span className="text-xs sm:text-sm font-semibold tracking-[0.16em] text-yellow-100 uppercase">
+                Actor profesional certificado
+              </span>
             </motion.div>
 
-            {/* Main Title */}
-            <div>
-              <motion.h1 
-                className="text-5xl md:text-7xl font-serif font-bold mb-4 bg-gradient-to-r from-white via-yellow-100 to-yellow-300 bg-clip-text text-transparent leading-tight"
-                initial={{ opacity: 0, y: 20 }}
+            {/* NOMBRE EN UNA SOLA LÍNEA */}
+            <div className="space-y-2">
+              <motion.h1
+                className="whitespace-nowrap text-[40px] sm:text-[48px] md:text-[56px] lg:text-[64px] xl:text-[70px] 
+                           font-serif font-bold tracking-tight 
+                           bg-gradient-to-r from-white via-yellow-100 to-yellow-300 bg-clip-text text-transparent"
+                initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
+                transition={{ delay: 0.25, duration: 0.7 }}
               >
-                Almagro <span className="text-yellow-400">San Miguel</span>
+                Almagro San Miguel
               </motion.h1>
-              
+
               <motion.p
-                className="text-2xl md:text-3xl text-yellow-400 font-bold mb-3"
+                className="text-lg sm:text-xl md:text-2xl font-semibold text-yellow-300/95"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
+                transition={{ delay: 0.35, duration: 0.6 }}
               >
                 Actor de Televisión, Cine y Teatro
               </motion.p>
             </div>
 
-            {/* Quick Info Cards */}
+            {/* INFO RÁPIDA */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
               className="grid grid-cols-2 gap-3"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45, duration: 0.6 }}
             >
-              <div className="bg-slate-800/60 backdrop-blur-md border border-slate-700/50 rounded-xl p-3.5 hover:border-yellow-500/40 transition-all group">
-                <div className="flex items-center gap-2 mb-1">
-                  <MapPin className="w-4 h-4 text-yellow-400 group-hover:scale-110 transition-transform" />
-                  <span className="text-xs text-gray-400 uppercase tracking-wider">Ubicación</span>
+              <div className="rounded-2xl bg-slate-900/80 border border-slate-700/60 px-4 py-3.5 backdrop-blur-md">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <MapPin className="w-4 h-4 text-yellow-300" />
+                  <span className="text-[11px] font-medium uppercase tracking-[0.16em] text-gray-400">
+                    Ubicación
+                  </span>
                 </div>
-                <p className="text-sm font-bold text-white">Sevilla, España</p>
+                <p className="text-sm font-semibold text-white">Sevilla, España</p>
               </div>
-              <div className="bg-slate-800/60 backdrop-blur-md border border-slate-700/50 rounded-xl p-3.5 hover:border-yellow-500/40 transition-all group">
-                <div className="flex items-center gap-2 mb-1">
-                  <Calendar className="w-4 h-4 text-yellow-400 group-hover:scale-110 transition-transform" />
-                  <span className="text-xs text-gray-400 uppercase tracking-wider">Nacimiento</span>
+              <div className="rounded-2xl bg-slate-900/80 border border-slate-700/60 px-4 py-3.5 backdrop-blur-md">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <Calendar className="w-4 h-4 text-yellow-300" />
+                  <span className="text-[11px] font-medium uppercase tracking-[0.16em] text-gray-400">
+                    Nacimiento
+                  </span>
                 </div>
-                <p className="text-sm font-bold text-white">7 Marzo 1990</p>
+                <p className="text-sm font-semibold text-white">7 Marzo 1990</p>
               </div>
             </motion.div>
 
-            {/* Training Pills */}
+            {/* FORMACIÓN */}
             <motion.div
+              className="flex flex-wrap gap-2.5"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="flex flex-wrap gap-2"
+              transition={{ delay: 0.55, duration: 0.6 }}
             >
-              <span className="px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full text-xs font-bold text-blue-300 hover:bg-blue-500/20 hover:border-blue-400/50 transition-all cursor-default">
-                ESAD Sevilla
-              </span>
-              <span className="px-4 py-2 bg-purple-500/10 border border-purple-500/30 rounded-full text-xs font-bold text-purple-300 hover:bg-purple-500/20 hover:border-purple-400/50 transition-all cursor-default">
-                CNTC Helena Pimenta
-              </span>
-              <span className="px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-full text-xs font-bold text-red-300 hover:bg-red-500/20 hover:border-red-400/50 transition-all cursor-default">
-                NO-IDENTITY Especialista
-              </span>
+              {[
+                'ESAD Sevilla',
+                'CNTC Helena Pimenta',
+                'NO-IDENTITY Especialista',
+              ].map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-slate-600/70 bg-slate-900/80 px-4 py-1.5 text-[11px] font-semibold tracking-wide text-slate-100"
+                >
+                  {tag}
+                </span>
+              ))}
             </motion.div>
 
-            {/* Recent Works Section - ORDENADOS CRONOLÓGICAMENTE */}
+            {/* TRABAJOS DESTACADOS */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              className="space-y-3 pt-1"
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.8 }}
-              className="space-y-3"
+              transition={{ delay: 0.65, duration: 0.6 }}
             >
-              <div className="flex items-center gap-2 mb-4">
-                <Sparkles className="w-5 h-5 text-yellow-400" />
-                <h3 className="text-lg font-bold text-white">Trabajos Destacados</h3>
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-yellow-300" />
+                  <h3 className="text-sm sm:text-base font-semibold text-white">
+                    Trabajos destacados
+                  </h3>
+                </div>
+                <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-gray-400">
+                  2025 – 2019
+                </span>
               </div>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {recentWorks.map((work, index) => (
                   <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
-                    className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/60 rounded-xl p-4 hover:bg-slate-700/50 hover:border-yellow-500/40 transition-all group cursor-pointer shadow-lg hover:shadow-yellow-500/10"
+                    key={work.title}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7 + index * 0.07, duration: 0.4 }}
+                    className="group rounded-2xl bg-slate-900/80 border border-slate-700/70 px-4 py-3.5 
+                               backdrop-blur-md hover:border-yellow-400/60 hover:bg-slate-900/95 
+                               transition-all shadow-[0_18px_50px_rgba(15,23,42,0.9)]"
                   >
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <p className="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors leading-tight">
+                    <div className="flex items-start justify-between gap-3 mb-1.5">
+                      <p className="text-xs sm:text-sm font-semibold text-slate-50 group-hover:text-yellow-300 transition-colors">
                         {work.title}
                       </p>
-                      <span className="text-xs font-bold text-yellow-400 bg-yellow-400/10 px-2 py-1 rounded-md whitespace-nowrap">
+                      <span className="rounded-md bg-yellow-500/15 px-2 py-0.5 text-[11px] font-semibold text-yellow-300">
                         {work.year}
                       </span>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs text-gray-400">
-                        {work.episodes || work.type || work.role}
-                      </span>
-                      <span className="text-xs text-gray-300 font-semibold">
-                        {work.network}
-                      </span>
+                    <div className="flex items-center justify-between text-[11px] sm:text-xs text-gray-300">
+                      <span>{work.info}</span>
+                      <span className="font-semibold text-gray-200">{work.network}</span>
                     </div>
                   </motion.div>
                 ))}
               </div>
             </motion.div>
 
-            {/* Achievement Badges - Enhanced */}
+            {/* LOGROS RÁPIDOS */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              className="grid grid-cols-2 gap-3 pt-1"
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.8 }}
-              className="grid grid-cols-2 lg:grid-cols-4 gap-3"
+              transition={{ delay: 0.85, duration: 0.6 }}
             >
               {achievements.map((achievement, index) => {
                 const Icon = achievement.icon
                 return (
                   <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1.1 + index * 0.1, duration: 0.5 }}
-                    whileHover={{ scale: 1.05, y: -3 }}
-                    className="group relative"
+                    key={achievement.label}
+                    whileHover={{ y: -3, scale: 1.02 }}
+                    transition={{ duration: 0.2 }}
+                    className="rounded-2xl border border-slate-700/70 bg-slate-950/80 px-4 py-3.5 
+                               backdrop-blur-md shadow-[0_16px_40px_rgba(15,23,42,0.9)]"
                   >
-                    <div className={`${achievement.bgColor} ${achievement.borderColor} border backdrop-blur-sm rounded-xl p-4 transform transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/10`}>
-                      <div className="flex flex-col items-center text-center gap-1.5">
-                        <Icon className="w-6 h-6 text-white group-hover:text-yellow-400 transition-colors" />
-                        <span className="text-white font-bold text-sm group-hover:text-yellow-400 transition-colors">{achievement.label}</span>
-                        <span className="text-xs text-gray-400">{achievement.subtitle}</span>
+                    <div className="flex items-center gap-2.5">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-slate-800/80 text-yellow-300">
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <div className="leading-tight">
+                        <p className="text-xs font-semibold text-slate-50">{achievement.label}</p>
+                        <p className="text-[11px] text-gray-400">{achievement.subtitle}</p>
                       </div>
                     </div>
                   </motion.div>
@@ -266,69 +290,71 @@ export default function Hero() {
               })}
             </motion.div>
 
-            {/* CTA Buttons - Enhanced */}
+            {/* CTAS */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              className="flex flex-wrap gap-3 pt-3"
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.3, duration: 0.8 }}
-              className="flex flex-wrap gap-3 pt-4"
+              transition={{ delay: 1.0, duration: 0.6 }}
             >
               <motion.a
                 href="#showreel"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group px-7 py-3.5 bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-500 hover:to-orange-500 text-white rounded-full transition-all font-bold shadow-xl hover:shadow-2xl hover:shadow-yellow-500/30 flex items-center gap-2"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 
+                           px-7 py-3.5 text-sm font-semibold text-black shadow-[0_22px_60px_rgba(250,204,21,0.45)]"
               >
-                <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                Ver Showreel
+                <Play className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                Ver showreel
               </motion.a>
-              
+
               <motion.a
                 href="https://www.imdb.com/name/nm9017709/"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-7 py-3.5 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-md transition-all font-bold border border-white/20 hover:border-yellow-400/60 shadow-lg"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center rounded-full border border-slate-500/70 bg-slate-900/80 
+                           px-6 py-3 text-sm font-semibold text-slate-50 hover:border-yellow-400/60 hover:bg-slate-900"
               >
                 IMDb
               </motion.a>
-              
+
               <motion.a
                 href="https://es.wikipedia.org/wiki/Almagro_San_Miguel"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-7 py-3.5 bg-white/10 hover:bg-white/20 text-white rounded-full backdrop-blur-md transition-all font-bold border border-white/20 hover:border-yellow-400/60 shadow-lg"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center rounded-full border border-slate-500/70 bg-slate-900/80 
+                           px-6 py-3 text-sm font-semibold text-slate-50 hover:border-yellow-400/60 hover:bg-slate-900"
               >
                 Wikipedia
               </motion.a>
             </motion.div>
 
-            {/* Scroll Indicator */}
+            {/* INDICADOR DE SCROLL */}
             <motion.a
               href="#about"
-              className="inline-flex items-center gap-2 text-gray-400 hover:text-yellow-400 transition-colors group pt-4"
+              className="inline-flex items-center gap-2 pt-3 text-xs font-medium text-gray-400 hover:text-yellow-300"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.5, duration: 0.8 }}
-              aria-label="Scroll para saber más"
+              transition={{ delay: 1.15, duration: 0.6 }}
             >
-              <span className="text-sm font-medium">Descubre más</span>
+              Descubre más
               <motion.div
                 animate={{ y: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
               >
-                <ArrowDown className="w-5 h-5" />
+                <ArrowDown className="w-4 h-4" />
               </motion.div>
             </motion.a>
           </motion.div>
         </div>
       </motion.div>
 
-      {/* Bottom Gradient */}
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent z-[5]" />
+      {/* VIGNETTE INFERIOR */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
     </section>
   )
 }
