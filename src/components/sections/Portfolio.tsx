@@ -174,20 +174,10 @@ const projects: Project[] = [
   },
 ].sort((a, b) => b.yearSort - a.yearSort)
 
-const categories = [
-  { id: 'all' as Category, label: 'Todas', icon: Clapperboard, count: projects.length },
-  { id: 'tv' as Category, label: 'Televisión', icon: Tv, count: projects.filter(p => p.category === 'tv').length },
-]
-
 export default function Portfolio() {
-  const [selectedCategory, setSelectedCategory] = useState<Category>('all')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
-
-  const filteredProjects = selectedCategory === 'all'
-    ? projects
-    : projects.filter(p => p.category === selectedCategory)
 
   return (
     <section id="portfolio" className="relative py-32 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-black">
@@ -240,42 +230,9 @@ export default function Portfolio() {
             </motion.p>
           </div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-3 mb-16"
-          >
-            {categories.map((cat) => {
-              const Icon = cat.icon
-              const isActive = selectedCategory === cat.id
-              return (
-                <motion.button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`relative px-5 py-2.5 rounded-xl font-semibold transition-all flex items-center gap-2 ${
-                    isActive
-                      ? 'bg-yellow-400 text-black shadow-lg'
-                      : 'bg-white/[0.03] text-slate-300 border border-white/10 hover:bg-white/[0.05] hover:border-white/20'
-                  }`}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span>{cat.label}</span>
-                  <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${
-                    isActive ? 'bg-black/20 text-black' : 'bg-white/5 text-slate-400'
-                  }`}>
-                    {cat.count}
-                  </span>
-                </motion.button>
-              )
-            })}
-          </motion.div>
-
           <div className="space-y-6">
             <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project, index) => (
+              {projects.map((project, index) => (
                 <motion.div
                   key={project.id}
                   layout
