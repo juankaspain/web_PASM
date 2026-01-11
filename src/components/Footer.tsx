@@ -1,6 +1,6 @@
 'use client'
 
-import { Mail, MapPin, Facebook, Instagram, X, ExternalLink } from 'lucide-react'
+import { Mail, MapPin, Facebook, Instagram, X, Youtube, ExternalLink } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const socialLinks = [
@@ -8,6 +8,11 @@ const socialLinks = [
     name: 'Instagram',
     url: 'https://www.instagram.com/almagrosanmiguel/',
     icon: Instagram,
+  },
+  {
+    name: 'YouTube',
+    url: 'https://www.youtube.com/@almagrosanmiguel7219',
+    icon: Youtube,
   },
   {
     name: 'X',
