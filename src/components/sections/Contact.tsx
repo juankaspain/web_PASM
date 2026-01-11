@@ -241,144 +241,175 @@ export default function Contact() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-7xl mx-auto">
+            {/* Columna izquierda: Formulario + Tiempo de Respuesta */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.5 }}
               viewport={{ once: true }}
-              className="relative"
+              className="space-y-6"
             >
-              <div className="absolute -inset-1 bg-yellow-400/20 rounded-3xl blur-2xl opacity-50" />
-              
-              <div className="relative bg-white/[0.02] rounded-3xl p-8 border border-white/10 backdrop-blur-xl shadow-2xl">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-bold mb-2 text-slate-200">
-                      Nombre Completo *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      required
-                      minLength={2}
-                      maxLength={100}
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      disabled={status === 'sending'}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-400 focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all disabled:opacity-50"
-                      placeholder="Tu nombre"
-                    />
-                  </div>
+              <div className="relative">
+                <div className="absolute -inset-1 bg-yellow-400/20 rounded-3xl blur-2xl opacity-50" />
+                
+                <div className="relative bg-white/[0.02] rounded-3xl p-8 border border-white/10 backdrop-blur-xl shadow-2xl">
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-bold mb-2 text-slate-200">
+                        Nombre Completo *
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        required
+                        minLength={2}
+                        maxLength={100}
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        disabled={status === 'sending'}
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-400 focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all disabled:opacity-50"
+                        placeholder="Tu nombre"
+                      />
+                    </div>
 
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-bold mb-2 text-slate-200">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      required
-                      maxLength={100}
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      disabled={status === 'sending'}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-400 focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all disabled:opacity-50"
-                      placeholder="tu@email.com"
-                    />
-                  </div>
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-bold mb-2 text-slate-200">
+                        Email *
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        required
+                        maxLength={100}
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        disabled={status === 'sending'}
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-400 focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all disabled:opacity-50"
+                        placeholder="tu@email.com"
+                      />
+                    </div>
 
-                  <div>
-                    <label htmlFor="category" className="block text-sm font-bold mb-2 text-slate-200">
-                      Categoría *
-                    </label>
-                    <select
-                      id="category"
-                      required
-                      value={formData.category}
-                      onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                      disabled={status === 'sending'}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all disabled:opacity-50"
-                    >
-                      {categories.map((cat) => (
-                        <option key={cat} value={cat}>
-                          {cat}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                    <div>
+                      <label htmlFor="category" className="block text-sm font-bold mb-2 text-slate-200">
+                        Categoría *
+                      </label>
+                      <select
+                        id="category"
+                        required
+                        value={formData.category}
+                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                        disabled={status === 'sending'}
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all disabled:opacity-50"
+                      >
+                        {categories.map((cat) => (
+                          <option key={cat} value={cat}>
+                            {cat}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
 
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-bold mb-2 text-slate-200">
-                      Mensaje *
-                    </label>
-                    <textarea
-                      id="message"
-                      required
-                      minLength={10}
-                      maxLength={2000}
-                      rows={6}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      disabled={status === 'sending'}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-400 focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all resize-none disabled:opacity-50"
-                      placeholder="Cuéntame sobre tu proyecto o consulta..."
-                    />
-                    <p className="text-xs text-slate-400 mt-1">
-                      {formData.message.length} / 2000 caracteres
-                    </p>
-                  </div>
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-bold mb-2 text-slate-200">
+                        Mensaje *
+                      </label>
+                      <textarea
+                        id="message"
+                        required
+                        minLength={10}
+                        maxLength={2000}
+                        rows={6}
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        disabled={status === 'sending'}
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-400 focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all resize-none disabled:opacity-50"
+                        placeholder="Cuéntame sobre tu proyecto o consulta..."
+                      />
+                      <p className="text-xs text-slate-400 mt-1">
+                        {formData.message.length} / 2000 caracteres
+                      </p>
+                    </div>
 
-                  {status === 'success' && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="flex items-center gap-3 p-4 bg-white/[0.05] border border-white/10 rounded-xl"
-                    >
-                      <CheckCircle className="w-5 h-5 text-white flex-shrink-0" />
-                      <span className="text-sm font-semibold text-white">
-                        ¡Mensaje enviado! Te responderé en menos de 48 horas.
-                      </span>
-                    </motion.div>
-                  )}
-
-                  {status === 'error' && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/30 rounded-xl"
-                    >
-                      <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
-                      <span className="text-sm font-semibold text-red-300">{errorMessage}</span>
-                    </motion.div>
-                  )}
-
-                  <motion.button
-                    type="submit"
-                    disabled={status === 'sending'}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full px-8 py-4 bg-yellow-400 hover:bg-yellow-300 text-black rounded-xl transition-all font-bold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg"
-                  >
-                    {status === 'sending' ? (
-                      <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        <span>Enviando...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-5 h-5" />
-                        <span>Enviar Mensaje</span>
-                      </>
+                    {status === 'success' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex items-center gap-3 p-4 bg-white/[0.05] border border-white/10 rounded-xl"
+                      >
+                        <CheckCircle className="w-5 h-5 text-white flex-shrink-0" />
+                        <span className="text-sm font-semibold text-white">
+                          ¡Mensaje enviado! Te responderé en menos de 48 horas.
+                        </span>
+                      </motion.div>
                     )}
-                  </motion.button>
 
-                  <p className="text-xs text-center text-slate-400">
-                    Formulario protegido por Formspree • Tus datos son privados
-                  </p>
-                </form>
+                    {status === 'error' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/30 rounded-xl"
+                      >
+                        <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
+                        <span className="text-sm font-semibold text-red-300">{errorMessage}</span>
+                      </motion.div>
+                    )}
+
+                    <motion.button
+                      type="submit"
+                      disabled={status === 'sending'}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full px-8 py-4 bg-yellow-400 hover:bg-yellow-300 text-black rounded-xl transition-all font-bold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg"
+                    >
+                      {status === 'sending' ? (
+                        <>
+                          <Loader2 className="w-5 h-5 animate-spin" />
+                          <span>Enviando...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5" />
+                          <span>Enviar Mensaje</span>
+                        </>
+                      )}
+                    </motion.button>
+
+                    <p className="text-xs text-center text-slate-400">
+                      Formulario protegido por Formspree • Tus datos son privados
+                    </p>
+                  </form>
+                </div>
               </div>
+
+              {/* Tiempo de Respuesta - Ahora debajo del formulario */}
+              <motion.div 
+                whileHover={{ scale: 1.02 }} 
+                className="relative"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
+                viewport={{ once: true }}
+              >
+                <div className="absolute -inset-0.5 bg-yellow-400/20 rounded-2xl blur-lg opacity-40" />
+                <div className="relative p-6 bg-white/[0.03] rounded-2xl border border-white/10 backdrop-blur-xl">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-yellow-400 flex items-center justify-center flex-shrink-0">
+                      <Clock className="w-6 h-6 text-black" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold mb-2 text-white text-lg">Tiempo de Respuesta</h4>
+                      <p className="text-sm text-slate-300 leading-relaxed">
+                        Respondo personalmente a todos los mensajes en un plazo
+                        máximo de <strong className="text-white">48 horas hábiles</strong>. Para consultas urgentes,
+                        contacta directamente por email o redes sociales.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
 
+            {/* Columna derecha: Info de contacto y Redes Sociales */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -455,25 +486,6 @@ export default function Contact() {
                   })}
                 </div>
               </div>
-
-              <motion.div whileHover={{ scale: 1.02 }} className="relative">
-                <div className="absolute -inset-0.5 bg-yellow-400/20 rounded-2xl blur-lg opacity-40" />
-                <div className="relative p-6 bg-white/[0.03] rounded-2xl border border-white/10 backdrop-blur-xl">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-yellow-400 flex items-center justify-center flex-shrink-0">
-                      <Clock className="w-6 h-6 text-black" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold mb-2 text-white text-lg">Tiempo de Respuesta</h4>
-                      <p className="text-sm text-slate-300 leading-relaxed">
-                        Respondo personalmente a todos los mensajes en un plazo
-                        máximo de <strong className="text-white">48 horas hábiles</strong>. Para consultas urgentes,
-                        contacta directamente por email o redes sociales.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
             </motion.div>
           </div>
         </motion.div>
