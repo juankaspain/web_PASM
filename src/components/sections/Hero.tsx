@@ -54,7 +54,7 @@ export default function Hero() {
     },
     {
       name: 'X / Twitter',
-      url: 'https://twitter.com/almagrosanmi',
+      url: 'https://x.com/almagroSM',
       icon: Twitter,
       color: 'hover:text-sky-400',
       bgHover: 'hover:bg-sky-400/10',
@@ -70,7 +70,7 @@ export default function Hero() {
     },
     {
       name: 'YouTube',
-      url: 'https://www.youtube.com/@AlmagroSanMiguel',
+      url: 'https://www.youtube.com/@almagrosanmiguel7219',
       icon: Youtube,
       color: 'hover:text-red-500',
       bgHover: 'hover:bg-red-500/10',
@@ -78,7 +78,7 @@ export default function Hero() {
     },
     {
       name: 'Facebook',
-      url: 'https://www.facebook.com/AlmagroSanMiguelOficial',
+      url: 'https://www.facebook.com/almagrosanmiguel/',
       icon: Facebook,
       color: 'hover:text-blue-500',
       bgHover: 'hover:bg-blue-500/10',

@@ -65,7 +65,7 @@ const socialLinks = [
     icon: Twitter,
     label: 'X',
     handle: '@almagroSM',
-    url: 'https://twitter.com/almagrosanmi',
+    url: 'https://x.com/almagroSM',
   },
   {
     icon: 'tiktok',
@@ -76,14 +76,14 @@ const socialLinks = [
   {
     icon: Youtube,
     label: 'YouTube',
-    handle: '@AlmagroSanMiguel',
-    url: 'https://www.youtube.com/@AlmagroSanMiguel',
+    handle: '@almagrosanmiguel7219',
+    url: 'https://www.youtube.com/@almagrosanmiguel7219',
   },
   {
     icon: Facebook,
     label: 'Facebook',
-    handle: 'AlmagroSanMiguelOficial',
-    url: 'https://www.facebook.com/AlmagroSanMiguelOficial',
+    handle: 'almagrosanmiguel',
+    url: 'https://www.facebook.com/almagrosanmiguel/',
   },
 ]
 
