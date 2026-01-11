@@ -43,68 +43,84 @@ const showreels: ShowreelVideo[] = [
 
 const clips: ClipVideo[] = [
   {
-    title: 'La Moderna - Entrevista Personaje',
-    description: 'Íñigo Peñalver y el amor puro en la serie',
-    project: 'La Moderna (TVE)',
-    year: '2023',
-    duration: '3:31',
-    youtubeId: 'G1Lg0fHmK_Q',
-  },
-  {
-    title: 'Un fantasma en la batalla',
-    description: 'Cómo fue trabajar en la película de Agustín Díaz Yanes',
-    project: 'Netflix',
-    year: '2025',
-    duration: '16:55',
-    youtubeId: 'MV5kUBPfd9U',
-  },
-  {
-    title: 'Operación Barrio Inglés y La Moderna',
-    description: 'Presentación de ambos proyectos en TVE',
-    project: 'Serie TVE',
-    year: '2024',
-    duration: '20:45',
-    youtubeId: 'mll_3Sj8kjg',
-  },
-  {
-    title: 'La Moderna - Presión del Éxito',
-    description: 'El actor habla sobre ir junto al éxito de La Promesa',
-    project: 'La Moderna (TVE)',
-    year: '2023',
-    duration: '4:12',
-    youtubeId: 'b-NDBU2G7xQ',
-  },
-  {
-    title: 'La Moderna - Ejercicio de Apartar Prejuicios',
-    description: 'Claves del personaje y detalles de la serie',
-    project: 'La Moderna (TVE)',
-    year: '2023',
-    duration: '3:31',
-    youtubeId: 'UPV0J17s6Po',
-  },
-  {
-    title: 'Entrevista - Pasión por Actuar',
-    description: 'En el Teatro de la Maestranza de Sevilla',
-    project: 'Entrevista',
-    year: '2024',
-    duration: '14:09',
-    youtubeId: 'ts2qSZpSO_I',
-  },
-  {
-    title: 'Videobook 2024',
-    description: 'Portfolio visual profesional actualizado',
-    project: 'Material Promocional',
-    year: '2024',
-    duration: '2:30',
-    youtubeId: 'kS39Q8KXT1U',
-  },
-  {
     title: 'La Caza: Guadiana',
-    description: 'Participación en la serie de TVE',
+    description: 'Actuación en la serie de TVE',
     project: 'La Caza (TVE)',
     year: '2024',
-    duration: '1:45',
-    youtubeId: 'kS39Q8KXT1U',
+    duration: '2:11',
+    youtubeId: 'AHUe0aYf9S8',
+  },
+  {
+    title: 'La Moderna',
+    description: 'Escenas destacadas de la serie',
+    project: 'La Moderna (TVE)',
+    year: '2024',
+    duration: '4:02',
+    youtubeId: 'ursuF5r4_Ms',
+  },
+  {
+    title: 'Operación: Barrio Inglés',
+    description: 'Participación en la serie de TVE',
+    project: 'Operación: Barrio Inglés (TVE)',
+    year: '2024',
+    duration: '2:54',
+    youtubeId: '1t0JcwYR-so',
+  },
+  {
+    title: 'Honor',
+    description: 'Escenas de la serie',
+    project: 'Honor (Serie)',
+    year: '2024',
+    duration: '4:29',
+    youtubeId: 'grtiShqUAkg',
+  },
+  {
+    title: 'Desconocidas',
+    description: 'Actuación en la serie',
+    project: 'Desconocidas (Serie)',
+    year: '2022',
+    duration: '3:19',
+    youtubeId: 'Xel0dzOmHLA',
+  },
+  {
+    title: 'Vis a Vis: El Oasis',
+    description: 'Diego Ramala - Escenas destacadas',
+    project: 'Vis a Vis: El Oasis',
+    year: '2021',
+    duration: '2:30',
+    youtubeId: 't4LYYroY5bo',
+  },
+  {
+    title: 'Estoy Vivo T4',
+    description: 'Mikel Uribe - Clip extendido',
+    project: 'Estoy Vivo (TVE)',
+    year: '2021',
+    duration: '13:25',
+    youtubeId: 'kw3SvwH4khQ',
+  },
+  {
+    title: 'Hernán Cortés',
+    description: 'Gonzalo de Sandoval - Escenas',
+    project: 'Hernán Cortés',
+    year: '2020',
+    duration: '3:33',
+    youtubeId: '2P7Ha4u3qBA',
+  },
+  {
+    title: 'Proyecto Audiovisual',
+    description: 'Trabajo destacado',
+    project: 'Producción',
+    year: '2021',
+    duration: '3:15',
+    youtubeId: 'xitfEzmseG4',
+  },
+  {
+    title: 'Actuación Destacada',
+    description: 'Escena de trabajo',
+    project: 'Producción Audiovisual',
+    year: '2021',
+    duration: '2:45',
+    youtubeId: '6YOHYHYj8Qk',
   },
 ]
 
@@ -271,7 +287,7 @@ export default function Showreel() {
             <div className="text-center mb-12">
               <h3 className="text-3xl font-light text-white mb-3">Clips de Actuaciones</h3>
               <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent mx-auto mb-4" />
-              <p className="text-neutral-500 font-light">Entrevistas, escenas y material de mis proyectos principales</p>
+              <p className="text-neutral-500 font-light">Escenas destacadas de mis principales trabajos en televisión y cine</p>
             </div>
             
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
