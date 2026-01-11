@@ -1,17 +1,69 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Award, Star, Trophy, Calendar, Sparkles } from 'lucide-react'
+import { Award, Star, Trophy, Calendar, Sparkles, Tv, Film } from 'lucide-react'
 import { useRef } from 'react'
 
 const awards = [
   {
+    year: '2025',
+    title: 'Nominación Equipo de Guión',
+    work: 'La Moderna (TVE)',
+    organization: 'Premios ALMA',
+    role: 'Íñigo Peñalver (Protagonista)',
+    type: 'nominacion',
+    category: 'Televisión',
+    international: false,
+  },
+  {
+    year: '2024',
+    title: 'Nominación Mejor Telenovela',
+    work: 'La Moderna (TVE)',
+    organization: 'Emmy Internacionales',
+    role: 'Íñigo Peñalver (Protagonista)',
+    type: 'nominacion',
+    category: 'Televisión',
+    international: true,
+  },
+  {
+    year: '2023',
+    title: 'Mejor Serie Diaria',
+    work: 'La Moderna (TVE)',
+    organization: 'Premio FICAL - Festival de Almería',
+    role: 'Íñigo Peñalver (Protagonista)',
+    type: 'premio',
+    category: 'Televisión',
+    international: false,
+  },
+  {
+    year: '2020',
+    title: 'Múltiples Nominaciones',
+    work: 'Vis a vis: El Oasis (FOX)',
+    organization: 'Premios Iris - Academia Televisión',
+    role: 'Diego Ramala (Protagonista)',
+    type: 'nominacion',
+    category: 'Televisión',
+    international: false,
+  },
+  {
+    year: '2020',
+    title: 'Nominación Mejor Actriz',
+    work: 'Vis a vis: El Oasis (FOX)',
+    organization: 'Fotogramas de Plata',
+    role: 'Diego Ramala (Protagonista)',
+    type: 'nominacion',
+    category: 'Televisión',
+    international: false,
+  },
+  {
     year: '2016',
     title: 'Mejor Espectáculo del Año',
     work: 'Oliver Twist (Musical)',
-    organization: 'Producción CIA La Tarasca',
+    organization: 'Festival de Teatro 2016',
     role: 'Jefe de Policía Duff',
     type: 'premio',
+    category: 'Teatro',
+    international: false,
   },
   {
     year: '2015',
@@ -20,33 +72,53 @@ const awards = [
     organization: 'Unión de Actores',
     role: 'Compañía Nacional de Teatro Clásico',
     type: 'nominacion',
+    category: 'Teatro',
+    international: false,
   },
 ]
 
 const recognitions = [
   {
+    icon: Tv,
+    title: 'La Moderna - Éxito Internacional',
+    description: 'Nominada a los Emmy Internacionales 2024 y ganadora del Premio FICAL. Más de 350 episodios como protagonista en TVE.',
+    year: '2023-2025',
+    highlight: true,
+  },
+  {
     icon: Star,
     title: 'Compañía Nacional Teatro Clásico',
-    description: 'Seleccionado para formar parte de la CNTC bajo dirección de Helena Pimenta',
+    description: 'Seleccionado para formar parte de la CNTC bajo dirección de Helena Pimenta. Formación de élite en verso clásico español.',
     year: '2015-2017',
+    highlight: false,
+  },
+  {
+    icon: Film,
+    title: 'La Caza - Serie Más Vista RTVE',
+    description: 'Protagonista en "La Caza: Guadiana", una de las series más vistas de RTVE Play y gran éxito de audiencia en La 1.',
+    year: '2022-2024',
+    highlight: true,
   },
   {
     icon: Trophy,
-    title: 'Protagonista Serie Diaria TVE',
-    description: '236 episodios como Íñigo Peñalver en La Moderna, el galán de las tardes',
-    year: '2023-2024',
+    title: 'Vis a vis: El Oasis - Protagonista',
+    description: 'Primer papel protagonista (Diego Ramala) en el spin-off de la exitosa serie. Múltiples nominaciones en Premios Iris y Fotogramas.',
+    year: '2020',
+    highlight: false,
   },
   {
     icon: Award,
-    title: 'Prime Video International',
-    description: 'Seleccionado para Hernán, producción histórica de Amazon para Latinoamérica',
+    title: 'Hernán Cortés - Prime Video',
+    description: 'Seleccionado para producción histórica internacional de Amazon Prime Video. Estreno en Latinoamérica y España.',
     year: '2019',
+    highlight: false,
   },
   {
-    icon: Star,
-    title: 'Vis a vis: El Oasis',
-    description: 'Primer papel protagonista en spin-off de la exitosa serie de Antena 3',
-    year: '2020',
+    icon: Tv,
+    title: 'Operación: Barrio Inglés - TVE',
+    description: 'Serie de época ambientada en la II Guerra Mundial. Nominaciones en Premios ASECAN por banda sonora original.',
+    year: '2024',
+    highlight: false,
   },
 ]
 
@@ -101,12 +173,12 @@ export default function Awards() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
             >
-              Logros y reconocimientos a lo largo de mi trayectoria profesional
+              Trayectoria profesional reconocida por la industria audiovisual nacional e internacional
             </motion.p>
           </div>
 
           {/* Awards */}
-          <div className="max-w-4xl mx-auto mb-20">
+          <div className="max-w-5xl mx-auto mb-20">
             <h3 className="text-2xl font-bold mb-10 text-center flex items-center justify-center gap-2 text-white">
               <Award className="w-6 h-6 text-yellow-400" />
               Premios y Nominaciones
@@ -122,10 +194,12 @@ export default function Awards() {
                   className="relative group"
                 >
                   <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-6 hover:bg-white/[0.04] hover:border-white/20 transition-all">
-                    <div className="flex items-start gap-4">
+                  <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-6 lg:p-8 hover:bg-white/[0.04] hover:border-white/20 transition-all">
+                    <div className="flex flex-col lg:flex-row items-start gap-6">
                       <div className="flex-shrink-0">
-                        <div className="w-16 h-16 rounded-xl bg-yellow-400 flex items-center justify-center shadow-lg">
+                        <div className={`w-16 h-16 rounded-xl flex items-center justify-center shadow-lg ${
+                          award.type === 'premio' ? 'bg-yellow-400' : 'bg-orange-400'
+                        }`}>
                           {award.type === 'premio' ? (
                             <Trophy className="w-8 h-8 text-black" />
                           ) : (
@@ -134,24 +208,40 @@ export default function Awards() {
                         </div>
                       </div>
                       <div className="flex-grow">
-                        <div className="flex items-center gap-3 mb-2">
+                        <div className="flex flex-wrap items-center gap-3 mb-3">
                           <span className="text-2xl font-bold text-white">{award.year}</span>
-                          <span className="px-3 py-1 rounded-full text-xs font-bold bg-yellow-400 text-black">
+                          <span className={`px-3 py-1 rounded-full text-xs font-bold ${
+                            award.type === 'premio' 
+                              ? 'bg-yellow-400 text-black' 
+                              : 'bg-orange-400 text-black'
+                          }`}>
                             {award.type === 'premio' ? 'PREMIO' : 'NOMINACIÓN'}
                           </span>
+                          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-slate-300 border border-white/20">
+                            {award.category}
+                          </span>
+                          {award.international && (
+                            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                              INTERNACIONAL
+                            </span>
+                          )}
                         </div>
-                        <h4 className="text-xl font-bold mb-2 text-white">{award.title}</h4>
+                        <h4 className="text-xl lg:text-2xl font-bold mb-2 text-white">{award.title}</h4>
                         <p className="text-slate-300 mb-1">
-                          <span className="font-semibold">Obra:</span> {award.work}
+                          <span className="font-semibold">Producción:</span> {award.work}
                         </p>
                         <p className="text-slate-300 mb-1">
                           <span className="font-semibold">Organización:</span> {award.organization}
                         </p>
-                        <p className="text-slate-400 text-sm">{award.role}</p>
+                        <p className="text-slate-400 text-sm mt-2">
+                          <span className="font-semibold">Papel:</span> {award.role}
+                        </p>
                       </div>
                     </div>
                     <motion.div 
-                      className="absolute bottom-0 left-0 h-[2px] bg-yellow-400"
+                      className={`absolute bottom-0 left-0 h-[2px] ${
+                        award.type === 'premio' ? 'bg-yellow-400' : 'bg-orange-400'
+                      }`}
                       initial={{ width: 0 }}
                       whileHover={{ width: '100%' }}
                       transition={{ duration: 0.4 }}
@@ -166,9 +256,9 @@ export default function Awards() {
           <div>
             <h3 className="text-2xl font-bold mb-10 text-center flex items-center justify-center gap-2 text-white">
               <Star className="w-6 h-6 text-yellow-400" />
-              Hitos Profesionales
+              Hitos Profesionales & Producciones Destacadas
             </h3>
-            <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
               {recognitions.map((recognition, index) => (
                 <motion.div
                   key={index}
@@ -178,13 +268,27 @@ export default function Awards() {
                   whileHover={{ y: -4 }}
                   className="relative group"
                 >
-                  <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-6 hover:bg-white/[0.04] hover:border-white/20 transition-all">
+                  <div className={`absolute -inset-[1px] rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+                    recognition.highlight ? 'bg-green-400/20' : 'bg-yellow-400/20'
+                  }`} />
+                  <div className={`relative border rounded-2xl p-6 hover:border-white/20 transition-all ${
+                    recognition.highlight 
+                      ? 'bg-gradient-to-br from-green-900/10 to-green-950/5 border-green-500/30 hover:bg-green-900/15'
+                      : 'bg-white/[0.02] border-white/10 hover:bg-white/[0.04]'
+                  }`}>
                     <div className="flex items-start gap-4">
-                      <recognition.icon className="w-8 h-8 text-yellow-400 flex-shrink-0 mt-1" />
-                      <div>
+                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 mt-1 ${
+                        recognition.highlight 
+                          ? 'bg-green-400/10 border border-green-400/20'
+                          : 'bg-yellow-400/10 border border-yellow-400/20'
+                      }`}>
+                        <recognition.icon className={`w-6 h-6 ${
+                          recognition.highlight ? 'text-green-400' : 'text-yellow-400'
+                        }`} />
+                      </div>
+                      <div className="flex-1">
                         <h4 className="font-bold text-lg mb-2 text-white">{recognition.title}</h4>
-                        <p className="text-slate-300 text-sm mb-2">{recognition.description}</p>
+                        <p className="text-slate-300 text-sm leading-relaxed mb-3">{recognition.description}</p>
                         <div className="flex items-center gap-2 text-xs text-slate-400">
                           <Calendar className="w-3 h-3" />
                           {recognition.year}
@@ -201,13 +305,24 @@ export default function Awards() {
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
             transition={{ duration: 0.6, delay: 0.9 }}
-            className="mt-16 text-center"
+            className="mt-20 text-center"
           >
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm">
-              <Sparkles className="w-5 h-5 text-yellow-400" />
-              <span className="text-sm font-medium text-slate-300">
-                Trayectoria profesional respaldada por la industria
-              </span>
+            <div className="max-w-4xl mx-auto">
+              <div className="relative">
+                <div className="absolute -inset-4 bg-yellow-400/5 rounded-2xl blur-2xl" />
+                <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
+                  <div className="flex flex-col items-center gap-4">
+                    <Sparkles className="w-8 h-8 text-yellow-400" />
+                    <p className="text-lg text-slate-300 leading-relaxed">
+                      <span className="font-semibold text-white">Emmy Internacionales 2024</span>: "La Moderna" nominada junto a "La Promesa" en la categoría de Mejor Telenovela. Ambas series de RTVE compitieron con producciones de 21 países. "La Promesa" resultó ganadora en la gala celebrada en Nueva York.
+                    </p>
+                    <div className="flex items-center gap-2 text-sm text-slate-400 mt-2">
+                      <Award className="w-4 h-4 text-yellow-400" />
+                      <span>Trayectoria profesional respaldada por la industria nacional e internacional</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </motion.div>
