@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { Newspaper, Quote, Play, Calendar, Tv, ExternalLink, X } from 'lucide-react'
+import { Newspaper, Quote, Play, Calendar, Tv, X } from 'lucide-react'
 import { useRef, useState } from 'react'
 
 interface Interview {
@@ -19,126 +19,127 @@ interface PressQuote {
   source: string
   production: string
   year: string
-  featured?: boolean
+  category: string
 }
 
 const interviews: Interview[] = [
   {
     title: 'La pasión por actuar y su paso por La Moderna',
     media: 'El Plural TV',
-    production: 'La Moderna & Operación Barrio Inglés',
+    production: 'La Moderna',
     year: '2024',
     duration: '14:09',
     youtubeId: 'ts2qSZpSO_I',
-    description: 'Entrevista en profundidad sobre su trayectoria, sus inicios en actuaciones callejeras y su interés por producciones históricas.',
+    description: 'Entrevista en profundidad sobre su trayectoria, desde actuaciones callejeras hasta La Moderna y Operación Barrio Inglés.',
   },
   {
-    title: 'Presenta Un fantasma en la batalla',
-    media: 'Netflix España',
+    title: 'Un fantasma en la batalla - Netflix',
+    media: 'Presentación Oficial',
     production: 'Un fantasma en la batalla',
     year: '2025',
     duration: '8:32',
     youtubeId: 'cZSW_6X-Lzk',
-    description: 'El actor sevillano habla sobre su papel de Antonio, novio de una joven guardia civil infiltrada en ETA.',
+    description: 'Presenta su papel de Antonio, novio de una joven guardia civil infiltrada en ETA.',
   },
   {
-    title: 'Cómo ha sido trabajar en Un fantasma en la batalla',
-    media: 'Entrevista Promoción',
-    production: 'Un fantasma en la batalla',
+    title: 'Operación Barrio Inglés - Making Of',
+    media: 'TVE Behind The Scenes',
+    production: 'Operación Barrio Inglés',
     year: '2024',
-    duration: '5:18',
-    youtubeId: 'MV5kUBPfd9U',
-    description: 'Detalla su experiencia interpretando al novio de una joven guardia civil en esta producción de Netflix.',
-  },
-  {
-    title: 'Operación Barrio Inglés y La Moderna',
-    media: 'TVE Promoción',
-    production: 'Operación Barrio Inglés & La Moderna',
-    year: '2024',
-    duration: '18:45',
+    duration: '4:02',
     youtubeId: 'mll_3Sj8kjg',
-    description: 'Presenta su doble trabajo en TVE: la serie de espías en los años 40 y su papel protagonista en La Moderna.',
-  },
-  {
-    title: 'Un té con Almagro San Miguel',
-    media: 'RTVE - La Moderna',
-    production: 'La Moderna',
-    year: '2024',
-    duration: '12:30',
-    youtubeId: '16137829',
-    description: 'Conversación sobre su personaje de Íñigo Peñalver, las tramas de la serie y su futuro en La Moderna.',
-  },
-  {
-    title: 'Lunes Seriéfilos - Entrevista completa',
-    media: 'Lunes Seriéfilos TV',
-    production: 'La Moderna',
-    year: '2024',
-    duration: '53:48',
-    youtubeId: 'Fh9WHJpDtV0',
-    description: 'Entrevista extensa donde actualiza su trabajo y profundiza en su papel de Íñigo en La Moderna.',
+    description: 'Habla sobre la serie de espías ambientada en los años 40 y su doble trabajo en TVE.',
   },
   {
     title: 'Vis a Vis: El Oasis y Hernán',
     media: 'La Caja de Música TV',
-    production: 'Vis a Vis: El Oasis & Hernán',
+    production: 'Vis a Vis: El Oasis',
     year: '2020',
     duration: '15:42',
     youtubeId: 'C211y0omwZ8',
-    description: 'Habla sobre su primer papel protagonista como Diego Ramala y su experiencia en la producción histórica Hernán.',
+    description: 'Primer papel protagonista como Diego Ramala y su experiencia en la producción histórica de Prime Video.',
   },
   {
-    title: 'El Oasis - Vis a Vis',
-    media: 'Rumbera Sevilla 93.4 FM',
-    production: 'Vis a Vis: El Oasis',
-    year: '2020',
-    duration: '22:15',
-    youtubeId: 'JnzoAOXccYg',
-    description: 'Entrevista radiofónica sobre su participación en el spin-off de Vis a vis y su trabajo con el elenco femenino.',
+    title: 'Entrevista Almagro San Miguel',
+    media: 'Canal Profesional',
+    production: 'Trayectoria Completa',
+    year: '2024',
+    duration: '25:30',
+    youtubeId: 'RfJU1SQJvMc',
+    description: 'Repaso completo de su carrera desde el teatro hasta las grandes producciones de televisión.',
+  },
+  {
+    title: 'Lunes Seriéfilos - Especial',
+    media: 'Lunes Seriéfilos',
+    production: 'La Moderna',
+    year: '2024',
+    duration: '53:48',
+    youtubeId: 'Fh9WHJpDtV0',
+    description: 'Entrevista extensa donde profundiza en su papel de Íñigo Peñalver y la dinámica de rodaje.',
   },
 ]
 
 const pressQuotes: PressQuote[] = [
+  // La Moderna
   {
     quote: 'Cada proyecto, personaje, es otra historia, otro mundo, otros conflictos. La posibilidad de aprender de la historia de mi país me llena mucho.',
-    source: 'RTVE - Entrevista La Moderna',
+    source: 'RTVE - Entrevista oficial',
     production: 'La Moderna',
     year: '2023',
-    featured: true,
+    category: 'Televisión',
   },
   {
-    quote: 'Me trabajé mucho las audiciones porque la oportunidad así lo requería. Estoy tremendamente agradecido con Boomerang y RTVE por la confianza.',
+    quote: 'Me trabajé mucho las audiciones porque la oportunidad así lo requería. Estoy tremendamente agradecido con Boomerang y RTVE por la confianza depositada.',
     source: 'RTVE - Sobre su casting',
     production: 'La Moderna',
     year: '2023',
-    featured: true,
-  },
-  {
-    quote: 'Es alucinante ver cómo los directores y el equipo técnico se desenvuelven. Siempre están abiertos a tus propuestas y el equipo salva cualquier problema en un abrir y cerrar de ojos.',
-    source: 'RTVE - Sobre el equipo de La Moderna',
-    production: 'La Moderna',
-    year: '2023',
-    featured: false,
+    category: 'Televisión',
   },
   {
     quote: 'Cada vez que me vienen nuevos guiones me sorprendo, me encanta que sea así. No te puedes quedar tranquilo pensando que todo está bien o mal, porque en un segundo cambia.',
     source: 'RTVE - Sobre las tramas',
     production: 'La Moderna',
     year: '2023',
-    featured: false,
+    category: 'Televisión',
   },
+  // Hernán
   {
-    quote: 'Venía de estar poniendo copas en discotecas. Hernán fue maravilloso, un proyecto que me cambió la vida profesionalmente.',
+    quote: 'Venía de estar poniendo copas en discotecas. Hernán fue maravilloso, un proyecto que me cambió la vida profesionalmente. Trabajar en una producción histórica de Amazon fue un sueño.',
     source: 'La Caja de Música TV',
     production: 'Hernán Cortés',
     year: '2020',
-    featured: false,
+    category: 'Cine & TV',
   },
+  // Vis a vis
   {
-    quote: 'Mi personaje Diego es un guitarrista que trabaja con un narcotraficante mexicano. Fue fascinante explorar ese mundo y trabajar con el elenco femenino de Vis a vis.',
+    quote: 'Diego es un guitarrista que trabaja con un narcotraficante mexicano. Fue fascinante explorar ese mundo oscuro y trabajar con el increíble elenco femenino de Vis a vis.',
     source: 'Rumbera Sevilla FM',
     production: 'Vis a Vis: El Oasis',
     year: '2020',
-    featured: false,
+    category: 'Televisión',
+  },
+  {
+    quote: 'Mi primer papel protagonista fue un reto enorme. Diego Ramala es un personaje complejo, con muchas capas. Me permitió demostrar mi rango como actor.',
+    source: 'FOX España',
+    production: 'Vis a Vis: El Oasis',
+    year: '2020',
+    category: 'Televisión',
+  },
+  // Un fantasma en la batalla
+  {
+    quote: 'Interpretar a Antonio en esta historia basada en hechos reales sobre ETA fue un honor y una responsabilidad. Es una historia que necesitaba ser contada.',
+    source: 'Netflix España',
+    production: 'Un fantasma en la batalla',
+    year: '2025',
+    category: 'Cine',
+  },
+  // Teatro - CNTC
+  {
+    quote: 'La Compañía Nacional de Teatro Clásico fue mi escuela más importante. Aprender verso clásico con Helena Pimenta marcó mi carrera para siempre.',
+    source: 'Gatropolis - Entrevista',
+    production: 'Fuente Ovejuna (CNTC)',
+    year: '2015',
+    category: 'Teatro',
   },
 ]
 
@@ -146,6 +147,13 @@ export default function Press() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
   const [modalVideo, setModalVideo] = useState<Interview | null>(null)
+  const [selectedCategory, setSelectedCategory] = useState<string>('all')
+
+  const filteredQuotes = selectedCategory === 'all' 
+    ? pressQuotes 
+    : pressQuotes.filter(q => q.category === selectedCategory)
+
+  const categories = ['all', 'Televisión', 'Cine', 'Cine & TV', 'Teatro']
 
   const openModal = (interview: Interview) => {
     setModalVideo(interview)
@@ -187,7 +195,7 @@ export default function Press() {
                 className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
               >
                 <Newspaper className="w-4 h-4 text-yellow-400" strokeWidth={2} />
-                <span className="text-sm font-medium text-slate-300 tracking-wide">Medios & Entrevistas</span>
+                <span className="text-sm font-medium text-slate-300 tracking-wide">Medios & Declaraciones</span>
               </motion.div>
               
               <motion.h2 
@@ -212,48 +220,15 @@ export default function Press() {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
               >
-                Apariciones en medios, entrevistas y cobertura de sus principales producciones
+                Cobertura profesional y declaraciones sobre sus principales producciones
               </motion.p>
             </div>
-
-            {/* Featured Quotes */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="max-w-5xl mx-auto mb-20"
-            >
-              <h3 className="text-2xl font-bold mb-10 text-center flex items-center justify-center gap-2 text-white">
-                <Quote className="w-6 h-6 text-yellow-400" />
-                Declaraciones Destacadas
-              </h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                {pressQuotes.filter(q => q.featured).map((quote, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                    className="relative bg-gradient-to-br from-yellow-900/10 to-orange-900/5 border border-yellow-500/30 rounded-2xl p-8 backdrop-blur-sm"
-                  >
-                    <Quote className="w-8 h-8 text-yellow-400/30 mb-4" />
-                    <p className="text-lg text-white leading-relaxed mb-4 italic">
-                      &ldquo;{quote.quote}&rdquo;
-                    </p>
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-slate-400">{quote.source}</span>
-                      <span className="text-slate-500">{quote.year}</span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
 
             {/* Interviews Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
               className="mb-20"
             >
               <h3 className="text-2xl font-bold mb-10 text-center flex items-center justify-center gap-2 text-white">
@@ -261,7 +236,7 @@ export default function Press() {
                 Entrevistas en Video
               </h3>
               
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {interviews.map((interview, index) => (
                   <motion.div
                     key={index}
@@ -277,17 +252,9 @@ export default function Press() {
                     }}
                     transition={{ 
                       duration: 0.6,
-                      delay: 0.8 + index * 0.1,
-                      ease: [0.25, 0.46, 0.45, 0.94]
+                      delay: 0.6 + index * 0.1,
                     }}
-                    whileHover={{ 
-                      y: -8, 
-                      scale: 1.03,
-                      transition: { 
-                        duration: 0.3,
-                        ease: [0.34, 1.56, 0.64, 1]
-                      }
-                    }}
+                    whileHover={{ y: -8, scale: 1.03 }}
                     className="group relative cursor-pointer"
                     onClick={() => openModal(interview)}
                   >
@@ -296,7 +263,7 @@ export default function Press() {
                         className="absolute -inset-[2px] bg-yellow-400/30 rounded-2xl blur-xl"
                         initial={{ opacity: 0 }}
                         whileHover={{ opacity: 1 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
+                        transition={{ duration: 0.4 }}
                       />
                       
                       <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl overflow-hidden hover:border-yellow-400/30 transition-all duration-500 backdrop-blur-xl shadow-2xl">
@@ -305,57 +272,30 @@ export default function Press() {
                             src={`https://img.youtube.com/vi/${interview.youtubeId}/mqdefault.jpg`}
                             alt={interview.title}
                             className="w-full h-full object-cover"
-                            initial={{ opacity: 0.75, scale: 1 }}
-                            whileHover={{ 
-                              opacity: 1, 
-                              scale: 1.08,
-                              transition: { duration: 0.5, ease: "easeOut" }
-                            }}
+                            whileHover={{ scale: 1.08 }}
                           />
                           
-                          <motion.div 
-                            className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"
-                            initial={{ opacity: 0.7 }}
-                            whileHover={{ opacity: 0.5 }}
-                            transition={{ duration: 0.3 }}
-                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                           
                           <div className="absolute inset-0 flex items-center justify-center">
                             <motion.div 
                               className="w-16 h-16 rounded-full bg-white/95 flex items-center justify-center shadow-2xl"
-                              whileHover={{ 
-                                scale: 1.2,
-                                backgroundColor: "rgba(255, 255, 255, 1)",
-                                boxShadow: "0 0 30px rgba(250, 204, 21, 0.6)"
-                              }}
-                              transition={{ 
-                                type: "spring",
-                                stiffness: 400,
-                                damping: 15
-                              }}
+                              whileHover={{ scale: 1.2 }}
                             >
                               <Play className="w-7 h-7 ml-1 fill-black text-black" />
                             </motion.div>
                           </div>
                           
-                          <motion.div 
-                            className="absolute bottom-3 right-3 px-3 py-1.5 rounded-lg bg-black/90 text-white text-xs font-bold backdrop-blur-md border border-white/10"
-                            whileHover={{ scale: 1.05, backgroundColor: "rgba(0, 0, 0, 0.95)" }}
-                            transition={{ duration: 0.2 }}
-                          >
+                          <div className="absolute bottom-3 right-3 px-3 py-1.5 rounded-lg bg-black/90 text-white text-xs font-bold backdrop-blur-md border border-white/10">
                             {interview.duration}
-                          </motion.div>
+                          </div>
                         </div>
 
                         <div className="p-5 bg-gradient-to-b from-black/50 to-black/80">
-                          <motion.h4 
-                            className="text-base font-semibold text-white mb-2 line-clamp-2 leading-tight"
-                            whileHover={{ color: "rgb(250, 204, 21)" }}
-                            transition={{ duration: 0.2 }}
-                          >
+                          <h4 className="text-base font-semibold text-white mb-2 line-clamp-2">
                             {interview.title}
-                          </motion.h4>
-                          <p className="text-xs text-slate-400 mb-3 line-clamp-2 leading-relaxed">
+                          </h4>
+                          <p className="text-xs text-slate-400 mb-3 line-clamp-2">
                             {interview.description}
                           </p>
                           <div className="space-y-2">
@@ -363,7 +303,7 @@ export default function Press() {
                               <span className="text-xs text-slate-500 font-medium">{interview.media}</span>
                               <span className="text-xs text-slate-600 font-medium">{interview.year}</span>
                             </div>
-                            <div className="text-xs text-slate-500">{interview.production}</div>
+                            <div className="text-xs text-yellow-400 font-medium">{interview.production}</div>
                           </div>
                         </div>
                       </div>
@@ -373,32 +313,67 @@ export default function Press() {
               </div>
             </motion.div>
 
-            {/* Additional Quotes */}
+            {/* Quotes Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.9 }}
-              className="max-w-4xl mx-auto"
+              transition={{ duration: 0.6, delay: 0.7 }}
             >
-              <div className="grid md:grid-cols-2 gap-6">
-                {pressQuotes.filter(q => !q.featured).map((quote, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                    transition={{ duration: 0.6, delay: 1.0 + index * 0.1 }}
-                    className="bg-white/[0.02] border border-white/10 rounded-xl p-6 hover:bg-white/[0.04] hover:border-yellow-400/30 transition-all"
-                  >
-                    <Quote className="w-6 h-6 text-yellow-400/40 mb-3" />
-                    <p className="text-sm text-slate-300 leading-relaxed mb-3 italic">
-                      &ldquo;{quote.quote}&rdquo;
-                    </p>
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-slate-500">{quote.source}</span>
-                      <span className="text-slate-600">{quote.year}</span>
-                    </div>
-                  </motion.div>
-                ))}
+              <div className="mb-10">
+                <h3 className="text-2xl font-bold mb-6 text-center flex items-center justify-center gap-2 text-white">
+                  <Quote className="w-6 h-6 text-yellow-400" />
+                  Declaraciones Profesionales
+                </h3>
+                
+                {/* Category Filter */}
+                <div className="flex flex-wrap justify-center gap-3">
+                  {categories.map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => setSelectedCategory(cat)}
+                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                        selectedCategory === cat
+                          ? 'bg-yellow-400 text-black'
+                          : 'bg-white/5 text-slate-400 hover:bg-white/10'
+                      }`}
+                    >
+                      {cat === 'all' ? 'Todas' : cat}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+                <AnimatePresence mode="popLayout">
+                  {filteredQuotes.map((quote, index) => (
+                    <motion.div
+                      key={`${quote.production}-${index}`}
+                      layout
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.3 }}
+                      className="bg-white/[0.02] border border-white/10 rounded-xl p-6 hover:bg-white/[0.04] hover:border-yellow-400/30 transition-all"
+                    >
+                      <Quote className="w-6 h-6 text-yellow-400/40 mb-3" />
+                      <p className="text-sm text-slate-300 leading-relaxed mb-4 italic">
+                        &ldquo;{quote.quote}&rdquo;
+                      </p>
+                      <div className="flex items-center justify-between gap-3 text-xs">
+                        <div>
+                          <p className="text-slate-500 mb-1">{quote.source}</p>
+                          <p className="text-yellow-400 font-medium">{quote.production}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-slate-600">{quote.year}</p>
+                          <span className="inline-block mt-1 px-2 py-1 rounded bg-white/5 text-slate-400 text-[10px]">
+                            {quote.category}
+                          </span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
               </div>
             </motion.div>
           </motion.div>
@@ -412,7 +387,6 @@ export default function Press() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-md"
             onClick={closeModal}
           >
@@ -420,7 +394,6 @@ export default function Press() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3, type: "spring", damping: 25 }}
               className="relative w-full max-w-6xl"
               onClick={(e) => e.stopPropagation()}
             >
@@ -443,20 +416,14 @@ export default function Press() {
                 </div>
 
                 <div className="p-6">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-semibold text-white mb-2">{modalVideo.title}</h3>
-                      <p className="text-slate-400 mb-3">{modalVideo.description}</p>
-                      <div className="flex items-center gap-4 text-sm text-slate-500">
-                        <span>{modalVideo.media}</span>
-                        <span>•</span>
-                        <span>{modalVideo.production}</span>
-                        <span>•</span>
-                        <span>{modalVideo.year}</span>
-                        <span>•</span>
-                        <span>{modalVideo.duration}</span>
-                      </div>
-                    </div>
+                  <h3 className="text-2xl font-semibold text-white mb-2">{modalVideo.title}</h3>
+                  <p className="text-slate-400 mb-3">{modalVideo.description}</p>
+                  <div className="flex items-center gap-4 text-sm text-slate-500">
+                    <span>{modalVideo.media}</span>
+                    <span>•</span>
+                    <span className="text-yellow-400">{modalVideo.production}</span>
+                    <span>•</span>
+                    <span>{modalVideo.year}</span>
                   </div>
                 </div>
               </div>
