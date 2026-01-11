@@ -1,9 +1,10 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Play, MapPin, Calendar, ExternalLink, Clapperboard, Tv, Star, Theater as TheaterIcon } from 'lucide-react'
+import { ArrowDown, Play, MapPin, Calendar, ExternalLink, Clapperboard, Tv, Star, Theater as TheaterIcon, Instagram, Twitter, Youtube, Facebook } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import { SiTiktok } from 'react-icons/si'
 
 export default function Hero() {
   const { scrollY } = useScroll()
@@ -39,6 +40,49 @@ export default function Hero() {
       url: 'https://es.wikipedia.org/wiki/Almagro_San_Miguel',
       icon: '📖',
       description: 'Biografía'
+    },
+  ]
+
+  const socialLinks = [
+    {
+      name: 'Instagram',
+      url: 'https://www.instagram.com/almagrosanmiguel/',
+      icon: Instagram,
+      color: 'hover:text-pink-500',
+      bgHover: 'hover:bg-pink-500/10',
+      borderHover: 'hover:border-pink-500/30',
+    },
+    {
+      name: 'X / Twitter',
+      url: 'https://twitter.com/almagrosanmi',
+      icon: Twitter,
+      color: 'hover:text-sky-400',
+      bgHover: 'hover:bg-sky-400/10',
+      borderHover: 'hover:border-sky-400/30',
+    },
+    {
+      name: 'TikTok',
+      url: 'https://www.tiktok.com/@almagrosanmiguel',
+      icon: 'tiktok',
+      color: 'hover:text-white',
+      bgHover: 'hover:bg-white/10',
+      borderHover: 'hover:border-white/30',
+    },
+    {
+      name: 'YouTube',
+      url: 'https://www.youtube.com/@AlmagroSanMiguel',
+      icon: Youtube,
+      color: 'hover:text-red-500',
+      bgHover: 'hover:bg-red-500/10',
+      borderHover: 'hover:border-red-500/30',
+    },
+    {
+      name: 'Facebook',
+      url: 'https://www.facebook.com/AlmagroSanMiguelOficial',
+      icon: Facebook,
+      color: 'hover:text-blue-500',
+      bgHover: 'hover:bg-blue-500/10',
+      borderHover: 'hover:border-blue-500/30',
     },
   ]
 
@@ -323,11 +367,57 @@ export default function Hero() {
               </div>
             </motion.div>
 
+            {/* Sección de Redes Sociales */}
+            <motion.div
+              className="space-y-3"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.95, duration: 0.6 }}
+            >
+              <div className="flex items-center gap-2">
+                <Instagram className="w-4 h-4 text-yellow-400" />
+                <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400">
+                  Redes Sociales
+                </h3>
+              </div>
+              
+              <div className="grid grid-cols-3 sm:grid-cols-5 gap-2.5">
+                {socialLinks.map((link, index) => {
+                  const Icon = link.icon
+                  return (
+                    <motion.a
+                      key={link.name}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1.0 + index * 0.05, duration: 0.4 }}
+                      whileHover={{ scale: 1.08, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`group flex flex-col items-center justify-center gap-2 rounded-xl border border-slate-700/70 
+                                 bg-slate-900/80 px-3 py-3 backdrop-blur-md transition-all 
+                                 shadow-[0_12px_30px_rgba(15,23,42,0.8)] ${link.borderHover} ${link.bgHover}`}
+                    >
+                      {Icon === 'tiktok' ? (
+                        <SiTiktok className={`w-5 h-5 text-slate-300 transition-colors ${link.color}`} />
+                      ) : (
+                        <Icon className={`w-5 h-5 text-slate-300 transition-colors ${link.color}`} />
+                      )}
+                      <p className={`text-[10px] font-semibold text-slate-400 transition-colors ${link.color}`}>
+                        {link.name.split(' ')[0]}
+                      </p>
+                    </motion.a>
+                  )
+                })}
+              </div>
+            </motion.div>
+
             <motion.div
               className="pt-3 flex justify-center lg:justify-start"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.05, duration: 0.6 }}
+              transition={{ delay: 1.15, duration: 0.6 }}
             >
               <motion.a
                 href="#about"
