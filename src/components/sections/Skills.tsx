@@ -161,7 +161,7 @@ export default function Skills() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-white"
             >
-              Skills & Training
+              Formación y Habilidades
             </motion.h2>
 
             <motion.div
