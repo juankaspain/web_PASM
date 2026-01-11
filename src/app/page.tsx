@@ -30,6 +30,7 @@ const Timeline = dynamic(() => import('@/components/sections/Timeline'), {
 
 const Milestones = dynamic(() => import('@/components/sections/Milestones'))
 const Awards = dynamic(() => import('@/components/sections/Awards'))
+const Calendar = dynamic(() => import('@/components/sections/Calendar'))
 const Gallery = dynamic(() => import('@/components/sections/Gallery'))
 const Showreel = dynamic(() => import('@/components/sections/Showreel'))
 const Press = dynamic(() => import('@/components/sections/Press'))
@@ -63,6 +64,9 @@ export default function Home() {
       <Timeline />
       <Milestones />
       <Awards />
+      
+      {/* Events & Schedule - NUEVO */}
+      <Calendar />
       
       {/* Media sections - Professional photos first */}
       <Headshots />
