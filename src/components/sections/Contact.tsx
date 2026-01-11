@@ -16,7 +16,7 @@ import {
   Sparkles,
   Clock,
 } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { trackEvent } from '@/lib/analytics'
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xlggrndl'
@@ -72,6 +72,12 @@ const socialLinks = [
   },
 ]
 
+interface Particle {
+  id: number
+  x: number
+  y: number
+}
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -83,6 +89,19 @@ export default function Contact() {
     'idle',
   )
   const [errorMessage, setErrorMessage] = useState('')
+  const [particles, setParticles] = useState<Particle[]>([])
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+    // Generate particles only on client side
+    const newParticles = [...Array(30)].map((_, i) => ({
+      id: i,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+    }))
+    setParticles(newParticles)
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -142,27 +161,29 @@ export default function Contact() {
       <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-yellow-500/10 rounded-full blur-[150px]" />
 
-      <div className="absolute inset-0 opacity-20">
-        {[...Array(30)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-yellow-400 rounded-full"
-            initial={{
-              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920),
-              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080),
-            }}
-            animate={{
-              y: [null, Math.random() * -300],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: Math.random() * 6 + 4,
-              repeat: Infinity,
-              delay: Math.random() * 3,
-            }}
-          />
-        ))}
-      </div>
+      {isMounted && (
+        <div className="absolute inset-0 opacity-20">
+          {particles.map((particle) => (
+            <motion.div
+              key={particle.id}
+              className="absolute w-1 h-1 bg-yellow-400 rounded-full"
+              initial={{
+                x: particle.x,
+                y: particle.y,
+              }}
+              animate={{
+                y: [null, particle.y - 300],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: Math.random() * 6 + 4,
+                repeat: Infinity,
+                delay: Math.random() * 3,
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
