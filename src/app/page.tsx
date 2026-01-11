@@ -33,10 +33,11 @@ const Awards = dynamic(() => import('@/components/sections/Awards'))
 const Calendar = dynamic(() => import('@/components/sections/Calendar'))
 const Gallery = dynamic(() => import('@/components/sections/Gallery'))
 const Showreel = dynamic(() => import('@/components/sections/Showreel'))
+const PressInterviews = dynamic(() => import('@/components/sections/PressInterviews'))
+const Testimonials = dynamic(() => import('@/components/sections/Testimonials'))
 const Press = dynamic(() => import('@/components/sections/Press'))
 const PressKit = dynamic(() => import('@/components/sections/PressKit'))
 const Contact = dynamic(() => import('@/components/sections/Contact'))
-const Testimonials = dynamic(() => import('@/components/sections/Testimonials'))
 
 export default function Home() {
   return (
@@ -69,13 +70,14 @@ export default function Home() {
       {/* Events & Schedule */}
       <Calendar />
       
-      {/* Testimonials - Professional Declarations */}
-      <Testimonials />
-      
       {/* Media sections - Professional photos first */}
       <Headshots />
       <Gallery />
       <Showreel />
+      
+      {/* Press & Interviews */}
+      <PressInterviews />
+      <Testimonials />
       <Press />
       
       {/* Professional sections */}
