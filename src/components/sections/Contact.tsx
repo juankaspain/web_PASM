@@ -16,9 +16,11 @@ import {
   Send,
   Sparkles,
   Clock,
+  Twitter,
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { trackEvent } from '@/lib/analytics'
+import { SiTiktok } from 'react-icons/si'
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xlggrndl'
 
@@ -60,22 +62,28 @@ const socialLinks = [
     url: 'https://www.instagram.com/almagrosanmiguel/',
   },
   {
-    icon: Youtube,
-    label: 'YouTube',
-    handle: '@almagrosanmiguel7219',
-    url: 'https://www.youtube.com/@almagrosanmiguel7219',
+    icon: Twitter,
+    label: 'X',
+    handle: '@almagroSM',
+    url: 'https://twitter.com/almagrosanmi',
   },
   {
-    icon: X,
-    label: 'X (Twitter)',
-    handle: '@almagroSM',
-    url: 'https://x.com/almagroSM',
+    icon: 'tiktok',
+    label: 'TikTok',
+    handle: '@almagrosanmiguel',
+    url: 'https://www.tiktok.com/@almagrosanmiguel',
+  },
+  {
+    icon: Youtube,
+    label: 'YouTube',
+    handle: '@AlmagroSanMiguel',
+    url: 'https://www.youtube.com/@AlmagroSanMiguel',
   },
   {
     icon: Facebook,
     label: 'Facebook',
-    handle: '/almagrosanmiguel',
-    url: 'https://www.facebook.com/almagrosanmiguel/',
+    handle: 'AlmagroSanMiguelOficial',
+    url: 'https://www.facebook.com/AlmagroSanMiguelOficial',
   },
 ]
 
@@ -414,7 +422,7 @@ export default function Contact() {
               <div>
                 <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-yellow-400" />
-                  Redes Sociales
+                  Sígueme
                 </h3>
                 <div className="space-y-3">
                   {socialLinks.map((social, index) => {
@@ -431,7 +439,11 @@ export default function Contact() {
                       >
                         <div className="flex items-center gap-3">
                           <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center shadow-lg">
-                            <Icon className="w-6 h-6 text-white" />
+                            {Icon === 'tiktok' ? (
+                              <SiTiktok className="w-6 h-6 text-white" />
+                            ) : (
+                              <Icon className="w-6 h-6 text-white" />
+                            )}
                           </div>
                           <div>
                             <p className="font-bold text-white">{social.label}</p>
