@@ -5,12 +5,13 @@ import { Menu, X } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
-// NAVEGACIÓN OPTIMIZADA: De 10 links → 6 links principales
+// NAVEGACIÓN OPTIMIZADA: 7 links principales
 const navLinks = [
   { href: '#portfolio', label: 'Filmografía' },
   { href: '#theater', label: 'Teatro' },
   { href: '#awards', label: 'Premios' },
   { href: '#showreel', label: 'Showreel' },
+  { href: '#press', label: 'Prensa' },
   { href: '#presskit', label: 'Press Kit' },
   { href: '#contact', label: 'Contacto' },
 ]
