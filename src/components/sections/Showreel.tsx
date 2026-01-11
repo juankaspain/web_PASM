@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { Play, Calendar, Sparkles, Film, ExternalLink, Youtube, X } from 'lucide-react'
+import { Play, Calendar, Film, X } from 'lucide-react'
 import { useRef, useState } from 'react'
 
 interface ShowreelVideo {
@@ -142,7 +142,7 @@ export default function Showreel() {
 
   return (
     <>
-      <section id="showreel" className="relative py-32 overflow-hidden bg-gradient-to-b from-slate-900 via-black to-slate-950">
+      <section id="showreel" className="relative py-24 overflow-hidden bg-gradient-to-b from-slate-900 via-black to-slate-950">
         {/* Background decorations */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/3 left-1/3 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px]" />
@@ -163,23 +163,23 @@ export default function Showreel() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6 }}
           >
-            {/* Header */}
+            {/* Header - ESTANDARIZADO */}
             <div className="text-center mb-16">
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-orange-700/30 bg-gradient-to-r from-orange-900/30 to-yellow-900/30 backdrop-blur-sm"
+                className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm"
               >
-                <Film className="w-4 h-4 text-orange-400" strokeWidth={1.5} />
-                <span className="text-sm font-light text-orange-200 tracking-wider">Video Profesional</span>
+                <Film className="w-4 h-4 text-yellow-400" strokeWidth={2} />
+                <span className="text-sm font-medium text-slate-300 tracking-wide">Video Profesional</span>
               </motion.div>
               
               <motion.h2 
                 initial={{ opacity: 0, y: 10 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-5xl lg:text-6xl font-light mb-4 tracking-tight bg-gradient-to-r from-white via-orange-100 to-yellow-200 bg-clip-text text-transparent"
+                className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-white"
               >
                 Showreel
               </motion.h2>
@@ -188,14 +188,14 @@ export default function Showreel() {
                 initial={{ opacity: 0, scaleX: 0 }}
                 animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="w-24 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent mx-auto mb-6"
+                className="w-20 h-0.5 bg-yellow-400 mx-auto mb-6"
               />
               
               <motion.p 
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed font-light"
+                className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
               >
                 Selección de mis mejores interpretaciones en televisión, cine y teatro
               </motion.p>
@@ -214,8 +214,8 @@ export default function Showreel() {
                   onClick={() => setActiveVideo(reel.id)}
                   className={`px-8 py-3 rounded-xl font-medium text-sm transition-all duration-300 ${
                     activeVideo === reel.id
-                      ? 'bg-gradient-to-r from-orange-600/30 to-yellow-600/30 border-2 border-orange-500/50 text-white shadow-lg scale-105'
-                      : 'bg-neutral-900/50 border border-neutral-800 text-neutral-400 hover:border-neutral-700 hover:text-neutral-300 hover:scale-102'
+                      ? 'bg-yellow-400 text-black shadow-lg shadow-yellow-400/25 scale-105'
+                      : 'bg-white/5 border border-white/10 text-slate-400 hover:border-white/20 hover:text-white hover:scale-102'
                   }`}
                 >
                   Showreel {reel.year}
@@ -229,14 +229,12 @@ export default function Showreel() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="max-w-5xl mx-auto mb-32"
+              className="max-w-5xl mx-auto mb-24"
             >
               <div className="relative">
-                {/* Glow effect */}
-                <div className="absolute -inset-[2px] bg-gradient-to-br from-orange-500/20 to-yellow-500/20 rounded-2xl blur-xl opacity-50" />
+                <div className="absolute -inset-[2px] bg-yellow-400/20 rounded-2xl blur-xl opacity-50" />
                 
-                <div className="relative bg-gradient-to-br from-neutral-900/80 to-neutral-900/40 border border-neutral-800 rounded-2xl p-2 backdrop-blur-sm shadow-2xl">
-                  {/* YouTube Embed */}
+                <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-2 backdrop-blur-sm shadow-2xl">
                   <div className="relative aspect-video overflow-hidden rounded-xl bg-black">
                     <iframe
                       src={`https://www.youtube.com/embed/${currentShowreel.youtubeId}?rel=0&modestbranding=1`}
@@ -247,47 +245,37 @@ export default function Showreel() {
                     />
                   </div>
 
-                  {/* Video Info */}
                   <div className="p-6">
                     <div className="flex items-start justify-between gap-4 mb-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <h3 className="text-2xl font-medium text-white">{currentShowreel.title}</h3>
-                          <span className="px-3 py-1 rounded-full bg-orange-500/20 border border-orange-500/30 text-orange-300 text-xs font-semibold">
+                          <h3 className="text-2xl font-bold text-white">{currentShowreel.title}</h3>
+                          <span className="px-3 py-1 rounded-full bg-yellow-400/20 border border-yellow-400/30 text-yellow-300 text-xs font-semibold">
                             {currentShowreel.year}
                           </span>
                         </div>
-                        <p className="text-neutral-400 leading-relaxed font-light">
+                        <p className="text-slate-400 leading-relaxed">
                           {currentShowreel.description}
                         </p>
                       </div>
                     </div>
 
-                    {/* Metadata */}
-                    <div className="flex items-center gap-6 pt-4 border-t border-neutral-800">
-                      <div className="flex items-center gap-2 text-sm text-neutral-500">
+                    <div className="flex items-center gap-6 pt-4 border-t border-white/10">
+                      <div className="flex items-center gap-2 text-sm text-slate-500">
                         <Calendar className="w-4 h-4" strokeWidth={1.5} />
-                        <span className="font-light">Año {currentShowreel.year}</span>
+                        <span>Año {currentShowreel.year}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-neutral-500">
+                      <div className="flex items-center gap-2 text-sm text-slate-500">
                         <Play className="w-4 h-4" strokeWidth={1.5} />
-                        <span className="font-light">{currentShowreel.duration} min</span>
+                        <span>{currentShowreel.duration} min</span>
                       </div>
-                      <a
-                        href={`https://www.youtube.com/watch?v=${currentShowreel.youtubeId}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="ml-auto px-4 py-2 rounded-lg bg-red-600/20 border border-red-500/30 hover:bg-red-600/30 hover:border-red-500/50 text-red-300 hover:text-red-200 text-sm font-medium transition-all"
-                      >
-                        Ver en YouTube
-                      </a>
                     </div>
                   </div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Clips Section - Enhanced with Professional Transitions */}
+            {/* Clips Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -295,9 +283,9 @@ export default function Showreel() {
               className="max-w-7xl mx-auto"
             >
               <div className="text-center mb-16">
-                <h3 className="text-3xl font-light text-white mb-3">Clips de Actuaciones</h3>
-                <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent mx-auto mb-4" />
-                <p className="text-neutral-500 font-light">Escenas destacadas de mis principales trabajos en televisión y cine</p>
+                <h3 className="text-3xl font-bold text-white mb-4">Clips de Actuaciones</h3>
+                <div className="w-20 h-0.5 bg-yellow-400 mx-auto mb-4" />
+                <p className="text-slate-400">Escenas destacadas de mis principales trabajos en televisión y cine</p>
               </div>
               
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
@@ -327,20 +315,18 @@ export default function Showreel() {
                         ease: [0.34, 1.56, 0.64, 1]
                       }
                     }}
-                    className="group relative perspective-1000 cursor-pointer"
+                    className="group relative cursor-pointer"
                     onClick={() => openModal(clip)}
                   >
-                    <div className="relative transform-gpu">
-                      {/* Enhanced Hover glow with smoother transition */}
+                    <div className="relative">
                       <motion.div 
-                        className="absolute -inset-[2px] bg-gradient-to-br from-orange-500/30 via-yellow-500/20 to-orange-500/30 rounded-2xl blur-xl"
+                        className="absolute -inset-[2px] bg-yellow-400/30 rounded-2xl blur-xl"
                         initial={{ opacity: 0 }}
                         whileHover={{ opacity: 1 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
                       />
                       
-                      <div className="relative bg-gradient-to-br from-neutral-900/80 to-neutral-900/50 border border-neutral-800 rounded-2xl overflow-hidden hover:border-orange-500/30 transition-all duration-500 backdrop-blur-xl shadow-2xl">
-                        {/* Thumbnail with enhanced effects */}
+                      <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl overflow-hidden hover:border-yellow-400/30 transition-all duration-500 backdrop-blur-xl shadow-2xl">
                         <div className="relative aspect-video overflow-hidden bg-black">
                           <motion.img
                             src={`https://img.youtube.com/vi/${clip.youtubeId}/mqdefault.jpg`}
@@ -354,7 +340,6 @@ export default function Showreel() {
                             }}
                           />
                           
-                          {/* Enhanced gradient overlay */}
                           <motion.div 
                             className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"
                             initial={{ opacity: 0.7 }}
@@ -362,14 +347,13 @@ export default function Showreel() {
                             transition={{ duration: 0.3 }}
                           />
                           
-                          {/* Play button with spring animation */}
                           <div className="absolute inset-0 flex items-center justify-center">
                             <motion.div 
                               className="w-16 h-16 rounded-full bg-white/95 flex items-center justify-center shadow-2xl"
                               whileHover={{ 
                                 scale: 1.2,
                                 backgroundColor: "rgba(255, 255, 255, 1)",
-                                boxShadow: "0 0 30px rgba(251, 146, 60, 0.6)"
+                                boxShadow: "0 0 30px rgba(250, 204, 21, 0.6)"
                               }}
                               transition={{ 
                                 type: "spring",
@@ -381,7 +365,6 @@ export default function Showreel() {
                             </motion.div>
                           </div>
                           
-                          {/* Duration badge with smooth transition */}
                           <motion.div 
                             className="absolute bottom-3 right-3 px-3 py-1.5 rounded-lg bg-black/90 text-white text-xs font-bold backdrop-blur-md border border-white/10"
                             whileHover={{ scale: 1.05, backgroundColor: "rgba(0, 0, 0, 0.95)" }}
@@ -391,21 +374,20 @@ export default function Showreel() {
                           </motion.div>
                         </div>
 
-                        {/* Info section with enhanced transitions */}
-                        <div className="p-5 bg-gradient-to-b from-neutral-900/50 to-neutral-900/80">
+                        <div className="p-5 bg-gradient-to-b from-black/50 to-black/80">
                           <motion.h4 
                             className="text-base font-semibold text-white mb-2 line-clamp-2 leading-tight"
-                            whileHover={{ color: "rgb(251, 146, 60)" }}
+                            whileHover={{ color: "rgb(250, 204, 21)" }}
                             transition={{ duration: 0.2 }}
                           >
                             {clip.title}
                           </motion.h4>
-                          <p className="text-xs text-neutral-400 mb-3 line-clamp-2 leading-relaxed">
+                          <p className="text-xs text-slate-400 mb-3 line-clamp-2 leading-relaxed">
                             {clip.description}
                           </p>
-                          <div className="flex items-center justify-between pt-3 border-t border-neutral-800/70">
-                            <span className="text-xs text-neutral-500 font-medium">{clip.project}</span>
-                            <span className="text-xs text-neutral-600 font-medium">{clip.year}</span>
+                          <div className="flex items-center justify-between pt-3 border-t border-white/10">
+                            <span className="text-xs text-slate-500 font-medium">{clip.project}</span>
+                            <span className="text-xs text-slate-600 font-medium">{clip.year}</span>
                           </div>
                         </div>
                       </div>
@@ -413,41 +395,6 @@ export default function Showreel() {
                   </motion.div>
                 ))}
               </div>
-
-              {/* Professional YouTube Channel Button */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                transition={{ delay: 1.6, duration: 0.5 }}
-                className="text-center mt-20"
-              >
-                <motion.a
-                  href="https://www.youtube.com/@almagrosanmiguel7219/videos"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl overflow-hidden"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  {/* Animated gradient background */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 via-orange-600/20 to-red-600/20 group-hover:from-red-600/30 group-hover:via-orange-600/30 group-hover:to-red-600/30 transition-all duration-300" />
-                  
-                  {/* Border with gradient */}
-                  <div className="absolute inset-0 border-2 border-red-500/40 group-hover:border-red-500/60 rounded-2xl transition-all duration-300" />
-                  
-                  {/* Glow effect */}
-                  <motion.div 
-                    className="absolute -inset-1 bg-gradient-to-r from-red-500/20 to-orange-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  />
-                  
-                  {/* Content */}
-                  <div className="relative flex items-center gap-3">
-                    <Youtube className="w-6 h-6 text-red-400 group-hover:text-red-300 transition-colors" />
-                    <span className="text-base font-semibold text-white">Explorar Canal de YouTube</span>
-                    <ExternalLink className="w-4 h-4 text-neutral-400 group-hover:text-neutral-300 transition-colors" />
-                  </div>
-                </motion.a>
-              </motion.div>
             </motion.div>
           </motion.div>
         </div>
@@ -472,7 +419,6 @@ export default function Showreel() {
               className="relative w-full max-w-6xl"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close button */}
               <button
                 onClick={closeModal}
                 className="absolute -top-12 right-0 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 transition-all group"
@@ -480,8 +426,7 @@ export default function Showreel() {
                 <X className="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300" />
               </button>
 
-              {/* Video container */}
-              <div className="relative bg-gradient-to-br from-neutral-900/80 to-neutral-900/40 border-2 border-orange-500/30 rounded-2xl p-2 backdrop-blur-sm shadow-2xl">
+              <div className="relative bg-white/[0.02] border-2 border-yellow-400/30 rounded-2xl p-2 backdrop-blur-sm shadow-2xl">
                 <div className="relative aspect-video overflow-hidden rounded-xl bg-black">
                   <iframe
                     src={`https://www.youtube.com/embed/${modalVideo.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
@@ -492,13 +437,12 @@ export default function Showreel() {
                   />
                 </div>
 
-                {/* Video info */}
                 <div className="p-6">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
                       <h3 className="text-2xl font-semibold text-white mb-2">{modalVideo.title}</h3>
-                      <p className="text-neutral-400 mb-3">{modalVideo.description}</p>
-                      <div className="flex items-center gap-4 text-sm text-neutral-500">
+                      <p className="text-slate-400 mb-3">{modalVideo.description}</p>
+                      <div className="flex items-center gap-4 text-sm text-slate-500">
                         <span>{modalVideo.project}</span>
                         <span>•</span>
                         <span>{modalVideo.year}</span>
@@ -506,15 +450,6 @@ export default function Showreel() {
                         <span>{modalVideo.duration}</span>
                       </div>
                     </div>
-                    <a
-                      href={`https://www.youtube.com/watch?v=${modalVideo.youtubeId}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600/20 border border-red-500/30 hover:bg-red-600/30 hover:border-red-500/50 text-red-300 hover:text-red-200 text-sm font-medium transition-all whitespace-nowrap"
-                    >
-                      <Youtube className="w-4 h-4" />
-                      Ver en YouTube
-                    </a>
                   </div>
                 </div>
               </div>
