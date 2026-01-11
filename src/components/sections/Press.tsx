@@ -80,7 +80,7 @@ const interviews: Interview[] = [
 ]
 
 const pressQuotes: PressQuote[] = [
-  // La Moderna
+  // La Moderna - Televisión
   {
     quote: 'Cada proyecto, personaje, es otra historia, otro mundo, otros conflictos. La posibilidad de aprender de la historia de mi país me llena mucho.',
     source: 'RTVE - Entrevista oficial',
@@ -102,15 +102,7 @@ const pressQuotes: PressQuote[] = [
     year: '2023',
     category: 'Televisión',
   },
-  // Hernán
-  {
-    quote: 'Venía de estar poniendo copas en discotecas. Hernán fue maravilloso, un proyecto que me cambió la vida profesionalmente. Trabajar en una producción histórica de Amazon fue un sueño.',
-    source: 'La Caja de Música TV',
-    production: 'Hernán Cortés',
-    year: '2020',
-    category: 'Cine & TV',
-  },
-  // Vis a vis
+  // Vis a vis - Televisión
   {
     quote: 'Diego es un guitarrista que trabaja con un narcotraficante mexicano. Fue fascinante explorar ese mundo oscuro y trabajar con el increíble elenco femenino de Vis a vis.',
     source: 'Rumbera Sevilla FM',
@@ -125,7 +117,15 @@ const pressQuotes: PressQuote[] = [
     year: '2020',
     category: 'Televisión',
   },
-  // Un fantasma en la batalla
+  // Hernán - Serie (Prime Video)
+  {
+    quote: 'Venía de estar poniendo copas en discotecas. Hernán fue maravilloso, un proyecto que me cambió la vida profesionalmente. Trabajar en una producción histórica de Amazon fue un sueño.',
+    source: 'La Caja de Música TV',
+    production: 'Hernán Cortés',
+    year: '2020',
+    category: 'Series',
+  },
+  // Un fantasma en la batalla - Cine
   {
     quote: 'Interpretar a Antonio en esta historia basada en hechos reales sobre ETA fue un honor y una responsabilidad. Es una historia que necesitaba ser contada.',
     source: 'Netflix España',
@@ -153,7 +153,7 @@ export default function Press() {
     ? pressQuotes 
     : pressQuotes.filter(q => q.category === selectedCategory)
 
-  const categories = ['all', 'Televisión', 'Cine', 'Cine & TV', 'Teatro']
+  const categories = ['all', 'Televisión', 'Series', 'Cine', 'Teatro']
 
   const openModal = (interview: Interview) => {
     setModalVideo(interview)
