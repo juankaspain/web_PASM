@@ -36,11 +36,7 @@ const Showreel = dynamic(() => import('@/components/sections/Showreel'))
 const Press = dynamic(() => import('@/components/sections/Press'))
 const PressKit = dynamic(() => import('@/components/sections/PressKit'))
 const Contact = dynamic(() => import('@/components/sections/Contact'))
-
-// New: Professional Testimonials with Cine, Series, Teatro
-const ProfessionalTestimonials = dynamic(
-  () => import('@/components/sections/ProfessionalTestimonials')
-)
+const Testimonials = dynamic(() => import('@/components/sections/Testimonials'))
 
 export default function Home() {
   return (
@@ -73,8 +69,8 @@ export default function Home() {
       {/* Events & Schedule */}
       <Calendar />
       
-      {/* Professional Testimonials - NEW */}
-      <ProfessionalTestimonials />
+      {/* Testimonials - Professional Declarations */}
+      <Testimonials />
       
       {/* Media sections - Professional photos first */}
       <Headshots />
