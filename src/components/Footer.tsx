@@ -2,27 +2,38 @@
 
 import { Mail, MapPin, Facebook, Instagram, X, Youtube, ExternalLink } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { SiTiktok } from 'react-icons/si'
 
 const socialLinks = [
   {
     name: 'Instagram',
     url: 'https://www.instagram.com/almagrosanmiguel/',
     icon: Instagram,
+    iconType: 'lucide',
   },
   {
     name: 'YouTube',
     url: 'https://www.youtube.com/@almagrosanmiguel7219',
     icon: Youtube,
+    iconType: 'lucide',
   },
   {
     name: 'X',
     url: 'https://x.com/almagroSM',
     icon: X,
+    iconType: 'lucide',
+  },
+  {
+    name: 'TikTok',
+    url: 'https://www.tiktok.com/@almagro.san.migue',
+    icon: SiTiktok,
+    iconType: 'react-icons',
   },
   {
     name: 'Facebook',
     url: 'https://www.facebook.com/almagrosanmiguel/',
     icon: Facebook,
+    iconType: 'lucide',
   },
 ]
 
@@ -97,20 +108,23 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="text-lg font-semibold mb-4">Sígueme</h4>
             <div className="flex gap-3">
-              {socialLinks.map((link) => (
-                <motion.a
-                  key={link.name}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 p-3 rounded-lg transition-all shadow-lg"
-                  aria-label={link.name}
-                >
-                  <link.icon className="w-5 h-5" />
-                </motion.a>
-              ))}
+              {socialLinks.map((link) => {
+                const Icon = link.icon
+                return (
+                  <motion.a
+                    key={link.name}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 p-3 rounded-lg transition-all shadow-lg"
+                    aria-label={link.name}
+                  >
+                    <Icon className="w-5 h-5" />
+                  </motion.a>
+                )
+              })}
             </div>
           </div>
         </div>
