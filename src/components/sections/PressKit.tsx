@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Download, FileText, Image as ImageIcon, Video, Award, Info, CheckCircle2, Package, Mail, Sparkles } from 'lucide-react'
+import { Download, FileText, Image as ImageIcon, Video, Award, Info, CheckCircle2, Package, Mail, Sparkles, ExternalLink } from 'lucide-react'
 import { useState, useRef } from 'react'
 
 const DOWNLOAD_ITEMS = [
@@ -73,7 +73,12 @@ const DOWNLOAD_ITEMS = [
   },
 ]
 
-const techSpecs = [
+interface TechSpec {
+  label: string
+  value: string | { text: string; links?: Array<{ text: string; url: string }> }
+}
+
+const techSpecs: TechSpec[] = [
   { label: 'Nombre Artístico', value: 'Almagro San Miguel' },
   { label: 'Nombre Real', value: 'Pedro Francisco Almagro Gordillo' },
   { label: 'Fecha de Nacimiento', value: '7 de marzo de 1990' },
@@ -82,7 +87,26 @@ const techSpecs = [
   { label: 'Ojos', value: 'Marrones' },
   { label: 'Cabello', value: 'Castaño Oscuro' },
   { label: 'Idiomas', value: 'Español (nativo), Inglés (intermedio)' },
-  { label: 'Formación', value: 'ESAD Sevilla, CNTC' },
+  { 
+    label: 'Formación Principal', 
+    value: { 
+      text: '', 
+      links: [
+        { text: 'ESAD Sevilla', url: 'https://www.esadsevilla.org/' },
+        { text: 'CNTC', url: 'http://teatroclasico.es/compania-nacional-de-teatro-clasico/' },
+      ]
+    } 
+  },
+  { 
+    label: 'Formación Adicional', 
+    value: { 
+      text: '', 
+      links: [
+        { text: 'Work In Progress', url: 'http://www.workinprogressmadrid.com/' },
+        { text: 'NO-IDENTITY', url: 'https://www.no-identity.es/' },
+      ]
+    } 
+  },
   { label: 'Agencia', value: 'Contacto directo' },
 ]
 
@@ -250,7 +274,28 @@ export default function PressKit() {
                         {spec.label}
                       </span>
                       <span className="text-neutral-200 font-light text-right group-hover:text-neutral-100 transition-colors">
-                        {spec.value}
+                        {typeof spec.value === 'string' ? (
+                          spec.value
+                        ) : (
+                          <span className="flex flex-wrap items-center justify-end gap-2">
+                            {spec.value.links?.map((link, linkIndex) => (
+                              <span key={linkIndex}>
+                                <a
+                                  href={link.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors underline decoration-blue-400/30 hover:decoration-blue-300/50 underline-offset-2"
+                                >
+                                  {link.text}
+                                  <ExternalLink className="w-3 h-3" strokeWidth={1.5} />
+                                </a>
+                                {linkIndex < (spec.value.links?.length || 0) - 1 && (
+                                  <span className="text-neutral-600 mx-1">,</span>
+                                )}
+                              </span>
+                            ))}
+                          </span>
+                        )}
                       </span>
                     </motion.div>
                   ))}
