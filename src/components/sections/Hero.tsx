@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Play, MapPin, Calendar, ExternalLink, Clapperboard, Tv, Star, Theater as TheaterIcon, Instagram, Twitter, Youtube, Facebook } from 'lucide-react'
+import { ArrowDown, Play, MapPin, Calendar, ExternalLink, Clapperboard, Tv, Star, Theater as TheaterIcon, Instagram, X, Youtube, Facebook } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { SiTiktok } from 'react-icons/si'
@@ -53,16 +53,16 @@ export default function Hero() {
       borderHover: 'hover:border-pink-500/30',
     },
     {
-      name: 'X / Twitter',
+      name: 'X',
       url: 'https://x.com/almagroSM',
-      icon: Twitter,
+      icon: X,
       color: 'hover:text-sky-400',
       bgHover: 'hover:bg-sky-400/10',
       borderHover: 'hover:border-sky-400/30',
     },
     {
       name: 'TikTok',
-      url: 'https://www.tiktok.com/@almagrosanmiguel',
+      url: 'https://www.tiktok.com/@almagro.san.migue',
       icon: 'tiktok',
       color: 'hover:text-white',
       bgHover: 'hover:bg-white/10',

@@ -16,7 +16,6 @@ import {
   Send,
   Sparkles,
   Clock,
-  Twitter,
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { trackEvent } from '@/lib/analytics'
@@ -62,7 +61,7 @@ const socialLinks = [
     url: 'https://www.instagram.com/almagrosanmiguel/',
   },
   {
-    icon: Twitter,
+    icon: X,
     label: 'X',
     handle: '@almagroSM',
     url: 'https://x.com/almagroSM',
@@ -70,8 +69,8 @@ const socialLinks = [
   {
     icon: 'tiktok',
     label: 'TikTok',
-    handle: '@almagrosanmiguel',
-    url: 'https://www.tiktok.com/@almagrosanmiguel',
+    handle: '@almagro.san.migue',
+    url: 'https://www.tiktok.com/@almagro.san.migue',
   },
   {
     icon: Youtube,
