@@ -92,6 +92,59 @@ interface Particle {
   y: number
 }
 
+// Skeleton Loader Component
+function ContactSkeleton() {
+  return (
+    <section className="relative py-24 sm:py-32 overflow-hidden bg-black">
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-yellow-500/10 rounded-full blur-[150px]" />
+
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16 sm:mb-20">
+          {/* Skeleton Header */}
+          <div className="inline-flex items-center gap-2 px-5 py-2 bg-white/5 border border-white/10 rounded-full mb-6">
+            <div className="w-4 h-4 bg-white/10 rounded animate-pulse" />
+            <div className="w-20 h-4 bg-white/10 rounded animate-pulse" />
+          </div>
+          
+          <div className="w-96 h-12 bg-white/5 rounded mx-auto mb-6 animate-pulse" />
+          <div className="w-full max-w-2xl h-6 bg-white/5 rounded mx-auto animate-pulse" />
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-7xl mx-auto">
+          {/* Skeleton Form */}
+          <div className="space-y-6">
+            <div className="bg-white/[0.02] rounded-3xl p-8 border border-white/10">
+              <div className="space-y-6">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i}>
+                    <div className="w-32 h-4 bg-white/10 rounded mb-2 animate-pulse" />
+                    <div className="w-full h-12 bg-white/5 rounded-xl animate-pulse" />
+                  </div>
+                ))}
+                <div className="w-full h-14 bg-yellow-400/20 rounded-xl animate-pulse" />
+              </div>
+            </div>
+          </div>
+
+          {/* Skeleton Info */}
+          <div className="space-y-6">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="flex items-center gap-4 p-5 bg-white/[0.02] rounded-2xl border border-white/10">
+                <div className="w-14 h-14 bg-yellow-400/20 rounded-xl animate-pulse" />
+                <div className="flex-1">
+                  <div className="w-20 h-3 bg-white/10 rounded mb-2 animate-pulse" />
+                  <div className="w-32 h-5 bg-white/10 rounded animate-pulse" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -104,17 +157,25 @@ export default function Contact() {
   )
   const [errorMessage, setErrorMessage] = useState('')
   const [particles, setParticles] = useState<Particle[]>([])
-  const [isMounted, setIsMounted] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    setIsMounted(true)
+    // Simulate initial loading
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 100)
+
     // Generate particles only on client side
-    const newParticles = [...Array(30)].map((_, i) => ({
-      id: i,
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-    }))
-    setParticles(newParticles)
+    if (typeof window !== 'undefined') {
+      const newParticles = [...Array(30)].map((_, i) => ({
+        id: i,
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+      }))
+      setParticles(newParticles)
+    }
+
+    return () => clearTimeout(timer)
   }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -170,12 +231,17 @@ export default function Contact() {
     }
   }
 
+  // Show skeleton while loading
+  if (isLoading) {
+    return <ContactSkeleton />
+  }
+
   return (
     <section id="contact" className="relative py-24 sm:py-32 overflow-hidden bg-black">
       <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-yellow-500/10 rounded-full blur-[150px]" />
 
-      {isMounted && (
+      {particles.length > 0 && (
         <div className="absolute inset-0 opacity-20">
           {particles.map((particle) => (
             <motion.div
