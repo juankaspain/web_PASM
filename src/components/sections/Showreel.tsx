@@ -229,7 +229,7 @@ export default function Showreel() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="max-w-5xl mx-auto mb-24"
+              className="max-w-5xl mx-auto mb-32"
             >
               <div className="relative">
                 {/* Glow effect */}
@@ -294,13 +294,13 @@ export default function Showreel() {
               transition={{ duration: 0.6, delay: 0.7 }}
               className="max-w-7xl mx-auto"
             >
-              <div className="text-center mb-12">
+              <div className="text-center mb-16">
                 <h3 className="text-3xl font-light text-white mb-3">Clips de Actuaciones</h3>
                 <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent mx-auto mb-4" />
                 <p className="text-neutral-500 font-light">Escenas destacadas de mis principales trabajos en televisión y cine</p>
               </div>
               
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
                 {clips.map((clip, index) => (
                   <motion.div
                     key={index}
@@ -365,7 +365,7 @@ export default function Showreel() {
                           {/* Play button with spring animation */}
                           <div className="absolute inset-0 flex items-center justify-center">
                             <motion.div 
-                              className="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center shadow-2xl"
+                              className="w-16 h-16 rounded-full bg-white/95 flex items-center justify-center shadow-2xl"
                               whileHover={{ 
                                 scale: 1.2,
                                 backgroundColor: "rgba(255, 255, 255, 1)",
@@ -377,13 +377,13 @@ export default function Showreel() {
                                 damping: 15
                               }}
                             >
-                              <Play className="w-6 h-6 ml-1 fill-black text-black" />
+                              <Play className="w-7 h-7 ml-1 fill-black text-black" />
                             </motion.div>
                           </div>
                           
                           {/* Duration badge with smooth transition */}
                           <motion.div 
-                            className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-black/90 text-white text-xs font-bold backdrop-blur-md border border-white/10"
+                            className="absolute bottom-3 right-3 px-3 py-1.5 rounded-lg bg-black/90 text-white text-xs font-bold backdrop-blur-md border border-white/10"
                             whileHover={{ scale: 1.05, backgroundColor: "rgba(0, 0, 0, 0.95)" }}
                             transition={{ duration: 0.2 }}
                           >
@@ -392,18 +392,18 @@ export default function Showreel() {
                         </div>
 
                         {/* Info section with enhanced transitions */}
-                        <div className="p-4 bg-gradient-to-b from-neutral-900/50 to-neutral-900/80">
+                        <div className="p-5 bg-gradient-to-b from-neutral-900/50 to-neutral-900/80">
                           <motion.h4 
-                            className="text-sm font-semibold text-white mb-1.5 line-clamp-2 leading-tight"
+                            className="text-base font-semibold text-white mb-2 line-clamp-2 leading-tight"
                             whileHover={{ color: "rgb(251, 146, 60)" }}
                             transition={{ duration: 0.2 }}
                           >
                             {clip.title}
                           </motion.h4>
-                          <p className="text-xs text-neutral-400 mb-2 line-clamp-2 leading-relaxed">
+                          <p className="text-xs text-neutral-400 mb-3 line-clamp-2 leading-relaxed">
                             {clip.description}
                           </p>
-                          <div className="flex items-center justify-between pt-2.5 border-t border-neutral-800/70">
+                          <div className="flex items-center justify-between pt-3 border-t border-neutral-800/70">
                             <span className="text-xs text-neutral-500 font-medium">{clip.project}</span>
                             <span className="text-xs text-neutral-600 font-medium">{clip.year}</span>
                           </div>
@@ -419,7 +419,7 @@ export default function Showreel() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
                 transition={{ delay: 1.6, duration: 0.5 }}
-                className="text-center mt-16"
+                className="text-center mt-20"
               >
                 <motion.a
                   href="https://www.youtube.com/@almagrosanmiguel7219/videos"
