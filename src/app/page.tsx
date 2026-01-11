@@ -30,6 +30,7 @@ const Milestones = dynamic(() => import('@/components/sections/Milestones'))
 const Awards = dynamic(() => import('@/components/sections/Awards'))
 const Gallery = dynamic(() => import('@/components/sections/Gallery'))
 const Showreel = dynamic(() => import('@/components/sections/Showreel'))
+const Press = dynamic(() => import('@/components/sections/Press'))
 const PressKit = dynamic(() => import('@/components/sections/PressKit'))
 const Contact = dynamic(() => import('@/components/sections/Contact'))
 
@@ -63,6 +64,7 @@ export default function Home() {
       {/* Media sections */}
       <Gallery />
       <Showreel />
+      <Press />
       
       {/* Professional sections */}
       <PressKit />
