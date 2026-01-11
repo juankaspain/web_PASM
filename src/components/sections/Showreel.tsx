@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { Play, Calendar, Film, X } from 'lucide-react'
+import { Play, Calendar, Film, X, Newspaper, ExternalLink } from 'lucide-react'
 import { useRef, useState } from 'react'
 
 interface ShowreelVideo {
@@ -20,6 +20,14 @@ interface ClipVideo {
   year: string
   duration: string
   youtubeId: string
+}
+
+interface PressInterview {
+  title: string
+  publication: string
+  date: string
+  excerpt: string
+  url: string
 }
 
 const showreels: ShowreelVideo[] = [
@@ -124,9 +132,53 @@ const clips: ClipVideo[] = [
   },
 ]
 
+const pressInterviews: PressInterview[] = [
+  {
+    title: '"Al principio tenía una voz en la cabeza que me decía que era muy mal actor"',
+    publication: 'La Vanguardia',
+    date: '17 de octubre, 2025',
+    excerpt: 'El actor sevillano habla sobre el síndrome del impostor, su papel en Un fantasma en la batalla y cómo las señoras mayores le hablan como a su personaje de La Moderna.',
+    url: 'https://www.lavanguardia.com/gente/20251017/11166920/almagro-san-miguel-principio-tenia-voz-cabeza-me-decia-mal-actor-me-fustiga',
+  },
+  {
+    title: 'Entrevista a Almagro San Miguel, el galán de La Moderna',
+    publication: 'RTVE',
+    date: '2 de diciembre, 2023',
+    excerpt: '"Me trabajé mucho las audiciones porque la oportunidad así lo requería". Se siente muy agradecido con Boomerang y RTVE por la confianza depositada.',
+    url: 'https://www.rtve.es/television/20231202/moderna-entrevista-almagro-san-miguel-inigo-penalver/2463590.shtml',
+  },
+  {
+    title: 'De La Moderna a la película sobre ETA producida por Bayona',
+    publication: 'Diario de Sevilla',
+    date: '17 de octubre, 2024',
+    excerpt: 'Almagro San Miguel habla sobre Un fantasma en la batalla. "Es un privilegio trabajar con Agustín Díaz Yanes. Crea un ambiente muy tranquilo, se percibe su experiencia".',
+    url: 'https://www.diariodesevilla.es/television/almagro-san-miguel-moderna-pelicula_0_2004995240.html',
+  },
+  {
+    title: '"Cuando llegué a La Moderna pensé: dónde me he metido, voy a morir"',
+    publication: 'La Razón',
+    date: '26 de noviembre, 2023',
+    excerpt: 'El actor sevillano explica cómo tuvo que cambiar su ritmo de vida para adaptarse a una serie diaria. El equipo de arte ha reconstruido el Madrid de los años 30.',
+    url: 'https://www.larazon.es/television/series/almagro-san-miguel-cuando-llegue-moderna-pense-donde-metido-voy-morir_202311266562edda5',
+  },
+  {
+    title: 'La pasión por actuar y el respeto a los clásicos del cine',
+    publication: 'El Plural TV',
+    date: '22 de diciembre, 2024',
+    excerpt: 'Descubre sus inicios en actuaciones callejeras, la irrupción de influencers en la industria y la idealización de la figura del actor.',
+    url: 'https://www.youtube.com/watch?v=ts2qSZpSO_I',
+  },
+  {
+    title: 'Un té con Almagro San Miguel en el Salón de La Moderna',
+    publication: 'RTVE Play',
+    date: '15 de noviembre, 2023',
+    excerpt: 'El actor habla de su paso por La Moderna, del personaje de Íñigo, de las tramas que más nos preocupan y del futuro que le espera.',
+    url: 'https://www.rtve.es/play/videos/salon-de-te-la-moderna/almagro-san-miguel/16137829/',
+  },
+]
+
 export default function Showreel() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const ref = useInView(null)
   const [activeVideo, setActiveVideo] = useState<string>('2024')
   const [modalVideo, setModalVideo] = useState<ClipVideo | null>(null)
 
@@ -158,43 +210,47 @@ export default function Showreel() {
 
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <motion.div
-            ref={ref}
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
           >
-            {/* Header - ESTANDARIZADO */}
+            {/* Header - Entrevistas en Video */}
             <div className="text-center mb-16">
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true }}
                 className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm"
               >
                 <Film className="w-4 h-4 text-yellow-400" strokeWidth={2} />
-                <span className="text-sm font-medium text-slate-300 tracking-wide">Video Profesional</span>
+                <span className="text-sm font-medium text-slate-300 tracking-wide">Medios & Declaraciones</span>
               </motion.div>
               
               <motion.h2 
                 initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
                 className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-white"
               >
-                Showreel
+                Entrevistas en Video
               </motion.h2>
 
               <motion.div
                 initial={{ opacity: 0, scaleX: 0 }}
-                animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+                whileInView={{ opacity: 1, scaleX: 1 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
+                viewport={{ once: true }}
                 className="w-20 h-0.5 bg-yellow-400 mx-auto mb-6"
               />
               
               <motion.p 
                 initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
+                viewport={{ once: true }}
                 className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
               >
                 Selección de mis mejores interpretaciones en televisión, cine y teatro
@@ -204,8 +260,9 @@ export default function Showreel() {
             {/* Year Selector */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
+              viewport={{ once: true }}
               className="flex justify-center gap-3 mb-12"
             >
               {showreels.map((reel) => (
@@ -278,9 +335,10 @@ export default function Showreel() {
             {/* Clips Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="max-w-7xl mx-auto"
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="max-w-7xl mx-auto mb-32"
             >
               <div className="text-center mb-16">
                 <h3 className="text-3xl font-bold text-white mb-4">Clips de Actuaciones</h3>
@@ -293,20 +351,17 @@ export default function Showreel() {
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                    animate={isInView ? { 
+                    whileInView={{ 
                       opacity: 1, 
                       y: 0, 
                       scale: 1 
-                    } : { 
-                      opacity: 0, 
-                      y: 20, 
-                      scale: 0.95 
                     }}
                     transition={{ 
                       duration: 0.6,
-                      delay: 0.8 + index * 0.1,
+                      delay: index * 0.1,
                       ease: [0.25, 0.46, 0.45, 0.94]
                     }}
+                    viewport={{ once: true }}
                     whileHover={{ 
                       y: -8, 
                       scale: 1.03,
@@ -396,6 +451,86 @@ export default function Showreel() {
                 ))}
               </div>
             </motion.div>
+
+            {/* NUEVA SECCIÓN: Entrevistas en Prensa */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="max-w-7xl mx-auto mb-32"
+            >
+              <div className="text-center mb-16">
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  viewport={{ once: true }}
+                  className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm"
+                >
+                  <Newspaper className="w-4 h-4 text-yellow-400" strokeWidth={2} />
+                  <span className="text-sm font-medium text-slate-300 tracking-wide">Cobertura Mediática</span>
+                </motion.div>
+
+                <h3 className="text-3xl lg:text-4xl font-bold text-white mb-4">Entrevistas en Prensa</h3>
+                <div className="w-20 h-0.5 bg-yellow-400 mx-auto mb-4" />
+                <p className="text-slate-400">Conversaciones en profundidad con medios nacionales e internacionales</p>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                {pressInterviews.map((interview, index) => (
+                  <motion.a
+                    key={index}
+                    href={interview.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    whileHover={{ y: -5 }}
+                    className="group relative"
+                  >
+                    <div className="relative">
+                      <motion.div 
+                        className="absolute -inset-[2px] bg-yellow-400/30 rounded-2xl blur-xl"
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 1 }}
+                        transition={{ duration: 0.4 }}
+                      />
+                      
+                      <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:border-yellow-400/30 transition-all duration-500">
+                        <div className="flex items-start gap-4 mb-4">
+                          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-400/10 flex items-center justify-center">
+                            <Newspaper className="w-5 h-5 text-yellow-400" strokeWidth={2} />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h4 className="text-base font-semibold text-white mb-2 group-hover:text-yellow-400 transition-colors line-clamp-2">
+                              {interview.title}
+                            </h4>
+                            <div className="flex items-center gap-2 text-xs text-slate-500 mb-3">
+                              <span className="font-medium">{interview.publication}</span>
+                              <span>•</span>
+                              <span>{interview.date}</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <p className="text-sm text-slate-400 mb-4 leading-relaxed line-clamp-3">
+                          {interview.excerpt}
+                        </p>
+                        
+                        <div className="flex items-center gap-2 text-sm text-yellow-400 font-medium group-hover:gap-3 transition-all">
+                          <span>Leer entrevista</span>
+                          <ExternalLink className="w-4 h-4" strokeWidth={2} />
+                        </div>
+                      </div>
+                    </div>
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+
           </motion.div>
         </div>
       </section>
