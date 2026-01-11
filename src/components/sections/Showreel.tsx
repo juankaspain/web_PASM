@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Play, Calendar, Sparkles, Film, ExternalLink } from 'lucide-react'
+import { Play, Calendar, Sparkles, Film, ExternalLink, Youtube } from 'lucide-react'
 import { useRef, useState } from 'react'
 
 interface ShowreelVideo {
@@ -415,46 +415,40 @@ export default function Showreel() {
               ))}
             </div>
 
-            {/* Link to channel with enhanced animation */}
+            {/* Professional YouTube Channel Button */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ delay: 1.6, duration: 0.5 }}
-              className="text-center mt-12"
+              className="text-center mt-16"
             >
               <motion.a
                 href="https://www.youtube.com/@almagrosanmiguel7219/videos"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-neutral-900/60 border border-neutral-800 text-neutral-400 font-light backdrop-blur-sm"
-                whileHover={{ 
-                  scale: 1.05,
-                  backgroundColor: "rgba(23, 23, 23, 0.8)",
-                  borderColor: "rgba(115, 115, 115, 0.5)",
-                  color: "rgb(229, 229, 229)",
-                  transition: { duration: 0.3 }
-                }}
+                className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl overflow-hidden"
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <span>Ver todos los videos en YouTube</span>
-                <ExternalLink className="w-4 h-4" />
+                {/* Animated gradient background */}
+                <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 via-orange-600/20 to-red-600/20 group-hover:from-red-600/30 group-hover:via-orange-600/30 group-hover:to-red-600/30 transition-all duration-300" />
+                
+                {/* Border with gradient */}
+                <div className="absolute inset-0 border-2 border-red-500/40 group-hover:border-red-500/60 rounded-2xl transition-all duration-300" />
+                
+                {/* Glow effect */}
+                <motion.div 
+                  className="absolute -inset-1 bg-gradient-to-r from-red-500/20 to-orange-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                />
+                
+                {/* Content */}
+                <div className="relative flex items-center gap-3">
+                  <Youtube className="w-6 h-6 text-red-400 group-hover:text-red-300 transition-colors" />
+                  <span className="text-base font-semibold text-white">Explorar Canal de YouTube</span>
+                  <ExternalLink className="w-4 h-4 text-neutral-400 group-hover:text-neutral-300 transition-colors" />
+                </div>
               </motion.a>
             </motion.div>
-          </motion.div>
-
-          {/* Footer Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-            transition={{ duration: 0.6, delay: 1.8 }}
-            className="mt-20 text-center"
-          >
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-neutral-900/50 to-neutral-800/50 border border-neutral-800 backdrop-blur-sm">
-              <Sparkles className="w-5 h-5 text-orange-400" strokeWidth={1.5} />
-              <span className="text-sm font-light text-neutral-300">
-                Material actualizado con nuevos proyectos
-              </span>
-            </div>
           </motion.div>
         </motion.div>
       </div>
