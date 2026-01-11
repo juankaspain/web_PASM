@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Theater as TheaterIcon, Award, Users, Calendar, Sparkles, Crown, Star, Trophy, Zap } from 'lucide-react'
+import { Theater as TheaterIcon, Award, Users, Calendar, Crown, Star, Trophy, Zap } from 'lucide-react'
 import { useRef } from 'react'
 
 const theaterWorks = [
@@ -10,7 +10,7 @@ const theaterWorks = [
     company: 'DMLP Producciones',
     period: '2025-2026',
     director: 'Ángel Caballero',
-    description: 'Continuación de la aclamada "Donde mueren las palabras" (finalista al Premio Nacional de Literatura Dramática). Comedia sobre el reencuentro de amigos de la infancia que, tras años de distanciamiento, se ven obligados a confinarse juntos durante la pandemia. Una reflexión sobre amistades, reproches del pasado y segundas oportunidades.',
+    description: 'Continuación de la aclamada "Donde mueren las palabras" (finalista al Premio Nacional de Literatura Dramática). Comedia sobre el reencuentro de amigos de la infancia que, tras años de distanciamiento, se ven obligados a confinarse juntos durante la pandemia.',
     award: 'En Cartel - Gira Nacional 2026',
     awardEntity: 'Teatro Lara Madrid & Palacio de la Prensa',
     featured: true,
@@ -23,7 +23,7 @@ const theaterWorks = [
     company: 'Compañía Nacional de Teatro Clásico',
     period: '2015-2017',
     director: 'Helena Pimenta',
-    description: 'Clásico de Lope de Vega interpretado bajo la dirección de Helena Pimenta. Trabajo intensivo en verso clásico español, comedia del Siglo de Oro y técnicas de interpretación profesional.',
+    description: 'Clásico de Lope de Vega bajo dirección de Helena Pimenta. Trabajo intensivo en verso clásico español, comedia del Siglo de Oro y técnicas de interpretación profesional.',
     award: 'Nominado Mejor Actor Secundario',
     awardEntity: 'Unión de Actores 2015',
     featured: true,
@@ -53,7 +53,7 @@ const theaterWorks = [
     company: 'Compañía Viento Sur',
     period: '2014-2015',
     director: 'José Pascual',
-    description: 'Obra cumbre de José Zorrilla. Interpretación del mito de Don Juan con un enfoque contemporáneo manteniendo la esencia del verso clásico.',
+    description: 'Obra cumbre de José Zorrilla. Interpretación del mito de Don Juan con enfoque contemporáneo manteniendo la esencia del verso clásico.',
     category: 'Teatro Clásico',
   },
   {
@@ -71,7 +71,7 @@ export default function Theater() {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="theater" className="relative py-32 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-black">
+    <section id="theater" className="relative py-24 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-black">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[120px]" />
         <div className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[100px]" />
@@ -91,7 +91,8 @@ export default function Theater() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="text-center mb-20">
+          {/* Header ESTANDARIZADO */}
+          <div className="text-center mb-16">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
@@ -106,51 +107,51 @@ export default function Theater() {
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white"
+              className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-white"
             >
               Trayectoria Teatral
             </motion.h2>
+
+            <motion.div
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="w-20 h-0.5 bg-yellow-400 mx-auto mb-6"
+            />
             
             <motion.p 
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
               className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
             >
-              Formación de élite en la <span className="text-white font-semibold">Compañía Nacional de Teatro Clásico</span> (2015-2017)
-              bajo la dirección de Helena Pimenta. Especialización en verso clásico español y comedia del Siglo de Oro
+              Formación de élite en la Compañía Nacional de Teatro Clásico bajo dirección de Helena Pimenta
             </motion.p>
           </div>
 
+          {/* Feature Box */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="max-w-5xl mx-auto mb-16"
+            className="max-w-5xl mx-auto mb-12"
           >
             <div className="group relative">
               <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               
-              <div className="relative bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-8 lg:p-10 shadow-2xl">
-                <div className="flex flex-col lg:flex-row items-center gap-8">
+              <div className="relative bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
+                <div className="flex flex-col lg:flex-row items-center gap-6">
                   <div className="flex-shrink-0">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-yellow-400 rounded-2xl blur-lg opacity-30" />
-                      <div className="relative w-20 h-20 bg-yellow-400 rounded-2xl flex items-center justify-center">
-                        <Crown className="w-10 h-10 text-black" strokeWidth={2.5} />
-                      </div>
+                    <div className="w-16 h-16 bg-yellow-400 rounded-2xl flex items-center justify-center">
+                      <Crown className="w-8 h-8 text-black" strokeWidth={2.5} />
                     </div>
                   </div>
                   
                   <div className="flex-1 text-center lg:text-left">
-                    <div className="flex items-center justify-center lg:justify-start gap-2 mb-3">
-                      <Sparkles className="w-5 h-5 text-yellow-400" />
-                      <h3 className="text-2xl font-bold text-white">Formación de Élite</h3>
-                    </div>
-                    <p className="text-slate-300 leading-relaxed text-lg">
-                      Dos años de formación profesional intensiva en la <span className="text-white font-semibold">Compañía Nacional de Teatro Clásico</span> bajo
-                      la dirección de <span className="text-white font-semibold">Helena Pimenta</span>. Trabajo exhaustivo en verso clásico español,
-                      comedia del Siglo de Oro y técnicas avanzadas de interpretación teatral.
+                    <h3 className="text-xl font-bold text-white mb-2">Formación de Élite - CNTC</h3>
+                    <p className="text-slate-300 leading-relaxed">
+                      Dos años de formación profesional intensiva (2015-2017) en la Compañía Nacional de Teatro Clásico bajo
+                      dirección de Helena Pimenta. Especialización en verso clásico español y comedia del Siglo de Oro.
                     </p>
                   </div>
                 </div>
@@ -158,45 +159,43 @@ export default function Theater() {
             </div>
           </motion.div>
 
+          {/* Awards Grid */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="max-w-5xl mx-auto mb-20"
+            className="max-w-5xl mx-auto mb-16"
           >
             <div className="grid md:grid-cols-2 gap-4">
-              <div className="group">
-                <div className="relative bg-white/[0.02] border border-white/10 rounded-xl p-6 backdrop-blur-sm hover:bg-white/[0.04] transition-all duration-300">
-                  <div className="flex items-center gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 bg-yellow-400/20 rounded-lg flex items-center justify-center border border-yellow-400/30">
-                      <Trophy className="w-6 h-6 text-yellow-400" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-xs text-slate-500 uppercase tracking-wider mb-0.5">Premio 2016</p>
-                      <p className="text-base font-semibold text-white mb-0.5">Mejor Espectáculo del Año</p>
-                      <p className="text-sm text-slate-400">Oliver Twist</p>
-                    </div>
+              <div className="bg-white/[0.02] border border-white/10 rounded-xl p-6 backdrop-blur-sm hover:bg-white/[0.04] hover:border-yellow-400/30 transition-all">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-yellow-400/20 rounded-lg flex items-center justify-center border border-yellow-400/30">
+                    <Trophy className="w-6 h-6 text-yellow-400" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 uppercase tracking-wider mb-0.5">Premio 2016</p>
+                    <p className="text-base font-semibold text-white mb-0.5">Mejor Espectáculo del Año</p>
+                    <p className="text-sm text-slate-400">Oliver Twist</p>
                   </div>
                 </div>
               </div>
 
-              <div className="group">
-                <div className="relative bg-white/[0.02] border border-white/10 rounded-xl p-6 backdrop-blur-sm hover:bg-white/[0.04] transition-all duration-300">
-                  <div className="flex items-center gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 bg-yellow-400/20 rounded-lg flex items-center justify-center border border-yellow-400/30">
-                      <Star className="w-6 h-6 text-yellow-400" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-xs text-slate-500 uppercase tracking-wider mb-0.5">Nominación 2015</p>
-                      <p className="text-base font-semibold text-white mb-0.5">Mejor Actor Secundario</p>
-                      <p className="text-sm text-slate-400">Unión de Actores</p>
-                    </div>
+              <div className="bg-white/[0.02] border border-white/10 rounded-xl p-6 backdrop-blur-sm hover:bg-white/[0.04] hover:border-yellow-400/30 transition-all">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-yellow-400/20 rounded-lg flex items-center justify-center border border-yellow-400/30">
+                    <Star className="w-6 h-6 text-yellow-400" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 uppercase tracking-wider mb-0.5">Nominación 2015</p>
+                    <p className="text-base font-semibold text-white mb-0.5">Mejor Actor Secundario</p>
+                    <p className="text-sm text-slate-400">Unión de Actores</p>
                   </div>
                 </div>
               </div>
             </div>
           </motion.div>
 
+          {/* Works List */}
           <div className="max-w-6xl mx-auto space-y-6">
             {theaterWorks.map((work, index) => (
               <motion.div
@@ -215,7 +214,7 @@ export default function Theater() {
                     transition={{ duration: 0.3 }}
                   />
                   
-                  <div className={`relative border rounded-xl p-6 lg:p-8 backdrop-blur-sm hover:border-white/20 transition-all duration-300 ${
+                  <div className={`relative border rounded-xl p-6 lg:p-8 backdrop-blur-sm hover:border-white/20 transition-all ${
                     work.current 
                       ? 'bg-gradient-to-br from-green-900/10 to-green-950/5 border-green-500/30 hover:bg-green-900/15' 
                       : 'bg-white/[0.02] border-white/10 hover:bg-white/[0.04]'
@@ -254,9 +253,7 @@ export default function Theater() {
                             <Calendar className="w-4 h-4" />
                             <span>{work.period}</span>
                           </div>
-                          <div className="flex items-center gap-2 text-slate-500">
-                            <span className="text-xs">Dir: {work.director}</span>
-                          </div>
+                          <p className="text-xs text-slate-500">Dir: {work.director}</p>
                         </div>
                       </div>
 
@@ -275,9 +272,7 @@ export default function Theater() {
                         </p>
 
                         {work.venues && (
-                          <div className="mb-4 text-sm text-slate-500">
-                            <span className="font-medium">{work.venues}</span>
-                          </div>
+                          <p className="mb-4 text-sm text-slate-500">{work.venues}</p>
                         )}
 
                         {work.award && (
@@ -300,25 +295,6 @@ export default function Theater() {
               </motion.div>
             ))}
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
-            className="text-center mt-20 max-w-4xl mx-auto"
-          >
-            <div className="relative">
-              <div className="absolute -inset-4 bg-yellow-400/5 rounded-2xl blur-2xl" />
-              <blockquote className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
-                <p className="text-lg text-slate-300 italic leading-relaxed mb-4">
-                  "El teatro es la base de mi formación como actor. Mi trabajo en la Compañía Nacional de Teatro Clásico 
-                  con Helena Pimenta fue determinante para mi especialización en verso clásico español y mi desarrollo 
-                  como intérprete profesional."
-                </p>
-                <div className="w-12 h-[2px] bg-yellow-400 mx-auto" />
-              </blockquote>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>
