@@ -49,6 +49,7 @@ export default function Hero() {
       character: 'Antonio',
       year: '2025',
       detail: 'Netflix • Dir. Agustín Díaz Yanes',
+      url: 'https://www.netflix.com/es/title/81700950',
     },
     {
       icon: Tv,
@@ -56,6 +57,7 @@ export default function Hero() {
       character: 'Íñigo Peñalver',
       year: '2023-2024',
       detail: '236 episodios • TVE',
+      url: 'https://www.rtve.es/play/videos/salon-de-te-la-moderna/',
     },
     {
       icon: Star,
@@ -63,6 +65,7 @@ export default function Hero() {
       character: 'Diego Ramala',
       year: '2020',
       detail: 'Protagonista • Fox España',
+      url: 'https://www.netflix.com/es/title/80059465',
     },
     {
       icon: TheaterIcon,
@@ -70,6 +73,7 @@ export default function Hero() {
       character: 'Verso clásico español',
       year: '2015-2017',
       detail: 'Compañía Nacional de Teatro Clásico',
+      url: null,
     },
   ]
 
@@ -195,7 +199,7 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            {/* Quick Highlights - Expandido */}
+            {/* Quick Highlights - Expandido con Enlaces */}
             <motion.div
               className="grid grid-cols-2 gap-3"
               initial={{ opacity: 0, y: 16 }}
@@ -204,15 +208,8 @@ export default function Hero() {
             >
               {quickHighlights.map((highlight, index) => {
                 const Icon = highlight.icon
-                return (
-                  <motion.div
-                    key={highlight.title}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 + index * 0.05, duration: 0.4 }}
-                    whileHover={{ scale: 1.03, y: -2 }}
-                    className="rounded-xl bg-slate-900/80 border border-slate-700/60 px-3.5 py-3.5 backdrop-blur-md hover:border-yellow-400/30 transition-all"
-                  >
+                const CardContent = (
+                  <>
                     <div className="flex items-start gap-2 mb-2">
                       <Icon className="w-4 h-4 text-yellow-400 flex-shrink-0 mt-0.5" />
                       <div className="flex-1 min-w-0">
@@ -220,6 +217,9 @@ export default function Hero() {
                           {highlight.title}
                         </h4>
                       </div>
+                      {highlight.url && (
+                        <ExternalLink className="w-3 h-3 text-slate-500 group-hover:text-yellow-400 transition-colors flex-shrink-0" />
+                      )}
                     </div>
                     <div className="space-y-1">
                       <p className="text-[11px] text-yellow-400/90 font-semibold">
@@ -232,6 +232,33 @@ export default function Hero() {
                         {highlight.detail}
                       </p>
                     </div>
+                  </>
+                )
+
+                return highlight.url ? (
+                  <motion.a
+                    key={highlight.title}
+                    href={highlight.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 + index * 0.05, duration: 0.4 }}
+                    whileHover={{ scale: 1.03, y: -2 }}
+                    className="group rounded-xl bg-slate-900/80 border border-slate-700/60 px-3.5 py-3.5 backdrop-blur-md hover:border-yellow-400/30 transition-all cursor-pointer"
+                  >
+                    {CardContent}
+                  </motion.a>
+                ) : (
+                  <motion.div
+                    key={highlight.title}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 + index * 0.05, duration: 0.4 }}
+                    whileHover={{ scale: 1.03, y: -2 }}
+                    className="group rounded-xl bg-slate-900/80 border border-slate-700/60 px-3.5 py-3.5 backdrop-blur-md hover:border-yellow-400/30 transition-all"
+                  >
+                    {CardContent}
                   </motion.div>
                 )
               })}
