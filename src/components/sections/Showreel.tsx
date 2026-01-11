@@ -277,7 +277,7 @@ export default function Showreel() {
             </div>
           </motion.div>
 
-          {/* Clips Section - Enhanced */}
+          {/* Clips Section - Enhanced with Professional Transitions */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -297,53 +297,116 @@ export default function Showreel() {
                   href={`https://www.youtube.com/watch?v=${clip.youtubeId}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                  transition={{ duration: 0.5, delay: 0.8 + index * 0.08 }}
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  className="group relative"
+                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                  animate={isInView ? { 
+                    opacity: 1, 
+                    y: 0, 
+                    scale: 1 
+                  } : { 
+                    opacity: 0, 
+                    y: 20, 
+                    scale: 0.95 
+                  }}
+                  transition={{ 
+                    duration: 0.6,
+                    delay: 0.8 + index * 0.1,
+                    ease: [0.25, 0.46, 0.45, 0.94]
+                  }}
+                  whileHover={{ 
+                    y: -8, 
+                    scale: 1.03,
+                    transition: { 
+                      duration: 0.3,
+                      ease: [0.34, 1.56, 0.64, 1]
+                    }
+                  }}
+                  className="group relative perspective-1000"
                 >
-                  <div className="relative">
-                    {/* Hover glow */}
-                    <div className="absolute -inset-[1px] bg-gradient-to-br from-orange-500/20 to-yellow-500/20 rounded-xl opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500" />
+                  <div className="relative transform-gpu">
+                    {/* Enhanced Hover glow with smoother transition */}
+                    <motion.div 
+                      className="absolute -inset-[2px] bg-gradient-to-br from-orange-500/30 via-yellow-500/20 to-orange-500/30 rounded-2xl blur-xl"
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                    />
                     
-                    <div className="relative bg-gradient-to-br from-neutral-900/70 to-neutral-900/40 border border-neutral-800 rounded-xl overflow-hidden hover:border-neutral-700 transition-all backdrop-blur-sm shadow-xl">
-                      {/* Thumbnail */}
+                    <div className="relative bg-gradient-to-br from-neutral-900/80 to-neutral-900/50 border border-neutral-800 rounded-2xl overflow-hidden hover:border-orange-500/30 transition-all duration-500 backdrop-blur-xl shadow-2xl">
+                      {/* Thumbnail with enhanced effects */}
                       <div className="relative aspect-video overflow-hidden bg-black">
-                        <img
+                        <motion.img
                           src={`https://img.youtube.com/vi/${clip.youtubeId}/mqdefault.jpg`}
                           alt={clip.title}
-                          className="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-300"
+                          className="w-full h-full object-cover"
+                          initial={{ opacity: 0.75, scale: 1 }}
+                          whileHover={{ 
+                            opacity: 1, 
+                            scale: 1.08,
+                            transition: { duration: 0.5, ease: "easeOut" }
+                          }}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                         
-                        {/* Play button */}
+                        {/* Enhanced gradient overlay */}
+                        <motion.div 
+                          className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"
+                          initial={{ opacity: 0.7 }}
+                          whileHover={{ opacity: 0.5 }}
+                          transition={{ duration: 0.3 }}
+                        />
+                        
+                        {/* Play button with spring animation */}
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 group-hover:bg-white transition-all shadow-lg">
-                            <Play className="w-5 h-5 ml-0.5 fill-black text-black" />
-                          </div>
+                          <motion.div 
+                            className="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center shadow-2xl"
+                            whileHover={{ 
+                              scale: 1.2,
+                              backgroundColor: "rgba(255, 255, 255, 1)",
+                              boxShadow: "0 0 30px rgba(251, 146, 60, 0.6)"
+                            }}
+                            transition={{ 
+                              type: "spring",
+                              stiffness: 400,
+                              damping: 15
+                            }}
+                          >
+                            <Play className="w-6 h-6 ml-1 fill-black text-black" />
+                          </motion.div>
                         </div>
                         
-                        {/* Duration badge */}
-                        <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-white text-xs font-semibold backdrop-blur-sm">
+                        {/* Duration badge with smooth transition */}
+                        <motion.div 
+                          className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md bg-black/90 text-white text-xs font-bold backdrop-blur-md border border-white/10"
+                          whileHover={{ scale: 1.05, backgroundColor: "rgba(0, 0, 0, 0.95)" }}
+                          transition={{ duration: 0.2 }}
+                        >
                           {clip.duration}
-                        </div>
+                        </motion.div>
                         
-                        {/* External link icon */}
-                        <ExternalLink className="absolute top-2 right-2 w-4 h-4 text-white/60 group-hover:text-white transition-colors" />
+                        {/* External link icon with fade */}
+                        <motion.div
+                          initial={{ opacity: 0.5 }}
+                          whileHover={{ opacity: 1, scale: 1.1 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <ExternalLink className="absolute top-3 right-3 w-4 h-4 text-white drop-shadow-lg" />
+                        </motion.div>
                       </div>
 
-                      {/* Info */}
-                      <div className="p-4">
-                        <h4 className="text-sm font-semibold text-white mb-1.5 line-clamp-2 leading-tight group-hover:text-orange-300 transition-colors">
+                      {/* Info section with enhanced transitions */}
+                      <div className="p-4 bg-gradient-to-b from-neutral-900/50 to-neutral-900/80">
+                        <motion.h4 
+                          className="text-sm font-semibold text-white mb-1.5 line-clamp-2 leading-tight"
+                          whileHover={{ color: "rgb(251, 146, 60)" }}
+                          transition={{ duration: 0.2 }}
+                        >
                           {clip.title}
-                        </h4>
-                        <p className="text-xs text-neutral-500 mb-2 line-clamp-2 leading-relaxed">
+                        </motion.h4>
+                        <p className="text-xs text-neutral-400 mb-2 line-clamp-2 leading-relaxed">
                           {clip.description}
                         </p>
-                        <div className="flex items-center justify-between pt-2 border-t border-neutral-800/50">
-                          <span className="text-xs text-neutral-600 font-light">{clip.project}</span>
-                          <span className="text-xs text-neutral-700 font-light">{clip.year}</span>
+                        <div className="flex items-center justify-between pt-2.5 border-t border-neutral-800/70">
+                          <span className="text-xs text-neutral-500 font-medium">{clip.project}</span>
+                          <span className="text-xs text-neutral-600 font-medium">{clip.year}</span>
                         </div>
                       </div>
                     </div>
@@ -352,22 +415,30 @@ export default function Showreel() {
               ))}
             </div>
 
-            {/* Link to channel */}
+            {/* Link to channel with enhanced animation */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ delay: 1.4 }}
-              className="text-center mt-10"
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ delay: 1.6, duration: 0.5 }}
+              className="text-center mt-12"
             >
-              <a
+              <motion.a
                 href="https://www.youtube.com/@almagrosanmiguel7219/videos"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-neutral-900/50 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-900/70 text-neutral-400 hover:text-neutral-200 transition-all font-light"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-neutral-900/60 border border-neutral-800 text-neutral-400 font-light backdrop-blur-sm"
+                whileHover={{ 
+                  scale: 1.05,
+                  backgroundColor: "rgba(23, 23, 23, 0.8)",
+                  borderColor: "rgba(115, 115, 115, 0.5)",
+                  color: "rgb(229, 229, 229)",
+                  transition: { duration: 0.3 }
+                }}
+                whileTap={{ scale: 0.98 }}
               >
                 <span>Ver todos los videos en YouTube</span>
                 <ExternalLink className="w-4 h-4" />
-              </a>
+              </motion.a>
             </motion.div>
           </motion.div>
 
@@ -375,7 +446,7 @@ export default function Showreel() {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-            transition={{ duration: 0.6, delay: 1.6 }}
+            transition={{ duration: 0.6, delay: 1.8 }}
             className="mt-20 text-center"
           >
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-neutral-900/50 to-neutral-800/50 border border-neutral-800 backdrop-blur-sm">
