@@ -7,6 +7,7 @@ import {
   Calendar,
   Instagram,
   Facebook,
+  Youtube,
   ExternalLink,
   CheckCircle,
   AlertCircle,
@@ -57,6 +58,12 @@ const socialLinks = [
     label: 'Instagram',
     handle: '@almagrosanmiguel',
     url: 'https://www.instagram.com/almagrosanmiguel/',
+  },
+  {
+    icon: Youtube,
+    label: 'YouTube',
+    handle: '@almagrosanmiguel7219',
+    url: 'https://www.youtube.com/@almagrosanmiguel7219',
   },
   {
     icon: X,
