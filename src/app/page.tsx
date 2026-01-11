@@ -17,6 +17,8 @@ const Portfolio = dynamic(() => import('@/components/sections/Portfolio'), {
 
 const Cinema = dynamic(() => import('@/components/sections/Cinema'))
 const Theater = dynamic(() => import('@/components/sections/Theater'))
+const Skills = dynamic(() => import('@/components/sections/Skills'))
+const Headshots = dynamic(() => import('@/components/sections/Headshots'))
 
 const Timeline = dynamic(() => import('@/components/sections/Timeline'), {
   loading: () => (
@@ -41,8 +43,9 @@ export default function Home() {
       <Navbar />
       <Hero />
       
-      {/* Core sections */}
+      {/* Core sections - Optimized for casting directors */}
       <About />
+      <Skills />
       <LatestProject />
       
       {/* Filmography sections - reorganized order */}
@@ -61,7 +64,8 @@ export default function Home() {
       <Milestones />
       <Awards />
       
-      {/* Media sections */}
+      {/* Media sections - Professional photos first */}
+      <Headshots />
       <Gallery />
       <Showreel />
       <Press />
