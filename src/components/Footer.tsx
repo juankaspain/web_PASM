@@ -60,8 +60,9 @@ export default function Footer() {
         <div className="grid md:grid-cols-3 gap-12 mb-12">
           {/* About */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-serif font-bold bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">
-              Almagro San Miguel
+            <h3 className="text-2xl font-serif font-bold">
+              <span className="text-white">Almagro </span>
+              <span className="text-yellow-500">San Miguel</span>
             </h3>
             <p className="text-gray-400 leading-relaxed font-light">
               Actor sevillano con más de 10 años de experiencia en televisión, cine y teatro. 
