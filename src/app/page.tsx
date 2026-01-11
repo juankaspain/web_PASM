@@ -37,6 +37,11 @@ const Press = dynamic(() => import('@/components/sections/Press'))
 const PressKit = dynamic(() => import('@/components/sections/PressKit'))
 const Contact = dynamic(() => import('@/components/sections/Contact'))
 
+// New: Professional Testimonials with Cine, Series, Teatro
+const ProfessionalTestimonials = dynamic(
+  () => import('@/components/sections/ProfessionalTestimonials')
+)
+
 export default function Home() {
   return (
     <main className="relative bg-black">
@@ -65,8 +70,11 @@ export default function Home() {
       <Milestones />
       <Awards />
       
-      {/* Events & Schedule - NUEVO */}
+      {/* Events & Schedule */}
       <Calendar />
+      
+      {/* Professional Testimonials - NEW */}
+      <ProfessionalTestimonials />
       
       {/* Media sections - Professional photos first */}
       <Headshots />
