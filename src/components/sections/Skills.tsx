@@ -9,7 +9,7 @@ const training = [
     title: 'Compañía Nacional de Teatro Clásico',
     organization: 'CNTC - Ministerio de Cultura',
     period: '2015-2017',
-    director: 'Helena Pimenta',
+    director: 'Dir: Helena Pimenta',
     description: 'Formación de élite en verso clásico español, comedia del Siglo de Oro y técnicas de interpretación profesional. Dos años intensivos en la compañía nacional.',
     featured: true,
   },
@@ -25,7 +25,7 @@ const training = [
     title: 'Work In Progress',
     organization: 'Escuela de Actuación Madrid',
     period: '2013-2015',
-    director: 'Darío Facal',
+    director: 'Dir: Darío Facal',
     description: 'Perfeccionamiento en técnicas de cámara, casting y preparación de personajes para cine y televisión.',
     featured: false,
   },
@@ -231,7 +231,7 @@ export default function Skills() {
                             {course.period}
                           </span>
                           <span>•</span>
-                          <span>Dir: {course.director}</span>
+                          <span>{course.director}</span>
                         </div>
                       </div>
                     </div>
