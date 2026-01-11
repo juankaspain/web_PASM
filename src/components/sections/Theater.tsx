@@ -1,10 +1,23 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Theater as TheaterIcon, Award, Users, Calendar, Sparkles, Crown, Star, Trophy } from 'lucide-react'
+import { Theater as TheaterIcon, Award, Users, Calendar, Sparkles, Crown, Star, Trophy, Zap } from 'lucide-react'
 import { useRef } from 'react'
 
 const theaterWorks = [
+  {
+    title: 'Donde nacen las palabras',
+    company: 'DMLP Producciones',
+    period: '2025-2026',
+    director: 'Ángel Caballero',
+    description: 'Continuación de la aclamada "Donde mueren las palabras" (finalista al Premio Nacional de Literatura Dramática). Comedia sobre el reencuentro de amigos de la infancia que, tras años de distanciamiento, se ven obligados a confinarse juntos durante la pandemia. Una reflexión sobre amistades, reproches del pasado y segundas oportunidades.',
+    award: 'En Cartel - Gira Nacional 2026',
+    awardEntity: 'Teatro Lara Madrid & Palacio de la Prensa',
+    featured: true,
+    current: true,
+    category: 'Comedia Contemporánea',
+    venues: 'Estreno: Teatro Cervantes Málaga | Teatro Lara Madrid | Palacio de la Prensa | Gira Nacional',
+  },
   {
     title: 'Fuente Ovejuna',
     company: 'Compañía Nacional de Teatro Clásico',
@@ -196,20 +209,36 @@ export default function Theater() {
               >
                 <div className="relative">
                   <motion.div 
-                    className="absolute left-0 top-0 bottom-0 w-[2px] bg-yellow-400"
+                    className={`absolute left-0 top-0 bottom-0 w-[2px] ${work.current ? 'bg-green-400' : 'bg-yellow-400'}`}
                     initial={{ scaleY: 0 }}
                     whileHover={{ scaleY: 1 }}
                     transition={{ duration: 0.3 }}
                   />
                   
-                  <div className="relative bg-white/[0.02] border border-white/10 rounded-xl p-6 lg:p-8 backdrop-blur-sm hover:bg-white/[0.04] hover:border-white/20 transition-all duration-300">
+                  <div className={`relative border rounded-xl p-6 lg:p-8 backdrop-blur-sm hover:border-white/20 transition-all duration-300 ${
+                    work.current 
+                      ? 'bg-gradient-to-br from-green-900/10 to-green-950/5 border-green-500/30 hover:bg-green-900/15' 
+                      : 'bg-white/[0.02] border-white/10 hover:bg-white/[0.04]'
+                  }`}>
                     <div className="flex flex-col lg:flex-row lg:items-start gap-6">
                       <div className="lg:w-64 flex-shrink-0">
                         <div className="flex items-center gap-3 mb-4">
-                          <div className="w-10 h-10 bg-yellow-400/10 rounded-lg flex items-center justify-center border border-yellow-400/20">
-                            <TheaterIcon className="w-5 h-5 text-yellow-400" />
+                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center border ${
+                            work.current 
+                              ? 'bg-green-400/10 border-green-400/20' 
+                              : 'bg-yellow-400/10 border-yellow-400/20'
+                          }`}>
+                            <TheaterIcon className={`w-5 h-5 ${work.current ? 'text-green-400' : 'text-yellow-400'}`} />
                           </div>
-                          {work.featured && (
+                          {work.current && (
+                            <div className="px-3 py-1 bg-green-400/20 border border-green-400/30 rounded-full animate-pulse">
+                              <span className="text-xs font-bold text-green-300 uppercase tracking-wide flex items-center gap-1.5">
+                                <Zap className="w-3 h-3" />
+                                En Cartel
+                              </span>
+                            </div>
+                          )}
+                          {work.featured && !work.current && (
                             <div className="px-3 py-1 bg-yellow-400/20 border border-yellow-400/30 rounded-full">
                               <span className="text-xs font-bold text-yellow-300 uppercase tracking-wide">CNTC</span>
                             </div>
@@ -245,9 +274,19 @@ export default function Theater() {
                           {work.description}
                         </p>
 
+                        {work.venues && (
+                          <div className="mb-4 text-sm text-slate-500">
+                            <span className="font-medium">{work.venues}</span>
+                          </div>
+                        )}
+
                         {work.award && (
-                          <div className="inline-flex items-start gap-2 bg-yellow-400/5 border border-yellow-400/20 rounded-lg px-4 py-2.5">
-                            <Award className="w-4 h-4 text-yellow-400 flex-shrink-0 mt-0.5" />
+                          <div className={`inline-flex items-start gap-2 border rounded-lg px-4 py-2.5 ${
+                            work.current 
+                              ? 'bg-green-400/5 border-green-400/20' 
+                              : 'bg-yellow-400/5 border-yellow-400/20'
+                          }`}>
+                            <Award className={`w-4 h-4 flex-shrink-0 mt-0.5 ${work.current ? 'text-green-400' : 'text-yellow-400'}`} />
                             <div>
                               <p className="text-sm font-semibold text-white">{work.award}</p>
                               <p className="text-xs text-slate-400">{work.awardEntity}</p>
@@ -272,9 +311,9 @@ export default function Theater() {
               <div className="absolute -inset-4 bg-yellow-400/5 rounded-2xl blur-2xl" />
               <blockquote className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
                 <p className="text-lg text-slate-300 italic leading-relaxed mb-4">
-                  “El teatro es la base de mi formación como actor. Mi trabajo en la Compañía Nacional de Teatro Clásico 
+                  "El teatro es la base de mi formación como actor. Mi trabajo en la Compañía Nacional de Teatro Clásico 
                   con Helena Pimenta fue determinante para mi especialización en verso clásico español y mi desarrollo 
-                  como intérprete profesional.”
+                  como intérprete profesional."
                 </p>
                 <div className="w-12 h-[2px] bg-yellow-400 mx-auto" />
               </blockquote>
