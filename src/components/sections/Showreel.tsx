@@ -178,7 +178,8 @@ const pressInterviews: PressInterview[] = [
 ]
 
 export default function Showreel() {
-  const ref = useInView(null)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
   const [activeVideo, setActiveVideo] = useState<string>('2024')
   const [modalVideo, setModalVideo] = useState<ClipVideo | null>(null)
 
@@ -210,18 +211,17 @@ export default function Showreel() {
 
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <motion.div
+            ref={ref}
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
           >
             {/* Header - Entrevistas en Video */}
             <div className="text-center mb-16">
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                viewport={{ once: true }}
                 className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm"
               >
                 <Film className="w-4 h-4 text-yellow-400" strokeWidth={2} />
@@ -230,9 +230,8 @@ export default function Showreel() {
               
               <motion.h2 
                 initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                viewport={{ once: true }}
                 className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-white"
               >
                 Entrevistas en Video
@@ -240,17 +239,15 @@ export default function Showreel() {
 
               <motion.div
                 initial={{ opacity: 0, scaleX: 0 }}
-                whileInView={{ opacity: 1, scaleX: 1 }}
+                animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                viewport={{ once: true }}
                 className="w-20 h-0.5 bg-yellow-400 mx-auto mb-6"
               />
               
               <motion.p 
                 initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
+                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                viewport={{ once: true }}
                 className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
               >
                 Selección de mis mejores interpretaciones en televisión, cine y teatro
@@ -260,9 +257,8 @@ export default function Showreel() {
             {/* Year Selector */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              viewport={{ once: true }}
               className="flex justify-center gap-3 mb-12"
             >
               {showreels.map((reel) => (
