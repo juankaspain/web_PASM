@@ -4,8 +4,6 @@ import './globals.css'
 import Analytics from '@/components/Analytics'
 import PWAInstall from '@/components/PWAInstall'
 import Script from 'next/script'
-import fs from 'fs'
-import path from 'path'
 
 // Optimized font configuration with display swap and fallbacks
 const inter = Inter({ 
@@ -15,19 +13,6 @@ const inter = Inter({
   preload: true,
   fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Arial', 'sans-serif']
 })
-
-// Read critical CSS at build time
-const getCriticalCSS = () => {
-  if (typeof window === 'undefined') {
-    try {
-      const criticalPath = path.join(process.cwd(), 'src/app/critical.css')
-      return fs.readFileSync(criticalPath, 'utf8')
-    } catch {
-      return ''
-    }
-  }
-  return ''
-}
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://almagrosanmiguel.com'),
@@ -181,18 +166,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const criticalCSS = getCriticalCSS()
-
   return (
     <html lang="es" className={inter.variable} suppressHydrationWarning>
       <head>
-        {/* Critical CSS inlined for instant rendering */}
-        {criticalCSS && (
-          <style
-            dangerouslySetInnerHTML={{ __html: criticalCSS }}
-            data-critical="true"
-          />
-        )}
+        {/* Critical CSS temporarily disabled - will be re-enabled after build fix */}
+        {/* See FIX_BUILD_ERRORS.md for details */}
 
         {/* Preconnect to critical external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -228,10 +206,6 @@ export default function RootLayout({
         <link rel="prefetch" href="/#about" />
         <link rel="prefetch" href="/#portfolio" />
         <link rel="prefetch" href="/#contact" />
-        
-        {/* Resource hints for improved performance */}
-        <link rel="modulepreload" href="/_next/static/chunks/main.js" />
-        <link rel="modulepreload" href="/_next/static/chunks/pages/_app.js" />
       </head>
       <body className={inter.className} suppressHydrationWarning>
         {children}
