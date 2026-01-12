@@ -4,7 +4,14 @@ import './globals.css'
 import Analytics from '@/components/Analytics'
 import Script from 'next/script'
 
-const inter = Inter({ subsets: ['latin'] })
+// Optimized font configuration with display swap and fallbacks
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+  preload: true,
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Arial', 'sans-serif']
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://almagrosanmiguel.com'),
@@ -148,6 +155,9 @@ export const metadata: Metadata = {
     google: 'pending-verification',
   },
   category: 'entertainment',
+  other: {
+    'font-display': 'swap',
+  }
 }
 
 export default function RootLayout({
@@ -156,23 +166,24 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es" className={inter.variable} suppressHydrationWarning>
       <head>
-        {/* Preconnect to external domains */}
-        <link rel="preconnect" href="https://www.google-analytics.com" />
-        <link rel="preconnect" href="https://formspree.io" />
+        {/* Preconnect to external domains for faster loading */}
+        <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://formspree.io" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://formspree.io" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       </head>
       <body className={inter.className} suppressHydrationWarning>
         {children}
         <Analytics />
         
-        {/* Enhanced Schema.org Person Markup */}
+        {/* Enhanced Schema.org Person Markup - Deferred for performance */}
         <Script
           id="person-schema"
           type="application/ld+json"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
@@ -313,7 +324,7 @@ export default function RootLayout({
         <Script
           id="filmography-schema"
           type="application/ld+json"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
@@ -389,7 +400,7 @@ export default function RootLayout({
         <Script
           id="breadcrumb-schema"
           type="application/ld+json"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
@@ -428,7 +439,7 @@ export default function RootLayout({
         <Script
           id="website-schema"
           type="application/ld+json"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
@@ -460,7 +471,7 @@ export default function RootLayout({
         <Script
           id="profilepage-schema"
           type="application/ld+json"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
