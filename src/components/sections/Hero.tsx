@@ -1,11 +1,11 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Play, MapPin, Calendar, ExternalLink, Award, Tv, Film, Users, Instagram, X, Youtube, Facebook } from 'lucide-react'
+import { ArrowDown, Play, MapPin, Calendar, Camera, Instagram, X, Youtube, Facebook } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { SiTiktok, SiImdb, SiWikipedia } from 'react-icons/si'
-import { RiFilmLine, RiMovie2Line } from 'react-icons/ri'
+import { SiTiktok } from 'react-icons/si'
+import { Tv, Film, Award, Users } from 'lucide-react'
 
 export default function Hero() {
   const { scrollY } = useScroll()
@@ -16,57 +16,6 @@ export default function Hero() {
   useEffect(() => {
     setMounted(true)
   }, [])
-
-  const professionalLinks = [
-    { 
-      name: 'IMDb', 
-      url: 'https://www.imdb.com/name/nm9017709/',
-      icon: SiImdb,
-      description: 'Perfil profesional',
-      gradient: 'from-yellow-400/20 to-yellow-600/20',
-      borderColor: 'border-yellow-400/30',
-      iconColor: 'text-yellow-400',
-      hoverBg: 'hover:bg-yellow-400/10',
-      hoverBorder: 'hover:border-yellow-400/50',
-      hoverText: 'hover:text-yellow-400',
-    },
-    { 
-      name: 'FilmAffinity', 
-      url: 'https://www.filmaffinity.com/es/name.php?name-id=231727420',
-      icon: RiFilmLine,
-      description: 'Filmografía completa',
-      gradient: 'from-blue-400/20 to-blue-600/20',
-      borderColor: 'border-blue-400/30',
-      iconColor: 'text-blue-400',
-      hoverBg: 'hover:bg-blue-400/10',
-      hoverBorder: 'hover:border-blue-400/50',
-      hoverText: 'hover:text-blue-400',
-    },
-    { 
-      name: 'SensaCine', 
-      url: 'https://www.sensacine.com/actores/actor-889713/',
-      icon: RiMovie2Line,
-      description: 'Proyectos y noticias',
-      gradient: 'from-purple-400/20 to-purple-600/20',
-      borderColor: 'border-purple-400/30',
-      iconColor: 'text-purple-400',
-      hoverBg: 'hover:bg-purple-400/10',
-      hoverBorder: 'hover:border-purple-400/50',
-      hoverText: 'hover:text-purple-400',
-    },
-    { 
-      name: 'Wikipedia', 
-      url: 'https://es.wikipedia.org/wiki/Almagro_San_Miguel',
-      icon: SiWikipedia,
-      description: 'Biografía',
-      gradient: 'from-slate-400/20 to-slate-600/20',
-      borderColor: 'border-slate-400/30',
-      iconColor: 'text-slate-300',
-      hoverBg: 'hover:bg-slate-400/10',
-      hoverBorder: 'hover:border-slate-400/50',
-      hoverText: 'hover:text-slate-200',
-    },
-  ]
 
   const socialLinks = [
     {
@@ -240,30 +189,6 @@ export default function Hero() {
           animation: bounce 1.4s ease-in-out infinite;
         }
 
-        .profile-card {
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .profile-card:hover {
-          transform: translateY(-8px);
-        }
-
-        .profile-icon {
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .profile-card:hover .profile-icon {
-          transform: scale(1.15) rotate(5deg);
-        }
-
-        .external-link-icon {
-          transition: all 0.3s ease;
-        }
-
-        .profile-card:hover .external-link-icon {
-          transform: translate(2px, -2px);
-        }
-
         .stat-card {
           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -429,74 +354,27 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="pt-2 fade-in-up" style={{ animationDelay: '0.5s' }}>
+            {/* Botones de CTA - Showreel y Headshots */}
+            <div className="pt-2 flex flex-col sm:flex-row gap-3 fade-in-up" style={{ animationDelay: '0.5s' }}>
               <a
                 href="#showreel"
-                className="cta-button group inline-flex items-center gap-2 rounded-full bg-yellow-400 px-7 py-3.5 text-base font-semibold text-black shadow-[0_10px_30px_rgba(250,204,21,0.25)]"
+                className="cta-button group inline-flex items-center justify-center gap-2 rounded-full bg-yellow-400 px-7 py-3.5 text-base font-semibold text-black shadow-[0_10px_30px_rgba(250,204,21,0.25)]"
               >
                 <Play className="w-5 h-5 play-icon" />
                 Ver Showreel Profesional
               </a>
-            </div>
-
-            {/* Professional Links - ULTRA PROFESSIONAL DESIGN */}
-            <div className="space-y-4 fade-in-up" style={{ animationDelay: '0.6s' }}>
-              <div className="flex items-center gap-2.5">
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/60 border border-slate-700/50 backdrop-blur-sm">
-                  <ExternalLink className="w-3.5 h-3.5 text-yellow-400" />
-                  <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-slate-300">
-                    Perfiles Profesionales
-                  </h3>
-                </div>
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
-              </div>
               
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {professionalLinks.map((link) => {
-                  const Icon = link.icon
-                  return (
-                    <a
-                      key={link.name}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`profile-card group relative flex flex-col items-center gap-3 rounded-2xl border bg-gradient-to-br from-slate-900/90 to-slate-950/90 px-4 py-5 backdrop-blur-xl transition-all shadow-[0_8px_32px_rgba(0,0,0,0.5)] ${link.borderColor} ${link.hoverBg} ${link.hoverBorder}`}
-                    >
-                      {/* Gradient glow effect */}
-                      <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${link.gradient} opacity-0 group-hover:opacity-100 transition-opacity blur-xl`} />
-                      
-                      {/* Icon container */}
-                      <div className="relative z-10 flex items-center justify-center w-14 h-14 rounded-xl bg-black/40 border border-white/10 shadow-lg">
-                        <Icon className={`profile-icon w-7 h-7 ${link.iconColor}`} />
-                      </div>
-                      
-                      {/* Text content */}
-                      <div className="relative z-10 text-center space-y-1">
-                        <div className="flex items-center justify-center gap-1.5">
-                          <p className={`text-sm font-bold text-white transition-colors ${link.hoverText}`}>
-                            {link.name}
-                          </p>
-                          <ExternalLink className={`external-link-icon w-3 h-3 text-slate-500 group-hover:${link.iconColor.replace('text-', 'text-')} transition-all`} />
-                        </div>
-                        <p className="text-[10px] text-slate-400 leading-tight">
-                          {link.description}
-                        </p>
-                      </div>
-                      
-                      {/* Border shine effect */}
-                      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-                      </div>
-                    </a>
-                  )
-                })}
-              </div>
+              <a
+                href="#headshots"
+                className="cta-button group inline-flex items-center justify-center gap-2 rounded-full bg-yellow-400 px-7 py-3.5 text-base font-semibold text-black shadow-[0_10px_30px_rgba(250,204,21,0.25)]"
+              >
+                <Camera className="w-5 h-5 play-icon" />
+                Ver Headshots Profesionales
+              </a>
             </div>
 
             {/* Social Links */}
-            <div className="space-y-3 fade-in-up" style={{ animationDelay: '0.7s' }}>
+            <div className="space-y-3 fade-in-up" style={{ animationDelay: '0.6s' }}>
               <div className="flex items-center gap-2">
                 <Instagram className="w-4 h-4 text-yellow-400" />
                 <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400">
@@ -525,7 +403,7 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="pt-3 flex justify-center lg:justify-start fade-in-up" style={{ animationDelay: '0.8s' }}>
+            <div className="pt-3 flex justify-center lg:justify-start fade-in-up" style={{ animationDelay: '0.7s' }}>
               <a
                 href="#about"
                 className="explore-button group inline-flex items-center gap-3 rounded-full border border-slate-600/70 bg-slate-900/60 px-5 py-2.5 backdrop-blur-md hover:border-white/20 hover:bg-slate-900/80 transition-all"
