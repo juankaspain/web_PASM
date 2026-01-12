@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Analytics from '@/components/Analytics'
 import PWAInstall from '@/components/PWAInstall'
+import CookieConsent from '@/components/CookieConsent'
 import Script from 'next/script'
 
 // Optimized font configuration with display swap and fallbacks
@@ -217,6 +218,7 @@ export default function RootLayout({
         {children}
         <Analytics />
         <PWAInstall />
+        <CookieConsent />
         
         {/* Enhanced Schema.org Person Markup - Deferred for performance */}
         <Script
