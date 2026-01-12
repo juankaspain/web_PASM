@@ -239,6 +239,8 @@ export default function Gallery() {
                     src={image.src}
                     alt={image.alt}
                     fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                    quality={80}
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   
@@ -323,6 +325,8 @@ export default function Gallery() {
                   src={lightboxImage.src}
                   alt={lightboxImage.alt}
                   fill
+                  sizes="(max-width: 1280px) 100vw, 1280px"
+                  quality={90}
                   className="object-contain"
                 />
               </div>
