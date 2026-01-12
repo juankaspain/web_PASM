@@ -1,8 +1,9 @@
 'use client'
 
-import { Mail, MapPin, Facebook, Instagram, X, Youtube, ExternalLink } from 'lucide-react'
+import { Mail, MapPin, Facebook, Instagram, X, Youtube, ExternalLink, Heart } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { SiTiktok } from 'react-icons/si'
+import { useState, useEffect } from 'react'
 
 const socialLinks = [
   {
@@ -65,6 +66,40 @@ const professionalLinks = [
 ]
 
 export default function Footer() {
+  const [hasSupported, setHasSupported] = useState(false)
+  const [fanCount, setFanCount] = useState(23)
+  const [showParticles, setShowParticles] = useState(false)
+
+  useEffect(() => {
+    // Load state from localStorage
+    const supported = localStorage.getItem('fanSupport')
+    if (supported === 'true') {
+      setHasSupported(true)
+    }
+    
+    // Load fan count from localStorage
+    const savedCount = localStorage.getItem('fanCount')
+    if (savedCount) {
+      setFanCount(parseInt(savedCount, 10))
+    }
+  }, [])
+
+  const handleFanSupport = () => {
+    if (!hasSupported) {
+      setHasSupported(true)
+      const newCount = fanCount + 1
+      setFanCount(newCount)
+      setShowParticles(true)
+      
+      // Save to localStorage
+      localStorage.setItem('fanSupport', 'true')
+      localStorage.setItem('fanCount', newCount.toString())
+      
+      // Hide particles after animation
+      setTimeout(() => setShowParticles(false), 2000)
+    }
+  }
+
   return (
     <footer className="bg-slate-950 border-t border-neutral-800 text-white py-16">
       <div className="container mx-auto px-4 max-w-7xl">
@@ -162,6 +197,82 @@ export default function Footer() {
               </motion.a>
             ))}
           </div>
+        </div>
+
+        {/* Fan Support Button */}
+        <div className="mb-12 flex flex-col items-center">
+          <motion.button
+            onClick={handleFanSupport}
+            disabled={hasSupported}
+            whileHover={!hasSupported ? { scale: 1.05 } : {}}
+            whileTap={!hasSupported ? { scale: 0.95 } : {}}
+            className={`relative group px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl transition-all duration-300 overflow-hidden ${
+              hasSupported 
+                ? 'bg-gradient-to-r from-pink-500 to-rose-500 cursor-default' 
+                : 'bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 cursor-pointer'
+            }`}
+          >
+            {/* Particles Effect */}
+            {showParticles && (
+              <div className="absolute inset-0 pointer-events-none">
+                {[...Array(12)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ 
+                      x: '50%', 
+                      y: '50%', 
+                      opacity: 1,
+                      scale: 0
+                    }}
+                    animate={{ 
+                      x: `${50 + (Math.random() - 0.5) * 200}%`, 
+                      y: `${50 + (Math.random() - 0.5) * 200}%`, 
+                      opacity: 0,
+                      scale: 1
+                    }}
+                    transition={{ 
+                      duration: 1.5,
+                      delay: i * 0.05,
+                      ease: 'easeOut'
+                    }}
+                    className="absolute w-2 h-2 bg-white rounded-full"
+                  />
+                ))}
+              </div>
+            )}
+
+            <div className="relative flex items-center gap-3">
+              <motion.div
+                animate={!hasSupported ? {
+                  scale: [1, 1.3, 1],
+                } : {}}
+                transition={{
+                  duration: 0.6,
+                  repeat: Infinity,
+                  repeatDelay: 2
+                }}
+              >
+                <Heart 
+                  className={`w-6 h-6 ${
+                    hasSupported ? 'fill-white text-white' : 'text-white'
+                  }`}
+                  fill={hasSupported ? 'currentColor' : 'none'}
+                />
+              </motion.div>
+              <span className="text-white">
+                {hasSupported ? '¡Gracias! ❤️' : 'Apóyame ❤️'}
+              </span>
+            </div>
+          </motion.button>
+          
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="mt-4 text-sm text-gray-400 font-light"
+          >
+            <span className="font-semibold text-pink-400">{fanCount} fans</span> te apoyan ❤️
+          </motion.p>
         </div>
 
         {/* Bottom Bar */}
