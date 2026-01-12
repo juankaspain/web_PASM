@@ -44,7 +44,7 @@ const films: FilmDetails[] = [
       characterName: 'Antonio',
       characterDescription: 'Antonio es el novio de Amaia, la joven guardia civil que se infiltra en ETA durante más de una década. Su personaje representa el amor incondicional y el apoyo emocional en medio de una operación extremadamente peligrosa. Interpreta a un hombre que debe enfrentar la decisión más difícil: dejar ir al amor de su vida por el bien de la misión y la seguridad nacional.',
       synopsis: 'Película dramática dirigida por Agustín Díaz Yanes sobre ETA y sus consecuencias. La historia se centra en la Operación Santuario, la mayor operación encubierta contra ETA. Estrenada en cines en octubre de 2025 y disponible en Netflix. Reparto estelar con Susana Abaitua, Aitor Luna, Luis Callejo y Ruth Díaz.',
-      quote: '“Es un proyecto que me gustó desde el primer momento. La historia sobre la lucha contra ETA es cruda. El trabajo de Susana Abaitua es de Goya. Ella tiene que rechazar la vida familiar que tenía previsto, soy su pareja.”',
+      quote: '"Es un proyecto que me gustó desde el primer momento. La historia sobre la lucha contra ETA es cruda. El trabajo de Susana Abaitua es de Goya. Ella tiene que rechazar la vida familiar que tenía previsto, soy su pareja."',
       trailerUrl: 'https://www.youtube.com/watch?v=R0ufJf5SFIU',
       imdbUrl: 'https://www.imdb.com/title/tt32129665/',
     },
@@ -64,7 +64,7 @@ const films: FilmDetails[] = [
       characterName: 'Legionario',
       characterDescription: 'Interpreto a un legionario español durante la guerra del Rif. Un personaje que representa el sacrificio y la lealtad de los soldados que lucharon en el desastre de Annual. El rodaje se realizó en Ceuta con la colaboración de legionarios reales, lo que aportó autenticidad y realismo a la interpretación.',
       synopsis: 'Film histórico dirigido por Gerardo Herrero que narra los acontecimientos del desastre de Annual durante la guerra del Rif. Una mirada intensa y realista sobre uno de los episodios más dramáticos de la historia militar española.',
-      quote: '“Trabajar con legionarios reales fue una experiencia única. Su disciplina y profesionalidad me ayudaron a entender la mentalidad militar y a dar autenticidad al personaje.”',
+      quote: '"Trabajar con legionarios reales fue una experiencia única. Su disciplina y profesionalidad me ayudaron a entender la mentalidad militar y a dar autenticidad al personaje."',
     },
   },
   {
@@ -127,7 +127,7 @@ export default function Cinema() {
 
   return (
     <>
-      <section className="relative py-32 overflow-hidden bg-gradient-to-b from-black via-slate-950 to-slate-900">
+      <section id="filmografia" className="relative py-32 overflow-hidden bg-gradient-to-b from-black via-slate-950 to-slate-900">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px]" />
           <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[120px]" />
