@@ -178,7 +178,8 @@ export default function RootLayout({
         {/* Theme Color for PWA */}
         <meta name="theme-color" content="#000000" />
         <meta name="color-scheme" content="dark" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
+        
+        {/* Apple-specific meta tags - usando solo los no deprecados */}
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="format-detection" content="telephone=no" />
 
