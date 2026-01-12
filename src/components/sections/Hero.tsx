@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowDown, Play, MapPin, Calendar, ExternalLink, Clapperboard, Tv, Star, Theater as TheaterIcon, Instagram, X, Youtube, Facebook } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { SiTiktok } from 'react-icons/si'
+import { SiTiktok } from 'react-icons/si/SiTiktok'
 
 export default function Hero() {
   const { scrollY } = useScroll()
@@ -128,31 +128,34 @@ export default function Hero() {
     >
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black via-slate-950 to-slate-900" />
 
+      {/* Simplified stars animation - using CSS instead of Framer Motion for better performance */}
       {mounted && (
         <div className="pointer-events-none absolute inset-0 opacity-10">
           {[...Array(18)].map((_, i) => (
-            <motion.div
+            <div
               key={i}
-              className="absolute w-1 h-1 bg-yellow-400 rounded-full blur-[1px]"
-              initial={{
-                x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920),
-                y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080),
-                opacity: 0,
-              }}
-              animate={{
-                y: [null, Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080)],
-                opacity: [0, 1, 0],
-              }}
-              transition={{
-                duration: Math.random() * 12 + 14,
-                repeat: Infinity,
-                ease: 'linear',
-                delay: Math.random() * 6,
+              className="star-animation absolute w-1 h-1 bg-yellow-400 rounded-full blur-[1px]"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 6}s`,
+                animationDuration: `${Math.random() * 12 + 14}s`,
               }}
             />
           ))}
         </div>
       )}
+
+      <style jsx>{`
+        @keyframes star-float {
+          0%, 100% { opacity: 0; transform: translateY(0); }
+          50% { opacity: 1; }
+          100% { transform: translateY(-100vh); }
+        }
+        .star-animation {
+          animation: star-float linear infinite;
+        }
+      `}</style>
 
       <motion.div
         className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20"
@@ -163,11 +166,8 @@ export default function Hero() {
             <div className="relative w-full max-w-[480px] lg:max-w-[520px]">
               <div className="absolute inset-0 rounded-[28px] lg:rounded-[36px] bg-yellow-400/10 blur-3xl" />
               
-              <motion.div 
-                className="relative aspect-[2.5/4] rounded-[28px] lg:rounded-[36px] overflow-hidden shadow-[0_50px_150px_rgba(0,0,0,0.95)]"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-              >
+              {/* Optimized image with priority and fetchPriority */}
+              <div className="hero-image-container relative aspect-[2.5/4] rounded-[28px] lg:rounded-[36px] overflow-hidden shadow-[0_50px_150px_rgba(0,0,0,0.95)]">
                 <Image
                   src="https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4"
                   alt="Almagro San Miguel - Actor profesional de televisión, cine y teatro"
@@ -175,6 +175,8 @@ export default function Hero() {
                   className="object-cover object-[center_15%] scale-105"
                   sizes="(min-width: 1024px) 520px, 90vw"
                   priority
+                  fetchPriority="high"
+                  quality={90}
                   style={{
                     filter: 'brightness(1.05) contrast(1.08) saturate(0.95)',
                   }}
@@ -185,44 +187,37 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
                 <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.7)]" />
                 <div className="absolute inset-0 bg-gradient-to-tl from-yellow-600/5 via-transparent to-transparent" />
-              </motion.div>
+              </div>
+
+              <style jsx>{`
+                .hero-image-container {
+                  transition: transform 0.5s ease-out;
+                }
+                .hero-image-container:hover {
+                  transform: scale(1.02);
+                }
+              `}</style>
             </div>
           </div>
 
-          <motion.div
-            className="order-1 lg:order-2 space-y-6 lg:space-y-7"
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, ease: 'easeOut' }}
-          >
+          <div className="order-1 lg:order-2 space-y-6 lg:space-y-7 fade-in-up">
             <div className="space-y-2">
-              <motion.h1
-                className="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[60px] xl:text-[66px] 
-                           font-serif font-bold tracking-tight leading-[1.1]"
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.25, duration: 0.7 }}
+              <h1 className="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[60px] xl:text-[66px] 
+                           font-serif font-bold tracking-tight leading-[1.1] fade-in-up"
+                  style={{ animationDelay: '0.1s' }}
               >
                 <span className="text-white">Almagro </span>
                 <span className="text-yellow-400">San Miguel</span>
-              </motion.h1>
+              </h1>
 
-              <motion.p
-                className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-300"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.35, duration: 0.6 }}
+              <p className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-300 fade-in-up"
+                 style={{ animationDelay: '0.2s' }}
               >
                 Actor de Televisión, Cine y Teatro
-              </motion.p>
+              </p>
             </div>
 
-            <motion.div
-              className="grid grid-cols-2 gap-3"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45, duration: 0.6 }}
-            >
+            <div className="grid grid-cols-2 gap-3 fade-in-up" style={{ animationDelay: '0.3s' }}>
               <div className="rounded-2xl bg-slate-900/80 border border-slate-700/60 px-4 py-3 backdrop-blur-md">
                 <div className="flex items-center gap-2 mb-1">
                   <MapPin className="w-4 h-4 text-yellow-400" />
@@ -241,16 +236,11 @@ export default function Hero() {
                 </div>
                 <p className="text-sm font-semibold text-white">7 Marzo 1990</p>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Quick Highlights - Expandido con Enlaces */}
-            <motion.div
-              className="grid grid-cols-2 gap-3"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.55, duration: 0.6 }}
-            >
-              {quickHighlights.map((highlight, index) => {
+            {/* Quick Highlights */}
+            <div className="grid grid-cols-2 gap-3 fade-in-up" style={{ animationDelay: '0.4s' }}>
+              {quickHighlights.map((highlight) => {
                 const Icon = highlight.icon
                 const CardContent = (
                   <>
@@ -280,58 +270,39 @@ export default function Hero() {
                 )
 
                 return highlight.url ? (
-                  <motion.a
+                  <a
                     key={highlight.title}
                     href={highlight.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 + index * 0.05, duration: 0.4 }}
-                    whileHover={{ scale: 1.03, y: -2 }}
-                    className="group rounded-xl bg-slate-900/80 border border-slate-700/60 px-3.5 py-3.5 backdrop-blur-md hover:border-yellow-400/30 transition-all cursor-pointer"
+                    className="card-hover group rounded-xl bg-slate-900/80 border border-slate-700/60 px-3.5 py-3.5 backdrop-blur-md hover:border-yellow-400/30 transition-all cursor-pointer"
                   >
                     {CardContent}
-                  </motion.a>
+                  </a>
                 ) : (
-                  <motion.div
+                  <div
                     key={highlight.title}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 + index * 0.05, duration: 0.4 }}
-                    whileHover={{ scale: 1.03, y: -2 }}
-                    className="group rounded-xl bg-slate-900/80 border border-slate-700/60 px-3.5 py-3.5 backdrop-blur-md hover:border-yellow-400/30 transition-all"
+                    className="card-hover group rounded-xl bg-slate-900/80 border border-slate-700/60 px-3.5 py-3.5 backdrop-blur-md hover:border-yellow-400/30 transition-all"
                   >
                     {CardContent}
-                  </motion.div>
+                  </div>
                 )
               })}
-            </motion.div>
+            </div>
 
-            <motion.div
-              className="pt-2"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.75, duration: 0.6 }}
-            >
-              <motion.a
+            <div className="pt-2 fade-in-up" style={{ animationDelay: '0.5s' }}>
+              <a
                 href="#showreel"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                className="group inline-flex items-center gap-2 rounded-full bg-yellow-400
+                className="cta-button group inline-flex items-center gap-2 rounded-full bg-yellow-400
                            px-7 py-3.5 text-base font-semibold text-black shadow-[0_10px_30px_rgba(250,204,21,0.25)]"
               >
-                <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <Play className="w-5 h-5 play-icon" />
                 Ver Showreel Profesional
-              </motion.a>
-            </motion.div>
+              </a>
+            </div>
 
-            <motion.div
-              className="space-y-3"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.85, duration: 0.6 }}
-            >
+            {/* Professional Links */}
+            <div className="space-y-3 fade-in-up" style={{ animationDelay: '0.6s' }}>
               <div className="flex items-center gap-2">
                 <ExternalLink className="w-4 h-4 text-yellow-400" />
                 <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400">
@@ -340,18 +311,13 @@ export default function Hero() {
               </div>
               
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                {professionalLinks.map((link, index) => (
-                  <motion.a
+                {professionalLinks.map((link) => (
+                  <a
                     key={link.name}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.9 + index * 0.05, duration: 0.4 }}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="group flex flex-col items-center gap-2 rounded-xl border border-slate-700/70 
+                    className="card-hover group flex flex-col items-center gap-2 rounded-xl border border-slate-700/70 
                                bg-slate-900/80 px-3 py-3 backdrop-blur-md hover:border-white/20
                                hover:bg-slate-900/95 transition-all shadow-[0_12px_30px_rgba(15,23,42,0.8)]"
                   >
@@ -362,18 +328,13 @@ export default function Hero() {
                       </p>
                       <p className="text-[10px] text-gray-400 mt-0.5">{link.description}</p>
                     </div>
-                  </motion.a>
+                  </a>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
-            {/* Sección de Redes Sociales */}
-            <motion.div
-              className="space-y-3"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.95, duration: 0.6 }}
-            >
+            {/* Social Links */}
+            <div className="space-y-3 fade-in-up" style={{ animationDelay: '0.7s' }}>
               <div className="flex items-center gap-2">
                 <Instagram className="w-4 h-4 text-yellow-400" />
                 <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400">
@@ -382,20 +343,15 @@ export default function Hero() {
               </div>
               
               <div className="grid grid-cols-3 sm:grid-cols-5 gap-2.5">
-                {socialLinks.map((link, index) => {
+                {socialLinks.map((link) => {
                   const Icon = link.icon
                   return (
-                    <motion.a
+                    <a
                       key={link.name}
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 1.0 + index * 0.05, duration: 0.4 }}
-                      whileHover={{ scale: 1.08, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`group flex flex-col items-center justify-center gap-2 rounded-xl border border-slate-700/70 
+                      className={`card-hover group flex flex-col items-center justify-center gap-2 rounded-xl border border-slate-700/70 
                                  bg-slate-900/80 px-3 py-3 backdrop-blur-md transition-all 
                                  shadow-[0_12px_30px_rgba(15,23,42,0.8)] ${link.borderHover} ${link.bgHover}`}
                     >
@@ -407,39 +363,91 @@ export default function Hero() {
                       <p className={`text-[10px] font-semibold text-slate-400 transition-colors ${link.color}`}>
                         {link.name.split(' ')[0]}
                       </p>
-                    </motion.a>
+                    </a>
                   )
                 })}
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              className="pt-3 flex justify-center lg:justify-start"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.15, duration: 0.6 }}
-            >
-              <motion.a
+            <div className="pt-3 flex justify-center lg:justify-start fade-in-up" style={{ animationDelay: '0.8s' }}>
+              <a
                 href="#about"
-                className="group inline-flex items-center gap-3 rounded-full border border-slate-600/70 
+                className="explore-button group inline-flex items-center gap-3 rounded-full border border-slate-600/70 
                            bg-slate-900/60 px-5 py-2.5 backdrop-blur-md hover:border-white/20
                            hover:bg-slate-900/80 transition-all"
-                whileHover={{ scale: 1.03 }}
               >
                 <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
                   Explorar portfolio completo
                 </span>
-                <motion.div
-                  animate={{ y: [0, 5, 0] }}
-                  transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                  <ArrowDown className="w-4 h-4 text-yellow-400" />
-                </motion.div>
-              </motion.a>
-            </motion.div>
-          </motion.div>
+                <ArrowDown className="w-4 h-4 text-yellow-400 arrow-bounce" />
+              </a>
+            </div>
+          </div>
         </div>
       </motion.div>
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(5px); }
+        }
+
+        .fade-in-up {
+          animation: fadeInUp 0.6s ease-out forwards;
+          opacity: 0;
+        }
+
+        .card-hover {
+          transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+          transform: scale(1.03) translateY(-2px);
+        }
+
+        .cta-button {
+          transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+          transform: scale(1.04);
+        }
+
+        .cta-button:active {
+          transform: scale(0.97);
+        }
+
+        .play-icon {
+          transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover .play-icon {
+          transform: scale(1.1);
+        }
+
+        .explore-button {
+          transition: all 0.3s ease;
+        }
+
+        .explore-button:hover {
+          transform: scale(1.03);
+        }
+
+        .arrow-bounce {
+          animation: bounce 1.4s ease-in-out infinite;
+        }
+      `}</style>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
     </section>
