@@ -4,6 +4,7 @@ import './globals.css'
 import Analytics from '@/components/Analytics'
 import PWAInstall from '@/components/PWAInstall'
 import CookieConsent from '@/components/CookieConsent'
+import Footer from '@/components/Footer'
 import Script from 'next/script'
 
 // Optimized font configuration with display swap and fallbacks
@@ -216,6 +217,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className} suppressHydrationWarning>
         {children}
+        <Footer />
         <Analytics />
         <PWAInstall />
         <CookieConsent />
