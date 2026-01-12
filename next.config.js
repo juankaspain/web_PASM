@@ -54,6 +54,9 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // Optimize image loading
+    unoptimized: false,
+    loader: 'default',
   },
 
   // Security headers
@@ -193,6 +196,8 @@ const nextConfig = {
   // Experimental features for better performance
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion', 'react-icons'],
+    // Optimize CSS
+    optimizeCss: true,
     // Enable when using turbopack
     // turbo: {
     //   resolveExtensions: ['.tsx', '.ts', '.jsx', '.js'],
@@ -204,10 +209,12 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production' ? {
       exclude: ['error', 'warn'],
     } : false,
+    // Remove React properties in production
+    reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
 
   // Webpack optimizations
-  webpack: (config, { isServer }) => {
+  webpack: (config, { isServer, webpack }) => {
     // Optimize bundle size
     if (!isServer) {
       config.optimization = {
@@ -217,6 +224,7 @@ const nextConfig = {
           cacheGroups: {
             default: false,
             vendors: false,
+            // Framework bundle (React, React-DOM)
             framework: {
               name: 'framework',
               chunks: 'all',
@@ -224,6 +232,7 @@ const nextConfig = {
               priority: 40,
               enforce: true,
             },
+            // Lib bundle (other node_modules)
             lib: {
               test: /[\\/]node_modules[\\/]/,
               name(module) {
@@ -236,15 +245,45 @@ const nextConfig = {
               minChunks: 1,
               reuseExistingChunk: true,
             },
+            // Commons bundle (shared code)
             commons: {
               name: 'commons',
               minChunks: 2,
               priority: 20,
             },
+            // Separate Framer Motion (heavy library)
+            framerMotion: {
+              name: 'framer-motion',
+              test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+              priority: 35,
+              reuseExistingChunk: true,
+            },
           },
         },
+        // Minimize bundle size
+        minimize: process.env.NODE_ENV === 'production',
+      }
+
+      // Add performance hints
+      config.performance = {
+        ...config.performance,
+        hints: process.env.NODE_ENV === 'production' ? 'warning' : false,
+        maxAssetSize: 244000, // 244kb
+        maxEntrypointSize: 244000, // 244kb
       }
     }
+
+    // Optimize modules
+    config.module.rules.push({
+      test: /\.(js|jsx|ts|tsx)$/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['next/babel'],
+          plugins: [],
+        },
+      },
+    })
 
     return config
   },
