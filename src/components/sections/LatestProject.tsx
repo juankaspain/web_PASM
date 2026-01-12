@@ -213,7 +213,7 @@ export default function LatestProject() {
             </div>
           </motion.div>
 
-          {/* Collapsible Character Info Section - Sin badge */}
+          {/* Collapsible Character Info Section - Sin título Antonio */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -221,7 +221,6 @@ export default function LatestProject() {
             className="mt-20"
           >
             <div className="text-center">
-              {/* Collapsible Toggle Button - Sin badge arriba */}
               <motion.button
                 onClick={() => setShowCharacterInfo(!showCharacterInfo)}
                 whileHover={{ scale: 1.05 }}
@@ -242,7 +241,7 @@ export default function LatestProject() {
               </motion.button>
             </div>
 
-            {/* Animated Collapsible Content */}
+            {/* Animated Collapsible Content - SIN título "Antonio" ni subtítulo */}
             <AnimatePresence>
               {showCharacterInfo && (
                 <motion.div
@@ -252,14 +251,6 @@ export default function LatestProject() {
                   transition={{ duration: 0.5, ease: 'easeInOut' }}
                   className="overflow-hidden"
                 >
-                  {/* Título del personaje aparece al expandir */}
-                  <div className="text-center mb-12">
-                    <h3 className="text-4xl lg:text-5xl font-bold mb-4 text-white">
-                      Antonio
-                    </h3>
-                    <p className="text-slate-400 text-lg">Agente de apoyo en la Operación Santuario</p>
-                  </div>
-
                   <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                     <motion.div
                       initial={{ opacity: 0, x: -20 }}
