@@ -41,11 +41,6 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'avatars.githubusercontent.com',
       },
-      // Add CDN domains when ready
-      // {
-      //   protocol: 'https',
-      //   hostname: 'res.cloudinary.com',
-      // },
     ],
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -54,7 +49,6 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    // Optimize image loading
     unoptimized: false,
     loader: 'default',
   },
@@ -163,25 +157,12 @@ const nextConfig = {
 
   // Redirects for SEO
   async redirects() {
-    return [
-      // Redirect old paths if any
-      // {
-      //   source: '/old-path',
-      //   destination: '/new-path',
-      //   permanent: true,
-      // },
-    ]
+    return []
   },
 
   // Rewrites for clean URLs
   async rewrites() {
-    return [
-      // Add custom rewrites if needed
-      // {
-      //   source: '/blog/:slug',
-      //   destination: '/news/:slug',
-      // },
-    ]
+    return []
   },
 
   // Compression
@@ -196,25 +177,19 @@ const nextConfig = {
   // Experimental features for better performance
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion', 'react-icons'],
-    // Optimize CSS
     optimizeCss: true,
-    // Enable when using turbopack
-    // turbo: {
-    //   resolveExtensions: ['.tsx', '.ts', '.jsx', '.js'],
-    // },
   },
 
-  // Compiler optimizations
+  // Compiler optimizations (uses SWC by default)
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production' ? {
       exclude: ['error', 'warn'],
     } : false,
-    // Remove React properties in production
     reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
 
-  // Webpack optimizations
-  webpack: (config, { isServer, webpack }) => {
+  // Webpack optimizations - REMOVED babel-loader (Next.js 14 uses SWC)
+  webpack: (config, { isServer }) => {
     // Optimize bundle size
     if (!isServer) {
       config.optimization = {
@@ -260,7 +235,6 @@ const nextConfig = {
             },
           },
         },
-        // Minimize bundle size
         minimize: process.env.NODE_ENV === 'production',
       }
 
@@ -273,24 +247,11 @@ const nextConfig = {
       }
     }
 
-    // Optimize modules
-    config.module.rules.push({
-      test: /\.(js|jsx|ts|tsx)$/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: ['next/babel'],
-          plugins: [],
-        },
-      },
-    })
+    // NO babel-loader - Next.js 14 uses SWC compiler which is much faster
+    // SWC is configured via compiler options above
 
     return config
   },
-
-  // Generate standalone output only for Docker/container deployments
-  // Uncomment if deploying to containers:
-  // output: 'standalone',
 }
 
 module.exports = withBundleAnalyzer(nextConfig)
