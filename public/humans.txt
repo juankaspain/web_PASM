@@ -1,77 +1,106 @@
 /* TEAM */
-Actor: Almagro San Miguel
-Contact: info [at] almagrosanmiguel.com
-X: @almagroSM
-Instagram: @almagrosanmiguel
-Location: Madrid y Sevilla, España
 
-Development: AI-Assisted Development
-Content: Almagro San Miguel
-Location: Sevilla, España
-
-/* THANKS */
-Framework: Next.js Team
-Testing: Vitest & Playwright Teams
-Monitoring: Sentry Team
-Forms: Formspree Team
-Hosting: Vercel Team
+    Actor: Almagro San Miguel
+    Email: info@almagrosanmiguel.com
+    Location: Madrid y Sevilla, España
+    Twitter: @almagroSM
+    Instagram: @almagrosanmiguel
 
 /* SITE */
-Last update: 2026/01/10
-Language: Español / English
-Doctype: HTML5
-IDE: VSCode, Cursor
-Standards: HTML5, CSS3, ES2024
-Components: React 19, TypeScript 5
-Software: Next.js 15, Tailwind CSS 3.4, Framer Motion 11
 
-/* TECHNOLOGIES */
-- Next.js 15.5.9
-- React 19.0.0
-- TypeScript 5
-- Tailwind CSS 3.4.1
-- Framer Motion 11.15.0
-- Zod 3.23.8
-- React Hook Form 7.53.2
-- Lucide React 0.468.0
-- Sentry 8.42.0
-- Vitest 4.0.16
-- Playwright 1.48.2
+    Last update: 2026/01/12
+    Language: Español / Spanish
+    Doctype: HTML5
+    Framework: Next.js 14 / React 18
+    Styling: Tailwind CSS
+    Animations: Framer Motion
+    IDE: Visual Studio Code
+    Version Control: Git + GitHub
 
-/* ACCESSIBILITY */
-- WCAG 2.1 Level AA Compliant
-- axe-core 4.10.2
-- 0 violations
-- Screen reader compatible
-- Keyboard navigation
-- High contrast support
+/* TECHNOLOGY STACK */
 
-/* PERFORMANCE */
-- Lighthouse Score: 97-100
-- FCP: 0.8s
-- LCP: 1.2s
-- TBT: 50ms
-- CLS: 0.02
+    Frontend:
+    - Next.js 14 (App Router)
+    - React 18
+    - TypeScript
+    - Tailwind CSS
+    - Framer Motion
+    - Lucide Icons
+    
+    Performance:
+    - Image Optimization (AVIF/WebP)
+    - Code Splitting
+    - Bundle Analysis
+    - Progressive Web App (PWA)
+    
+    Analytics:
+    - Google Analytics 4
+    - Custom Event Tracking
+    
+    SEO:
+    - Schema.org Markup (Person, ItemList, BreadcrumbList)
+    - Open Graph
+    - Twitter Cards
+    - Sitemap XML
+    - Robots.txt
+    - Canonical URLs
+    
+    Hosting:
+    - Vercel (Deployment)
+    - GitHub (Repository)
 
-/* SECURITY */
-- 0 known vulnerabilities
-- Security headers configured
-- Content Security Policy
-- Input validation with Zod
-- Rate limiting active
-- Sentry monitoring
+/* FEATURES */
 
-/* THANKS FOR VISITING! */
-We hope you enjoyed browsing this portfolio.
-For professional inquiries, please contact via email.
+    ✓ Fully Responsive Design
+    ✓ Mobile-First Approach
+    ✓ Dark Theme
+    ✓ Progressive Web App (PWA)
+    ✓ Offline Support
+    ✓ Fast Loading (<2s LCP)
+    ✓ Accessibility (WCAG AA)
+    ✓ SEO Optimized
+    ✓ Analytics Integration
+    ✓ Contact Form (Formspree)
+    ✓ Video Embedding (YouTube/Vimeo)
+    ✓ Image Optimization
+    ✓ Security Headers
+    ✓ HTTPS Only
 
-                    _
-                   /(|
-                  (  :
-                 __\  \  _____
-               (____)  `|
-              (____)|   |
-               (____).__|
-                (___)__.|_____
+/* CREDITS */
 
-Made with ❤️ in Sevilla, España
+    Portfolio Design & Development: Custom
+    Photography: Professional Headshots
+    Video Production: Professional Showreel
+    
+    Special Thanks:
+    - ESAD Sevilla (Formación)
+    - CNTC (Teatro Clásico)
+    - TVE, Fox, Prime Video (Series)
+    - Todos los directores y equipos de producción
+
+/* PROFESSIONAL PROFILES */
+
+    IMDb: https://www.imdb.com/name/nm9017709/
+    Wikipedia: https://es.wikipedia.org/wiki/Almagro_San_Miguel
+    FilmAffinity: https://www.filmaffinity.com/es/name.php?name-id=231727420
+    SensaCine: https://www.sensacine.com/actores/actor-889713/
+
+/* CONTACT */
+
+    Para castings, colaboraciones o consultas profesionales:
+    Email: info@almagrosanmiguel.com
+    Web: https://almagrosanmiguel.com
+    
+    Disponibilidad: A partir de Mayo 2026
+    Ubicación: Madrid y Sevilla, España
+    Idiomas: Español (Nativo), Inglés, Francés
+
+/* LEGAL */
+
+    Copyright © 2026 Almagro San Miguel
+    Todos los derechos reservados
+    
+    Este sitio web es el portfolio oficial de Almagro San Miguel.
+    El contenido, imágenes y videos son propiedad de sus respectivos autores.
+    
+    Built with ♥ and Next.js
