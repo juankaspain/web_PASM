@@ -6,6 +6,7 @@ import About from '@/components/sections/About'
 import LatestProject from '@/components/sections/LatestProject'
 import SkillsGraph from '@/components/sections/SkillsGraph'
 import Footer from '@/components/Footer'
+import ScrollToTop from '@/components/ui/ScrollToTop'
 import { 
   SectionSkeleton, 
   ShowreelSkeleton, 
@@ -153,6 +154,9 @@ export default function Home() {
       
       {/* Footer */}
       <Footer />
+      
+      {/* Scroll to Top Button */}
+      <ScrollToTop />
     </main>
   )
 }
