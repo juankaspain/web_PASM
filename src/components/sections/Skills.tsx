@@ -157,79 +157,19 @@ export default function Skills() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          {/* Header */}
-          <div className="text-center mb-16">
-            <motion.h2 
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white"
-            >
-              Habilidades Artísticas
-            </motion.h2>
-            
-            <motion.p 
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
-            >
-              Habilidades desarrolladas a través de más de <span className="text-white font-semibold">13 años</span> de formación y práctica profesional en las principales escuelas y compañías de España
-            </motion.p>
-          </div>
-
-          {/* Skills Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-            {skills.map((skillCategory, categoryIndex) => (
-              <motion.div
-                key={categoryIndex}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ duration: 0.6, delay: 0.4 + categoryIndex * 0.1 }}
-                whileHover={{ y: -4 }}
-                className="group relative"
-              >
-                <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-6 hover:bg-white/[0.04] hover:border-yellow-400/30 transition-all backdrop-blur-sm">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
-                      <skillCategory.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <h4 className="text-xl font-bold text-white">{skillCategory.category}</h4>
-                  </div>
-                  
-                  <div className="space-y-3">
-                    {skillCategory.items.map((skill, skillIndex) => (
-                      <div key={skillIndex} className="flex items-center justify-between gap-3">
-                        <span className="text-sm text-slate-300 flex items-center gap-2">
-                          {skill.icon && <span>{skill.icon}</span>}
-                          {skill.name}
-                        </span>
-                        <span className={`px-2.5 py-1 rounded-full text-xs font-bold border ${getLevelColor(skill.level)}`}>
-                          {skill.level}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Training Section */}
-          <div className="max-w-5xl mx-auto">
+          {/* PRIMERO: Training Section */}
+          <div className="mb-32">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-center mb-12"
             >
-              <h3 className="text-4xl font-bold text-white mb-4">Formación Profesional</h3>
+              <h3 className="text-4xl lg:text-5xl font-bold text-white mb-4">Formación Profesional</h3>
               <p className="text-slate-400 text-lg">Instituciones de prestigio donde he desarrollado mi carrera</p>
             </motion.div>
             
-            <div className="space-y-6">
+            <div className="max-w-5xl mx-auto space-y-6">
               {training.map((course, index) => (
                 <motion.a
                   key={index}
@@ -238,7 +178,7 @@ export default function Skills() {
                   rel="noopener noreferrer"
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                  transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
+                  transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
                   whileHover={{ x: 4 }}
                   className="group block cursor-pointer"
                 >
@@ -283,11 +223,64 @@ export default function Skills() {
             </div>
           </div>
 
+          {/* SEGUNDO: Skills Grid */}
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="text-center mb-12"
+            >
+              <h3 className="text-4xl lg:text-5xl font-bold text-white mb-4">Habilidades Artísticas</h3>
+              <p className="text-slate-400 text-base lg:text-lg max-w-5xl mx-auto">
+                Más de 13 años de formación y práctica profesional en las principales escuelas y compañías de España
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {skills.map((skillCategory, categoryIndex) => (
+                <motion.div
+                  key={categoryIndex}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ duration: 0.6, delay: 0.7 + categoryIndex * 0.1 }}
+                  whileHover={{ y: -4 }}
+                  className="group relative"
+                >
+                  <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-6 hover:bg-white/[0.04] hover:border-yellow-400/30 transition-all backdrop-blur-sm">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
+                        <skillCategory.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <h4 className="text-xl font-bold text-white">{skillCategory.category}</h4>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      {skillCategory.items.map((skill, skillIndex) => (
+                        <div key={skillIndex} className="flex items-center justify-between gap-3">
+                          <span className="text-sm text-slate-300 flex items-center gap-2">
+                            {skill.icon && <span>{skill.icon}</span>}
+                            {skill.name}
+                          </span>
+                          <span className={`px-2.5 py-1 rounded-full text-xs font-bold border ${getLevelColor(skill.level)}`}>
+                            {skill.level}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
           {/* Note for Casting */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
+            transition={{ duration: 0.6, delay: 1.3 }}
             className="mt-16 max-w-4xl mx-auto"
           >
             <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-8 backdrop-blur-sm text-center">
