@@ -53,7 +53,7 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-hidden ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
             ? 'bg-black/95 backdrop-blur-md shadow-lg border-b border-white/5'
             : 'bg-transparent'
@@ -67,7 +67,7 @@ export default function Navbar() {
               <span className="text-yellow-400"> San Miguel</span>
             </Link>
 
-            {/* Desktop Navigation - Minimalista */}
+            {/* Desktop Navigation - Minimalista y limpio */}
             <div className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.href
@@ -75,23 +75,15 @@ export default function Navbar() {
                   <a
                     key={link.href}
                     href={link.href}
-                    className="group relative px-4 py-5 transition-all duration-300"
+                    className="group relative px-4 py-2 transition-all duration-300"
                   >
-                    {/* Link text */}
-                    <span className={`relative text-sm font-medium tracking-wide transition-all duration-300 ${
+                    <span className={`text-sm font-medium tracking-wide transition-all duration-300 ${
                       isActive 
                         ? 'text-yellow-400 font-semibold' 
                         : 'text-white/70 group-hover:text-white'
                     }`}>
                       {link.label}
                     </span>
-                    
-                    {/* Línea inferior - contenida dentro del padding */}
-                    <div className={`absolute bottom-0 left-4 right-4 transition-all duration-300 ${
-                      isActive 
-                        ? 'h-0.5 bg-yellow-400 opacity-100' 
-                        : 'h-px bg-white/30 opacity-0 group-hover:opacity-100'
-                    }`} />
                   </a>
                 )
               })}
@@ -112,7 +104,7 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu - Rediseñado minimalista */}
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <motion.div
           initial={{ opacity: 0, x: '100%' }}
@@ -136,7 +128,7 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Mobile links - Minimalista */}
+            {/* Mobile links */}
             <div className="flex-1 overflow-y-auto p-6">
               <div className="space-y-1">
                 {navLinks.map((link, index) => {
@@ -155,7 +147,6 @@ export default function Navbar() {
                           : 'border-l-2 border-transparent hover:bg-white/5 hover:border-l-white/20'
                       }`}
                     >
-                      {/* Label */}
                       <span className={`text-base font-medium tracking-wide transition-colors duration-300 ${
                         isActive
                           ? 'text-yellow-400 font-semibold'
@@ -164,7 +155,6 @@ export default function Navbar() {
                         {link.label}
                       </span>
                       
-                      {/* Indicador sutil */}
                       <div className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
                         isActive 
                           ? 'bg-yellow-400 scale-100' 
