@@ -7,16 +7,16 @@ import Link from 'next/link'
 
 // NAVEGACIÓN OPTIMIZADA: 10 links principales organizados para casting directors
 const navLinks = [
-  { href: '#skills', label: 'Skills', icon: '🎭' },
-  { href: '#portfolio', label: 'Filmografía', icon: '🎥' },
-  { href: '#theater', label: 'Teatro', icon: '🎭' },
-  { href: '#awards', label: 'Premios', icon: '🏆' },
-  { href: '#calendar', label: 'Agenda', icon: '📅' },
-  { href: '#headshots', label: 'Headshots', icon: '📸' },
-  { href: '#showreel', label: 'Showreel', icon: '🎬' },
-  { href: '#press', label: 'Prensa', icon: '📰' },
-  { href: '#presskit', label: 'Press Kit', icon: '📎' },
-  { href: '#contact', label: 'Contacto', icon: '📨' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#portfolio', label: 'Filmografía' },
+  { href: '#theater', label: 'Teatro' },
+  { href: '#awards', label: 'Premios' },
+  { href: '#calendar', label: 'Agenda' },
+  { href: '#headshots', label: 'Headshots' },
+  { href: '#showreel', label: 'Showreel' },
+  { href: '#press', label: 'Prensa' },
+  { href: '#presskit', label: 'Press Kit' },
+  { href: '#contact', label: 'Contacto' },
 ]
 
 export default function Navbar() {
@@ -53,7 +53,7 @@ export default function Navbar() {
         transition={{ duration: 0.5 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-black/95 backdrop-blur-md shadow-lg border-b border-white/10'
+            ? 'bg-black/95 backdrop-blur-md shadow-lg border-b border-white/5'
             : 'bg-transparent'
         }`}
       >
@@ -65,7 +65,7 @@ export default function Navbar() {
               <span className="text-yellow-400"> San Miguel</span>
             </Link>
 
-            {/* Desktop Navigation */}
+            {/* Desktop Navigation - Minimalista */}
             <div className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.href
@@ -73,32 +73,23 @@ export default function Navbar() {
                   <a
                     key={link.href}
                     href={link.href}
-                    className="group relative px-4 py-2 transition-all duration-300"
+                    className="group relative px-4 py-6 transition-all duration-300"
                   >
-                    {/* Background hover effect */}
-                    <div className={`absolute inset-0 rounded-lg transition-all duration-300 ${
-                      isActive 
-                        ? 'bg-yellow-400/10 border border-yellow-400/30' 
-                        : 'bg-transparent border border-transparent group-hover:bg-white/5 group-hover:border-white/10'
-                    }`} />
-                    
-                    {/* Link content */}
-                    <span className={`relative text-sm font-semibold transition-colors duration-300 ${
+                    {/* Link text */}
+                    <span className={`relative text-sm font-medium tracking-wide transition-all duration-300 ${
                       isActive 
                         ? 'text-yellow-400' 
-                        : 'text-slate-300 group-hover:text-white'
+                        : 'text-white/70 group-hover:text-white'
                     }`}>
                       {link.label}
                     </span>
                     
-                    {/* Active indicator */}
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeSection"
-                        className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-yellow-400"
-                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                      />
-                    )}
+                    {/* Línea inferior - aparece en hover y activo */}
+                    <div className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ${
+                      isActive 
+                        ? 'bg-yellow-400 opacity-100' 
+                        : 'bg-white/30 opacity-0 group-hover:opacity-100'
+                    }`} />
                   </a>
                 )
               })}
@@ -107,7 +98,7 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+              className="lg:hidden p-2 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-300"
             >
               {isMobileMenuOpen ? (
                 <X className="w-6 h-6" />
@@ -119,33 +110,33 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Rediseñado minimalista */}
       {isMobileMenuOpen && (
         <motion.div
           initial={{ opacity: 0, x: '100%' }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: '100%' }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className="fixed inset-y-0 right-0 z-40 w-full sm:w-80 bg-black/98 backdrop-blur-xl border-l border-white/10 shadow-2xl"
+          className="fixed inset-y-0 right-0 z-40 w-full sm:w-80 bg-black/98 backdrop-blur-xl border-l border-white/5 shadow-2xl"
         >
           <div className="flex flex-col h-full">
             {/* Mobile header */}
-            <div className="flex items-center justify-between p-6 border-b border-white/10">
+            <div className="flex items-center justify-between p-6 border-b border-white/5">
               <div className="font-serif text-xl font-bold">
                 <span className="text-white">Almagro</span>
                 <span className="text-yellow-400"> San Miguel</span>
               </div>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+                className="p-2 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-300"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Mobile links */}
+            {/* Mobile links - Minimalista */}
             <div className="flex-1 overflow-y-auto p-6">
-              <div className="space-y-2">
+              <div className="space-y-1">
                 {navLinks.map((link, index) => {
                   const isActive = activeSection === link.href
                   return (
@@ -156,41 +147,27 @@ export default function Navbar() {
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.05 }}
-                      className={`group flex items-center gap-4 p-4 rounded-xl transition-all duration-300 ${
+                      className={`group flex items-center justify-between px-5 py-4 rounded-lg transition-all duration-300 ${
                         isActive
-                          ? 'bg-yellow-400/10 border border-yellow-400/30'
-                          : 'bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20'
+                          ? 'bg-white/5 border-l-2 border-yellow-400'
+                          : 'border-l-2 border-transparent hover:bg-white/5 hover:border-l-white/20'
                       }`}
                     >
-                      {/* Icon */}
-                      <div className={`flex items-center justify-center w-10 h-10 rounded-lg transition-colors ${
-                        isActive
-                          ? 'bg-yellow-400/20 text-yellow-400'
-                          : 'bg-white/10 text-slate-300 group-hover:bg-white/20 group-hover:text-white'
-                      }`}>
-                        <span className="text-lg">{link.icon}</span>
-                      </div>
-                      
                       {/* Label */}
-                      <span className={`text-base font-semibold transition-colors ${
+                      <span className={`text-base font-medium tracking-wide transition-colors duration-300 ${
                         isActive
                           ? 'text-yellow-400'
-                          : 'text-white group-hover:text-yellow-400'
+                          : 'text-white/70 group-hover:text-white'
                       }`}>
                         {link.label}
                       </span>
                       
-                      {/* Arrow indicator */}
-                      <svg 
-                        className={`ml-auto w-5 h-5 transition-transform group-hover:translate-x-1 ${
-                          isActive ? 'text-yellow-400' : 'text-slate-500'
-                        }`}
-                        fill="none" 
-                        stroke="currentColor" 
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
+                      {/* Indicador sutil */}
+                      <div className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                        isActive 
+                          ? 'bg-yellow-400 scale-100' 
+                          : 'bg-white/30 scale-0 group-hover:scale-100'
+                      }`} />
                     </motion.a>
                   )
                 })}
@@ -198,8 +175,8 @@ export default function Navbar() {
             </div>
 
             {/* Mobile footer */}
-            <div className="p-6 border-t border-white/10">
-              <p className="text-xs text-slate-400 text-center">
+            <div className="p-6 border-t border-white/5">
+              <p className="text-xs text-white/40 text-center font-light tracking-wide">
                 Actor de Televisión, Cine y Teatro
               </p>
             </div>
