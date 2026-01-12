@@ -7,8 +7,9 @@ import Link from 'next/link'
 
 // NAVEGACIÓN OPTIMIZADA: 10 links principales organizados para casting directors
 const navLinks = [
-  { href: '#skills', label: 'Skills' },
-  { href: '#portfolio', label: 'Filmografía' },
+  { href: '#about', label: 'Sobre mí' },
+  { href: '#portfolio', label: 'Series TV' },
+  { href: '#cinema', label: 'Cine' },
   { href: '#theater', label: 'Teatro' },
   { href: '#awards', label: 'Premios' },
   { href: '#calendar', label: 'Agenda' },
