@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/Skeleton'
 
 // Lazy load heavy sections with optimized loading states
-const Portfolio = dynamic(() => import('@/components/sections/Portfolio'), {
+const Series = dynamic(() => import('@/components/sections/Series'), {
   loading: () => <SectionSkeleton />,
 })
 
@@ -94,7 +94,7 @@ export default function Home() {
       {/* Filmography sections - reorganized order with Suspense */}
       {/* 1. Series de Televisión */}
       <Suspense fallback={<SectionSkeleton />}>
-        <Portfolio />
+        <Series />
       </Suspense>
       
       {/* 2. Cine & Cortometrajes */}
