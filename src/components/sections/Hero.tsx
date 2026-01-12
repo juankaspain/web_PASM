@@ -426,8 +426,8 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Botones de CTA */}
-            <div className="pt-2 flex flex-col sm:flex-row gap-3 fade-in-up" style={{ animationDelay: '0.4s' }}>
+            {/* Botones de CTA - CENTRADOS */}
+            <div className="pt-2 flex flex-col sm:flex-row justify-center gap-3 fade-in-up" style={{ animationDelay: '0.4s' }}>
               <a
                 href="#showreel"
                 className="cta-button group inline-flex items-center justify-center gap-2 rounded-full bg-yellow-400 px-7 py-3.5 text-base font-semibold text-black shadow-[0_10px_30px_rgba(250,204,21,0.25)]"
@@ -441,7 +441,7 @@ export default function Hero() {
                 className="cta-button group inline-flex items-center justify-center gap-2 rounded-full bg-yellow-400 px-7 py-3.5 text-base font-semibold text-black shadow-[0_10px_30px_rgba(250,204,21,0.25)]"
               >
                 <Camera className="w-5 h-5 play-icon" />
-                Ver Headshots Profesionales
+                Ver Professional Headshots
               </a>
             </div>
 
