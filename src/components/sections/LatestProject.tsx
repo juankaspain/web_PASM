@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { Play, Calendar, Film, Star, ExternalLink, Youtube, Heart, Users, Sparkles, Video, ChevronDown, ChevronUp } from 'lucide-react'
+import { Play, Calendar, Film, Star, ExternalLink, Youtube, Heart, Sparkles, Video, ChevronDown, ChevronUp } from 'lucide-react'
 import Image from 'next/image'
 import { useRef, useState } from 'react'
 
@@ -38,7 +38,7 @@ export default function LatestProject() {
             className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-red-600 shadow-lg"
           >
             <Sparkles className="w-4 h-4 text-white" strokeWidth={2} />
-            <span className="text-sm font-bold text-white tracking-wide">ÚTLTIMO TRABAJO</span>
+            <span className="text-sm font-bold text-white tracking-wide">ÚLTIMO TRABAJO</span>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
@@ -190,8 +190,8 @@ export default function LatestProject() {
                     </div>
                     <p className="text-slate-300 leading-relaxed mb-4">
                       El actor sevillano <span className="text-white font-semibold">Almagro San Miguel</span> cuenta cómo ha sido trabajar 
-                      en <span className="text-white font-semibold">“Un fantasma en la batalla”</span> junto al director <span className="text-white font-semibold">Agustín Díaz Yanes</span>. 
-                      También habla sobre su participación en <span className="text-white font-semibold">“Carta Blanca”</span> de Gerardo Herrero.
+                      en <span className="text-white font-semibold">"Un fantasma en la batalla"</span> junto al director <span className="text-white font-semibold">Agustín Díaz Yanes</span>. 
+                      También habla sobre su participación en <span className="text-white font-semibold">"Carta Blanca"</span> de Gerardo Herrero.
                     </p>
                     <div className="flex items-center gap-4 text-sm text-slate-400">
                       <span>📺 Canal Sur</span>
@@ -213,7 +213,7 @@ export default function LatestProject() {
             </div>
           </motion.div>
 
-          {/* Collapsible Character Info Section - Solo botón visible por defecto */}
+          {/* Collapsible Character Info Section - Sin badge */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -221,12 +221,7 @@ export default function LatestProject() {
             className="mt-20"
           >
             <div className="text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-                <Users className="w-4 h-4 text-slate-400" strokeWidth={2} />
-                <span className="text-sm font-medium text-slate-300 tracking-wide">Mi Personaje</span>
-              </div>
-
-              {/* Collapsible Toggle Button */}
+              {/* Collapsible Toggle Button - Sin badge arriba */}
               <motion.button
                 onClick={() => setShowCharacterInfo(!showCharacterInfo)}
                 whileHover={{ scale: 1.05 }}
@@ -313,8 +308,8 @@ export default function LatestProject() {
                         
                         <div className="space-y-4">
                           <blockquote className="border-l-4 border-white/20 pl-4 italic text-slate-300">
-                            “Yo al amor de mi vida la esperaría lo que fuera necesario. Es un personaje que se mueve 
-                            entre la lealtad y la duda, con una presencia sobria y contenida.”
+                            "Yo al amor de mi vida la esperaría lo que fuera necesario. Es un personaje que se mueve 
+                            entre la lealtad y la duda, con una presencia sobria y contenida."
                           </blockquote>
                           
                           <div className="bg-white/[0.03] border border-white/10 rounded-xl p-4 space-y-3">
@@ -353,11 +348,11 @@ export default function LatestProject() {
                   >
                     <div className="inline-block bg-white/[0.03] border border-white/10 rounded-2xl px-8 py-6 max-w-3xl backdrop-blur-sm">
                       <p className="text-slate-300 text-lg leading-relaxed">
-                        <span className="text-white font-bold text-2xl">“</span>
+                        <span className="text-white font-bold text-2xl">"</span>
                         Es un proyecto que me gustó desde el primer momento. La historia sobre la lucha contra ETA es cruda. 
                         El trabajo de Susana Abaitua es de Goya. Ella tiene que rechazar la vida familiar que tenía previsto, 
                         soy su pareja.
-                        <span className="text-white font-bold text-2xl">”</span>
+                        <span className="text-white font-bold text-2xl">"</span>
                       </p>
                       <p className="text-slate-400 font-semibold mt-4">— Almagro San Miguel</p>
                     </div>
