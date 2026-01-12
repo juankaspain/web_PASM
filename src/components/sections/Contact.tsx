@@ -301,8 +301,7 @@ export default function Contact() {
               viewport={{ once: true }}
               className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed"
             >
-              Disponible para castings, colaboraciones y consultas profesionales.
-              Respondo personalmente a todos los mensajes
+              Disponible para castings, colaboraciones y consultas profesionales
             </motion.p>
           </div>
 
@@ -556,7 +555,7 @@ export default function Contact() {
                         <ExternalLink className="w-5 h-5 text-slate-500 group-hover:text-yellow-400 transition-colors" />
                       </motion.a>
                     )
-                  })}
+                  })}}
                 </div>
               </div>
             </motion.div>
