@@ -16,7 +16,6 @@ export default function LegalNotice() {
           </p>
           <div className="bg-white/5 border border-white/10 rounded-xl p-6 space-y-2">
             <p><strong className="text-white">Titular:</strong> Pedro Francisco Almagro Gordillo (Almagro San Miguel)</p>
-            <p><strong className="text-white">NIF:</strong> [Pendiente de incluir]</p>
             <p><strong className="text-white">Domicilio:</strong> Madrid, España</p>
             <p><strong className="text-white">Email:</strong>{' '}
               <a href="mailto:info@almagrosanmiguel.com" className="text-yellow-400 hover:text-yellow-300">

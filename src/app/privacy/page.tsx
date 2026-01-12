@@ -13,7 +13,6 @@ export default function PrivacyPolicy() {
         <>
           <p className="mb-4">
             <strong>Identidad:</strong> Pedro Francisco Almagro Gordillo (Almagro San Miguel)<br />
-            <strong>NIF:</strong> [Pendiente de incluir]<br />
             <strong>Dirección:</strong> Madrid, España<br />
             <strong>Correo electrónico:</strong> <a href="mailto:info@almagrosanmiguel.com" className="text-yellow-400 hover:text-yellow-300">info@almagrosanmiguel.com</a><br />
             <strong>Sitio Web:</strong> <a href="https://almagrosanmiguel.com" className="text-yellow-400 hover:text-yellow-300">https://almagrosanmiguel.com</a>
