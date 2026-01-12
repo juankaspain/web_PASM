@@ -3,6 +3,7 @@
 import Script from 'next/script'
 import { useEffect } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
+import { useReportWebVitals } from 'next/web-vitals'
 
 // Google Analytics ID (replace with actual ID)
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-XXXXXXXXXX'
@@ -11,6 +12,7 @@ export default function Analytics() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
+  // Track page views
   useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).gtag) {
       const url = pathname + searchParams.toString()
@@ -20,6 +22,18 @@ export default function Analytics() {
     }
   }, [pathname, searchParams])
 
+  // Track Web Vitals for performance monitoring
+  useReportWebVitals((metric) => {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      ;(window as any).gtag('event', metric.name, {
+        value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+        event_category: 'Web Vitals',
+        event_label: metric.id,
+        non_interaction: true,
+      })
+    }
+  })
+
   // Only load in production
   if (process.env.NODE_ENV !== 'production') {
     return null
@@ -27,14 +41,14 @@ export default function Analytics() {
 
   return (
     <>
-      {/* Google Analytics */}
+      {/* Google Analytics - Optimized with lazyOnload for better performance */}
       <Script
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
       />
       <Script
         id="google-analytics"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
@@ -43,7 +57,8 @@ export default function Analytics() {
             gtag('config', '${GA_ID}', {
               page_path: window.location.pathname,
               anonymize_ip: true,
-              cookie_flags: 'SameSite=None;Secure'
+              cookie_flags: 'SameSite=None;Secure',
+              send_page_view: false
             });
           `,
         }}
@@ -55,6 +70,7 @@ export default function Analytics() {
         defer
         data-domain="almagrosanmiguel.com"
         src="https://plausible.io/js/script.js"
+        strategy="lazyOnload"
       /> */}
     </>
   )
