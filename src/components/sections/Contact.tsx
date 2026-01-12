@@ -20,6 +20,7 @@ import {
 import { useState, useEffect } from 'react'
 import { trackEvent } from '@/lib/analytics'
 import { SiTiktok } from 'react-icons/si'
+import Link from 'next/link'
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xlggrndl'
 
@@ -151,6 +152,8 @@ export default function Contact() {
     email: '',
     category: categories[0],
     message: '',
+    acceptPrivacy: false,
+    acceptNewsletter: false,
   })
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>(
     'idle',
@@ -180,6 +183,14 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Validate privacy checkbox
+    if (!formData.acceptPrivacy) {
+      setStatus('error')
+      setErrorMessage('Debes aceptar la Política de Privacidad para continuar.')
+      return
+    }
+    
     setStatus('sending')
     setErrorMessage('')
 
@@ -195,6 +206,7 @@ export default function Contact() {
           email: formData.email,
           category: formData.category,
           message: formData.message,
+          acceptNewsletter: formData.acceptNewsletter,
           _subject: `Nuevo mensaje de ${formData.name} - ${formData.category}`,
           _replyto: formData.email,
         }),
@@ -211,6 +223,8 @@ export default function Contact() {
           email: '',
           category: categories[0],
           message: '',
+          acceptPrivacy: false,
+          acceptNewsletter: false,
         })
 
         setTimeout(() => {
@@ -400,6 +414,40 @@ export default function Contact() {
                       <p className="text-xs text-slate-400 mt-1">
                         {formData.message.length} / 2000 caracteres
                       </p>
+                    </div>
+
+                    {/* Legal Checkboxes */}
+                    <div className="space-y-3 p-4 bg-white/[0.02] rounded-xl border border-white/10">
+                      <label className="flex items-start gap-3 cursor-pointer group">
+                        <input
+                          type="checkbox"
+                          required
+                          checked={formData.acceptPrivacy}
+                          onChange={(e) => setFormData({ ...formData, acceptPrivacy: e.target.checked })}
+                          disabled={status === 'sending'}
+                          className="mt-0.5 w-5 h-5 rounded border-white/20 bg-white/5 text-yellow-400 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-0 cursor-pointer disabled:opacity-50"
+                        />
+                        <span className="text-sm text-slate-300 leading-relaxed">
+                          He leído y acepto la{' '}
+                          <Link href="/privacy" target="_blank" className="text-yellow-400 hover:text-yellow-300 font-semibold underline">
+                            Política de Privacidad
+                          </Link>
+                          {' '}*
+                        </span>
+                      </label>
+
+                      <label className="flex items-start gap-3 cursor-pointer group">
+                        <input
+                          type="checkbox"
+                          checked={formData.acceptNewsletter}
+                          onChange={(e) => setFormData({ ...formData, acceptNewsletter: e.target.checked })}
+                          disabled={status === 'sending'}
+                          className="mt-0.5 w-5 h-5 rounded border-white/20 bg-white/5 text-yellow-400 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-0 cursor-pointer disabled:opacity-50"
+                        />
+                        <span className="text-sm text-slate-300 leading-relaxed">
+                          Deseo recibir noticias y actualizaciones sobre proyectos (opcional)
+                        </span>
+                      </label>
                     </div>
 
                     {status === 'success' && (
