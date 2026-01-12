@@ -1,0 +1,75 @@
+/* Critical CSS - Inline in <head> for instant rendering */
+/* This CSS covers above-the-fold content only */
+
+/* Reset and base */
+*,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}
+
+/* Typography */
+html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;font-feature-settings:normal;font-variation-settings:normal}
+
+body{margin:0;line-height:inherit;background:#000;color:#fff}
+
+/* Critical layout - Navbar */
+.navbar-critical{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+
+/* Critical layout - Hero */
+.hero-critical{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#000}
+
+.hero-gradient{position:absolute;inset:0;background:linear-gradient(to bottom right,#000,#020617,#0f172a)}
+
+/* Critical typography */
+.hero-title{font-size:clamp(2.5rem,5vw,4rem);font-weight:700;line-height:1.1;letter-spacing:-0.025em}
+
+.text-yellow{color:#facc15}
+.text-white{color:#fff}
+.text-slate-300{color:#cbd5e1}
+
+/* Critical spacing */
+.container-critical{width:100%;max-width:80rem;margin:0 auto;padding:0 1rem}
+
+@media(min-width:640px){.container-critical{padding:0 1.5rem}}
+@media(min-width:1024px){.container-critical{padding:0 2rem}}
+
+/* Hide non-critical content initially */
+.below-fold{opacity:0}
+
+/* Smooth reveal */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.fade-in{animation:fadeIn 0.6s ease-out forwards}
+
+/* Critical grid */
+.hero-grid{display:grid;gap:2rem;align-items:center}
+@media(min-width:1024px){.hero-grid{grid-template-columns:0.95fr 1.25fr;gap:3rem}}
+
+/* Critical image container */
+.hero-image-container{position:relative;aspect-ratio:2.5/4;border-radius:1.75rem;overflow:hidden}
+
+/* Critical buttons */
+.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;border-radius:9999px;background:#facc15;padding:0.875rem 1.75rem;font-size:1rem;font-weight:600;color:#000;transition:transform 0.3s ease}
+
+.btn-primary:hover{transform:scale(1.04)}
+
+/* Font loading optimization */
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 900;font-display:swap;src:url(/fonts/inter-var.woff2) format('woff2')}
+
+/* Prevent FOIT */
+body{font-family:var(--font-inter),'Inter',system-ui,-apple-system,sans-serif}
+
+/* Critical animations only */
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* Preload hints */
+.preload-hint{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+
+/* Loading state */
+.loading-skeleton{background:linear-gradient(90deg,#1e293b 25%,#334155 50%,#1e293b 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* Critical responsive images */
+img{max-width:100%;height:auto;display:block}
+
+/* Prevent CLS */
+.hero-image-wrapper{position:relative;width:100%;padding-bottom:160%}
+
+.hero-image-wrapper img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}
