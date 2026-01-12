@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { GraduationCap, Award, ExternalLink } from 'lucide-react'
+import { GraduationCap, Award, Languages, Music, Swords, Star, FileText, CheckCircle2, ExternalLink } from 'lucide-react'
 import { useRef } from 'react'
 
 const training = [
@@ -43,6 +43,94 @@ const training = [
   },
 ]
 
+const skills = [
+  {
+    category: 'Combate & Acción',
+    icon: Swords,
+    color: 'yellow',
+    items: [
+      { name: 'Esgrima Teatral', level: 'Avanzado', icon: '⚔️' },
+      { name: 'Lucha Escénica', level: 'Avanzado' },
+      { name: 'Equitación', level: 'Avanzado' },
+      { name: 'Especialista Cine', level: 'Competente' },
+      { name: 'Acrobacias', level: 'Competente' },
+    ],
+  },
+  {
+    category: 'Música & Canto',
+    icon: Music,
+    color: 'yellow',
+    items: [
+      { name: 'Violonchelo', level: 'Avanzado', icon: '🎻' },
+      { name: 'Viola', level: 'Avanzado' },
+      { name: 'Canto Lírico', level: 'Avanzado' },
+      { name: 'Teatro Musical', level: 'Avanzado', icon: '🎭' },
+    ],
+  },
+  {
+    category: 'Idiomas & Dialectos',
+    icon: Languages,
+    color: 'yellow',
+    items: [
+      { name: 'Español Nativo', level: 'Experto', icon: '🌟' },
+      { name: 'Andaluz', level: 'Experto' },
+      { name: 'Inglés', level: 'Avanzado' },
+      { name: 'Verso Clásico', level: 'Experto', icon: '🌟' },
+      { name: 'Francés', level: 'Competente' },
+    ],
+  },
+  {
+    category: 'Movimiento & Danza',
+    icon: Star,
+    color: 'yellow',
+    items: [
+      { name: 'Danza Contemporánea', level: 'Avanzado' },
+      { name: 'Flamenco', level: 'Avanzado' },
+      { name: 'Mimo & Pantomima', level: 'Avanzado' },
+      { name: 'Expresión Corporal', level: 'Avanzado' },
+    ],
+  },
+  {
+    category: 'Técnicas Actorales',
+    icon: CheckCircle2,
+    color: 'yellow',
+    items: [
+      { name: 'Teatro Clásico', level: 'Experto', icon: '🌟' },
+      { name: 'Televisión', level: 'Experto', icon: '🌟' },
+      { name: 'Cine', level: 'Avanzado' },
+      { name: 'Improvisación', level: 'Avanzado' },
+    ],
+  },
+  {
+    category: 'Especialidades',
+    icon: Star,
+    color: 'yellow',
+    items: [
+      { name: 'Teatro de Calle', level: 'Experto', icon: '🌟' },
+      { name: 'Títeres', level: 'Avanzado' },
+      { name: 'Cine', level: 'Avanzado' },
+      { name: 'Clown', level: 'Competente' },
+      { name: 'Caída Libre', level: 'Competente' },
+    ],
+  },
+]
+
+const getLevelColor = (level: string) => {
+  switch (level) {
+    case 'Nativo':
+    case 'Experto':
+      return 'text-yellow-400 bg-yellow-400/10 border-yellow-400/30'
+    case 'Avanzado':
+      return 'text-yellow-400 bg-yellow-400/10 border-yellow-400/30'
+    case 'Competente':
+      return 'text-slate-400 bg-slate-400/10 border-slate-400/30'
+    case 'Intermedio':
+      return 'text-slate-400 bg-slate-400/10 border-slate-400/30'
+    default:
+      return 'text-slate-300 bg-slate-300/10 border-slate-300/30'
+  }
+}
+
 export default function Skills() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
@@ -69,8 +157,8 @@ export default function Skills() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          {/* Training Section */}
-          <div>
+          {/* PRIMERO: Training Section */}
+          <div className="mb-32">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
@@ -144,6 +232,74 @@ export default function Skills() {
               ))}
             </div>
           </div>
+
+          {/* SEGUNDO: Skills Grid */}
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="text-center mb-12"
+            >
+              <h3 className="text-4xl lg:text-5xl font-bold text-white mb-4">Habilidades Artísticas</h3>
+              <p className="text-slate-400 text-base lg:text-lg max-w-5xl mx-auto">
+                Más de 13 años de formación y práctica profesional en las principales escuelas y compañías de España
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {skills.map((skillCategory, categoryIndex) => (
+                <motion.div
+                  key={categoryIndex}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ duration: 0.6, delay: 0.7 + categoryIndex * 0.1 }}
+                  whileHover={{ y: -4 }}
+                  className="group relative"
+                >
+                  <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-6 hover:bg-white/[0.04] hover:border-yellow-400/30 transition-all backdrop-blur-sm">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
+                        <skillCategory.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <h4 className="text-xl font-bold text-white">{skillCategory.category}</h4>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      {skillCategory.items.map((skill, skillIndex) => (
+                        <div key={skillIndex} className="flex items-center justify-between gap-3">
+                          <span className="text-sm text-slate-300 flex items-center gap-2">
+                            {skill.icon && <span>{skill.icon}</span>}
+                            {skill.name}
+                          </span>
+                          <span className={`px-2.5 py-1 rounded-full text-xs font-bold border ${getLevelColor(skill.level)}`}>
+                            {skill.level}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Note for Casting */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+            transition={{ duration: 0.6, delay: 1.3 }}
+            className="mt-16 max-w-4xl mx-auto"
+          >
+            <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-8 backdrop-blur-sm text-center">
+              <FileText className="w-8 h-8 text-yellow-400 mx-auto mb-4" />
+              <p className="text-slate-300 leading-relaxed">
+                Estas habilidades están respaldadas por más de <span className="font-bold text-white">13 años de experiencia profesional</span> en teatro, cine y televisión. Disponible para proyectos que requieran formación adicional o especialización específica.
+              </p>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
