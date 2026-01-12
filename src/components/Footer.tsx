@@ -301,9 +301,6 @@ export default function Footer() {
         <div className="border-t border-neutral-800 pt-8 space-y-4">
           <div className="text-center text-gray-400 text-sm space-y-2">
             <p className="font-light">
-              <strong className="text-gray-300">Pedro Francisco Almagro Gordillo</strong> (Almagro San Miguel)
-            </p>
-            <p className="font-light">
               © {new Date().getFullYear()} Almagro San Miguel. Todos los derechos reservados.
             </p>
             <p className="text-gray-500 text-xs font-light">
