@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowDown, Play, MapPin, Calendar, ExternalLink, Clapperboard, Tv, Star, Theater as TheaterIcon, Instagram, X, Youtube, Facebook } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { SiTiktok } from 'react-icons/si/SiTiktok'
+import { SiTiktok } from 'react-icons/si'
 
 export default function Hero() {
   const { scrollY } = useScroll()
@@ -63,7 +63,7 @@ export default function Hero() {
     {
       name: 'TikTok',
       url: 'https://www.tiktok.com/@almagro.san.migue',
-      icon: 'tiktok',
+      icon: SiTiktok,
       color: 'hover:text-white',
       bgHover: 'hover:bg-white/10',
       borderHover: 'hover:border-white/30',
@@ -415,11 +415,7 @@ export default function Hero() {
                       rel="noopener noreferrer"
                       className={`card-hover group flex flex-col items-center justify-center gap-2 rounded-xl border border-slate-700/70 bg-slate-900/80 px-3 py-3 backdrop-blur-md transition-all shadow-[0_12px_30px_rgba(15,23,42,0.8)] ${link.borderHover} ${link.bgHover}`}
                     >
-                      {Icon === 'tiktok' ? (
-                        <SiTiktok className={`w-5 h-5 text-slate-300 transition-colors ${link.color}`} />
-                      ) : (
-                        <Icon className={`w-5 h-5 text-slate-300 transition-colors ${link.color}`} />
-                      )}
+                      <Icon className={`w-5 h-5 text-slate-300 transition-colors ${link.color}`} />
                       <p className={`text-[10px] font-semibold text-slate-400 transition-colors ${link.color}`}>
                         {link.name.split(' ')[0]}
                       </p>
