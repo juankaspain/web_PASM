@@ -1,254 +1,220 @@
 'use client'
 
-import { Mail, MapPin, Facebook, Instagram, X, Youtube, ExternalLink, Heart } from 'lucide-react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { SiTiktok } from 'react-icons/si'
-import { useState, useEffect } from 'react'
+import { Heart, Mail, MapPin, Scale, Shield, Cookie, Instagram, Facebook, Youtube, ExternalLink } from 'lucide-react'
+import { SiTiktok, SiImdb } from 'react-icons/si'
+import { trackEvent } from '@/lib/analytics'
 
 const socialLinks = [
   {
-    name: 'Instagram',
-    url: 'https://www.instagram.com/almagrosanmiguel/',
     icon: Instagram,
-    iconType: 'lucide',
+    label: 'Instagram',
+    url: 'https://www.instagram.com/almagrosanmiguel/',
+    color: 'hover:text-pink-400',
   },
   {
-    name: 'YouTube',
-    url: 'https://www.youtube.com/@almagrosanmiguel7219',
-    icon: Youtube,
-    iconType: 'lucide',
-  },
-  {
-    name: 'X',
+    icon: 'X',
+    label: 'X (Twitter)',
     url: 'https://x.com/almagroSM',
-    icon: X,
-    iconType: 'lucide',
+    color: 'hover:text-blue-400',
   },
   {
-    name: 'TikTok',
+    icon: 'tiktok',
+    label: 'TikTok',
     url: 'https://www.tiktok.com/@almagro.san.migue',
-    icon: SiTiktok,
-    iconType: 'react-icons',
+    color: 'hover:text-white',
   },
   {
-    name: 'Facebook',
-    url: 'https://www.facebook.com/almagrosanmiguel/',
+    icon: Youtube,
+    label: 'YouTube',
+    url: 'https://www.youtube.com/@almagrosanmiguel7219',
+    color: 'hover:text-red-400',
+  },
+  {
     icon: Facebook,
-    iconType: 'lucide',
+    label: 'Facebook',
+    url: 'https://www.facebook.com/almagrosanmiguel/',
+    color: 'hover:text-blue-500',
+  },
+  {
+    icon: 'imdb',
+    label: 'IMDb',
+    url: 'https://www.imdb.com/name/nm8137381/',
+    color: 'hover:text-yellow-400',
   },
 ]
 
-const professionalLinks = [
-  { 
-    name: 'IMDb', 
-    url: 'https://www.imdb.com/name/nm9017709/',
-    icon: '⭐',
-    description: 'Perfil profesional'
+const legalLinks = [
+  {
+    icon: Scale,
+    label: 'Aviso Legal',
+    href: '/legal',
   },
-  { 
-    name: 'FilmAffinity', 
-    url: 'https://www.filmaffinity.com/es/name.php?name-id=231727420',
-    icon: '🎬',
-    description: 'Filmografía completa'
+  {
+    icon: Shield,
+    label: 'Privacidad',
+    href: '/privacy',
   },
-  { 
-    name: 'SensaCine', 
-    url: 'https://www.sensacine.com/actores/actor-889713/',
-    icon: '🎭',
-    description: 'Proyectos y noticias'
-  },
-  { 
-    name: 'Wikipedia', 
-    url: 'https://es.wikipedia.org/wiki/Almagro_San_Miguel',
-    icon: '📖',
-    description: 'Biografía'
+  {
+    icon: Cookie,
+    label: 'Cookies',
+    href: '/cookies',
   },
 ]
 
 export default function Footer() {
-  const [hasSupported, setHasSupported] = useState(false)
-  const [fanCount, setFanCount] = useState(23)
-
-  useEffect(() => {
-    // Load state from localStorage
-    const supported = localStorage.getItem('fanSupport')
-    if (supported === 'true') {
-      setHasSupported(true)
-    }
-    
-    // Load fan count from localStorage
-    const savedCount = localStorage.getItem('fanCount')
-    if (savedCount) {
-      setFanCount(parseInt(savedCount, 10))
-    }
-  }, [])
-
-  const handleFanSupport = () => {
-    if (!hasSupported) {
-      setHasSupported(true)
-      const newCount = fanCount + 1
-      setFanCount(newCount)
-      
-      // Save to localStorage
-      localStorage.setItem('fanSupport', 'true')
-      localStorage.setItem('fanCount', newCount.toString())
-    }
-  }
+  const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-slate-950 border-t border-neutral-800 text-white py-16">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <div className="grid md:grid-cols-3 gap-12 mb-12">
-          {/* About */}
-          <div className="space-y-4">
-            <h3 className="text-2xl font-serif font-bold">
-              <span className="text-white">Almagro </span>
-              <span className="text-yellow-500">San Miguel</span>
+    <footer className="relative bg-black border-t border-white/10">
+      {/* Gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 to-black" />
+      
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
+          {/* Column 1: About */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="lg:col-span-2"
+          >
+            <h3 className="text-2xl font-bold text-white mb-4">
+              Almagro San Miguel
             </h3>
-            <p className="text-gray-400 leading-relaxed font-light">
-              Actor sevillano con más de 10 años de experiencia en televisión, cine y teatro. 
-              Protagonista de producciones en TVE, Prime Video y otras plataformas.
+            <p className="text-slate-300 leading-relaxed mb-6 max-w-md">
+              Actor profesional con formación en interpretación teatral y audiovisual. 
+              Disponible para castings, colaboraciones y proyectos artísticos.
             </p>
-          </div>
+            
+            {/* Contact Info */}
+            <div className="space-y-3">
+              <a 
+                href="mailto:info@almagrosanmiguel.com"
+                className="flex items-center gap-3 text-slate-300 hover:text-yellow-400 transition-colors group"
+              >
+                <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-yellow-400/10 group-hover:border-yellow-400/30 transition-all">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <span className="text-sm">info@almagrosanmiguel.com</span>
+              </a>
+              
+              <div className="flex items-center gap-3 text-slate-300">
+                <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <span className="text-sm">Madrid y Sevilla, España</span>
+              </div>
+            </div>
+          </motion.div>
 
-          {/* Contact */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <Mail className="w-4 h-4 text-blue-400" />
-              Contacto
-            </h4>
-            <ul className="space-y-3 text-gray-400">
-              <li className="flex items-center gap-2 group">
-                <Mail className="w-4 h-4 text-neutral-500 group-hover:text-blue-400 transition-colors" />
-                <a 
-                  href="mailto:info@almagrosanmiguel.com" 
-                  className="hover:text-white transition-colors font-light"
-                >
-                  info@almagrosanmiguel.com
-                </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-neutral-500" />
-                <span className="font-light">Madrid y Sevilla, España</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Social Links + Fan Support */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold mb-4">Sígueme</h4>
-            <div className="flex gap-3">
-              {socialLinks.map((link) => {
+          {/* Column 2: Legal Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <h4 className="text-lg font-bold text-white mb-4">Información Legal</h4>
+            <ul className="space-y-3">
+              {legalLinks.map((link, index) => {
                 const Icon = link.icon
                 return (
-                  <motion.a
-                    key={link.name}
-                    href={link.url}
+                  <li key={index}>
+                    <Link
+                      href={link.href}
+                      className="flex items-center gap-2 text-slate-300 hover:text-yellow-400 transition-colors group"
+                    >
+                      <Icon className="w-4 h-4" />
+                      <span className="text-sm">{link.label}</span>
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </motion.div>
+
+          {/* Column 3: Social Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h4 className="text-lg font-bold text-white mb-4">Sígueme</h4>
+            <div className="flex flex-wrap gap-3">
+              {socialLinks.map((social, index) => {
+                const Icon = social.icon
+                return (
+                  <a
+                    key={index}
+                    href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 p-3 rounded-lg transition-all shadow-lg"
-                    aria-label={link.name}
+                    onClick={() => trackEvent('click_social_footer', 'engagement', social.label)}
+                    className={`w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 ${social.color} transition-all hover:scale-110 hover:bg-white/10`}
+                    aria-label={social.label}
                   >
-                    <Icon className="w-5 h-5" />
-                  </motion.a>
+                    {Icon === 'X' ? (
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                      </svg>
+                    ) : Icon === 'tiktok' ? (
+                      <SiTiktok className="w-5 h-5" />
+                    ) : Icon === 'imdb' ? (
+                      <SiImdb className="w-5 h-5" />
+                    ) : (
+                      <Icon className="w-5 h-5" />
+                    )}
+                  </a>
                 )
               })}
             </div>
+          </motion.div>
+        </div>
 
-            {/* Fan Support Button - Minimalist */}
-            <motion.button
-              onClick={handleFanSupport}
-              disabled={hasSupported}
-              whileHover={!hasSupported ? { scale: 1.02 } : {}}
-              whileTap={!hasSupported ? { scale: 0.98 } : {}}
-              className={`w-full mt-6 px-4 py-3 rounded-lg font-medium text-sm transition-all duration-300 flex items-center justify-between ${
-                hasSupported 
-                  ? 'bg-neutral-900 border border-neutral-800 cursor-default' 
-                  : 'bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 cursor-pointer'
-              }`}
+        {/* Divider */}
+        <div className="border-t border-white/10 pt-8">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
+            {/* Legal Identity Data */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="text-center lg:text-left"
             >
-              <div className="flex items-center gap-2.5">
-                <motion.div
-                  animate={!hasSupported ? {
-                    scale: [1, 1.2, 1],
-                  } : {}}
-                  transition={{
-                    duration: 0.5,
-                    repeat: Infinity,
-                    repeatDelay: 3
-                  }}
-                >
-                  <Heart 
-                    className={`w-4 h-4 ${
-                      hasSupported ? 'fill-rose-500 text-rose-500' : 'text-neutral-400'
-                    } transition-colors`}
-                  />
-                </motion.div>
-                <span className="text-neutral-300">
-                  {hasSupported ? 'Gracias por tu apoyo' : 'Apóyame'}
-                </span>
-              </div>
-              <span className="text-xs text-neutral-500 font-light">
-                {fanCount} fans
-              </span>
-            </motion.button>
-          </div>
-        </div>
+              <p className="text-sm text-slate-400 mb-1">
+                <strong className="text-slate-300">Pedro Francisco Almagro Gordillo</strong> (Almagro San Miguel)
+              </p>
+              <p className="text-xs text-slate-500">
+                NIF: 12345678Z • Madrid, España
+              </p>
+            </motion.div>
 
-        {/* Professional Links Section - Styled like Hero */}
-        <div className="mb-12">
-          <div className="flex items-center gap-2 mb-6">
-            <ExternalLink className="w-4 h-4 text-blue-400" />
-            <h4 className="text-lg font-semibold">Enlaces Profesionales</h4>
+            {/* Copyright & Made with */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="text-center lg:text-right"
+            >
+              <p className="text-sm text-slate-400 mb-1">
+                © {currentYear} Almagro San Miguel. Todos los derechos reservados.
+              </p>
+              <p className="text-xs text-slate-500 flex items-center justify-center lg:justify-end gap-1">
+                Hecho con <Heart className="w-3 h-3 text-red-500 fill-red-500" /> en España
+              </p>
+            </motion.div>
           </div>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {professionalLinks.map((link, index) => (
-              <motion.a
-                key={link.name}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.4 }}
-                whileHover={{ scale: 1.05, y: -4 }}
-                whileTap={{ scale: 0.98 }}
-                className="group flex flex-col items-center gap-2.5 rounded-xl border border-neutral-800 
-                           bg-neutral-900/80 px-4 py-4 backdrop-blur-md hover:border-neutral-700
-                           hover:bg-neutral-900 transition-all shadow-lg hover:shadow-xl"
-              >
-                <span className="text-2xl">{link.icon}</span>
-                <div className="text-center">
-                  <p className="text-sm font-semibold text-neutral-100 group-hover:text-white transition-colors">
-                    {link.name}
-                  </p>
-                  <p className="text-xs text-neutral-500 mt-1 font-light">{link.description}</p>
-                </div>
-              </motion.a>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="border-t border-neutral-800 pt-8 text-center text-gray-500 text-sm space-y-2">
-          <p className="font-light">
-            © {new Date().getFullYear()} Almagro San Miguel. Todos los derechos reservados.
-          </p>
-          <p className="font-light">
-            Actor profesional | Madrid y Sevilla, España
-          </p>
-          <motion.p 
-            className="font-light text-xs text-neutral-600 mt-3"
-            whileHover={{ color: 'rgb(115, 115, 115)' }}
-            transition={{ duration: 0.3 }}
-          >
-            Developed by <span className="text-neutral-500">JuankaSpain</span>
-          </motion.p>
         </div>
       </div>
+
+      {/* Bottom gradient */}
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent" />
     </footer>
   )
 }
