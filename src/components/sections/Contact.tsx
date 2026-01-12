@@ -365,10 +365,16 @@ export default function Contact() {
                         value={formData.category}
                         onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                         disabled={status === 'sending'}
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all disabled:opacity-50"
+                        className="w-full px-4 py-3 bg-neutral-900 border border-white/10 rounded-xl text-white focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all disabled:opacity-50 appearance-none cursor-pointer"
+                        style={{
+                          backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                          backgroundPosition: 'right 0.5rem center',
+                          backgroundRepeat: 'no-repeat',
+                          backgroundSize: '1.5em 1.5em',
+                        }}
                       >
                         {categories.map((cat) => (
-                          <option key={cat} value={cat}>
+                          <option key={cat} value={cat} className="bg-neutral-900 text-white py-2">
                             {cat}
                           </option>
                         ))}
