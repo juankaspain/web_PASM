@@ -555,7 +555,7 @@ export default function Contact() {
                         <ExternalLink className="w-5 h-5 text-slate-500 group-hover:text-yellow-400 transition-colors" />
                       </motion.a>
                     )
-                  })}}
+                  })}
                 </div>
               </div>
             </motion.div>
