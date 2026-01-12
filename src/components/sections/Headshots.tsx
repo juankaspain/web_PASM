@@ -1,8 +1,8 @@
 'use client'
 
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { Camera, X, Filter } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { Camera, X, Filter, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 
 interface Headshot {
@@ -70,11 +70,57 @@ export default function Headshots() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
-  const [selectedImage, setSelectedImage] = useState<Headshot | null>(null)
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null)
 
   const filteredHeadshots = selectedCategory === 'all' 
     ? headshots 
     : headshots.filter(shot => shot.category === selectedCategory)
+
+  const selectedImage = selectedImageIndex !== null ? filteredHeadshots[selectedImageIndex] : null
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (selectedImageIndex === null) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        navigatePrevious()
+      } else if (e.key === 'ArrowRight') {
+        navigateNext()
+      } else if (e.key === 'Escape') {
+        closeModal()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [selectedImageIndex, filteredHeadshots.length])
+
+  const navigatePrevious = () => {
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex((prev) => 
+        prev === 0 ? filteredHeadshots.length - 1 : (prev as number) - 1
+      )
+    }
+  }
+
+  const navigateNext = () => {
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex((prev) => 
+        prev === filteredHeadshots.length - 1 ? 0 : (prev as number) + 1
+      )
+    }
+  }
+
+  const closeModal = () => {
+    setSelectedImageIndex(null)
+  }
+
+  // Prevent right-click and drag on images
+  const handleImageProtection = (e: React.MouseEvent) => {
+    e.preventDefault()
+    return false
+  }
 
   return (
     <>
@@ -178,8 +224,9 @@ export default function Headshots() {
                     exit={{ opacity: 0, scale: 0.8 }}
                     transition={{ duration: 0.4, delay: index * 0.05 }}
                     whileHover={{ y: -8, scale: 1.03 }}
-                    className="group relative cursor-pointer"
-                    onClick={() => setSelectedImage(headshot)}
+                    className="group relative cursor-pointer select-none"
+                    onClick={() => setSelectedImageIndex(index)}
+                    onContextMenu={handleImageProtection}
                   >
                     <div className="relative">
                       <motion.div 
@@ -194,8 +241,10 @@ export default function Headshots() {
                           src={headshot.url}
                           alt={headshot.alt}
                           fill
-                          className="object-cover object-center group-hover:scale-110 transition-transform duration-700"
+                          className="object-cover object-center group-hover:scale-110 transition-transform duration-700 pointer-events-none select-none"
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                          draggable={false}
+                          onContextMenu={handleImageProtection}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         
@@ -226,40 +275,83 @@ export default function Headshots() {
         </div>
       </section>
 
-      {/* Lightbox Modal */}
+      {/* Lightbox Modal with Navigation */}
       <AnimatePresence>
-        {selectedImage && (
+        {selectedImage && selectedImageIndex !== null && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-md"
-            onClick={() => setSelectedImage(null)}
+            onClick={closeModal}
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3, type: "spring", damping: 25 }}
-              className="relative max-w-4xl max-h-[90vh]"
-              onClick={(e) => e.stopPropagation()}
+            {/* Close Button */}
+            <motion.button
+              onClick={closeModal}
+              className="absolute top-4 right-4 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 transition-all group"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
             >
-              <button
-                onClick={() => setSelectedImage(null)}
-                className="absolute -top-12 right-0 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 transition-all group"
-              >
-                <X className="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300" />
-              </button>
+              <X className="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300" />
+            </motion.button>
 
+            {/* Previous Button */}
+            <motion.button
+              onClick={(e) => {
+                e.stopPropagation()
+                navigatePrevious()
+              }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-14 h-14 flex items-center justify-center rounded-full bg-white/10 hover:bg-yellow-400 border border-white/20 hover:border-yellow-400 transition-all group backdrop-blur-sm"
+              whileHover={{ scale: 1.1, x: -4 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label="Imagen anterior"
+            >
+              <ChevronLeft className="w-8 h-8 text-white group-hover:text-black transition-colors" strokeWidth={3} />
+            </motion.button>
+
+            {/* Next Button */}
+            <motion.button
+              onClick={(e) => {
+                e.stopPropagation()
+                navigateNext()
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-14 h-14 flex items-center justify-center rounded-full bg-white/10 hover:bg-yellow-400 border border-white/20 hover:border-yellow-400 transition-all group backdrop-blur-sm"
+              whileHover={{ scale: 1.1, x: 4 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label="Siguiente imagen"
+            >
+              <ChevronRight className="w-8 h-8 text-white group-hover:text-black transition-colors" strokeWidth={3} />
+            </motion.button>
+
+            {/* Image Counter */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+              <span className="text-white font-medium text-sm">
+                {selectedImageIndex + 1} / {filteredHeadshots.length}
+              </span>
+            </div>
+
+            {/* Image Container */}
+            <motion.div
+              key={selectedImageIndex}
+              initial={{ scale: 0.9, opacity: 0, x: 100 }}
+              animate={{ scale: 1, opacity: 1, x: 0 }}
+              exit={{ scale: 0.9, opacity: 0, x: -100 }}
+              transition={{ duration: 0.3, type: "spring", damping: 25 }}
+              className="relative max-w-4xl max-h-[85vh] select-none"
+              onClick={(e) => e.stopPropagation()}
+              onContextMenu={handleImageProtection}
+            >
               <div className="relative border-2 border-yellow-400/30 rounded-2xl overflow-hidden shadow-2xl">
                 <Image
                   src={selectedImage.url}
                   alt={selectedImage.alt}
                   width={800}
                   height={1200}
-                  className="w-full h-auto"
+                  className="w-full h-auto pointer-events-none select-none"
                   priority
+                  draggable={false}
+                  onContextMenu={handleImageProtection}
                 />
                 
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
@@ -267,11 +359,36 @@ export default function Headshots() {
                     {categories.find(c => c.id === selectedImage.category)?.label}
                   </span>
                 </div>
+
+                {/* Watermark overlay for extra protection */}
+                <div className="absolute inset-0 pointer-events-none select-none" style={{ userSelect: 'none' }} />
               </div>
             </motion.div>
+
+            {/* Instructions */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+              <span className="text-white/60 font-medium text-xs">
+                Usa ← → o los botones para navegar • ESC para cerrar
+              </span>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* CSS for additional protection */}
+      <style jsx global>{`
+        #headshots img {
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          -webkit-user-drag: none;
+          -khtml-user-drag: none;
+          -moz-user-drag: none;
+          -o-user-drag: none;
+          pointer-events: none;
+        }
+      `}</style>
     </>
   )
 }
