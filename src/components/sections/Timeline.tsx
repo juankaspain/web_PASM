@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Calendar, Award, Briefcase, GraduationCap, Star, TrendingUp, Sparkles } from 'lucide-react'
+import { Calendar, Award, Briefcase, GraduationCap, Star, TrendingUp, Sparkles, Theater } from 'lucide-react'
 import { useRef } from 'react'
 
 interface TimelineEvent {
@@ -121,6 +121,15 @@ const events: TimelineEvent[] = [
     description: 'Antonio. Película dirigida por Agustín Díaz Yanes sobre ETA basada en hechos reales. Disponible en Netflix.',
     icon: Star,
     gradient: 'from-indigo-500 to-blue-500',
+    type: 'milestone',
+  },
+  {
+    year: '2025-2026',
+    title: 'Donde nacen las palabras',
+    subtitle: 'En Cartel - Gira Nacional',
+    description: 'Comedia contemporánea producida por DMLP Producciones, dirigida por Ángel Caballero. Continuación de la aclamada "Donde mueren las palabras" (finalista al Premio Nacional de Literatura Dramática). Teatro Lara Madrid, Palacio de la Prensa y gira nacional 2026.',
+    icon: Theater,
+    gradient: 'from-green-500 to-emerald-500',
     type: 'milestone',
   },
 ]
