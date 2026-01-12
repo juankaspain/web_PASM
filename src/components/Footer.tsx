@@ -1,6 +1,6 @@
 'use client'
 
-import { Mail, MapPin, Facebook, Instagram, X, Youtube, ExternalLink, Heart, Scale, Shield, Cookie, Code } from 'lucide-react'
+import { Mail, MapPin, Facebook, Instagram, X, Youtube, Heart, Scale, Shield, Cookie, Code } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { SiTiktok } from 'react-icons/si'
 import { useState, useEffect } from 'react'
@@ -36,33 +36,6 @@ const socialLinks = [
     url: 'https://www.facebook.com/almagrosanmiguel/',
     icon: Facebook,
     iconType: 'lucide',
-  },
-]
-
-const professionalLinks = [
-  { 
-    name: 'IMDb', 
-    url: 'https://www.imdb.com/es-es/name/nm9017709/',
-    icon: '⭐',
-    description: 'Perfil profesional'
-  },
-  { 
-    name: 'FilmAffinity', 
-    url: 'https://www.filmaffinity.com/es/name.php?name-id=231727420',
-    icon: '🎬',
-    description: 'Filmografía completa'
-  },
-  { 
-    name: 'SensaCine', 
-    url: 'https://www.sensacine.com/actores/actor-889713/',
-    icon: '🎭',
-    description: 'Proyectos y noticias'
-  },
-  { 
-    name: 'Wikipedia', 
-    url: 'https://es.wikipedia.org/wiki/Almagro_San_Miguel',
-    icon: '📖',
-    description: 'Biografía'
   },
 ]
 
@@ -259,41 +232,6 @@ export default function Footer() {
                 {fanCount} fans
               </span>
             </motion.button>
-          </div>
-        </div>
-
-        {/* Professional Links Section */}
-        <div className="mb-12 pt-8 border-t border-neutral-800">
-          <div className="flex items-center gap-2 mb-6">
-            <ExternalLink className="w-4 h-4 text-blue-400" />
-            <h4 className="text-lg font-semibold">Enlaces Profesionales</h4>
-          </div>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {professionalLinks.map((link, index) => (
-              <motion.a
-                key={link.name}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.4 }}
-                whileHover={{ scale: 1.05, y: -4 }}
-                whileTap={{ scale: 0.98 }}
-                className="group flex flex-col items-center gap-2.5 rounded-xl border border-neutral-800 
-                           bg-neutral-900/80 px-4 py-4 backdrop-blur-md hover:border-neutral-700
-                           hover:bg-neutral-900 transition-all shadow-lg hover:shadow-xl"
-              >
-                <span className="text-2xl" aria-hidden="true">{link.icon}</span>
-                <div className="text-center">
-                  <p className="text-sm font-semibold text-neutral-100 group-hover:text-white transition-colors">
-                    {link.name}
-                  </p>
-                  <p className="text-xs text-neutral-500 mt-1 font-light">{link.description}</p>
-                </div>
-              </motion.a>
-            ))}
           </div>
         </div>
 
