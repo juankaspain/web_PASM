@@ -240,6 +240,13 @@ export default function Footer() {
           <p className="font-light">
             Actor profesional | Madrid y Sevilla, España
           </p>
+          <motion.p 
+            className="font-light text-xs text-neutral-600 mt-3"
+            whileHover={{ color: 'rgb(115, 115, 115)' }}
+            transition={{ duration: 0.3 }}
+          >
+            Developed by <span className="text-neutral-500">JuankaSpain</span>
+          </motion.p>
         </div>
       </div>
     </footer>
