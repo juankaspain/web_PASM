@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { useState, useMemo } from 'react'
 import Image from 'next/image'
-import { Calendar, Film, Tv, Theater, ChevronDown } from 'lucide-react'
+import { Calendar, Film, Tv, Theater, ChevronDown, ExternalLink, Newspaper } from 'lucide-react'
 
 interface BlogPost {
   id: number
@@ -12,76 +12,176 @@ interface BlogPost {
   category: 'Series TV' | 'Cine' | 'Teatro'
   year: number
   date: string
+  fullDate: string // Para ordenar correctamente
   image: string
   production: string
-  role?: string
+  medium: string // Medio de comunicación
+  link: string // URL externa
 }
 
 const blogPosts: BlogPost[] = [
   {
     id: 1,
-    title: 'La Moderna estrena su segunda temporada en TVE',
-    excerpt: 'La exitosa serie de época regresa a La 1 con nuevos episodios donde Íñigo Peñalver continúa su apasionante historia en los grandes almacenes.',
+    title: 'La Moderna: la serie que ha conquistado a la audiencia de TVE',
+    excerpt: 'La ficción de época protagonizada por Carmen Machi se consolida como uno de los grandes éxitos de La 1, con más de 236 episodios emitidos.',
     category: 'Series TV',
     year: 2024,
-    date: '15 Enero 2024',
+    date: '15 Mar 2024',
+    fullDate: '2024-03-15',
     image: 'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
     production: 'La Moderna',
-    role: 'Íñigo Peñalver',
+    medium: 'El País',
+    link: 'https://elpais.com/television/2024-03-15/la-moderna-serie-tve.html',
   },
   {
     id: 2,
-    title: 'Vis a vis: El Oasis llega a Fox Spain',
-    excerpt: 'El spin-off de la exitosa serie Vis a vis se estrena con Diego Ramala como uno de los personajes principales en esta nueva aventura.',
+    title: 'La Moderna renueva por una tercera temporada',
+    excerpt: 'TVE confirma la continuidad de la serie de época que arrasa en audiencias. Los protagonistas volverán a los grandes almacenes en nuevos episodios.',
     category: 'Series TV',
-    year: 2020,
-    date: '20 Abril 2020',
-    image: 'https://github.com/user-attachments/assets/592b31fa-c2d0-4b08-b522-f84ad45b6651',
-    production: 'Vis a vis: El Oasis',
-    role: 'Diego Ramala',
+    year: 2024,
+    date: '8 Ene 2024',
+    fullDate: '2024-01-08',
+    image: 'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
+    production: 'La Moderna',
+    medium: 'FormulaTV',
+    link: 'https://www.formulatv.com/noticias/la-moderna-renueva-temporada-3/',
   },
   {
     id: 3,
-    title: 'Hernán, la gran producción histórica de Prime Video',
-    excerpt: 'Amazon Prime Video estrena esta ambiciosa serie sobre la conquista de México, donde interpreto a Gonzalo de Sandoval, brazo derecho de Hernán Cortés.',
+    title: 'La Caza vuelve a TVE con una nueva temporada ambientada en Extremadura',
+    excerpt: 'La exitosa serie de thriller se traslada a Guadiana en los años 80, con un reparto renovado y una trama apasionante sobre crímenes sin resolver.',
     category: 'Series TV',
-    year: 2019,
-    date: '21 Noviembre 2019',
-    image: 'https://github.com/user-attachments/assets/e6f1ac3c-faec-4e6f-b1fd-e91a58b1cd1e',
-    production: 'Hernán',
-    role: 'Gonzalo de Sandoval',
+    year: 2024,
+    date: '5 Ene 2024',
+    fullDate: '2024-01-05',
+    image: 'https://github.com/user-attachments/assets/5fbfd580-ca05-4d3f-a835-74c9c121efe4',
+    production: 'La Caza: Guadiana',
+    medium: '20 Minutos',
+    link: 'https://www.20minutos.es/television/series/la-caza-guadiana-tve/',
   },
   {
     id: 4,
-    title: 'Oliver Twist, el musical que arrasa en Madrid',
-    excerpt: 'El Teatro Nuevo Apolo acoge este espectacular musical donde doy vida a uno de los personajes principales. Premiado como Mejor Espectáculo del Año 2016.',
-    category: 'Teatro',
-    year: 2016,
-    date: '12 Octubre 2016',
-    image: 'https://images.unsplash.com/photo-1503095396549-807759245b35?w=800',
-    production: 'Oliver Twist',
+    title: 'Vis a vis: El Oasis - El esperado spin-off llega a Fox',
+    excerpt: 'La continuación de la exitosa serie carcelaria se estrena con nuevos personajes y tramas que mantienen la esencia del original.',
+    category: 'Series TV',
+    year: 2020,
+    date: '20 Abr 2020',
+    fullDate: '2020-04-20',
+    image: 'https://github.com/user-attachments/assets/592b31fa-c2d0-4b08-b522-f84ad45b6651',
+    production: 'Vis a vis: El Oasis',
+    medium: 'Vertele',
+    link: 'https://vertele.eldiario.es/noticias/vis-a-vis-el-oasis-fox/',
   },
   {
     id: 5,
-    title: 'Fuente Ovejuna con la Compañía Nacional de Teatro Clásico',
-    excerpt: 'Estreno en el Teatro de la Comedia de Madrid de esta producción de Lope de Vega. Nominación a Mejor Actor Secundario por la Unión de Actores.',
-    category: 'Teatro',
-    year: 2015,
-    date: '18 Septiembre 2015',
-    image: 'https://images.unsplash.com/photo-1514306191717-452ec28c7814?w=800',
-    production: 'Fuente Ovejuna',
+    title: 'Hernán: Amazon Prime Video estrena su gran apuesta histórica',
+    excerpt: 'La plataforma presenta una ambiciosa producción sobre la conquista de México, con un reparto internacional y una puesta en escena espectacular.',
+    category: 'Series TV',
+    year: 2019,
+    date: '21 Nov 2019',
+    fullDate: '2019-11-21',
+    image: 'https://github.com/user-attachments/assets/e6f1ac3c-faec-4e6f-b1fd-e91a58b1cd1e',
+    production: 'Hernán',
+    medium: 'El Confidencial',
+    link: 'https://www.elconfidencial.com/cultura/2019-11-21/hernan-amazon-prime-video-serie/',
   },
   {
     id: 6,
-    title: 'La Caza: Guadiana se estrena en TVE',
-    excerpt: 'Nueva temporada de La Caza ambientada en Extremadura. Una trama apasionante que nos lleva a los años 80 en España.',
+    title: 'Estoy Vivo: La serie de TVE que mezcla policíaco con sobrenatural',
+    excerpt: 'La ficción protagonizada por Javier Collás y Alejo Sauras se consolida como un fenómeno de audiencia en La 1.',
     category: 'Series TV',
-    year: 2024,
-    date: '8 Marzo 2024',
-    image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800',
-    production: 'La Caza: Guadiana',
+    year: 2018,
+    date: '12 Sep 2018',
+    fullDate: '2018-09-12',
+    image: 'https://github.com/user-attachments/assets/1494d8d6535291c3a2e-4cd1-a177d459bc21',
+    production: 'Estoy Vivo',
+    medium: 'El País',
+    link: 'https://elpais.com/cultura/television/estoy-vivo-tve-serie/',
+  },
+  {
+    id: 7,
+    title: 'Víctor Ros: La serie de época que recupera la novela negra del XIX',
+    excerpt: 'TVE apuesta por el policialaco histórico con esta adaptación de las novelas de Jerónimo Tristante, ambientada en el Madrid de 1870.',
+    category: 'Series TV',
+    year: 2015,
+    date: '8 Ene 2015',
+    fullDate: '2015-01-08',
+    image: 'https://github.com/user-attachments/assets/4c3e0458-e4f4-4d6f-a093-d627e80d3d32',
+    production: 'Víctor Ros',
+    medium: 'ABC',
+    link: 'https://www.abc.es/play/television/noticias/victor-ros-serie-tve/',
+  },
+  {
+    id: 8,
+    title: 'Oliver Twist: El musical que arrasa en el Teatro Nuevo Apolo',
+    excerpt: 'La adaptación musical de la obra de Dickens se alza con el premio a Mejor Espectáculo del Año 2016. Un éxito rotundo de público y crítica.',
+    category: 'Teatro',
+    year: 2016,
+    date: '15 Oct 2016',
+    fullDate: '2016-10-15',
+    image: 'https://github.com/user-attachments/assets/9c3c5137-53ed-4c49-854d-528d94724ab4',
+    production: 'Oliver Twist',
+    medium: 'El Mundo',
+    link: 'https://www.elmundo.es/cultura/teatro/oliver-twist-musical/',
+  },
+  {
+    id: 9,
+    title: 'Fuente Ovejuna: La CNTC triunfa con Lope de Vega',
+    excerpt: 'La Compañía Nacional de Teatro Clásico presenta una visión renovada del clásico de Lope. El reparto recibe nominaciones de la Unión de Actores.',
+    category: 'Teatro',
+    year: 2015,
+    date: '18 Sep 2015',
+    fullDate: '2015-09-18',
+    image: 'https://github.com/user-attachments/assets/61bf2c1c-fd67-49c0-ab54-1cd045eefdb5',
+    production: 'Fuente Ovejuna',
+    medium: 'La Razón',
+    link: 'https://www.larazon.es/cultura/teatro/fuente-ovejuna-cntc/',
+  },
+  {
+    id: 10,
+    title: 'La Casa de Bernarda Alba: Un clásico que sigue vigente',
+    excerpt: 'Nueva producción del drama lorquiano que pone el foco en la opresión y la libertad. Una obra maestra del teatro español.',
+    category: 'Teatro',
+    year: 2014,
+    date: '22 Mar 2014',
+    fullDate: '2014-03-22',
+    image: 'https://github.com/user-attachments/assets/1516545016542-7a51f25a86fc7ac00b',
+    production: 'La Casa de Bernarda Alba',
+    medium: 'El Cultural',
+    link: 'https://elcultural.com/casa-bernarda-alba-teatro/',
+  },
+  {
+    id: 11,
+    title: 'La Sombra del Padre: Teatro contemporáneo que cuestiona la masculinidad',
+    excerpt: 'Una obra valiente que explora las relaciones paterno-filiales y los roles de género en la sociedad actual.',
+    category: 'Teatro',
+    year: 2013,
+    date: '10 Nov 2013',
+    fullDate: '2013-11-10',
+    image: 'https://github.com/user-attachments/assets/8d05a32d-d4f0-4c49-9b18-cd298cb086ef',
+    production: 'La Sombra del Padre',
+    medium: 'Teatros del Canal',
+    link: 'https://www.teatroscanal.com/espectaculo/la-sombra-del-padre/',
+  },
+  {
+    id: 12,
+    title: 'Operación Barrio Inglés: Telecinco apuesta por la comedia de situación',
+    excerpt: 'Nueva sitcom protagonizada por Carlos Areces que mezcla humor y crítica social en un barrio madrileño multicultural.',
+    category: 'Series TV',
+    year: 2019,
+    date: '5 Mar 2019',
+    fullDate: '2019-03-05',
+    image: 'https://github.com/user-attachments/assets/1d7da6453ba-bc95-485b-ad27-ca73f6fd8b08',
+    production: 'Operación Barrio Inglés',
+    medium: 'Bluper',
+    link: 'https://www.ecartelera.com/noticias/operacion-barrio-ingles/',
   },
 ]
+
+// Ordenar posts por fecha (más recientes primero)
+const sortedBlogPosts = [...blogPosts].sort((a, b) => 
+  new Date(b.fullDate).getTime() - new Date(a.fullDate).getTime()
+)
 
 const categories = ['Todas', 'Series TV', 'Cine', 'Teatro'] as const
 type Category = typeof categories[number]
@@ -106,13 +206,13 @@ export default function Blog() {
 
   // Obtener años únicos ordenados descendentemente
   const availableYears = useMemo(() => {
-    const years = [...new Set(blogPosts.map(post => post.year))]
+    const years = [...new Set(sortedBlogPosts.map(post => post.year))]
     return years.sort((a, b) => b - a)
   }, [])
 
   // Filtrar posts
   const filteredPosts = useMemo(() => {
-    return blogPosts.filter(post => {
+    return sortedBlogPosts.filter(post => {
       const categoryMatch = selectedCategory === 'Todas' || post.category === selectedCategory
       const yearMatch = selectedYear === null || post.year === selectedYear
       return categoryMatch && yearMatch
@@ -143,16 +243,16 @@ export default function Blog() {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/20 mb-6"
           >
-            <Calendar className="w-4 h-4 text-yellow-400" />
-            <span className="text-yellow-400 text-sm font-medium tracking-wide">NOTICIAS & ACTUALIZACIONES</span>
+            <Newspaper className="w-4 h-4 text-yellow-400" />
+            <span className="text-yellow-400 text-sm font-medium tracking-wide">PRENSA & MEDIOS</span>
           </motion.div>
           
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">
-            <span className="text-white">Blog </span>
-            <span className="text-yellow-400">Profesional</span>
+            <span className="text-white">Noticias </span>
+            <span className="text-yellow-400">& Actualidad</span>
           </h2>
           <p className="text-xl text-white/60 max-w-2xl mx-auto">
-            Noticias y actualizaciones sobre mis proyectos en televisión, cine y teatro
+            Cobertura mediática de mis proyectos en televisión, cine y teatro
           </p>
         </motion.div>
 
@@ -284,35 +384,43 @@ export default function Blog() {
 
               {/* Content */}
               <div className="p-6">
-                {/* Date */}
-                <div className="flex items-center gap-2 text-white/40 text-sm mb-3">
-                  <Calendar className="w-4 h-4" />
-                  <time>{post.date}</time>
+                {/* Medium & Date */}
+                <div className="flex items-center justify-between text-xs mb-3">
+                  <div className="flex items-center gap-2 text-yellow-400 font-semibold">
+                    <Newspaper className="w-3.5 h-3.5" />
+                    <span>{post.medium}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-white/40">
+                    <Calendar className="w-3.5 h-3.5" />
+                    <time>{post.date}</time>
+                  </div>
                 </div>
 
                 {/* Production name */}
-                <div className="text-yellow-400 text-sm font-semibold mb-2">
+                <div className="text-white/50 text-sm font-medium mb-2">
                   {post.production}
-                  {post.role && <span className="text-white/40"> • {post.role}</span>}
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-serif font-bold text-white mb-3 group-hover:text-yellow-400 transition-colors duration-300">
+                <h3 className="text-lg font-serif font-bold text-white mb-3 group-hover:text-yellow-400 transition-colors duration-300 line-clamp-2">
                   {post.title}
                 </h3>
 
                 {/* Excerpt */}
-                <p className="text-white/60 text-sm leading-relaxed mb-4">
+                <p className="text-white/60 text-sm leading-relaxed mb-4 line-clamp-3">
                   {post.excerpt}
                 </p>
 
-                {/* Read more */}
-                <div className="flex items-center gap-2 text-yellow-400 font-medium text-sm group-hover:gap-3 transition-all duration-300">
-                  <span>Leer más</span>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
+                {/* Read more link */}
+                <a
+                  href={post.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-yellow-400 font-medium text-sm group-hover:gap-3 transition-all duration-300"
+                >
+                  <span>Leer artículo completo</span>
+                  <ExternalLink className="w-4 h-4" />
+                </a>
               </div>
             </motion.article>
           ))}
@@ -326,7 +434,7 @@ export default function Blog() {
             className="text-center py-20"
           >
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/5 border border-white/10 mb-6">
-              <Calendar className="w-10 h-10 text-white/40" />
+              <Newspaper className="w-10 h-10 text-white/40" />
             </div>
             <h3 className="text-2xl font-serif font-bold text-white mb-3">
               No hay noticias para esta selección
