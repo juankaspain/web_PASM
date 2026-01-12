@@ -266,16 +266,17 @@ export default function Hero() {
 
           <div className="order-1 lg:order-2 space-y-6 lg:space-y-7 fade-in-up">
             <div className="space-y-2">
-              <h1 className="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[60px] xl:text-[66px] 
-                           font-serif font-bold tracking-tight leading-[1.1] fade-in-up"
-                  style={{ animationDelay: '0.1s' }}
+              <h1 
+                className="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[60px] xl:text-[66px] font-serif font-bold tracking-tight leading-[1.1] fade-in-up"
+                style={{ animationDelay: '0.1s' }}
               >
                 <span className="text-white">Almagro </span>
                 <span className="text-yellow-400">San Miguel</span>
               </h1>
 
-              <p className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-300 fade-in-up"
-                 style={{ animationDelay: '0.2s' }}
+              <p 
+                className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-300 fade-in-up"
+                style={{ animationDelay: '0.2s' }}
               >
                 Actor de Televisión, Cine y Teatro
               </p>
@@ -357,8 +358,7 @@ export default function Hero() {
             <div className="pt-2 fade-in-up" style={{ animationDelay: '0.5s' }}>
               <a
                 href="#showreel"
-                className="cta-button group inline-flex items-center gap-2 rounded-full bg-yellow-400
-                           px-7 py-3.5 text-base font-semibold text-black shadow-[0_10px_30px_rgba(250,204,21,0.25)]"
+                className="cta-button group inline-flex items-center gap-2 rounded-full bg-yellow-400 px-7 py-3.5 text-base font-semibold text-black shadow-[0_10px_30px_rgba(250,204,21,0.25)]"
               >
                 <Play className="w-5 h-5 play-icon" />
                 Ver Showreel Profesional
@@ -381,9 +381,7 @@ export default function Hero() {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="card-hover group flex flex-col items-center gap-2 rounded-xl border border-slate-700/70 
-                               bg-slate-900/80 px-3 py-3 backdrop-blur-md hover:border-white/20
-                               hover:bg-slate-900/95 transition-all shadow-[0_12px_30px_rgba(15,23,42,0.8)]"
+                    className="card-hover group flex flex-col items-center gap-2 rounded-xl border border-slate-700/70 bg-slate-900/80 px-3 py-3 backdrop-blur-md hover:border-white/20 hover:bg-slate-900/95 transition-all shadow-[0_12px_30px_rgba(15,23,42,0.8)]"
                   >
                     <span className="text-2xl">{link.icon}</span>
                     <div className="text-center">
@@ -415,9 +413,7 @@ export default function Hero() {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`card-hover group flex flex-col items-center justify-center gap-2 rounded-xl border border-slate-700/70 
-                                 bg-slate-900/80 px-3 py-3 backdrop-blur-md transition-all 
-                                 shadow-[0_12px_30px_rgba(15,23,42,0.8)] ${link.borderHover} ${link.bgHover}`}
+                      className={`card-hover group flex flex-col items-center justify-center gap-2 rounded-xl border border-slate-700/70 bg-slate-900/80 px-3 py-3 backdrop-blur-md transition-all shadow-[0_12px_30px_rgba(15,23,42,0.8)] ${link.borderHover} ${link.bgHover}`}
                     >
                       {Icon === 'tiktok' ? (
                         <SiTiktok className={`w-5 h-5 text-slate-300 transition-colors ${link.color}`} />
@@ -436,9 +432,7 @@ export default function Hero() {
             <div className="pt-3 flex justify-center lg:justify-start fade-in-up" style={{ animationDelay: '0.8s' }}>
               <a
                 href="#about"
-                className="explore-button group inline-flex items-center gap-3 rounded-full border border-slate-600/70 
-                           bg-slate-900/60 px-5 py-2.5 backdrop-blur-md hover:border-white/20
-                           hover:bg-slate-900/80 transition-all"
+                className="explore-button group inline-flex items-center gap-3 rounded-full border border-slate-600/70 bg-slate-900/60 px-5 py-2.5 backdrop-blur-md hover:border-white/20 hover:bg-slate-900/80 transition-all"
               >
                 <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
                   Explorar portfolio completo
