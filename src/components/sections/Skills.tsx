@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { GraduationCap, Award, Languages, Music, Swords, Horse, Drama, Mic, FileText, CheckCircle2, Star } from 'lucide-react'
+import { GraduationCap, Award, Languages, Music, Swords, Horse, Drama, Mic, FileText, CheckCircle2, Star, ExternalLink } from 'lucide-react'
 import { useRef } from 'react'
 
 const training = [
@@ -12,6 +12,7 @@ const training = [
     director: 'Dir: Helena Pimenta',
     description: 'Formación de élite en verso clásico español, comedia del Siglo de Oro y técnicas de interpretación profesional. Dos años intensivos en la compañía nacional.',
     featured: true,
+    url: 'https://teatroclasico.inaem.gob.es/',
   },
   {
     title: 'Escuela Superior de Arte Dramático',
@@ -20,6 +21,7 @@ const training = [
     director: 'Titulación Oficial Universitaria',
     description: 'Formación completa en interpretación teatral, cine y televisión. Especialización en texto clásico y contemporáneo.',
     featured: true,
+    url: 'https://www.esadsevilla.org',
   },
   {
     title: 'Work In Progress',
@@ -28,6 +30,7 @@ const training = [
     director: 'Dir: Darío Facal',
     description: 'Perfeccionamiento en técnicas de cámara, casting y preparación de personajes para cine y televisión.',
     featured: false,
+    url: 'https://estudio-workinprogress.com/',
   },
   {
     title: 'Especialización en Dobles de Acción',
@@ -36,6 +39,7 @@ const training = [
     director: 'Formación en Especialistas de Acción',
     description: 'Formación en lucha escénica, control de nervios, coordinación de escenas de acción y trabajo de riesgo controlado.',
     featured: false,
+    url: 'https://www.noidentity.es/',
   },
 ]
 
@@ -175,7 +179,7 @@ export default function Skills() {
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
+              className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed px-4"
             >
               Formación profesional y habilidades especiales que complementan mi versatilidad como intérprete
             </motion.p>
@@ -189,55 +193,62 @@ export default function Skills() {
             </h3>
             
             <div className="space-y-6">
-              {training.map((course, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                  transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-                  whileHover={{ x: 4 }}
-                  className="group"
-                >
-                  <div className={`relative border rounded-2xl p-6 lg:p-8 backdrop-blur-sm hover:border-white/20 transition-all ${
-                    course.featured 
-                      ? 'bg-gradient-to-br from-yellow-900/10 to-orange-900/5 border-yellow-500/30 hover:bg-yellow-900/15'
-                      : 'bg-white/[0.02] border-white/10 hover:bg-white/[0.04]'
-                  }`}>
-                    <div className="flex flex-col lg:flex-row items-start gap-6">
-                      <div className="flex-shrink-0">
-                        <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${
-                          course.featured 
-                            ? 'bg-yellow-400/20 border border-yellow-400/30'
-                            : 'bg-white/5 border border-white/10'
-                        }`}>
-                          <GraduationCap className={`w-7 h-7 ${course.featured ? 'text-yellow-400' : 'text-slate-400'}`} />
-                        </div>
+              {training.map((course, index) => {
+                const CardContent = (
+                  <div className="flex flex-col lg:flex-row items-start gap-6">
+                    <div className="flex-shrink-0">
+                      <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${course.featured ? 'bg-yellow-400/20 border border-yellow-400/30' : 'bg-white/5 border border-white/10'}`}>
+                        <GraduationCap className={`w-7 h-7 ${course.featured ? 'text-yellow-400' : 'text-slate-400'}`} />
                       </div>
-                      
-                      <div className="flex-1">
-                        <div className="flex flex-wrap items-center gap-3 mb-3">
-                          <h4 className="text-xl lg:text-2xl font-bold text-white">{course.title}</h4>
-                          {course.featured && (
-                            <span className="px-3 py-1 rounded-full bg-yellow-400 text-black text-xs font-bold">
-                              DESTACADO
-                            </span>
-                          )}
-                        </div>
-                        <p className="text-base text-slate-300 mb-2">{course.organization}</p>
-                        <p className="text-slate-400 leading-relaxed mb-3">{course.description}</p>
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
-                          <span className="flex items-center gap-1">
-                            <Award className="w-4 h-4" />
-                            {course.period}
+                    </div>
+                    
+                    <div className="flex-1">
+                      <div className="flex flex-wrap items-center gap-3 mb-3">
+                        <h4 className="text-xl lg:text-2xl font-bold text-white group-hover:text-yellow-400 transition-colors">{course.title}</h4>
+                        {course.featured && (
+                          <span className="px-3 py-1 rounded-full bg-yellow-400 text-black text-xs font-bold">
+                            DESTACADO
                           </span>
-                          <span>•</span>
-                          <span>{course.director}</span>
-                        </div>
+                        )}
+                      </div>
+                      <p className="text-base text-slate-300 mb-2">{course.organization}</p>
+                      <p className="text-slate-400 leading-relaxed mb-3">{course.description}</p>
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
+                        <span className="flex items-center gap-1">
+                          <Award className="w-4 h-4" />
+                          {course.period}
+                        </span>
+                        <span>•</span>
+                        <span>{course.director}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex-shrink-0">
+                      <div className="w-10 h-10 bg-yellow-400/10 rounded-lg flex items-center justify-center group-hover:bg-yellow-400/20 transition-all">
+                        <ExternalLink className="w-5 h-5 text-yellow-400 group-hover:scale-110 group-hover:rotate-12 transition-all" />
                       </div>
                     </div>
                   </div>
-                </motion.div>
-              ))}
+                )
+
+                return (
+                  <motion.a
+                    key={index}
+                    href={course.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                    transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
+                    whileHover={{ x: 4 }}
+                    className="group block cursor-pointer"
+                  >
+                    <div className={`relative border rounded-2xl p-6 lg:p-8 backdrop-blur-sm hover:border-white/20 transition-all ${course.featured ? 'bg-gradient-to-br from-yellow-900/10 to-orange-900/5 border-yellow-500/30 hover:bg-yellow-900/15 hover:border-yellow-400/50' : 'bg-white/[0.02] border-white/10 hover:bg-white/[0.04] hover:border-yellow-400/30'}`}>
+                      {CardContent}
+                    </div>
+                  </motion.a>
+                )
+              })}
             </div>
           </div>
 
