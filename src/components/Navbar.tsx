@@ -5,11 +5,11 @@ import { Menu, X } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
-// NAVEGACIÓN OPTIMIZADA: 10 links principales organizados para casting directors
+// NAVEGACIÓN OPTIMIZADA: 11 links principales organizados para casting directors
 const navLinks = [
   { href: '#about', label: 'Sobre mí' },
   { href: '#portfolio', label: 'Series TV' },
-  { href: '#cinema', label: 'Cine' },
+  { href: '#filmografia', label: 'Cine' },
   { href: '#theater', label: 'Teatro' },
   { href: '#awards', label: 'Premios' },
   { href: '#calendar', label: 'Agenda' },
