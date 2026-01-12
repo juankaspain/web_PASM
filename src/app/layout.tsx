@@ -199,21 +199,11 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://player.vimeo.com" />
         <link rel="dns-prefetch" href="https://img.youtube.com" />
         
-        {/* Preload Inter font - Critical for FCP */}
-        <link
-          rel="preload"
-          href="/_next/static/media/inter-latin-400-normal.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/_next/static/media/inter-latin-700-normal.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
+        {/* 
+          NO preload de fuentes Inter - Next.js 14 las optimiza automáticamente
+          Las rutas _next/static/media/inter-*.woff2 no existen hasta el build
+          y Next.js ya hace preload interno de las fuentes configuradas en next/font
+        */}
         
         {/* Preload critical hero image */}
         <link
