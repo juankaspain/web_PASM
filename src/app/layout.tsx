@@ -185,45 +185,31 @@ export default function RootLayout({
         {/* Humans.txt reference */}
         <link rel="author" href="/humans.txt" />
 
-        {/* Preconnect to critical external domains */}
+        {/* Preconnect to critical external domains - mejora DNS y TLS handshake */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://formspree.io" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://github.com" />
-        <link rel="preconnect" href="https://user-images.githubusercontent.com" />
         
-        {/* DNS prefetch for secondary resources */}
+        {/* DNS prefetch para recursos secundarios */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.youtube.com" />
         <link rel="dns-prefetch" href="https://player.vimeo.com" />
         <link rel="dns-prefetch" href="https://img.youtube.com" />
+        <link rel="dns-prefetch" href="https://user-images.githubusercontent.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
         
         {/* 
-          NO preload de fuentes Inter - Next.js 14 las optimiza automáticamente
-          Las rutas _next/static/media/inter-*.woff2 no existen hasta el build
-          y Next.js ya hace preload interno de las fuentes configuradas en next/font
+          IMPORTANTE: NO hacer preload de imágenes específicas
+          - Next.js Image component ya optimiza la carga automáticamente
+          - Los preloads manuales causan warnings si la imagen no se usa inmediatamente
+          - La imagen del Hero se carga con priority={true} en el componente
         */}
-        
-        {/* Preload critical hero image */}
-        <link
-          rel="preload"
-          as="image"
-          href="https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4"
-          fetchPriority="high"
-        />
-        
-        {/* Preload critical about image */}
-        <link
-          rel="preload"
-          as="image"
-          href="https://github.com/user-attachments/assets/0c09e17f-1983-4ad0-8926-a0d6ef6ae5cf"
-          fetchPriority="high"
-        />
 
         {/* Prefetch important routes on idle */}
         <link rel="prefetch" href="/#about" />
-        <link rel="prefetch" href="/#portfolio" />
+        <link rel="prefetch" href="/#series" />
         <link rel="prefetch" href="/#contact" />
       </head>
       <body className={inter.className} suppressHydrationWarning>
@@ -473,8 +459,8 @@ export default function RootLayout({
                 {
                   '@type': 'ListItem',
                   position: 3,
-                  name: 'Portfolio',
-                  item: 'https://almagrosanmiguel.com/#portfolio',
+                  name: 'Series',
+                  item: 'https://almagrosanmiguel.com/#series',
                 },
                 {
                   '@type': 'ListItem',
