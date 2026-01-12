@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar'
 import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import LatestProject from '@/components/sections/LatestProject'
-import SkillsGraph from '@/components/sections/SkillsGraph'
+// import SkillsGraph from '@/components/sections/SkillsGraph' // ELIMINADA - Capacidades Artísticas
 import Footer from '@/components/Footer'
 import ScrollToTop from '@/components/ui/ScrollToTop'
 import { 
@@ -112,7 +112,7 @@ export default function Home() {
       </Suspense>
       
       {/* Career sections */}
-      <SkillsGraph />
+      {/* <SkillsGraph /> */} {/* ELIMINADA - Sección Capacidades Artísticas */}
       <Suspense fallback={<TimelineSkeleton />}>
         <Timeline />
       </Suspense>
