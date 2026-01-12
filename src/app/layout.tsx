@@ -4,6 +4,8 @@ import './globals.css'
 import Analytics from '@/components/Analytics'
 import PWAInstall from '@/components/PWAInstall'
 import Script from 'next/script'
+import fs from 'fs'
+import path from 'path'
 
 // Optimized font configuration with display swap and fallbacks
 const inter = Inter({ 
@@ -13,6 +15,19 @@ const inter = Inter({
   preload: true,
   fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Arial', 'sans-serif']
 })
+
+// Read critical CSS at build time
+const getCriticalCSS = () => {
+  if (typeof window === 'undefined') {
+    try {
+      const criticalPath = path.join(process.cwd(), 'src/app/critical.css')
+      return fs.readFileSync(criticalPath, 'utf8')
+    } catch {
+      return ''
+    }
+  }
+  return ''
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://almagrosanmiguel.com'),
@@ -166,15 +181,57 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const criticalCSS = getCriticalCSS()
+
   return (
     <html lang="es" className={inter.variable} suppressHydrationWarning>
       <head>
-        {/* Preconnect to external domains for faster loading */}
+        {/* Critical CSS inlined for instant rendering */}
+        {criticalCSS && (
+          <style
+            dangerouslySetInnerHTML={{ __html: criticalCSS }}
+            data-critical="true"
+          />
+        )}
+
+        {/* Preconnect to critical external domains */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://formspree.io" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        <link rel="dns-prefetch" href="https://formspree.io" />
+        <link rel="preconnect" href="https://github.com" />
+        <link rel="preconnect" href="https://user-images.githubusercontent.com" />
+        
+        {/* DNS prefetch for secondary resources */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.youtube.com" />
+        <link rel="dns-prefetch" href="https://player.vimeo.com" />
+        <link rel="dns-prefetch" href="https://img.youtube.com" />
+        
+        {/* Preload critical hero image */}
+        <link
+          rel="preload"
+          as="image"
+          href="https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4"
+          fetchPriority="high"
+        />
+        
+        {/* Preload critical about image */}
+        <link
+          rel="preload"
+          as="image"
+          href="https://github.com/user-attachments/assets/0c09e17f-1983-4ad0-8926-a0d6ef6ae5cf"
+          fetchPriority="high"
+        />
+
+        {/* Prefetch important routes on idle */}
+        <link rel="prefetch" href="/#about" />
+        <link rel="prefetch" href="/#portfolio" />
+        <link rel="prefetch" href="/#contact" />
+        
+        {/* Resource hints for improved performance */}
+        <link rel="modulepreload" href="/_next/static/chunks/main.js" />
+        <link rel="modulepreload" href="/_next/static/chunks/pages/_app.js" />
       </head>
       <body className={inter.className} suppressHydrationWarning>
         {children}
