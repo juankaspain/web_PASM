@@ -247,18 +247,22 @@ export default function Portfolio() {
                   <div className="relative">
                     <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                     
-                    <div className="relative bg-white/[0.02] border border-white/10 rounded-xl hover:bg-white/[0.04] hover:border-white/20 transition-all duration-300 overflow-hidden">
+                    <div className="relative bg-white/[0.02] border border-white/10 rounded-3xl hover:bg-white/[0.04] hover:border-white/20 transition-all duration-300 overflow-hidden shadow-2xl">
                       <div className="flex flex-col lg:flex-row">
-                        <div className="relative w-full lg:w-80 h-48 lg:h-auto flex-shrink-0">
-                          <Image
-                            src={project.image}
-                            alt={project.title}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                          />
+                        <div className="relative w-full lg:w-80 h-[480px] flex-shrink-0 overflow-hidden">
+                          <div className="relative w-full h-full aspect-[2/3]">
+                            <Image
+                              src={project.image}
+                              alt={project.title}
+                              fill
+                              priority
+                              sizes="(max-width: 768px) 100vw, 400px"
+                              className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                            />
+                          </div>
                           <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/80 lg:bg-gradient-to-r" />
                           
-                          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
                             <div className="w-14 h-14 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg">
                               <Play className="w-6 h-6 text-black ml-0.5" fill="currentColor" />
                             </div>
@@ -342,7 +346,7 @@ export default function Portfolio() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 overflow-y-auto backdrop-blur-sm"
+            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 overflow-y-auto backdrop-blur-md"
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
@@ -360,14 +364,16 @@ export default function Portfolio() {
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="relative h-80 rounded-t-2xl overflow-hidden">
+              <div className="relative h-[650px] rounded-t-2xl overflow-hidden">
                 <Image
                   src={selectedProject.image}
                   alt={selectedProject.title}
                   fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 1000px"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent backdrop-blur-sm" />
                 
                 <div className="absolute bottom-0 left-0 right-0 p-8">
                   <div className="inline-block px-3 py-1 bg-yellow-400 rounded-full text-black text-sm font-bold mb-3">
