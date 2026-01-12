@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Analytics from '@/components/Analytics'
+import PWAInstall from '@/components/PWAInstall'
 import Script from 'next/script'
 
 // Optimized font configuration with display swap and fallbacks
@@ -178,6 +179,7 @@ export default function RootLayout({
       <body className={inter.className} suppressHydrationWarning>
         {children}
         <Analytics />
+        <PWAInstall />
         
         {/* Enhanced Schema.org Person Markup - Deferred for performance */}
         <Script
