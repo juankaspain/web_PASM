@@ -394,8 +394,8 @@ export default function Hero() {
                     Bienvenido a mi Portfolio Profesional
                   </h3>
                   <p className="text-sm text-slate-300 leading-relaxed">
-                    Más de <span className="text-yellow-400 font-bold">12 años</span> de experiencia en televisión, cine y teatro.
-                    Con <span className="text-yellow-400 font-bold">+300 episodios</span> en series de televisión.
+                    Actor profesional con <span className="text-yellow-400 font-bold">+12 años de trayectoria</span> en producciones nacionales e internacionales.
+                    He participado en series de <span className="text-yellow-400 font-bold">Prime Video</span>, <span className="text-yellow-400 font-bold">TVE</span> y <span className="text-yellow-400 font-bold">Atresplayer</span>, acumulando <span className="text-yellow-400 font-bold">+300 episodios</span>.
                   </p>
                 </div>
 
