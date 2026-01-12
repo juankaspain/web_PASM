@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Play, MapPin, Calendar, Camera, Instagram, X, Youtube, Facebook, ExternalLink, Sparkles } from 'lucide-react'
+import { ArrowDown, Play, Camera, Instagram, X, Youtube, Facebook, ExternalLink, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { SiTiktok, SiImdb, SiWikipedia } from 'react-icons/si'
@@ -377,29 +377,8 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 fade-in-up" style={{ animationDelay: '0.3s' }}>
-              <div className="rounded-2xl bg-slate-900/80 border border-slate-700/60 px-4 py-3 backdrop-blur-md">
-                <div className="flex items-center gap-2 mb-1">
-                  <MapPin className="w-4 h-4 text-yellow-400" />
-                  <span className="text-[11px] font-medium uppercase tracking-[0.16em] text-gray-400">
-                    Ubicación
-                  </span>
-                </div>
-                <p className="text-sm font-semibold text-white">Sevilla y Madrid</p>
-              </div>
-              <div className="rounded-2xl bg-slate-900/80 border border-slate-700/60 px-4 py-3 backdrop-blur-md">
-                <div className="flex items-center gap-2 mb-1">
-                  <Calendar className="w-4 h-4 text-yellow-400" />
-                  <span className="text-[11px] font-medium uppercase tracking-[0.16em] text-gray-400">
-                    Nacimiento
-                  </span>
-                </div>
-                <p className="text-sm font-semibold text-white">7 Marzo 1990</p>
-              </div>
-            </div>
-
             {/* Sección de Bienvenida Profesional con Estadísticas */}
-            <div className="relative fade-in-up" style={{ animationDelay: '0.4s' }}>
+            <div className="relative fade-in-up" style={{ animationDelay: '0.3s' }}>
               <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400/20 via-yellow-500/20 to-yellow-400/20 rounded-3xl blur-2xl opacity-60" />
               
               <div className="relative bg-gradient-to-br from-slate-900/95 to-black/95 rounded-3xl border border-yellow-400/20 p-6 backdrop-blur-xl shadow-2xl">
@@ -448,7 +427,7 @@ export default function Hero() {
             </div>
 
             {/* Botones de CTA */}
-            <div className="pt-2 flex flex-col sm:flex-row gap-3 fade-in-up" style={{ animationDelay: '0.5s' }}>
+            <div className="pt-2 flex flex-col sm:flex-row gap-3 fade-in-up" style={{ animationDelay: '0.4s' }}>
               <a
                 href="#showreel"
                 className="cta-button group inline-flex items-center justify-center gap-2 rounded-full bg-yellow-400 px-7 py-3.5 text-base font-semibold text-black shadow-[0_10px_30px_rgba(250,204,21,0.25)]"
@@ -466,8 +445,8 @@ export default function Hero() {
               </a>
             </div>
 
-            {/* Professional Links - Recuperados */}
-            <div className="space-y-4 fade-in-up" style={{ animationDelay: '0.6s' }}>
+            {/* Professional Links */}
+            <div className="space-y-4 fade-in-up" style={{ animationDelay: '0.5s' }}>
               <div className="flex items-center gap-2.5">
                 <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
                 <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/60 border border-slate-700/50 backdrop-blur-sm">
@@ -519,7 +498,7 @@ export default function Hero() {
             </div>
 
             {/* Social Links */}
-            <div className="space-y-3 fade-in-up" style={{ animationDelay: '0.7s' }}>
+            <div className="space-y-3 fade-in-up" style={{ animationDelay: '0.6s' }}>
               <div className="flex items-center gap-2">
                 <Instagram className="w-4 h-4 text-yellow-400" />
                 <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400">
@@ -548,7 +527,7 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="pt-3 flex justify-center lg:justify-start fade-in-up" style={{ animationDelay: '0.8s' }}>
+            <div className="pt-3 flex justify-center lg:justify-start fade-in-up" style={{ animationDelay: '0.7s' }}>
               <a
                 href="#about"
                 className="explore-button group inline-flex items-center gap-3 rounded-full border border-slate-600/70 bg-slate-900/60 px-5 py-2.5 backdrop-blur-md hover:border-white/20 hover:bg-slate-900/80 transition-all"
