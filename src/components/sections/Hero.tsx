@@ -126,6 +126,90 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
     >
+      {/* All styled-jsx tags MUST be at section root level */}
+      <style jsx>{`
+        @keyframes star-float {
+          0%, 100% { opacity: 0; transform: translateY(0); }
+          50% { opacity: 1; }
+          100% { transform: translateY(-100vh); }
+        }
+        .star-animation {
+          animation: star-float linear infinite;
+        }
+      `}</style>
+
+      <style jsx>{`
+        .hero-image-container {
+          transition: transform 0.5s ease-out;
+        }
+        .hero-image-container:hover {
+          transform: scale(1.02);
+        }
+      `}</style>
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(5px); }
+        }
+
+        .fade-in-up {
+          animation: fadeInUp 0.6s ease-out forwards;
+          opacity: 0;
+        }
+
+        .card-hover {
+          transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+          transform: scale(1.03) translateY(-2px);
+        }
+
+        .cta-button {
+          transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+          transform: scale(1.04);
+        }
+
+        .cta-button:active {
+          transform: scale(0.97);
+        }
+
+        .play-icon {
+          transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover .play-icon {
+          transform: scale(1.1);
+        }
+
+        .explore-button {
+          transition: all 0.3s ease;
+        }
+
+        .explore-button:hover {
+          transform: scale(1.03);
+        }
+
+        .arrow-bounce {
+          animation: bounce 1.4s ease-in-out infinite;
+        }
+      `}</style>
+
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black via-slate-950 to-slate-900" />
 
       {/* Simplified stars animation - using CSS instead of Framer Motion for better performance */}
@@ -145,17 +229,6 @@ export default function Hero() {
           ))}
         </div>
       )}
-
-      <style jsx>{`
-        @keyframes star-float {
-          0%, 100% { opacity: 0; transform: translateY(0); }
-          50% { opacity: 1; }
-          100% { transform: translateY(-100vh); }
-        }
-        .star-animation {
-          animation: star-float linear infinite;
-        }
-      `}</style>
 
       <motion.div
         className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20"
@@ -188,15 +261,6 @@ export default function Hero() {
                 <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.7)]" />
                 <div className="absolute inset-0 bg-gradient-to-tl from-yellow-600/5 via-transparent to-transparent" />
               </div>
-
-              <style jsx>{`
-                .hero-image-container {
-                  transition: transform 0.5s ease-out;
-                }
-                .hero-image-container:hover {
-                  transform: scale(1.02);
-                }
-              `}</style>
             </div>
           </div>
 
@@ -385,69 +449,6 @@ export default function Hero() {
           </div>
         </div>
       </motion.div>
-
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(5px); }
-        }
-
-        .fade-in-up {
-          animation: fadeInUp 0.6s ease-out forwards;
-          opacity: 0;
-        }
-
-        .card-hover {
-          transition: all 0.3s ease;
-        }
-
-        .card-hover:hover {
-          transform: scale(1.03) translateY(-2px);
-        }
-
-        .cta-button {
-          transition: all 0.3s ease;
-        }
-
-        .cta-button:hover {
-          transform: scale(1.04);
-        }
-
-        .cta-button:active {
-          transform: scale(0.97);
-        }
-
-        .play-icon {
-          transition: transform 0.3s ease;
-        }
-
-        .cta-button:hover .play-icon {
-          transform: scale(1.1);
-        }
-
-        .explore-button {
-          transition: all 0.3s ease;
-        }
-
-        .explore-button:hover {
-          transform: scale(1.03);
-        }
-
-        .arrow-bounce {
-          animation: bounce 1.4s ease-in-out infinite;
-        }
-      `}</style>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
     </section>
