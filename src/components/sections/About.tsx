@@ -184,13 +184,13 @@ export default function About() {
                   <span className="text-white font-semibold"> Helena Pimenta</span> (2015-2017), donde se especializó en verso clásico español.
                 </p>
                 <p>
-                  Su debut televisivo llegó en 2019 con <span className="text-white font-semibold">"Hernán"</span> (Amazon Prime Video), interpretando
+                  Su debut televisivo llegó en 2019 con <span className="text-white font-semibold">“Hernán”</span> (Amazon Prime Video), interpretando
                   a Gonzalo de Sandoval junto a Óscar Jaenada. Desde entonces ha participado en <span className="text-white font-semibold">más de 300 episodios</span>
-                  en series como <span className="text-white font-semibold">"Vis a vis: El Oasis"</span>, <span className="text-white font-semibold">"La Moderna"</span> (236 episodios como protagonista),
-                  <span className="text-white font-semibold"> "Operación Barrio Inglés"</span> y <span className="text-white font-semibold">"La caza: Guadiana"</span>.
+                  en series como <span className="text-white font-semibold">“Vis a vis: El Oasis”</span>, <span className="text-white font-semibold">“La Moderna”</span> (236 episodios como protagonista),
+                  <span className="text-white font-semibold"> “Operación Barrio Inglés”</span> y <span className="text-white font-semibold">“La caza: Guadiana”</span>.
                 </p>
                 <p>
-                  En 2025 protagoniza la película <span className="text-white font-semibold">"Un fantasma en la batalla"</span>, dirigida por
+                  En 2025 protagoniza la película <span className="text-white font-semibold">“Un fantasma en la batalla”</span>, dirigida por
                   Agustín Díaz Yanes, actualmente en cines y Netflix. Además de su trabajo actoral, domina
                   habilidades como <span className="text-white font-semibold">esgrima</span>, <span className="text-white font-semibold">equitación</span>, <span className="text-white font-semibold">violonchelo</span>
                   y <span className="text-white font-semibold">viola</span>, que enriquecen su versatilidad interpretativa.
@@ -236,7 +236,7 @@ export default function About() {
             </div>
           </div>
 
-          {/* Formación Profesional - CSS animations */}
+          {/* Formación Profesional - Enhanced clickable cards */}
           <div className="mb-20">
             <h3 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
               <GraduationCap className="w-7 h-7 text-yellow-400" />
@@ -251,22 +251,24 @@ export default function About() {
                     href={edu.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="stagger-item group relative block"
+                    className="stagger-item group relative block cursor-pointer"
                     style={{ animationDelay: `${0.3 + index * 0.1}s` }}
                   >
-                    <div className="glow-effect absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg" />
-                    <div className="relative h-full bg-white/[0.03] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:bg-white/[0.05] hover:border-white/20 transition-all card-lift">
+                    <div className="glow-effect-strong absolute -inset-[1px] bg-yellow-400/30 rounded-2xl blur-lg" />
+                    <div className="relative h-full bg-white/[0.03] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:bg-white/[0.08] hover:border-yellow-400/40 transition-all card-lift-strong">
                       <div className="flex items-start justify-between mb-4">
-                        <div className="w-12 h-12 bg-yellow-400 rounded-xl flex items-center justify-center shadow-lg">
+                        <div className="w-12 h-12 bg-yellow-400 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                           <Icon className="w-6 h-6 text-black" />
                         </div>
-                        <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-yellow-400 transition-colors" />
+                        <div className="w-8 h-8 bg-yellow-400/10 rounded-lg flex items-center justify-center group-hover:bg-yellow-400/20 transition-all">
+                          <ExternalLink className="w-4 h-4 text-yellow-400 group-hover:scale-110 group-hover:rotate-12 transition-all" />
+                        </div>
                       </div>
-                      <h4 className="font-bold text-white mb-2">{edu.title}</h4>
+                      <h4 className="font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">{edu.title}</h4>
                       <p className="text-sm text-slate-500 mb-2 font-semibold">{edu.period}</p>
-                      <p className="text-sm text-slate-400 leading-relaxed">{edu.description}</p>
+                      <p className="text-sm text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">{edu.description}</p>
                       
-                      <div className="slide-effect absolute bottom-0 left-0 h-[2px] bg-yellow-400 rounded-b-2xl" />
+                      <div className="slide-effect-strong absolute bottom-0 left-0 h-[3px] bg-yellow-400 rounded-b-2xl shadow-[0_0_10px_rgba(250,204,21,0.5)]" />
                     </div>
                   </a>
                 )
@@ -389,6 +391,14 @@ export default function About() {
           transform: translateY(-6px);
         }
 
+        .card-lift-strong {
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-lift-strong:hover {
+          transform: translateY(-8px) scale(1.02);
+        }
+
         .glow-effect {
           opacity: 0;
           transition: opacity 0.5s ease;
@@ -398,12 +408,30 @@ export default function About() {
           opacity: 1;
         }
 
+        .glow-effect-strong {
+          opacity: 0;
+          transition: opacity 0.4s ease;
+        }
+
+        .group:hover .glow-effect-strong {
+          opacity: 1;
+        }
+
         .slide-effect {
           width: 0;
           transition: width 0.4s ease;
         }
 
         .group:hover .slide-effect {
+          width: 100%;
+        }
+
+        .slide-effect-strong {
+          width: 0;
+          transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .group:hover .slide-effect-strong {
           width: 100%;
         }
 
