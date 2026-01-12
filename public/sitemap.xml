@@ -1,76 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-  
-  <!-- Homepage -->
+
+  <!-- Página principal -->
   <url>
-    <loc>https://almagrosanmiguel.com/</loc>
-    <lastmod>2026-01-09</lastmod>
+    <loc>https://almagrosanmiguel.com</loc>
+    <lastmod>2026-01-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://almagrosanmiguel.com/og-image.jpg</image:loc>
+      <image:title>Almagro San Miguel - Actor Profesional</image:title>
+      <image:caption>Actor con 13+ años de experiencia en TV, cine y teatro</image:caption>
+    </image:image>
   </url>
 
-  <!-- Section Deep Links -->
+  <!-- Sección: Home / Hero -->
+  <url>
+    <loc>https://almagrosanmiguel.com/#home</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Sección: About / Biografía -->
   <url>
     <loc>https://almagrosanmiguel.com/#about</loc>
-    <lastmod>2026-01-09</lastmod>
+    <lastmod>2026-01-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
+  <!-- Sección: Skills / Habilidades -->
   <url>
-    <loc>https://almagrosanmiguel.com/#portfolio</loc>
-    <lastmod>2026-01-09</lastmod>
+    <loc>https://almagrosanmiguel.com/#skills</loc>
+    <lastmod>2026-01-12</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sección: Filmography / Filmografía -->
+  <url>
+    <loc>https://almagrosanmiguel.com/#filmography</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
+  <!-- Sección: Theater / Teatro -->
   <url>
-    <loc>https://almagrosanmiguel.com/#timeline</loc>
-    <lastmod>2026-01-09</lastmod>
+    <loc>https://almagrosanmiguel.com/#theater</loc>
+    <lastmod>2026-01-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
+  <!-- Sección: Showreel -->
   <url>
-    <loc>https://almagrosanmiguel.com/#awards</loc>
-    <lastmod>2026-01-09</lastmod>
+    <loc>https://almagrosanmiguel.com/#showreel</loc>
+    <lastmod>2026-01-12</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/JjPtvXw-gyo/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Almagro San Miguel - Showreel Profesional</video:title>
+      <video:description>Showreel profesional del actor Almagro San Miguel con escenas de sus trabajos en televisión, cine y teatro</video:description>
+      <video:player_loc>https://www.youtube.com/embed/JjPtvXw-gyo</video:player_loc>
+      <video:duration>120</video:duration>
+      <video:publication_date>2024-01-01</video:publication_date>
+    </video:video>
   </url>
 
-  <url>
-    <loc>https://almagrosanmiguel.com/#gallery</loc>
-    <lastmod>2026-01-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://almagrosanmiguel.com/#news</loc>
-    <lastmod>2026-01-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://almagrosanmiguel.com/#events</loc>
-    <lastmod>2026-01-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
+  <!-- Sección: Press Kit -->
   <url>
     <loc>https://almagrosanmiguel.com/#presskit</loc>
-    <lastmod>2026-01-09</lastmod>
+    <lastmod>2026-01-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
+  <!-- Sección: Contact / Contacto -->
   <url>
     <loc>https://almagrosanmiguel.com/#contact</loc>
-    <lastmod>2026-01-09</lastmod>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Enlaces externos destacados (para referencia SEO) -->
+  <!-- IMDb -->
+  <url>
+    <loc>https://www.imdb.com/name/nm9017709/</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- FilmAffinity -->
+  <url>
+    <loc>https://www.filmaffinity.com/es/name.php?name-id=231727420</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Wikipedia -->
+  <url>
+    <loc>https://es.wikipedia.org/wiki/Almagro_San_Miguel</loc>
+    <lastmod>2026-01-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
