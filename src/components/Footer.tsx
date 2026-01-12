@@ -1,6 +1,6 @@
 'use client'
 
-import { Mail, MapPin, Facebook, Instagram, X, Youtube, ExternalLink, Heart, Scale, Shield, Cookie } from 'lucide-react'
+import { Mail, MapPin, Facebook, Instagram, X, Youtube, ExternalLink, Heart, Scale, Shield, Cookie, Code } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { SiTiktok } from 'react-icons/si'
 import { useState, useEffect } from 'react'
@@ -42,7 +42,7 @@ const socialLinks = [
 const professionalLinks = [
   { 
     name: 'IMDb', 
-    url: 'https://www.imdb.com/name/nm8137381/',
+    url: 'https://www.imdb.com/es-es/name/nm9017709/',
     icon: '⭐',
     description: 'Perfil profesional'
   },
@@ -298,7 +298,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-neutral-800 pt-8 space-y-3">
+        <div className="border-t border-neutral-800 pt-8 space-y-4">
           <div className="text-center text-gray-400 text-sm space-y-2">
             <p className="font-light">
               <strong className="text-gray-300">Pedro Francisco Almagro Gordillo</strong> (Almagro San Miguel)
@@ -309,6 +309,19 @@ export default function Footer() {
             <p className="text-gray-500 text-xs font-light">
               Actor profesional | Madrid y Sevilla, España
             </p>
+          </div>
+          
+          {/* Developer Credit */}
+          <div className="text-center pt-4 border-t border-neutral-800/50">
+            <a
+              href="https://github.com/juankaspain"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-xs text-gray-500 hover:text-yellow-400 transition-colors group"
+            >
+              <Code className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" aria-hidden="true" />
+              <span className="font-light">Developed by <strong className="font-semibold">JuankaSpain</strong></span>
+            </a>
           </div>
         </div>
       </div>
