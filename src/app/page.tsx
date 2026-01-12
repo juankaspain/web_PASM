@@ -1,5 +1,3 @@
-'use client'
-
 import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import Navbar from '@/components/Navbar'
@@ -17,70 +15,23 @@ import {
   TimelineSkeleton
 } from '@/components/ui/Skeleton'
 
-// Lazy load heavy sections with optimized loading states
-const Series = dynamic(() => import('@/components/sections/Series'), {
-  ssr: false,
-})
-
-const Cinema = dynamic(() => import('@/components/sections/Cinema'), {
-  ssr: false,
-})
-
-const Theater = dynamic(() => import('@/components/sections/Theater'), {
-  ssr: false,
-})
-
-const Skills = dynamic(() => import('@/components/sections/Skills'), {
-  ssr: false,
-})
-
-const Headshots = dynamic(() => import('@/components/sections/Headshots'), {
-  ssr: false,
-})
-
-const Timeline = dynamic(() => import('@/components/sections/Timeline'), {
-  ssr: false,
-})
-
-const Milestones = dynamic(() => import('@/components/sections/Milestones'), {
-  ssr: false,
-})
-
-const Awards = dynamic(() => import('@/components/sections/Awards'), {
-  ssr: false,
-})
-
-const Calendar = dynamic(() => import('@/components/sections/Calendar'), {
-  ssr: false,
-})
-
-const Gallery = dynamic(() => import('@/components/sections/Gallery'), {
-  ssr: false,
-})
-
-const Showreel = dynamic(() => import('@/components/sections/Showreel'), {
-  ssr: false,
-})
-
-const Testimonials = dynamic(() => import('@/components/sections/Testimonials'), {
-  ssr: false,
-})
-
-const Press = dynamic(() => import('@/components/sections/Press'), {
-  ssr: false,
-})
-
-const Blog = dynamic(() => import('@/components/sections/Blog'), {
-  ssr: false,
-})
-
-const PressKit = dynamic(() => import('@/components/sections/PressKit'), {
-  ssr: false,
-})
-
-const Contact = dynamic(() => import('@/components/sections/Contact'), {
-  ssr: false,
-})
+// Lazy load heavy sections
+const Series = dynamic(() => import('@/components/sections/Series'))
+const Cinema = dynamic(() => import('@/components/sections/Cinema'))
+const Theater = dynamic(() => import('@/components/sections/Theater'))
+const Skills = dynamic(() => import('@/components/sections/Skills'))
+const Headshots = dynamic(() => import('@/components/sections/Headshots'))
+const Timeline = dynamic(() => import('@/components/sections/Timeline'))
+const Milestones = dynamic(() => import('@/components/sections/Milestones'))
+const Awards = dynamic(() => import('@/components/sections/Awards'))
+const Calendar = dynamic(() => import('@/components/sections/Calendar'))
+const Gallery = dynamic(() => import('@/components/sections/Gallery'))
+const Showreel = dynamic(() => import('@/components/sections/Showreel'))
+const Testimonials = dynamic(() => import('@/components/sections/Testimonials'))
+const Press = dynamic(() => import('@/components/sections/Press'))
+const Blog = dynamic(() => import('@/components/sections/Blog'))
+const PressKit = dynamic(() => import('@/components/sections/PressKit'))
+const Contact = dynamic(() => import('@/components/sections/Contact'))
 
 export default function Home() {
   return (
