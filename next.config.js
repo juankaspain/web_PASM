@@ -177,7 +177,8 @@ const nextConfig = {
   // Experimental features for better performance
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion', 'react-icons'],
-    optimizeCss: true,
+    // Disabled - requires 'critters' package
+    // optimizeCss: true,
   },
 
   // Compiler optimizations (uses SWC by default)
@@ -188,7 +189,7 @@ const nextConfig = {
     reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
 
-  // Webpack optimizations - REMOVED babel-loader (Next.js 14 uses SWC)
+  // Webpack optimizations - NO babel-loader (Next.js 14 uses SWC)
   webpack: (config, { isServer }) => {
     // Optimize bundle size
     if (!isServer) {
