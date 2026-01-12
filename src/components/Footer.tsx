@@ -178,7 +178,7 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
-            {/* Legal Identity Data */}
+            {/* Legal Identity Data - Simplified */}
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -186,11 +186,11 @@ export default function Footer() {
               viewport={{ once: true }}
               className="text-center lg:text-left"
             >
-              <p className="text-sm text-slate-400 mb-1">
+              <p className="text-sm text-slate-400">
                 <strong className="text-slate-300">Pedro Francisco Almagro Gordillo</strong> (Almagro San Miguel)
               </p>
-              <p className="text-xs text-slate-500">
-                NIF: 12345678Z • Madrid, España
+              <p className="text-xs text-slate-500 mt-1">
+                Actor profesional • Madrid, España
               </p>
             </motion.div>
 
