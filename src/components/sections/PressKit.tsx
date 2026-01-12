@@ -3,6 +3,7 @@
 import { motion, useInView } from 'framer-motion'
 import { Download, FileText, Image as ImageIcon, Video, Award, Info, CheckCircle2, Package, Mail, Sparkles, ExternalLink } from 'lucide-react'
 import { useState, useRef } from 'react'
+import SectionHeader from '@/components/ui/SectionHeader'
 
 const DOWNLOAD_ITEMS = [
   {
@@ -129,11 +130,11 @@ export default function PressKit() {
   }
 
   return (
-    <section id="presskit" className="relative py-32 overflow-hidden bg-gradient-to-b from-neutral-950 via-black to-neutral-950">
+    <section id="presskit" className="relative py-32 overflow-hidden bg-gradient-to-b from-slate-900 via-black to-slate-950">
       {/* Decorative background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[100px]" />
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px]" />
       </div>
 
       {/* Subtle grid pattern */}
@@ -151,45 +152,15 @@ export default function PressKit() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          {/* Header with decorative line */}
-          <div className="text-center mb-20">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-neutral-700 bg-gradient-to-r from-neutral-900/50 to-neutral-800/50 backdrop-blur-sm shadow-lg"
-            >
-              <Package className="w-4 h-4 text-blue-400" strokeWidth={1.5} />
-              <span className="text-sm font-light text-neutral-300 tracking-wider">Material Promocional</span>
-            </motion.div>
-            
-            <motion.h2 
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-5xl lg:text-6xl font-light mb-4 tracking-tight bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent"
-            >
-              Press Kit
-            </motion.h2>
+          {/* Header with golden line */}
+          <SectionHeader
+            badge={{ icon: Package, text: 'Material Promocional' }}
+            title="Press Kit"
+            subtitle="Material profesional para prensa, medios de comunicación y productoras. Descarga gratuita"
+            isInView={isInView}
+          />
 
-            <motion.div
-              initial={{ opacity: 0, scaleX: 0 }}
-              animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="w-24 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent mx-auto mb-6"
-            />
-            
-            <motion.p 
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-lg text-neutral-400 max-w-3xl mx-auto leading-relaxed font-light"
-            >
-              Material profesional para prensa, medios de comunicación y productoras. Descarga gratuita
-            </motion.p>
-          </div>
-
-          {/* Download Items Grid - Enhanced */}
+          {/* Download Items Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 max-w-6xl mx-auto">
             {DOWNLOAD_ITEMS.map((item, index) => {
               const Icon = item.icon
@@ -199,39 +170,40 @@ export default function PressKit() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  className="relative group"
+                  className="group"
                 >
-                  {/* Glow effect on hover */}
-                  <div className={`absolute -inset-[1px] bg-gradient-to-br ${item.color} rounded-xl opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500`} />
-                  
-                  <div className="relative bg-gradient-to-br from-neutral-900/80 to-neutral-900/40 border border-neutral-800 rounded-xl p-6 hover:border-neutral-700 transition-all duration-300 backdrop-blur-sm shadow-2xl">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className={`w-12 h-12 rounded-lg ${item.iconBg} border border-neutral-700/50 flex items-center justify-center backdrop-blur-sm`}>
-                        <Icon className={`w-5 h-5 ${item.iconColor}`} strokeWidth={1.5} />
+                  <div className="relative h-full">
+                    {/* Glow effect */}
+                    <div className={`absolute -inset-[1px] bg-gradient-to-br ${item.color} rounded-xl opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500`} />
+                    
+                    <div className="relative h-full bg-white/[0.03] border border-white/10 rounded-xl p-6 hover:bg-white/[0.05] hover:border-yellow-400/30 transition-all backdrop-blur-sm">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className={`w-12 h-12 rounded-lg ${item.iconBg} border border-white/10 flex items-center justify-center backdrop-blur-sm`}>
+                          <Icon className={`w-5 h-5 ${item.iconColor}`} strokeWidth={1.5} />
+                        </div>
+                        <div className="flex flex-col items-end gap-1">
+                          <span className="text-xs font-medium text-slate-400 uppercase tracking-wider bg-white/5 px-2 py-0.5 rounded">{item.format}</span>
+                          <span className="text-xs text-slate-600">{item.size}</span>
+                        </div>
                       </div>
-                      <div className="flex flex-col items-end gap-1">
-                        <span className="text-xs font-medium text-neutral-400 uppercase tracking-wider bg-neutral-800/50 px-2 py-0.5 rounded">{item.format}</span>
-                        <span className="text-xs text-neutral-600">{item.size}</span>
-                      </div>
+                      <h3 className="font-semibold text-lg mb-2 text-white">{item.title}</h3>
+                      <p className="text-sm text-slate-400 mb-5 leading-relaxed">{item.description}</p>
+                      <button
+                        onClick={() => handleDownload(item.type, item.title)}
+                        disabled={downloading === item.type}
+                        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 hover:border-yellow-400/50 hover:bg-white/10 text-slate-300 hover:text-white rounded-lg transition-all duration-300 text-sm disabled:opacity-50"
+                      >
+                        <Download className="w-4 h-4" strokeWidth={1.5} />
+                        {downloading === item.type ? 'Descargando...' : 'Descargar'}
+                      </button>
                     </div>
-                    <h3 className="font-medium text-lg mb-2 text-neutral-100 tracking-wide">{item.title}</h3>
-                    <p className="text-sm text-neutral-500 mb-5 font-light leading-relaxed">{item.description}</p>
-                    <button
-                      onClick={() => handleDownload(item.type, item.title)}
-                      disabled={downloading === item.type}
-                      className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-neutral-800/50 to-neutral-800/30 border border-neutral-700 hover:border-neutral-600 hover:from-neutral-800/70 hover:to-neutral-800/50 text-neutral-300 hover:text-neutral-100 rounded-lg transition-all duration-300 font-light text-sm disabled:opacity-50 shadow-lg"
-                    >
-                      <Download className="w-4 h-4" strokeWidth={1.5} />
-                      {downloading === item.type ? 'Descargando...' : 'Descargar'}
-                    </button>
                   </div>
                 </motion.div>
               )
             })}
           </div>
 
-          {/* Complete Press Kit Button - Enhanced */}
+          {/* Complete Press Kit Button */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -241,26 +213,25 @@ export default function PressKit() {
             <button
               onClick={() => handleDownload('complete', 'Press Kit Completo')}
               disabled={downloading === 'complete'}
-              className="px-10 py-4 bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 hover:border-blue-400/50 hover:from-blue-600/30 hover:to-purple-600/30 text-neutral-200 rounded-xl hover:scale-[1.03] transition-all duration-300 font-light text-base inline-flex items-center gap-3 disabled:opacity-50 backdrop-blur-sm shadow-2xl"
+              className="px-10 py-4 bg-yellow-400/10 border border-yellow-400/30 hover:border-yellow-400/50 hover:bg-yellow-400/20 text-white rounded-xl hover:scale-[1.03] transition-all duration-300 font-medium text-base inline-flex items-center gap-3 disabled:opacity-50 backdrop-blur-sm shadow-xl"
             >
               <Download className="w-5 h-5" strokeWidth={1.5} />
               {downloading === 'complete' ? 'Descargando...' : 'Descargar Press Kit Completo'}
-              <span className="text-sm font-light text-neutral-400">(120 MB)</span>
+              <span className="text-sm text-slate-400">(120 MB)</span>
             </button>
           </motion.div>
 
-          {/* Technical Specs - Enhanced Grid */}
+          {/* Technical Specs */}
           <div className="max-w-4xl mx-auto mb-20">
             <div className="text-center mb-8">
-              <h3 className="text-2xl font-light mb-2 text-neutral-100 tracking-wide">Ficha Técnica</h3>
-              <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-purple-500 to-transparent mx-auto" />
+              <h3 className="text-3xl font-bold mb-4 text-white">Ficha Técnica</h3>
+              <div className="w-16 h-0.5 bg-yellow-400 mx-auto" />
             </div>
             
             <div className="relative">
-              {/* Subtle glow */}
-              <div className="absolute -inset-[1px] bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl blur-lg opacity-50" />
+              <div className="absolute -inset-[1px] bg-yellow-400/10 rounded-xl blur-lg opacity-50" />
               
-              <div className="relative border border-neutral-800 rounded-xl p-8 bg-gradient-to-br from-neutral-900/50 to-neutral-900/30 backdrop-blur-sm shadow-2xl">
+              <div className="relative border border-white/10 rounded-xl p-8 bg-white/[0.03] backdrop-blur-sm">
                 <div className="grid md:grid-cols-2 gap-6">
                   {techSpecs.map((spec, index) => (
                     <motion.div
@@ -268,12 +239,12 @@ export default function PressKit() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                       transition={{ duration: 0.5, delay: 0.9 + index * 0.05 }}
-                      className="flex justify-between items-center py-3 border-b border-neutral-800/50 last:border-0 group hover:border-neutral-700 transition-colors"
+                      className="flex justify-between items-center py-3 border-b border-white/5 last:border-0 group hover:border-white/10 transition-colors"
                     >
-                      <span className="text-sm text-neutral-500 uppercase tracking-wider font-light group-hover:text-neutral-400 transition-colors">
+                      <span className="text-sm text-slate-500 uppercase tracking-wider font-medium group-hover:text-slate-400 transition-colors">
                         {spec.label}
                       </span>
-                      <span className="text-neutral-200 font-light text-right group-hover:text-neutral-100 transition-colors">
+                      <span className="text-white font-medium text-right">
                         {typeof spec.value === 'string' ? (
                           spec.value
                         ) : (
@@ -284,13 +255,13 @@ export default function PressKit() {
                                   href={link.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors underline decoration-blue-400/30 hover:decoration-blue-300/50 underline-offset-2"
+                                  className="inline-flex items-center gap-1 text-yellow-400 hover:text-yellow-300 transition-colors"
                                 >
                                   {link.text}
                                   <ExternalLink className="w-3 h-3" strokeWidth={1.5} />
                                 </a>
                                 {linkIndex < (spec.value.links?.length || 0) - 1 && (
-                                  <span className="text-neutral-600 mx-1">,</span>
+                                  <span className="text-slate-600 mx-1">,</span>
                                 )}
                               </span>
                             ))}
@@ -304,7 +275,7 @@ export default function PressKit() {
             </div>
           </div>
 
-          {/* Press Contact - Elegant Card */}
+          {/* Press Contact */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -312,29 +283,25 @@ export default function PressKit() {
             className="max-w-2xl mx-auto"
           >
             <div className="relative">
-              {/* Glow effect */}
-              <div className="absolute -inset-[1px] bg-gradient-to-br from-green-500/10 to-blue-500/10 rounded-xl blur-xl opacity-50" />
+              <div className="absolute -inset-[1px] bg-yellow-400/10 rounded-xl blur-xl opacity-50" />
               
-              <div className="relative text-center p-12 border border-neutral-800 rounded-xl bg-gradient-to-br from-neutral-900/50 to-neutral-900/30 backdrop-blur-sm shadow-2xl">
-                <Sparkles className="w-8 h-8 text-blue-400 mx-auto mb-4" strokeWidth={1.5} />
-                <h3 className="text-2xl font-light text-neutral-100 mb-4 tracking-wide">
+              <div className="relative text-center p-12 border border-white/10 rounded-xl bg-white/[0.03] backdrop-blur-sm">
+                <Sparkles className="w-8 h-8 text-yellow-400 mx-auto mb-4" strokeWidth={1.5} />
+                <h3 className="text-2xl font-bold text-white mb-4">
                   Contacto para Prensa
                 </h3>
-                <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent mx-auto mb-6" />
-                <p className="text-neutral-400 mb-8 leading-relaxed font-light">
+                <div className="w-12 h-0.5 bg-yellow-400 mx-auto mb-6" />
+                <p className="text-slate-400 mb-8 leading-relaxed">
                   Para entrevistas, solicitudes de material adicional o información específica:
                 </p>
                 
                 <a
                   href="mailto:info@almagrosanmiguel.com"
                   className="inline-flex items-center gap-3 px-10 py-4 
-                           bg-gradient-to-r from-blue-600/20 to-green-600/20
-                           border border-blue-500/30 hover:border-blue-400/50
-                           rounded-xl text-neutral-200 hover:text-neutral-100
-                           transition-all duration-300 
-                           hover:from-blue-600/30 hover:to-green-600/30
-                           hover:scale-[1.03]
-                           font-light tracking-wide shadow-2xl"
+                           bg-yellow-400/10 border border-yellow-400/30 hover:border-yellow-400/50
+                           rounded-xl text-white hover:bg-yellow-400/20
+                           transition-all duration-300 hover:scale-[1.03]
+                           font-medium shadow-xl"
                 >
                   <Mail className="w-5 h-5" strokeWidth={1.5} />
                   info@almagrosanmiguel.com
@@ -347,10 +314,10 @@ export default function PressKit() {
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ delay: 1.4 }}
-              className="flex items-center justify-center gap-2 mt-8 text-neutral-500"
+              className="flex items-center justify-center gap-2 mt-8 text-slate-500"
             >
-              <CheckCircle2 className="w-4 h-4 text-green-500" strokeWidth={1.5} />
-              <span className="text-sm font-light">Material de alta calidad para uso profesional</span>
+              <CheckCircle2 className="w-4 h-4 text-yellow-400" strokeWidth={1.5} />
+              <span className="text-sm">Material de alta calidad para uso profesional</span>
             </motion.div>
           </motion.div>
         </motion.div>
