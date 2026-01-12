@@ -83,10 +83,12 @@ export default function Home() {
       <Navbar />
       <Hero />
       
+      {/* Latest Project - Immediately after hero to showcase current work */}
+      <LatestProject />
+      
       {/* Core sections - Optimized for casting directors */}
       <About />
       <Skills />
-      <LatestProject />
       
       {/* Filmography sections - reorganized order with Suspense */}
       {/* 1. Series de Televisión */}
