@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Play, MapPin, Calendar, ExternalLink, Clapperboard, Tv, Star, Theater as TheaterIcon, Instagram, X, Youtube, Facebook } from 'lucide-react'
+import { ArrowDown, Play, MapPin, Calendar, ExternalLink, Award, Tv, Film, Users, Instagram, X, Youtube, Facebook } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { SiTiktok, SiImdb, SiWikipedia } from 'react-icons/si'
@@ -111,38 +111,39 @@ export default function Hero() {
     },
   ]
 
-  const quickHighlights = [
-    {
-      icon: Clapperboard,
-      title: 'Un fantasma en la batalla',
-      character: 'Antonio',
-      year: '2025',
-      detail: 'Netflix • Dir. Agustín Díaz Yanes',
-      url: 'https://www.netflix.com/es/title/81700950',
-    },
+  // Estadísticas profesionales clave
+  const careerStats = [
     {
       icon: Tv,
-      title: 'La Moderna',
-      character: 'Íñigo Peñalver',
-      year: '2023-2024',
-      detail: '236 episodios • TVE',
-      url: 'https://www.rtve.es/play/videos/salon-de-te-la-moderna/',
+      value: '15+',
+      label: 'Series TV',
+      gradient: 'from-blue-500/20 to-blue-600/20',
+      iconColor: 'text-blue-400',
+      borderColor: 'border-blue-400/30',
     },
     {
-      icon: Star,
-      title: 'Vis a vis: El Oasis',
-      character: 'Diego Ramala',
-      year: '2020',
-      detail: 'Protagonista • Fox España',
-      url: 'https://www.netflix.com/es/title/80059465',
+      icon: Film,
+      value: '20+',
+      label: 'Películas',
+      gradient: 'from-purple-500/20 to-purple-600/20',
+      iconColor: 'text-purple-400',
+      borderColor: 'border-purple-400/30',
     },
     {
-      icon: TheaterIcon,
-      title: 'CNTC',
-      character: 'Verso clásico español',
-      year: '2015-2017',
-      detail: 'Compañía Nacional de Teatro Clásico',
-      url: null,
+      icon: Award,
+      value: '8+',
+      label: 'Obras Teatro',
+      gradient: 'from-yellow-500/20 to-yellow-600/20',
+      iconColor: 'text-yellow-400',
+      borderColor: 'border-yellow-400/30',
+    },
+    {
+      icon: Users,
+      value: '12+',
+      label: 'Años Exp.',
+      gradient: 'from-green-500/20 to-green-600/20',
+      iconColor: 'text-green-400',
+      borderColor: 'border-green-400/30',
     },
   ]
 
@@ -187,6 +188,11 @@ export default function Hero() {
         @keyframes bounce {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(5px); }
+        }
+
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.6; }
         }
 
         .fade-in-up {
@@ -256,6 +262,26 @@ export default function Hero() {
 
         .profile-card:hover .external-link-icon {
           transform: translate(2px, -2px);
+        }
+
+        .stat-card {
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stat-card:hover {
+          transform: translateY(-6px) scale(1.02);
+        }
+
+        .stat-icon {
+          transition: all 0.4s ease;
+        }
+
+        .stat-card:hover .stat-icon {
+          transform: scale(1.2) rotate(5deg);
+        }
+
+        .pulse-dot {
+          animation: pulse 2s ease-in-out infinite;
         }
       `}</style>
 
@@ -352,56 +378,55 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Quick Highlights */}
-            <div className="grid grid-cols-2 gap-3 fade-in-up" style={{ animationDelay: '0.4s' }}>
-              {quickHighlights.map((highlight) => {
-                const Icon = highlight.icon
-                const CardContent = (
-                  <>
-                    <div className="flex items-start gap-2 mb-2">
-                      <Icon className="w-4 h-4 text-yellow-400 flex-shrink-0 mt-0.5" />
-                      <div className="flex-1 min-w-0">
-                        <h4 className="text-xs font-bold text-white leading-tight line-clamp-2">
-                          {highlight.title}
-                        </h4>
-                      </div>
-                      {highlight.url && (
-                        <ExternalLink className="w-3 h-3 text-slate-500 group-hover:text-yellow-400 transition-colors flex-shrink-0" />
-                      )}
-                    </div>
-                    <div className="space-y-1">
-                      <p className="text-[11px] text-yellow-400/90 font-semibold">
-                        {highlight.character}
-                      </p>
-                      <p className="text-[10px] text-slate-400 font-medium">
-                        {highlight.year}
-                      </p>
-                      <p className="text-[10px] text-slate-500 leading-tight">
-                        {highlight.detail}
-                      </p>
-                    </div>
-                  </>
-                )
+            {/* Sección de Bienvenida Profesional con Estadísticas */}
+            <div className="relative fade-in-up" style={{ animationDelay: '0.4s' }}>
+              <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400/20 via-yellow-500/20 to-yellow-400/20 rounded-3xl blur-2xl opacity-60" />
+              
+              <div className="relative bg-gradient-to-br from-slate-900/95 to-black/95 rounded-3xl border border-yellow-400/20 p-6 backdrop-blur-xl shadow-2xl">
+                {/* Badge de disponibilidad */}
+                <div className="flex items-center justify-center gap-2 mb-4">
+                  <div className="w-2 h-2 rounded-full bg-green-400 pulse-dot" />
+                  <span className="text-xs font-bold uppercase tracking-widest text-green-400">
+                    Disponible para nuevos proyectos
+                  </span>
+                </div>
 
-                return highlight.url ? (
-                  <a
-                    key={highlight.title}
-                    href={highlight.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="card-hover group rounded-xl bg-slate-900/80 border border-slate-700/60 px-3.5 py-3.5 backdrop-blur-md hover:border-yellow-400/30 transition-all cursor-pointer"
-                  >
-                    {CardContent}
-                  </a>
-                ) : (
-                  <div
-                    key={highlight.title}
-                    className="card-hover group rounded-xl bg-slate-900/80 border border-slate-700/60 px-3.5 py-3.5 backdrop-blur-md hover:border-yellow-400/30 transition-all"
-                  >
-                    {CardContent}
-                  </div>
-                )
-              })}
+                {/* Mensaje de bienvenida */}
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    Bienvenido a mi Portfolio Profesional
+                  </h3>
+                  <p className="text-sm text-slate-300 leading-relaxed">
+                    Más de <span className="text-yellow-400 font-bold">12 años</span> de experiencia en televisión, cine y teatro.
+                    Especializado en <span className="text-yellow-400 font-bold">drama</span>, <span className="text-yellow-400 font-bold">comedia</span> y <span className="text-yellow-400 font-bold">verso clásico</span>.
+                  </p>
+                </div>
+
+                {/* Estadísticas */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {careerStats.map((stat, index) => {
+                    const Icon = stat.icon
+                    return (
+                      <div
+                        key={index}
+                        className={`stat-card relative rounded-xl border bg-gradient-to-br from-black/60 to-slate-900/60 p-4 backdrop-blur-sm ${stat.borderColor}`}
+                      >
+                        <div className={`absolute inset-0 rounded-xl bg-gradient-to-br ${stat.gradient} opacity-0 hover:opacity-100 transition-opacity blur-lg`} />
+                        
+                        <div className="relative flex flex-col items-center gap-2 text-center">
+                          <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
+                            <Icon className={`stat-icon w-5 h-5 ${stat.iconColor}`} />
+                          </div>
+                          <div className="text-2xl font-bold text-white">{stat.value}</div>
+                          <div className="text-[10px] font-medium text-slate-400 uppercase tracking-wider">
+                            {stat.label}
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
             </div>
 
             <div className="pt-2 fade-in-up" style={{ animationDelay: '0.5s' }}>
