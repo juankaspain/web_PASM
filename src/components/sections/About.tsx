@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion'
 import { Award, GraduationCap, Heart, MapPin, Calendar, Sparkles, ExternalLink, Drama, Sword, Music, Languages, Crown, Clapperboard, Tv, Star } from 'lucide-react'
 import Image from 'next/image'
 import { useRef } from 'react'
+import { generateShimmerDataURL, imageSizes } from '@/lib/image-utils'
 
 const skillCategories = [
   {
@@ -124,67 +125,52 @@ export default function About() {
           transition={{ duration: 0.6 }}
         >
           <div className="text-center mb-20">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
-            >
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm fade-in-up">
               <Heart className="w-4 h-4 text-yellow-400" strokeWidth={2} />
               <span className="text-sm font-medium text-slate-300 tracking-wide">Sobre Mí</span>
-            </motion.div>
+            </div>
             
-            <motion.p 
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed"
-            >
+            <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed fade-in-up" style={{ animationDelay: '0.1s' }}>
               Actor con vocación por el teatro clásico y amplia experiencia en TV y cine
-            </motion.p>
+            </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto mb-20">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
+            <div className="fade-in-left">
               <div className="relative mb-8 group">
-                <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="glow-effect absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg" />
                 <div className="relative h-[500px] rounded-2xl overflow-hidden">
                   <Image
                     src="https://github.com/user-attachments/assets/0c09e17f-1983-4ad0-8926-a0d6ef6ae5cf"
                     alt="Almagro San Miguel - Actor profesional"
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
-                    sizes="(max-width: 1200px) 100vw, 600px"
-                    priority
+                    className="object-cover image-hover-scale"
+                    sizes={imageSizes.hero}
+                    placeholder="blur"
+                    blurDataURL={generateShimmerDataURL(600, 500)}
+                    quality={85}
+                    loading="eager"
+                    fetchPriority="high"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white/[0.03] border border-white/10 rounded-xl p-4 backdrop-blur-sm">
+                <div className="bg-white/[0.03] border border-white/10 rounded-xl p-4 backdrop-blur-sm card-hover">
                   <MapPin className="w-5 h-5 text-yellow-400 mb-2" />
                   <div className="text-xs text-slate-500">Ubicación</div>
                   <div className="font-bold text-white">Madrid / Sevilla</div>
                 </div>
-                <div className="bg-white/[0.03] border border-white/10 rounded-xl p-4 backdrop-blur-sm">
+                <div className="bg-white/[0.03] border border-white/10 rounded-xl p-4 backdrop-blur-sm card-hover">
                   <Calendar className="w-5 h-5 text-yellow-400 mb-2" />
                   <div className="text-xs text-slate-500">Nacimiento</div>
                   <div className="font-bold text-white">7 Marzo 1990</div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col justify-center"
-            >
+            <div className="flex flex-col justify-center fade-in-right">
               <div className="space-y-4 text-slate-300 leading-relaxed">
                 <p>
                   Nacido en <span className="text-white font-semibold">Sevilla</span> el 7 de marzo de 1990, <span className="text-white font-semibold">Pedro Francisco Almagro Gordillo</span>,
@@ -210,10 +196,10 @@ export default function About() {
                   y <span className="text-white font-semibold">viola</span>, que enriquecen su versatilidad interpretativa.
                 </p>
               </div>
-            </motion.div>
+            </div>
           </div>
 
-          {/* Actuaciones Destacadas */}
+          {/* Actuaciones Destacadas - CSS animations */}
           <div className="mb-20">
             <h3 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
               <Drama className="w-7 h-7 text-yellow-400" />
@@ -223,16 +209,13 @@ export default function About() {
               {recentWorks.map((work, index) => {
                 const Icon = work.icon
                 return (
-                  <motion.div
+                  <div
                     key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                    whileHover={{ y: -6 }}
-                    className="group relative"
+                    className="stagger-item group relative"
+                    style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="relative h-full bg-white/[0.03] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:bg-white/[0.05] hover:border-white/20 transition-all">
+                    <div className="glow-effect absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg" />
+                    <div className="relative h-full bg-white/[0.03] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:bg-white/[0.05] hover:border-white/20 transition-all card-lift">
                       <div className="flex items-start gap-3 mb-4">
                         <div className="w-12 h-12 bg-yellow-400 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
                           <Icon className="w-6 h-6 text-black" />
@@ -245,20 +228,15 @@ export default function About() {
                       <p className="text-sm text-slate-500 mb-2 font-semibold">{work.year}</p>
                       <p className="text-sm text-slate-400 leading-relaxed">{work.detail}</p>
                       
-                      <motion.div 
-                        className="absolute bottom-0 left-0 h-[2px] bg-yellow-400 rounded-b-2xl"
-                        initial={{ width: 0 }}
-                        whileHover={{ width: '100%' }}
-                        transition={{ duration: 0.4 }}
-                      />
+                      <div className="slide-effect absolute bottom-0 left-0 h-[2px] bg-yellow-400 rounded-b-2xl" />
                     </div>
-                  </motion.div>
+                  </div>
                 )
               })}
             </div>
           </div>
 
-          {/* Formación Profesional */}
+          {/* Formación Profesional - CSS animations */}
           <div className="mb-20">
             <h3 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
               <GraduationCap className="w-7 h-7 text-yellow-400" />
@@ -268,19 +246,16 @@ export default function About() {
               {education.map((edu, index) => {
                 const Icon = edu.icon
                 return (
-                  <motion.a
+                  <a
                     key={index}
                     href={edu.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                    whileHover={{ y: -6 }}
-                    className="group relative block"
+                    className="stagger-item group relative block"
+                    style={{ animationDelay: `${0.3 + index * 0.1}s` }}
                   >
-                    <div className="absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="relative h-full bg-white/[0.03] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:bg-white/[0.05] hover:border-white/20 transition-all">
+                    <div className="glow-effect absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg" />
+                    <div className="relative h-full bg-white/[0.03] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:bg-white/[0.05] hover:border-white/20 transition-all card-lift">
                       <div className="flex items-start justify-between mb-4">
                         <div className="w-12 h-12 bg-yellow-400 rounded-xl flex items-center justify-center shadow-lg">
                           <Icon className="w-6 h-6 text-black" />
@@ -291,19 +266,15 @@ export default function About() {
                       <p className="text-sm text-slate-500 mb-2 font-semibold">{edu.period}</p>
                       <p className="text-sm text-slate-400 leading-relaxed">{edu.description}</p>
                       
-                      <motion.div 
-                        className="absolute bottom-0 left-0 h-[2px] bg-yellow-400 rounded-b-2xl"
-                        initial={{ width: 0 }}
-                        whileHover={{ width: '100%' }}
-                        transition={{ duration: 0.4 }}
-                      />
+                      <div className="slide-effect absolute bottom-0 left-0 h-[2px] bg-yellow-400 rounded-b-2xl" />
                     </div>
-                  </motion.a>
+                  </a>
                 )
               })}
             </div>
           </div>
 
+          {/* Habilidades - CSS animations */}
           <div>
             <h3 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
               <Sparkles className="w-7 h-7 text-yellow-400" />
@@ -311,37 +282,148 @@ export default function About() {
             </h3>
             <div className="max-w-5xl mx-auto space-y-8">
               {skillCategories.map((category, catIndex) => (
-                <motion.div
-                  key={catIndex}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.5, delay: 1.0 + catIndex * 0.1 }}
-                >
+                <div key={catIndex} className="fade-in-up" style={{ animationDelay: `${0.6 + catIndex * 0.1}s` }}>
                   <h4 className="text-lg font-bold text-slate-300 mb-4">{category.title}</h4>
                   <div className="flex flex-wrap gap-3">
                     {category.skills.map((skill, skillIndex) => {
                       const Icon = skill.icon
                       return (
-                        <motion.div
+                        <div
                           key={skillIndex}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-                          transition={{ duration: 0.3, delay: 1.1 + catIndex * 0.1 + skillIndex * 0.05 }}
-                          whileHover={{ scale: 1.05, y: -2 }}
-                          className="inline-flex items-center gap-2 px-4 py-2 bg-white/[0.05] border border-white/10 rounded-full text-sm font-medium text-slate-300 hover:bg-white/[0.08] hover:border-white/20 hover:text-white transition-all"
+                          className="skill-badge inline-flex items-center gap-2 px-4 py-2 bg-white/[0.05] border border-white/10 rounded-full text-sm font-medium text-slate-300 hover:bg-white/[0.08] hover:border-white/20 hover:text-white transition-all"
+                          style={{ animationDelay: `${0.7 + catIndex * 0.1 + skillIndex * 0.05}s` }}
                         >
                           <Icon className="w-4 h-4" />
                           {skill.name}
-                        </motion.div>
+                        </div>
                       )
                     })}
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
         </motion.div>
       </div>
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fadeInLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes fadeInRight {
+          from {
+            opacity: 0;
+            transform: translateX(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes staggerFade {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .fade-in-up {
+          animation: fadeInUp 0.6s ease-out forwards;
+          opacity: 0;
+        }
+
+        .fade-in-left {
+          animation: fadeInLeft 0.6s ease-out forwards;
+          opacity: 0;
+          animation-delay: 0.2s;
+        }
+
+        .fade-in-right {
+          animation: fadeInRight 0.6s ease-out forwards;
+          opacity: 0;
+          animation-delay: 0.2s;
+        }
+
+        .stagger-item {
+          animation: staggerFade 0.5s ease-out forwards;
+          opacity: 0;
+        }
+
+        .card-hover {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+          transform: translateY(-4px);
+        }
+
+        .card-lift {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-lift:hover {
+          transform: translateY(-6px);
+        }
+
+        .glow-effect {
+          opacity: 0;
+          transition: opacity 0.5s ease;
+        }
+
+        .group:hover .glow-effect {
+          opacity: 1;
+        }
+
+        .slide-effect {
+          width: 0;
+          transition: width 0.4s ease;
+        }
+
+        .group:hover .slide-effect {
+          width: 100%;
+        }
+
+        .image-hover-scale {
+          transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .group:hover .image-hover-scale {
+          transform: scale(1.05);
+        }
+
+        .skill-badge {
+          animation: staggerFade 0.3s ease-out forwards;
+          opacity: 0;
+        }
+
+        .skill-badge:hover {
+          transform: scale(1.05) translateY(-2px);
+        }
+      `}</style>
     </section>
   )
 }
