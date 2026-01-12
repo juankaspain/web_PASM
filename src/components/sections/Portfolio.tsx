@@ -254,7 +254,8 @@ export default function Portfolio() {
                               alt={project.title}
                               fill
                               priority
-                              sizes="(max-width: 768px) 100vw, 400px"
+                              sizes="(max-width: 768px) 100vw, 320px"
+                              quality={85}
                               className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                             />
                           </div>
@@ -369,6 +370,7 @@ export default function Portfolio() {
                   fill
                   priority
                   sizes="(max-width: 768px) 100vw, 1000px"
+                  quality={90}
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent backdrop-blur-sm" />
