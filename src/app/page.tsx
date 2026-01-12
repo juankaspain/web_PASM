@@ -69,6 +69,10 @@ const Press = dynamic(() => import('@/components/sections/Press'), {
   loading: () => <SectionSkeleton />,
 })
 
+const Blog = dynamic(() => import('@/components/sections/Blog'), {
+  loading: () => <SectionSkeleton />,
+})
+
 const PressKit = dynamic(() => import('@/components/sections/PressKit'), {
   loading: () => <SectionSkeleton />,
 })
@@ -142,6 +146,11 @@ export default function Home() {
       
       <Suspense fallback={<SectionSkeleton />}>
         <Press />
+      </Suspense>
+      
+      {/* Blog - Noticias y actualizaciones */}
+      <Suspense fallback={<SectionSkeleton />}>
+        <Blog />
       </Suspense>
       
       {/* Professional sections */}
