@@ -78,17 +78,17 @@ export default function Navbar() {
                     {/* Link text */}
                     <span className={`relative text-sm font-medium tracking-wide transition-all duration-300 ${
                       isActive 
-                        ? 'text-yellow-400' 
+                        ? 'text-yellow-400 font-semibold' 
                         : 'text-white/70 group-hover:text-white'
                     }`}>
                       {link.label}
                     </span>
                     
-                    {/* Línea inferior - aparece en hover y activo */}
-                    <div className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ${
+                    {/* Línea inferior - más visible cuando está activa */}
+                    <div className={`absolute bottom-0 left-0 right-0 transition-all duration-300 ${
                       isActive 
-                        ? 'bg-yellow-400 opacity-100' 
-                        : 'bg-white/30 opacity-0 group-hover:opacity-100'
+                        ? 'h-0.5 bg-yellow-400 opacity-100' 
+                        : 'h-px bg-white/30 opacity-0 group-hover:opacity-100'
                     }`} />
                   </a>
                 )
@@ -156,7 +156,7 @@ export default function Navbar() {
                       {/* Label */}
                       <span className={`text-base font-medium tracking-wide transition-colors duration-300 ${
                         isActive
-                          ? 'text-yellow-400'
+                          ? 'text-yellow-400 font-semibold'
                           : 'text-white/70 group-hover:text-white'
                       }`}>
                         {link.label}
