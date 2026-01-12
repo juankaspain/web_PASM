@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Heart, MapPin, Calendar, Quote, Sparkles, BookOpen, Compass, Trophy, Users, Home, Theater, Film, Tv } from 'lucide-react'
+import { Heart, MapPin, Calendar, Quote, Sparkles, Trophy, Users, Compass } from 'lucide-react'
 import Image from 'next/image'
 import { useRef } from 'react'
 import { generateShimmerDataURL, imageSizes } from '@/lib/image-utils'
@@ -9,33 +9,6 @@ import { generateShimmerDataURL, imageSizes } from '@/lib/image-utils'
 export default function About() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
-
-  const journey = [
-    {
-      icon: Home,
-      title: 'Raíces Sevillanas',
-      year: '1990',
-      description: 'Nacido en Sevilla, donde el teatro y la cultura flamenca formaron parte de mi infancia. La riqueza artística de mi ciudad natal despertó mi pasión por las artes escénicas.',
-    },
-    {
-      icon: BookOpen,
-      title: 'Formación Clásica',
-      year: '2008-2012',
-      description: 'Cuatro años intensos en la ESAD Sevilla, donde descubrí mi verdadera vocación: dar vida a textos clásicos españoles, especialmente el verso del Siglo de Oro.',
-    },
-    {
-      icon: Theater,
-      title: 'Compañía Nacional',
-      year: '2015-2017',
-      description: 'Dos años transformadores en la CNTC con Helena Pimenta. Aquí perfeccioné el arte del verso clásico y comprendí el peso de mantener viva nuestra tradición teatral.',
-    },
-    {
-      icon: Tv,
-      title: 'Salto a la Televisión',
-      year: '2019-presente',
-      description: 'Desde "Hernán" hasta "La Moderna", más de 300 episodios que me han permitido llevar mi formación teatral a millones de hogares, manteniendo siempre la exigencia artística.',
-    },
-  ]
 
   const values = [
     {
@@ -93,7 +66,7 @@ export default function About() {
 
             <div className="w-20 h-0.5 bg-yellow-400 mx-auto mb-6 fade-in-up" style={{ animationDelay: '0.2s' }} />
             
-            <p className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed fade-in-up" style={{ animationDelay: '0.3s' }}>
+            <p className="text-lg text-slate-400 max-w-4xl mx-auto leading-relaxed fade-in-up px-4" style={{ animationDelay: '0.3s' }}>
               La historia de un actor sevillano que encontró su voz en el verso clásico y su lugar en la pantalla
             </p>
           </div>
@@ -137,8 +110,8 @@ export default function About() {
               <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
                 <Quote className="w-8 h-8 text-yellow-400 mb-4" />
                 <p className="text-xl text-slate-300 leading-relaxed italic mb-4">
-                  “El teatro me enseñó a respetar el texto, la televisión me enseñó a contar historias con silencio, 
-                  y el cine me enseñó que cada fotograma es una oportunidad para la verdad.”
+                  "El teatro me enseñó a respetar el texto, la televisión me enseñó a contar historias con silencio, 
+                  y el cine me enseñó que cada fotograma es una oportunidad para la verdad."
                 </p>
                 <p className="text-slate-500 font-semibold">— Almagro San Miguel</p>
               </div>
@@ -159,52 +132,12 @@ export default function About() {
                   Hay algo mágico en dar vida a palabras escritas hace siglos, en hacer que Lope, Calderón o Tirso vuelvan a respirar en el escenario.
                 </p>
                 <p>
-                  Cuando llegó la televisión, con <span className="text-white font-semibold">“Hernán” en 2019</span>, algunos pensaron que abandonaría el teatro. 
+                  Cuando llegó la televisión, con <span className="text-white font-semibold">"Hernán" en 2019</span>, algunos pensaron que abandonaría el teatro. 
                   Pero para mí, cada medio es una oportunidad diferente de contar historias. He participado en 
                   <span className="text-white font-semibold"> más de 300 episodios</span> de televisión, siempre intentando llevar la misma exigencia 
                   que aprendí en los escenarios.
                 </p>
               </div>
-            </div>
-          </div>
-
-          {/* Journey Timeline */}
-          <div className="mb-20">
-            <h3 className="text-3xl font-bold text-center mb-12 text-white">
-              Mi Trayectoria
-            </h3>
-            <div className="max-w-5xl mx-auto space-y-6">
-              {journey.map((step, index) => {
-                const Icon = step.icon
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                    transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-                    className="group"
-                  >
-                    <div className="relative bg-white/[0.03] border border-white/10 rounded-2xl p-6 lg:p-8 backdrop-blur-sm hover:bg-white/[0.05] hover:border-yellow-400/30 transition-all">
-                      <div className="flex items-start gap-6">
-                        <div className="flex-shrink-0">
-                          <div className="w-16 h-16 bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <Icon className="w-8 h-8 text-yellow-400" />
-                          </div>
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex flex-wrap items-center gap-3 mb-3">
-                            <h4 className="text-2xl font-bold text-white">{step.title}</h4>
-                            <span className="px-3 py-1 rounded-full bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 text-sm font-bold">
-                              {step.year}
-                            </span>
-                          </div>
-                          <p className="text-slate-300 leading-relaxed text-lg">{step.description}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                )
-              })}
             </div>
           </div>
 
@@ -221,7 +154,7 @@ export default function About() {
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
+                    transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
                     className="group"
                   >
                     <div className="relative h-full bg-white/[0.03] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:bg-white/[0.05] hover:border-yellow-400/30 transition-all">
@@ -241,7 +174,7 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
             className="max-w-4xl mx-auto"
           >
             <div className="bg-gradient-to-br from-yellow-900/10 to-orange-900/5 border border-yellow-500/30 rounded-2xl p-8 lg:p-12 backdrop-blur-sm">
@@ -279,13 +212,13 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 1.4 }}
+            transition={{ duration: 0.6, delay: 1.1 }}
             className="mt-16 text-center max-w-3xl mx-auto"
           >
             <div className="bg-white/[0.03] border border-white/10 rounded-2xl px-8 py-6 backdrop-blur-sm">
               <Quote className="w-8 h-8 text-yellow-400 mx-auto mb-4" />
               <p className="text-2xl text-slate-300 leading-relaxed italic">
-                “Cada personaje que interpreto deja algo en mí, y espero dejar algo de mí en cada personaje.”
+                "Cada personaje que interpreto deja algo en mí, y espero dejar algo de mí en cada personaje."
               </p>
             </div>
           </motion.div>
