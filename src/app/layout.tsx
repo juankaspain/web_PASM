@@ -156,8 +156,14 @@ export const metadata: Metadata = {
     google: 'pending-verification',
   },
   category: 'entertainment',
+  applicationName: 'Almagro San Miguel Portfolio',
+  referrer: 'origin-when-cross-origin',
   other: {
     'font-display': 'swap',
+    'theme-color': '#000000',
+    'color-scheme': 'dark',
+    'mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'black-translucent',
   }
 }
 
@@ -169,8 +175,15 @@ export default function RootLayout({
   return (
     <html lang="es" className={inter.variable} suppressHydrationWarning>
       <head>
-        {/* Critical CSS temporarily disabled - will be re-enabled after build fix */}
-        {/* See FIX_BUILD_ERRORS.md for details */}
+        {/* Theme Color for PWA */}
+        <meta name="theme-color" content="#000000" />
+        <meta name="color-scheme" content="dark" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="format-detection" content="telephone=no" />
+
+        {/* Humans.txt reference */}
+        <link rel="author" href="/humans.txt" />
 
         {/* Preconnect to critical external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -185,6 +198,22 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.youtube.com" />
         <link rel="dns-prefetch" href="https://player.vimeo.com" />
         <link rel="dns-prefetch" href="https://img.youtube.com" />
+        
+        {/* Preload Inter font - Critical for FCP */}
+        <link
+          rel="preload"
+          href="/_next/static/media/inter-latin-400-normal.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/_next/static/media/inter-latin-700-normal.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
         
         {/* Preload critical hero image */}
         <link
@@ -514,6 +543,30 @@ export default function RootLayout({
               },
               breadcrumb: {
                 '@id': 'https://almagrosanmiguel.com/#breadcrumb',
+              },
+            }),
+          }}
+        />
+
+        {/* VideoObject Schema for Showreel */}
+        <Script
+          id="video-schema"
+          type="application/ld+json"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'VideoObject',
+              name: 'Almagro San Miguel - Showreel Profesional',
+              description: 'Showreel profesional del actor Almagro San Miguel con escenas de sus trabajos en televisión, cine y teatro',
+              thumbnailUrl: 'https://img.youtube.com/vi/JjPtvXw-gyo/maxresdefault.jpg',
+              uploadDate: '2024-01-01',
+              duration: 'PT2M',
+              contentUrl: 'https://www.youtube.com/watch?v=JjPtvXw-gyo',
+              embedUrl: 'https://www.youtube.com/embed/JjPtvXw-gyo',
+              publisher: {
+                '@type': 'Person',
+                '@id': 'https://almagrosanmiguel.com/#person',
               },
             }),
           }}
