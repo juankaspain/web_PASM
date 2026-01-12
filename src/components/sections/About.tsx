@@ -1,107 +1,64 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { Award, GraduationCap, Heart, MapPin, Calendar, Sparkles, ExternalLink, Drama, Sword, Music, Languages, Crown, Clapperboard, Tv, Star } from 'lucide-react'
+import { Heart, MapPin, Calendar, Quote, Sparkles, BookOpen, Compass, Trophy, Users, Home, Theater, Film, Tv } from 'lucide-react'
 import Image from 'next/image'
 import { useRef } from 'react'
 import { generateShimmerDataURL, imageSizes } from '@/lib/image-utils'
 
-const skillCategories = [
-  {
-    title: 'Interpretación',
-    skills: [
-      { name: 'Verso Clásico Español', icon: Drama },
-      { name: 'TV & Cine', icon: Drama },
-      { name: 'Teatro Musical', icon: Music },
-      { name: 'Comedia', icon: Drama },
-      { name: 'Drama', icon: Drama },
-    ],
-  },
-  {
-    title: 'Habilidades Físicas',
-    skills: [
-      { name: 'Esgrima Teatral', icon: Sword },
-      { name: 'Combate Escénico', icon: Sword },
-      { name: 'Equitación', icon: Sword },
-      { name: 'Acrobacias', icon: Sword },
-    ],
-  },
-  {
-    title: 'Habilidades Artísticas',
-    skills: [
-      { name: 'Violonchelo', icon: Music },
-      { name: 'Viola', icon: Music },
-      { name: 'Canto', icon: Music },
-    ],
-  },
-  {
-    title: 'Idiomas',
-    skills: [
-      { name: 'Español (Nativo)', icon: Languages },
-      { name: 'Inglés (Alto)', icon: Languages },
-      { name: 'Francés (Medio)', icon: Languages },
-    ],
-  },
-]
-
-const recentWorks = [
-  {
-    icon: Clapperboard,
-    title: 'Un fantasma en la batalla',
-    character: 'Antonio',
-    year: '2025',
-    detail: 'Netflix • Dir. Agustín Díaz Yanes',
-  },
-  {
-    icon: Tv,
-    title: 'La Moderna',
-    character: 'Íñigo Peñalver',
-    year: '2023-2024',
-    detail: '236 episodios • TVE',
-  },
-  {
-    icon: Star,
-    title: 'Vis a vis: El Oasis',
-    character: 'Diego Ramala',
-    year: '2020',
-    detail: 'Protagonista • Fox España',
-  },
-]
-
-const education = [
-  {
-    icon: Award,
-    title: 'Compañía Nacional de Teatro Clásico',
-    period: '2015-2017',
-    description: 'Formación especializada en verso clásico español con Helena Pimenta',
-    url: 'https://teatroclasico.inaem.gob.es/',
-  },
-  {
-    icon: Sparkles,
-    title: 'Work In Progress',
-    period: '2014-2015',
-    description: 'Formación avanzada en interpretación con Darío Facal',
-    url: 'https://estudio-workinprogress.com/',
-  },
-  {
-    icon: GraduationCap,
-    title: 'ESAD Sevilla',
-    period: '2008-2012',
-    description: 'Graduado en Arte Dramático - Escuela Superior de Arte Dramático de Sevilla',
-    url: 'https://www.esadsevilla.org',
-  },
-  {
-    icon: Crown,
-    title: 'NO-IDENTITY',
-    period: 'Especialista',
-    description: 'Formación especializada en acrobacias y lucha escénica',
-    url: 'https://www.noidentity.es/',
-  },
-]
-
 export default function About() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
+
+  const journey = [
+    {
+      icon: Home,
+      title: 'Raíces Sevillanas',
+      year: '1990',
+      description: 'Nacido en Sevilla, donde el teatro y la cultura flamenca formaron parte de mi infancia. La riqueza artística de mi ciudad natal despertó mi pasión por las artes escénicas.',
+    },
+    {
+      icon: BookOpen,
+      title: 'Formación Clásica',
+      year: '2008-2012',
+      description: 'Cuatro años intensos en la ESAD Sevilla, donde descubrí mi verdadera vocación: dar vida a textos clásicos españoles, especialmente el verso del Siglo de Oro.',
+    },
+    {
+      icon: Theater,
+      title: 'Compañía Nacional',
+      year: '2015-2017',
+      description: 'Dos años transformadores en la CNTC con Helena Pimenta. Aquí perfeccioné el arte del verso clásico y comprendí el peso de mantener viva nuestra tradición teatral.',
+    },
+    {
+      icon: Tv,
+      title: 'Salto a la Televisión',
+      year: '2019-presente',
+      description: 'Desde "Hernán" hasta "La Moderna", más de 300 episodios que me han permitido llevar mi formación teatral a millones de hogares, manteniendo siempre la exigencia artística.',
+    },
+  ]
+
+  const values = [
+    {
+      icon: Sparkles,
+      title: 'Versatilidad',
+      description: 'Del verso clásico al drama contemporáneo, cada proyecto es una oportunidad para explorar nuevas facetas de la interpretación.',
+    },
+    {
+      icon: Trophy,
+      title: 'Excelencia',
+      description: 'La formación continua y el trabajo riguroso son la base de cada personaje que construyo.',
+    },
+    {
+      icon: Users,
+      title: 'Colaboración',
+      description: 'El mejor trabajo surge del diálogo creativo con directores, compañeros y equipos técnicos.',
+    },
+    {
+      icon: Compass,
+      title: 'Compromiso',
+      description: 'Cada papel, grande o pequeño, merece la misma dedicación y profundidad interpretativa.',
+    },
+  ]
 
   return (
     <section id="about" className="relative py-32 overflow-hidden bg-gradient-to-b from-slate-900 via-black to-slate-950">
@@ -130,14 +87,20 @@ export default function About() {
               <span className="text-sm font-medium text-slate-300 tracking-wide">Sobre Mí</span>
             </div>
             
-            <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed fade-in-up" style={{ animationDelay: '0.1s' }}>
-              Actor con vocación por el teatro clásico y amplia experiencia en TV y cine
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-white fade-in-up" style={{ animationDelay: '0.1s' }}>
+              Más Allá del Personaje
+            </h2>
+
+            <div className="w-20 h-0.5 bg-yellow-400 mx-auto mb-6 fade-in-up" style={{ animationDelay: '0.2s' }} />
+            
+            <p className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed fade-in-up" style={{ animationDelay: '0.3s' }}>
+              La historia de un actor sevillano que encontró su voz en el verso clásico y su lugar en la pantalla
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto mb-20">
-            <div className="fade-in-left">
-              <div className="relative mb-8 group">
+            <div className="fade-in-left space-y-8">
+              <div className="relative group">
                 <div className="glow-effect absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg" />
                 <div className="relative h-[500px] rounded-2xl overflow-hidden">
                   <Image
@@ -159,7 +122,7 @@ export default function About() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-white/[0.03] border border-white/10 rounded-xl p-4 backdrop-blur-sm card-hover">
                   <MapPin className="w-5 h-5 text-yellow-400 mb-2" />
-                  <div className="text-xs text-slate-500">Ubicación</div>
+                  <div className="text-xs text-slate-500">Residencia</div>
                   <div className="font-bold text-white">Madrid / Sevilla</div>
                 </div>
                 <div className="bg-white/[0.03] border border-white/10 rounded-xl p-4 backdrop-blur-sm card-hover">
@@ -170,141 +133,162 @@ export default function About() {
               </div>
             </div>
 
-            <div className="flex flex-col justify-center fade-in-right">
+            <div className="flex flex-col justify-center fade-in-right space-y-6">
+              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
+                <Quote className="w-8 h-8 text-yellow-400 mb-4" />
+                <p className="text-xl text-slate-300 leading-relaxed italic mb-4">
+                  “El teatro me enseñó a respetar el texto, la televisión me enseñó a contar historias con silencio, 
+                  y el cine me enseñó que cada fotograma es una oportunidad para la verdad.”
+                </p>
+                <p className="text-slate-500 font-semibold">— Almagro San Miguel</p>
+              </div>
+
               <div className="space-y-4 text-slate-300 leading-relaxed">
                 <p>
-                  Nacido en <span className="text-white font-semibold">Sevilla</span> el 7 de marzo de 1990, <span className="text-white font-semibold">Pedro Francisco Almagro Gordillo</span>,
-                  conocido artísticamente como <span className="text-white font-semibold">Almagro San Miguel</span>, es un actor profesional que ha
-                  construido una sólida carrera en televisión, cine y teatro.
+                  Soy <span className="text-white font-semibold">Pedro Francisco Almagro Gordillo</span>, conocido artísticamente como 
+                  <span className="text-white font-semibold"> Almagro San Miguel</span>. Nací en Sevilla, una ciudad que respira arte, 
+                  y desde muy joven supe que mi vida estaría ligada al teatro.
                 </p>
                 <p>
-                  Graduado por la <span className="text-white font-semibold">Escuela Superior de Arte Dramático de Sevilla (ESAD)</span> entre
-                  2008 y 2012, completó su formación con <span className="text-white font-semibold">Darío Facal</span> en Work In Progress (2014-2015)
-                  y en la <span className="text-white font-semibold">Compañía Nacional de Teatro Clásico (CNTC)</span> bajo la dirección de
-                  <span className="text-white font-semibold"> Helena Pimenta</span> (2015-2017), donde se especializó en verso clásico español.
+                  Mi camino no ha sido convencional. Mientras muchos actores buscan la fama rápida, yo elegí el camino largo: 
+                  <span className="text-white font-semibold"> cuatro años en la ESAD</span>, perfeccionamiento con <span className="text-white font-semibold">Darío Facal</span>, 
+                  y <span className="text-white font-semibold">dos años en la Compañía Nacional de Teatro Clásico</span> bajo la dirección de Helena Pimenta.
                 </p>
                 <p>
-                  Su debut televisivo llegó en 2019 con <span className="text-white font-semibold">“Hernán”</span> (Amazon Prime Video), interpretando
-                  a Gonzalo de Sandoval junto a Óscar Jaenada. Desde entonces ha participado en <span className="text-white font-semibold">más de 300 episodios</span>
-                  en series como <span className="text-white font-semibold">“Vis a vis: El Oasis”</span>, <span className="text-white font-semibold">“La Moderna”</span> (236 episodios como protagonista),
-                  <span className="text-white font-semibold"> “Operación Barrio Inglés”</span> y <span className="text-white font-semibold">“La caza: Guadiana”</span>.
+                  El <span className="text-white font-semibold">verso clásico español</span> se convirtió en mi especialidad, casi en mi obsesión. 
+                  Hay algo mágico en dar vida a palabras escritas hace siglos, en hacer que Lope, Calderón o Tirso vuelvan a respirar en el escenario.
                 </p>
                 <p>
-                  En 2025 protagoniza la película <span className="text-white font-semibold">“Un fantasma en la batalla”</span>, dirigida por
-                  Agustín Díaz Yanes, actualmente en cines y Netflix. Además de su trabajo actoral, domina
-                  habilidades como <span className="text-white font-semibold">esgrima</span>, <span className="text-white font-semibold">equitación</span>, <span className="text-white font-semibold">violonchelo</span>
-                  y <span className="text-white font-semibold">viola</span>, que enriquecen su versatilidad interpretativa.
+                  Cuando llegó la televisión, con <span className="text-white font-semibold">“Hernán” en 2019</span>, algunos pensaron que abandonaría el teatro. 
+                  Pero para mí, cada medio es una oportunidad diferente de contar historias. He participado en 
+                  <span className="text-white font-semibold"> más de 300 episodios</span> de televisión, siempre intentando llevar la misma exigencia 
+                  que aprendí en los escenarios.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Actuaciones Destacadas - CSS animations */}
+          {/* Journey Timeline */}
           <div className="mb-20">
-            <h3 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
-              <Drama className="w-7 h-7 text-yellow-400" />
-              <span className="text-white">Actuaciones Destacadas</span>
+            <h3 className="text-3xl font-bold text-center mb-12 text-white">
+              Mi Trayectoria
             </h3>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {recentWorks.map((work, index) => {
-                const Icon = work.icon
+            <div className="max-w-5xl mx-auto space-y-6">
+              {journey.map((step, index) => {
+                const Icon = step.icon
                 return (
-                  <div
+                  <motion.div
                     key={index}
-                    className="stagger-item group relative"
-                    style={{ animationDelay: `${index * 0.1}s` }}
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                    transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
+                    className="group"
                   >
-                    <div className="glow-effect absolute -inset-[1px] bg-yellow-400/20 rounded-2xl blur-lg" />
-                    <div className="relative h-full bg-white/[0.03] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:bg-white/[0.05] hover:border-white/20 transition-all card-lift">
-                      <div className="flex items-start gap-3 mb-4">
-                        <div className="w-12 h-12 bg-yellow-400 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
-                          <Icon className="w-6 h-6 text-black" />
+                    <div className="relative bg-white/[0.03] border border-white/10 rounded-2xl p-6 lg:p-8 backdrop-blur-sm hover:bg-white/[0.05] hover:border-yellow-400/30 transition-all">
+                      <div className="flex items-start gap-6">
+                        <div className="flex-shrink-0">
+                          <div className="w-16 h-16 bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <Icon className="w-8 h-8 text-yellow-400" />
+                          </div>
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-bold text-white mb-1 leading-tight">{work.title}</h4>
-                          <p className="text-sm text-yellow-400 font-semibold">{work.character}</p>
+                        <div className="flex-1">
+                          <div className="flex flex-wrap items-center gap-3 mb-3">
+                            <h4 className="text-2xl font-bold text-white">{step.title}</h4>
+                            <span className="px-3 py-1 rounded-full bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 text-sm font-bold">
+                              {step.year}
+                            </span>
+                          </div>
+                          <p className="text-slate-300 leading-relaxed text-lg">{step.description}</p>
                         </div>
                       </div>
-                      <p className="text-sm text-slate-500 mb-2 font-semibold">{work.year}</p>
-                      <p className="text-sm text-slate-400 leading-relaxed">{work.detail}</p>
-                      
-                      <div className="slide-effect absolute bottom-0 left-0 h-[2px] bg-yellow-400 rounded-b-2xl" />
                     </div>
-                  </div>
+                  </motion.div>
                 )
               })}
             </div>
           </div>
 
-          {/* Formación Profesional - Enhanced clickable cards */}
+          {/* Values Grid */}
           <div className="mb-20">
-            <h3 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
-              <GraduationCap className="w-7 h-7 text-yellow-400" />
-              <span className="text-white">Formación Profesional</span>
+            <h3 className="text-3xl font-bold text-center mb-12 text-white">
+              Lo Que Me Define Como Actor
             </h3>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-              {education.map((edu, index) => {
-                const Icon = edu.icon
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+              {values.map((value, index) => {
+                const Icon = value.icon
                 return (
-                  <a
+                  <motion.div
                     key={index}
-                    href={edu.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="stagger-item group relative block cursor-pointer"
-                    style={{ animationDelay: `${0.3 + index * 0.1}s` }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
+                    className="group"
                   >
-                    <div className="glow-effect-strong absolute -inset-[1px] bg-yellow-400/30 rounded-2xl blur-lg" />
-                    <div className="relative h-full bg-white/[0.03] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:bg-white/[0.08] hover:border-yellow-400/40 transition-all card-lift-strong">
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="w-12 h-12 bg-yellow-400 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                          <Icon className="w-6 h-6 text-black" />
-                        </div>
-                        <div className="w-8 h-8 bg-yellow-400/10 rounded-lg flex items-center justify-center group-hover:bg-yellow-400/20 transition-all">
-                          <ExternalLink className="w-4 h-4 text-yellow-400 group-hover:scale-110 group-hover:rotate-12 transition-all" />
-                        </div>
+                    <div className="relative h-full bg-white/[0.03] border border-white/10 rounded-2xl p-6 backdrop-blur-sm hover:bg-white/[0.05] hover:border-yellow-400/30 transition-all">
+                      <div className="w-12 h-12 bg-yellow-400/10 border border-yellow-400/30 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <Icon className="w-6 h-6 text-yellow-400" />
                       </div>
-                      <h4 className="font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">{edu.title}</h4>
-                      <p className="text-sm text-slate-500 mb-2 font-semibold">{edu.period}</p>
-                      <p className="text-sm text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">{edu.description}</p>
-                      
-                      <div className="slide-effect-strong absolute bottom-0 left-0 h-[3px] bg-yellow-400 rounded-b-2xl shadow-[0_0_10px_rgba(250,204,21,0.5)]" />
+                      <h4 className="text-xl font-bold text-white mb-3">{value.title}</h4>
+                      <p className="text-slate-400 leading-relaxed">{value.description}</p>
                     </div>
-                  </a>
+                  </motion.div>
                 )
               })}
             </div>
           </div>
 
-          {/* Habilidades - CSS animations */}
-          <div>
-            <h3 className="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-2">
-              <Sparkles className="w-7 h-7 text-yellow-400" />
-              <span className="text-white">Habilidades Especiales</span>
-            </h3>
-            <div className="max-w-5xl mx-auto space-y-8">
-              {skillCategories.map((category, catIndex) => (
-                <div key={catIndex} className="fade-in-up" style={{ animationDelay: `${0.6 + catIndex * 0.1}s` }}>
-                  <h4 className="text-lg font-bold text-slate-300 mb-4">{category.title}</h4>
-                  <div className="flex flex-wrap gap-3">
-                    {category.skills.map((skill, skillIndex) => {
-                      const Icon = skill.icon
-                      return (
-                        <div
-                          key={skillIndex}
-                          className="skill-badge inline-flex items-center gap-2 px-4 py-2 bg-white/[0.05] border border-white/10 rounded-full text-sm font-medium text-slate-300 hover:bg-white/[0.08] hover:border-white/20 hover:text-white transition-all"
-                          style={{ animationDelay: `${0.7 + catIndex * 0.1 + skillIndex * 0.05}s` }}
-                        >
-                          <Icon className="w-4 h-4" />
-                          {skill.name}
-                        </div>
-                      )
-                    })}
+          {/* Personal Reflection */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6, delay: 1.2 }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="bg-gradient-to-br from-yellow-900/10 to-orange-900/5 border border-yellow-500/30 rounded-2xl p-8 lg:p-12 backdrop-blur-sm">
+              <div className="flex items-start gap-6">
+                <div className="flex-shrink-0">
+                  <div className="w-16 h-16 bg-yellow-400 rounded-2xl flex items-center justify-center">
+                    <Heart className="w-8 h-8 text-black" />
                   </div>
                 </div>
-              ))}
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-white mb-4">Más Allá de la Actuación</h3>
+                  <div className="space-y-4 text-slate-300 leading-relaxed">
+                    <p>
+                      Fuera de los escenarios y platós, soy un apasionado de la <span className="text-white font-semibold">música clásica</span>. 
+                      Toco el <span className="text-white font-semibold">violonchelo</span> y la <span className="text-white font-semibold">viola</span> de forma autodidacta, 
+                      instrumentos que me ayudan a encontrar el ritmo y la musicalidad en los textos que interpreto.
+                    </p>
+                    <p>
+                      La <span className="text-white font-semibold">esgrima</span> y la <span className="text-white font-semibold">equitación</span> no son solo habilidades 
+                      profesionales para mí, son pasiones que me conectan con la historia y la tradición de los personajes que doy vida, 
+                      especialmente en producciones de época.
+                    </p>
+                    <p>
+                      Creo firmemente que un actor completo debe ser un <span className="text-white font-semibold">eterno estudiante</span>. 
+                      Por eso nunca dejo de formarme, de leer, de ver teatro, de cuestionarme. Cada proyecto es una oportunidad para crecer, 
+                      tanto profesional como personalmente.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+          </motion.div>
+
+          {/* Final Quote */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 1.4 }}
+            className="mt-16 text-center max-w-3xl mx-auto"
+          >
+            <div className="bg-white/[0.03] border border-white/10 rounded-2xl px-8 py-6 backdrop-blur-sm">
+              <Quote className="w-8 h-8 text-yellow-400 mx-auto mb-4" />
+              <p className="text-2xl text-slate-300 leading-relaxed italic">
+                “Cada personaje que interpreto deja algo en mí, y espero dejar algo de mí en cada personaje.”
+              </p>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
 
@@ -342,17 +326,6 @@ export default function About() {
           }
         }
 
-        @keyframes staggerFade {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
         .fade-in-up {
           animation: fadeInUp 0.6s ease-out forwards;
           opacity: 0;
@@ -370,33 +343,12 @@ export default function About() {
           animation-delay: 0.2s;
         }
 
-        .stagger-item {
-          animation: staggerFade 0.5s ease-out forwards;
-          opacity: 0;
-        }
-
         .card-hover {
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .card-hover:hover {
           transform: translateY(-4px);
-        }
-
-        .card-lift {
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .card-lift:hover {
-          transform: translateY(-6px);
-        }
-
-        .card-lift-strong {
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .card-lift-strong:hover {
-          transform: translateY(-8px) scale(1.02);
         }
 
         .glow-effect {
@@ -408,48 +360,12 @@ export default function About() {
           opacity: 1;
         }
 
-        .glow-effect-strong {
-          opacity: 0;
-          transition: opacity 0.4s ease;
-        }
-
-        .group:hover .glow-effect-strong {
-          opacity: 1;
-        }
-
-        .slide-effect {
-          width: 0;
-          transition: width 0.4s ease;
-        }
-
-        .group:hover .slide-effect {
-          width: 100%;
-        }
-
-        .slide-effect-strong {
-          width: 0;
-          transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .group:hover .slide-effect-strong {
-          width: 100%;
-        }
-
         .image-hover-scale {
           transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .group:hover .image-hover-scale {
           transform: scale(1.05);
-        }
-
-        .skill-badge {
-          animation: staggerFade 0.3s ease-out forwards;
-          opacity: 0;
-        }
-
-        .skill-badge:hover {
-          transform: scale(1.05) translateY(-2px);
         }
       `}</style>
     </section>
