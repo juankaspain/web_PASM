@@ -87,17 +87,6 @@ export default function LatestProject() {
                   Ver en Netflix
                 </motion.a>
                 <motion.a
-                  href="https://www.youtube.com/watch?v=MV5kUBPfd9U"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-600 hover:to-orange-700 rounded-full font-bold transition-all shadow-xl text-white"
-                >
-                  <Youtube className="w-5 h-5" />
-                  Entrevista Canal Sur
-                </motion.a>
-                <motion.a
                   href="https://www.youtube.com/watch?v=R0ufJf5SFIU"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -161,7 +150,7 @@ export default function LatestProject() {
             </motion.div>
           </div>
 
-          {/* Behind the Scenes - Entrevista Canal Sur */}
+          {/* Behind the Scenes - Entrevista Canal Sur con video embebido */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -179,49 +168,19 @@ export default function LatestProject() {
               <p className="text-slate-400 text-lg">Cómo fue trabajar en esta producción</p>
             </div>
 
-            <motion.a
-              href="https://www.youtube.com/watch?v=MV5kUBPfd9U"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.02 }}
-              className="block max-w-4xl mx-auto group"
-            >
+            <div className="max-w-4xl mx-auto">
               <div className="relative">
-                <div className="absolute -inset-[1px] bg-gradient-to-r from-yellow-500/30 to-orange-600/30 rounded-2xl blur-xl opacity-60 group-hover:opacity-100 transition-opacity" />
-                <div className="relative bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 rounded-2xl overflow-hidden backdrop-blur-sm hover:border-yellow-500/30 transition-all">
+                <div className="absolute -inset-[1px] bg-gradient-to-r from-yellow-500/30 to-orange-600/30 rounded-2xl blur-xl opacity-60" />
+                <div className="relative bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 rounded-2xl overflow-hidden backdrop-blur-sm">
+                  {/* Embedded YouTube Player */}
                   <div className="relative aspect-video">
-                    <Image
-                      src="https://img.youtube.com/vi/MV5kUBPfd9U/maxresdefault.jpg"
-                      alt="Entrevista Canal Sur - Un fantasma en la batalla"
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 900px"
+                    <iframe
+                      src="https://www.youtube.com/embed/MV5kUBPfd9U"
+                      title="Una de cine - Canal Sur - Almagro San Miguel"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
-                    
-                    {/* Play button overlay */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <motion.div
-                        whileHover={{ scale: 1.1 }}
-                        className="w-20 h-20 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-full flex items-center justify-center shadow-2xl"
-                      >
-                        <Play className="w-10 h-10 text-white ml-1" fill="white" />
-                      </motion.div>
-                    </div>
-
-                    {/* Badge */}
-                    <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-red-600 text-white text-xs font-bold rounded-full shadow-lg">
-                        ENTREVISTA
-                      </span>
-                    </div>
-
-                    {/* Duration */}
-                    <div className="absolute bottom-4 right-4">
-                      <span className="px-3 py-1 bg-black/80 text-white text-sm font-bold rounded-lg">
-                        16:55
-                      </span>
-                    </div>
                   </div>
 
                   <div className="p-6">
@@ -239,50 +198,50 @@ export default function LatestProject() {
                       <span>•</span>
                       <span>📅 14 nov 2025</span>
                       <span>•</span>
-                      <span className="text-yellow-400 font-semibold group-hover:text-yellow-300 transition-colors">
-                        Ver entrevista completa →
-                      </span>
+                      <a 
+                        href="https://www.youtube.com/watch?v=MV5kUBPfd9U"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors"
+                      >
+                        Ver en YouTube →
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
-            </motion.a>
+            </div>
           </motion.div>
 
-          {/* Collapsible Character Info Section */}
+          {/* Collapsible Character Info Section - Solo botón visible por defecto */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-20"
           >
-            <div className="text-center mb-8">
+            <div className="text-center">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
                 <Users className="w-4 h-4 text-slate-400" strokeWidth={2} />
                 <span className="text-sm font-medium text-slate-300 tracking-wide">Mi Personaje</span>
               </div>
-              <h3 className="text-4xl lg:text-5xl font-bold mb-4 text-white">
-                Antonio
-              </h3>
-              <p className="text-slate-400 text-lg mb-8">Agente de apoyo en la Operación Santuario</p>
 
               {/* Collapsible Toggle Button */}
               <motion.button
                 onClick={() => setShowCharacterInfo(!showCharacterInfo)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-white/[0.08] to-white/[0.05] border border-white/20 hover:border-white/30 rounded-full font-bold transition-all shadow-xl text-white hover:bg-white/[0.12]"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-white/[0.08] to-white/[0.05] border border-white/20 hover:border-yellow-400/40 rounded-full font-bold transition-all shadow-xl text-white hover:bg-white/[0.12]"
               >
-                <Heart className="w-5 h-5 text-red-400" />
                 <span>¿Quieres saber más sobre mi personaje?</span>
                 <motion.div
                   animate={{ rotate: showCharacterInfo ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
                   {showCharacterInfo ? (
-                    <ChevronUp className="w-5 h-5" />
+                    <ChevronUp className="w-5 h-5 text-yellow-400" />
                   ) : (
-                    <ChevronDown className="w-5 h-5" />
+                    <ChevronDown className="w-5 h-5 text-yellow-400" />
                   )}
                 </motion.div>
               </motion.button>
@@ -298,6 +257,14 @@ export default function LatestProject() {
                   transition={{ duration: 0.5, ease: 'easeInOut' }}
                   className="overflow-hidden"
                 >
+                  {/* Título del personaje aparece al expandir */}
+                  <div className="text-center mb-12">
+                    <h3 className="text-4xl lg:text-5xl font-bold mb-4 text-white">
+                      Antonio
+                    </h3>
+                    <p className="text-slate-400 text-lg">Agente de apoyo en la Operación Santuario</p>
+                  </div>
+
                   <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                     <motion.div
                       initial={{ opacity: 0, x: -20 }}
