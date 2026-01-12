@@ -245,8 +245,6 @@ export default function Portfolio() {
                   className="group cursor-pointer"
                 >
                   <div className="relative">
-                    <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    
                     <div className="relative bg-white/[0.02] border border-white/10 rounded-3xl hover:bg-white/[0.04] hover:border-white/20 transition-all duration-300 overflow-hidden shadow-2xl">
                       <div className="flex flex-col lg:flex-row">
                         <div className="relative w-full lg:w-80 h-[480px] flex-shrink-0 overflow-hidden">
