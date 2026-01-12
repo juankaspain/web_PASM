@@ -4,7 +4,6 @@ import Navbar from '@/components/Navbar'
 import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
 import LatestProject from '@/components/sections/LatestProject'
-// import SkillsGraph from '@/components/sections/SkillsGraph' // ELIMINADA - Capacidades Artísticas
 import Footer from '@/components/Footer'
 import ScrollToTop from '@/components/ui/ScrollToTop'
 import { 
@@ -18,67 +17,67 @@ import {
 
 // Lazy load heavy sections with optimized loading states
 const Series = dynamic(() => import('@/components/sections/Series'), {
-  loading: () => <SectionSkeleton />,
+  ssr: false,
 })
 
 const Cinema = dynamic(() => import('@/components/sections/Cinema'), {
-  loading: () => <SectionSkeleton />,
+  ssr: false,
 })
 
 const Theater = dynamic(() => import('@/components/sections/Theater'), {
-  loading: () => <SectionSkeleton />,
+  ssr: false,
 })
 
 const Skills = dynamic(() => import('@/components/sections/Skills'), {
-  loading: () => <SectionSkeleton />,
+  ssr: false,
 })
 
 const Headshots = dynamic(() => import('@/components/sections/Headshots'), {
-  loading: () => <GallerySkeleton />,
+  ssr: false,
 })
 
 const Timeline = dynamic(() => import('@/components/sections/Timeline'), {
-  loading: () => <TimelineSkeleton />,
+  ssr: false,
 })
 
 const Milestones = dynamic(() => import('@/components/sections/Milestones'), {
-  loading: () => <SectionSkeleton />,
+  ssr: false,
 })
 
 const Awards = dynamic(() => import('@/components/sections/Awards'), {
-  loading: () => <SectionSkeleton />,
+  ssr: false,
 })
 
 const Calendar = dynamic(() => import('@/components/sections/Calendar'), {
-  loading: () => <SectionSkeleton />,
+  ssr: false,
 })
 
 const Gallery = dynamic(() => import('@/components/sections/Gallery'), {
-  loading: () => <GallerySkeleton />,
+  ssr: false,
 })
 
 const Showreel = dynamic(() => import('@/components/sections/Showreel'), {
-  loading: () => <ShowreelSkeleton />,
+  ssr: false,
 })
 
 const Testimonials = dynamic(() => import('@/components/sections/Testimonials'), {
-  loading: () => <TestimonialsSkeleton />,
+  ssr: false,
 })
 
 const Press = dynamic(() => import('@/components/sections/Press'), {
-  loading: () => <SectionSkeleton />,
+  ssr: false,
 })
 
 const Blog = dynamic(() => import('@/components/sections/Blog'), {
-  loading: () => <SectionSkeleton />,
+  ssr: false,
 })
 
 const PressKit = dynamic(() => import('@/components/sections/PressKit'), {
-  loading: () => <SectionSkeleton />,
+  ssr: false,
 })
 
 const Contact = dynamic(() => import('@/components/sections/Contact'), {
-  loading: () => <ContactSkeleton />,
+  ssr: false,
 })
 
 export default function Home() {
@@ -112,7 +111,6 @@ export default function Home() {
       </Suspense>
       
       {/* Career sections */}
-      {/* <SkillsGraph /> */} {/* ELIMINADA - Sección Capacidades Artísticas */}
       <Suspense fallback={<TimelineSkeleton />}>
         <Timeline />
       </Suspense>
