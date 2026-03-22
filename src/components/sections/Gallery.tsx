@@ -26,7 +26,7 @@ interface GalleryImage {
 const images: GalleryImage[] = [
   {
     id: 1,
-    src: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800',
+    src: '/assets/gallery/la-moderna.jpg',
     alt: 'La Moderna - Set de filmación',
     category: 'TV',
     title: 'La Moderna (TVE)',
@@ -34,7 +34,7 @@ const images: GalleryImage[] = [
   },
   {
     id: 2,
-    src: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800',
+    src: '/assets/gallery/vis-a-vis.jpg',
     alt: 'Vis a vis: El Oasis - Escena dramática',
     category: 'TV',
     title: 'Vis a vis: El Oasis',
@@ -42,7 +42,7 @@ const images: GalleryImage[] = [
   },
   {
     id: 3,
-    src: 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=800',
+    src: '/assets/gallery/hernan.jpg',
     alt: 'Hernán - Producción histórica',
     category: 'TV',
     title: 'Hernán (Prime Video)',
@@ -50,7 +50,7 @@ const images: GalleryImage[] = [
   },
   {
     id: 4,
-    src: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800',
+    src: '/assets/gallery/fantasma-batalla.jpg',
     alt: 'Un fantasma en la batalla - Filming',
     category: 'Cine',
     title: 'Un fantasma en la batalla',
@@ -58,7 +58,7 @@ const images: GalleryImage[] = [
   },
   {
     id: 5,
-    src: 'https://images.unsplash.com/photo-1503095396549-807759245b35?w=800',
+    src: '/assets/gallery/fuente-ovejuna.jpg',
     alt: 'Fuente Ovejuna - CNTC',
     category: 'Teatro',
     title: 'Fuente Ovejuna',
@@ -66,7 +66,7 @@ const images: GalleryImage[] = [
   },
   {
     id: 6,
-    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800',
+    src: '/assets/gallery/sesion-fotografica.jpg',
     alt: 'Headshot profesional',
     category: 'Behind the Scenes',
     title: 'Sesión Fotográfica',
@@ -74,7 +74,7 @@ const images: GalleryImage[] = [
   },
   {
     id: 7,
-    src: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800',
+    src: '/assets/gallery/estoy-vivo.jpg',
     alt: 'Estoy vivo - Grabación',
     category: 'TV',
     title: 'Estoy vivo (TVE)',
@@ -82,7 +82,7 @@ const images: GalleryImage[] = [
   },
   {
     id: 8,
-    src: 'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=800',
+    src: '/assets/gallery/oliver-twist.jpg',
     alt: 'Oliver Twist - Musical',
     category: 'Teatro',
     title: 'Oliver Twist Musical',
@@ -90,7 +90,7 @@ const images: GalleryImage[] = [
   },
   {
     id: 9,
-    src: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800',
+    src: '/assets/gallery/la-caza.jpg',
     alt: 'La Caza Guadiana - Set',
     category: 'TV',
     title: 'La Caza: Guadiana (TVE)',
@@ -98,7 +98,7 @@ const images: GalleryImage[] = [
   },
   {
     id: 10,
-    src: 'https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=800',
+    src: '/assets/gallery/behind-scenes.jpg',
     alt: 'Behind the scenes - Maquillaje',
     category: 'Behind the Scenes',
     title: 'Preparación de Personaje',
@@ -106,7 +106,7 @@ const images: GalleryImage[] = [
   },
   {
     id: 11,
-    src: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800',
+    src: '/assets/gallery/desconocidas.jpg',
     alt: 'Desconocidas - Canal Sur',
     category: 'TV',
     title: 'Desconocidas (Canal Sur)',
@@ -114,7 +114,7 @@ const images: GalleryImage[] = [
   },
   {
     id: 12,
-    src: 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=800',
+    src: '/assets/gallery/lapso.jpg',
     alt: 'Lapso - Cortometraje',
     category: 'Cine',
     title: 'Lapso (Cortometraje)',

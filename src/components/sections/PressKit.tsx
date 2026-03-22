@@ -138,12 +138,51 @@ export default function PressKit() {
     setDisplayEmail(parts.join('@'))
   }, [])
 
-  const handleDownload = async (type: string, _title: string) => {
+  const handleDownload = async (type: string, title: string) => {
     setDownloading(type)
     try {
-      const response = await fetch(`/api/download?type=${type}`)
-      const data = await response.json()
-      alert(`${data.message}\n\n${data.note}`)
+      const {
+        generateBioPDF,
+        generateFilmographyPDF,
+        generateAwardsPDF,
+        generateTechSheetPDF,
+      } = await import('@/lib/generatePDF')
+
+      let blob: Blob | null = null
+      let filename = ''
+
+      switch (type) {
+        case 'bio':
+          blob = await generateBioPDF()
+          filename = 'Almagro_San_Miguel_Biografia.txt'
+          break
+        case 'filmography':
+          blob = await generateFilmographyPDF()
+          filename = 'Almagro_San_Miguel_Filmografia.txt'
+          break
+        case 'awards':
+          blob = await generateAwardsPDF()
+          filename = 'Almagro_San_Miguel_Premios.txt'
+          break
+        case 'techsheet':
+          blob = await generateTechSheetPDF()
+          filename = 'Almagro_San_Miguel_Ficha_Tecnica.txt'
+          break
+        default:
+          alert(`${title} — Descarga no disponible`)
+          return
+      }
+
+      if (blob) {
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = filename
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+        URL.revokeObjectURL(url)
+      }
     } catch {
       alert('Error al descargar. Inténtalo de nuevo.')
     } finally {

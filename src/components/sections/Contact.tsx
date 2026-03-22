@@ -217,17 +217,20 @@ export default function Contact() {
     setErrorMessage('')
 
     try {
-      // E.3 - Submit through our API route (server-side proxy to Formspree)
-      const response = await fetch('/api/contact', {
+      // Submit directly to Formspree (client-side)
+      const response = await fetch('https://formspree.io/f/xlggrndl', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify({
           name: data.name,
           email: data.email,
           category: data.category,
           message: data.message,
+          _subject: `Nuevo mensaje de ${data.name} - ${data.category}`,
+          _replyto: data.email,
         }),
       })
 

@@ -46,8 +46,7 @@ const projects: Project[] = [
     yearSort: 2024,
     platform: 'TVE',
     episodes: '8 episodios',
-    image:
-      'https://github.com/user-attachments/assets/5fbf0580-cab5-4d3f-a835-74d9c121ef5f',
+    image: '/assets/series/operacion-barrio-ingles.jpg',
     rating: '7.5',
     imdb: 'https://www.imdb.com/title/tt27672403/',
     youtube: 'https://www.youtube.com/watch?v=1t0JcwYR-so',
@@ -66,8 +65,7 @@ const projects: Project[] = [
     yearSort: 2023.5,
     platform: 'TVE',
     episodes: '236 episodios',
-    image:
-      'https://github.com/user-attachments/assets/d1a8381f-3ebe-4278-82e7-659e1158b282',
+    image: '/assets/series/la-moderna.jpg',
     rating: '7.5',
     imdb: 'https://www.imdb.com/title/tt28507389/',
     youtube: 'https://www.youtube.com/watch?v=ursuF5r4_Ms',
@@ -86,8 +84,7 @@ const projects: Project[] = [
     yearSort: 2023,
     platform: 'TVE',
     episodes: '6 episodios',
-    image:
-      'https://github.com/user-attachments/assets/c4e2e2ad-dbf6-4f95-a9b7-0e1a3b60c2f9',
+    image: '/assets/series/la-caza-guadiana.jpg',
     rating: '7.2',
     imdb: 'https://www.imdb.com/title/tt8787372/',
     youtube: 'https://www.youtube.com/watch?v=AHUe0aYf9S8',
@@ -106,8 +103,7 @@ const projects: Project[] = [
     yearSort: 2023,
     platform: 'Atresplayer',
     episodes: '5 episodios',
-    image:
-      'https://github.com/user-attachments/assets/93c83137-53ad-4c49-854c-528a4974ad64',
+    image: '/assets/series/honor.jpg',
     rating: '6.8',
     imdb: 'https://www.imdb.com/title/tt21374322/',
     youtube: 'https://www.youtube.com/watch?v=grtiShqUAkg',
@@ -126,8 +122,7 @@ const projects: Project[] = [
     yearSort: 2022,
     platform: 'Canal Sur',
     episodes: '8 episodios',
-    image:
-      'https://github.com/user-attachments/assets/7a047940-c1b5-4710-bb18-cd29a82d58ff',
+    image: '/assets/series/desconocidas.jpg',
     rating: '7.4',
     imdb: 'https://www.imdb.com/title/tt18074418/',
     youtube: 'https://www.youtube.com/watch?v=Xel0dzOmHLA',
@@ -144,7 +139,7 @@ const projects: Project[] = [
     yearSort: 2021,
     platform: 'TVE',
     episodes: '12 episodios',
-    image: 'https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?q=80&w=1000',
+    image: '/assets/series/estoy-vivo.jpg',
     rating: '7.1',
     imdb: 'https://www.imdb.com/title/tt7180852/',
     youtube: 'https://www.youtube.com/watch?v=kw3SvwH4khQ',
@@ -163,8 +158,7 @@ const projects: Project[] = [
     yearSort: 2020,
     platform: 'Star Channel',
     episodes: '6 episodios',
-    image:
-      'https://github.com/user-attachments/assets/b5f1ac3c-fe6c-4a6f-b16e-e91a5881fd59',
+    image: '/assets/series/vis-a-vis-el-oasis.jpg',
     rating: '6.8',
     imdb: 'https://www.imdb.com/title/tt10375568/',
     youtube: 'https://www.youtube.com/watch?v=t4LYYroY5bo',
@@ -183,8 +177,7 @@ const projects: Project[] = [
     yearSort: 2020,
     platform: 'Prime Video',
     episodes: '8 episodios',
-    image:
-      'https://github.com/user-attachments/assets/992b31fe-c22d-4b9b-b522-f84ad34b6651',
+    image: '/assets/series/hernan.jpg',
     rating: '6.2',
     imdb: 'https://www.imdb.com/title/tt9645942/',
     youtube: 'https://www.youtube.com/watch?v=CRlE3_JI7ZY',

@@ -21,8 +21,7 @@ export const projects: Project[] = [
     category: 'Cine',
     role: 'Protagonista - Marcos Fernández',
     year: 2024,
-    image:
-      'https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800',
+    image: '/assets/gallery/el-ultimo-adios.jpg',
     description:
       'Drama intenso sobre pérdida, redención y segundas oportunidades en la España contemporánea. Un hombre debe enfrentar su pasado antes de que sea demasiado tarde.',
     icon: Film,
@@ -36,8 +35,7 @@ export const projects: Project[] = [
     category: 'TV',
     role: 'Inspector David Morales (Recurrente)',
     year: 2023,
-    image:
-      'https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?q=80&w=800',
+    image: '/assets/gallery/sombras-medianoche.jpg',
     description:
       'Serie de suspense que cautivó a millones de espectadores. Crímenes sin resolver en una ciudad que nunca duerme. 8 episodios de pura tensión.',
     icon: TvMinimal,
@@ -50,8 +48,7 @@ export const projects: Project[] = [
     category: 'Teatro',
     role: 'Hamlet - Príncipe de Dinamarca',
     year: 2023,
-    image:
-      'https://images.unsplash.com/photo-1503095396549-807759245b35?q=80&w=800',
+    image: '/assets/gallery/hamlet.jpg',
     description:
       'Adaptación moderna y visceral del clásico de Shakespeare. Una producción que desafía los límites entre la locura y la lucidez. Más de 50 funciones con sold out.',
     icon: Theater,
@@ -65,8 +62,7 @@ export const projects: Project[] = [
     category: 'Cine',
     role: 'Secundario - Pablo Vega',
     year: 2023,
-    image:
-      'https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=800',
+    image: '/assets/gallery/caminos-cruzados.jpg',
     description:
       'Comedia dramática sobre encuentros fortuitos que cambian vidas. Una historia coral sobre el destino, el azar y las decisiones que tomamos.',
     icon: Film,
@@ -79,8 +75,7 @@ export const projects: Project[] = [
     category: 'Teatro',
     role: 'Pepe el Romano',
     year: 2022,
-    image:
-      'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&w=800',
+    image: '/assets/gallery/bernarda-alba.jpg',
     description:
       'Clásico imperecedero de Federico García Lorca en el emblemático Teatro Lope de Vega de Sevilla. Una producción que rindió homenaje a nuestras raíces andaluzas.',
     icon: Theater,
@@ -93,8 +88,7 @@ export const projects: Project[] = [
     category: 'TV',
     role: 'Protagonista - Capitán Álvarez',
     year: 2022,
-    image:
-      'https://images.unsplash.com/photo-1574267432644-f046462e8e4d?q=80&w=800',
+    image: '/assets/gallery/codigo-rojo.jpg',
     description:
       'Thriller policial con altos ratings. Una unidad especial lucha contra el crimen organizado en una carrera contrarreloj. 2 temporadas, 16 episodios.',
     icon: TvMinimal,
@@ -108,8 +102,7 @@ export const projects: Project[] = [
     category: 'Cine',
     role: 'Protagonista - Daniel Ortega',
     year: 2022,
-    image:
-      'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=800',
+    image: '/assets/gallery/sombra-pasado.jpg',
     description:
       'Thriller psicológico sobre un hombre atormentado por eventos de su niñez. Una exploración profunda del trauma y la memoria.',
     icon: Film,
@@ -122,8 +115,7 @@ export const projects: Project[] = [
     category: 'Teatro',
     role: 'Don Juan',
     year: 2021,
-    image:
-      'https://images.unsplash.com/photo-1514306191717-452ec28c7814?q=80&w=800',
+    image: '/assets/gallery/don-juan-tenorio.jpg',
     description:
       'Interpretación apasionada del clásico de José Zorrilla. Una celebración del romanticismo español con producción de lujo.',
     icon: Theater,
@@ -136,8 +128,7 @@ export const projects: Project[] = [
     category: 'TV',
     role: 'Doctor Rafael Sánchez (Principal)',
     year: 2021,
-    image:
-      'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800',
+    image: '/assets/gallery/entre-dos-mundos.jpg',
     description:
       'Drama médico que explora dilemas éticos en un hospital de Barcelona. Emoción y tensión en cada episodio.',
     icon: TvMinimal,

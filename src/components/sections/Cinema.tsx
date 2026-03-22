@@ -38,8 +38,7 @@ const films: FilmDetails[] = [
     role: 'Antonio',
     type: 'Largometraje',
     platform: 'Netflix',
-    poster:
-      'https://github.com/user-attachments/assets/64e9e876-5ecc-452e-8be4-d7d5f7968ec9',
+    poster: '/assets/cinema/fantasma-en-la-batalla.jpg',
     description:
       'Película sobre la Operación Santuario contra ETA. Interpreto al novio de la protagonista infiltrada.',
     detailedInfo: {
@@ -63,7 +62,7 @@ const films: FilmDetails[] = [
     role: 'Legionario',
     type: 'Largometraje',
     platform: 'Cine',
-    poster: 'https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?q=80&w=1000',
+    poster: '/assets/cinema/carta-blanca.jpg',
     description:
       'Film sobre la guerra en el Rif y el desastre de Annual. Rodaje en Ceuta con legionarios reales.',
     detailedInfo: {
@@ -85,8 +84,7 @@ const films: FilmDetails[] = [
     role: 'Personaje Principal',
     type: 'Largometraje',
     platform: 'Cine',
-    poster:
-      'https://github.com/user-attachments/assets/c2fd3a19-ecb8-427c-ad8c-acfbc7a8df48',
+    poster: '/assets/cinema/fueron-los-dias.jpg',
     description: 'Largometraje estrenado en 2024.',
     detailedInfo: {
       characterName: 'Personaje Principal',
@@ -105,7 +103,7 @@ const films: FilmDetails[] = [
     role: 'Kike',
     type: 'Cortometraje',
     platform: 'Festival',
-    poster: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=1000',
+    poster: '/assets/cinema/mario-kike-david.jpg',
     description: 'Cortometraje donde interpreto al personaje Kike.',
     detailedInfo: {
       characterName: 'Kike',
@@ -124,7 +122,7 @@ const films: FilmDetails[] = [
     role: 'Rodolfo',
     type: 'Cortometraje',
     platform: 'Festival',
-    poster: 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=1000',
+    poster: '/assets/cinema/lapso.jpg',
     description: 'Uno de mis primeros trabajos en cine, interpretando a Rodolfo.',
     detailedInfo: {
       characterName: 'Rodolfo',

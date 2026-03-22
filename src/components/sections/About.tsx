@@ -105,7 +105,7 @@ export default function About() {
                 <div className="glow-effect absolute -inset-[1px] rounded-2xl bg-yellow-400/20 blur-lg" />
                 <div className="relative h-[500px] overflow-hidden rounded-2xl">
                   <Image
-                    src="https://github.com/user-attachments/assets/0c09e17f-1983-4ad0-8926-a0d6ef6ae5cf"
+                    src="/assets/about/profile.jpg"
                     alt="Almagro San Miguel - Actor profesional"
                     fill
                     className="image-hover-scale object-cover"

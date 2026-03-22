@@ -38,8 +38,7 @@ const blogPosts: BlogPost[] = [
     year: 2024,
     date: '8 Jun 2024',
     fullDate: '2024-06-08',
-    image:
-      'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
+    image: '/assets/blog/la-moderna-rtve-2024.jpg',
     production: 'La Moderna',
     medium: 'RTVE',
     link: 'https://www.rtve.es/television/20240608/con-almagro-san-miguel-moderna-cambiado-antes-despues-vida/16137963.shtml',
@@ -54,8 +53,7 @@ const blogPosts: BlogPost[] = [
     year: 2023,
     date: '2 Dic 2023',
     fullDate: '2023-12-02',
-    image:
-      'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
+    image: '/assets/blog/la-moderna-rtve-2023.jpg',
     production: 'La Moderna',
     medium: 'RTVE',
     link: 'https://www.rtve.es/television/20231202/moderna-entrevista-almagro-san-miguel-inigo-penalver/2463590.shtml',
@@ -70,8 +68,7 @@ const blogPosts: BlogPost[] = [
     year: 2023,
     date: '25 Oct 2023',
     fullDate: '2023-10-25',
-    image:
-      'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
+    image: '/assets/blog/la-moderna-20minutos.jpg',
     production: 'La Moderna',
     medium: '20 Minutos',
     link: 'https://www.20minutos.es/cinemania/series/quien-es-almagro-san-miguel-actor-inigo-penalver-salon-te-moderna-5179648/',
@@ -86,8 +83,7 @@ const blogPosts: BlogPost[] = [
     year: 2020,
     date: '20 Abr 2020',
     fullDate: '2020-04-20',
-    image:
-      'https://github.com/user-attachments/assets/592b31fa-c2d0-4b08-b522-f84ad45b6651',
+    image: '/assets/blog/vis-a-vis-citizen.jpg',
     production: 'Vis a vis: El Oasis',
     medium: 'The Citizen',
     link: 'https://thecitizen.es/cultura/almagro-san-miguel-entrv/',
@@ -102,8 +98,7 @@ const blogPosts: BlogPost[] = [
     year: 2020,
     date: '20 Abr 2020',
     fullDate: '2020-04-20',
-    image:
-      'https://github.com/user-attachments/assets/592b31fa-c2d0-4b08-b522-f84ad45b6651',
+    image: '/assets/blog/vis-a-vis-yourway.jpg',
     production: 'Vis a vis: El Oasis',
     medium: 'YourWay Magazine',
     link: 'https://www.yourwaymagazine.com/entrevista-almagro-san-miguel-el-oasis/',
@@ -117,8 +112,7 @@ const blogPosts: BlogPost[] = [
     year: 2020,
     date: '13 May 2020',
     fullDate: '2020-05-13',
-    image:
-      'https://github.com/user-attachments/assets/592b31fa-c2d0-4b08-b522-f84ad45b6651',
+    image: '/assets/blog/vis-a-vis-youtube.jpg',
     production: 'Vis a vis: El Oasis',
     medium: 'YouTube Interview',
     link: 'https://www.youtube.com/watch?v=eVzy4GL1BoY',
@@ -132,8 +126,7 @@ const blogPosts: BlogPost[] = [
     year: 2024,
     date: '20 Sep 2024',
     fullDate: '2024-09-20',
-    image:
-      'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
+    image: '/assets/blog/la-moderna-imdb.jpg',
     production: 'La Moderna',
     medium: 'IMDb',
     link: 'https://www.imdb.com/name/nm9017709/',
@@ -147,8 +140,7 @@ const blogPosts: BlogPost[] = [
     year: 2019,
     date: '21 Nov 2019',
     fullDate: '2019-11-21',
-    image:
-      'https://github.com/user-attachments/assets/e6f1ac3c-faec-4e6f-b1fd-e91a58b1cd1e',
+    image: '/assets/blog/hernan-imdb.jpg',
     production: 'Hernán',
     medium: 'IMDb',
     link: 'https://www.imdb.com/name/nm9017709/',

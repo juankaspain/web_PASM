@@ -14,45 +14,45 @@ interface Headshot {
 const headshots: Headshot[] = [
   // Comercial - Looks amigables y accesibles
   {
-    url: 'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
+    url: '/assets/headshots/comercial-1.jpg',
     category: 'comercial',
     alt: 'Almagro San Miguel - Headshot Comercial 1',
   },
   {
-    url: 'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
+    url: '/assets/headshots/comercial-2.jpg',
     category: 'comercial',
     alt: 'Almagro San Miguel - Headshot Comercial 2',
   },
   // Dramático - Looks intensos y serios
   {
-    url: 'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
+    url: '/assets/headshots/dramatico-1.jpg',
     category: 'dramatico',
     alt: 'Almagro San Miguel - Headshot Dramático 1',
   },
   {
-    url: 'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
+    url: '/assets/headshots/dramatico-2.jpg',
     category: 'dramatico',
     alt: 'Almagro San Miguel - Headshot Dramático 2',
   },
   // Personaje - Diferentes caracteres
   {
-    url: 'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
+    url: '/assets/headshots/personaje-1.jpg',
     category: 'personaje',
     alt: 'Almagro San Miguel - Personaje 1',
   },
   {
-    url: 'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
+    url: '/assets/headshots/personaje-2.jpg',
     category: 'personaje',
     alt: 'Almagro San Miguel - Personaje 2',
   },
   // Full Body - Cuerpo completo
   {
-    url: 'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
+    url: '/assets/headshots/fullbody-1.jpg',
     category: 'fullbody',
     alt: 'Almagro San Miguel - Full Body 1',
   },
   {
-    url: 'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
+    url: '/assets/headshots/fullbody-2.jpg',
     category: 'fullbody',
     alt: 'Almagro San Miguel - Full Body 2',
   },
@@ -72,11 +72,13 @@ export default function Headshots() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null)
 
-  const filteredHeadshots = selectedCategory === 'all' 
-    ? headshots 
-    : headshots.filter(shot => shot.category === selectedCategory)
+  const filteredHeadshots =
+    selectedCategory === 'all'
+      ? headshots
+      : headshots.filter((shot) => shot.category === selectedCategory)
 
-  const selectedImage = selectedImageIndex !== null ? filteredHeadshots[selectedImageIndex] : null
+  const selectedImage =
+    selectedImageIndex !== null ? filteredHeadshots[selectedImageIndex] : null
 
   // Keyboard navigation
   useEffect(() => {
@@ -98,7 +100,7 @@ export default function Headshots() {
 
   const navigatePrevious = () => {
     if (selectedImageIndex !== null) {
-      setSelectedImageIndex((prev) => 
+      setSelectedImageIndex((prev) =>
         prev === 0 ? filteredHeadshots.length - 1 : (prev as number) - 1
       )
     }
@@ -106,7 +108,7 @@ export default function Headshots() {
 
   const navigateNext = () => {
     if (selectedImageIndex !== null) {
-      setSelectedImageIndex((prev) => 
+      setSelectedImageIndex((prev) =>
         prev === filteredHeadshots.length - 1 ? 0 : (prev as number) + 1
       )
     }
@@ -124,21 +126,24 @@ export default function Headshots() {
 
   return (
     <>
-      <section id="headshots" className="relative py-24 overflow-hidden bg-gradient-to-b from-slate-950 via-black to-slate-900">
+      <section
+        id="headshots"
+        className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-black to-slate-900 py-24"
+      >
         {/* Background decorations */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/3 left-1/3 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px]" />
-          <div className="absolute bottom-1/3 right-1/3 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px]" />
+          <div className="absolute left-1/3 top-1/3 h-[500px] w-[500px] rounded-full bg-yellow-500/5 blur-[100px]" />
+          <div className="absolute bottom-1/3 right-1/3 h-[600px] w-[600px] rounded-full bg-orange-500/5 blur-[120px]" />
         </div>
 
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.02]"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}
         />
 
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
@@ -146,22 +151,24 @@ export default function Headshots() {
             transition={{ duration: 0.6 }}
           >
             {/* Header ESTANDARIZADO */}
-            <div className="text-center mb-16">
+            <div className="mb-16 text-center">
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
+                className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm"
               >
-                <Camera className="w-4 h-4 text-yellow-400" strokeWidth={2} />
-                <span className="text-sm font-medium text-slate-300 tracking-wide">Fotografía Profesional</span>
+                <Camera className="h-4 w-4 text-yellow-400" strokeWidth={2} />
+                <span className="text-sm font-medium tracking-wide text-slate-300">
+                  Fotografía Profesional
+                </span>
               </motion.div>
-              
-              <motion.h2 
+
+              <motion.h2
                 initial={{ opacity: 0, y: 10 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-white"
+                className="mb-6 text-4xl font-bold tracking-tight text-white lg:text-5xl"
               >
                 Professional Headshots
               </motion.h2>
@@ -170,16 +177,17 @@ export default function Headshots() {
                 initial={{ opacity: 0, scaleX: 0 }}
                 animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="w-20 h-0.5 bg-yellow-400 mx-auto mb-6"
+                className="mx-auto mb-6 h-0.5 w-20 bg-yellow-400"
               />
-              
-              <motion.p 
+
+              <motion.p
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
+                className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-400"
               >
-                Selección de fotografías profesionales para casting directors y productoras
+                Selección de fotografías profesionales para casting directors y
+                productoras
               </motion.p>
             </div>
 
@@ -188,20 +196,20 @@ export default function Headshots() {
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="flex flex-wrap justify-center gap-3 mb-12"
+              className="mb-12 flex flex-wrap justify-center gap-3"
             >
-              <div className="flex items-center gap-2 mr-2">
-                <Filter className="w-4 h-4 text-slate-400" />
+              <div className="mr-2 flex items-center gap-2">
+                <Filter className="h-4 w-4 text-slate-400" />
                 <span className="text-sm text-slate-400">Filtrar:</span>
               </div>
               {categories.map((category) => (
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
-                  className={`px-6 py-2 rounded-xl font-medium text-sm transition-all duration-300 ${
+                  className={`rounded-xl px-6 py-2 text-sm font-medium transition-all duration-300 ${
                     selectedCategory === category.id
-                      ? 'bg-yellow-400 text-black shadow-lg shadow-yellow-400/25 scale-105'
-                      : 'bg-white/5 border border-white/10 text-slate-400 hover:border-white/20 hover:text-white hover:scale-102'
+                      ? 'scale-105 bg-yellow-400 text-black shadow-lg shadow-yellow-400/25'
+                      : 'hover:scale-102 border border-white/10 bg-white/5 text-slate-400 hover:border-white/20 hover:text-white'
                   }`}
                 >
                   {category.label}
@@ -210,10 +218,7 @@ export default function Headshots() {
             </motion.div>
 
             {/* Headshots Grid */}
-            <motion.div
-              layout
-              className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
-            >
+            <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               <AnimatePresence mode="popLayout">
                 {filteredHeadshots.map((headshot, index) => (
                   <motion.div
@@ -229,28 +234,28 @@ export default function Headshots() {
                     onContextMenu={handleImageProtection}
                   >
                     <div className="relative">
-                      <motion.div 
-                        className="absolute -inset-[2px] bg-yellow-400/30 rounded-2xl blur-xl"
+                      <motion.div
+                        className="absolute -inset-[2px] rounded-2xl bg-yellow-400/30 blur-xl"
                         initial={{ opacity: 0 }}
                         whileHover={{ opacity: 1 }}
                         transition={{ duration: 0.4 }}
                       />
-                      
-                      <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-black border border-white/10 hover:border-yellow-400/30 transition-all duration-500">
+
+                      <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-white/10 bg-black transition-all duration-500 hover:border-yellow-400/30">
                         <Image
                           src={headshot.url}
                           alt={headshot.alt}
                           fill
-                          className="object-cover object-center group-hover:scale-110 transition-transform duration-700 pointer-events-none select-none"
+                          className="pointer-events-none select-none object-cover object-center transition-transform duration-700 group-hover:scale-110"
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                           draggable={false}
                           onContextMenu={handleImageProtection}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        
-                        <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <span className="px-3 py-1 rounded-full bg-yellow-400 text-black text-xs font-bold uppercase">
-                            {categories.find(c => c.id === headshot.category)?.label}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+                        <div className="absolute bottom-4 left-4 right-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                          <span className="rounded-full bg-yellow-400 px-3 py-1 text-xs font-bold uppercase text-black">
+                            {categories.find((c) => c.id === headshot.category)?.label}
                           </span>
                         </div>
                       </div>
@@ -265,10 +270,16 @@ export default function Headshots() {
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="mt-16 max-w-4xl mx-auto text-center"
+              className="mx-auto mt-16 max-w-4xl text-center"
             >
               <p className="text-slate-400">
-                <span className="font-semibold text-white">Nota:</span> Headshots actualizados regularmente. Para solicitar fotografías en alta resolución o sesiones específicas, contactar a través de <a href="#contact" className="text-yellow-400 hover:underline">representación</a>.
+                <span className="font-semibold text-white">Nota:</span> Headshots
+                actualizados regularmente. Para solicitar fotografías en alta resolución o
+                sesiones específicas, contactar a través de{' '}
+                <a href="#contact" className="text-yellow-400 hover:underline">
+                  representación
+                </a>
+                .
               </p>
             </motion.div>
           </motion.div>
@@ -283,17 +294,17 @@ export default function Headshots() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-md"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-md"
             onClick={closeModal}
           >
             {/* Close Button */}
             <motion.button
               onClick={closeModal}
-              className="absolute top-4 right-4 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 transition-all group"
+              className="group absolute right-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 transition-all hover:border-white/30 hover:bg-white/20"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <X className="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300" />
+              <X className="h-6 w-6 text-white transition-transform duration-300 group-hover:rotate-90" />
             </motion.button>
 
             {/* Previous Button */}
@@ -302,12 +313,15 @@ export default function Headshots() {
                 e.stopPropagation()
                 navigatePrevious()
               }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-14 h-14 flex items-center justify-center rounded-full bg-white/10 hover:bg-yellow-400 border border-white/20 hover:border-yellow-400 transition-all group backdrop-blur-sm"
+              className="group absolute left-4 top-1/2 z-10 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition-all hover:border-yellow-400 hover:bg-yellow-400"
               whileHover={{ scale: 1.1, x: -4 }}
               whileTap={{ scale: 0.9 }}
               aria-label="Imagen anterior"
             >
-              <ChevronLeft className="w-8 h-8 text-white group-hover:text-black transition-colors" strokeWidth={3} />
+              <ChevronLeft
+                className="h-8 w-8 text-white transition-colors group-hover:text-black"
+                strokeWidth={3}
+              />
             </motion.button>
 
             {/* Next Button */}
@@ -316,17 +330,20 @@ export default function Headshots() {
                 e.stopPropagation()
                 navigateNext()
               }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-14 h-14 flex items-center justify-center rounded-full bg-white/10 hover:bg-yellow-400 border border-white/20 hover:border-yellow-400 transition-all group backdrop-blur-sm"
+              className="group absolute right-4 top-1/2 z-10 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition-all hover:border-yellow-400 hover:bg-yellow-400"
               whileHover={{ scale: 1.1, x: 4 }}
               whileTap={{ scale: 0.9 }}
               aria-label="Siguiente imagen"
             >
-              <ChevronRight className="w-8 h-8 text-white group-hover:text-black transition-colors" strokeWidth={3} />
+              <ChevronRight
+                className="h-8 w-8 text-white transition-colors group-hover:text-black"
+                strokeWidth={3}
+              />
             </motion.button>
 
             {/* Image Counter */}
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
-              <span className="text-white font-medium text-sm">
+            <div className="absolute left-1/2 top-4 z-10 -translate-x-1/2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md">
+              <span className="text-sm font-medium text-white">
                 {selectedImageIndex + 1} / {filteredHeadshots.length}
               </span>
             </div>
@@ -337,37 +354,40 @@ export default function Headshots() {
               initial={{ scale: 0.9, opacity: 0, x: 100 }}
               animate={{ scale: 1, opacity: 1, x: 0 }}
               exit={{ scale: 0.9, opacity: 0, x: -100 }}
-              transition={{ duration: 0.3, type: "spring", damping: 25 }}
-              className="relative max-w-4xl max-h-[85vh] select-none"
+              transition={{ duration: 0.3, type: 'spring', damping: 25 }}
+              className="relative max-h-[85vh] max-w-4xl select-none"
               onClick={(e) => e.stopPropagation()}
               onContextMenu={handleImageProtection}
             >
-              <div className="relative border-2 border-yellow-400/30 rounded-2xl overflow-hidden shadow-2xl">
+              <div className="relative overflow-hidden rounded-2xl border-2 border-yellow-400/30 shadow-2xl">
                 <Image
                   src={selectedImage.url}
                   alt={selectedImage.alt}
                   width={800}
                   height={1200}
-                  className="w-full h-auto pointer-events-none select-none"
+                  className="pointer-events-none h-auto w-full select-none"
                   priority
                   draggable={false}
                   onContextMenu={handleImageProtection}
                 />
-                
+
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                  <span className="inline-block px-4 py-2 rounded-full bg-yellow-400 text-black text-sm font-bold uppercase">
-                    {categories.find(c => c.id === selectedImage.category)?.label}
+                  <span className="inline-block rounded-full bg-yellow-400 px-4 py-2 text-sm font-bold uppercase text-black">
+                    {categories.find((c) => c.id === selectedImage.category)?.label}
                   </span>
                 </div>
 
                 {/* Watermark overlay for extra protection */}
-                <div className="absolute inset-0 pointer-events-none select-none" style={{ userSelect: 'none' }} />
+                <div
+                  className="pointer-events-none absolute inset-0 select-none"
+                  style={{ userSelect: 'none' }}
+                />
               </div>
             </motion.div>
 
             {/* Instructions */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
-              <span className="text-white/60 font-medium text-xs">
+            <div className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md">
+              <span className="text-xs font-medium text-white/60">
                 Usa ← → o los botones para navegar • ESC para cerrar
               </span>
             </div>

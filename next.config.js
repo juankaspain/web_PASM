@@ -5,161 +5,16 @@ const withBundleAnalyzer =
     : (config) => config
 /* eslint-enable @typescript-eslint/no-require-imports */
 
-const isDev = process.env.NODE_ENV === 'development'
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
 
-  // Image optimization
+  // Static export for Hostinger shared hosting
+  output: 'export',
+
+  // Images: unoptimized for static export (no server-side optimization)
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'img.youtube.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'via.placeholder.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'github.com',
-        pathname: '/user-attachments/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'raw.githubusercontent.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'user-images.githubusercontent.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'private-user-images.githubusercontent.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'avatars.githubusercontent.com',
-      },
-    ],
-    formats: ['image/avif', 'image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 31536000, // 1 year
-    dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    unoptimized: false,
-    loader: 'default',
-  },
-
-  // Security headers
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on',
-          },
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=63072000; includeSubDomains; preload',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
-          },
-          {
-            key: 'Content-Security-Policy',
-            value: [
-              "default-src 'self'",
-              `script-src 'self' 'unsafe-inline' ${isDev ? "'unsafe-eval' " : ''}https://www.google-analytics.com https://ssl.google-analytics.com https://www.googletagmanager.com https://*.sentry.io`,
-              "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: https: blob:",
-              "font-src 'self' data:",
-              "connect-src 'self' https://www.google-analytics.com https://formspree.io https://*.sentry.io",
-              "frame-src 'self' https://www.youtube.com https://player.vimeo.com",
-              "object-src 'none'",
-              "base-uri 'self'",
-              "form-action 'self' https://formspree.io",
-              "frame-ancestors 'self'",
-              'upgrade-insecure-requests',
-            ].join('; '),
-          },
-        ],
-      },
-      // Cache static assets aggressively
-      {
-        source: '/images/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/:path*.{jpg,jpeg,png,gif,webp,avif,svg,ico}',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/:path*.{woff,woff2,ttf,otf,eot}',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/site.webmanifest',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=86400',
-          },
-        ],
-      },
-    ]
-  },
-
-  // Redirects for SEO
-  async redirects() {
-    return []
-  },
-
-  // Rewrites for clean URLs
-  async rewrites() {
-    return []
+    unoptimized: true,
   },
 
   // Compression
@@ -176,11 +31,6 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react', 'framer-motion', 'react-icons'],
   },
 
-  // Note: Chrome DevTools "setTimeout handler took Xms" and "requestIdleCallback handler
-  // took Xms" violations are development-only performance warnings triggered by React
-  // reconciliation, Framer Motion layout calculations, and Next.js HMR. They do not
-  // appear in production builds and cannot be eliminated in a complex React app.
-
   // Compiler optimizations (uses SWC by default)
   compiler: {
     removeConsole:
@@ -192,9 +42,8 @@ const nextConfig = {
     reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
 
-  // Webpack optimizations - NO babel-loader (Next.js 14 uses SWC)
+  // Webpack optimizations
   webpack: (config, { isServer }) => {
-    // Optimize bundle size
     if (!isServer) {
       config.optimization = {
         ...config.optimization,
@@ -203,7 +52,6 @@ const nextConfig = {
           cacheGroups: {
             default: false,
             vendors: false,
-            // Framework bundle (React, React-DOM)
             framework: {
               name: 'framework',
               chunks: 'all',
@@ -211,7 +59,6 @@ const nextConfig = {
               priority: 40,
               enforce: true,
             },
-            // Lib bundle (other node_modules)
             lib: {
               test: /[\\/]node_modules[\\/]/,
               name(module) {
@@ -224,13 +71,11 @@ const nextConfig = {
               minChunks: 1,
               reuseExistingChunk: true,
             },
-            // Commons bundle (shared code)
             commons: {
               name: 'commons',
               minChunks: 2,
               priority: 20,
             },
-            // Separate Framer Motion (heavy library)
             framerMotion: {
               name: 'framer-motion',
               test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
@@ -242,17 +87,13 @@ const nextConfig = {
         minimize: process.env.NODE_ENV === 'production',
       }
 
-      // Add performance hints
       config.performance = {
         ...config.performance,
         hints: process.env.NODE_ENV === 'production' ? 'warning' : false,
-        maxAssetSize: 244000, // 244kb
-        maxEntrypointSize: 244000, // 244kb
+        maxAssetSize: 244000,
+        maxEntrypointSize: 244000,
       }
     }
-
-    // NO babel-loader - Next.js 14 uses SWC compiler which is much faster
-    // SWC is configured via compiler options above
 
     return config
   },

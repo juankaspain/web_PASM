@@ -119,7 +119,7 @@ export const metadata: Metadata = {
       'Actor con 13+ años de experiencia. Más de 300 episodios en TV. Protagonista de La Moderna (TVE) y Vis a vis: El Oasis (Fox). Formación ESAD Sevilla y CNTC. Especialista en verso clásico, combate escénico y equitación.',
     images: [
       {
-        url: 'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
+        url: '/assets/og/main.jpg',
         width: 1200,
         height: 630,
         alt: 'Almagro San Miguel - Actor Profesional',
@@ -133,9 +133,7 @@ export const metadata: Metadata = {
     title: 'Almagro San Miguel - Actor Profesional',
     description:
       'Actor con 13+ años de experiencia. Más de 300 episodios en TV. La Moderna (TVE), Vis a vis: El Oasis (Fox), Hernán (Prime Video).',
-    images: [
-      'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
-    ],
+    images: ['/assets/og/main.jpg'],
   },
   robots: {
     index: true,
@@ -200,8 +198,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://www.youtube.com" />
         <link rel="dns-prefetch" href="https://player.vimeo.com" />
         <link rel="dns-prefetch" href="https://img.youtube.com" />
-        <link rel="dns-prefetch" href="https://user-images.githubusercontent.com" />
-        <link rel="dns-prefetch" href="https://images.unsplash.com" />
       </head>
       <body className={inter.className}>
         <PassiveEvents />
@@ -314,8 +310,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 },
               ],
               url: 'https://almagrosanmiguel.com',
-              image:
-                'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
+              image: '/assets/og/main.jpg',
               sameAs: [
                 'https://www.imdb.com/name/nm9017709/',
                 'https://es.wikipedia.org/wiki/Almagro_San_Miguel',

@@ -343,7 +343,7 @@ export default function Hero() {
 
               <div className="hero-image-container relative aspect-[2.5/4] overflow-hidden rounded-[28px] shadow-[0_50px_150px_rgba(0,0,0,0.95)] lg:rounded-[36px]">
                 <Image
-                  src="https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4"
+                  src="/assets/hero/main.jpg"
                   alt="Almagro San Miguel - Actor profesional de televisión, cine y teatro"
                   fill
                   className="scale-105 object-cover object-[center_15%]"
