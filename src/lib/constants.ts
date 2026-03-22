@@ -26,10 +26,17 @@ export const CONTACT_INFO = {
 } as const
 
 export const NAVIGATION_ITEMS = [
-  { label: 'Inicio', href: '#hero' },
-  { label: 'Sobre Mí', href: '#about' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Habilidades', href: '#skills' },
+  { label: 'Sobre mí', href: '#about' },
+  { label: 'Series TV', href: '#series' },
+  { label: 'Cine', href: '#filmografia' },
+  { label: 'Teatro', href: '#theater' },
+  { label: 'Premios', href: '#awards' },
+  { label: 'Agenda', href: '#calendar' },
+  { label: 'Headshots', href: '#headshots' },
+  { label: 'Showreel', href: '#showreel' },
+  { label: 'Prensa', href: '#press' },
+  { label: 'Blog', href: '#blog' },
+  { label: 'Press Kit', href: '#presskit' },
   { label: 'Contacto', href: '#contact' },
 ] as const
 

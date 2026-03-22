@@ -2,10 +2,18 @@
 
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import Image from 'next/image'
-import { Film, Tv, Theater, Play, Star, ExternalLink, Calendar, Clapperboard, X, Sparkles, Youtube } from 'lucide-react'
+import {
+  Film,
+  Tv,
+  Play,
+  Star,
+  ExternalLink,
+  Calendar,
+  X,
+  Sparkles,
+  Youtube,
+} from 'lucide-react'
 import { useState, useRef } from 'react'
-
-type Category = 'all' | 'tv' | 'film' | 'theater'
 
 interface Project {
   id: string
@@ -22,7 +30,7 @@ interface Project {
   youtube?: string
   filmaffinity?: string
   sensacine?: string
-  category: 'tv' | 'film' | 'theater'
+  category: string
   description: string
   director?: string
   coStars?: string[]
@@ -38,14 +46,16 @@ const projects: Project[] = [
     yearSort: 2024,
     platform: 'TVE',
     episodes: '8 episodios',
-    image: 'https://github.com/user-attachments/assets/5fbf0580-cab5-4d3f-a835-74d9c121ef5f',
+    image:
+      'https://github.com/user-attachments/assets/5fbf0580-cab5-4d3f-a835-74d9c121ef5f',
     rating: '7.5',
     imdb: 'https://www.imdb.com/title/tt27672403/',
     youtube: 'https://www.youtube.com/watch?v=1t0JcwYR-so',
     filmaffinity: 'https://www.filmaffinity.com/es/film704765.html',
     sensacine: 'https://www.sensacine.com/series/serie-36464/',
     category: 'tv',
-    description: 'Thriller de espionaje ambientado en la década de los 40 en Huelva. La serie narra las operaciones del servicio secreto británico en España durante la Segunda Guerra Mundial. Toni es un personaje clave en esta historia de espías.',
+    description:
+      'Thriller de espionaje ambientado en la década de los 40 en Huelva. La serie narra las operaciones del servicio secreto británico en España durante la Segunda Guerra Mundial. Toni es un personaje clave en esta historia de espías.',
     highlights: ['Espionaje', 'Thriller', 'La 1'],
   },
   {
@@ -56,14 +66,16 @@ const projects: Project[] = [
     yearSort: 2023.5,
     platform: 'TVE',
     episodes: '236 episodios',
-    image: 'https://github.com/user-attachments/assets/d1a8381f-3ebe-4278-82e7-659e1158b282',
+    image:
+      'https://github.com/user-attachments/assets/d1a8381f-3ebe-4278-82e7-659e1158b282',
     rating: '7.5',
     imdb: 'https://www.imdb.com/title/tt28507389/',
     youtube: 'https://www.youtube.com/watch?v=ursuF5r4_Ms',
     filmaffinity: 'https://www.filmaffinity.com/es/film141429.html',
     sensacine: 'https://www.sensacine.com/series/serie-35252/',
     category: 'tv',
-    description: 'Serie diaria de época ambientada en el Madrid de los años 40-50. Interpreto a Íñigo Peñalver, uno de los protagonistas masculinos de la serie, un hombre honrado, generoso, bondadoso y muy romántico. Un papel que ha marcado un antes y un después en mi carrera.',
+    description:
+      'Serie diaria de época ambientada en el Madrid de los años 40-50. Interpreto a Íñigo Peñalver, uno de los protagonistas masculinos de la serie, un hombre honrado, generoso, bondadoso y muy romántico. Un papel que ha marcado un antes y un después en mi carrera.',
     highlights: ['Protagonista', '236 episodios', 'Prime Time La 1'],
   },
   {
@@ -74,14 +86,16 @@ const projects: Project[] = [
     yearSort: 2023,
     platform: 'TVE',
     episodes: '6 episodios',
-    image: 'https://github.com/user-attachments/assets/c4e2e2ad-dbf6-4f95-a9b7-0e1a3b60c2f9',
+    image:
+      'https://github.com/user-attachments/assets/c4e2e2ad-dbf6-4f95-a9b7-0e1a3b60c2f9',
     rating: '7.2',
     imdb: 'https://www.imdb.com/title/tt8787372/',
     youtube: 'https://www.youtube.com/watch?v=AHUe0aYf9S8',
     filmaffinity: 'https://www.filmaffinity.com/es/film558512.html',
     sensacine: 'https://www.sensacine.com/series/serie-30545/',
     category: 'tv',
-    description: 'Cuarta entrega de la exitosa franquicia "La Caza". Thriller policíaco que reabre casos sin resolver cuando una de las jóvenes desaparecidas hace cinco años en Monteperdido reaparece misteriosamente.',
+    description:
+      'Cuarta entrega de la exitosa franquicia "La Caza". Thriller policíaco que reabre casos sin resolver cuando una de las jóvenes desaparecidas hace cinco años en Monteperdido reaparece misteriosamente.',
     highlights: ['Thriller', '7.2 IMDb', 'La 1'],
   },
   {
@@ -92,14 +106,16 @@ const projects: Project[] = [
     yearSort: 2023,
     platform: 'Atresplayer',
     episodes: '5 episodios',
-    image: 'https://github.com/user-attachments/assets/93c83137-53ad-4c49-854c-528a4974ad64',
+    image:
+      'https://github.com/user-attachments/assets/93c83137-53ad-4c49-854c-528a4974ad64',
     rating: '6.8',
     imdb: 'https://www.imdb.com/title/tt21374322/',
     youtube: 'https://www.youtube.com/watch?v=grtiShqUAkg',
     filmaffinity: 'https://www.filmaffinity.com/es/film984464.html',
     sensacine: 'https://www.sensacine.com/series/serie-32511/',
     category: 'tv',
-    description: 'Thriller dramático sobre un juez honesto que debe proteger a su hijo tras un trágico accidente con la mafia. La serie plantea temas como el poder, la corrupción, la venganza y el honor.',
+    description:
+      'Thriller dramático sobre un juez honesto que debe proteger a su hijo tras un trágico accidente con la mafia. La serie plantea temas como el poder, la corrupción, la venganza y el honor.',
     highlights: ['Atresplayer', 'Drama', 'Thriller'],
   },
   {
@@ -110,12 +126,14 @@ const projects: Project[] = [
     yearSort: 2022,
     platform: 'Canal Sur',
     episodes: '8 episodios',
-    image: 'https://github.com/user-attachments/assets/7a047940-c1b5-4710-bb18-cd29a82d58ff',
+    image:
+      'https://github.com/user-attachments/assets/7a047940-c1b5-4710-bb18-cd29a82d58ff',
     rating: '7.4',
     imdb: 'https://www.imdb.com/title/tt18074418/',
     youtube: 'https://www.youtube.com/watch?v=Xel0dzOmHLA',
     category: 'tv',
-    description: 'Serie andaluza producida por Canal Sur Televisión. Una historia de misterio y drama ambientada en Andalucía con gran acogida del público local.',
+    description:
+      'Serie andaluza producida por Canal Sur Televisión. Una historia de misterio y drama ambientada en Andalucía con gran acogida del público local.',
     highlights: ['Canal Sur', '8 episodios', 'Andalucía'],
   },
   {
@@ -133,7 +151,8 @@ const projects: Project[] = [
     filmaffinity: 'https://www.filmaffinity.com/es/film269606.html',
     sensacine: 'https://www.sensacine.com/series/serie-21983/',
     category: 'tv',
-    description: 'Temporada 4 de la popular serie de TVE. Interpreto a Mikel Uribe, un nuevo policía que se incorpora a la comisaría del barrio. Serie que mezcla policíaco, drama y toques de fantasía.',
+    description:
+      'Temporada 4 de la popular serie de TVE. Interpreto a Mikel Uribe, un nuevo policía que se incorpora a la comisaría del barrio. Serie que mezcla policíaco, drama y toques de fantasía.',
     highlights: ['12 episodios', 'La 1', 'Temporada 4'],
   },
   {
@@ -144,14 +163,16 @@ const projects: Project[] = [
     yearSort: 2020,
     platform: 'Star Channel',
     episodes: '6 episodios',
-    image: 'https://github.com/user-attachments/assets/b5f1ac3c-fe6c-4a6f-b16e-e91a5881fd59',
+    image:
+      'https://github.com/user-attachments/assets/b5f1ac3c-fe6c-4a6f-b16e-e91a5881fd59',
     rating: '6.8',
     imdb: 'https://www.imdb.com/title/tt10375568/',
     youtube: 'https://www.youtube.com/watch?v=t4LYYroY5bo',
     filmaffinity: 'https://www.filmaffinity.com/es/film894080.html',
     sensacine: 'https://www.sensacine.com/series/serie-25156/',
     category: 'tv',
-    description: 'Spin-off de la exitosa serie "Vis a vis". Papel protagonista como Diego "Dieguito" Ramala en este thriller carcelario con distribución internacional en Fox/Star Channel. Una producción de alto nivel con gran seguimiento.',
+    description:
+      'Spin-off de la exitosa serie "Vis a vis". Papel protagonista como Diego "Dieguito" Ramala en este thriller carcelario con distribución internacional en Fox/Star Channel. Una producción de alto nivel con gran seguimiento.',
     highlights: ['Protagonista', 'Star Channel', 'Internacional'],
   },
   {
@@ -162,14 +183,16 @@ const projects: Project[] = [
     yearSort: 2020,
     platform: 'Prime Video',
     episodes: '8 episodios',
-    image: 'https://github.com/user-attachments/assets/992b31fe-c22d-4b9b-b522-f84ad34b6651',
+    image:
+      'https://github.com/user-attachments/assets/992b31fe-c22d-4b9b-b522-f84ad34b6651',
     rating: '6.2',
     imdb: 'https://www.imdb.com/title/tt9645942/',
     youtube: 'https://www.youtube.com/watch?v=CRlE3_JI7ZY',
     filmaffinity: 'https://www.filmaffinity.com/es/film530592.html',
     sensacine: 'https://www.sensacine.com/series/serie-23708/',
     category: 'tv',
-    description: 'Serie histórica épica de Amazon Prime Video sobre la conquista de México. Interpreto a Gonzalo de Sandoval junto a Óscar Jaenada. Mi debut televisivo en una producción internacional de alto presupuesto, estrenada en más de 240 países.',
+    description:
+      'Serie histórica épica de Amazon Prime Video sobre la conquista de México. Interpreto a Gonzalo de Sandoval junto a Óscar Jaenada. Mi debut televisivo en una producción internacional de alto presupuesto, estrenada en más de 240 países.',
     highlights: ['Prime Video', '240+ países', 'Épica'],
   },
 ].sort((a, b) => b.yearSort - a.yearSort)
@@ -180,42 +203,47 @@ export default function Series() {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="series" className="relative py-32 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-black">
+    <section
+      id="series"
+      className="relative overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-black py-32"
+    >
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px]" />
+        <div className="absolute right-1/4 top-0 h-[600px] w-[600px] rounded-full bg-yellow-500/5 blur-[120px]" />
+        <div className="absolute bottom-0 left-1/4 h-[500px] w-[500px] rounded-full bg-yellow-500/5 blur-[100px]" />
       </div>
 
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
         }}
       />
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+      <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="text-center mb-20">
+          <div className="mb-20 text-center">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm"
             >
-              <Tv className="w-4 h-4 text-yellow-400" strokeWidth={2} />
-              <span className="text-sm font-medium text-slate-300 tracking-wide">Series de Televisión</span>
+              <Tv className="h-4 w-4 text-yellow-400" strokeWidth={2} />
+              <span className="text-sm font-medium tracking-wide text-slate-300">
+                Series de Televisión
+              </span>
             </motion.div>
-            
-            <motion.h2 
+
+            <motion.h2
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white"
+              className="mb-6 text-5xl font-bold tracking-tight text-white lg:text-6xl"
             >
               Series TV
             </motion.h2>
@@ -225,16 +253,17 @@ export default function Series() {
               initial={{ opacity: 0, scaleX: 0 }}
               animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
               transition={{ duration: 0.8, delay: 0.25 }}
-              className="w-20 h-0.5 bg-yellow-400 mx-auto mb-6"
+              className="mx-auto mb-6 h-0.5 w-20 bg-yellow-400"
             />
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
+              className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-400"
             >
-              Más de <span className="text-white font-semibold">300 episodios</span> en series de televisión nacional e internacional
+              Más de <span className="font-semibold text-white">300 episodios</span> en
+              series de televisión nacional e internacional
             </motion.p>
           </div>
 
@@ -253,62 +282,75 @@ export default function Series() {
                   className="group cursor-pointer"
                 >
                   <div className="relative">
-                    <div className="relative bg-white/[0.02] border border-white/10 rounded-3xl hover:bg-white/[0.04] hover:border-white/20 transition-all duration-300 overflow-hidden shadow-2xl">
+                    <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] shadow-2xl transition-all duration-300 hover:border-white/20 hover:bg-white/[0.04]">
                       <div className="flex flex-col lg:flex-row">
-                        <div className="relative w-full lg:w-80 h-[480px] flex-shrink-0 overflow-hidden">
-                          <div className="relative w-full h-full aspect-[2/3]">
+                        <div className="relative h-[480px] w-full flex-shrink-0 overflow-hidden lg:w-80">
+                          <div className="relative aspect-[2/3] h-full w-full">
                             <Image
                               src={project.image}
                               alt={project.title}
                               fill
                               priority
                               sizes="(max-width: 768px) 100vw, 400px"
-                              className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                             />
                           </div>
                           <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/80 lg:bg-gradient-to-r" />
-                          
-                          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                            <div className="w-14 h-14 bg-yellow-400 rounded-full flex items-center justify-center shadow-lg">
-                              <Play className="w-6 h-6 text-black ml-0.5" fill="currentColor" />
+
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
+                            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-yellow-400 shadow-lg">
+                              <Play
+                                className="ml-0.5 h-6 w-6 text-black"
+                                fill="currentColor"
+                              />
                             </div>
                           </div>
 
-                          <div className="absolute top-4 left-4 px-3 py-1 bg-yellow-400 rounded-full text-black text-xs font-bold shadow-lg">
+                          <div className="absolute left-4 top-4 rounded-full bg-yellow-400 px-3 py-1 text-xs font-bold text-black shadow-lg">
                             {project.platform}
                           </div>
 
                           {project.rating && (
-                            <div className="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 bg-yellow-400 rounded-lg font-bold text-black text-xs shadow-lg">
-                              <Star className="w-3 h-3 fill-black" />
+                            <div className="absolute right-4 top-4 flex items-center gap-1 rounded-lg bg-yellow-400 px-2 py-1 text-xs font-bold text-black shadow-lg">
+                              <Star className="h-3 w-3 fill-black" />
                               {project.rating}
                             </div>
                           )}
                         </div>
 
                         <div className="flex-1 p-6 lg:p-8">
-                          <div className="flex items-start justify-between gap-4 mb-3">
+                          <div className="mb-3 flex items-start justify-between gap-4">
                             <h3 className="text-2xl font-bold text-white">
                               {project.title}
                             </h3>
-                            <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium text-slate-400 whitespace-nowrap">
+                            <span className="whitespace-nowrap rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-slate-300">
                               {project.year}
                             </span>
                           </div>
 
-                          <p className="text-lg text-slate-300 mb-3">
-                            <span className="font-semibold text-white">{project.role}</span>
-                            {project.episodes && <span className="text-slate-500"> • {project.episodes}</span>}
+                          <p className="mb-3 text-lg text-slate-300">
+                            <span className="font-semibold text-white">
+                              {project.role}
+                            </span>
+                            {project.episodes && (
+                              <span className="text-slate-500">
+                                {' '}
+                                • {project.episodes}
+                              </span>
+                            )}
                           </p>
 
-                          <p className="text-slate-400 leading-relaxed mb-4">
+                          <p className="mb-4 leading-relaxed text-slate-400">
                             {project.description}
                           </p>
 
                           {project.highlights && project.highlights.length > 0 && (
                             <div className="flex flex-wrap gap-2">
                               {project.highlights.map((highlight, i) => (
-                                <span key={i} className="px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-xs font-medium text-slate-300">
+                                <span
+                                  key={i}
+                                  className="rounded-lg border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-slate-300"
+                                >
                                   {highlight}
                                 </span>
                               ))}
@@ -317,7 +359,7 @@ export default function Series() {
                         </div>
                       </div>
 
-                      <motion.div 
+                      <motion.div
                         className="absolute bottom-0 left-0 h-[2px] bg-yellow-400"
                         initial={{ width: 0 }}
                         whileHover={{ width: '100%' }}
@@ -336,10 +378,11 @@ export default function Series() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="mt-16 text-center"
           >
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm">
-              <Sparkles className="w-5 h-5 text-yellow-400" />
+            <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 backdrop-blur-sm">
+              <Sparkles className="h-5 w-5 text-yellow-400" />
               <span className="text-sm font-medium text-slate-300">
-                8 series • +300 episodios • TVE, Prime Video, Star Channel, Atresplayer, Canal Sur
+                8 series • +300 episodios • TVE, Prime Video, Star Channel, Atresplayer,
+                Canal Sur
               </span>
             </div>
           </motion.div>
@@ -352,7 +395,7 @@ export default function Series() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 overflow-y-auto backdrop-blur-md"
+            className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/95 p-4 backdrop-blur-md"
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
@@ -360,17 +403,17 @@ export default function Series() {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.95, y: 20, opacity: 0 }}
               transition={{ type: 'spring', duration: 0.5 }}
-              className="relative bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl max-w-4xl w-full shadow-2xl my-8"
+              className="relative my-8 w-full max-w-4xl rounded-2xl border border-white/10 bg-white/[0.03] shadow-2xl backdrop-blur-xl"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-black transition-colors border border-white/10"
+                className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 backdrop-blur-md transition-colors hover:bg-yellow-400 hover:text-black"
               >
-                <X className="w-5 h-5" />
+                <X className="h-5 w-5" />
               </button>
 
-              <div className="relative h-[650px] rounded-t-2xl overflow-hidden">
+              <div className="relative h-[650px] overflow-hidden rounded-t-2xl">
                 <Image
                   src={selectedProject.image}
                   alt={selectedProject.title}
@@ -380,50 +423,62 @@ export default function Series() {
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent backdrop-blur-sm" />
-                
+
                 <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <div className="inline-block px-3 py-1 bg-yellow-400 rounded-full text-black text-sm font-bold mb-3">
+                  <div className="mb-3 inline-block rounded-full bg-yellow-400 px-3 py-1 text-sm font-bold text-black">
                     {selectedProject.platform}
                   </div>
-                  <h3 className="text-4xl font-bold text-white mb-2">{selectedProject.title}</h3>
-                  <p className="text-xl text-slate-200 font-semibold">{selectedProject.role}</p>
+                  <h3 className="mb-2 text-4xl font-bold text-white">
+                    {selectedProject.title}
+                  </h3>
+                  <p className="text-xl font-semibold text-slate-200">
+                    {selectedProject.role}
+                  </p>
                 </div>
               </div>
 
               <div className="p-8">
-                <div className="grid md:grid-cols-3 gap-6 mb-6">
+                <div className="mb-6 grid gap-6 md:grid-cols-3">
                   <div className="flex items-center gap-3">
-                    <Calendar className="w-5 h-5 text-yellow-400" />
+                    <Calendar className="h-5 w-5 text-yellow-400" />
                     <div>
-                      <div className="text-xs text-slate-500 uppercase">Año</div>
-                      <div className="font-semibold text-white">{selectedProject.year}</div>
+                      <div className="text-xs uppercase text-slate-500">Año</div>
+                      <div className="font-semibold text-white">
+                        {selectedProject.year}
+                      </div>
                     </div>
                   </div>
-                  
+
                   {selectedProject.rating && (
                     <div className="flex items-center gap-3">
-                      <Star className="w-5 h-5 text-yellow-400" />
+                      <Star className="h-5 w-5 text-yellow-400" />
                       <div>
-                        <div className="text-xs text-slate-500 uppercase">IMDb</div>
-                        <div className="font-semibold text-white">{selectedProject.rating}/10</div>
+                        <div className="text-xs uppercase text-slate-500">IMDb</div>
+                        <div className="font-semibold text-white">
+                          {selectedProject.rating}/10
+                        </div>
                       </div>
                     </div>
                   )}
 
                   {selectedProject.episodes && (
                     <div className="flex items-center gap-3">
-                      <Tv className="w-5 h-5 text-yellow-400" />
+                      <Tv className="h-5 w-5 text-yellow-400" />
                       <div>
-                        <div className="text-xs text-slate-500 uppercase">Episodios</div>
-                        <div className="font-semibold text-white">{selectedProject.episodes}</div>
+                        <div className="text-xs uppercase text-slate-500">Episodios</div>
+                        <div className="font-semibold text-white">
+                          {selectedProject.episodes}
+                        </div>
                       </div>
                     </div>
                   )}
                 </div>
 
-                <p className="text-slate-300 leading-relaxed mb-6">{selectedProject.description}</p>
+                <p className="mb-6 leading-relaxed text-slate-300">
+                  {selectedProject.description}
+                </p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {selectedProject.youtube && (
                     <motion.a
                       href={selectedProject.youtube}
@@ -431,14 +486,14 @@ export default function Series() {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-red-600 text-white rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-red-700 transition-all"
+                      className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-6 py-3 font-bold text-white shadow-lg transition-all hover:bg-red-700 hover:shadow-xl"
                     >
-                      <Youtube className="w-5 h-5" />
+                      <Youtube className="h-5 w-5" />
                       Ver en YouTube
-                      <ExternalLink className="w-4 h-4" />
+                      <ExternalLink className="h-4 w-4" />
                     </motion.a>
                   )}
-                  
+
                   {selectedProject.imdb && (
                     <motion.a
                       href={selectedProject.imdb}
@@ -446,11 +501,11 @@ export default function Series() {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-yellow-400 text-black rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-yellow-300 transition-all"
+                      className="inline-flex items-center justify-center gap-2 rounded-xl bg-yellow-400 px-6 py-3 font-bold text-black shadow-lg transition-all hover:bg-yellow-300 hover:shadow-xl"
                     >
-                      <Star className="w-5 h-5" />
+                      <Star className="h-5 w-5" />
                       Ver en IMDb
-                      <ExternalLink className="w-4 h-4" />
+                      <ExternalLink className="h-4 w-4" />
                     </motion.a>
                   )}
 
@@ -461,14 +516,18 @@ export default function Series() {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all"
+                      className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-bold shadow-lg transition-all hover:shadow-xl"
                       style={{ backgroundColor: '#FA6432', color: 'white' }}
-                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#E55A2B'}
-                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#FA6432'}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.backgroundColor = '#E55A2B')
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.backgroundColor = '#FA6432')
+                      }
                     >
-                      <Film className="w-5 h-5" />
+                      <Film className="h-5 w-5" />
                       Ver en FilmAffinity
-                      <ExternalLink className="w-4 h-4" />
+                      <ExternalLink className="h-4 w-4" />
                     </motion.a>
                   )}
 
@@ -479,14 +538,18 @@ export default function Series() {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all"
+                      className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-bold shadow-lg transition-all hover:shadow-xl"
                       style={{ backgroundColor: '#0066CC', color: 'white' }}
-                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#0052A3'}
-                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#0066CC'}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.backgroundColor = '#0052A3')
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.backgroundColor = '#0066CC')
+                      }
                     >
-                      <Film className="w-5 h-5" />
+                      <Film className="h-5 w-5" />
                       Ver en SensaCine
-                      <ExternalLink className="w-4 h-4" />
+                      <ExternalLink className="h-4 w-4" />
                     </motion.a>
                   )}
                 </div>

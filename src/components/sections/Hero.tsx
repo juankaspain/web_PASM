@@ -1,7 +1,17 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Play, Camera, Instagram, X, Youtube, Facebook, ExternalLink, Sparkles } from 'lucide-react'
+import {
+  ArrowDown,
+  Play,
+  Camera,
+  Instagram,
+  X,
+  Youtube,
+  Facebook,
+  ExternalLink,
+  Sparkles,
+} from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { SiTiktok, SiImdb, SiWikipedia } from 'react-icons/si'
@@ -19,8 +29,8 @@ export default function Hero() {
   }, [])
 
   const professionalLinks = [
-    { 
-      name: 'IMDb', 
+    {
+      name: 'IMDb',
       url: 'https://www.imdb.com/name/nm9017709/',
       icon: SiImdb,
       description: 'Perfil profesional',
@@ -31,8 +41,8 @@ export default function Hero() {
       hoverBorder: 'hover:border-yellow-400/50',
       hoverText: 'hover:text-yellow-400',
     },
-    { 
-      name: 'FilmAffinity', 
+    {
+      name: 'FilmAffinity',
       url: 'https://www.filmaffinity.com/es/name.php?name-id=231727420',
       icon: RiFilmLine,
       description: 'Filmografía completa',
@@ -43,8 +53,8 @@ export default function Hero() {
       hoverBorder: 'hover:border-blue-400/50',
       hoverText: 'hover:text-blue-400',
     },
-    { 
-      name: 'SensaCine', 
+    {
+      name: 'SensaCine',
       url: 'https://www.sensacine.com/actores/actor-889713/',
       icon: RiMovie2Line,
       description: 'Proyectos y noticias',
@@ -55,8 +65,8 @@ export default function Hero() {
       hoverBorder: 'hover:border-purple-400/50',
       hoverText: 'hover:text-purple-400',
     },
-    { 
-      name: 'Wikipedia', 
+    {
+      name: 'Wikipedia',
       url: 'https://es.wikipedia.org/wiki/Almagro_San_Miguel',
       icon: SiWikipedia,
       description: 'Biografía',
@@ -153,30 +163,34 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black"
     >
-      {/* All styled-jsx tags MUST be at section root level */}
+      {/* A.10 - Consolidated styled-jsx block */}
       <style jsx>{`
         @keyframes star-float {
-          0%, 100% { opacity: 0; transform: translateY(0); }
-          50% { opacity: 1; }
-          100% { transform: translateY(-100vh); }
+          0%,
+          100% {
+            opacity: 0;
+            transform: translateY(0);
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(-100vh);
+          }
         }
         .star-animation {
           animation: star-float linear infinite;
         }
-      `}</style>
 
-      <style jsx>{`
         .hero-image-container {
           transition: transform 0.5s ease-out;
         }
         .hero-image-container:hover {
           transform: scale(1.02);
         }
-      `}</style>
 
-      <style jsx>{`
         @keyframes fadeInUp {
           from {
             opacity: 0;
@@ -189,13 +203,23 @@ export default function Hero() {
         }
 
         @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(5px); }
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(5px);
+          }
         }
 
         @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.6; }
+          0%,
+          100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.6;
+          }
         }
 
         .fade-in-up {
@@ -296,7 +320,7 @@ export default function Hero() {
           {[...Array(18)].map((_, i) => (
             <div
               key={i}
-              className="star-animation absolute w-1 h-1 bg-yellow-400 rounded-full blur-[1px]"
+              className="star-animation absolute h-1 w-1 rounded-full bg-yellow-400 blur-[1px]"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -309,20 +333,20 @@ export default function Hero() {
       )}
 
       <motion.div
-        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20"
+        className="relative z-10 mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20"
         style={{ opacity, scale }}
       >
-        <div className="grid lg:grid-cols-[0.95fr_1.25fr] gap-8 xl:gap-12 items-center">
-          <div className="order-2 lg:order-1 flex justify-center lg:justify-start">
+        <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.25fr] xl:gap-12">
+          <div className="order-2 flex justify-center lg:order-1 lg:justify-start">
             <div className="relative w-full max-w-[480px] lg:max-w-[520px]">
-              <div className="absolute inset-0 rounded-[28px] lg:rounded-[36px] bg-yellow-400/10 blur-3xl" />
-              
-              <div className="hero-image-container relative aspect-[2.5/4] rounded-[28px] lg:rounded-[36px] overflow-hidden shadow-[0_50px_150px_rgba(0,0,0,0.95)]">
+              <div className="absolute inset-0 rounded-[28px] bg-yellow-400/10 blur-3xl lg:rounded-[36px]" />
+
+              <div className="hero-image-container relative aspect-[2.5/4] overflow-hidden rounded-[28px] shadow-[0_50px_150px_rgba(0,0,0,0.95)] lg:rounded-[36px]">
                 <Image
                   src="https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4"
                   alt="Almagro San Miguel - Actor profesional de televisión, cine y teatro"
                   fill
-                  className="object-cover object-[center_15%] scale-105"
+                  className="scale-105 object-cover object-[center_15%]"
                   sizes="(min-width: 1024px) 520px, 90vw"
                   priority
                   fetchPriority="high"
@@ -331,7 +355,7 @@ export default function Hero() {
                     filter: 'brightness(1.05) contrast(1.08) saturate(0.95)',
                   }}
                 />
-                
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
@@ -341,35 +365,37 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="order-1 lg:order-2 space-y-6 lg:space-y-7 fade-in-up">
+          <div className="fade-in-up order-1 space-y-6 lg:order-2 lg:space-y-7">
             <div className="space-y-2">
-              <h1 
-                className="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[60px] xl:text-[66px] font-serif font-bold tracking-tight leading-[1.1] fade-in-up"
+              <h1
+                className="fade-in-up font-serif text-[40px] font-bold leading-[1.1] tracking-tight sm:text-[48px] md:text-[54px] lg:text-[60px] xl:text-[66px]"
                 style={{ animationDelay: '0.1s' }}
               >
                 <span className="text-white">Almagro </span>
                 <span className="text-yellow-400">San Miguel</span>
               </h1>
 
-              <p 
-                className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-300 fade-in-up"
+              <p
+                className="fade-in-up text-lg font-semibold text-slate-300 sm:text-xl md:text-2xl"
                 style={{ animationDelay: '0.2s' }}
               >
                 Actor de Televisión, Cine y Teatro
               </p>
 
               {/* Especialidades */}
-              <div 
-                className="flex items-center gap-2 flex-wrap fade-in-up pt-2"
+              <div
+                className="fade-in-up flex flex-wrap items-center gap-2 pt-2"
                 style={{ animationDelay: '0.25s' }}
               >
-                <Sparkles className="w-4 h-4 text-yellow-400 flex-shrink-0" />
-                <div className="flex items-center gap-2 flex-wrap">
+                <Sparkles className="h-4 w-4 flex-shrink-0 text-yellow-400" />
+                <div className="flex flex-wrap items-center gap-2">
                   {specialties.map((specialty, index) => (
                     <span key={specialty}>
-                      <span className="text-sm font-medium text-slate-400">{specialty}</span>
+                      <span className="text-sm font-medium text-slate-400">
+                        {specialty}
+                      </span>
                       {index < specialties.length - 1 && (
-                        <span className="text-slate-600 mx-1">|</span>
+                        <span className="mx-1 text-slate-600">|</span>
                       )}
                     </span>
                   ))}
@@ -378,44 +404,56 @@ export default function Hero() {
             </div>
 
             {/* Sección de Bienvenida Profesional con Estadísticas */}
-            <div className="relative fade-in-up" style={{ animationDelay: '0.3s' }}>
-              <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400/20 via-yellow-500/20 to-yellow-400/20 rounded-3xl blur-2xl opacity-60" />
-              
-              <div className="relative bg-gradient-to-br from-slate-900/95 to-black/95 rounded-3xl border border-yellow-400/20 p-6 backdrop-blur-xl shadow-2xl">
-                <div className="flex items-center justify-center gap-2 mb-4">
-                  <div className="w-2 h-2 rounded-full bg-green-400 pulse-dot" />
+            <div className="fade-in-up relative" style={{ animationDelay: '0.3s' }}>
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-yellow-400/20 via-yellow-500/20 to-yellow-400/20 opacity-60 blur-2xl" />
+
+              <div className="relative rounded-3xl border border-yellow-400/20 bg-gradient-to-br from-slate-900/95 to-black/95 p-6 shadow-2xl backdrop-blur-xl">
+                <div className="mb-4 flex items-center justify-center gap-2">
+                  <div className="pulse-dot h-2 w-2 rounded-full bg-green-400" />
                   <span className="text-xs font-bold uppercase tracking-widest text-green-400">
                     Disponible para nuevos proyectos
                   </span>
                 </div>
 
-                <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-white mb-2">
+                <div className="mb-6 text-center">
+                  <h2 className="mb-2 text-xl font-bold text-white">
                     Bienvenido a mi Portfolio Profesional
-                  </h3>
-                  <p className="text-sm text-slate-300 leading-relaxed">
-                    Actor profesional con <span className="text-yellow-400 font-bold">+12 años de trayectoria</span> en producciones nacionales e internacionales.
-                    He participado en series de <span className="text-yellow-400 font-bold">Prime Video</span>, <span className="text-yellow-400 font-bold">TVE</span> y <span className="text-yellow-400 font-bold">Atresplayer</span>, acumulando <span className="text-yellow-400 font-bold">+300 episodios</span>.
+                  </h2>
+                  <p className="text-sm leading-relaxed text-slate-300">
+                    Actor profesional con{' '}
+                    <span className="font-bold text-yellow-400">
+                      +12 años de trayectoria
+                    </span>{' '}
+                    en producciones nacionales e internacionales. He participado en series
+                    de <span className="font-bold text-yellow-400">Prime Video</span>,{' '}
+                    <span className="font-bold text-yellow-400">TVE</span> y{' '}
+                    <span className="font-bold text-yellow-400">Atresplayer</span>,
+                    acumulando{' '}
+                    <span className="font-bold text-yellow-400">+300 episodios</span>.
                   </p>
                 </div>
 
                 {/* Estadísticas actualizadas */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  {careerStats.map((stat, index) => {
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                  {careerStats.map((stat) => {
                     const Icon = stat.icon
                     return (
                       <div
-                        key={index}
+                        key={stat.label}
                         className={`stat-card relative rounded-xl border bg-gradient-to-br from-black/60 to-slate-900/60 p-4 backdrop-blur-sm ${stat.borderColor}`}
                       >
-                        <div className={`absolute inset-0 rounded-xl bg-gradient-to-br ${stat.gradient} opacity-0 hover:opacity-100 transition-opacity blur-lg`} />
-                        
+                        <div
+                          className={`absolute inset-0 rounded-xl bg-gradient-to-br ${stat.gradient} opacity-0 blur-lg transition-opacity hover:opacity-100`}
+                        />
+
                         <div className="relative flex flex-col items-center gap-2 text-center">
-                          <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
-                            <Icon className={`stat-icon w-5 h-5 ${stat.iconColor}`} />
+                          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5">
+                            <Icon className={`stat-icon h-5 w-5 ${stat.iconColor}`} />
                           </div>
-                          <div className="text-2xl font-bold text-white">{stat.value}</div>
-                          <div className="text-[10px] font-medium text-slate-400 uppercase tracking-wider">
+                          <div className="text-2xl font-bold text-white">
+                            {stat.value}
+                          </div>
+                          <div className="text-[10px] font-medium uppercase tracking-wider text-slate-300">
                             {stat.label}
                           </div>
                         </div>
@@ -427,38 +465,44 @@ export default function Hero() {
             </div>
 
             {/* Botones de CTA - CENTRADOS */}
-            <div className="pt-2 flex flex-col sm:flex-row justify-center gap-3 fade-in-up" style={{ animationDelay: '0.4s' }}>
+            <div
+              className="fade-in-up flex flex-col justify-center gap-3 pt-2 sm:flex-row"
+              style={{ animationDelay: '0.4s' }}
+            >
               <a
                 href="#showreel"
                 className="cta-button group inline-flex items-center justify-center gap-2 rounded-full bg-yellow-400 px-7 py-3.5 text-base font-semibold text-black shadow-[0_10px_30px_rgba(250,204,21,0.25)]"
               >
-                <Play className="w-5 h-5 play-icon" />
+                <Play className="play-icon h-5 w-5" />
                 Ver Showreel Profesional
               </a>
-              
+
               <a
                 href="#headshots"
                 className="cta-button group inline-flex items-center justify-center gap-2 rounded-full bg-yellow-400 px-7 py-3.5 text-base font-semibold text-black shadow-[0_10px_30px_rgba(250,204,21,0.25)]"
               >
-                <Camera className="w-5 h-5 play-icon" />
-                Ver Professional Headshots
+                <Camera className="play-icon h-5 w-5" />
+                Ver Headshots Profesionales
               </a>
             </div>
 
-            {/* Professional Links */}
-            <div className="space-y-4 fade-in-up" style={{ animationDelay: '0.5s' }}>
+            {/* A.6 - Professional Links (hidden on mobile to reduce Hero length) */}
+            <div
+              className="fade-in-up hidden space-y-4 md:block"
+              style={{ animationDelay: '0.5s' }}
+            >
               <div className="flex items-center gap-2.5">
                 <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/60 border border-slate-700/50 backdrop-blur-sm">
-                  <ExternalLink className="w-3.5 h-3.5 text-yellow-400" />
-                  <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-slate-300">
+                <div className="flex items-center gap-2 rounded-full border border-slate-700/50 bg-slate-900/60 px-3 py-1.5 backdrop-blur-sm">
+                  <ExternalLink className="h-3.5 w-3.5 text-yellow-400" />
+                  <span className="text-xs font-bold uppercase tracking-[0.18em] text-slate-300">
                     Perfiles Profesionales
-                  </h3>
+                  </span>
                 </div>
                 <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
               </div>
-              
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                 {professionalLinks.map((link) => {
                   const Icon = link.icon
                   return (
@@ -467,27 +511,34 @@ export default function Hero() {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`profile-card group relative flex flex-col items-center gap-3 rounded-2xl border bg-gradient-to-br from-slate-900/90 to-slate-950/90 px-4 py-5 backdrop-blur-xl transition-all shadow-[0_8px_32px_rgba(0,0,0,0.5)] ${link.borderColor} ${link.hoverBg} ${link.hoverBorder}`}
+                      aria-label={`${link.name} — ${link.description} (se abre en nueva ventana)`}
+                      className={`profile-card group relative flex flex-col items-center gap-3 rounded-2xl border bg-gradient-to-br from-slate-900/90 to-slate-950/90 px-4 py-5 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all ${link.borderColor} ${link.hoverBg} ${link.hoverBorder}`}
                     >
-                      <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${link.gradient} opacity-0 group-hover:opacity-100 transition-opacity blur-xl`} />
-                      
-                      <div className="relative z-10 flex items-center justify-center w-14 h-14 rounded-xl bg-black/40 border border-white/10 shadow-lg">
-                        <Icon className={`profile-icon w-7 h-7 ${link.iconColor}`} />
+                      <div
+                        className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${link.gradient} opacity-0 blur-xl transition-opacity group-hover:opacity-100`}
+                      />
+
+                      <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-xl border border-white/10 bg-black/40 shadow-lg">
+                        <Icon className={`profile-icon h-7 w-7 ${link.iconColor}`} />
                       </div>
-                      
-                      <div className="relative z-10 text-center space-y-1">
+
+                      <div className="relative z-10 space-y-1 text-center">
                         <div className="flex items-center justify-center gap-1.5">
-                          <p className={`text-sm font-bold text-white transition-colors ${link.hoverText}`}>
+                          <p
+                            className={`text-sm font-bold text-white transition-colors ${link.hoverText}`}
+                          >
                             {link.name}
                           </p>
-                          <ExternalLink className={`external-link-icon w-3 h-3 text-slate-500 group-hover:${link.iconColor.replace('text-', 'text-')} transition-all`} />
+                          <ExternalLink
+                            className={`external-link-icon h-3 w-3 text-slate-500 group-hover:${link.iconColor.replace('text-', 'text-')} transition-all`}
+                          />
                         </div>
-                        <p className="text-[10px] text-slate-400 leading-tight">
+                        <p className="text-[10px] leading-tight text-slate-300">
                           {link.description}
                         </p>
                       </div>
-                      
-                      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity">
+
+                      <div className="absolute inset-0 rounded-2xl opacity-0 transition-opacity group-hover:opacity-100">
                         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
                       </div>
@@ -497,16 +548,19 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Social Links */}
-            <div className="space-y-3 fade-in-up" style={{ animationDelay: '0.6s' }}>
+            {/* A.6 - Social Links (hidden on mobile to reduce Hero length) */}
+            <div
+              className="fade-in-up hidden space-y-3 md:block"
+              style={{ animationDelay: '0.6s' }}
+            >
               <div className="flex items-center gap-2">
-                <Instagram className="w-4 h-4 text-yellow-400" />
-                <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400">
+                <Instagram className="h-4 w-4 text-yellow-400" />
+                <span className="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400">
                   Redes Sociales
-                </h3>
+                </span>
               </div>
-              
-              <div className="grid grid-cols-3 sm:grid-cols-5 gap-2.5">
+
+              <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-5">
                 {socialLinks.map((link) => {
                   const Icon = link.icon
                   return (
@@ -515,10 +569,15 @@ export default function Hero() {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`card-hover group flex flex-col items-center justify-center gap-2 rounded-xl border border-slate-700/70 bg-slate-900/80 px-3 py-3 backdrop-blur-md transition-all shadow-[0_12px_30px_rgba(15,23,42,0.8)] ${link.borderHover} ${link.bgHover}`}
+                      aria-label={`Visitar ${link.name} (se abre en nueva ventana)`}
+                      className={`card-hover group flex flex-col items-center justify-center gap-2 rounded-xl border border-slate-700/70 bg-slate-900/80 px-3 py-3 shadow-[0_12px_30px_rgba(15,23,42,0.8)] backdrop-blur-md transition-all ${link.borderHover} ${link.bgHover}`}
                     >
-                      <Icon className={`w-5 h-5 text-slate-300 transition-colors ${link.color}`} />
-                      <p className={`text-[10px] font-semibold text-slate-400 transition-colors ${link.color}`}>
+                      <Icon
+                        className={`h-5 w-5 text-slate-300 transition-colors ${link.color}`}
+                      />
+                      <p
+                        className={`text-[10px] font-semibold text-slate-300 transition-colors ${link.color}`}
+                      >
                         {link.name.split(' ')[0]}
                       </p>
                     </a>
@@ -527,15 +586,18 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="pt-3 flex justify-center lg:justify-start fade-in-up" style={{ animationDelay: '0.7s' }}>
+            <div
+              className="fade-in-up flex justify-center pt-3 lg:justify-start"
+              style={{ animationDelay: '0.7s' }}
+            >
               <a
                 href="#about"
-                className="explore-button group inline-flex items-center gap-3 rounded-full border border-slate-600/70 bg-slate-900/60 px-5 py-2.5 backdrop-blur-md hover:border-white/20 hover:bg-slate-900/80 transition-all"
+                className="explore-button group inline-flex items-center gap-3 rounded-full border border-slate-600/70 bg-slate-900/60 px-5 py-2.5 backdrop-blur-md transition-all hover:border-white/20 hover:bg-slate-900/80"
               >
-                <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
+                <span className="text-sm font-medium text-gray-300 transition-colors group-hover:text-white">
                   Explorar portfolio completo
                 </span>
-                <ArrowDown className="w-4 h-4 text-yellow-400 arrow-bounce" />
+                <ArrowDown className="arrow-bounce h-4 w-4 text-yellow-400" />
               </a>
             </div>
           </div>

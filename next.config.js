@@ -1,11 +1,14 @@
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-})
+/* eslint-disable @typescript-eslint/no-require-imports */
+const withBundleAnalyzer =
+  process.env.ANALYZE === 'true'
+    ? require('@next/bundle-analyzer')({ enabled: true })
+    : (config) => config
+/* eslint-enable @typescript-eslint/no-require-imports */
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  
+
   // Image optimization
   images: {
     remotePatterns: [
@@ -92,7 +95,7 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.google-analytics.com https://ssl.google-analytics.com https://www.googletagmanager.com https://*.sentry.io",
+              "script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://ssl.google-analytics.com https://www.googletagmanager.com https://*.sentry.io",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
@@ -102,7 +105,7 @@ const nextConfig = {
               "base-uri 'self'",
               "form-action 'self' https://formspree.io",
               "frame-ancestors 'self'",
-              "upgrade-insecure-requests",
+              'upgrade-insecure-requests',
             ].join('; '),
           },
         ],
@@ -136,20 +139,11 @@ const nextConfig = {
         ],
       },
       {
-        source: '/manifest.json',
+        source: '/site.webmanifest',
         headers: [
           {
             key: 'Cache-Control',
             value: 'public, max-age=86400',
-          },
-        ],
-      },
-      {
-        source: '/sitemap.xml',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=3600, stale-while-revalidate=86400',
           },
         ],
       },
@@ -178,15 +172,16 @@ const nextConfig = {
   // Experimental features for better performance
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion', 'react-icons'],
-    // Disabled - requires 'critters' package
-    // optimizeCss: true,
   },
 
   // Compiler optimizations (uses SWC by default)
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production' ? {
-      exclude: ['error', 'warn'],
-    } : false,
+    removeConsole:
+      process.env.NODE_ENV === 'production'
+        ? {
+            exclude: ['error', 'warn'],
+          }
+        : false,
     reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
 

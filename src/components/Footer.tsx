@@ -1,9 +1,18 @@
 'use client'
 
-import { Mail, MapPin, Facebook, Instagram, X, Youtube, Heart, Scale, Shield, Cookie, Code } from 'lucide-react'
-import { motion } from 'framer-motion'
+import {
+  Mail,
+  MapPin,
+  Facebook,
+  Instagram,
+  X,
+  Youtube,
+  Scale,
+  Shield,
+  Cookie,
+  Code,
+} from 'lucide-react'
 import { SiTiktok } from 'react-icons/si'
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 const socialLinks = [
@@ -69,58 +78,32 @@ const legalLinks = [
 ]
 
 export default function Footer() {
-  const [hasSupported, setHasSupported] = useState(false)
-  const [fanCount, setFanCount] = useState(23)
-
-  useEffect(() => {
-    // Load state from localStorage
-    const supported = localStorage.getItem('fanSupport')
-    if (supported === 'true') {
-      setHasSupported(true)
-    }
-    
-    // Load fan count from localStorage
-    const savedCount = localStorage.getItem('fanCount')
-    if (savedCount) {
-      setFanCount(parseInt(savedCount, 10))
-    }
-  }, [])
-
-  const handleFanSupport = () => {
-    if (!hasSupported) {
-      setHasSupported(true)
-      const newCount = fanCount + 1
-      setFanCount(newCount)
-      
-      // Save to localStorage
-      localStorage.setItem('fanSupport', 'true')
-      localStorage.setItem('fanCount', newCount.toString())
-    }
-  }
-
   return (
-    <footer className="bg-slate-950 border-t border-neutral-800 text-white py-16" role="contentinfo">
-      <div className="container mx-auto px-4 max-w-7xl">
+    <footer
+      className="border-t border-neutral-800 bg-slate-950 py-16 text-white"
+      role="contentinfo"
+    >
+      <div className="container mx-auto max-w-7xl px-4">
         {/* Main Grid - 4 columns on desktop */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          
+        <div className="mb-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* About Section */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-serif font-bold">
+            <h3 className="font-serif text-2xl font-bold">
               <span className="text-white">Almagro </span>
               <span className="text-yellow-500">San Miguel</span>
             </h3>
-            <p className="text-gray-400 leading-relaxed font-light text-sm">
-              Actor sevillano con más de 10 años de experiencia en televisión, cine y teatro. 
-              Protagonista de producciones en TVE, Prime Video y otras plataformas.
+            <p className="text-sm font-light leading-relaxed text-gray-400">
+              Actor sevillano con más de 10 años de experiencia en televisión, cine y
+              teatro. Protagonista de producciones en TVE, Prime Video y otras
+              plataformas.
             </p>
-            <div className="space-y-2 text-gray-400 text-sm">
+            <div className="space-y-2 text-sm text-gray-400">
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-neutral-500" />
+                <MapPin className="h-4 w-4 text-neutral-500" aria-hidden="true" />
                 <span className="font-light">Madrid y Sevilla, España</span>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-neutral-500" />
+                <Mail className="h-4 w-4 text-neutral-500" aria-hidden="true" />
                 <span className="font-light">Disponible para proyectos</span>
               </div>
             </div>
@@ -128,13 +111,13 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold mb-4">Navegación</h4>
+            <h4 className="mb-4 text-lg font-semibold">Navegación</h4>
             <ul className="space-y-2.5" role="list">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-yellow-400 transition-colors text-sm block hover:translate-x-1 transform duration-200 font-light"
+                    className="block transform text-sm font-light text-gray-400 transition-colors duration-200 hover:translate-x-1 hover:text-yellow-400"
                   >
                     {link.label}
                   </Link>
@@ -145,7 +128,7 @@ export default function Footer() {
 
           {/* Legal Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold mb-4">Legal</h4>
+            <h4 className="mb-4 text-lg font-semibold">Legal</h4>
             <ul className="space-y-2.5" role="list">
               {legalLinks.map((link) => {
                 const Icon = link.icon
@@ -153,11 +136,11 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="group flex items-start gap-2 text-gray-400 hover:text-yellow-400 transition-colors text-sm"
+                      className="group flex items-start gap-2 text-sm text-gray-400 transition-colors hover:text-yellow-400"
                       title={link.description}
                     >
-                      <Icon className="w-4 h-4 mt-0.5 flex-shrink-0" aria-hidden="true" />
-                      <span className="group-hover:translate-x-1 transform duration-200 inline-block font-light">
+                      <Icon className="mt-0.5 h-4 w-4 flex-shrink-0" aria-hidden="true" />
+                      <span className="inline-block transform font-light duration-200 group-hover:translate-x-1">
                         {link.label}
                       </span>
                     </Link>
@@ -167,102 +150,70 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Social Links + Fan Support */}
+          {/* Social Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold mb-4">Sígueme</h4>
+            <h4 className="mb-4 text-lg font-semibold">Sígueme</h4>
             <div className="flex flex-wrap gap-3">
               {socialLinks.map((link) => {
                 const Icon = link.icon
                 return (
-                  <motion.a
+                  <a
                     key={link.name}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="group relative bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 p-3 rounded-lg transition-all shadow-lg"
-                    aria-label={`Visitar ${link.name}`}
+                    className="group relative rounded-lg border border-neutral-800 bg-neutral-900 p-3 shadow-lg transition-all hover:-translate-y-0.5 hover:scale-110 hover:border-neutral-700 hover:bg-neutral-800"
+                    aria-label={`Visitar ${link.name} (se abre en nueva ventana)`}
                   >
-                    <Icon className="w-5 h-5" />
-                    <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-slate-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10">
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                    <span className="pointer-events-none absolute -bottom-8 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded bg-slate-900 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
                       {link.name}
                     </span>
-                  </motion.a>
+                  </a>
                 )
               })}
             </div>
-
-            {/* Fan Support Button - Minimalist */}
-            <motion.button
-              onClick={handleFanSupport}
-              disabled={hasSupported}
-              whileHover={!hasSupported ? { scale: 1.02 } : {}}
-              whileTap={!hasSupported ? { scale: 0.98 } : {}}
-              className={`w-full mt-6 px-4 py-3 rounded-lg font-medium text-sm transition-all duration-300 flex items-center justify-between ${
-                hasSupported 
-                  ? 'bg-neutral-900 border border-neutral-800 cursor-default' 
-                  : 'bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 cursor-pointer'
-              }`}
-              aria-label={hasSupported ? 'Ya has apoyado' : 'Apoyar al actor'}
-            >
-              <div className="flex items-center gap-2.5">
-                <motion.div
-                  animate={!hasSupported ? {
-                    scale: [1, 1.2, 1],
-                  } : {}}
-                  transition={{
-                    duration: 0.5,
-                    repeat: Infinity,
-                    repeatDelay: 3
-                  }}
-                >
-                  <Heart 
-                    className={`w-4 h-4 ${
-                      hasSupported ? 'fill-rose-500 text-rose-500' : 'text-neutral-400'
-                    } transition-colors`}
-                    aria-hidden="true"
-                  />
-                </motion.div>
-                <span className="text-neutral-300 font-light">
-                  {hasSupported ? 'Gracias por tu apoyo' : 'Apóyame'}
-                </span>
-              </div>
-              <span className="text-xs text-neutral-500 font-light">
-                {fanCount} fans
-              </span>
-            </motion.button>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-neutral-800 pt-8 space-y-4">
-          <div className="text-center text-gray-400 text-sm space-y-2">
+        <div className="space-y-4 border-t border-neutral-800 pt-8">
+          <div className="space-y-2 text-center text-sm text-gray-400">
             <p className="font-light">
-              © {new Date().getFullYear()} Almagro San Miguel. Todos los derechos reservados.
+              © {new Date().getFullYear()} Almagro San Miguel. Todos los derechos
+              reservados.
             </p>
-            <p className="text-gray-500 text-xs font-light">
+            <p className="text-xs font-light text-gray-500">
               Actor profesional | Madrid y Sevilla, España
             </p>
           </div>
-          
+
           {/* Developer Credit */}
-          <div className="text-center pt-4 border-t border-neutral-800/50">
+          <div className="border-t border-neutral-800/50 pt-4 text-center">
             <a
               href="https://github.com/juankaspain"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs text-gray-500 hover:text-yellow-400 transition-colors group"
+              className="group inline-flex items-center gap-2 text-xs text-gray-500 transition-colors hover:text-yellow-400"
+              aria-label="Developed by JuankaSpain (se abre en nueva ventana)"
             >
-              <Code className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" aria-hidden="true" />
-              <span className="font-light">Developed by <strong className="font-semibold">JuankaSpain</strong></span>
+              <Code
+                className="h-3.5 w-3.5 transition-transform group-hover:rotate-12"
+                aria-hidden="true"
+              />
+              <span className="font-light">
+                Developed by <strong className="font-semibold">JuankaSpain</strong>
+              </span>
             </a>
           </div>
         </div>
       </div>
 
       {/* Bottom accent line */}
-      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent" />
+      <div
+        className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent"
+        aria-hidden="true"
+      />
     </footer>
   )
 }

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Quote } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 type Category = 'series' | 'cine' | 'teatro'
 
@@ -206,8 +206,31 @@ const sortedTestimonials = [...testimonials].sort(
   (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
 )
 
+function useInView(options?: IntersectionObserverInit) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [isInView, setIsInView] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsInView(true)
+        observer.unobserve(el)
+      }
+    }, options)
+    observer.observe(el)
+    return () => observer.disconnect()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  return { ref, isInView }
+}
+
 export default function Testimonials() {
   const [activeCategory, setActiveCategory] = useState<Category>('series')
+  const sectionHeader = useInView({ threshold: 0.1 })
+  const stats = useInView({ threshold: 0.1 })
 
   const filteredTestimonials = sortedTestimonials.filter(
     (t) => t.category === activeCategory
@@ -220,32 +243,30 @@ export default function Testimonials() {
   ]
 
   return (
-    <section id="testimonials" className="py-20 bg-slate-900 text-white">
+    <section id="testimonials" className="bg-slate-900 py-20 text-white">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+        <div
+          ref={sectionHeader.ref}
+          className={`transition-all duration-[600ms] ${sectionHeader.isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Quote className="w-8 h-8 text-yellow-500" />
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-center">
+          <div className="mb-4 flex items-center justify-center gap-3">
+            <Quote className="h-8 w-8 text-yellow-500" />
+            <h2 className="text-center font-serif text-4xl font-bold md:text-5xl">
               Declaraciones Profesionales
             </h2>
           </div>
-          <p className="text-center text-gray-300 mb-12 max-w-2xl mx-auto">
-            Reflexiones sobre proyectos, personajes y experiencias a lo largo de su carrera
-            artística
+          <p className="mx-auto mb-12 max-w-2xl text-center text-gray-300">
+            Reflexiones sobre proyectos, personajes y experiencias a lo largo de su
+            carrera artística
           </p>
 
           {/* Filter Tabs */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="mb-12 flex flex-wrap justify-center gap-3">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+                className={`rounded-full px-6 py-2 font-medium transition-all duration-300 ${
                   activeCategory === cat.id
                     ? 'bg-yellow-500 text-slate-900'
                     : 'bg-slate-800 text-gray-300 hover:bg-slate-700'
@@ -256,7 +277,7 @@ export default function Testimonials() {
             ))}
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredTestimonials.map((testimonial, index) => (
               <motion.div
                 key={`${testimonial.role}-${index}`}
@@ -264,25 +285,27 @@ export default function Testimonials() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="group bg-slate-800 p-6 rounded-lg border border-slate-700 hover:border-yellow-500 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-500/10"
+                className="group rounded-lg border border-slate-700 bg-slate-800 p-6 transition-all duration-300 hover:border-yellow-500 hover:shadow-2xl hover:shadow-yellow-500/10"
               >
-                <Quote className="w-8 h-8 text-yellow-500/50 mb-4" />
-                <blockquote className="text-gray-200 leading-relaxed mb-4 italic text-sm">
+                <Quote className="mb-4 h-8 w-8 text-yellow-500/50" />
+                <blockquote className="mb-4 text-sm italic leading-relaxed text-gray-200">
                   {testimonial.quote}
                 </blockquote>
                 <div className="border-t border-slate-700 pt-4">
-                  <p className="font-semibold text-yellow-500 mb-1">{testimonial.author}</p>
-                  <p className="text-sm text-gray-400 mb-2">{testimonial.role}</p>
+                  <p className="mb-1 font-semibold text-yellow-500">
+                    {testimonial.author}
+                  </p>
+                  <p className="mb-2 text-sm text-gray-400">{testimonial.role}</p>
                   <div className="flex items-center justify-between">
                     <a
                       href={testimonial.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs text-gray-500 hover:text-yellow-500 transition-colors"
+                      className="text-xs text-gray-500 transition-colors hover:text-yellow-500"
                     >
                       {testimonial.source} →
                     </a>
-                    <span className="text-xs text-gray-500 bg-slate-900 px-2 py-1 rounded">
+                    <span className="rounded bg-slate-900 px-2 py-1 text-xs text-gray-500">
                       {testimonial.year}
                     </span>
                   </div>
@@ -292,27 +315,24 @@ export default function Testimonials() {
           </div>
 
           {/* Stats Summary */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="mt-16 grid grid-cols-3 gap-6 max-w-2xl mx-auto"
+          <div
+            ref={stats.ref}
+            className={`mx-auto mt-16 grid max-w-2xl grid-cols-3 gap-6 transition-all delay-300 duration-[600ms] ${stats.isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
           >
             {categories.map((cat) => {
               const count = testimonials.filter((t) => t.category === cat.id).length
               return (
                 <div
                   key={cat.id}
-                  className="text-center p-4 bg-slate-800 rounded-lg border border-slate-700"
+                  className="rounded-lg border border-slate-700 bg-slate-800 p-4 text-center"
                 >
-                  <div className="text-3xl font-bold text-yellow-500 mb-2">{count}</div>
+                  <div className="mb-2 text-3xl font-bold text-yellow-500">{count}</div>
                   <div className="text-sm text-gray-400">{cat.label}</div>
                 </div>
               )
             })}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   )

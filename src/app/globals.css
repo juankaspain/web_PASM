@@ -25,7 +25,7 @@
     --ring: 240 5.9% 10%;
     --radius: 0.5rem;
     --font-sans: var(--font-inter), system-ui, sans-serif;
-    --font-serif: var(--font-playfair), Georgia, serif;
+    --font-serif: Georgia, 'Times New Roman', serif;
   }
 
   .dark {
@@ -57,7 +57,9 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
   }
 }
 
@@ -83,4 +85,57 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--foreground));
+}
+
+/* D.7 - Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* G.6 - Print styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  nav,
+  footer,
+  .fixed,
+  button,
+  [role='dialog'] {
+    display: none !important;
+  }
+
+  main {
+    background: white !important;
+  }
+
+  a {
+    color: black !important;
+    text-decoration: underline !important;
+  }
+
+  a[href]::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+  section {
+    background: white !important;
+    color: black !important;
+    page-break-inside: avoid;
+  }
 }

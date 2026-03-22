@@ -27,13 +27,19 @@ Object.defineProperty(window, 'matchMedia', {
 
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
-  constructor() {}
+  readonly root: Element | null = null
+  readonly rootMargin: string = '0px'
+  readonly thresholds: ReadonlyArray<number> = [0]
+  constructor(
+    _callback: IntersectionObserverCallback,
+    _options?: IntersectionObserverInit
+  ) {}
   disconnect() {}
-  observe() {}
-  takeRecords() {
+  observe(_target: Element) {}
+  takeRecords(): IntersectionObserverEntry[] {
     return []
   }
-  unobserve() {}
+  unobserve(_target: Element) {}
 }
 
 // Mock ResizeObserver

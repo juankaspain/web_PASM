@@ -6,13 +6,13 @@ import About from '@/components/sections/About'
 import LatestProject from '@/components/sections/LatestProject'
 import Footer from '@/components/Footer'
 import ScrollToTop from '@/components/ui/ScrollToTop'
-import { 
-  SectionSkeleton, 
-  ShowreelSkeleton, 
-  TestimonialsSkeleton, 
+import {
+  SectionSkeleton,
+  ShowreelSkeleton,
+  TestimonialsSkeleton,
   ContactSkeleton,
   GallerySkeleton,
-  TimelineSkeleton
+  TimelineSkeleton,
 } from '@/components/ui/Skeleton'
 
 // Lazy load heavy sections
@@ -35,34 +35,36 @@ const Contact = dynamic(() => import('@/components/sections/Contact'))
 
 export default function Home() {
   return (
-    <main className="relative bg-black">
+    <main id="main-content" className="relative bg-black">
       {/* Critical above-the-fold content - loaded immediately */}
       <Navbar />
       <Hero />
-      
+
       {/* Latest Project - Immediately after hero to showcase current work */}
       <LatestProject />
-      
+
       {/* Core sections - Optimized for casting directors */}
       <About />
-      <Skills />
-      
+      <Suspense fallback={<SectionSkeleton />}>
+        <Skills />
+      </Suspense>
+
       {/* Filmography sections - reorganized order with Suspense */}
       {/* 1. Series de Televisión */}
       <Suspense fallback={<SectionSkeleton />}>
         <Series />
       </Suspense>
-      
+
       {/* 2. Cine & Cortometrajes */}
       <Suspense fallback={<SectionSkeleton />}>
         <Cinema />
       </Suspense>
-      
+
       {/* 3. Teatro Profesional */}
       <Suspense fallback={<SectionSkeleton />}>
         <Theater />
       </Suspense>
-      
+
       {/* Career sections */}
       <Suspense fallback={<TimelineSkeleton />}>
         <Timeline />
@@ -73,12 +75,12 @@ export default function Home() {
       <Suspense fallback={<SectionSkeleton />}>
         <Awards />
       </Suspense>
-      
+
       {/* Events & Schedule */}
       <Suspense fallback={<SectionSkeleton />}>
         <Calendar />
       </Suspense>
-      
+
       {/* Media sections - Professional photos first */}
       <Suspense fallback={<GallerySkeleton />}>
         <Headshots />
@@ -86,7 +88,7 @@ export default function Home() {
       <Suspense fallback={<GallerySkeleton />}>
         <Gallery />
       </Suspense>
-      
+
       {/* Media & Declarations - Integrated section */}
       <Suspense fallback={<ShowreelSkeleton />}>
         <Showreel />
@@ -94,16 +96,16 @@ export default function Home() {
       <Suspense fallback={<TestimonialsSkeleton />}>
         <Testimonials />
       </Suspense>
-      
+
       <Suspense fallback={<SectionSkeleton />}>
         <Press />
       </Suspense>
-      
+
       {/* Blog - Noticias y actualizaciones */}
       <Suspense fallback={<SectionSkeleton />}>
         <Blog />
       </Suspense>
-      
+
       {/* Professional sections */}
       <Suspense fallback={<SectionSkeleton />}>
         <PressKit />
@@ -111,10 +113,10 @@ export default function Home() {
       <Suspense fallback={<ContactSkeleton />}>
         <Contact />
       </Suspense>
-      
+
       {/* Footer */}
       <Footer />
-      
+
       {/* Scroll to Top Button */}
       <ScrollToTop />
     </main>
