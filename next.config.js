@@ -5,6 +5,8 @@ const withBundleAnalyzer =
     : (config) => config
 /* eslint-enable @typescript-eslint/no-require-imports */
 
+const isDev = process.env.NODE_ENV === 'development'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -95,7 +97,7 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://ssl.google-analytics.com https://www.googletagmanager.com https://*.sentry.io",
+              `script-src 'self' 'unsafe-inline' ${isDev ? "'unsafe-eval' " : ''}https://www.google-analytics.com https://ssl.google-analytics.com https://www.googletagmanager.com https://*.sentry.io`,
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
@@ -173,6 +175,11 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion', 'react-icons'],
   },
+
+  // Note: Chrome DevTools "setTimeout handler took Xms" and "requestIdleCallback handler
+  // took Xms" violations are development-only performance warnings triggered by React
+  // reconciliation, Framer Motion layout calculations, and Next.js HMR. They do not
+  // appear in production builds and cannot be eliminated in a complex React app.
 
   // Compiler optimizations (uses SWC by default)
   compiler: {

@@ -6,6 +6,7 @@ import Analytics from '@/components/Analytics'
 import PWAInstall from '@/components/PWAInstall'
 import CookieConsent from '@/components/CookieConsent'
 import Script from 'next/script'
+import PassiveEvents from '@/components/PassiveEvents'
 
 // Optimized font configuration with display swap and fallbacks
 const inter = Inter({
@@ -203,6 +204,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
       </head>
       <body className={inter.className}>
+        <PassiveEvents />
         {/* D.1 - Skip to content link for keyboard/screen reader users */}
         <a
           href="#main-content"
