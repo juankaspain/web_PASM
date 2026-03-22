@@ -103,7 +103,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`animate-slideInDown fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+        className={`fixed left-0 right-0 top-0 z-50 h-20 transition-all duration-300 ${
           isScrolled
             ? 'border-b border-white/5 bg-black/95 shadow-lg backdrop-blur-md'
             : 'bg-transparent'
@@ -215,7 +215,7 @@ export default function Navbar() {
         role="dialog"
         aria-modal="true"
         aria-label="Menú de navegación"
-        className={`bg-black/98 fixed inset-y-0 right-0 z-40 w-full border-l border-white/5 shadow-2xl backdrop-blur-xl sm:w-80 transition-transform duration-300 ease-out ${
+        className={`bg-black/98 fixed inset-y-0 right-0 z-40 w-full border-l border-white/5 shadow-2xl backdrop-blur-xl transition-transform duration-300 ease-out sm:w-80 ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -287,8 +287,10 @@ export default function Navbar() {
       {/* Overlay for mobile menu */}
       <div
         onClick={() => setIsMobileMenuOpen(false)}
-        className={`fixed inset-0 z-30 bg-black/60 backdrop-blur-sm lg:hidden transition-opacity duration-300 ${
-          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        className={`fixed inset-0 z-30 bg-black/60 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
+          isMobileMenuOpen
+            ? 'pointer-events-auto opacity-100'
+            : 'pointer-events-none opacity-0'
         }`}
       />
     </>

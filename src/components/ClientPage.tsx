@@ -41,6 +41,25 @@ const Blog = dynamic(() => import('@/components/sections/Blog'), { ssr: false })
 const PressKit = dynamic(() => import('@/components/sections/PressKit'), { ssr: false })
 const Contact = dynamic(() => import('@/components/sections/Contact'), { ssr: false })
 
+/** Wrapper that reserves vertical space for lazy-loaded sections to prevent CLS */
+function LazySection({
+  children,
+  fallback,
+  minHeight = 'min-h-[400px]',
+}: {
+  children: React.ReactNode
+  fallback: React.ReactNode
+  minHeight?: string
+}) {
+  return (
+    <div className={`content-auto ${minHeight}`}>
+      <Suspense fallback={<div className={minHeight}>{fallback}</div>}>
+        {children}
+      </Suspense>
+    </div>
+  )
+}
+
 export default function ClientPage() {
   return (
     <main id="main-content" className="relative bg-black">
@@ -49,112 +68,76 @@ export default function ClientPage() {
       <Hero />
 
       {/* Latest Project - Immediately after hero to showcase current work */}
-      <div className="content-auto">
-        <Suspense fallback={<SectionSkeleton />}>
-          <LatestProject />
-        </Suspense>
-      </div>
+      <LazySection fallback={<SectionSkeleton />}>
+        <LatestProject />
+      </LazySection>
 
       {/* Core sections - Optimized for casting directors */}
-      <div className="content-auto">
-        <Suspense fallback={<SectionSkeleton />}>
-          <About />
-        </Suspense>
-      </div>
-      <div className="content-auto">
-        <Suspense fallback={<SectionSkeleton />}>
-          <Skills />
-        </Suspense>
-      </div>
+      <LazySection fallback={<SectionSkeleton />}>
+        <About />
+      </LazySection>
+      <LazySection fallback={<SectionSkeleton />}>
+        <Skills />
+      </LazySection>
 
       {/* Filmography sections */}
-      <div className="content-auto">
-        <Suspense fallback={<SectionSkeleton />}>
-          <Series />
-        </Suspense>
-      </div>
-      <div className="content-auto">
-        <Suspense fallback={<SectionSkeleton />}>
-          <Cinema />
-        </Suspense>
-      </div>
-      <div className="content-auto">
-        <Suspense fallback={<SectionSkeleton />}>
-          <Theater />
-        </Suspense>
-      </div>
+      <LazySection fallback={<SectionSkeleton />}>
+        <Series />
+      </LazySection>
+      <LazySection fallback={<SectionSkeleton />}>
+        <Cinema />
+      </LazySection>
+      <LazySection fallback={<SectionSkeleton />}>
+        <Theater />
+      </LazySection>
 
       {/* Career sections */}
-      <div className="content-auto">
-        <Suspense fallback={<TimelineSkeleton />}>
-          <Timeline />
-        </Suspense>
-      </div>
-      <div className="content-auto">
-        <Suspense fallback={<SectionSkeleton />}>
-          <Milestones />
-        </Suspense>
-      </div>
-      <div className="content-auto">
-        <Suspense fallback={<SectionSkeleton />}>
-          <Awards />
-        </Suspense>
-      </div>
+      <LazySection fallback={<TimelineSkeleton />}>
+        <Timeline />
+      </LazySection>
+      <LazySection fallback={<SectionSkeleton />}>
+        <Milestones />
+      </LazySection>
+      <LazySection fallback={<SectionSkeleton />}>
+        <Awards />
+      </LazySection>
 
       {/* Events & Schedule */}
-      <div className="content-auto">
-        <Suspense fallback={<SectionSkeleton />}>
-          <Calendar />
-        </Suspense>
-      </div>
+      <LazySection fallback={<SectionSkeleton />}>
+        <Calendar />
+      </LazySection>
 
       {/* Media sections */}
-      <div className="content-auto">
-        <Suspense fallback={<GallerySkeleton />}>
-          <Headshots />
-        </Suspense>
-      </div>
-      <div className="content-auto">
-        <Suspense fallback={<GallerySkeleton />}>
-          <Gallery />
-        </Suspense>
-      </div>
+      <LazySection fallback={<GallerySkeleton />} minHeight="min-h-[500px]">
+        <Headshots />
+      </LazySection>
+      <LazySection fallback={<GallerySkeleton />} minHeight="min-h-[500px]">
+        <Gallery />
+      </LazySection>
 
       {/* Media & Declarations */}
-      <div className="content-auto">
-        <Suspense fallback={<ShowreelSkeleton />}>
-          <Showreel />
-        </Suspense>
-      </div>
-      <div className="content-auto">
-        <Suspense fallback={<TestimonialsSkeleton />}>
-          <Testimonials />
-        </Suspense>
-      </div>
-      <div className="content-auto">
-        <Suspense fallback={<SectionSkeleton />}>
-          <Press />
-        </Suspense>
-      </div>
+      <LazySection fallback={<ShowreelSkeleton />} minHeight="min-h-[500px]">
+        <Showreel />
+      </LazySection>
+      <LazySection fallback={<TestimonialsSkeleton />}>
+        <Testimonials />
+      </LazySection>
+      <LazySection fallback={<SectionSkeleton />}>
+        <Press />
+      </LazySection>
 
       {/* Blog */}
-      <div className="content-auto">
-        <Suspense fallback={<SectionSkeleton />}>
-          <Blog />
-        </Suspense>
-      </div>
+      <LazySection fallback={<SectionSkeleton />}>
+        <Blog />
+      </LazySection>
 
       {/* Professional sections */}
-      <div className="content-auto">
-        <Suspense fallback={<SectionSkeleton />}>
-          <PressKit />
-        </Suspense>
-      </div>
-      <div className="content-auto">
-        <Suspense fallback={<ContactSkeleton />}>
-          <Contact />
-        </Suspense>
-      </div>
+      <LazySection fallback={<SectionSkeleton />}>
+        <PressKit />
+      </LazySection>
+      <LazySection fallback={<ContactSkeleton />}>
+        <Contact />
+      </LazySection>
 
       {/* Footer */}
       <Footer />

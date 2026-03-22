@@ -13,7 +13,7 @@ export function Skeleton({ className, ...props }: SkeletonProps) {
 
 export function SectionSkeleton({ className }: { className?: string }) {
   return (
-    <section className={cn('bg-black py-20', className)}>
+    <section className={cn('min-h-[400px] bg-black py-20', className)}>
       <div className="container mx-auto px-4">
         <Skeleton className="mx-auto mb-12 h-12 w-64" />
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -46,7 +46,7 @@ export function CardSkeleton() {
 
 export function ShowreelSkeleton() {
   return (
-    <section className="bg-black py-20">
+    <section className="min-h-[500px] bg-black py-20">
       <div className="container mx-auto px-4">
         <Skeleton className="mx-auto mb-12 h-12 w-64" />
         <div className="mx-auto aspect-video max-w-4xl">
@@ -63,7 +63,7 @@ export function ShowreelSkeleton() {
 
 export function TestimonialsSkeleton() {
   return (
-    <section className="bg-zinc-900 py-20">
+    <section className="min-h-[400px] bg-zinc-900 py-20">
       <div className="container mx-auto px-4">
         <Skeleton className="mx-auto mb-12 h-12 w-64" />
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -87,7 +87,7 @@ export function TestimonialsSkeleton() {
 
 export function ContactSkeleton() {
   return (
-    <section className="bg-black py-20">
+    <section className="min-h-[400px] bg-black py-20">
       <div className="container mx-auto max-w-2xl px-4">
         <Skeleton className="mx-auto mb-12 h-12 w-48" />
         <div className="space-y-6">
@@ -103,7 +103,7 @@ export function ContactSkeleton() {
 
 export function GallerySkeleton() {
   return (
-    <section className="bg-zinc-900 py-20">
+    <section className="min-h-[500px] bg-zinc-900 py-20">
       <div className="container mx-auto px-4">
         <Skeleton className="mx-auto mb-12 h-12 w-48" />
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
@@ -118,7 +118,7 @@ export function GallerySkeleton() {
 
 export function TimelineSkeleton() {
   return (
-    <section className="bg-black py-20">
+    <section className="min-h-[400px] bg-black py-20">
       <div className="container mx-auto max-w-4xl px-4">
         <Skeleton className="mx-auto mb-12 h-12 w-56" />
         <div className="space-y-8">

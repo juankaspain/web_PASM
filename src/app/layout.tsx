@@ -6,11 +6,13 @@ import Script from 'next/script'
 import PassiveEvents from '@/components/PassiveEvents'
 
 // Optimized font configuration with display swap and fallbacks
+// preload: false avoids unnecessary preconnect hints to Google Fonts CDN
+// since next/font/google self-hosts fonts in static export mode
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
-  preload: true,
+  preload: false,
   fallback: [
     'system-ui',
     '-apple-system',
