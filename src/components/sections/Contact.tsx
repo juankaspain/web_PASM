@@ -20,25 +20,15 @@ import {
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 import { trackEvent } from '@/lib/analytics'
+import { contactFormSchema } from '@/lib/validators'
+import { z } from 'zod'
 import { SiTiktok } from 'react-icons/si'
 import Link from 'next/link'
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xlggrndl'
-
-// F.4 - Zod schema for client-side validation
-const contactSchema = z.object({
-  name: z
-    .string()
-    .min(2, 'El nombre debe tener al menos 2 caracteres')
-    .max(100, 'El nombre no puede exceder 100 caracteres'),
-  email: z.string().email('Correo electrónico inválido'),
+// F.4 - Extend the shared schema with UI-specific fields
+const contactSchema = contactFormSchema.extend({
   category: z.string().min(1, 'Selecciona una categoría'),
-  message: z
-    .string()
-    .min(10, 'El mensaje debe tener al menos 10 caracteres')
-    .max(2000, 'El mensaje no puede exceder 2000 caracteres'),
   acceptPrivacy: z.literal(true, {
     errorMap: () => ({ message: 'Debes aceptar la Política de Privacidad' }),
   }),
@@ -60,20 +50,23 @@ const contactInfo = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'info@almagrosanmiguel.com',
-    link: 'mailto:info@almagrosanmiguel.com',
+    value: '...',
+    link: '#',
+    isEmail: true,
   },
   {
     icon: MapPin,
     label: 'Ubicación',
     value: 'Madrid y Sevilla, España',
     link: null,
+    isEmail: false,
   },
   {
     icon: Calendar,
     label: 'Disponibilidad',
     value: 'A partir de Mayo 2026',
     link: null,
+    isEmail: false,
   },
 ]
 
@@ -194,6 +187,8 @@ export default function Contact() {
   const [errorMessage, setErrorMessage] = useState('')
   const [particles, setParticles] = useState<Particle[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  // E.6 - Reconstruct email client-side to prevent scraping
+  const [displayEmail, setDisplayEmail] = useState('...')
 
   const messageValue = watch('message', '')
 
@@ -202,14 +197,17 @@ export default function Contact() {
       setIsLoading(false)
     }, 100)
 
-    if (typeof window !== 'undefined') {
-      const newParticles = [...Array(30)].map((_, i) => ({
-        id: i,
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-      }))
-      setParticles(newParticles)
-    }
+    // A.5 - Use percentage-based positioning and reduce particle count
+    const newParticles = [...Array(15)].map((_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+    }))
+    setParticles(newParticles)
+
+    // E.6 - Reconstruct email client-side to prevent scraping
+    const parts = ['info', 'almagrosanmiguel.com']
+    setDisplayEmail(parts.join('@'))
 
     return () => clearTimeout(timer)
   }, [])
@@ -219,20 +217,17 @@ export default function Contact() {
     setErrorMessage('')
 
     try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
+      // E.3 - Submit through our API route (server-side proxy to Formspree)
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json',
         },
         body: JSON.stringify({
           name: data.name,
           email: data.email,
           category: data.category,
           message: data.message,
-          acceptNewsletter: data.acceptNewsletter,
-          _subject: `Nuevo mensaje de ${data.name} - ${data.category}`,
-          _replyto: data.email,
         }),
       })
 
@@ -281,12 +276,12 @@ export default function Contact() {
             <motion.div
               key={particle.id}
               className="absolute h-1 w-1 rounded-full bg-yellow-400"
-              initial={{
-                x: particle.x,
-                y: particle.y,
+              style={{
+                left: `${particle.x}%`,
+                top: `${particle.y}%`,
               }}
               animate={{
-                y: [null, particle.y - 300],
+                y: [0, -300],
                 opacity: [0, 1, 0],
               }}
               transition={{
@@ -460,7 +455,7 @@ export default function Contact() {
                         className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-slate-400 transition-all focus:border-transparent focus:ring-2 focus:ring-yellow-400 disabled:opacity-50"
                         placeholder="Cuéntame sobre tu proyecto o consulta..."
                       />
-                      <p className="mt-1 text-xs text-slate-400">
+                      <p className="mt-1 text-xs text-slate-300">
                         {messageValue.length} / 2000 caracteres
                       </p>
                       {errors.message && (
@@ -557,7 +552,7 @@ export default function Contact() {
                       )}
                     </motion.button>
 
-                    <p className="text-center text-xs text-slate-400">
+                    <p className="text-center text-xs text-slate-300">
                       Formulario protegido por Formspree • Tus datos son privados
                     </p>
                   </form>
@@ -606,6 +601,8 @@ export default function Contact() {
               <div className="space-y-4">
                 {contactInfo.map((info) => {
                   const Icon = info.icon
+                  const value = info.isEmail ? displayEmail : info.value
+                  const link = info.isEmail ? `mailto:${displayEmail}` : info.link
                   return (
                     <motion.div
                       key={info.label}
@@ -618,18 +615,18 @@ export default function Contact() {
                           <Icon className="h-7 w-7 text-black" />
                         </div>
                         <div className="flex-1">
-                          <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-400">
+                          <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-300">
                             {info.label}
                           </p>
-                          {info.link ? (
+                          {link && link !== '#' ? (
                             <a
-                              href={info.link}
+                              href={link}
                               className="font-bold text-white transition-colors hover:text-yellow-400"
                             >
-                              {info.value}
+                              {value}
                             </a>
                           ) : (
-                            <p className="font-bold text-white">{info.value}</p>
+                            <p className="font-bold text-white">{value}</p>
                           )}
                         </div>
                       </div>

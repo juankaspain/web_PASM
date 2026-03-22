@@ -7,6 +7,7 @@ Estas imágenes son IMPRESCINDIBLES para el funcionamiento profesional de la web
 ### 1. Open Graph Images (Redes Sociales)
 
 #### `/public/og-image.jpg`
+
 - **Dimensiones**: 1200 x 630 px
 - **Formato**: JPG optimizado (<200KB)
 - **Uso**: Facebook, LinkedIn, WhatsApp
@@ -18,15 +19,17 @@ Estas imágenes son IMPRESCINDIBLES para el funcionamiento profesional de la web
   - Logo/marca personal (opcional)
 
 #### `/public/twitter-image.jpg`
+
 - **Dimensiones**: 1200 x 630 px (mismo tamaño que OG)
 - **Formato**: JPG optimizado (<200KB)
 - **Uso**: Twitter/X cards
-- **Diferencias con og-image**: 
+- **Diferencias con og-image**:
   - Puede ser similar pero optimizado para timeline de Twitter
   - Menos texto (se ve más pequeño en Twitter)
   - Mayor contraste
 
 **Ejemplo de contenido**:
+
 ```
 [FOTO PROFESIONAL]  ALMAGRO SAN MIGUEL
                     Actor Profesional
@@ -38,23 +41,27 @@ Estas imágenes son IMPRESCINDIBLES para el funcionamiento profesional de la web
 ### 2. Favicons e Iconos
 
 #### `/public/favicon.ico` (ACTUALMENTE VACÍO - 0 bytes)
+
 - **Dimensiones**: Múltiples (16x16, 32x32, 48x48)
 - **Formato**: ICO multi-resolución
 - **Contenido**: Iniciales "ASM" o logo personal
 - **Herramienta**: [favicon.io](https://favicon.io/) o [realfavicongenerator.net](https://realfavicongenerator.net/)
 
 #### `/public/apple-touch-icon.png`
+
 - **Dimensiones**: 180 x 180 px
 - **Formato**: PNG transparente
 - **Uso**: iOS home screen
 - **Contenido**: Logo/iniciales con padding de 20px
 
 #### `/public/android-chrome-192x192.png`
+
 - **Dimensiones**: 192 x 192 px
 - **Formato**: PNG
 - **Uso**: Android Chrome
 
 #### `/public/android-chrome-512x512.png`
+
 - **Dimensiones**: 512 x 512 px
 - **Formato**: PNG
 - **Uso**: Android Chrome (alta resolución)
@@ -64,6 +71,7 @@ Estas imágenes son IMPRESCINDIBLES para el funcionamiento profesional de la web
 ### 3. Imagen de Perfil Schema.org
 
 #### `/public/profile-image.jpg`
+
 - **Dimensiones**: 800 x 800 px (cuadrado)
 - **Formato**: JPG optimizado
 - **Uso**: Schema.org Person markup, Google Knowledge Panel
@@ -81,11 +89,13 @@ Estas imágenes son IMPRESCINDIBLES para el funcionamiento profesional de la web
 ### 4. Screenshots PWA
 
 #### `/public/screenshots/desktop.jpg`
+
 - **Dimensiones**: 1280 x 720 px
 - **Formato**: JPG
 - **Contenido**: Captura de la homepage en desktop
 
 #### `/public/screenshots/mobile.jpg`
+
 - **Dimensiones**: 750 x 1334 px
 - **Formato**: JPG
 - **Contenido**: Captura de la homepage en móvil
@@ -97,21 +107,25 @@ Estas imágenes son IMPRESCINDIBLES para el funcionamiento profesional de la web
 Actualmente usan placeholders de Unsplash. Reemplazar con:
 
 #### La Moderna
+
 - **Archivo**: Foto de escena o promotional shot oficial
 - **Formato**: JPG 1920x1080 (landscape)
 - **Fuente**: TVE / Producción oficial
 
 #### Vis a vis: El Oasis
+
 - **Archivo**: Foto de personaje Diego Ramala
 - **Formato**: JPG 1920x1080
 - **Fuente**: Fox / Star Channel
 
 #### Hernán
+
 - **Archivo**: Foto como Gonzalo de Sandoval
 - **Formato**: JPG 1920x1080
 - **Fuente**: Amazon Prime Video
 
 #### Resto de producciones
+
 - Repetir para cada serie/película listada
 - Priorizar las más recientes/importantes
 
@@ -129,6 +143,7 @@ Actualmente usan placeholders de Unsplash. Reemplazar con:
 - **Eventos**: Premieres, festivales, etc.
 
 **Especificaciones**:
+
 - Formato: JPG optimizado con Sharp
 - Dimensiones: Max 2000px lado largo
 - Tamaño: <300KB por imagen
@@ -167,6 +182,7 @@ npm run optimize:images
 ## 📄 **Checklist de Imágenes**
 
 ### Crítico (¡Hacer YA!)
+
 - [ ] `/public/og-image.jpg` (1200x630)
 - [ ] `/public/twitter-image.jpg` (1200x630)
 - [ ] `/public/favicon.ico` (multi-res)
@@ -174,18 +190,21 @@ npm run optimize:images
 - [ ] `/public/profile-image.jpg` (800x800)
 
 ### Importante (Esta semana)
+
 - [ ] `/public/android-chrome-192x192.png`
 - [ ] `/public/android-chrome-512x512.png`
 - [ ] `/public/screenshots/desktop.jpg`
 - [ ] `/public/screenshots/mobile.jpg`
 
 ### Portfolio (Siguiente semana)
+
 - [ ] Imágenes reales de La Moderna (5+)
 - [ ] Imágenes reales de Vis a vis (3+)
 - [ ] Imágenes reales de Hernán (3+)
 - [ ] Imágenes resto de producciones (2+ cada una)
 
 ### Galería (Mes actual)
+
 - [ ] Headshots profesionales (5-8)
 - [ ] Behind the scenes (10+)
 - [ ] Teatro (5+)
@@ -196,17 +215,20 @@ npm run optimize:images
 ## 🎨 **Guía de Estilo Visual**
 
 ### Paleta de Colores
+
 - **Principal**: Dorado (#f59e0b, #fbbf24)
 - **Secundario**: Negro (#000000)
 - **Acento**: Blanco (#ffffff)
 - **Degradados**: De amarillo a naranja
 
 ### Tipografía
+
 - **Nombre**: Bold, grande, legible
 - **Fuente recomendada**: Inter, Helvetica, Arial
 - **Tamaño mínimo**: 48px para OG images
 
 ### Composición
+
 - **Espacio en blanco**: Generoso, profesional
 - **Alineación**: Centrada o con sistema de grids
 - **Jerarquía**: Clara (nombre > rol > detalles)
@@ -227,12 +249,14 @@ Para obtener imágenes profesionales:
 ## ⚠️ **Importante**
 
 ### Derechos de Autor
+
 - **NO usar** imágenes de Google sin permiso
 - **SÍ usar** imágenes propias o con licencia
 - **Solicitar** permiso a productoras para fotos oficiales
 - **Creditar** fotógrafos cuando sea necesario
 
 ### Optimización
+
 - Todas las imágenes deben pasar por TinyPNG/Squoosh
 - Usar formato WebP/AVIF cuando sea posible
 - Añadir alt text descriptivo
@@ -243,12 +267,14 @@ Para obtener imágenes profesionales:
 ## 🚀 **Impacto en SEO y Redes Sociales**
 
 ### Sin imágenes correctas:
+
 - ❌ Link preview roto en redes sociales
 - ❌ No aparece en Google Imágenes
 - ❌ Percepción poco profesional
 - ❌ 0 compartidos virales
 
 ### Con imágenes correctas:
+
 - ✅ Link preview atractivo (+300% CTR)
 - ✅ Aparece en Google Imágenes
 - ✅ Imagen profesional premium
@@ -259,11 +285,13 @@ Para obtener imágenes profesionales:
 ## 📊 **ROI Estimado**
 
 **Inversión**:
+
 - Sesión de fotos profesional: €500-1000
 - Diseño de OG images: €200-400
 - Optimización de imágenes: Gratis (automatizado)
 
 **Retorno**:
+
 - +300% engagement en redes sociales
 - +50% tiempo en página
 - +200% compartidos

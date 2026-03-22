@@ -3,7 +3,14 @@
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { useState, useRef } from 'react'
 import Image from 'next/image'
-import { X, ZoomIn, ChevronLeft, ChevronRight, Image as ImageIcon, Sparkles } from 'lucide-react'
+import {
+  X,
+  ZoomIn,
+  ChevronLeft,
+  ChevronRight,
+  Image as ImageIcon,
+  Sparkles,
+} from 'lucide-react'
 
 type Category = 'Todas' | 'TV' | 'Cine' | 'Teatro' | 'Behind the Scenes'
 
@@ -123,11 +130,14 @@ export default function Gallery() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
-  const filteredImages = selectedCategory === 'Todas'
-    ? images
-    : images.filter((img) => img.category === selectedCategory)
+  const filteredImages =
+    selectedCategory === 'Todas'
+      ? images
+      : images.filter((img) => img.category === selectedCategory)
 
-  const currentIndex = lightboxImage ? images.findIndex(img => img.id === lightboxImage.id) : -1
+  const currentIndex = lightboxImage
+    ? images.findIndex((img) => img.id === lightboxImage.id)
+    : -1
 
   const nextImage = () => {
     if (currentIndex < images.length - 1) {
@@ -142,61 +152,66 @@ export default function Gallery() {
   }
 
   return (
-    <section id="gallery" className="relative py-32 overflow-hidden bg-gradient-to-b from-black via-slate-950 to-slate-900">
+    <section
+      id="gallery"
+      className="relative overflow-hidden bg-gradient-to-b from-black via-slate-950 to-slate-900 py-32"
+    >
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px]" />
-        <div className="absolute bottom-1/4 left-1/4 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px]" />
+        <div className="absolute right-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-yellow-500/5 blur-[100px]" />
+        <div className="absolute bottom-1/4 left-1/4 h-[600px] w-[600px] rounded-full bg-orange-500/5 blur-[120px]" />
       </div>
 
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
         }}
       />
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+      <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="text-center mb-20">
+          <div className="mb-20 text-center">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm"
             >
-              <ImageIcon className="w-4 h-4 text-yellow-400" strokeWidth={2} />
-              <span className="text-sm font-medium text-slate-300 tracking-wide">Galería Visual</span>
+              <ImageIcon className="h-4 w-4 text-yellow-400" strokeWidth={2} />
+              <span className="text-sm font-medium tracking-wide text-slate-300">
+                Galería Visual
+              </span>
             </motion.div>
-            
-            <motion.h2 
+
+            <motion.h2
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-white"
+              className="mb-6 text-5xl font-bold tracking-tight text-white lg:text-6xl"
             >
               Galería Profesional
             </motion.h2>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
+              className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-400"
             >
               Colección de momentos destacados de mi carrera en televisión, cine y teatro
             </motion.p>
           </div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-3 mb-16"
+            className="mb-16 flex flex-wrap justify-center gap-3"
           >
             {categories.map((category) => {
               const isActive = selectedCategory === category
@@ -206,10 +221,10 @@ export default function Gallery() {
                   onClick={() => setSelectedCategory(category)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`relative px-5 py-2.5 rounded-xl font-semibold transition-all ${
+                  className={`relative rounded-xl px-5 py-2.5 font-semibold transition-all ${
                     isActive
                       ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-black shadow-lg'
-                      : 'bg-white/[0.03] text-slate-300 border border-white/10 hover:bg-white/[0.05] hover:border-white/20'
+                      : 'border border-white/10 bg-white/[0.03] text-slate-300 hover:border-white/20 hover:bg-white/[0.05]'
                   }`}
                 >
                   {category}
@@ -218,9 +233,9 @@ export default function Gallery() {
             })}
           </motion.div>
 
-          <motion.div 
+          <motion.div
             layout
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           >
             <AnimatePresence mode="popLayout">
               {filteredImages.map((image, index) => (
@@ -232,7 +247,7 @@ export default function Gallery() {
                   exit={{ opacity: 0, scale: 0.8 }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                   whileHover={{ y: -8, scale: 1.02 }}
-                  className="group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-shadow"
+                  className="group relative aspect-[3/4] cursor-pointer overflow-hidden rounded-2xl shadow-lg transition-shadow hover:shadow-2xl"
                   onClick={() => setLightboxImage(image)}
                 >
                   <Image
@@ -241,21 +256,21 @@ export default function Gallery() {
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                     quality={80}
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <div className="absolute inset-0 flex flex-col justify-end p-4">
-                      <h3 className="text-white font-bold text-lg mb-1">{image.title}</h3>
-                      <p className="text-slate-300 text-sm">{image.description}</p>
+                      <h3 className="mb-1 text-lg font-bold text-white">{image.title}</h3>
+                      <p className="text-sm text-slate-300">{image.description}</p>
                     </div>
-                    
-                    <div className="absolute top-4 right-4 w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center">
-                      <ZoomIn className="w-5 h-5 text-black" />
+
+                    <div className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-yellow-400">
+                      <ZoomIn className="h-5 w-5 text-black" />
                     </div>
                   </div>
 
-                  <div className="absolute top-4 left-4 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-xs font-semibold text-white border border-white/20">
+                  <div className="absolute left-4 top-4 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
                     {image.category}
                   </div>
                 </motion.div>
@@ -269,8 +284,8 @@ export default function Gallery() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="mt-16 text-center"
           >
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm">
-              <Sparkles className="w-5 h-5 text-yellow-400" />
+            <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 backdrop-blur-sm">
+              <Sparkles className="h-5 w-5 text-yellow-400" />
               <span className="text-sm font-medium text-slate-300">
                 {images.length} imágenes profesionales disponibles
               </span>
@@ -285,31 +300,40 @@ export default function Gallery() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-sm"
             onClick={() => setLightboxImage(null)}
           >
             <button
               onClick={() => setLightboxImage(null)}
-              className="absolute top-4 right-4 w-12 h-12 bg-white/10 hover:bg-yellow-400 backdrop-blur-md rounded-full flex items-center justify-center transition-colors z-10 border border-white/20 hover:border-yellow-400"
+              aria-label="Cerrar visor de imagen"
+              className="absolute right-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md transition-colors hover:border-yellow-400 hover:bg-yellow-400"
             >
-              <X className="w-6 h-6 text-white hover:text-black" />
+              <X className="h-6 w-6 text-white hover:text-black" />
             </button>
 
             {currentIndex > 0 && (
               <button
-                onClick={(e) => { e.stopPropagation(); prevImage(); }}
-                className="absolute left-4 w-12 h-12 bg-white/10 hover:bg-yellow-400 backdrop-blur-md rounded-full flex items-center justify-center transition-colors z-10 border border-white/20 hover:border-yellow-400"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  prevImage()
+                }}
+                aria-label="Imagen anterior"
+                className="absolute left-4 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md transition-colors hover:border-yellow-400 hover:bg-yellow-400"
               >
-                <ChevronLeft className="w-6 h-6 text-white" />
+                <ChevronLeft className="h-6 w-6 text-white" />
               </button>
             )}
-            
+
             {currentIndex < images.length - 1 && (
               <button
-                onClick={(e) => { e.stopPropagation(); nextImage(); }}
-                className="absolute right-4 w-12 h-12 bg-white/10 hover:bg-yellow-400 backdrop-blur-md rounded-full flex items-center justify-center transition-colors z-10 border border-white/20 hover:border-yellow-400"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  nextImage()
+                }}
+                aria-label="Imagen siguiente"
+                className="absolute right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md transition-colors hover:border-yellow-400 hover:bg-yellow-400"
               >
-                <ChevronRight className="w-6 h-6 text-white" />
+                <ChevronRight className="h-6 w-6 text-white" />
               </button>
             )}
 
@@ -317,7 +341,7 @@ export default function Gallery() {
               initial={{ scale: 0.8, y: 50 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.8, y: 50 }}
-              className="relative max-w-5xl w-full"
+              className="relative w-full max-w-5xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative aspect-[4/3] w-full">
@@ -330,14 +354,20 @@ export default function Gallery() {
                   className="object-contain"
                 />
               </div>
-              
+
               <div className="mt-6 text-center">
-                <h3 className="text-2xl font-bold text-white mb-2">{lightboxImage.title}</h3>
-                <p className="text-slate-300 mb-4">{lightboxImage.description}</p>
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
-                  <span className="text-sm text-white font-semibold">{lightboxImage.category}</span>
+                <h3 className="mb-2 text-2xl font-bold text-white">
+                  {lightboxImage.title}
+                </h3>
+                <p className="mb-4 text-slate-300">{lightboxImage.description}</p>
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-sm">
+                  <span className="text-sm font-semibold text-white">
+                    {lightboxImage.category}
+                  </span>
                   <span className="text-slate-400">•</span>
-                  <span className="text-sm text-slate-300">{currentIndex + 1} / {images.length}</span>
+                  <span className="text-sm text-slate-300">
+                    {currentIndex + 1} / {images.length}
+                  </span>
                 </div>
               </div>
             </motion.div>

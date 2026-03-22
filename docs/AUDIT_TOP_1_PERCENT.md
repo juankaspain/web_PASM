@@ -40,6 +40,7 @@
 **Prioridad**: P0 - MÁXIMA
 
 **Archivos faltantes**:
+
 ```
 /public/og-image.jpg          (1200x630px)
 /public/twitter-image.jpg     (1200x630px)
@@ -48,6 +49,7 @@
 ```
 
 **Solución**:
+
 1. Sesión de fotos profesional con fondo neutro
 2. Headshot principal para og-image.jpg
 3. Diseño gráfico con:
@@ -56,6 +58,7 @@
    - Tipografía profesional
 
 **Herramientas**:
+
 - [Canva Pro](https://canva.com) - Templates OG image
 - [Figma](https://figma.com) - Diseño custom
 - [Photopea](https://photopea.com) - Editor online gratis
@@ -71,6 +74,7 @@
 **Impacto**: Sin icono en pestañas navegador
 
 **Solución**:
+
 ```bash
 # Generar favicon desde logo
 convert logo.png -resize 32x32 public/favicon-32.ico
@@ -90,12 +94,14 @@ convert logo.png -resize 16x16 public/favicon-16.ico
 **Impacto**: 0 credibilidad, parece demo
 
 **Necesitas reemplazar**:
+
 - Portfolio: 15+ fotos de producciones reales
 - About: 3-5 headshots profesionales
 - Gallery: 20+ behind the scenes
 - Timeline: Fotos por era/proyecto
 
 **Acción inmediata**:
+
 1. Recopilar TODAS las fotos que tengas de:
    - Sets de grabación
    - Fotografías promocionales oficiales
@@ -115,6 +121,7 @@ convert logo.png -resize 16x16 public/favicon-16.ico
 **Impacto**: No puedes ver analytics, errores, indexación
 
 **Pasos**:
+
 1. Ir a [Google Search Console](https://search.google.com/search-console)
 2. Añadir propiedad: `almagrosanmiguel.com`
 3. Verificar vía:
@@ -134,6 +141,7 @@ convert logo.png -resize 16x16 public/favicon-16.ico
 **Impacto**: Casting directors buscan esto PRIMERO
 
 **Especificaciones reel**:
+
 - Duración: 2-3 minutos
 - Formato: 1920x1080 (16:9)
 - Estructura:
@@ -144,6 +152,7 @@ convert logo.png -resize 16x16 public/favicon-16.ico
 - Hosting: Vimeo PRO (mejor para actores) o YouTube
 
 **Contenido**:
+
 - La Moderna: 2-3 escenas mejores (romántico, dramático)
 - Vis a vis: Escena intensa
 - Hernán: Escena épica
@@ -160,6 +169,7 @@ convert logo.png -resize 16x16 public/favicon-16.ico
 ### 6. Press Kit Descargable
 
 **Contenido necesario**:
+
 ```
 press-kit/
 ├── bio/
@@ -184,6 +194,7 @@ press-kit/
 ```
 
 **Implementación**:
+
 ```tsx
 // src/components/PressKit.tsx
 <a href="/press-kit.zip" download>
@@ -196,6 +207,7 @@ press-kit/
 ### 7. Páginas Individuales de Proyectos
 
 **Crear**:
+
 ```
 /projects/la-moderna
 /projects/vis-a-vis-el-oasis
@@ -206,6 +218,7 @@ press-kit/
 ```
 
 **Contenido cada proyecto**:
+
 - Hero con poster/banner
 - Sinopsis completa
 - Rol detallado con anécdotas
@@ -217,6 +230,7 @@ press-kit/
 - Link IMDb/Wikipedia
 
 **Beneficio SEO**:
+
 - +200% indexación Google
 - Keywords long-tail: "Almagro San Miguel La Moderna"
 - Rich snippets con Schema.org
@@ -226,6 +240,7 @@ press-kit/
 ### 8. Google Analytics 4 Real
 
 **Configurar**:
+
 ```env
 # .env.local
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
@@ -233,6 +248,7 @@ NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX  # Recomendado
 ```
 
 **Eventos a trackear**:
+
 ```js
 // Eventos críticos
 - click_reel_play
@@ -245,6 +261,7 @@ NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX  # Recomendado
 ```
 
 **Conversiones**:
+
 - Formulario enviado (objetivo principal)
 - Reel reproducido >50%
 - Press kit descargado
@@ -255,11 +272,13 @@ NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX  # Recomendado
 ### 9. Internacionalización (Inglés)
 
 **Implementar i18n**:
+
 ```bash
 npm install next-intl
 ```
 
 **Estructura**:
+
 ```
 src/
 ├── app/
@@ -272,6 +291,7 @@ src/
 ```
 
 **Contenido traducir**:
+
 - Todas las secciones (19)
 - Metadata SEO
 - Alt text de imágenes
@@ -295,10 +315,10 @@ module.exports = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     minimumCacheTTL: 31536000,
   },
-  
+
   // Compresión
   compress: true,
-  
+
   // Prefetch agresivo
   experimental: {
     optimizeCss: true,
@@ -308,6 +328,7 @@ module.exports = {
 ```
 
 **CDN para imágenes**:
+
 - Cloudinary (gratis hasta 25GB)
 - ImageKit (gratis hasta 20GB)
 - Vercel Image Optimization (incluído)
@@ -319,6 +340,7 @@ module.exports = {
 ### 11. Blog/News Activo
 
 **Calendario editorial**:
+
 - 1 artículo/semana (mínimo)
 - Temas:
   - Behind the scenes de proyectos
@@ -328,6 +350,7 @@ module.exports = {
   - Entrevistas a compañeros
 
 **Beneficio**:
+
 - +300% tráfico orgánico
 - Autoridad en nicho
 - Contenido para redes sociales
@@ -337,6 +360,7 @@ module.exports = {
 ### 12. Schema.org Completo
 
 **Añadir**:
+
 ```json
 {
   "@type": "ItemList",
@@ -358,6 +382,7 @@ module.exports = {
 ### 13. Testimonios Verificados
 
 **Mejorar**:
+
 - Foto del director/productor
 - Logo de la producción
 - Link a LinkedIn
@@ -368,6 +393,7 @@ module.exports = {
 ### 14. PWA Completa
 
 **Service Worker**:
+
 ```js
 // public/sw.js
 self.addEventListener('install', (event) => {
@@ -390,6 +416,7 @@ self.addEventListener('install', (event) => {
 ### 15. Chatbot IA
 
 **Implementación**:
+
 - Crisp Chat + GPT-4 API
 - Respuestas sobre disponibilidad, experiencia, caché
 - 24/7 automated
@@ -399,6 +426,7 @@ self.addEventListener('install', (event) => {
 ### 16. Behind the Scenes 360°
 
 **Contenido**:
+
 - Fotos 360° de sets
 - Tours virtuales
 - Making-of interactivo
@@ -441,15 +469,15 @@ Mes 3 (ÉLITE):
 
 ## 💰 INVERSIÓN ESTIMADA
 
-| Item | Coste | Prioridad |
-|------|-------|----------|
-| Sesión fotos profesional | €500-1000 | 🔴 P0 |
-| Video reel profesional | €800-1500 | 🔴 P0 |
-| Diseño OG images | €200-400 | 🔴 P0 |
-| Traducción inglés | €400-800 | 🟠 P1 |
-| Press Kit diseño | €300-500 | 🟠 P1 |
-| Copywriter blog (10 posts) | €500-1000 | 🟡 P2 |
-| **TOTAL** | **€2,700-5,200** | |
+| Item                       | Coste            | Prioridad |
+| -------------------------- | ---------------- | --------- |
+| Sesión fotos profesional   | €500-1000        | 🔴 P0     |
+| Video reel profesional     | €800-1500        | 🔴 P0     |
+| Diseño OG images           | €200-400         | 🔴 P0     |
+| Traducción inglés          | €400-800         | 🟠 P1     |
+| Press Kit diseño           | €300-500         | 🟠 P1     |
+| Copywriter blog (10 posts) | €500-1000        | 🟡 P2     |
+| **TOTAL**                  | **€2,700-5,200** |           |
 
 **ROI**: Una sola serie protagonista = €50,000-200,000+
 
@@ -458,6 +486,7 @@ Mes 3 (ÉLITE):
 ## ✅ CHECKLIST TOP 1%
 
 ### Contenido
+
 - [ ] Fotos profesionales reales (20+)
 - [ ] Video reel 2-3 min embebido
 - [ ] Press kit descargable completo
@@ -468,6 +497,7 @@ Mes 3 (ÉLITE):
 - [ ] 12+ testimonios verificados
 
 ### Técnico
+
 - [x] Sitemap dinámico
 - [x] Robots.txt optimizado
 - [ ] OG images reales
@@ -478,6 +508,7 @@ Mes 3 (ÉLITE):
 - [ ] PWA con service worker
 
 ### SEO
+
 - [ ] Schema.org completo (Person + ItemList)
 - [ ] Meta descriptions únicas cada sección
 - [ ] Alt text todas las imágenes
@@ -486,12 +517,14 @@ Mes 3 (ÉLITE):
 - [ ] Local SEO (Google Business)
 
 ### Internacional
+
 - [ ] Versión inglesa completa
 - [ ] Hreflang tags
 - [ ] Contenido traducido profesionalmente
 - [ ] Targeting keywords EN
 
 ### Profesional
+
 - [ ] Calendario disponibilidad público
 - [ ] Contacto manager/agente visible
 - [ ] Links IMDb/Spotlight prominentes
@@ -506,6 +539,7 @@ Mes 3 (ÉLITE):
 **Limitación principal**: Contenido real (fotos, videos, materiales)
 
 **Para TOP 1% necesitas**:
+
 1. 🔴 Contenido visual profesional (fotos + reel)
 2. 🔴 Optimización social media (OG images)
 3. 🟠 Internacionalización (EN)
@@ -516,6 +550,7 @@ Mes 3 (ÉLITE):
 ---
 
 **Próximos pasos inmediatos**:
+
 1. Contratar fotógrafo para sesión profesional
 2. Recopilar todas las fotos existentes de producciones
 3. Contactar editor para video reel

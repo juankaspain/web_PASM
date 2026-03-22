@@ -45,7 +45,9 @@ export default function Home() {
 
       {/* Core sections - Optimized for casting directors */}
       <About />
-      <Skills />
+      <Suspense fallback={<SectionSkeleton />}>
+        <Skills />
+      </Suspense>
 
       {/* Filmography sections - reorganized order with Suspense */}
       {/* 1. Series de Televisión */}

@@ -12,17 +12,17 @@
 
 ### Estado Actual
 
-| Criterio WCAG | Estado | Notas |
-|---------------|--------|-------|
-| 1.1 Text Alternatives | ✅ Pass | Todas las imágenes tienen alt text |
-| 1.3 Adaptable | ✅ Pass | Estructura semántica correcta |
-| 1.4 Distinguishable | ✅ Pass | Contraste de color adecuado |
-| 2.1 Keyboard Accessible | ✅ Pass | Navegación por teclado completa |
-| 2.4 Navigable | ✅ Pass | Enlaces y navegación claros |
-| 3.1 Readable | ✅ Pass | Idioma declarado, texto legible |
-| 3.2 Predictable | ✅ Pass | Comportamiento consistente |
-| 3.3 Input Assistance | ✅ Pass | Labels y errores claros |
-| 4.1 Compatible | ✅ Pass | Markup válido, ARIA correcto |
+| Criterio WCAG           | Estado  | Notas                              |
+| ----------------------- | ------- | ---------------------------------- |
+| 1.1 Text Alternatives   | ✅ Pass | Todas las imágenes tienen alt text |
+| 1.3 Adaptable           | ✅ Pass | Estructura semántica correcta      |
+| 1.4 Distinguishable     | ✅ Pass | Contraste de color adecuado        |
+| 2.1 Keyboard Accessible | ✅ Pass | Navegación por teclado completa    |
+| 2.4 Navigable           | ✅ Pass | Enlaces y navegación claros        |
+| 3.1 Readable            | ✅ Pass | Idioma declarado, texto legible    |
+| 3.2 Predictable         | ✅ Pass | Comportamiento consistente         |
+| 3.3 Input Assistance    | ✅ Pass | Labels y errores claros            |
+| 4.1 Compatible          | ✅ Pass | Markup válido, ARIA correcto       |
 
 ---
 
@@ -31,17 +31,20 @@
 ### Perceptible (Perceivable)
 
 #### 1.1 Alternativas de Texto
+
 - ✅ **1.1.1 Non-text Content (A)**: Todas las imágenes tienen `alt` descriptivo
 - ✅ Imágenes decorativas usan `alt=""`
 - ✅ Iconos tienen labels cuando es necesario
 
 #### 1.3 Adaptable
+
 - ✅ **1.3.1 Info and Relationships (A)**: HTML semántico correcto
 - ✅ **1.3.2 Meaningful Sequence (A)**: Orden lógico de contenido
 - ✅ Uso correcto de headings (h1, h2, h3)
 - ✅ Landmarks ARIA apropiados (main, nav, section)
 
 #### 1.4 Distinguible
+
 - ✅ **1.4.3 Contrast (AA)**: Ratio de contraste >4.5:1 para texto
 - ✅ **1.4.4 Resize Text (AA)**: Texto escalable hasta 200%
 - ✅ **1.4.10 Reflow (AA)**: Responsive sin scroll horizontal
@@ -50,6 +53,7 @@
 ### Operable
 
 #### 2.1 Accesible por Teclado
+
 - ✅ **2.1.1 Keyboard (A)**: Todas las funciones accesibles por teclado
 - ✅ **2.1.2 No Keyboard Trap (A)**: No hay trampas de foco
 - ✅ **2.1.4 Character Key Shortcuts (A)**: No hay conflictos de shortcuts
@@ -58,6 +62,7 @@
 - ✅ Formularios accesibles por teclado
 
 #### 2.4 Navegable
+
 - ✅ **2.4.1 Bypass Blocks (A)**: Skip to main content link
 - ✅ **2.4.2 Page Titled (A)**: Título descriptivo
 - ✅ **2.4.3 Focus Order (A)**: Orden de foco lógico
@@ -69,16 +74,19 @@
 ### Comprensible (Understandable)
 
 #### 3.1 Legible
+
 - ✅ **3.1.1 Language of Page (A)**: `lang="es"` declarado
 - ✅ Texto en español consistente
 
 #### 3.2 Predecible
+
 - ✅ **3.2.1 On Focus (A)**: Sin cambios de contexto al enfocar
 - ✅ **3.2.2 On Input (A)**: Sin cambios de contexto en inputs
 - ✅ **3.2.3 Consistent Navigation (AA)**: Navegación consistente
 - ✅ **3.2.4 Consistent Identification (AA)**: Componentes consistentes
 
 #### 3.3 Asistencia de Entrada
+
 - ✅ **3.3.1 Error Identification (A)**: Errores identificados claramente
 - ✅ **3.3.2 Labels or Instructions (A)**: Labels para todos los inputs
 - ✅ **3.3.3 Error Suggestion (AA)**: Sugerencias de corrección
@@ -87,6 +95,7 @@
 ### Robusto (Robust)
 
 #### 4.1 Compatible
+
 - ✅ **4.1.1 Parsing (A)**: HTML válido
 - ✅ **4.1.2 Name, Role, Value (A)**: ARIA usado correctamente
 - ✅ **4.1.3 Status Messages (AA)**: Mensajes de estado accesibles
@@ -96,6 +105,7 @@
 ## ✅ Mejoras Implementadas
 
 ### 1. Estructura Semántica
+
 ```tsx
 // Antes
 <div className="header">
@@ -107,6 +117,7 @@
 ```
 
 ### 2. Skip Links
+
 ```tsx
 // Añadido al inicio de la página
 <a href="#main-content" className="sr-only focus:not-sr-only">
@@ -115,6 +126,7 @@
 ```
 
 ### 3. ARIA Labels
+
 ```tsx
 // Botones sin texto
 <button aria-label="Abrir menú de navegación">
@@ -128,6 +140,7 @@
 ```
 
 ### 4. Focus Management
+
 ```css
 /* Estilos de foco visibles */
 .focus\:ring-2:focus {
@@ -137,6 +150,7 @@
 ```
 
 ### 5. Formulario Accesible
+
 ```tsx
 <label htmlFor="name" className="block text-sm font-medium">
   Nombre *

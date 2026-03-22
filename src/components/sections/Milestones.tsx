@@ -175,6 +175,8 @@ export default function Milestones() {
                     <div className="ml-20">
                       <button
                         onClick={() => toggleExpand(milestone.id)}
+                        aria-expanded={isExpanded}
+                        aria-label={`${milestone.title} (${milestone.year}) - ${isExpanded ? 'Contraer' : 'Expandir'} detalles`}
                         className="group w-full text-left"
                       >
                         <div className="relative">
@@ -191,7 +193,7 @@ export default function Milestones() {
                                     <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-bold text-slate-300">
                                       {milestone.year}
                                     </span>
-                                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-bold text-slate-400">
+                                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-bold text-slate-300">
                                       {milestone.category}
                                     </span>
                                   </div>

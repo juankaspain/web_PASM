@@ -42,6 +42,7 @@ Todas las tareas de FASE 3 (Prioridad Media) han sido completadas:
 #### Jobs Configurados
 
 ##### 1️⃣ Lint & Type Check
+
 ```yaml
 Pasos:
 1. Checkout code
@@ -55,6 +56,7 @@ Pasos:
 **Duración estimada**: 1-2 minutos
 
 ##### 2️⃣ Unit Tests
+
 ```yaml
 Pasos:
 1. Checkout code
@@ -67,6 +69,7 @@ Pasos:
 **Duración estimada**: 2-3 minutos
 
 ##### 3️⃣ E2E Tests
+
 ```yaml
 Pasos:
 1. Checkout code
@@ -81,6 +84,7 @@ Pasos:
 **Timeout**: 10 minutos
 
 ##### 4️⃣ Build
+
 ```yaml
 Pasos:
 1. Checkout code
@@ -120,6 +124,7 @@ Lint   Unit Tests
 ### Workflow: `.github/workflows/lighthouse.yml`
 
 **Triggers**:
+
 - Push a `main`
 - Pull Requests a `main`
 - Schedule: Domingos a medianoche (auditoría semanal)
@@ -128,10 +133,10 @@ Lint   Unit Tests
 
 ```yaml
 URLs:
-- http://localhost:3000              # Home
-- http://localhost:3000/#about       # About
-- http://localhost:3000/#portfolio   # Portfolio
-- http://localhost:3000/#contact     # Contact
+  - http://localhost:3000 # Home
+  - http://localhost:3000/#about # About
+  - http://localhost:3000/#portfolio # Portfolio
+  - http://localhost:3000/#contact # Contact
 ```
 
 #### Configuración
@@ -149,10 +154,10 @@ URLs:
     },
     "assert": {
       "assertions": {
-        "categories:performance": ["error", {"minScore": 0.9}],
-        "categories:accessibility": ["error", {"minScore": 0.95}],
-        "categories:best-practices": ["error", {"minScore": 0.95}],
-        "categories:seo": ["error", {"minScore": 0.95}]
+        "categories:performance": ["error", { "minScore": 0.9 }],
+        "categories:accessibility": ["error", { "minScore": 0.95 }],
+        "categories:best-practices": ["error", { "minScore": 0.95 }],
+        "categories:seo": ["error", { "minScore": 0.95 }]
       }
     }
   }
@@ -161,16 +166,16 @@ URLs:
 
 #### Métricas Monitoreadas
 
-| Métrica | Umbral | Nivel |
-|---------|--------|-------|
-| Performance | ≥90% | Error si <90% |
-| Accessibility | ≥95% | Error si <95% |
-| Best Practices | ≥95% | Error si <95% |
-| SEO | ≥95% | Error si <95% |
-| First Contentful Paint | <2s | Warning |
-| Largest Contentful Paint | <2.5s | Warning |
-| Cumulative Layout Shift | <0.1 | Warning |
-| Total Blocking Time | <300ms | Warning |
+| Métrica                  | Umbral | Nivel         |
+| ------------------------ | ------ | ------------- |
+| Performance              | ≥90%   | Error si <90% |
+| Accessibility            | ≥95%   | Error si <95% |
+| Best Practices           | ≥95%   | Error si <95% |
+| SEO                      | ≥95%   | Error si <95% |
+| First Contentful Paint   | <2s    | Warning       |
+| Largest Contentful Paint | <2.5s  | Warning       |
+| Cumulative Layout Shift  | <0.1   | Warning       |
+| Total Blocking Time      | <300ms | Warning       |
 
 #### Resultados
 
@@ -197,11 +202,11 @@ URLs:
 #### Configuración
 
 ```yaml
-fail-on-severity: moderate      # Falla en vulnerabilidades moderadas+
-deny-licenses:                  # Licencias prohibidas
+fail-on-severity: moderate # Falla en vulnerabilidades moderadas+
+deny-licenses: # Licencias prohibidas
   - GPL-3.0
   - AGPL-3.0
-comment-summary-in-pr: always   # Comenta siempre en PR
+comment-summary-in-pr: always # Comenta siempre en PR
 ```
 
 #### Ejemplo de Output
@@ -210,13 +215,16 @@ comment-summary-in-pr: always   # Comenta siempre en PR
 ## 🔒 Dependency Review
 
 ### ⚠️ Vulnerabilities Found
+
 - **moderate**: lodash@4.17.19 (CVE-2020-8203)
   Recommendation: Upgrade to 4.17.21+
 
 ### ✅ License Review
+
 - All dependencies use approved licenses
 
 ### 📊 Summary
+
 - 3 dependencies added
 - 2 dependencies updated
 - 0 dependencies removed
@@ -229,6 +237,7 @@ comment-summary-in-pr: always   # Comenta siempre en PR
 ### Bug Report: `.github/ISSUE_TEMPLATE/bug_report.yml`
 
 **Campos**:
+
 - Descripción del bug
 - Pasos para reproducir
 - Comportamiento esperado
@@ -242,6 +251,7 @@ comment-summary-in-pr: always   # Comenta siempre en PR
 ### Feature Request: `.github/ISSUE_TEMPLATE/feature_request.yml`
 
 **Campos**:
+
 - ¿Qué problema resolvería?
 - Solución propuesta
 - Alternativas consideradas
@@ -255,6 +265,7 @@ comment-summary-in-pr: always   # Comenta siempre en PR
 **Ya creado en Fase 2**: `.github/PULL_REQUEST_TEMPLATE.md`
 
 **Secciones**:
+
 - Descripción
 - Issue relacionado
 - Tipo de cambio
@@ -294,6 +305,7 @@ SENTRY_AUTH_TOKEN                 # Para Sentry (futuro)
 ```
 
 **Cómo configurar secrets**:
+
 1. Ir a Settings > Secrets and variables > Actions
 2. Click "New repository secret"
 3. Añadir nombre y valor
@@ -315,11 +327,11 @@ SENTRY_AUTH_TOKEN                 # Para Sentry (futuro)
 
 4. Push a GitHub
    git push origin feat/nueva-feature
-   
+
 5. Crea Pull Request
    ↓
    GitHub Actions se activan automáticamente:
-   
+
    ┌───────────────────────┐
    │ CI Pipeline            │
    │ - Lint & Type Check    │ ✅
@@ -327,14 +339,14 @@ SENTRY_AUTH_TOKEN                 # Para Sentry (futuro)
    │ - Build                │ ✅
    │ - E2E Tests            │ ✅
    └───────────────────────┘
-   
+
    ┌───────────────────────┐
    │ Dependency Review      │
    │ - Vulnerabilities      │ ✅
    │ - Licenses             │ ✅
    │ - Comment in PR        │ ✅
    └───────────────────────┘
-   
+
    ┌───────────────────────┐
    │ Lighthouse CI          │
    │ - Performance          │ ✅
@@ -342,7 +354,7 @@ SENTRY_AUTH_TOKEN                 # Para Sentry (futuro)
    │ - Best Practices       │ ✅
    │ - SEO                  │ ✅
    └───────────────────────┘
-   
+
 6. Revisor aprueba PR
 
 7. Merge a main
@@ -355,6 +367,7 @@ SENTRY_AUTH_TOKEN                 # Para Sentry (futuro)
 ### Monitoreo Continuo
 
 **Lighthouse CI semanal**:
+
 - Cada domingo a medianoche
 - Auditoría completa de 4 páginas
 - Detecta regresiones de performance
@@ -367,11 +380,13 @@ SENTRY_AUTH_TOKEN                 # Para Sentry (futuro)
 ### 1. Calidad Automática
 
 ✅ **Sin código roto en main**
+
 - Todos los checks pasan antes de merge
 - Build exitoso garantizado
 - Tests ejecutados automáticamente
 
 ✅ **Feedback inmediato**
+
 - Resultados en 5-10 minutos
 - Comentarios automáticos en PRs
 - Badges visuales en README
@@ -379,6 +394,7 @@ SENTRY_AUTH_TOKEN                 # Para Sentry (futuro)
 ### 2. Seguridad Mejorada
 
 ✅ **Vulnerabilidades detectadas temprano**
+
 - Revisión de dependencias en cada PR
 - Bloqueo automático si hay issues críticos
 - Alertas de licencias incompatibles
@@ -386,6 +402,7 @@ SENTRY_AUTH_TOKEN                 # Para Sentry (futuro)
 ### 3. Performance Monitoreado
 
 ✅ **Lighthouse CI continuo**
+
 - Previene regresiones de performance
 - Historial de métricas
 - Reportes visuales automáticos
@@ -393,11 +410,13 @@ SENTRY_AUTH_TOKEN                 # Para Sentry (futuro)
 ### 4. Developer Experience
 
 ✅ **Workflow estandarizado**
+
 - Proceso claro y documentado
 - Templates para issues y PRs
 - CI/CD transparente
 
 ✅ **Confianza para deployar**
+
 - Todos los checks automatizados
 - Sin sorpresas en producción
 - Rollback fácil si es necesario
@@ -408,13 +427,13 @@ SENTRY_AUTH_TOKEN                 # Para Sentry (futuro)
 
 ### Tiempo de Feedback
 
-| Acción | Antes | Después | Mejora |
-|---------|-------|---------|--------|
-| Detectar lint error | Manual | <2 min | ✅ Automático |
-| Detectar test failure | Manual | <3 min | ✅ Automático |
-| Detectar build error | En deploy | <3 min | ✅ Pre-deploy |
-| Detectar vulnerability | Manual | <1 min | ✅ Automático |
-| Lighthouse audit | Manual | <5 min | ✅ Automático |
+| Acción                 | Antes     | Después | Mejora        |
+| ---------------------- | --------- | ------- | ------------- |
+| Detectar lint error    | Manual    | <2 min  | ✅ Automático |
+| Detectar test failure  | Manual    | <3 min  | ✅ Automático |
+| Detectar build error   | En deploy | <3 min  | ✅ Pre-deploy |
+| Detectar vulnerability | Manual    | <1 min  | ✅ Automático |
+| Lighthouse audit       | Manual    | <5 min  | ✅ Automático |
 
 ### Cobertura de Calidad
 
@@ -443,6 +462,7 @@ DESPUÉS:
 **Causa**: Cambios en package-lock.json no committeados
 
 **Solución**:
+
 ```bash
 npm install
 git add package-lock.json
@@ -454,6 +474,7 @@ git commit -m "chore: update lockfile"
 **Causa**: Regresón de performance
 
 **Solución**:
+
 1. Revisar el reporte de Lighthouse
 2. Identificar recursos pesados
 3. Optimizar imágenes/bundles
@@ -464,6 +485,7 @@ git commit -m "chore: update lockfile"
 **Causa**: Dependencia con vulnerabilidad conocida
 
 **Solución**:
+
 ```bash
 # Ver detalles
 npm audit
@@ -480,6 +502,7 @@ npm audit fix
 **Causa**: Tests tardan >10 minutos
 
 **Solución**:
+
 - Ejecutar solo tests críticos en CI
 - Aumentar timeout en playwright.config.ts
 - Paralelizar tests
@@ -521,12 +544,14 @@ npm audit fix
 ### ✅ Completado en las 3 Fases
 
 #### FASE 1 (Crítica)
+
 - ✅ Errores críticos corregidos
 - ✅ SEO optimizado
 - ✅ Formulario de contacto funcional
 - ✅ Documentación completa
 
 #### FASE 2 (Alta)
+
 - ✅ Testing infrastructure completa
 - ✅ Git hooks y calidad automática
 - ✅ Lazy loading implementado
@@ -534,6 +559,7 @@ npm audit fix
 - ✅ Bundle analyzer configurado
 
 #### FASE 3 (Media)
+
 - ✅ CI/CD pipeline completo
 - ✅ Lighthouse CI automatizado
 - ✅ Dependency review
@@ -569,9 +595,11 @@ MEJORA TOTAL: +2.2 puntos (+30%)
 ```
 
 ### 🎯 Estado de Producción
+
 **🟢 PRODUCTION READY: 95%**
 
 El proyecto está listo para producción con:
+
 - ✅ Código de alta calidad
 - ✅ Testing completo
 - ✅ CI/CD automatizado
@@ -580,6 +608,7 @@ El proyecto está listo para producción con:
 - ✅ Documentación exhaustiva
 
 **Falta solo**:
+
 - ⏳ Archivos Press Kit reales (opcional)
 - ⏳ Error monitoring con Sentry (opcional)
 - ⏳ Auditoría de accesibilidad completa (opcional)
@@ -591,18 +620,21 @@ El proyecto está listo para producción con:
 ### Mejoras Adicionales
 
 1. **Error Monitoring**
+
    ```bash
    npm install @sentry/nextjs
    npx @sentry/wizard@latest -i nextjs
    ```
 
 2. **A11y Audit**
+
    ```bash
    npm install -D @axe-core/playwright
    # Crear tests de accesibilidad
    ```
 
 3. **Performance Budget**
+
    ```json
    // lighthouserc.json
    "budgets": [{
@@ -624,6 +656,7 @@ El proyecto está listo para producción con:
 ## ✅ Checklist Final
 
 ### Fase 3
+
 - [x] CI/CD pipeline configurado
 - [x] Lighthouse CI implementado
 - [x] Dependency review automatizado
@@ -633,6 +666,7 @@ El proyecto está listo para producción con:
 - [x] Documentación completa
 
 ### Proyecto Completo
+
 - [x] Errores críticos: 0
 - [x] Formulario funcional: Sí
 - [x] SEO: Excelente (9/10)
@@ -653,7 +687,7 @@ El proyecto **web_PASM** ha alcanzado un nivel de **calidad profesional excepcio
 ✅ **CI/CD moderno**: GitHub Actions configurado  
 ✅ **Performance óptimo**: Lazy loading + optimizaciones  
 ✅ **SEO excelente**: Metadata completa + Schema.org  
-✅ **Documentación completa**: 6 archivos MD detallados  
+✅ **Documentación completa**: 6 archivos MD detallados
 
 ### 🚀 Listo para Lanzamiento
 
@@ -669,6 +703,6 @@ git push origin main
 
 **Última actualización**: 10 de enero de 2026, 03:44 CET  
 **Estado**: 🎖️ EXCELENTE (9.5/10)  
-**Production Ready**: 🟢 95%  
+**Production Ready**: 🟢 95%
 
 ✅ **PROYECTO COMPLETO Y LISTO PARA PRODUCCIÓN**

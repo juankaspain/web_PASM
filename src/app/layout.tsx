@@ -229,7 +229,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               '@id': 'https://almagrosanmiguel.com/#person',
               name: 'Almagro San Miguel',
               alternateName: 'Pedro Francisco Almagro Gordillo',
-              birthDate: '1990-03-07',
               birthPlace: {
                 '@type': 'Place',
                 address: {

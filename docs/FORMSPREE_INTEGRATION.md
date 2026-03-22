@@ -21,24 +21,28 @@ El formulario de contacto ahora envía mensajes **directamente a Formspree** sin
 ### 2. Características Implementadas
 
 #### Campos del Formulario
+
 - **Nombre completo** (obligatorio, 2-100 caracteres)
 - **Email** (obligatorio, validación automática)
 - **Categoría** (6 opciones predefinidas)
 - **Mensaje** (obligatorio, 10-2000 caracteres)
 
 #### Validaciones
+
 - Validación HTML5 nativa
 - Contadores de caracteres
 - Deshabilitar campos durante envío
 - Prevención de doble-submit
 
 #### Estados del Formulario
+
 1. **Idle**: Estado inicial
 2. **Sending**: Mostrando spinner y "Enviando..."
 3. **Success**: Mensaje de confirmación verde con auto-hide (5s)
 4. **Error**: Mensaje de error con detalles específicos
 
 #### Mejoras UX
+
 - 🔄 Spinner animado durante envío
 - ✅ Confirmación visual con icono y animación
 - ❌ Mensajes de error descriptivos
@@ -47,6 +51,7 @@ El formulario de contacto ahora envía mensajes **directamente a Formspree** sin
 - 🔒 Nota de privacidad de Formspree
 
 #### Analytics
+
 - Tracking de envíos exitosos con Google Analytics
 - Tracking de clics en redes sociales
 
@@ -88,6 +93,7 @@ El formulario de contacto ahora envía mensajes **directamente a Formspree** sin
 ```
 
 **Campos especiales de Formspree**:
+
 - `_subject`: Personaliza el asunto del email
 - `_replyto`: Configura el email de respuesta
 
@@ -111,24 +117,25 @@ El formulario de contacto ahora envía mensajes **directamente a Formspree** sin
    - ✅ reCAPTCHA (activar si recibes spam)
    - ✅ Honeypot field (ya incluido por defecto)
 
-4. **Archivos adjuntos**: 
+4. **Archivos adjuntos**:
    - ❌ Desactivado (no necesario para tu caso)
    - Puedes activarlo si quieres recibir CVs o fotos
 
 5. **Auto-respuesta**:
+
    ```
    Asunto: "Gracias por tu mensaje - Almagro San Miguel"
-   
+
    Cuerpo:
    Hola {{name}},
-   
-   Gracias por contactarme. He recibido tu mensaje sobre "{{category}}" 
+
+   Gracias por contactarme. He recibido tu mensaje sobre "{{category}}"
    y te responderé personalmente en menos de 48 horas hábiles.
-   
+
    Saludos,
    Almagro San Miguel
    Actor Profesional
-   
+
    ---
    www.almagrosanmiguel.com
    ```
@@ -150,6 +157,7 @@ El formulario de contacto ahora envía mensajes **directamente a Formspree** sin
 - **Exportación a CSV**
 
 ### Acceso rápido:
+
 ```
 Dashboard: https://formspree.io/forms
 Tu form: https://formspree.io/forms/xlggrndl/submissions
@@ -162,6 +170,7 @@ Tu form: https://formspree.io/forms/xlggrndl/submissions
 ### Cómo Probar
 
 1. **Local**:
+
    ```bash
    npm run dev
    # Abre http://localhost:3000/#contact
@@ -184,16 +193,19 @@ Tu form: https://formspree.io/forms/xlggrndl/submissions
 ### Casos de Error a Probar
 
 **Sin internet**:
+
 ```
 ❌ Error de conexión. Verifica tu internet e inténtalo de nuevo.
 ```
 
 **Email inválido**:
+
 ```
 ❌ Validación HTML5 previene el envío
 ```
 
 **Mensaje muy corto** (<10 caracteres):
+
 ```
 ❌ Validación HTML5 previene el envío
 ```
@@ -214,6 +226,7 @@ Tu form: https://formspree.io/forms/xlggrndl/submissions
 ### Datos que se Almacenan
 
 **En Formspree** (30 días en plan free):
+
 - Nombre
 - Email
 - Categoría
@@ -222,9 +235,11 @@ Tu form: https://formspree.io/forms/xlggrndl/submissions
 - IP del remitente
 
 **En tu Email** (indefinidamente):
+
 - Todos los datos del formulario
 
 **No se almacena**:
+
 - Contraseñas
 - Datos de pago
 - Información sensible
@@ -300,6 +315,7 @@ trackEvent('form_completed', 'engagement', formData.category)
 ### Problema: "Error al enviar el mensaje"
 
 **Solución**:
+
 1. Verificar conexión a internet
 2. Verificar que el Form ID sea correcto: `xlggrndl`
 3. Comprobar en el panel de Formspree si hay errores
@@ -308,6 +324,7 @@ trackEvent('form_completed', 'engagement', formData.category)
 ### Problema: No recibo emails
 
 **Solución**:
+
 1. Revisar carpeta de SPAM
 2. Verificar que el email está confirmado en Formspree
 3. Comprobar en el dashboard de Formspree que el envío se registró
@@ -316,6 +333,7 @@ trackEvent('form_completed', 'engagement', formData.category)
 ### Problema: Recibo spam
 
 **Solución**:
+
 1. Activar reCAPTCHA en Formspree dashboard
 2. Configurar filtros de spam en Formspree
 3. Bloquear IPs específicas
@@ -326,11 +344,13 @@ trackEvent('form_completed', 'engagement', formData.category)
 ## 📊 Métricas de Éxito
 
 ### Antes de la Implementación
+
 - ❌ Formulario no funcional (mock)
 - ❌ Sin backend configurado
 - ❌ Sin manera de recibir mensajes
 
 ### Después de la Implementación
+
 - ✅ Formulario 100% funcional
 - ✅ Envío instantáneo de emails
 - ✅ Confirmación visual al usuario
@@ -361,17 +381,20 @@ trackEvent('form_completed', 'engagement', formData.category)
 ## 🚀 Próximos Pasos
 
 ### Inmediatamente (Antes del Deploy)
+
 1. Probar el formulario localmente
 2. Verificar que recibes el email de prueba
 3. Configurar auto-respuesta en Formspree (opcional)
 
 ### Después del Deploy
+
 1. Probar el formulario en producción
 2. Monitorear los primeros envíos
 3. Ajustar configuración de spam si es necesario
 4. Revisar analytics de conversiones
 
 ### Primer Mes
+
 1. Analizar tasa de respuesta
 2. Optimizar mensajes de confirmación
 3. Añadir campos adicionales si es necesario
@@ -382,11 +405,13 @@ trackEvent('form_completed', 'engagement', formData.category)
 ## 📞 Contacto y Soporte
 
 **Formspree**:
+
 - Docs: https://help.formspree.io/
 - Support: support@formspree.io
 - Status: https://status.formspree.io/
 
 **Tu configuración**:
+
 - Form ID: `xlggrndl`
 - Endpoint: `https://formspree.io/f/xlggrndl`
 - Dashboard: https://formspree.io/forms/xlggrndl

@@ -81,42 +81,48 @@ const recognitions = [
   {
     icon: Tv,
     title: 'La Moderna - Éxito Internacional',
-    description: 'Nominada Emmy Internacionales 2024 y ganadora Premio FICAL. Más de 350 episodios como protagonista en TVE.',
+    description:
+      'Nominada Emmy Internacionales 2024 y ganadora Premio FICAL. Más de 350 episodios como protagonista en TVE.',
     year: '2023-2025',
     highlight: true,
   },
   {
     icon: Star,
     title: 'CNTC - Formación de Élite',
-    description: 'Compañía Nacional de Teatro Clásico bajo dirección de Helena Pimenta. Especialización en verso clásico español.',
+    description:
+      'Compañía Nacional de Teatro Clásico bajo dirección de Helena Pimenta. Especialización en verso clásico español.',
     year: '2015-2017',
     highlight: false,
   },
   {
     icon: Film,
     title: 'La Caza - Serie Más Vista',
-    description: 'Protagonista en "La Caza: Guadiana", una de las series más vistas de RTVE Play y gran éxito de audiencia.',
+    description:
+      'Protagonista en "La Caza: Guadiana", una de las series más vistas de RTVE Play y gran éxito de audiencia.',
     year: '2022-2024',
     highlight: true,
   },
   {
     icon: Trophy,
     title: 'Vis a vis: El Oasis',
-    description: 'Primer papel protagonista (Diego Ramala) en spin-off exitoso. Múltiples nominaciones Premios Iris y Fotogramas.',
+    description:
+      'Primer papel protagonista (Diego Ramala) en spin-off exitoso. Múltiples nominaciones Premios Iris y Fotogramas.',
     year: '2020',
     highlight: false,
   },
   {
     icon: Award,
     title: 'Hernán Cortés - Prime Video',
-    description: 'Producción histórica internacional de Amazon Prime Video. Estreno en Latinoamérica y España.',
+    description:
+      'Producción histórica internacional de Amazon Prime Video. Estreno en Latinoamérica y España.',
     year: '2019',
     highlight: false,
   },
   {
     icon: Tv,
     title: 'Operación: Barrio Inglés',
-    description: 'Serie de época ambientada en la II Guerra Mundial. Nominaciones Premios ASECAN.',
+    description:
+      'Serie de época ambientada en la II Guerra Mundial. Nominaciones Premios ASECAN.',
     year: '2024',
     highlight: false,
   },
@@ -127,20 +133,23 @@ export default function Awards() {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="awards" className="relative py-24 overflow-hidden bg-gradient-to-b from-slate-950 via-black to-slate-900">
+    <section
+      id="awards"
+      className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-black to-slate-900 py-24"
+    >
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px]" />
+        <div className="absolute left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-yellow-500/5 blur-[100px]" />
+        <div className="absolute bottom-1/4 right-1/4 h-[600px] w-[600px] rounded-full bg-orange-500/5 blur-[120px]" />
       </div>
 
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
         }}
       />
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+      <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
@@ -148,22 +157,24 @@ export default function Awards() {
           transition={{ duration: 0.6 }}
         >
           {/* Header ESTANDARIZADO */}
-          <div className="text-center mb-16">
+          <div className="mb-16 text-center">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm"
             >
-              <Trophy className="w-4 h-4 text-yellow-400" strokeWidth={2} />
-              <span className="text-sm font-medium text-slate-300 tracking-wide">Reconocimientos</span>
+              <Trophy className="h-4 w-4 text-yellow-400" strokeWidth={2} />
+              <span className="text-sm font-medium tracking-wide text-slate-300">
+                Reconocimientos
+              </span>
             </motion.div>
-            
-            <motion.h2 
+
+            <motion.h2
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight text-white"
+              className="mb-6 text-4xl font-bold tracking-tight text-white lg:text-5xl"
             >
               Premios & Reconocimientos
             </motion.h2>
@@ -172,75 +183,85 @@ export default function Awards() {
               initial={{ opacity: 0, scaleX: 0 }}
               animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="w-20 h-0.5 bg-yellow-400 mx-auto mb-6"
+              className="mx-auto mb-6 h-0.5 w-20 bg-yellow-400"
             />
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed"
+              className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-400"
             >
-              Trayectoria profesional reconocida por la industria audiovisual nacional e internacional
+              Trayectoria profesional reconocida por la industria audiovisual nacional e
+              internacional
             </motion.p>
           </div>
 
           {/* Awards */}
-          <div className="max-w-5xl mx-auto mb-16">
-            <h3 className="text-2xl font-bold mb-10 text-center flex items-center justify-center gap-2 text-white">
-              <Award className="w-6 h-6 text-yellow-400" />
+          <div className="mx-auto mb-16 max-w-5xl">
+            <h3 className="mb-10 flex items-center justify-center gap-2 text-center text-2xl font-bold text-white">
+              <Award className="h-6 w-6 text-yellow-400" />
               Premios y Nominaciones
             </h3>
             <div className="space-y-6">
               {awards.map((award, index) => (
                 <motion.div
-                  key={index}
+                  key={`${award.year}-${award.organization}`}
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                   whileHover={{ x: 4 }}
                   className="group"
                 >
-                  <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-6 lg:p-8 hover:bg-white/[0.04] hover:border-yellow-400/30 transition-all">
-                    <div className="flex flex-col lg:flex-row items-start gap-6">
+                  <div className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-all hover:border-yellow-400/30 hover:bg-white/[0.04] lg:p-8">
+                    <div className="flex flex-col items-start gap-6 lg:flex-row">
                       <div className="flex-shrink-0">
-                        <div className={`w-16 h-16 rounded-xl flex items-center justify-center shadow-lg ${
-                          award.type === 'premio' ? 'bg-yellow-400' : 'bg-orange-400'
-                        }`}>
+                        <div
+                          className={`flex h-16 w-16 items-center justify-center rounded-xl shadow-lg ${
+                            award.type === 'premio' ? 'bg-yellow-400' : 'bg-orange-400'
+                          }`}
+                        >
                           {award.type === 'premio' ? (
-                            <Trophy className="w-8 h-8 text-black" />
+                            <Trophy className="h-8 w-8 text-black" />
                           ) : (
-                            <Star className="w-8 h-8 text-black" />
+                            <Star className="h-8 w-8 text-black" />
                           )}
                         </div>
                       </div>
                       <div className="flex-grow">
-                        <div className="flex flex-wrap items-center gap-3 mb-3">
-                          <span className="text-2xl font-bold text-white">{award.year}</span>
-                          <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                            award.type === 'premio' 
-                              ? 'bg-yellow-400 text-black' 
-                              : 'bg-orange-400 text-black'
-                          }`}>
+                        <div className="mb-3 flex flex-wrap items-center gap-3">
+                          <span className="text-2xl font-bold text-white">
+                            {award.year}
+                          </span>
+                          <span
+                            className={`rounded-full px-3 py-1 text-xs font-bold ${
+                              award.type === 'premio'
+                                ? 'bg-yellow-400 text-black'
+                                : 'bg-orange-400 text-black'
+                            }`}
+                          >
                             {award.type === 'premio' ? 'PREMIO' : 'NOMINACIÓN'}
                           </span>
-                          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-slate-300 border border-white/20">
+                          <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold text-slate-300">
                             {award.category}
                           </span>
                           {award.international && (
-                            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                            <span className="rounded-full border border-blue-500/30 bg-blue-500/20 px-3 py-1 text-xs font-semibold text-blue-300">
                               INTERNACIONAL
                             </span>
                           )}
                         </div>
-                        <h4 className="text-xl lg:text-2xl font-bold mb-2 text-white">{award.title}</h4>
-                        <p className="text-slate-300 mb-1">
+                        <h4 className="mb-2 text-xl font-bold text-white lg:text-2xl">
+                          {award.title}
+                        </h4>
+                        <p className="mb-1 text-slate-300">
                           <span className="font-semibold">Producción:</span> {award.work}
                         </p>
-                        <p className="text-slate-300 mb-1">
-                          <span className="font-semibold">Organización:</span> {award.organization}
+                        <p className="mb-1 text-slate-300">
+                          <span className="font-semibold">Organización:</span>{' '}
+                          {award.organization}
                         </p>
-                        <p className="text-slate-400 text-sm mt-2">
+                        <p className="mt-2 text-sm text-slate-400">
                           <span className="font-semibold">Papel:</span> {award.role}
                         </p>
                       </div>
@@ -253,40 +274,50 @@ export default function Awards() {
 
           {/* Recognitions */}
           <div>
-            <h3 className="text-2xl font-bold mb-10 text-center flex items-center justify-center gap-2 text-white">
-              <Star className="w-6 h-6 text-yellow-400" />
+            <h3 className="mb-10 flex items-center justify-center gap-2 text-center text-2xl font-bold text-white">
+              <Star className="h-6 w-6 text-yellow-400" />
               Hitos Profesionales
             </h3>
-            <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+            <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
               {recognitions.map((recognition, index) => (
                 <motion.div
-                  key={index}
+                  key={recognition.title}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
                   whileHover={{ y: -4 }}
                   className="group"
                 >
-                  <div className={`relative border rounded-2xl p-6 hover:border-white/20 transition-all ${
-                    recognition.highlight 
-                      ? 'bg-gradient-to-br from-green-900/10 to-green-950/5 border-green-500/30 hover:bg-green-900/15'
-                      : 'bg-white/[0.02] border-white/10 hover:bg-white/[0.04]'
-                  }`}>
+                  <div
+                    className={`relative rounded-2xl border p-6 transition-all hover:border-white/20 ${
+                      recognition.highlight
+                        ? 'border-green-500/30 bg-gradient-to-br from-green-900/10 to-green-950/5 hover:bg-green-900/15'
+                        : 'border-white/10 bg-white/[0.02] hover:bg-white/[0.04]'
+                    }`}
+                  >
                     <div className="flex items-start gap-4">
-                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                        recognition.highlight 
-                          ? 'bg-green-400/10 border border-green-400/20'
-                          : 'bg-yellow-400/10 border border-yellow-400/20'
-                      }`}>
-                        <recognition.icon className={`w-6 h-6 ${
-                          recognition.highlight ? 'text-green-400' : 'text-yellow-400'
-                        }`} />
+                      <div
+                        className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg ${
+                          recognition.highlight
+                            ? 'border border-green-400/20 bg-green-400/10'
+                            : 'border border-yellow-400/20 bg-yellow-400/10'
+                        }`}
+                      >
+                        <recognition.icon
+                          className={`h-6 w-6 ${
+                            recognition.highlight ? 'text-green-400' : 'text-yellow-400'
+                          }`}
+                        />
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-bold text-lg mb-2 text-white">{recognition.title}</h4>
-                        <p className="text-slate-300 text-sm leading-relaxed mb-3">{recognition.description}</p>
-                        <div className="flex items-center gap-2 text-xs text-slate-400">
-                          <Calendar className="w-3 h-3" />
+                        <h4 className="mb-2 text-lg font-bold text-white">
+                          {recognition.title}
+                        </h4>
+                        <p className="mb-3 text-sm leading-relaxed text-slate-300">
+                          {recognition.description}
+                        </p>
+                        <div className="flex items-center gap-2 text-xs text-slate-300">
+                          <Calendar className="h-3 w-3" />
                           {recognition.year}
                         </div>
                       </div>
@@ -302,17 +333,24 @@ export default function Awards() {
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
             transition={{ duration: 0.6, delay: 0.9 }}
-            className="mt-16 max-w-4xl mx-auto"
+            className="mx-auto mt-16 max-w-4xl"
           >
-            <div className="relative bg-white/[0.02] border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
+            <div className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm">
               <div className="flex flex-col items-center gap-4">
-                <Sparkles className="w-8 h-8 text-yellow-400" />
-                <p className="text-lg text-slate-300 leading-relaxed text-center">
-                  <span className="font-semibold text-white">Emmy Internacionales 2024</span>: "La Moderna" nominada junto a "La Promesa" en la categoría Mejor Telenovela. Ambas series de RTVE compitieron con producciones de 21 países.
+                <Sparkles className="h-8 w-8 text-yellow-400" />
+                <p className="text-center text-lg leading-relaxed text-slate-300">
+                  <span className="font-semibold text-white">
+                    Emmy Internacionales 2024
+                  </span>
+                  : "La Moderna" nominada junto a "La Promesa" en la categoría Mejor
+                  Telenovela. Ambas series de RTVE compitieron con producciones de 21
+                  países.
                 </p>
                 <div className="flex items-center gap-2 text-sm text-slate-400">
-                  <Award className="w-4 h-4 text-yellow-400" />
-                  <span>Trayectoria respaldada por la industria nacional e internacional</span>
+                  <Award className="h-4 w-4 text-yellow-400" />
+                  <span>
+                    Trayectoria respaldada por la industria nacional e internacional
+                  </span>
                 </div>
               </div>
             </div>

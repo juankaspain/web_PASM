@@ -105,7 +105,7 @@ rm babel.config.js
 const getCriticalCSS = () => {
   // Temporalmente deshabilitado para fix de build
   return ''
-  
+
   /* Descomentar después del build exitoso:
   if (typeof window === 'undefined') {
     try {
@@ -182,11 +182,13 @@ Antes de hacer `npm run dev` o `npm run build`:
 ## ⚡ Comando Único (Copiar y Pegar)
 
 ### En Windows (PowerShell):
+
 ```powershell
 Remove-Item -Recurse -Force node_modules, .next, package-lock.json -ErrorAction SilentlyContinue; npm install; npm run dev
 ```
 
 ### En Mac/Linux:
+
 ```bash
 rm -rf node_modules .next package-lock.json && npm install && npm run dev
 ```
@@ -201,6 +203,7 @@ node --version
 ```
 
 Si es menor:
+
 ```bash
 # Instalar Node.js 20 LTS desde:
 # https://nodejs.org/
@@ -238,28 +241,31 @@ import PWAInstall from '@/components/PWAInstall'
 import Script from 'next/script'
 
 // Font configuration
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
   preload: true,
-  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Arial', 'sans-serif']
+  fallback: [
+    'system-ui',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'Segoe UI',
+    'Arial',
+    'sans-serif',
+  ],
 })
 
 // ... (resto del metadata igual)
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   // Critical CSS deshabilitado temporalmente para fix de build
-  
+
   return (
     <html lang="es" className={inter.variable} suppressHydrationWarning>
       <head>
         {/* Critical CSS se agregará después del build exitoso */}
-        
+
         {/* Resource hints */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -287,6 +293,7 @@ Después de `npm run dev`, deberías ver:
 ```
 
 Y en el navegador:
+
 - http://localhost:3000 carga correctamente
 - Sin errores en consola del navegador
 - Imágenes se cargan
@@ -324,6 +331,7 @@ Una vez que `npm run dev` funcione:
 2. Probar navegación entre secciones
 3. Verificar que imágenes cargan
 4. Si todo funciona, hacer build para producción:
+
    ```bash
    npm run build
    npm start

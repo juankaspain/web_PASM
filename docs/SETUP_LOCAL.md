@@ -19,6 +19,7 @@ npm install -g pnpm@8
 ---
 
 ## 🛠️ Instalación
+
 ### 1. Clonar el Repositorio
 
 ```bash
@@ -223,6 +224,7 @@ pnpm type-check  # Ver todos los errores
 ---
 
 ## 🚀 Construir para Producción
+
 ### Build Local
 
 ```bash

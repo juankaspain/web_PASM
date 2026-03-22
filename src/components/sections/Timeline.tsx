@@ -11,7 +11,7 @@ import {
   Sparkles,
   Theater,
 } from 'lucide-react'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 interface TimelineEvent {
   year: string
@@ -156,12 +156,36 @@ const events: TimelineEvent[] = [
   },
 ]
 
+function useInView(options?: IntersectionObserverInit) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [isInView, setIsInView] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsInView(true)
+        observer.unobserve(el)
+      }
+    }, options)
+    observer.observe(el)
+    return () => observer.disconnect()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  return { ref, isInView }
+}
+
 export default function Timeline() {
   const containerRef = useRef(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start center', 'end center'],
   })
+
+  const headerInView = useInView({ threshold: 0.1 })
+  const footerInView = useInView({ threshold: 0.1 })
 
   const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
 
@@ -183,11 +207,9 @@ export default function Timeline() {
       />
 
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+        <div
+          ref={headerInView.ref}
+          className={`transition-all duration-[600ms] ${headerInView.isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
         >
           <div className="mb-20 text-center">
             <h2 className="mb-8 text-5xl font-bold tracking-tight lg:text-6xl">
@@ -223,56 +245,20 @@ export default function Timeline() {
                 const isLeft = index % 2 === 0
 
                 return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: 0.1 }}
-                    viewport={{ once: true, margin: '-100px' }}
-                    className={`relative flex items-center ${
-                      isLeft ? 'md:justify-end' : 'md:justify-start'
-                    }`}
-                  >
-                    <div className="hidden pr-12 md:block md:w-1/2">
-                      {isLeft && <TimelineCard event={event} Icon={Icon} />}
-                    </div>
-
-                    <div className="absolute left-0 z-10 -translate-x-0 md:left-1/2 md:-translate-x-1/2">
-                      <motion.div
-                        whileHover={{ scale: 1.2, rotate: 360 }}
-                        transition={{ duration: 0.5 }}
-                        className="relative"
-                      >
-                        <div
-                          className={`h-16 w-16 rounded-full bg-gradient-to-br ${event.gradient} flex items-center justify-center shadow-xl`}
-                        >
-                          <Icon className="h-8 w-8 text-white" />
-                        </div>
-                        <div
-                          className={`absolute inset-0 bg-gradient-to-br ${event.gradient} -z-10 rounded-full opacity-40 blur-xl`}
-                        />
-                      </motion.div>
-                    </div>
-
-                    <div className="hidden pl-12 md:block md:w-1/2">
-                      {!isLeft && <TimelineCard event={event} Icon={Icon} />}
-                    </div>
-
-                    <div className="w-full pl-24 md:hidden">
-                      <TimelineCard event={event} Icon={Icon} />
-                    </div>
-                  </motion.div>
+                  <TimelineEventRow
+                    key={`${event.year}-${event.title}`}
+                    event={event}
+                    Icon={Icon}
+                    isLeft={isLeft}
+                  />
                 )
               })}
             </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-20 text-center"
+          <div
+            ref={footerInView.ref}
+            className={`mt-20 text-center transition-all delay-300 duration-[600ms] ${footerInView.isInView ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}
           >
             <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 backdrop-blur-sm">
               <Sparkles className="h-5 w-5 text-blue-400" />
@@ -280,10 +266,60 @@ export default function Timeline() {
                 Historia en constante evolución
               </span>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
+  )
+}
+
+function TimelineEventRow({
+  event,
+  Icon,
+  isLeft,
+}: {
+  event: TimelineEvent
+  Icon: any
+  isLeft: boolean
+}) {
+  const row = useInView({ threshold: 0.1, rootMargin: '-100px' })
+
+  return (
+    <div
+      ref={row.ref}
+      className={`relative flex items-center transition-all delay-100 duration-[600ms] ${
+        isLeft ? 'md:justify-end' : 'md:justify-start'
+      } ${row.isInView ? 'translate-x-0 opacity-100' : `opacity-0 ${isLeft ? '-translate-x-[50px]' : 'translate-x-[50px]'}`}`}
+    >
+      <div className="hidden pr-12 md:block md:w-1/2">
+        {isLeft && <TimelineCard event={event} Icon={Icon} />}
+      </div>
+
+      <div className="absolute left-0 z-10 -translate-x-0 md:left-1/2 md:-translate-x-1/2">
+        <motion.div
+          whileHover={{ scale: 1.2, rotate: 360 }}
+          transition={{ duration: 0.5 }}
+          className="relative"
+        >
+          <div
+            className={`h-16 w-16 rounded-full bg-gradient-to-br ${event.gradient} flex items-center justify-center shadow-xl`}
+          >
+            <Icon className="h-8 w-8 text-white" />
+          </div>
+          <div
+            className={`absolute inset-0 bg-gradient-to-br ${event.gradient} -z-10 rounded-full opacity-40 blur-xl`}
+          />
+        </motion.div>
+      </div>
+
+      <div className="hidden pl-12 md:block md:w-1/2">
+        {!isLeft && <TimelineCard event={event} Icon={Icon} />}
+      </div>
+
+      <div className="w-full pl-24 md:hidden">
+        <TimelineCard event={event} Icon={Icon} />
+      </div>
+    </div>
   )
 }
 

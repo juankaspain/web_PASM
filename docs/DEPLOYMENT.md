@@ -1,4 +1,5 @@
 # 🚀 DEPLOYMENT GUIDE
+
 ## Almagro San Miguel Portfolio
 
 ---
@@ -6,6 +7,7 @@
 ## 🎯 PRE-DEPLOYMENT CHECKLIST
 
 ### ✅ Code & Content
+
 - [x] All components functional
 - [x] No broken links (0 critical)
 - [x] 19 sections complete
@@ -20,6 +22,7 @@
 - [x] PWA manifest ready
 
 ### 📝 Content Files Needed
+
 - [ ] Profile image (profile-image.jpg)
 - [ ] OG image (og-image.jpg, 1200x630)
 - [ ] Twitter image (twitter-image.jpg, 1200x600)
@@ -60,6 +63,7 @@ EMAIL_TO=info@almagrosanmiguel.com
 ### 🔵 Option 1: Vercel (Recommended)
 
 **Why Vercel?**
+
 - Next.js native platform
 - Zero configuration
 - Automatic HTTPS
@@ -70,16 +74,19 @@ EMAIL_TO=info@almagrosanmiguel.com
 **Steps:**
 
 1. **Install Vercel CLI**
+
 ```bash
 npm i -g vercel
 ```
 
 2. **Login**
+
 ```bash
 vercel login
 ```
 
 3. **Deploy**
+
 ```bash
 # Production deploy
 vercel --prod
@@ -92,16 +99,19 @@ vercel --prod
 ```
 
 4. **Configure Environment Variables**
+
 - Go to Project Settings
 - Add environment variables from `.env.local`
 - Redeploy
 
 5. **Custom Domain**
+
 - Go to Project Settings > Domains
 - Add `almagrosanmiguel.com`
 - Follow DNS instructions
 
 **Vercel Configuration**
+
 ```json
 // vercel.json (optional)
 {
@@ -139,21 +149,25 @@ vercel --prod
 **Steps:**
 
 1. **Install Netlify CLI**
+
 ```bash
 npm i -g netlify-cli
 ```
 
 2. **Build**
+
 ```bash
 npm run build
 ```
 
 3. **Deploy**
+
 ```bash
 netlify deploy --prod
 ```
 
 4. **Configuration**
+
 ```toml
 # netlify.toml
 [build]
@@ -194,6 +208,7 @@ netlify deploy --prod
 1. Go to AWS Amplify Console
 2. Connect repository
 3. Configure:
+
 ```yaml
 version: 1
 frontend:
@@ -212,6 +227,7 @@ frontend:
     paths:
       - node_modules/**/*
 ```
+
 4. Deploy
 
 ---
@@ -221,6 +237,7 @@ frontend:
 ### DNS Records (Example for Vercel)
 
 **A Record:**
+
 ```
 Type: A
 Name: @
@@ -229,6 +246,7 @@ TTL: Auto
 ```
 
 **CNAME Record:**
+
 ```
 Type: CNAME
 Name: www
@@ -237,6 +255,7 @@ TTL: Auto
 ```
 
 ### SSL Certificate
+
 - Automatic with Vercel/Netlify/Cloudflare
 - Force HTTPS: Yes
 - HSTS: Enable
@@ -259,6 +278,7 @@ curl -X POST https://almagrosanmiguel.com/api/contact \
 ### 2. Submit to Search Engines
 
 **Google Search Console:**
+
 1. Go to https://search.google.com/search-console
 2. Add property: `almagrosanmiguel.com`
 3. Verify ownership (DNS/HTML)
@@ -266,6 +286,7 @@ curl -X POST https://almagrosanmiguel.com/api/contact \
 5. Request indexing
 
 **Bing Webmaster Tools:**
+
 1. Go to https://www.bing.com/webmasters
 2. Add site
 3. Verify
@@ -274,6 +295,7 @@ curl -X POST https://almagrosanmiguel.com/api/contact \
 ### 3. Analytics Setup
 
 **Google Analytics 4:**
+
 1. Create GA4 property
 2. Get Measurement ID (G-XXXXXXXXXX)
 3. Add to `.env.local`
@@ -281,9 +303,10 @@ curl -X POST https://almagrosanmiguel.com/api/contact \
 5. Verify tracking in Real-Time reports
 
 **Alternative: Plausible**
+
 ```html
 <!-- In Analytics.tsx, uncomment Plausible -->
-<Script
+<script
   defer
   data-domain="almagrosanmiguel.com"
   src="https://plausible.io/js/script.js"
@@ -293,17 +316,20 @@ curl -X POST https://almagrosanmiguel.com/api/contact \
 ### 4. Performance Testing
 
 **Run Lighthouse:**
+
 ```bash
 npx lighthouse https://almagrosanmiguel.com --view
 ```
 
 **Target Scores:**
+
 - Performance: 90+
 - Accessibility: 95+
 - Best Practices: 95+
 - SEO: 95+
 
 **Tools:**
+
 - PageSpeed Insights: https://pagespeed.web.dev/
 - GTmetrix: https://gtmetrix.com/
 - WebPageTest: https://www.webpagetest.org/
@@ -311,11 +337,13 @@ npx lighthouse https://almagrosanmiguel.com --view
 ### 5. Accessibility Audit
 
 **Tools:**
+
 - WAVE: https://wave.webaim.org/
 - axe DevTools: Browser extension
 - Lighthouse Accessibility
 
 **Checklist:**
+
 - [ ] All images have alt text
 - [ ] Color contrast WCAG AA
 - [ ] Keyboard navigation
@@ -351,36 +379,36 @@ module.exports = {
         headers: [
           {
             key: 'X-DNS-Prefetch-Control',
-            value: 'on'
+            value: 'on',
           },
           {
             key: 'Strict-Transport-Security',
-            value: 'max-age=63072000; includeSubDomains; preload'
+            value: 'max-age=63072000; includeSubDomains; preload',
           },
           {
             key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
+            value: 'SAMEORIGIN',
           },
           {
             key: 'X-Content-Type-Options',
-            value: 'nosniff'
+            value: 'nosniff',
           },
           {
             key: 'X-XSS-Protection',
-            value: '1; mode=block'
+            value: '1; mode=block',
           },
           {
             key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin'
+            value: 'origin-when-cross-origin',
           },
           {
             key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()'
-          }
-        ]
-      }
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+        ],
+      },
     ]
-  }
+  },
 }
 ```
 
@@ -391,11 +419,13 @@ module.exports = {
 ### Uptime Monitoring
 
 **Free Options:**
+
 - UptimeRobot: https://uptimerobot.com/
 - Pingdom: https://www.pingdom.com/
 - StatusCake: https://www.statuscake.com/
 
 **Setup:**
+
 1. Create account
 2. Add monitor for `https://almagrosanmiguel.com`
 3. Set check interval: 5 minutes
@@ -404,6 +434,7 @@ module.exports = {
 ### Error Tracking
 
 **Sentry:**
+
 ```bash
 npm install @sentry/nextjs
 npx @sentry/wizard -i nextjs
@@ -416,17 +447,20 @@ npx @sentry/wizard -i nextjs
 ### Regular Updates
 
 **Weekly:**
+
 - Check analytics
 - Review contact form submissions
 - Monitor uptime
 
 **Monthly:**
+
 - Update dependencies: `npm update`
 - Check for security vulnerabilities: `npm audit`
 - Review and update content (news, events)
 - Backup data
 
 **Quarterly:**
+
 - Full SEO audit
 - Performance optimization
 - Content refresh
@@ -435,12 +469,14 @@ npx @sentry/wizard -i nextjs
 ### Updating Content
 
 **News Articles:**
+
 1. Edit `src/components/sections/News.tsx`
 2. Add new article to `newsItems` array
 3. Commit & push
 4. Auto-deploy
 
 **Events:**
+
 1. Edit `src/components/sections/Events.tsx`
 2. Update `upcomingEvents` / `pastEvents`
 3. Commit & push
@@ -476,6 +512,7 @@ npm run build
 1. Check `/api/contact` endpoint
 2. Verify environment variables
 3. Test with curl:
+
 ```bash
 curl -X POST https://almagrosanmiguel.com/api/contact \
   -H "Content-Type: application/json" \
@@ -506,12 +543,14 @@ curl -X POST https://almagrosanmiguel.com/api/contact \
 ## 📞 SUPPORT
 
 If you need help:
+
 1. Check documentation
 2. Review deployment logs
 3. Contact hosting support
 4. GitHub Issues (if open source)
 
 **Hosting Support:**
+
 - Vercel: https://vercel.com/support
 - Netlify: https://answers.netlify.com/
 - Cloudflare: https://community.cloudflare.com/

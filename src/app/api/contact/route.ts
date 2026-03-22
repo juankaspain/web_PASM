@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
+// E.3 - Formspree endpoint kept server-side only
+const FORMSPREE_ENDPOINT = process.env.FORMSPREE_URL || 'https://formspree.io/f/xlggrndl'
+
 // E.1 - Use Zod schema for validation (matching validators.ts pattern)
 const contactApiSchema = z.object({
   name: z
@@ -60,7 +63,32 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: firstError }, { status: 400 })
     }
 
-    const { name, category } = result.data
+    const { name, email, category, message } = result.data
+
+    // E.3 - Forward validated data to Formspree server-side
+    const formspreeResponse = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        category,
+        message,
+        _subject: `Nuevo mensaje de ${name} - ${category}`,
+        _replyto: email,
+      }),
+    })
+
+    if (!formspreeResponse.ok) {
+      const errorData = await formspreeResponse.json().catch(() => ({}))
+      return NextResponse.json(
+        { error: errorData.error || 'Error al enviar el mensaje. Inténtalo de nuevo.' },
+        { status: formspreeResponse.status }
+      )
+    }
 
     return NextResponse.json({
       success: true,

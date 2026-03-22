@@ -165,7 +165,7 @@ export default function Hero() {
       id="home"
       className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black"
     >
-      {/* All styled-jsx tags MUST be at section root level */}
+      {/* A.10 - Consolidated styled-jsx block */}
       <style jsx>{`
         @keyframes star-float {
           0%,
@@ -183,18 +183,14 @@ export default function Hero() {
         .star-animation {
           animation: star-float linear infinite;
         }
-      `}</style>
 
-      <style jsx>{`
         .hero-image-container {
           transition: transform 0.5s ease-out;
         }
         .hero-image-container:hover {
           transform: scale(1.02);
         }
-      `}</style>
 
-      <style jsx>{`
         @keyframes fadeInUp {
           from {
             opacity: 0;
@@ -457,7 +453,7 @@ export default function Hero() {
                           <div className="text-2xl font-bold text-white">
                             {stat.value}
                           </div>
-                          <div className="text-[10px] font-medium uppercase tracking-wider text-slate-400">
+                          <div className="text-[10px] font-medium uppercase tracking-wider text-slate-300">
                             {stat.label}
                           </div>
                         </div>
@@ -490,8 +486,11 @@ export default function Hero() {
               </a>
             </div>
 
-            {/* Professional Links */}
-            <div className="fade-in-up space-y-4" style={{ animationDelay: '0.5s' }}>
+            {/* A.6 - Professional Links (hidden on mobile to reduce Hero length) */}
+            <div
+              className="fade-in-up hidden space-y-4 md:block"
+              style={{ animationDelay: '0.5s' }}
+            >
               <div className="flex items-center gap-2.5">
                 <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
                 <div className="flex items-center gap-2 rounded-full border border-slate-700/50 bg-slate-900/60 px-3 py-1.5 backdrop-blur-sm">
@@ -534,7 +533,7 @@ export default function Hero() {
                             className={`external-link-icon h-3 w-3 text-slate-500 group-hover:${link.iconColor.replace('text-', 'text-')} transition-all`}
                           />
                         </div>
-                        <p className="text-[10px] leading-tight text-slate-400">
+                        <p className="text-[10px] leading-tight text-slate-300">
                           {link.description}
                         </p>
                       </div>
@@ -549,8 +548,11 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Social Links */}
-            <div className="fade-in-up space-y-3" style={{ animationDelay: '0.6s' }}>
+            {/* A.6 - Social Links (hidden on mobile to reduce Hero length) */}
+            <div
+              className="fade-in-up hidden space-y-3 md:block"
+              style={{ animationDelay: '0.6s' }}
+            >
               <div className="flex items-center gap-2">
                 <Instagram className="h-4 w-4 text-yellow-400" />
                 <span className="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400">
@@ -574,7 +576,7 @@ export default function Hero() {
                         className={`h-5 w-5 text-slate-300 transition-colors ${link.color}`}
                       />
                       <p
-                        className={`text-[10px] font-semibold text-slate-400 transition-colors ${link.color}`}
+                        className={`text-[10px] font-semibold text-slate-300 transition-colors ${link.color}`}
                       >
                         {link.name.split(' ')[0]}
                       </p>

@@ -39,6 +39,7 @@ NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION = tu-codigo-aqui
 ```
 
 **Cómo obtenerlo**:
+
 1. Ve a https://search.google.com/search-console
 2. Añade propiedad: `pedroalmagro.com`
 3. Elige método: **"Etiqueta HTML"**
@@ -91,10 +92,11 @@ vercel env add NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
 ### Después de añadirlas:
 
 1. **Redespliega el proyecto**:
+
    ```bash
    # Desde Git
    git push
-   
+
    # O desde Vercel dashboard
    Deployments > ... > Redeploy
    ```
@@ -137,6 +139,7 @@ NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION="tu-codigo"
 ### Analytics no funciona
 
 ✅ **Verificar**:
+
 1. Variable añadida correctamente en Vercel
 2. Redespliegue después de añadir variable
 3. ID correcto: `G-HMCWN2XT3`
@@ -146,6 +149,7 @@ NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION="tu-codigo"
 ### Warning de metadataBase
 
 ✅ **Solución**:
+
 1. Añadir `NEXT_PUBLIC_SITE_URL` en Vercel
 2. Redesplegar
 3. El warning solo aparece en localhost si no está configurado
@@ -153,6 +157,7 @@ NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION="tu-codigo"
 ### Imágenes OG no se ven
 
 ✅ **Verificar**:
+
 1. `NEXT_PUBLIC_SITE_URL` configurado
 2. Archivo `/public/og-image.jpg` existe
 3. Tamaño correcto: 1200x630px

@@ -14,7 +14,7 @@ import {
   Sparkles,
   ExternalLink,
 } from 'lucide-react'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import SectionHeader from '@/components/ui/SectionHeader'
 
 const DOWNLOAD_ITEMS = [
@@ -128,8 +128,15 @@ const techSpecs: TechSpec[] = [
 
 export default function PressKit() {
   const [downloading, setDownloading] = useState<string | null>(null)
+  // E.6 - Reconstruct email client-side to prevent scraping
+  const [displayEmail, setDisplayEmail] = useState('...')
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
+
+  useEffect(() => {
+    const parts = ['info', 'almagrosanmiguel.com']
+    setDisplayEmail(parts.join('@'))
+  }, [])
 
   const handleDownload = async (type: string, _title: string) => {
     setDownloading(type)
@@ -184,7 +191,7 @@ export default function PressKit() {
               const Icon = item.icon
               return (
                 <motion.div
-                  key={index}
+                  key={item.type}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
@@ -207,7 +214,7 @@ export default function PressKit() {
                           />
                         </div>
                         <div className="flex flex-col items-end gap-1">
-                          <span className="rounded bg-white/5 px-2 py-0.5 text-xs font-medium uppercase tracking-wider text-slate-400">
+                          <span className="rounded bg-white/5 px-2 py-0.5 text-xs font-medium uppercase tracking-wider text-slate-300">
                             {item.format}
                           </span>
                           <span className="text-xs text-slate-600">{item.size}</span>
@@ -268,7 +275,7 @@ export default function PressKit() {
                 <div className="grid gap-6 md:grid-cols-2">
                   {techSpecs.map((spec, index) => (
                     <motion.div
-                      key={index}
+                      key={spec.label}
                       initial={{ opacity: 0, x: -20 }}
                       animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                       transition={{ duration: 0.5, delay: 0.9 + index * 0.05 }}
@@ -333,11 +340,11 @@ export default function PressKit() {
                 </p>
 
                 <a
-                  href="mailto:info@almagrosanmiguel.com"
+                  href={`mailto:${displayEmail}`}
                   className="inline-flex items-center gap-3 rounded-xl border border-yellow-400/30 bg-yellow-400/10 px-10 py-4 font-medium text-white shadow-xl transition-all duration-300 hover:scale-[1.03] hover:border-yellow-400/50 hover:bg-yellow-400/20"
                 >
                   <Mail className="h-5 w-5" strokeWidth={1.5} />
-                  info@almagrosanmiguel.com
+                  {displayEmail}
                 </a>
               </div>
             </div>

@@ -1,36 +1,29 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, ChevronDown } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { NAVIGATION_ITEMS } from '@/lib/constants'
 
-const navLinks = [
-  { href: '#about', label: 'Sobre mí' },
-  { href: '#series', label: 'Series TV' },
-  { href: '#filmografia', label: 'Cine' },
-  { href: '#theater', label: 'Teatro' },
-  { href: '#awards', label: 'Premios' },
-  { href: '#calendar', label: 'Agenda' },
-  { href: '#headshots', label: 'Headshots' },
-  { href: '#showreel', label: 'Showreel' },
-  { href: '#press', label: 'Prensa' },
-  { href: '#blog', label: 'Blog' },
-  { href: '#presskit', label: 'Press Kit' },
-  { href: '#contact', label: 'Contacto' },
-]
+// A.4 - Primary links shown directly, rest grouped under "Más"
+const PRIMARY_COUNT = 8
+const primaryLinks = NAVIGATION_ITEMS.slice(0, PRIMARY_COUNT)
+const moreLinks = NAVIGATION_ITEMS.slice(PRIMARY_COUNT)
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
+  const [isMoreOpen, setIsMoreOpen] = useState(false)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
+  const moreMenuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
 
-      const sections = navLinks.map((link) => link.href.substring(1))
+      const sections = NAVIGATION_ITEMS.map((link) => link.href.substring(1))
       const current = sections.find((section) => {
         const element = document.getElementById(section)
         if (element) {
@@ -44,6 +37,17 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Close "Más" dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (moreMenuRef.current && !moreMenuRef.current.contains(e.target as Node)) {
+        setIsMoreOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
   // A.3 - Lock body scroll when mobile menu is open
@@ -95,6 +99,8 @@ export default function Navbar() {
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [isMobileMenuOpen])
 
+  const isMoreActive = moreLinks.some((link) => activeSection === link.href)
+
   return (
     <>
       <motion.nav
@@ -117,7 +123,7 @@ export default function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden items-center gap-1 lg:flex">
-              {navLinks.map((link) => {
+              {primaryLinks.map((link) => {
                 const isActive = activeSection === link.href
                 return (
                   <a
@@ -138,6 +144,54 @@ export default function Navbar() {
                   </a>
                 )
               })}
+
+              {/* A.4 - "Más" dropdown for remaining links */}
+              <div className="relative" ref={moreMenuRef}>
+                <button
+                  onClick={() => setIsMoreOpen(!isMoreOpen)}
+                  aria-expanded={isMoreOpen}
+                  aria-haspopup="true"
+                  className="group relative flex items-center gap-1 px-4 py-2 transition-all duration-300"
+                >
+                  <span
+                    className={`text-sm font-medium tracking-wide transition-all duration-300 ${
+                      isMoreActive
+                        ? 'font-semibold text-yellow-400'
+                        : 'text-white/70 group-hover:text-white'
+                    }`}
+                  >
+                    Más
+                  </span>
+                  <ChevronDown
+                    className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                      isMoreOpen ? 'rotate-180' : ''
+                    } ${isMoreActive ? 'text-yellow-400' : 'text-white/70 group-hover:text-white'}`}
+                  />
+                </button>
+
+                {isMoreOpen && (
+                  <div className="absolute right-0 top-full mt-2 w-48 rounded-xl border border-white/10 bg-black/95 py-2 shadow-xl backdrop-blur-md">
+                    {moreLinks.map((link) => {
+                      const isActive = activeSection === link.href
+                      return (
+                        <a
+                          key={link.href}
+                          href={link.href}
+                          onClick={() => setIsMoreOpen(false)}
+                          aria-current={isActive ? 'page' : undefined}
+                          className={`block px-4 py-2.5 text-sm font-medium transition-colors ${
+                            isActive
+                              ? 'bg-white/5 text-yellow-400'
+                              : 'text-white/70 hover:bg-white/5 hover:text-white'
+                          }`}
+                        >
+                          {link.label}
+                        </a>
+                      )
+                    })}
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Mobile Menu Button - D.3 aria-expanded */}
@@ -193,7 +247,7 @@ export default function Navbar() {
               {/* Mobile links */}
               <div className="flex-1 overflow-y-auto p-6">
                 <div className="space-y-1">
-                  {navLinks.map((link, index) => {
+                  {NAVIGATION_ITEMS.map((link, index) => {
                     const isActive = activeSection === link.href
                     return (
                       <motion.a

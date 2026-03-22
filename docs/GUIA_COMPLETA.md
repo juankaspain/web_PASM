@@ -89,6 +89,7 @@ pnpm dev
 ### ✅ Stack Tecnológico Simplificado
 
 **Core:**
+
 - Next.js 15.1.3 (App Router)
 - React 19
 - TypeScript 5.7.3
@@ -96,6 +97,7 @@ pnpm dev
 - Framer Motion 12.0
 
 **Herramientas:**
+
 - ESLint + Prettier
 - Husky (git hooks)
 - Vitest + Playwright (testing)
@@ -186,8 +188,12 @@ const projects = [
 
 ```typescript
 // src/components/sections/Press.tsx
-const pressItems = [ /* ... */ ]
-const testimonials = [ /* ... */ ]
+const pressItems = [
+  /* ... */
+]
+const testimonials = [
+  /* ... */
+]
 ```
 
 ---
@@ -238,7 +244,7 @@ Edita `src/app/globals.css`:
 
 ```css
 :root {
-  --primary: 240 5.9% 10%;    /* Tu color */
+  --primary: 240 5.9% 10%; /* Tu color */
 }
 ```
 
@@ -274,7 +280,7 @@ Edita `src/app/globals.css`:
 ✅ Sitemap XML  
 ✅ Robots.txt  
 ✅ Semántica HTML5  
-✅ Alt text en imágenes  
+✅ Alt text en imágenes
 
 ### Performance
 
@@ -285,7 +291,7 @@ Edita `src/app/globals.css`:
 ⚡ CSS optimizado  
 ⚡ Lazy loading  
 ⚡ Edge caching  
-⚡ Compresión gzip/brotli  
+⚡ Compresión gzip/brotli
 
 ---
 
@@ -315,6 +321,7 @@ Verifica `next.config.js` → `remotePatterns`
 ### ¿Por qué tan pocas dependencias?
 
 Portfolio estático = simple. Solo instalamos lo necesario:
+
 - Next.js + React (core)
 - TypeScript (type safety)
 - Tailwind (estilos)
@@ -346,6 +353,7 @@ export default function RootLayout({ children }) {
 ### ¿Puedo añadir un CMS después?
 
 Sí, opciones ligeras:
+
 - **Contentful** (headless CMS)
 - **Sanity** (headless CMS)
 - **Markdown files** (más simple)
@@ -374,11 +382,13 @@ export async function POST(request: Request) {
 ## 📊 Benchmarks
 
 ### Antes (con todas las deps)
+
 - **node_modules**: ~800 MB
 - **Tiempo install**: ~45s
 - **Bundle size**: ~500 KB
 
 ### Después (optimizado)
+
 - **node_modules**: ~350 MB 🟢 (-56%)
 - **Tiempo install**: ~15s 🟢 (-67%)
 - **Bundle size**: ~250 KB 🟢 (-50%)
@@ -393,7 +403,7 @@ Tu portfolio está:
 ✅ **Rápido**: Instalación y build ultra-rápidos  
 ✅ **Ligero**: Bundle optimizado  
 ✅ **Mantenible**: Código simple y claro  
-✅ **Escalable**: Fácil añadir features  
+✅ **Escalable**: Fácil añadir features
 
 ---
 

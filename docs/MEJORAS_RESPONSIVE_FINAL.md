@@ -29,17 +29,19 @@
 **Diseño creado**: `public/favicon.svg`
 
 #### Características del Favicon:
+
 - **Máscaras de teatro**: Símbolo icónico del mundo del teatro
   - Máscara feliz (dorada) - Comedia
   - Máscara triste (gris) - Tragedia
 - **Letra 'A'**: Inicial de "Almagro" en tipografía serif
-- **Colores**: 
+- **Colores**:
   - Gradiente slate (fondo): #1e293b → #475569
   - Gradiente dorado: #eab308 → #f59e0b
 - **Formato**: SVG (escalable, peso mínimo)
 - **Resolución**: 100x100 viewBox (se adapta a cualquier tamaño)
 
 #### Código del Favicon:
+
 ```xml
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <!-- Máscaras de teatro + Letra A -->
@@ -51,6 +53,7 @@
 
 **Resultado**:  
 ✅ Favicon personalizado visible en:
+
 - Pestaña del navegador
 - Marcadores/Favoritos
 - Historial de navegación
@@ -63,6 +66,7 @@
 #### About Section - Mejoras Responsive
 
 **Breakpoints optimizados**:
+
 ```
 Mobile:   < 640px   (sm)
 Tablet:   640-1024px (md)
@@ -72,16 +76,19 @@ Desktop:  > 1024px   (lg)
 **Cambios implementados**:
 
 ##### Typography
+
 - Headings: `text-3xl sm:text-4xl md:text-5xl`
 - Body text: `text-sm sm:text-base`
 - Labels: `text-xs sm:text-sm`
 
 ##### Spacing
+
 - Padding: `py-12 sm:py-16 md:py-20`
 - Margins: `mb-12 md:mb-16`
 - Gaps: `gap-8 md:gap-12`
 
 ##### Layout
+
 - Image height: `h-[400px] sm:h-[450px] md:h-[500px]`
 - Grid: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`
 - Container: `px-4 sm:px-6 lg:px-8`
@@ -89,10 +96,11 @@ Desktop:  > 1024px   (lg)
 ##### Components Responsivos
 
 **Quick Info Cards**:
+
 ```tsx
 <div className="grid grid-cols-2 gap-4">
-  <div className="bg-white rounded-xl p-4 shadow-lg">
-    <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
+  <div className="rounded-xl bg-white p-4 shadow-lg">
+    <MapPin className="h-5 w-5 sm:h-6 sm:w-6" />
     <div className="text-xs sm:text-sm">Ubicación</div>
     <div className="text-sm sm:text-base">Sevilla</div>
   </div>
@@ -100,13 +108,15 @@ Desktop:  > 1024px   (lg)
 ```
 
 **Education Cards**:
+
 ```tsx
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
   {/* Stacks en mobile, 2 cols en tablet, 4 cols en desktop */}
 </div>
 ```
 
 **Skills Bars**:
+
 - Labels: Tamaño responsive
 - Percentages: Siempre visible
 - Touch-friendly: Altura adecuada (h-3)
@@ -116,54 +126,62 @@ Desktop:  > 1024px   (lg)
 ## 📱 PRUEBAS DE RESPONSIVE
 
 ### Mobile (375px - iPhone SE)
+
 ✅ Logo legible  
 ✅ Menú hamburguesa funcional  
 ✅ Imágenes se adaptan  
 ✅ Cards apiladas verticalmente  
 ✅ Texto legible (min 14px)  
 ✅ Botones touch-friendly (min 44px)  
-✅ Sin scroll horizontal  
+✅ Sin scroll horizontal
 
 ### Tablet (768px - iPad)
+
 ✅ 2 columnas en grids  
 ✅ Navegación visible  
 ✅ Imágenes optimizadas  
 ✅ Spacing adecuado  
-✅ Hover states funcionales  
+✅ Hover states funcionales
 
 ### Desktop (1920px)
+
 ✅ 4 columnas en education  
 ✅ Max-width contenedores (6xl)  
 ✅ Navegación completa  
 ✅ Imágenes full quality  
-✅ Animaciones suaves  
+✅ Animaciones suaves
 
 ---
 
 ## 🎨 MEJORAS VISUALES IMPLEMENTADAS
 
 ### 1. Tipografía
+
 - **Headings**: Gradientes de color
 - **Body**: Leading optimizado (leading-relaxed)
 - **Labels**: Contraste mejorado
 - **Responsive**: Escalado fluido
 
 ### 2. Espaciado
+
 - **Consistente**: Múltiplos de 4px
 - **Respiración**: Spacing generoso
 - **Mobile-first**: Padding reducido en móvil
 
 ### 3. Colores
+
 - **Paleta coherente**: Slate + Yellow
 - **Gradientes**: Suaves y profesionales
 - **Contraste**: WCAG AA compliant
 
 ### 4. Sombras
+
 - **Cards**: shadow-lg hover:shadow-2xl
 - **Imágenes**: shadow-2xl
 - **Elevación**: Jerarquía visual clara
 
 ### 5. Animaciones
+
 - **Framer Motion**: Transiciones suaves
 - **Hover states**: Scale y translate
 - **Scroll reveals**: InView triggers
@@ -183,6 +201,7 @@ SEO:              100/100     🟢
 ```
 
 ### Mejoras específicas:
+
 - ✅ **Touch targets**: Mínimo 44x44px
 - ✅ **Font size**: Mínimo 14px en mobile
 - ✅ **Viewport**: Meta tag configurado
@@ -194,17 +213,20 @@ SEO:              100/100     🟢
 ## 📦 ARCHIVOS MODIFICADOS
 
 ### Creados
+
 ```
 ➕ public/favicon.svg
 ```
 
 ### Modificados
+
 ```
 ♻️ src/components/sections/About.tsx
 ♻️ src/app/layout.tsx
 ```
 
 ### Commits
+
 ```
 cc4b8c3 - feat: Add favicon SVG, reorder education
 9ccefd2 - feat: Update favicon to use new SVG
@@ -215,6 +237,7 @@ cc4b8c3 - feat: Add favicon SVG, reorder education
 ## ✅ CHECKLIST DE RESPONSIVE
 
 ### Mobile (< 640px)
+
 - [x] Menú hamburguesa funcional
 - [x] Imágenes optimizadas
 - [x] Texto legible (14px+)
@@ -225,6 +248,7 @@ cc4b8c3 - feat: Add favicon SVG, reorder education
 - [x] Performance 90+
 
 ### Tablet (640-1024px)
+
 - [x] 2 columnas en grids
 - [x] Navegación adaptada
 - [x] Imágenes medium quality
@@ -233,6 +257,7 @@ cc4b8c3 - feat: Add favicon SVG, reorder education
 - [x] Spacing medio
 
 ### Desktop (> 1024px)
+
 - [x] 4 columnas en grids
 - [x] Navegación completa
 - [x] Imágenes high quality
@@ -245,6 +270,7 @@ cc4b8c3 - feat: Add favicon SVG, reorder education
 ## 🔧 CÓDIGO DE EJEMPLO
 
 ### Responsive Image
+
 ```tsx
 <div className="relative h-[400px] sm:h-[450px] md:h-[500px]">
   <Image
@@ -260,8 +286,9 @@ cc4b8c3 - feat: Add favicon SVG, reorder education
 ```
 
 ### Responsive Grid
+
 ```tsx
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
   {items.map((item) => (
     <Card key={item.id} />
   ))}
@@ -269,6 +296,7 @@ cc4b8c3 - feat: Add favicon SVG, reorder education
 ```
 
 ### Responsive Typography
+
 ```tsx
 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
   Título Responsive
@@ -284,18 +312,19 @@ cc4b8c3 - feat: Add favicon SVG, reorder education
 
 ### Antes vs Después
 
-| Aspecto | Antes | Después |
-|---------|-------|----------|
-| Favicon | ❌ Genérico | ✅ Personalizado SVG |
-| Formación | 🟡 Desordenada | ✅ Cronológica |
-| Mobile | 🟡 Aceptable | ✅ Excelente |
-| Tablet | 🟡 Aceptable | ✅ Perfecto |
-| Desktop | ✅ Bueno | ✅ Perfecto |
-| Touch | 🟡 Pequeño | ✅ 44px+ |
-| Typography | 🟡 Fijo | ✅ Escalable |
-| Spacing | 🟡 Inconsistente | ✅ Armonioso |
+| Aspecto    | Antes            | Después              |
+| ---------- | ---------------- | -------------------- |
+| Favicon    | ❌ Genérico      | ✅ Personalizado SVG |
+| Formación  | 🟡 Desordenada   | ✅ Cronológica       |
+| Mobile     | 🟡 Aceptable     | ✅ Excelente         |
+| Tablet     | 🟡 Aceptable     | ✅ Perfecto          |
+| Desktop    | ✅ Bueno         | ✅ Perfecto          |
+| Touch      | 🟡 Pequeño       | ✅ 44px+             |
+| Typography | 🟡 Fijo          | ✅ Escalable         |
+| Spacing    | 🟡 Inconsistente | ✅ Armonioso         |
 
 ### Métricas
+
 - **Mobile Usability**: 100/100 🟢
 - **Touch Targets**: 100% compliant ✅
 - **Font Scaling**: Fluido ✅
@@ -307,6 +336,7 @@ cc4b8c3 - feat: Add favicon SVG, reorder education
 ## 📝 DOCUMENTACIÓN ADICIONAL
 
 ### Breakpoints Tailwind
+
 ```css
 sm:  640px  /* Tablet portrait */
 md:  768px  /* Tablet landscape */
@@ -316,6 +346,7 @@ xl:  1280px /* Large desktop */
 ```
 
 ### Utility Classes Más Usadas
+
 ```
 Responsive spacing:
 - py-12 sm:py-16 md:py-20
@@ -337,6 +368,7 @@ Responsive layout:
 ## ✨ CARACTERÍSTICAS DESTACADAS
 
 ### Favicon SVG
+
 - ✅ Escalable sin pérdida de calidad
 - ✅ Peso mínimo (<2KB)
 - ✅ Compatible con dark/light mode
@@ -344,6 +376,7 @@ Responsive layout:
 - ✅ Branding claro (letra A)
 
 ### Responsive Design
+
 - ✅ Mobile-first approach
 - ✅ Progressive enhancement
 - ✅ Touch-friendly
@@ -352,6 +385,7 @@ Responsive layout:
 - ✅ Adaptive images
 
 ### Visual Polish
+
 - ✅ Consistencia en spacing
 - ✅ Jerarquía visual clara
 - ✅ Animaciones suaves
@@ -366,26 +400,30 @@ Responsive layout:
 ### Optimizaciones Futuras
 
 1. **Imágenes WebP/AVIF**
+
    ```bash
    npm install sharp
    # Convertir JPG a WebP automáticamente
    ```
 
 2. **Lazy Loading Agresivo**
+
    ```tsx
    <Image loading="lazy" />
    ```
 
 3. **Service Worker**
+
    ```bash
    # PWA para caché offline
    npm install next-pwa
    ```
 
 4. **Animation Performance**
+
    ```tsx
    // Usar will-change con moderación
-   className="will-change-transform"
+   className = 'will-change-transform'
    ```
 
 5. **Critical CSS**
@@ -403,7 +441,7 @@ Todas las mejoras solicitadas han sido implementadas:
 ✅ **Formación ordenada cronológicamente** (2015-2017 → 2008-2012)  
 ✅ **Favicon SVG personalizado** con máscaras de teatro  
 ✅ **Responsive design perfecto** en todos los dispositivos  
-✅ **Visual polish completo** con tipografía y spacing optimizados  
+✅ **Visual polish completo** con tipografía y spacing optimizados
 
 **Estado del Proyecto**: 🟢 **PRODUCCIÓN READY 100%**
 

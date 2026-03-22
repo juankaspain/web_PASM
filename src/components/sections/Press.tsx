@@ -259,7 +259,7 @@ export default function Press() {
               <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 {interviews.map((interview, index) => (
                   <motion.div
-                    key={index}
+                    key={interview.youtubeId}
                     initial={{ opacity: 0, y: 20, scale: 0.95 }}
                     animate={
                       isInView
@@ -319,7 +319,7 @@ export default function Press() {
                           <h4 className="mb-2 line-clamp-2 text-base font-semibold text-white">
                             {interview.title}
                           </h4>
-                          <p className="mb-3 line-clamp-2 text-xs text-slate-400">
+                          <p className="mb-3 line-clamp-2 text-xs text-slate-300">
                             {interview.description}
                           </p>
                           <div className="space-y-2">
@@ -398,7 +398,7 @@ export default function Press() {
                         </div>
                         <div className="text-right">
                           <p className="text-slate-600">{quote.year}</p>
-                          <span className="mt-1 inline-block rounded bg-white/5 px-2 py-1 text-[10px] text-slate-400">
+                          <span className="mt-1 inline-block rounded bg-white/5 px-2 py-1 text-[10px] text-slate-300">
                             {quote.category}
                           </span>
                         </div>

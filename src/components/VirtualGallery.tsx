@@ -101,7 +101,7 @@ export default function VirtualGallery({
       <div ref={galleryRef} className={`grid ${columnClass}`} style={{ gap: `${gap}px` }}>
         {visibleImages.map((image, index) => (
           <div
-            key={index}
+            key={image.src}
             className="gallery-item group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-xl bg-slate-900/50"
             onClick={() => setSelectedImage(index)}
           >
@@ -170,6 +170,7 @@ export default function VirtualGallery({
               aria-label="Anterior"
             >
               <svg
+                aria-hidden="true"
                 className="h-6 w-6 text-white"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -197,6 +198,7 @@ export default function VirtualGallery({
               aria-label="Siguiente"
             >
               <svg
+                aria-hidden="true"
                 className="h-6 w-6 text-white"
                 fill="none"
                 viewBox="0 0 24 24"

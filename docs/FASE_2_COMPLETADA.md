@@ -41,15 +41,15 @@ Todas las tareas de FASE 2 (Alta Prioridad) han sido completadas:
 
 ```json
 {
-  "@playwright/test": "^1.48.2",           // E2E testing
-  "vitest": "^2.1.8",                        // Unit testing
-  "@vitejs/plugin-react": "^4.3.4",         // Vite plugin para React
-  "@testing-library/react": "^16.1.0",      // Testing utilities
-  "@testing-library/jest-dom": "^6.6.3",    // Jest matchers
+  "@playwright/test": "^1.48.2", // E2E testing
+  "vitest": "^2.1.8", // Unit testing
+  "@vitejs/plugin-react": "^4.3.4", // Vite plugin para React
+  "@testing-library/react": "^16.1.0", // Testing utilities
+  "@testing-library/jest-dom": "^6.6.3", // Jest matchers
   "@testing-library/user-event": "^14.5.2", // User interactions
-  "@vitest/ui": "^2.1.8",                    // UI para Vitest
-  "@vitest/coverage-v8": "^2.1.8",          // Coverage reports
-  "jsdom": "^25.0.1"                         // DOM para tests
+  "@vitest/ui": "^2.1.8", // UI para Vitest
+  "@vitest/coverage-v8": "^2.1.8", // Coverage reports
+  "jsdom": "^25.0.1" // DOM para tests
 }
 ```
 
@@ -57,20 +57,21 @@ Todas las tareas de FASE 2 (Alta Prioridad) han sido completadas:
 
 ```json
 {
-  "husky": "^9.1.7",                                   // Git hooks
-  "lint-staged": "^15.2.11",                          // Lint en staged files
-  "prettier": "^3.4.2",                               // Code formatter
-  "prettier-plugin-tailwindcss": "^0.6.9",           // Tailwind sorting
-  "@commitlint/cli": "^19.6.1",                       // Commit linting
-  "@commitlint/config-conventional": "^19.6.0"       // Conventional commits
+  "husky": "^9.1.7", // Git hooks
+  "lint-staged": "^15.2.11", // Lint en staged files
+  "prettier": "^3.4.2", // Code formatter
+  "prettier-plugin-tailwindcss": "^0.6.9", // Tailwind sorting
+  "@commitlint/cli": "^19.6.1", // Commit linting
+  "@commitlint/config-conventional": "^19.6.0" // Conventional commits
 }
 ```
 
 ### Análisis y Optimización
+
 ```json
 {
-  "@next/bundle-analyzer": "^15.5.9",  // Bundle size analysis
-  "sharp": "^0.33.5"                    // Image optimization
+  "@next/bundle-analyzer": "^15.5.9", // Bundle size analysis
+  "sharp": "^0.33.5" // Image optimization
 }
 ```
 
@@ -108,6 +109,7 @@ export default defineConfig({
 ```
 
 **Setup file**: `vitest.setup.ts`
+
 - Configuración de testing-library
 - Mocks de window.matchMedia
 - Mocks de IntersectionObserver
@@ -118,6 +120,7 @@ export default defineConfig({
 **Archivo creado**: `playwright.config.ts`
 
 **Características**:
+
 - ✅ Tests en paralelo
 - ✅ 5 navegadores configurados (Chrome, Firefox, Safari, Mobile Chrome, Mobile Safari)
 - ✅ Screenshots en fallos
@@ -133,18 +136,22 @@ export default defineConfig({
 ### Husky Hooks Configurados
 
 #### 1. Pre-commit Hook
+
 **Archivo**: `.husky/pre-commit`
 
 **Qué hace**:
+
 - Ejecuta `lint-staged` automáticamente
 - Formatea código con Prettier
 - Ejecuta ESLint y corrige errores
 - Solo en archivos staged (rápido)
 
 #### 2. Commit-msg Hook
+
 **Archivo**: `.husky/commit-msg`
 
 **Qué hace**:
+
 - Valida formato de commits
 - Requiere Conventional Commits
 - Bloquea commits mal formateados
@@ -154,6 +161,7 @@ export default defineConfig({
 **Archivo**: `commitlint.config.js`
 
 **Tipos válidos de commits**:
+
 ```bash
 feat:     # Nueva funcionalidad
 fix:      # Corrección de bug
@@ -169,6 +177,7 @@ revert:   # Revertir commit
 ```
 
 **Ejemplos válidos**:
+
 ```bash
 feat: add contact form with Formspree
 fix: correct import error in SkillsGraph
@@ -177,6 +186,7 @@ perf: implement lazy loading for heavy sections
 ```
 
 **Ejemplos INVÁLIDOS** (serán rechazados):
+
 ```bash
 ❌ Added new feature
 ❌ Update files
@@ -188,6 +198,7 @@ perf: implement lazy loading for heavy sections
 **Archivo**: `.prettierrc.json`
 
 **Configuración**:
+
 ```json
 {
   "semi": false,
@@ -202,6 +213,7 @@ perf: implement lazy loading for heavy sections
 ```
 
 **Beneficios**:
+
 - ✅ Formato consistente automático
 - ✅ Clases de Tailwind ordenadas automáticamente
 - ✅ Sin discusiones sobre estilo de código
@@ -218,11 +230,7 @@ perf: implement lazy loading for heavy sections
 import dynamic from 'next/dynamic'
 
 // Carga inmediata (above-the-fold)
-- Navbar
-- Hero
-- About
-- Stats
-- SkillsGraph
+;-Navbar - Hero - About - Stats - SkillsGraph
 
 // Lazy loading (below-the-fold)
 const Portfolio = dynamic(() => import('@/components/sections/Portfolio'))
@@ -235,12 +243,12 @@ const Press = dynamic(() => import('@/components/sections/Press'))
 
 ### Beneficios del Lazy Loading
 
-| Métrica | Antes | Después | Mejora |
-|---------|-------|---------|--------|
-| **First Load JS** | ~250 KB | ~120 KB | -52% |
-| **Time to Interactive** | ~3.5s | ~1.8s | -49% |
-| **Initial Bundle** | Completo | Parcial | Más rápido |
-| **Lighthouse Score** | 85-90 | 92-97 | +7-12 puntos |
+| Métrica                 | Antes    | Después | Mejora       |
+| ----------------------- | -------- | ------- | ------------ |
+| **First Load JS**       | ~250 KB  | ~120 KB | -52%         |
+| **Time to Interactive** | ~3.5s    | ~1.8s   | -49%         |
+| **Initial Bundle**      | Completo | Parcial | Más rápido   |
+| **Lighthouse Score**    | 85-90    | 92-97   | +7-12 puntos |
 
 ### Loading States
 
@@ -375,6 +383,7 @@ git push origin feat/nueva-funcionalidad
 ### 1. Velocidad de Carga
 
 ✅ **Lazy Loading**:
+
 - First Load JS reducido en ~52%
 - Time to Interactive mejorado en ~49%
 - Lighthouse Performance Score: +7-12 puntos
@@ -382,11 +391,13 @@ git push origin feat/nueva-funcionalidad
 ### 2. Calidad de Código
 
 ✅ **Git Hooks**:
+
 - Formato consistente automático
 - No más código mal formateado en el repo
 - Commits semánticos y descriptivos
 
 ✅ **Testing**:
+
 - Infraestructura completa para tests
 - Confianza para refactorizar
 - CI/CD ready
@@ -394,11 +405,13 @@ git push origin feat/nueva-funcionalidad
 ### 3. Developer Experience
 
 ✅ **Scripts Unificados**:
+
 - Un comando para cada tarea
 - Workflow estandarizado
 - Fácil onboarding de nuevos desarrolladores
 
 ✅ **Tooling Moderno**:
+
 - Vitest (rápido)
 - Playwright (potente)
 - Prettier (automático)
@@ -406,6 +419,7 @@ git push origin feat/nueva-funcionalidad
 ### 4. Mantenibilidad
 
 ✅ **Estructura Clara**:
+
 - Configuraciones separadas
 - Scripts bien organizados
 - Documentación completa
@@ -416,16 +430,16 @@ git push origin feat/nueva-funcionalidad
 
 ### Métricas del Proyecto
 
-| Aspecto | Antes | Después | Mejora |
-|---------|-------|---------|--------|
-| **Testing** | 0% | 100% | ✅ Completo |
-| **Git Hooks** | ❌ No | ✅ Sí | ✅ Implementado |
-| **Code Quality** | Manual | Automático | ✅ Mejorado |
-| **Bundle Analysis** | ❌ No | ✅ Sí | ✅ Disponible |
-| **Lazy Loading** | ❌ No | ✅ Sí | ✅ -52% JS inicial |
-| **Image Optimization** | Manual | Script | ✅ Automatizado |
-| **Dev Experience** | 6/10 | 9/10 | ✅ +50% |
-| **Production Ready** | 75% | 92% | ✅ +17% |
+| Aspecto                | Antes  | Después    | Mejora             |
+| ---------------------- | ------ | ---------- | ------------------ |
+| **Testing**            | 0%     | 100%       | ✅ Completo        |
+| **Git Hooks**          | ❌ No  | ✅ Sí      | ✅ Implementado    |
+| **Code Quality**       | Manual | Automático | ✅ Mejorado        |
+| **Bundle Analysis**    | ❌ No  | ✅ Sí      | ✅ Disponible      |
+| **Lazy Loading**       | ❌ No  | ✅ Sí      | ✅ -52% JS inicial |
+| **Image Optimization** | Manual | Script     | ✅ Automatizado    |
+| **Dev Experience**     | 6/10   | 9/10       | ✅ +50%            |
+| **Production Ready**   | 75%    | 92%        | ✅ +17%            |
 
 ### Puntuación General
 
@@ -464,12 +478,14 @@ MEJORA TOTAL: +1.2 puntos (+15%)
 ### Inmediatos (Hoy)
 
 1. **Instalar dependencias**:
+
    ```bash
    npm install
    npm run prepare
    ```
 
 2. **Verificar que todo funciona**:
+
    ```bash
    npm run check-all
    npm run build
@@ -489,9 +505,11 @@ MEJORA TOTAL: +1.2 puntos (+15%)
    - Coverage mínimo 50%
 
 5. **Analizar bundle**:
+
    ```bash
    npm run analyze
    ```
+
    - Identificar paquetes grandes
    - Optimizar imports
 
@@ -499,6 +517,7 @@ MEJORA TOTAL: +1.2 puntos (+15%)
    ```bash
    npm run optimize:images
    ```
+
    - Actualizar rutas en componentes
    - Verificar carga correcta
 
@@ -558,6 +577,7 @@ Todos los commits de esta fase:
 ## ✅ Checklist Final
 
 ### Configuración
+
 - [x] Vitest configurado
 - [x] Playwright configurado
 - [x] Husky instalado
@@ -566,16 +586,19 @@ Todos los commits de esta fase:
 - [x] Bundle analyzer añadido
 
 ### Código
+
 - [x] Lazy loading implementado
 - [x] Loading states añadidos
 - [x] Next.config optimizado
 
 ### Scripts
+
 - [x] Scripts de testing añadidos
 - [x] Scripts de optimización creados
 - [x] Script de análisis disponible
 
 ### Documentación
+
 - [x] README actualizado (pendiente)
 - [x] FASE_2_COMPLETADA.md creado
 - [x] PR template añadido

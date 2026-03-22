@@ -28,6 +28,7 @@
    - ☑️ Medir la interacción con el sitio
 
 ### Paso 4: Obtener ID de Medición
+
 1. Plataforma: **Web**
 2. URL del sitio web: **https://pedroalmagro.com**
 3. Nombre de flujo: **"Web Portfolio"**
@@ -44,6 +45,7 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID="G-TU-ID-AQUI"
 ```
 
 ### Paso 6: Verificar Instalación
+
 1. Inicia tu proyecto: `npm run dev`
 2. Abre en navegador: http://localhost:3000
 3. En Google Analytics, ve a **"Informes en tiempo real"**
@@ -62,6 +64,7 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID="G-TU-ID-AQUI"
 ### Paso 2: Tipo de Propiedad
 
 Elige **"Prefijo de URL"**:
+
 - URL: `https://pedroalmagro.com`
 - Click en **"Continuar"**
 
@@ -102,6 +105,7 @@ NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION="ABC123tu-codigo-aqui"
 Tu web ya tiene tracking de:
 
 ### 1. Vistas de Proyectos
+
 ```typescript
 import { trackProjectView } from '@/lib/analytics'
 
@@ -110,6 +114,7 @@ trackProjectView('El Último Adiós')
 ```
 
 ### 2. Reproducción de Showreel
+
 ```typescript
 import { trackShowreelPlay } from '@/lib/analytics'
 
@@ -118,6 +123,7 @@ trackShowreelPlay()
 ```
 
 ### 3. Envío de Formulario
+
 ```typescript
 import { trackContactSubmit } from '@/lib/analytics'
 
@@ -126,6 +132,7 @@ trackContactSubmit()
 ```
 
 ### 4. Clics en Enlaces Externos
+
 ```typescript
 import { trackExternalLink } from '@/lib/analytics'
 
@@ -153,6 +160,7 @@ trackExternalLink('https://instagram.com/...', 'Instagram')
 ### Eventos Personalizados
 
 En **Informes > Engagement > Eventos** verás:
+
 - `view_project` - Proyectos más vistos
 - `play_showreel` - Reproducciones del showreel
 - `submit_contact_form` - Envíos del formulario
@@ -165,6 +173,7 @@ En **Informes > Engagement > Eventos** verás:
 ### Rendimiento
 
 Ve a **"Rendimiento"** para ver:
+
 - **Clics totales**: Cuanta gente hace clic desde Google
 - **Impresiones**: Cuantas veces apareces en resultados
 - **CTR promedio**: % de clics vs impresiones
@@ -173,6 +182,7 @@ Ve a **"Rendimiento"** para ver:
 ### Consultas
 
 Ver qué búsquedas llevan a tu web:
+
 - "actor sevilla"
 - "pedro almagro"
 - "portfolio actor español"
@@ -181,6 +191,7 @@ Ver qué búsquedas llevan a tu web:
 ### Cobertura
 
 Verificar que todas tus páginas están indexadas:
+
 - Válidas: 6 páginas (hero, about, portfolio, showreel, press, contact)
 - Excluidas: 0
 - Con errores: 0
@@ -190,6 +201,7 @@ Verificar que todas tus páginas están indexadas:
 ## ✅ Checklist de Configuración
 
 ### Google Analytics
+
 - [ ] Cuenta de Google Analytics creada
 - [ ] Propiedad GA4 configurada
 - [ ] ID de medición obtenido (G-XXXXXXXXXX)
@@ -199,6 +211,7 @@ Verificar que todas tus páginas están indexadas:
 - [ ] Conversiones configuradas (formulario contacto)
 
 ### Google Search Console
+
 - [ ] Cuenta de Search Console creada
 - [ ] Propiedad verificada
 - [ ] Sitemap enviado (sitemap.xml)
@@ -206,6 +219,7 @@ Verificar que todas tus páginas están indexadas:
 - [ ] Esperando primera indexación (24-48h)
 
 ### Monitoreo Continuo
+
 - [ ] Revisar analytics semanalmente
 - [ ] Verificar errores en Search Console
 - [ ] Optimizar keywords según consultas

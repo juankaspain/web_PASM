@@ -11,12 +11,14 @@
 ### 1. og-image.jpg (Open Graph)
 
 **Especificaciones**:
+
 - Tamaño: **1200x630 pixels**
 - Formato: JPG optimizado (<200 KB)
 - Resolución: 72 DPI (web)
 - Uso: Facebook, LinkedIn, WhatsApp, Slack
 
 **Contenido**:
+
 ```
 ┌──────────────────────────────────────────┐
 │  [HEADSHOT]                              │
@@ -31,6 +33,7 @@
 ```
 
 **Elementos**:
+
 - Headshot profesional (lado izquierdo, 40% width)
 - Nombre grande y legible
 - Subtítulo "Actor Profesional"
@@ -39,6 +42,7 @@
 - Logo/icono pequeño (esquina)
 
 **Herramientas**:
+
 - [Canva](https://canva.com/create/og-images/) - Template OG
 - [Figma](https://figma.com) - Diseño custom
 - [Photopea](https://photopea.com) - Photoshop online gratis
@@ -48,11 +52,13 @@
 ### 2. twitter-image.jpg (Twitter Card)
 
 **Especificaciones**:
+
 - Tamaño: **1200x630 pixels** (mismo que OG)
 - Formato: JPG optimizado (<200 KB)
 - Uso: Twitter/X específicamente
 
 **Diferencias vs OG**:
+
 - Texto más grande (Twitter recorta más)
 - Handle @almagroSM visible
 - Menos elementos, más limpio
@@ -63,17 +69,20 @@
 ### 3. apple-touch-icon.png (iOS)
 
 **Especificaciones**:
+
 - Tamaño: **180x180 pixels**
 - Formato: PNG con transparencia
 - Uso: Icono iOS cuando se guarda en home screen
 
 **Contenido**:
+
 - Logo/iniciales "ASM" o "A"
 - Fondo sólido (no transparente para iOS)
 - Diseño simple, reconocible a tamaño pequeño
 - Sin texto (solo icono)
 
 **Colores sugeridos**:
+
 - Fondo: #F59E0B (dorado) o #000000 (negro)
 - Icono: Blanco o contraste alto
 
@@ -82,11 +91,13 @@
 ### 4. profile-image.jpg (Schema.org)
 
 **Especificaciones**:
+
 - Tamaño: **800x800 pixels** (cuadrado)
 - Formato: JPG alta calidad
 - Uso: Google Knowledge Graph, Schema.org
 
 **Contenido**:
+
 - Headshot profesional frontal
 - Fondo neutro (gris, blanco, o difuminado)
 - Buena iluminación
@@ -94,6 +105,7 @@
 - Encuadre: Hombros y cabeza
 
 **Estilo**:
+
 - Similar a foto de LinkedIn
 - Profesional pero accesible
 - Ropa: Camisa/blazer oscuro
@@ -107,6 +119,7 @@
 **Cantidad**: 5-8 fotos finales
 
 **Variedades**:
+
 1. **Comercial**: Sonriente, accesible, luz natural
 2. **Dramático**: Serio, iluminación lateral, contraste alto
 3. **Character**: Expresivo, múltiples emociones
@@ -114,12 +127,14 @@
 5. **Verso clásico**: Elegante, teatral
 
 **Fondos**:
+
 - Gris neutro (principal)
 - Blanco
 - Oscuro/negro
 - Textura sutil
 
 **Ropa**:
+
 - 3-4 cambios
 - Colores sólidos (evitar patterns)
 - Casual elegante
@@ -127,6 +142,7 @@
 - Negro (siempre)
 
 **Especificaciones técnicas**:
+
 - Resolución: 300 DPI (impresión)
 - Tamaño: 3000x2000 pixels mínimo
 - Formato: RAW + JPG editado
@@ -170,6 +186,7 @@
    - Momentos divertidos
 
 **Fuentes**:
+
 - Producciones oficiales (contactar departamento de prensa)
 - Fotógrafo de set
 - Archivo personal
@@ -182,6 +199,7 @@
 ### Reel Profesional (2-3 minutos)
 
 **Estructura**:
+
 ```
 0:00-0:10  Slate (nombre + contacto + stats)
 0:10-0:30  Escena 1: Drama intenso (La Moderna)
@@ -195,6 +213,7 @@
 ```
 
 **Especificaciones técnicas**:
+
 - Resolución: 1920x1080 (Full HD)
 - Formato: MP4 (H.264)
 - Frame rate: 24 fps (cinemático) o 25 fps (PAL)
@@ -202,12 +221,14 @@
 - Audio: AAC, 192 kbps stereo
 
 **Música**:
+
 - Sin copyright (Epidemic Sound, Artlist)
 - Volumen bajo (no compite con diálogos)
 - Estilo: Cinemático, dramático
 - Fade in/out suaves
 
 **Edición**:
+
 - Cortes en momentos clave
 - Sin transiciones fancy (cortes limpios)
 - Color grading consistente
@@ -215,6 +236,7 @@
 - Sin logos de producciones (legal)
 
 **Hosting**:
+
 - **Vimeo PRO** (recomendado para actores)
   - Mejor calidad
   - Sin anuncios
@@ -234,11 +256,13 @@
 **Cantidad**: 3-5 fotos
 
 **Formatos**:
+
 - **Alta resolución**: 3000x2000 px, 300 DPI (impresión)
 - **Web**: 1200x800 px, 72 DPI
 - **Thumbnail**: 400x400 px (cuadrado)
 
 **Naming convention**:
+
 ```
 AlmagroSanMiguel_Headshot_01_HiRes.jpg
 AlmagroSanMiguel_Headshot_01_Web.jpg
@@ -253,6 +277,7 @@ AlmagroSanMiguel_Headshot_02_HiRes.jpg
 **Cantidad**: 2-3 fotos
 
 **Tipos**:
+
 - Full body standing
 - 3/4 body seated
 - Action shot (si aplica)
@@ -266,6 +291,7 @@ AlmagroSanMiguel_Headshot_02_HiRes.jpg
 **Cantidad**: 10-15 por producción principal
 
 **Incluir**:
+
 - Escenas icónicas
 - Con co-protagonistas
 - Vestuario característico
@@ -324,6 +350,7 @@ AlmagroSanMiguel_Headshot_02_HiRes.jpg
 ## ✅ Checklist de Imágenes
 
 ### Social Media (CRÍTICO)
+
 - [ ] og-image.jpg (1200x630)
 - [ ] twitter-image.jpg (1200x630)
 - [ ] apple-touch-icon.png (180x180)
@@ -331,6 +358,7 @@ AlmagroSanMiguel_Headshot_02_HiRes.jpg
 - [ ] favicon.ico (32x32, 16x16)
 
 ### Headshots Profesionales
+
 - [ ] Comercial (sonriente)
 - [ ] Dramático (serio)
 - [ ] Character (expresivo)
@@ -338,6 +366,7 @@ AlmagroSanMiguel_Headshot_02_HiRes.jpg
 - [ ] Teatro (elegante)
 
 ### Portfolio Producciones
+
 - [ ] La Moderna (10 fotos)
 - [ ] Vis a vis (5 fotos)
 - [ ] Hernán (5 fotos)
@@ -345,12 +374,14 @@ AlmagroSanMiguel_Headshot_02_HiRes.jpg
 - [ ] Behind the scenes (10 fotos)
 
 ### Press Kit
+
 - [ ] 3-5 headshots alta resolución
 - [ ] 2-3 body shots
 - [ ] 10-15 production stills por proyecto
 - [ ] Todo organizado en carpetas
 
 ### Video
+
 - [ ] Reel 2-3 min editado
 - [ ] Subido a Vimeo PRO
 - [ ] Thumbnail atractivo
@@ -360,14 +391,14 @@ AlmagroSanMiguel_Headshot_02_HiRes.jpg
 
 ## 💰 Presupuesto Estimado
 
-| Item | Coste | Notas |
-|------|-------|-------|
-| Sesión fotos headshots | €300-600 | 2-3 horas, incluye retoque |
-| Diseño OG images | €150-300 | O DIY con Canva |
-| Edición video reel | €500-1000 | Profesional con color grading |
-| Vimeo PRO (1 año) | €84 | Hosting reel |
-| Canva Pro (1 año) | €144 | Templates |
-| **TOTAL** | **€1,178-2,128** | |
+| Item                   | Coste            | Notas                         |
+| ---------------------- | ---------------- | ----------------------------- |
+| Sesión fotos headshots | €300-600         | 2-3 horas, incluye retoque    |
+| Diseño OG images       | €150-300         | O DIY con Canva               |
+| Edición video reel     | €500-1000        | Profesional con color grading |
+| Vimeo PRO (1 año)      | €84              | Hosting reel                  |
+| Canva Pro (1 año)      | €144             | Templates                     |
+| **TOTAL**              | **€1,178-2,128** |                               |
 
 **Alternativa económica**: €300-500 (todo DIY + fotógrafo amateur)
 
@@ -376,11 +407,13 @@ AlmagroSanMiguel_Headshot_02_HiRes.jpg
 ## 📞 Contactos Recomendados Sevilla
 
 ### Fotógrafos Headshots
+
 - **Antonio Pérez Studio** - Especializado actores
 - **María Luque Photography** - Portfolio artístico
 - **Carlos Rivas** - Headshots profesionales
 
 ### Editores Video
+
 - **Sevilla Film Lab** - Reels actores
 - **Freelancers Domestika** - Online, €300-600
 
