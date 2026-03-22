@@ -182,7 +182,7 @@ body {
 /* Content visibility for below-fold sections */
 .content-auto {
   content-visibility: auto;
-  contain-intrinsic-size: auto 600px;
+  contain-intrinsic-size: auto 800px;
 }
 
 /* D.7 - Respect prefers-reduced-motion */

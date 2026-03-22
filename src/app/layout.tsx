@@ -1,9 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { Suspense } from 'react'
 import './globals.css'
-import Analytics from '@/components/Analytics'
-import PWAInstall from '@/components/PWAInstall'
 import CookieConsent from '@/components/CookieConsent'
 import Script from 'next/script'
 import PassiveEvents from '@/components/PassiveEvents'
@@ -183,9 +180,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Humans.txt reference */}
         <link rel="author" href="/humans.txt" />
 
-        {/* DNS prefetch for secondary resources (fonts handled by next/font) */}
-        <link rel="dns-prefetch" href="https://www.youtube.com" />
-        <link rel="dns-prefetch" href="https://img.youtube.com" />
+        {/* Preload hero image for faster LCP */}
+        <link rel="preload" as="image" href="/assets/hero/main.jpg" />
       </head>
       <body className={inter.className}>
         <PassiveEvents />
@@ -197,10 +193,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Saltar al contenido principal
         </a>
         {children}
-        <Suspense fallback={null}>
-          <Analytics />
-        </Suspense>
-        <PWAInstall />
         <CookieConsent />
 
         {/* Enhanced Schema.org Person Markup - Deferred for performance */}
