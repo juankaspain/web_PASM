@@ -237,7 +237,7 @@ export default function Showreel() {
               </div>
 
               <h2
-                className={`mb-6 text-4xl font-bold tracking-tight text-white lg:text-5xl transition-all delay-200 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
+                className={`mb-6 text-4xl font-bold tracking-tight text-white transition-all delay-200 duration-[500ms] lg:text-5xl ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
               >
                 Entrevistas en Video
               </h2>
@@ -336,19 +336,22 @@ export default function Showreel() {
                 {clips.map((clip, index) => (
                   <div
                     key={clip.youtubeId}
-                    className="group relative cursor-pointer hover:-translate-y-2 hover:scale-[1.03] transition-all duration-300"
+                    className="group relative cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:scale-[1.03]"
                     style={{ transitionDelay: `${index * 100}ms` }}
                     onClick={() => openModal(clip)}
                   >
                     <div className="relative">
-                      <div className="absolute -inset-[2px] rounded-2xl bg-yellow-400/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-[400ms]" />
+                      <div className="absolute -inset-[2px] rounded-2xl bg-yellow-400/30 opacity-0 blur-xl transition-opacity duration-[400ms] group-hover:opacity-100" />
 
                       <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] shadow-2xl backdrop-blur-xl transition-all duration-500 hover:border-yellow-400/30">
                         <div className="relative aspect-video overflow-hidden bg-black">
                           <img
                             src={`https://img.youtube.com/vi/${clip.youtubeId}/mqdefault.jpg`}
                             alt={clip.title}
-                            className="h-full w-full object-cover opacity-75 transition-all duration-500 group-hover:opacity-100 group-hover:scale-[1.08]"
+                            width={320}
+                            height={180}
+                            loading="lazy"
+                            className="h-full w-full object-cover opacity-75 transition-all duration-500 group-hover:scale-[1.08] group-hover:opacity-100"
                           />
 
                           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-70 transition-opacity duration-300 group-hover:opacity-50" />
@@ -414,11 +417,11 @@ export default function Showreel() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Leer entrevista en ${interview.publication}: ${interview.title} (se abre en nueva ventana)`}
-                    className="group relative hover:-translate-y-1 transition-all duration-[500ms]"
+                    className="group relative transition-all duration-[500ms] hover:-translate-y-1"
                     style={{ transitionDelay: `${index * 100}ms` }}
                   >
                     <div className="relative">
-                      <div className="absolute -inset-[2px] rounded-2xl bg-yellow-400/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-[400ms]" />
+                      <div className="absolute -inset-[2px] rounded-2xl bg-yellow-400/30 opacity-0 blur-xl transition-opacity duration-[400ms] group-hover:opacity-100" />
 
                       <div className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur-sm transition-all duration-500 hover:border-yellow-400/30">
                         <div className="mb-4 flex items-start gap-4">

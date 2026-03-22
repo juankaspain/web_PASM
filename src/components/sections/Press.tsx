@@ -199,12 +199,12 @@ export default function Press() {
         <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
             ref={ref}
-            className={`transition-all duration-[600ms] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+            className={`transition-all duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
           >
             {/* Header ESTANDARIZADO */}
             <div className="mb-16 text-center">
               <div
-                className={`mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm transition-all duration-500 delay-100 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
+                className={`mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm transition-all delay-100 duration-500 ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'}`}
               >
                 <Newspaper className="h-4 w-4 text-yellow-400" strokeWidth={2} />
                 <span className="text-sm font-medium tracking-wide text-slate-300">
@@ -213,17 +213,17 @@ export default function Press() {
               </div>
 
               <h2
-                className={`mb-6 text-4xl font-bold tracking-tight text-white lg:text-5xl transition-all duration-500 delay-200 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
+                className={`mb-6 text-4xl font-bold tracking-tight text-white transition-all delay-200 duration-500 lg:text-5xl ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'}`}
               >
                 Prensa & Entrevistas
               </h2>
 
               <div
-                className={`mx-auto mb-6 h-0.5 w-20 bg-yellow-400 transition-all duration-[800ms] delay-300 ${isInView ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}
+                className={`mx-auto mb-6 h-0.5 w-20 bg-yellow-400 transition-all delay-300 duration-[800ms] ${isInView ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`}
               />
 
               <p
-                className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-400 transition-all duration-500 delay-[400ms] ${isInView ? 'opacity-100' : 'opacity-0'}`}
+                className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-400 transition-all delay-[400ms] duration-500 ${isInView ? 'opacity-100' : 'opacity-0'}`}
               >
                 Cobertura profesional y declaraciones sobre sus principales producciones
               </p>
@@ -231,7 +231,7 @@ export default function Press() {
 
             {/* Interviews Section */}
             <div
-              className={`mb-20 transition-all duration-[600ms] delay-500 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+              className={`mb-20 transition-all delay-500 duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
             >
               <h3 className="mb-10 flex items-center justify-center gap-2 text-center text-2xl font-bold text-white">
                 <Tv className="h-6 w-6 text-yellow-400" />
@@ -242,18 +242,21 @@ export default function Press() {
                 {interviews.map((interview, index) => (
                   <div
                     key={interview.youtubeId}
-                    className={`group relative cursor-pointer transition-all duration-[600ms] hover:-translate-y-2 hover:scale-[1.03] ${isInView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-5 scale-95'}`}
+                    className={`group relative cursor-pointer transition-all duration-[600ms] hover:-translate-y-2 hover:scale-[1.03] ${isInView ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-5 scale-95 opacity-0'}`}
                     style={{ transitionDelay: `${600 + index * 100}ms` }}
                     onClick={() => openModal(interview)}
                   >
                     <div className="relative">
-                      <div className="absolute -inset-[2px] rounded-2xl bg-yellow-400/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+                      <div className="duration-400 absolute -inset-[2px] rounded-2xl bg-yellow-400/30 opacity-0 blur-xl transition-opacity group-hover:opacity-100" />
 
                       <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] shadow-2xl backdrop-blur-xl transition-all duration-500 hover:border-yellow-400/30">
                         <div className="relative aspect-video overflow-hidden bg-black">
                           <img
                             src={`https://img.youtube.com/vi/${interview.youtubeId}/mqdefault.jpg`}
                             alt={interview.title}
+                            width={320}
+                            height={180}
+                            loading="lazy"
                             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.08]"
                           />
 
@@ -300,7 +303,7 @@ export default function Press() {
 
             {/* Quotes Section */}
             <div
-              className={`transition-all duration-[600ms] delay-700 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+              className={`transition-all delay-700 duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
             >
               <div className="mb-10">
                 <h3 className="mb-6 flex items-center justify-center gap-2 text-center text-2xl font-bold text-white">
@@ -339,9 +342,7 @@ export default function Press() {
                     <div className="flex items-center justify-between gap-3 text-xs">
                       <div>
                         <p className="mb-1 text-slate-500">{quote.source}</p>
-                        <p className="font-medium text-yellow-400">
-                          {quote.production}
-                        </p>
+                        <p className="font-medium text-yellow-400">{quote.production}</p>
                       </div>
                       <div className="text-right">
                         <p className="text-slate-600">{quote.year}</p>
@@ -364,10 +365,7 @@ export default function Press() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-md"
           onClick={closeModal}
         >
-          <div
-            className="relative w-full max-w-6xl"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="relative w-full max-w-6xl" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={closeModal}
               className="group absolute -top-12 right-0 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 transition-all hover:border-white/30 hover:bg-white/20"

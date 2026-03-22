@@ -7,7 +7,7 @@ const withBundleAnalyzer =
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
 
   // Static export for Hostinger shared hosting
   output: 'export',
@@ -28,7 +28,12 @@ const nextConfig = {
 
   // Experimental features for better performance
   experimental: {
-    optimizePackageImports: ['lucide-react', 'react-icons'],
+    optimizePackageImports: [
+      'lucide-react',
+      'react-hook-form',
+      '@hookform/resolvers',
+      'zod',
+    ],
   },
 
   // Compiler optimizations (uses SWC by default)
@@ -47,45 +52,30 @@ const nextConfig = {
     if (!isServer) {
       config.optimization = {
         ...config.optimization,
+        usedExports: true,
+        sideEffects: true,
         splitChunks: {
+          ...config.optimization.splitChunks,
           chunks: 'all',
+          minSize: 20000,
+          maxSize: 60000,
           cacheGroups: {
-            default: false,
-            vendors: false,
+            ...config.optimization.splitChunks?.cacheGroups,
             framework: {
               name: 'framework',
-              chunks: 'all',
               test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
               priority: 40,
               enforce: true,
             },
-            lib: {
-              test: /[\\/]node_modules[\\/]/,
-              name(module) {
-                const packageName = module.context.match(
-                  /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-                )?.[1]
-                return `npm.${packageName?.replace('@', '')}`
-              },
+            forms: {
+              name: 'forms',
+              test: /[\\/]node_modules[\\/](react-hook-form|@hookform|zod)[\\/]/,
               priority: 30,
-              minChunks: 1,
-              reuseExistingChunk: true,
-            },
-            commons: {
-              name: 'commons',
-              minChunks: 2,
-              priority: 20,
+              enforce: true,
             },
           },
         },
         minimize: process.env.NODE_ENV === 'production',
-      }
-
-      config.performance = {
-        ...config.performance,
-        hints: process.env.NODE_ENV === 'production' ? 'warning' : false,
-        maxAssetSize: 244000,
-        maxEntrypointSize: 244000,
       }
     }
 
