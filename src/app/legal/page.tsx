@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { Scale, User, Mail, Globe, Copyright, Shield, FileText, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
@@ -186,14 +185,14 @@ export default function LegalNotice() {
       {/* Header */}
       <div className="relative border-b border-white/10 bg-black/50 backdrop-blur-xl">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl py-8">
-          <Link 
+          <Link
             href="/"
             className="inline-flex items-center gap-2 text-slate-400 hover:text-yellow-400 transition-colors mb-6 group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             Volver al inicio
           </Link>
-          
+
           <div className="flex items-center gap-4 mb-4">
             <div className="w-14 h-14 bg-yellow-400/10 border border-yellow-400/30 rounded-xl flex items-center justify-center">
               <Scale className="w-7 h-7 text-yellow-400" />
@@ -207,7 +206,7 @@ export default function LegalNotice() {
               </p>
             </div>
           </div>
-          
+
           <p className="text-slate-300 leading-relaxed">
             En cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa sobre los aspectos legales del sitio web.
           </p>
@@ -220,12 +219,10 @@ export default function LegalNotice() {
           {sections.map((section, index) => {
             const Icon = section.icon
             return (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white/[0.02] border border-white/10 rounded-2xl p-6 lg:p-8 hover:border-yellow-400/30 transition-colors"
+                className="animate-fadeInUp bg-white/[0.02] border border-white/10 rounded-2xl p-6 lg:p-8 hover:border-yellow-400/30 transition-colors"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="flex items-start gap-4 mb-4">
                   <div className="w-12 h-12 bg-yellow-400/10 border border-yellow-400/30 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -238,18 +235,13 @@ export default function LegalNotice() {
                 <div className="text-slate-300 leading-relaxed pl-16">
                   {section.content}
                 </div>
-              </motion.div>
+              </div>
             )
           })}
         </div>
 
         {/* Related Links */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="mt-12 grid md:grid-cols-2 gap-6"
-        >
+        <div className="mt-12 grid md:grid-cols-2 gap-6 animate-fadeInUp delay-[800ms]">
           <Link
             href="/privacy"
             className="bg-white/[0.02] border border-white/10 rounded-xl p-6 hover:border-yellow-400/30 transition-all group"
@@ -275,7 +267,7 @@ export default function LegalNotice() {
               Cómo utilizamos las cookies en este sitio web
             </p>
           </Link>
-        </motion.div>
+        </div>
       </div>
     </div>
   )

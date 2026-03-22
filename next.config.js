@@ -28,7 +28,7 @@ const nextConfig = {
 
   // Experimental features for better performance
   experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion', 'react-icons'],
+    optimizePackageImports: ['lucide-react', 'react-icons'],
   },
 
   // Compiler optimizations (uses SWC by default)
@@ -75,12 +75,6 @@ const nextConfig = {
               name: 'commons',
               minChunks: 2,
               priority: 20,
-            },
-            framerMotion: {
-              name: 'framer-motion',
-              test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
-              priority: 35,
-              reuseExistingChunk: true,
             },
           },
         },

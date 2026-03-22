@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useInView } from 'framer-motion'
+import { useInView } from '@/hooks/useInView'
 import {
   GraduationCap,
   Award,
@@ -12,7 +12,6 @@ import {
   CheckCircle2,
   ExternalLink,
 } from 'lucide-react'
-import { useRef } from 'react'
 
 const training = [
   {
@@ -146,8 +145,7 @@ const getLevelColor = (level: string) => {
 }
 
 export default function Skills() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const { ref, isInView } = useInView({ once: true, margin: '-80px' })
 
   return (
     <section
@@ -168,19 +166,14 @@ export default function Skills() {
       />
 
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
+        <div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
+          className={`transition-all duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
         >
           {/* PRIMERO: Training Section */}
           <div className="mb-32">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-12 text-center"
+            <div
+              className={`mb-12 text-center transition-all delay-100 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
             >
               <h3 className="mb-4 text-4xl font-bold text-white lg:text-5xl">
                 Formación Profesional
@@ -188,21 +181,18 @@ export default function Skills() {
               <p className="text-lg text-slate-400">
                 Instituciones de prestigio donde he desarrollado mi carrera
               </p>
-            </motion.div>
+            </div>
 
             <div className="mx-auto max-w-5xl space-y-6">
               {training.map((course, index) => (
-                <motion.a
+                <a
                   key={course.title}
                   href={course.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${course.title} - ${course.organization} (se abre en nueva ventana)`}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                  transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-                  whileHover={{ x: 4 }}
-                  className="group block cursor-pointer"
+                  className={`group block cursor-pointer hover-right transition-all duration-[600ms] ${isInView ? 'translate-x-0 opacity-100' : '-translate-x-5 opacity-0'}`}
+                  style={{ transitionDelay: `${200 + index * 100}ms` }}
                 >
                   <div
                     className={`relative rounded-2xl border p-6 backdrop-blur-sm transition-all hover:border-white/20 lg:p-8 ${
@@ -260,18 +250,15 @@ export default function Skills() {
                       </div>
                     </div>
                   </div>
-                </motion.a>
+                </a>
               ))}
             </div>
           </div>
 
           {/* SEGUNDO: Skills Grid */}
           <div>
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="mb-12 text-center"
+            <div
+              className={`mb-12 text-center transition-all delay-[600ms] duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
             >
               <h3 className="mb-4 text-4xl font-bold text-white lg:text-5xl">
                 Habilidades Artísticas
@@ -280,17 +267,14 @@ export default function Skills() {
                 Más de 13 años de formación y práctica profesional en las principales
                 escuelas y compañías de España
               </p>
-            </motion.div>
+            </div>
 
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {skills.map((skillCategory, categoryIndex) => (
-                <motion.div
+                <div
                   key={categoryIndex}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                  transition={{ duration: 0.6, delay: 0.7 + categoryIndex * 0.1 }}
-                  whileHover={{ y: -4 }}
-                  className="group relative"
+                  className={`group relative hover-lift transition-all duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
+                  style={{ transitionDelay: `${700 + categoryIndex * 100}ms` }}
                 >
                   <div className="absolute -inset-[1px] rounded-2xl bg-yellow-400/20 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
 
@@ -323,17 +307,14 @@ export default function Skills() {
                       ))}
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
 
           {/* Note for Casting */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-            transition={{ duration: 0.6, delay: 1.3 }}
-            className="mx-auto mt-16 max-w-4xl"
+          <div
+            className={`mx-auto mt-16 max-w-4xl transition-all delay-[1300ms] duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
           >
             <div className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-8 text-center backdrop-blur-sm">
               <FileText className="mx-auto mb-4 h-8 w-8 text-yellow-400" />
@@ -346,8 +327,8 @@ export default function Skills() {
                 formación adicional o especialización específica.
               </p>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   )

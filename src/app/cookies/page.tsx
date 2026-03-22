@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import {
   Cookie,
   Shield,
@@ -173,12 +172,7 @@ export default function CookiesPolicy() {
       {/* Content */}
       <div className="container mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
         {/* What are cookies */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8 rounded-2xl border border-white/10 bg-white/[0.02] p-6 lg:p-8"
-        >
+        <div className="mb-8 rounded-2xl border border-white/10 bg-white/[0.02] p-6 lg:p-8 animate-fadeInUp">
           <h2 className="mb-4 flex items-center gap-3 text-2xl font-bold text-white">
             <Cookie className="h-7 w-7 text-yellow-400" />
             ¿Qué son las cookies?
@@ -196,7 +190,7 @@ export default function CookiesPolicy() {
               cuando cierras el navegador).
             </p>
           </div>
-        </motion.div>
+        </div>
 
         {/* Cookie Types */}
         <div className="mb-12 space-y-8">
@@ -209,12 +203,10 @@ export default function CookiesPolicy() {
             const colors = getColorClasses(type.color)
 
             return (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-                className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-colors hover:border-yellow-400/30 lg:p-8"
+                className="animate-fadeInUp rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-colors hover:border-yellow-400/30 lg:p-8"
+                style={{ animationDelay: `${index * 100 + 200}ms` }}
               >
                 <div className="mb-4 flex items-start gap-4">
                   <div
@@ -265,18 +257,13 @@ export default function CookiesPolicy() {
                     </tbody>
                   </table>
                 </div>
-              </motion.div>
+              </div>
             )
           })}
         </div>
 
         {/* How to manage cookies */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="mb-8 rounded-2xl border border-white/10 bg-white/[0.02] p-6 lg:p-8"
-        >
+        <div className="mb-8 rounded-2xl border border-white/10 bg-white/[0.02] p-6 lg:p-8 animate-fadeInUp delay-[600ms]">
           <h2 className="mb-4 flex items-center gap-3 text-2xl font-bold text-white">
             <Settings className="h-7 w-7 text-yellow-400" />
             Cómo Gestionar las Cookies
@@ -338,15 +325,10 @@ export default function CookiesPolicy() {
               cookies que aparece al pie de la página.
             </p>
           </div>
-        </motion.div>
+        </div>
 
         {/* Third party cookies */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
-          className="mb-8 rounded-2xl border border-white/10 bg-white/[0.02] p-6 lg:p-8"
-        >
+        <div className="mb-8 rounded-2xl border border-white/10 bg-white/[0.02] p-6 lg:p-8 animate-fadeInUp delay-700">
           <h2 className="mb-4 text-2xl font-bold text-white">Cookies de Terceros</h2>
           <div className="space-y-4 leading-relaxed text-slate-300">
             <p>
@@ -384,15 +366,10 @@ export default function CookiesPolicy() {
               Te recomendamos revisar sus políticas de privacidad para más información.
             </p>
           </div>
-        </motion.div>
+        </div>
 
         {/* Updates */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 lg:p-8"
-        >
+        <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 lg:p-8 animate-fadeInUp delay-[800ms]">
           <h2 className="mb-4 text-2xl font-bold text-white">
             Actualizaciones de esta Política
           </h2>
@@ -401,15 +378,10 @@ export default function CookiesPolicy() {
             notificaremos cualquier cambio publicando la nueva Política de Cookies en esta
             página y actualizando la fecha de "Última actualización" en la parte superior.
           </p>
-        </motion.div>
+        </div>
 
         {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.9 }}
-          className="mt-12 rounded-2xl border border-yellow-400/30 bg-gradient-to-br from-yellow-900/10 to-orange-900/5 p-8 text-center"
-        >
+        <div className="mt-12 rounded-2xl border border-yellow-400/30 bg-gradient-to-br from-yellow-900/10 to-orange-900/5 p-8 text-center animate-fadeInUp delay-[900ms]">
           <Trash2 className="mx-auto mb-4 h-12 w-12 text-yellow-400" />
           <h3 className="mb-3 text-2xl font-bold text-white">
             Gestiona tus Preferencias
@@ -430,7 +402,7 @@ export default function CookiesPolicy() {
             <Settings className="h-5 w-5" />
             Configurar Cookies
           </button>
-        </motion.div>
+        </div>
 
         {/* Footer */}
         <div className="mt-12 text-center">

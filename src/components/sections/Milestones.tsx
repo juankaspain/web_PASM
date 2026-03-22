@@ -1,9 +1,8 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
+import { useInView } from '@/hooks/useInView'
 import { Film, Tv, Sparkles, ChevronDown, Calendar } from 'lucide-react'
-import { useState, useRef } from 'react'
-import { useInView } from 'framer-motion'
+import { useState } from 'react'
 
 const milestones = [
   {
@@ -92,8 +91,7 @@ const milestones = [
 
 export default function Milestones() {
   const [expandedId, setExpandedId] = useState<number | null>(null)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const { ref, isInView } = useInView({ once: true, margin: '-80px' })
 
   const toggleExpand = (id: number) => {
     setExpandedId(expandedId === id ? null : id)
@@ -114,42 +112,31 @@ export default function Milestones() {
       />
 
       <div className="container relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <motion.div
+        <div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
+          className={`transition-all duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
         >
           <div className="mb-16 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm"
+            <div
+              className={`mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm transition-all delay-100 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
             >
               <Sparkles className="h-4 w-4 text-yellow-400" strokeWidth={2} />
               <span className="text-sm font-medium tracking-wide text-slate-300">
                 Trayectoria
               </span>
-            </motion.div>
+            </div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="mb-6 text-5xl font-bold tracking-tight text-white lg:text-6xl"
+            <h2
+              className={`mb-6 text-5xl font-bold tracking-tight text-white transition-all delay-200 duration-[500ms] lg:text-6xl ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
             >
               Hitos de Carrera
-            </motion.h2>
+            </h2>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-400"
+            <p
+              className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-400 transition-all delay-300 duration-[500ms] ${isInView ? 'opacity-100' : 'opacity-0'}`}
             >
               Los momentos más significativos de mi trayectoria profesional
-            </motion.p>
+            </p>
           </div>
 
           <div className="relative">
@@ -162,12 +149,10 @@ export default function Milestones() {
                 const isExpanded = expandedId === milestone.id
 
                 return (
-                  <motion.div
+                  <div
                     key={milestone.id}
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                    transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                    className="relative"
+                    className={`relative transition-all duration-[600ms] ${isInView ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`}
+                    style={{ transitionDelay: `${400 + index * 100}ms` }}
                   >
                     {/* Timeline dot */}
                     <div className="absolute left-[26px] top-8 z-10 h-4 w-4 rounded-full border-4 border-black bg-yellow-400" />
@@ -206,67 +191,54 @@ export default function Milestones() {
                                 </div>
                               </div>
 
-                              <motion.div
-                                animate={{ rotate: isExpanded ? 180 : 0 }}
-                                transition={{ duration: 0.3 }}
-                                className="flex-shrink-0"
+                              <div
+                                className={`flex-shrink-0 transition-transform duration-300 ${isExpanded ? 'rotate-180' : 'rotate-0'}`}
                               >
                                 <ChevronDown className="h-5 w-5 text-slate-400 transition-colors group-hover:text-yellow-400" />
-                              </motion.div>
+                              </div>
                             </div>
 
-                            <AnimatePresence>
-                              {isExpanded && (
-                                <motion.div
-                                  initial={{ height: 0, opacity: 0 }}
-                                  animate={{ height: 'auto', opacity: 1 }}
-                                  exit={{ height: 0, opacity: 0 }}
-                                  transition={{ duration: 0.3 }}
-                                  className="overflow-hidden"
-                                >
-                                  <div className="mt-6 border-t border-white/10 pt-6">
-                                    <p className="mb-6 leading-relaxed text-slate-300">
-                                      {milestone.fullDesc}
-                                    </p>
+                            <div
+                              className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}
+                            >
+                              <div className="mt-6 border-t border-white/10 pt-6">
+                                <p className="mb-6 leading-relaxed text-slate-300">
+                                  {milestone.fullDesc}
+                                </p>
 
-                                    <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-                                      <h4 className="mb-3 flex items-center gap-2 text-sm font-bold text-white">
-                                        <Sparkles className="h-4 w-4 text-yellow-400" />
-                                        Destacados
-                                      </h4>
-                                      <ul className="space-y-2">
-                                        {milestone.highlights.map((highlight, idx) => (
-                                          <li
-                                            key={idx}
-                                            className="flex items-start gap-3"
-                                          >
-                                            <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-yellow-400" />
-                                            <span className="text-sm text-slate-400">
-                                              {highlight}
-                                            </span>
-                                          </li>
-                                        ))}
-                                      </ul>
-                                    </div>
-                                  </div>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
+                                <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+                                  <h4 className="mb-3 flex items-center gap-2 text-sm font-bold text-white">
+                                    <Sparkles className="h-4 w-4 text-yellow-400" />
+                                    Destacados
+                                  </h4>
+                                  <ul className="space-y-2">
+                                    {milestone.highlights.map((highlight, idx) => (
+                                      <li
+                                        key={idx}
+                                        className="flex items-start gap-3"
+                                      >
+                                        <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-yellow-400" />
+                                        <span className="text-sm text-slate-400">
+                                          {highlight}
+                                        </span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </button>
                     </div>
-                  </motion.div>
+                  </div>
                 )
               })}
             </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 1 }}
-            className="mt-16 text-center"
+          <div
+            className={`mt-16 text-center transition-all delay-[1000ms] duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
           >
             <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 backdrop-blur-sm">
               <Calendar className="h-5 w-5 text-yellow-400" />
@@ -274,8 +246,8 @@ export default function Milestones() {
                 Más de 8 años de trayectoria profesional
               </span>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   )

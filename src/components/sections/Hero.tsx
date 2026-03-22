@@ -1,6 +1,5 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
 import {
   ArrowDown,
   Play,
@@ -14,14 +13,10 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { SiTiktok, SiImdb, SiWikipedia } from 'react-icons/si'
-import { RiFilmLine, RiMovie2Line } from 'react-icons/ri'
+import { TikTokIcon, ImdbIcon, WikipediaIcon, FilmAffinityIcon, SensaCineIcon } from '@/components/icons'
 import { Tv, Film, Award, Users } from 'lucide-react'
 
 export default function Hero() {
-  const { scrollY } = useScroll()
-  const opacity = useTransform(scrollY, [0, 200], [1, 0.95])
-  const scale = useTransform(scrollY, [0, 200], [1, 0.98])
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -32,7 +27,7 @@ export default function Hero() {
     {
       name: 'IMDb',
       url: 'https://www.imdb.com/name/nm9017709/',
-      icon: SiImdb,
+      icon: ImdbIcon,
       description: 'Perfil profesional',
       gradient: 'from-yellow-400/20 to-yellow-600/20',
       borderColor: 'border-yellow-400/30',
@@ -44,7 +39,7 @@ export default function Hero() {
     {
       name: 'FilmAffinity',
       url: 'https://www.filmaffinity.com/es/name.php?name-id=231727420',
-      icon: RiFilmLine,
+      icon: FilmAffinityIcon,
       description: 'Filmografía completa',
       gradient: 'from-blue-400/20 to-blue-600/20',
       borderColor: 'border-blue-400/30',
@@ -56,7 +51,7 @@ export default function Hero() {
     {
       name: 'SensaCine',
       url: 'https://www.sensacine.com/actores/actor-889713/',
-      icon: RiMovie2Line,
+      icon: SensaCineIcon,
       description: 'Proyectos y noticias',
       gradient: 'from-purple-400/20 to-purple-600/20',
       borderColor: 'border-purple-400/30',
@@ -68,7 +63,7 @@ export default function Hero() {
     {
       name: 'Wikipedia',
       url: 'https://es.wikipedia.org/wiki/Almagro_San_Miguel',
-      icon: SiWikipedia,
+      icon: WikipediaIcon,
       description: 'Biografía',
       gradient: 'from-slate-400/20 to-slate-600/20',
       borderColor: 'border-slate-400/30',
@@ -99,7 +94,7 @@ export default function Hero() {
     {
       name: 'TikTok',
       url: 'https://www.tiktok.com/@almagro.san.migue',
-      icon: SiTiktok,
+      icon: TikTokIcon,
       color: 'hover:text-white',
       bgHover: 'hover:bg-white/10',
       borderHover: 'hover:border-white/30',
@@ -332,10 +327,7 @@ export default function Hero() {
         </div>
       )}
 
-      <motion.div
-        className="relative z-10 mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20"
-        style={{ opacity, scale }}
-      >
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.25fr] xl:gap-12">
           <div className="order-2 flex justify-center lg:order-1 lg:justify-start">
             <div className="relative w-full max-w-[480px] lg:max-w-[520px]">
@@ -602,7 +594,7 @@ export default function Hero() {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
     </section>

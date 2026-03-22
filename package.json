@@ -32,13 +32,11 @@
     "@hookform/resolvers": "^3.9.1",
     "@sentry/nextjs": "^8.42.0",
     "clsx": "^2.1.1",
-    "framer-motion": "^11.15.0",
     "lucide-react": "^0.468.0",
     "next": "15.5.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.53.2",
-    "react-icons": "^5.4.0",
     "sharp": "^0.33.5",
     "tailwind-merge": "^2.5.5",
     "zod": "^3.23.8"

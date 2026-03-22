@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { Quote } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
 
@@ -279,12 +278,8 @@ export default function Testimonials() {
 
           <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredTestimonials.map((testimonial, index) => (
-              <motion.div
+              <div
                 key={`${testimonial.role}-${index}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
                 className="group rounded-lg border border-slate-700 bg-slate-800 p-6 transition-all duration-300 hover:border-yellow-500 hover:shadow-2xl hover:shadow-yellow-500/10"
               >
                 <Quote className="mb-4 h-8 w-8 text-yellow-500/50" />
@@ -310,7 +305,7 @@ export default function Testimonials() {
                     </span>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 

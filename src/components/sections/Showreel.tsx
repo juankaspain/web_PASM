@@ -1,8 +1,8 @@
 'use client'
 
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { useInView } from '@/hooks/useInView'
 import { Play, Calendar, Film, X, Newspaper, ExternalLink } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 
 interface ShowreelVideo {
   id: string
@@ -186,8 +186,7 @@ const pressInterviews: PressInterview[] = [
 ]
 
 export default function Showreel() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const { ref, isInView } = useInView({ once: true, margin: '-80px' })
   const [activeVideo, setActiveVideo] = useState<string>('2024')
   const [modalVideo, setModalVideo] = useState<ClipVideo | null>(null)
 
@@ -222,58 +221,41 @@ export default function Showreel() {
         />
 
         <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div
+          <div
             ref={ref}
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6 }}
+            className={`transition-all duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
           >
-            {/* Header - Entrevistas en Video */}
+            {/* Header */}
             <div className="mb-16 text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm"
+              <div
+                className={`mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm transition-all delay-100 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
               >
                 <Film className="h-4 w-4 text-yellow-400" strokeWidth={2} />
                 <span className="text-sm font-medium tracking-wide text-slate-300">
                   Medios & Declaraciones
                 </span>
-              </motion.div>
+              </div>
 
-              <motion.h2
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="mb-6 text-4xl font-bold tracking-tight text-white lg:text-5xl"
+              <h2
+                className={`mb-6 text-4xl font-bold tracking-tight text-white lg:text-5xl transition-all delay-200 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
               >
                 Entrevistas en Video
-              </motion.h2>
+              </h2>
 
-              <motion.div
-                initial={{ opacity: 0, scaleX: 0 }}
-                animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="mx-auto mb-6 h-0.5 w-20 bg-yellow-400"
+              <div
+                className={`mx-auto mb-6 h-0.5 w-20 bg-yellow-400 transition-all delay-300 duration-[800ms] ${isInView ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`}
               />
 
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-400"
+              <p
+                className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-400 transition-all delay-[400ms] duration-[500ms] ${isInView ? 'opacity-100' : 'opacity-0'}`}
               >
                 Selección de mis mejores interpretaciones en televisión, cine y teatro
-              </motion.p>
+              </p>
             </div>
 
             {/* Year Selector */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="mb-12 flex justify-center gap-3"
+            <div
+              className={`mb-12 flex justify-center gap-3 transition-all delay-500 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
             >
               {showreels.map((reel) => (
                 <button
@@ -288,16 +270,10 @@ export default function Showreel() {
                   Showreel {reel.year}
                 </button>
               ))}
-            </motion.div>
+            </div>
 
             {/* Featured Video Player */}
-            <motion.div
-              key={activeVideo}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mx-auto mb-24 max-w-5xl"
-            >
+            <div className="mx-auto mb-24 max-w-5xl">
               <div className="relative">
                 <div className="absolute -inset-[2px] rounded-2xl bg-yellow-400/20 opacity-50 blur-xl" />
 
@@ -342,16 +318,10 @@ export default function Showreel() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Clips Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="mx-auto mb-32 max-w-7xl"
-            >
+            <div className="mx-auto mb-32 max-w-7xl">
               <div className="mb-16 text-center">
                 <h3 className="mb-4 text-3xl font-bold text-white">
                   Clips de Actuaciones
@@ -364,98 +334,40 @@ export default function Showreel() {
 
               <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
                 {clips.map((clip, index) => (
-                  <motion.div
+                  <div
                     key={clip.youtubeId}
-                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                    whileInView={{
-                      opacity: 1,
-                      y: 0,
-                      scale: 1,
-                    }}
-                    transition={{
-                      duration: 0.6,
-                      delay: index * 0.1,
-                      ease: [0.25, 0.46, 0.45, 0.94],
-                    }}
-                    viewport={{ once: true }}
-                    whileHover={{
-                      y: -8,
-                      scale: 1.03,
-                      transition: {
-                        duration: 0.3,
-                        ease: [0.34, 1.56, 0.64, 1],
-                      },
-                    }}
-                    className="group relative cursor-pointer"
+                    className="group relative cursor-pointer hover:-translate-y-2 hover:scale-[1.03] transition-all duration-300"
+                    style={{ transitionDelay: `${index * 100}ms` }}
                     onClick={() => openModal(clip)}
                   >
                     <div className="relative">
-                      <motion.div
-                        className="absolute -inset-[2px] rounded-2xl bg-yellow-400/30 blur-xl"
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        transition={{ duration: 0.4, ease: 'easeOut' }}
-                      />
+                      <div className="absolute -inset-[2px] rounded-2xl bg-yellow-400/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-[400ms]" />
 
                       <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] shadow-2xl backdrop-blur-xl transition-all duration-500 hover:border-yellow-400/30">
                         <div className="relative aspect-video overflow-hidden bg-black">
-                          <motion.img
+                          <img
                             src={`https://img.youtube.com/vi/${clip.youtubeId}/mqdefault.jpg`}
                             alt={clip.title}
-                            className="h-full w-full object-cover"
-                            initial={{ opacity: 0.75, scale: 1 }}
-                            whileHover={{
-                              opacity: 1,
-                              scale: 1.08,
-                              transition: { duration: 0.5, ease: 'easeOut' },
-                            }}
+                            className="h-full w-full object-cover opacity-75 transition-all duration-500 group-hover:opacity-100 group-hover:scale-[1.08]"
                           />
 
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"
-                            initial={{ opacity: 0.7 }}
-                            whileHover={{ opacity: 0.5 }}
-                            transition={{ duration: 0.3 }}
-                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-70 transition-opacity duration-300 group-hover:opacity-50" />
 
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <motion.div
-                              className="flex h-16 w-16 items-center justify-center rounded-full bg-white/95 shadow-2xl"
-                              whileHover={{
-                                scale: 1.2,
-                                backgroundColor: 'rgba(255, 255, 255, 1)',
-                                boxShadow: '0 0 30px rgba(250, 204, 21, 0.6)',
-                              }}
-                              transition={{
-                                type: 'spring',
-                                stiffness: 400,
-                                damping: 15,
-                              }}
-                            >
+                            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/95 shadow-2xl transition-all duration-300 group-hover:scale-[1.2] group-hover:shadow-yellow-400/60">
                               <Play className="ml-1 h-7 w-7 fill-black text-black" />
-                            </motion.div>
+                            </div>
                           </div>
 
-                          <motion.div
-                            className="absolute bottom-3 right-3 rounded-lg border border-white/10 bg-black/90 px-3 py-1.5 text-xs font-bold text-white backdrop-blur-md"
-                            whileHover={{
-                              scale: 1.05,
-                              backgroundColor: 'rgba(0, 0, 0, 0.95)',
-                            }}
-                            transition={{ duration: 0.2 }}
-                          >
+                          <div className="absolute bottom-3 right-3 rounded-lg border border-white/10 bg-black/90 px-3 py-1.5 text-xs font-bold text-white backdrop-blur-md transition-all duration-200 group-hover:scale-105">
                             {clip.duration}
-                          </motion.div>
+                          </div>
                         </div>
 
                         <div className="bg-gradient-to-b from-black/50 to-black/80 p-5">
-                          <motion.h4
-                            className="mb-2 line-clamp-2 text-base font-semibold leading-tight text-white"
-                            whileHover={{ color: 'rgb(250, 204, 21)' }}
-                            transition={{ duration: 0.2 }}
-                          >
+                          <h4 className="mb-2 line-clamp-2 text-base font-semibold leading-tight text-white transition-colors duration-200 group-hover:text-yellow-400">
                             {clip.title}
-                          </motion.h4>
+                          </h4>
                           <p className="mb-3 line-clamp-2 text-xs leading-relaxed text-slate-300">
                             {clip.description}
                           </p>
@@ -470,32 +382,20 @@ export default function Showreel() {
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
-            {/* NUEVA SECCIÓN: Entrevistas en Prensa */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="mx-auto mb-32 max-w-7xl"
-            >
+            {/* Press Interviews Section */}
+            <div className="mx-auto mb-32 max-w-7xl">
               <div className="mb-16 text-center">
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  viewport={{ once: true }}
-                  className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm"
-                >
+                <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm">
                   <Newspaper className="h-4 w-4 text-yellow-400" strokeWidth={2} />
                   <span className="text-sm font-medium tracking-wide text-slate-300">
                     Cobertura Mediática
                   </span>
-                </motion.div>
+                </div>
 
                 <h3 className="mb-4 text-3xl font-bold text-white lg:text-4xl">
                   Entrevistas en Prensa
@@ -508,26 +408,17 @@ export default function Showreel() {
 
               <div className="grid gap-6 md:grid-cols-2">
                 {pressInterviews.map((interview, index) => (
-                  <motion.a
+                  <a
                     key={interview.url}
                     href={interview.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Leer entrevista en ${interview.publication}: ${interview.title} (se abre en nueva ventana)`}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    whileHover={{ y: -5 }}
-                    className="group relative"
+                    className="group relative hover:-translate-y-1 transition-all duration-[500ms]"
+                    style={{ transitionDelay: `${index * 100}ms` }}
                   >
                     <div className="relative">
-                      <motion.div
-                        className="absolute -inset-[2px] rounded-2xl bg-yellow-400/30 blur-xl"
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        transition={{ duration: 0.4 }}
-                      />
+                      <div className="absolute -inset-[2px] rounded-2xl bg-yellow-400/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-[400ms]" />
 
                       <div className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur-sm transition-all duration-500 hover:border-yellow-400/30">
                         <div className="mb-4 flex items-start gap-4">
@@ -559,74 +450,64 @@ export default function Showreel() {
                         </div>
                       </div>
                     </div>
-                  </motion.a>
+                  </a>
                 ))}
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Video Modal */}
-      <AnimatePresence>
-        {modalVideo && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-md"
+      <div
+        className={`fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-md transition-all duration-300 ${modalVideo ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}
+        onClick={closeModal}
+      >
+        <div
+          className={`relative w-full max-w-6xl transition-all duration-300 ${modalVideo ? 'scale-100 opacity-100' : 'scale-90 opacity-0'}`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
             onClick={closeModal}
+            aria-label="Cerrar reproductor de video"
+            className="group absolute -top-12 right-0 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 transition-all hover:border-white/30 hover:bg-white/20"
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3, type: 'spring', damping: 25 }}
-              className="relative w-full max-w-6xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={closeModal}
-                aria-label="Cerrar reproductor de video"
-                className="group absolute -top-12 right-0 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 transition-all hover:border-white/30 hover:bg-white/20"
-              >
-                <X className="h-6 w-6 text-white transition-transform duration-300 group-hover:rotate-90" />
-              </button>
+            <X className="h-6 w-6 text-white transition-transform duration-300 group-hover:rotate-90" />
+          </button>
 
-              <div className="relative rounded-2xl border-2 border-yellow-400/30 bg-white/[0.02] p-2 shadow-2xl backdrop-blur-sm">
-                <div className="relative aspect-video overflow-hidden rounded-xl bg-black">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${modalVideo.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
-                    title={modalVideo.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="absolute inset-0 h-full w-full"
-                  />
-                </div>
+          {modalVideo && (
+            <div className="relative rounded-2xl border-2 border-yellow-400/30 bg-white/[0.02] p-2 shadow-2xl backdrop-blur-sm">
+              <div className="relative aspect-video overflow-hidden rounded-xl bg-black">
+                <iframe
+                  src={`https://www.youtube.com/embed/${modalVideo.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
+                  title={modalVideo.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 h-full w-full"
+                />
+              </div>
 
-                <div className="p-6">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <h3 className="mb-2 text-2xl font-semibold text-white">
-                        {modalVideo.title}
-                      </h3>
-                      <p className="mb-3 text-slate-400">{modalVideo.description}</p>
-                      <div className="flex items-center gap-4 text-sm text-slate-500">
-                        <span>{modalVideo.project}</span>
-                        <span>•</span>
-                        <span>{modalVideo.year}</span>
-                        <span>•</span>
-                        <span>{modalVideo.duration}</span>
-                      </div>
+              <div className="p-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <h3 className="mb-2 text-2xl font-semibold text-white">
+                      {modalVideo.title}
+                    </h3>
+                    <p className="mb-3 text-slate-400">{modalVideo.description}</p>
+                    <div className="flex items-center gap-4 text-sm text-slate-500">
+                      <span>{modalVideo.project}</span>
+                      <span>•</span>
+                      <span>{modalVideo.year}</span>
+                      <span>•</span>
+                      <span>{modalVideo.duration}</span>
                     </div>
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </div>
+          )}
+        </div>
+      </div>
     </>
   )
 }

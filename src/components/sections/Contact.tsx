@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import {
   Mail,
   MapPin,
@@ -23,8 +22,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { trackEvent } from '@/lib/analytics'
 import { contactFormSchema } from '@/lib/validators'
 import { z } from 'zod'
-import { SiTiktok } from 'react-icons/si'
+import { TikTokIcon } from '@/components/icons'
 import Link from 'next/link'
+import { useInView } from '@/hooks/useInView'
 
 // F.4 - Extend the shared schema with UI-specific fields
 const contactSchema = contactFormSchema.extend({
@@ -190,6 +190,8 @@ export default function Contact() {
   // E.6 - Reconstruct email client-side to prevent scraping
   const [displayEmail, setDisplayEmail] = useState('...')
 
+  const { ref: sectionRef, isInView } = useInView({ once: true, margin: '-80px' })
+
   const messageValue = watch('message', '')
 
   useEffect(() => {
@@ -274,23 +276,14 @@ export default function Contact() {
       <div className="absolute left-1/2 top-0 h-[500px] w-[1000px] -translate-x-1/2 rounded-full bg-yellow-500/10 blur-[150px]" />
 
       {particles.length > 0 && (
-        <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
           {particles.map((particle) => (
-            <motion.div
+            <div
               key={particle.id}
-              className="absolute h-1 w-1 rounded-full bg-yellow-400"
+              className="absolute h-1 w-1 rounded-full bg-yellow-400 animate-fadeIn"
               style={{
                 left: `${particle.x}%`,
                 top: `${particle.y}%`,
-              }}
-              animate={{
-                y: [0, -300],
-                opacity: [0, 1, 0],
-              }}
-              transition={{
-                duration: Math.random() * 6 + 4,
-                repeat: Infinity,
-                delay: Math.random() * 3,
               }}
             />
           ))}
@@ -298,55 +291,37 @@ export default function Contact() {
       )}
 
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+        <div
+          ref={sectionRef}
+          className={`transition-all duration-[800ms] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <div className="mb-16 text-center sm:mb-20">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 backdrop-blur-sm"
+            <div
+              className={`mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 backdrop-blur-sm transition-all duration-[600ms] delay-200 ${isInView ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
             >
               <Sparkles className="h-4 w-4 text-yellow-400" />
               <span className="text-sm font-bold uppercase tracking-wider text-slate-300">
                 Hablemos
               </span>
-            </motion.div>
+            </div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="mb-6 text-4xl font-bold text-white sm:text-5xl lg:text-6xl"
+            <h2
+              className={`mb-6 text-4xl font-bold text-white sm:text-5xl lg:text-6xl transition-all duration-[600ms] delay-300 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
             >
               Contacto Profesional
-            </motion.h2>
+            </h2>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-300 sm:text-xl"
+            <p
+              className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-300 sm:text-xl transition-all duration-[600ms] delay-[400ms] ${isInView ? 'opacity-100' : 'opacity-0'}`}
             >
               Disponible para castings, colaboraciones y consultas profesionales
-            </motion.p>
+            </p>
           </div>
 
           <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2 lg:gap-12">
             {/* Columna izquierda: Formulario + Tiempo de Respuesta */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.5 }}
-              viewport={{ once: true }}
-              className="space-y-6"
+            <div
+              className={`space-y-6 transition-all duration-700 delay-500 ${isInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}
             >
               <div className="relative">
                 <div className="absolute -inset-1 rounded-3xl bg-yellow-400/20 opacity-50 blur-2xl" />
@@ -510,37 +485,27 @@ export default function Contact() {
                     </div>
 
                     {status === 'success' && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.05] p-4"
-                      >
+                      <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.05] p-4 animate-fadeInUp">
                         <CheckCircle className="h-5 w-5 flex-shrink-0 text-white" />
                         <span className="text-sm font-semibold text-white">
                           ¡Mensaje enviado! Te responderé en menos de 48 horas.
                         </span>
-                      </motion.div>
+                      </div>
                     )}
 
                     {status === 'error' && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex items-center gap-3 rounded-xl border border-red-500/30 bg-red-500/10 p-4"
-                      >
+                      <div className="flex items-center gap-3 rounded-xl border border-red-500/30 bg-red-500/10 p-4 animate-fadeInUp">
                         <AlertCircle className="h-5 w-5 flex-shrink-0 text-red-400" />
                         <span className="text-sm font-semibold text-red-300">
                           {errorMessage}
                         </span>
-                      </motion.div>
+                      </div>
                     )}
 
-                    <motion.button
+                    <button
                       type="submit"
                       disabled={status === 'sending'}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="flex w-full items-center justify-center gap-3 rounded-xl bg-yellow-400 px-8 py-4 font-bold text-black shadow-lg transition-all hover:bg-yellow-300 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="flex w-full items-center justify-center gap-3 rounded-xl bg-yellow-400 px-8 py-4 font-bold text-black shadow-lg transition-all hover:bg-yellow-300 hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {status === 'sending' ? (
                         <>
@@ -553,7 +518,7 @@ export default function Contact() {
                           <span>Enviar Mensaje</span>
                         </>
                       )}
-                    </motion.button>
+                    </button>
 
                     <p className="text-center text-xs text-slate-300">
                       Formulario protegido por Formspree • Tus datos son privados
@@ -563,14 +528,7 @@ export default function Contact() {
               </div>
 
               {/* Tiempo de Respuesta - Ahora debajo del formulario */}
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="relative"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.7 }}
-                viewport={{ once: true }}
-              >
+              <div className="relative hover:scale-[1.02] transition-transform duration-300">
                 <div className="absolute -inset-0.5 rounded-2xl bg-yellow-400/20 opacity-40 blur-lg" />
                 <div className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl">
                   <div className="flex items-start gap-4">
@@ -590,16 +548,12 @@ export default function Contact() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* Columna derecha: Info de contacto y Redes Sociales */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.6 }}
-              viewport={{ once: true }}
-              className="space-y-6"
+            <div
+              className={`space-y-6 transition-all duration-700 delay-[600ms] ${isInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
             >
               <div className="space-y-4">
                 {contactInfo.map((info) => {
@@ -607,10 +561,9 @@ export default function Contact() {
                   const value = info.isEmail ? displayEmail : info.value
                   const link = info.isEmail ? `mailto:${displayEmail}` : info.link
                   return (
-                    <motion.div
+                    <div
                       key={info.label}
-                      whileHover={{ y: -4, scale: 1.02 }}
-                      className="group relative"
+                      className="group relative hover:-translate-y-1 hover:scale-[1.02] transition-transform duration-300"
                     >
                       <div className="absolute -inset-0.5 rounded-2xl bg-yellow-400/20 opacity-0 blur-lg transition-opacity group-hover:opacity-100" />
                       <div className="relative flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.02] p-5 backdrop-blur-xl">
@@ -633,7 +586,7 @@ export default function Contact() {
                           )}
                         </div>
                       </div>
-                    </motion.div>
+                    </div>
                   )
                 })}
               </div>
@@ -647,7 +600,7 @@ export default function Contact() {
                   {socialLinks.map((social) => {
                     const Icon = social.icon
                     return (
-                      <motion.a
+                      <a
                         key={social.label}
                         href={social.url}
                         target="_blank"
@@ -658,13 +611,12 @@ export default function Contact() {
                             label: social.label,
                           })
                         }
-                        whileHover={{ x: 5, scale: 1.02 }}
-                        className="group relative flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.02] p-4 backdrop-blur-xl transition-all"
+                        className="group relative flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.02] p-4 backdrop-blur-xl transition-all hover:translate-x-1 hover:scale-[1.02]"
                       >
                         <div className="flex items-center gap-3">
                           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 shadow-lg">
                             {Icon === 'tiktok' ? (
-                              <SiTiktok className="h-6 w-6 text-white" />
+                              <TikTokIcon className="h-6 w-6 text-white" />
                             ) : (
                               <Icon className="h-6 w-6 text-white" />
                             )}
@@ -675,14 +627,14 @@ export default function Contact() {
                           </div>
                         </div>
                         <ExternalLink className="h-5 w-5 text-slate-500 transition-colors group-hover:text-yellow-400" />
-                      </motion.a>
+                      </a>
                     )
                   })}
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />

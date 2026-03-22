@@ -1,6 +1,5 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
@@ -103,11 +102,8 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+      <nav
+        className={`animate-slideInDown fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
           isScrolled
             ? 'border-b border-white/5 bg-black/95 shadow-lg backdrop-blur-md'
             : 'bg-transparent'
@@ -210,106 +206,91 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-      </motion.nav>
+      </nav>
 
-      {/* A.2 - AnimatePresence for exit animations */}
-      <AnimatePresence>
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <motion.div
-            id="mobile-menu"
-            ref={mobileMenuRef}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Menú de navegación"
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="bg-black/98 fixed inset-y-0 right-0 z-40 w-full border-l border-white/5 shadow-2xl backdrop-blur-xl sm:w-80"
-          >
-            <div className="flex h-full flex-col">
-              {/* Mobile header */}
-              <div className="flex items-center justify-between border-b border-white/5 p-6">
-                <div className="font-serif text-xl font-bold">
-                  <span className="text-white">Almagro</span>
-                  <span className="text-yellow-400"> San Miguel</span>
-                </div>
-                <button
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  aria-label="Cerrar menú"
-                  className="rounded-lg p-2 text-white/70 transition-all duration-300 hover:bg-white/5 hover:text-white"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-
-              {/* Mobile links */}
-              <div className="flex-1 overflow-y-auto p-6">
-                <div className="space-y-1">
-                  {NAVIGATION_ITEMS.map((link, index) => {
-                    const isActive = activeSection === link.href
-                    return (
-                      <motion.a
-                        key={link.href}
-                        href={link.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        aria-current={isActive ? 'page' : undefined}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.05 }}
-                        className={`group flex items-center justify-between rounded-lg px-5 py-4 transition-all duration-300 ${
-                          isActive
-                            ? 'border-l-2 border-yellow-400 bg-white/5'
-                            : 'border-l-2 border-transparent hover:border-l-white/20 hover:bg-white/5'
-                        }`}
-                      >
-                        <span
-                          className={`text-base font-medium tracking-wide transition-colors duration-300 ${
-                            isActive
-                              ? 'font-semibold text-yellow-400'
-                              : 'text-white/70 group-hover:text-white'
-                          }`}
-                        >
-                          {link.label}
-                        </span>
-
-                        <div
-                          className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${
-                            isActive
-                              ? 'scale-100 bg-yellow-400'
-                              : 'scale-0 bg-white/30 group-hover:scale-100'
-                          }`}
-                        />
-                      </motion.a>
-                    )
-                  })}
-                </div>
-              </div>
-
-              {/* Mobile footer */}
-              <div className="border-t border-white/5 p-6">
-                <p className="text-center text-xs font-light tracking-wide text-white/40">
-                  Actor de Televisión, Cine y Teatro
-                </p>
-              </div>
+      {/* Mobile Menu */}
+      <div
+        id="mobile-menu"
+        ref={mobileMenuRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menú de navegación"
+        className={`bg-black/98 fixed inset-y-0 right-0 z-40 w-full border-l border-white/5 shadow-2xl backdrop-blur-xl sm:w-80 transition-transform duration-300 ease-out ${
+          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="flex h-full flex-col">
+          {/* Mobile header */}
+          <div className="flex items-center justify-between border-b border-white/5 p-6">
+            <div className="font-serif text-xl font-bold">
+              <span className="text-white">Almagro</span>
+              <span className="text-yellow-400"> San Miguel</span>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Cerrar menú"
+              className="rounded-lg p-2 text-white/70 transition-all duration-300 hover:bg-white/5 hover:text-white"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+
+          {/* Mobile links */}
+          <div className="flex-1 overflow-y-auto p-6">
+            <div className="space-y-1">
+              {NAVIGATION_ITEMS.map((link) => {
+                const isActive = activeSection === link.href
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    aria-current={isActive ? 'page' : undefined}
+                    className={`group flex items-center justify-between rounded-lg px-5 py-4 transition-all duration-300 ${
+                      isActive
+                        ? 'border-l-2 border-yellow-400 bg-white/5'
+                        : 'border-l-2 border-transparent hover:border-l-white/20 hover:bg-white/5'
+                    }`}
+                  >
+                    <span
+                      className={`text-base font-medium tracking-wide transition-colors duration-300 ${
+                        isActive
+                          ? 'font-semibold text-yellow-400'
+                          : 'text-white/70 group-hover:text-white'
+                      }`}
+                    >
+                      {link.label}
+                    </span>
+
+                    <div
+                      className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${
+                        isActive
+                          ? 'scale-100 bg-yellow-400'
+                          : 'scale-0 bg-white/30 group-hover:scale-100'
+                      }`}
+                    />
+                  </a>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Mobile footer */}
+          <div className="border-t border-white/5 p-6">
+            <p className="text-center text-xs font-light tracking-wide text-white/40">
+              Actor de Televisión, Cine y Teatro
+            </p>
+          </div>
+        </div>
+      </div>
 
       {/* Overlay for mobile menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="fixed inset-0 z-30 bg-black/60 backdrop-blur-sm lg:hidden"
-          />
-        )}
-      </AnimatePresence>
+      <div
+        onClick={() => setIsMobileMenuOpen(false)}
+        className={`fixed inset-0 z-30 bg-black/60 backdrop-blur-sm lg:hidden transition-opacity duration-300 ${
+          isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      />
     </>
   )
 }

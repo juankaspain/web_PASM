@@ -1,8 +1,8 @@
 'use client'
 
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { useInView } from '@/hooks/useInView'
 import { Camera, X, Filter, ChevronLeft, ChevronRight } from 'lucide-react'
-import { useRef, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 interface Headshot {
@@ -67,8 +67,7 @@ const categories = [
 ]
 
 export default function Headshots() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const { ref, isInView } = useInView({ once: true, margin: '-80px' })
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null)
 
@@ -144,59 +143,42 @@ export default function Headshots() {
         />
 
         <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div
+          <div
             ref={ref}
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6 }}
+            className={`transition-all duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
           >
             {/* Header ESTANDARIZADO */}
             <div className="mb-16 text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm"
+              <div
+                className={`mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm transition-all delay-100 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
               >
                 <Camera className="h-4 w-4 text-yellow-400" strokeWidth={2} />
                 <span className="text-sm font-medium tracking-wide text-slate-300">
                   Fotografía Profesional
                 </span>
-              </motion.div>
+              </div>
 
-              <motion.h2
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="mb-6 text-4xl font-bold tracking-tight text-white lg:text-5xl"
+              <h2
+                className={`mb-6 text-4xl font-bold tracking-tight text-white lg:text-5xl transition-all delay-200 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
               >
                 Professional Headshots
-              </motion.h2>
+              </h2>
 
-              <motion.div
-                initial={{ opacity: 0, scaleX: 0 }}
-                animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="mx-auto mb-6 h-0.5 w-20 bg-yellow-400"
+              <div
+                className={`mx-auto mb-6 h-0.5 w-20 bg-yellow-400 transition-all delay-300 duration-[800ms] ${isInView ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`}
               />
 
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-400"
+              <p
+                className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-400 transition-all delay-[400ms] duration-[500ms] ${isInView ? 'opacity-100' : 'opacity-0'}`}
               >
                 Selección de fotografías profesionales para casting directors y
                 productoras
-              </motion.p>
+              </p>
             </div>
 
             {/* Category Filters */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="mb-12 flex flex-wrap justify-center gap-3"
+            <div
+              className={`mb-12 flex flex-wrap justify-center gap-3 transition-all delay-500 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
             >
               <div className="mr-2 flex items-center gap-2">
                 <Filter className="h-4 w-4 text-slate-400" />
@@ -215,62 +197,46 @@ export default function Headshots() {
                   {category.label}
                 </button>
               ))}
-            </motion.div>
+            </div>
 
             {/* Headshots Grid */}
-            <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              <AnimatePresence mode="popLayout">
-                {filteredHeadshots.map((headshot, index) => (
-                  <motion.div
-                    key={`${headshot.category}-${index}`}
-                    layout
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.4, delay: index * 0.05 }}
-                    whileHover={{ y: -8, scale: 1.03 }}
-                    className="group relative cursor-pointer select-none"
-                    onClick={() => setSelectedImageIndex(index)}
-                    onContextMenu={handleImageProtection}
-                  >
-                    <div className="relative">
-                      <motion.div
-                        className="absolute -inset-[2px] rounded-2xl bg-yellow-400/30 blur-xl"
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        transition={{ duration: 0.4 }}
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {filteredHeadshots.map((headshot, index) => (
+                <div
+                  key={`${headshot.category}-${index}`}
+                  className="group relative cursor-pointer select-none hover:-translate-y-2 hover:scale-[1.03] transition-all duration-300"
+                  onClick={() => setSelectedImageIndex(index)}
+                  onContextMenu={handleImageProtection}
+                >
+                  <div className="relative">
+                    <div className="absolute -inset-[2px] rounded-2xl bg-yellow-400/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-[400ms]" />
+
+                    <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-white/10 bg-black transition-all duration-500 hover:border-yellow-400/30">
+                      <Image
+                        src={headshot.url}
+                        alt={headshot.alt}
+                        fill
+                        className="pointer-events-none select-none object-cover object-center transition-transform duration-700 group-hover:scale-110"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                        draggable={false}
+                        onContextMenu={handleImageProtection}
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-                      <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-white/10 bg-black transition-all duration-500 hover:border-yellow-400/30">
-                        <Image
-                          src={headshot.url}
-                          alt={headshot.alt}
-                          fill
-                          className="pointer-events-none select-none object-cover object-center transition-transform duration-700 group-hover:scale-110"
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                          draggable={false}
-                          onContextMenu={handleImageProtection}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-                        <div className="absolute bottom-4 left-4 right-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                          <span className="rounded-full bg-yellow-400 px-3 py-1 text-xs font-bold uppercase text-black">
-                            {categories.find((c) => c.id === headshot.category)?.label}
-                          </span>
-                        </div>
+                      <div className="absolute bottom-4 left-4 right-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        <span className="rounded-full bg-yellow-400 px-3 py-1 text-xs font-bold uppercase text-black">
+                          {categories.find((c) => c.id === headshot.category)?.label}
+                        </span>
                       </div>
                     </div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </motion.div>
+                  </div>
+                </div>
+              ))}
+            </div>
 
             {/* Note */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="mx-auto mt-16 max-w-4xl text-center"
+            <div
+              className={`mx-auto mt-16 max-w-4xl text-center transition-all delay-[700ms] duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
             >
               <p className="text-slate-400">
                 <span className="font-semibold text-white">Nota:</span> Headshots
@@ -281,119 +247,103 @@ export default function Headshots() {
                 </a>
                 .
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Lightbox Modal with Navigation */}
-      <AnimatePresence>
-        {selectedImage && selectedImageIndex !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-md"
-            onClick={closeModal}
-          >
-            {/* Close Button */}
-            <motion.button
-              onClick={closeModal}
-              className="group absolute right-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 transition-all hover:border-white/30 hover:bg-white/20"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <X className="h-6 w-6 text-white transition-transform duration-300 group-hover:rotate-90" />
-            </motion.button>
+      <div
+        className={`fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-md transition-all duration-300 ${selectedImage && selectedImageIndex !== null ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}
+        onClick={closeModal}
+      >
+        {/* Close Button */}
+        <button
+          onClick={closeModal}
+          className="group absolute right-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 transition-all hover:scale-110 hover:border-white/30 hover:bg-white/20 active:scale-90"
+        >
+          <X className="h-6 w-6 text-white transition-transform duration-300 group-hover:rotate-90" />
+        </button>
 
-            {/* Previous Button */}
-            <motion.button
-              onClick={(e) => {
-                e.stopPropagation()
-                navigatePrevious()
-              }}
-              className="group absolute left-4 top-1/2 z-10 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition-all hover:border-yellow-400 hover:bg-yellow-400"
-              whileHover={{ scale: 1.1, x: -4 }}
-              whileTap={{ scale: 0.9 }}
-              aria-label="Imagen anterior"
-            >
-              <ChevronLeft
-                className="h-8 w-8 text-white transition-colors group-hover:text-black"
-                strokeWidth={3}
+        {/* Previous Button */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            navigatePrevious()
+          }}
+          className="group absolute left-4 top-1/2 z-10 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition-all hover:scale-110 hover:-translate-x-1 hover:border-yellow-400 hover:bg-yellow-400 active:scale-90"
+          aria-label="Imagen anterior"
+        >
+          <ChevronLeft
+            className="h-8 w-8 text-white transition-colors group-hover:text-black"
+            strokeWidth={3}
+          />
+        </button>
+
+        {/* Next Button */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            navigateNext()
+          }}
+          className="group absolute right-4 top-1/2 z-10 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition-all hover:scale-110 hover:translate-x-1 hover:border-yellow-400 hover:bg-yellow-400 active:scale-90"
+          aria-label="Siguiente imagen"
+        >
+          <ChevronRight
+            className="h-8 w-8 text-white transition-colors group-hover:text-black"
+            strokeWidth={3}
+          />
+        </button>
+
+        {/* Image Counter */}
+        <div className="absolute left-1/2 top-4 z-10 -translate-x-1/2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md">
+          <span className="text-sm font-medium text-white">
+            {selectedImageIndex !== null ? selectedImageIndex + 1 : 0} /{' '}
+            {filteredHeadshots.length}
+          </span>
+        </div>
+
+        {/* Image Container */}
+        <div
+          className={`relative max-h-[85vh] max-w-4xl select-none transition-all duration-300 ${selectedImage && selectedImageIndex !== null ? 'scale-100 opacity-100' : 'scale-90 opacity-0'}`}
+          onClick={(e) => e.stopPropagation()}
+          onContextMenu={handleImageProtection}
+        >
+          {selectedImage && (
+            <div className="relative overflow-hidden rounded-2xl border-2 border-yellow-400/30 shadow-2xl">
+              <Image
+                src={selectedImage.url}
+                alt={selectedImage.alt}
+                width={800}
+                height={1200}
+                className="pointer-events-none h-auto w-full select-none"
+                priority
+                draggable={false}
+                onContextMenu={handleImageProtection}
               />
-            </motion.button>
 
-            {/* Next Button */}
-            <motion.button
-              onClick={(e) => {
-                e.stopPropagation()
-                navigateNext()
-              }}
-              className="group absolute right-4 top-1/2 z-10 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition-all hover:border-yellow-400 hover:bg-yellow-400"
-              whileHover={{ scale: 1.1, x: 4 }}
-              whileTap={{ scale: 0.9 }}
-              aria-label="Siguiente imagen"
-            >
-              <ChevronRight
-                className="h-8 w-8 text-white transition-colors group-hover:text-black"
-                strokeWidth={3}
-              />
-            </motion.button>
-
-            {/* Image Counter */}
-            <div className="absolute left-1/2 top-4 z-10 -translate-x-1/2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md">
-              <span className="text-sm font-medium text-white">
-                {selectedImageIndex + 1} / {filteredHeadshots.length}
-              </span>
-            </div>
-
-            {/* Image Container */}
-            <motion.div
-              key={selectedImageIndex}
-              initial={{ scale: 0.9, opacity: 0, x: 100 }}
-              animate={{ scale: 1, opacity: 1, x: 0 }}
-              exit={{ scale: 0.9, opacity: 0, x: -100 }}
-              transition={{ duration: 0.3, type: 'spring', damping: 25 }}
-              className="relative max-h-[85vh] max-w-4xl select-none"
-              onClick={(e) => e.stopPropagation()}
-              onContextMenu={handleImageProtection}
-            >
-              <div className="relative overflow-hidden rounded-2xl border-2 border-yellow-400/30 shadow-2xl">
-                <Image
-                  src={selectedImage.url}
-                  alt={selectedImage.alt}
-                  width={800}
-                  height={1200}
-                  className="pointer-events-none h-auto w-full select-none"
-                  priority
-                  draggable={false}
-                  onContextMenu={handleImageProtection}
-                />
-
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                  <span className="inline-block rounded-full bg-yellow-400 px-4 py-2 text-sm font-bold uppercase text-black">
-                    {categories.find((c) => c.id === selectedImage.category)?.label}
-                  </span>
-                </div>
-
-                {/* Watermark overlay for extra protection */}
-                <div
-                  className="pointer-events-none absolute inset-0 select-none"
-                  style={{ userSelect: 'none' }}
-                />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                <span className="inline-block rounded-full bg-yellow-400 px-4 py-2 text-sm font-bold uppercase text-black">
+                  {categories.find((c) => c.id === selectedImage.category)?.label}
+                </span>
               </div>
-            </motion.div>
 
-            {/* Instructions */}
-            <div className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md">
-              <span className="text-xs font-medium text-white/60">
-                Usa ← → o los botones para navegar • ESC para cerrar
-              </span>
+              {/* Watermark overlay for extra protection */}
+              <div
+                className="pointer-events-none absolute inset-0 select-none"
+                style={{ userSelect: 'none' }}
+              />
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </div>
+
+        {/* Instructions */}
+        <div className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md">
+          <span className="text-xs font-medium text-white/60">
+            Usa ← → o los botones para navegar • ESC para cerrar
+          </span>
+        </div>
+      </div>
 
       {/* CSS for additional protection */}
       <style jsx global>{`

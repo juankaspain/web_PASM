@@ -1,8 +1,8 @@
 'use client'
 
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { useInView } from '@/hooks/useInView'
 import { Newspaper, Quote, Play, Tv, X } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 
 interface Interview {
   title: string
@@ -158,8 +158,7 @@ const pressQuotes: PressQuote[] = [
 ]
 
 export default function Press() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const { ref, isInView } = useInView({ once: true, margin: '-80px' })
   const [modalVideo, setModalVideo] = useState<Interview | null>(null)
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
 
@@ -198,58 +197,41 @@ export default function Press() {
         />
 
         <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div
+          <div
             ref={ref}
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6 }}
+            className={`transition-all duration-[600ms] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
           >
             {/* Header ESTANDARIZADO */}
             <div className="mb-16 text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm"
+              <div
+                className={`mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm transition-all duration-500 delay-100 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
               >
                 <Newspaper className="h-4 w-4 text-yellow-400" strokeWidth={2} />
                 <span className="text-sm font-medium tracking-wide text-slate-300">
                   Medios & Declaraciones
                 </span>
-              </motion.div>
+              </div>
 
-              <motion.h2
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="mb-6 text-4xl font-bold tracking-tight text-white lg:text-5xl"
+              <h2
+                className={`mb-6 text-4xl font-bold tracking-tight text-white lg:text-5xl transition-all duration-500 delay-200 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
               >
                 Prensa & Entrevistas
-              </motion.h2>
+              </h2>
 
-              <motion.div
-                initial={{ opacity: 0, scaleX: 0 }}
-                animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="mx-auto mb-6 h-0.5 w-20 bg-yellow-400"
+              <div
+                className={`mx-auto mb-6 h-0.5 w-20 bg-yellow-400 transition-all duration-[800ms] delay-300 ${isInView ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}
               />
 
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-400"
+              <p
+                className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-400 transition-all duration-500 delay-[400ms] ${isInView ? 'opacity-100' : 'opacity-0'}`}
               >
                 Cobertura profesional y declaraciones sobre sus principales producciones
-              </motion.p>
+              </p>
             </div>
 
             {/* Interviews Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mb-20"
+            <div
+              className={`mb-20 transition-all duration-[600ms] delay-500 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
             >
               <h3 className="mb-10 flex items-center justify-center gap-2 text-center text-2xl font-bold text-white">
                 <Tv className="h-6 w-6 text-yellow-400" />
@@ -258,56 +240,29 @@ export default function Press() {
 
               <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 {interviews.map((interview, index) => (
-                  <motion.div
+                  <div
                     key={interview.youtubeId}
-                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                    animate={
-                      isInView
-                        ? {
-                            opacity: 1,
-                            y: 0,
-                            scale: 1,
-                          }
-                        : {
-                            opacity: 0,
-                            y: 20,
-                            scale: 0.95,
-                          }
-                    }
-                    transition={{
-                      duration: 0.6,
-                      delay: 0.6 + index * 0.1,
-                    }}
-                    whileHover={{ y: -8, scale: 1.03 }}
-                    className="group relative cursor-pointer"
+                    className={`group relative cursor-pointer transition-all duration-[600ms] hover:-translate-y-2 hover:scale-[1.03] ${isInView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-5 scale-95'}`}
+                    style={{ transitionDelay: `${600 + index * 100}ms` }}
                     onClick={() => openModal(interview)}
                   >
                     <div className="relative">
-                      <motion.div
-                        className="absolute -inset-[2px] rounded-2xl bg-yellow-400/30 blur-xl"
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        transition={{ duration: 0.4 }}
-                      />
+                      <div className="absolute -inset-[2px] rounded-2xl bg-yellow-400/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
 
                       <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] shadow-2xl backdrop-blur-xl transition-all duration-500 hover:border-yellow-400/30">
                         <div className="relative aspect-video overflow-hidden bg-black">
-                          <motion.img
+                          <img
                             src={`https://img.youtube.com/vi/${interview.youtubeId}/mqdefault.jpg`}
                             alt={interview.title}
-                            className="h-full w-full object-cover"
-                            whileHover={{ scale: 1.08 }}
+                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.08]"
                           />
 
                           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <motion.div
-                              className="flex h-16 w-16 items-center justify-center rounded-full bg-white/95 shadow-2xl"
-                              whileHover={{ scale: 1.2 }}
-                            >
+                            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/95 shadow-2xl transition-transform duration-300 group-hover:scale-110">
                               <Play className="ml-1 h-7 w-7 fill-black text-black" />
-                            </motion.div>
+                            </div>
                           </div>
 
                           <div className="absolute bottom-3 right-3 rounded-lg border border-white/10 bg-black/90 px-3 py-1.5 text-xs font-bold text-white backdrop-blur-md">
@@ -338,16 +293,14 @@ export default function Press() {
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
             {/* Quotes Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
+            <div
+              className={`transition-all duration-[600ms] delay-700 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
             >
               <div className="mb-10">
                 <h3 className="mb-6 flex items-center justify-center gap-2 text-center text-2xl font-bold text-white">
@@ -374,97 +327,82 @@ export default function Press() {
               </div>
 
               <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
-                <AnimatePresence mode="popLayout">
-                  {filteredQuotes.map((quote, index) => (
-                    <motion.div
-                      key={`${quote.production}-${index}`}
-                      layout
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      transition={{ duration: 0.3 }}
-                      className="rounded-xl border border-white/10 bg-white/[0.02] p-6 transition-all hover:border-yellow-400/30 hover:bg-white/[0.04]"
-                    >
-                      <Quote className="mb-3 h-6 w-6 text-yellow-400/40" />
-                      <p className="mb-4 text-sm italic leading-relaxed text-slate-300">
-                        &ldquo;{quote.quote}&rdquo;
-                      </p>
-                      <div className="flex items-center justify-between gap-3 text-xs">
-                        <div>
-                          <p className="mb-1 text-slate-500">{quote.source}</p>
-                          <p className="font-medium text-yellow-400">
-                            {quote.production}
-                          </p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-slate-600">{quote.year}</p>
-                          <span className="mt-1 inline-block rounded bg-white/5 px-2 py-1 text-[10px] text-slate-300">
-                            {quote.category}
-                          </span>
-                        </div>
+                {filteredQuotes.map((quote, index) => (
+                  <div
+                    key={`${quote.production}-${index}`}
+                    className="rounded-xl border border-white/10 bg-white/[0.02] p-6 transition-all hover:border-yellow-400/30 hover:bg-white/[0.04]"
+                  >
+                    <Quote className="mb-3 h-6 w-6 text-yellow-400/40" />
+                    <p className="mb-4 text-sm italic leading-relaxed text-slate-300">
+                      &ldquo;{quote.quote}&rdquo;
+                    </p>
+                    <div className="flex items-center justify-between gap-3 text-xs">
+                      <div>
+                        <p className="mb-1 text-slate-500">{quote.source}</p>
+                        <p className="font-medium text-yellow-400">
+                          {quote.production}
+                        </p>
                       </div>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
+                      <div className="text-right">
+                        <p className="text-slate-600">{quote.year}</p>
+                        <span className="mt-1 inline-block rounded bg-white/5 px-2 py-1 text-[10px] text-slate-300">
+                          {quote.category}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Video Modal */}
-      <AnimatePresence>
-        {modalVideo && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-md"
-            onClick={closeModal}
+      {modalVideo && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-md"
+          onClick={closeModal}
+        >
+          <div
+            className="relative w-full max-w-6xl"
+            onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-6xl"
-              onClick={(e) => e.stopPropagation()}
+            <button
+              onClick={closeModal}
+              className="group absolute -top-12 right-0 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 transition-all hover:border-white/30 hover:bg-white/20"
             >
-              <button
-                onClick={closeModal}
-                className="group absolute -top-12 right-0 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 transition-all hover:border-white/30 hover:bg-white/20"
-              >
-                <X className="h-6 w-6 text-white transition-transform duration-300 group-hover:rotate-90" />
-              </button>
+              <X className="h-6 w-6 text-white transition-transform duration-300 group-hover:rotate-90" />
+            </button>
 
-              <div className="relative rounded-2xl border-2 border-yellow-400/30 bg-white/[0.02] p-2 shadow-2xl backdrop-blur-sm">
-                <div className="relative aspect-video overflow-hidden rounded-xl bg-black">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${modalVideo.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
-                    title={modalVideo.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="absolute inset-0 h-full w-full"
-                  />
-                </div>
+            <div className="relative rounded-2xl border-2 border-yellow-400/30 bg-white/[0.02] p-2 shadow-2xl backdrop-blur-sm">
+              <div className="relative aspect-video overflow-hidden rounded-xl bg-black">
+                <iframe
+                  src={`https://www.youtube.com/embed/${modalVideo.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
+                  title={modalVideo.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 h-full w-full"
+                />
+              </div>
 
-                <div className="p-6">
-                  <h3 className="mb-2 text-2xl font-semibold text-white">
-                    {modalVideo.title}
-                  </h3>
-                  <p className="mb-3 text-slate-400">{modalVideo.description}</p>
-                  <div className="flex items-center gap-4 text-sm text-slate-500">
-                    <span>{modalVideo.media}</span>
-                    <span>•</span>
-                    <span className="text-yellow-400">{modalVideo.production}</span>
-                    <span>•</span>
-                    <span>{modalVideo.year}</span>
-                  </div>
+              <div className="p-6">
+                <h3 className="mb-2 text-2xl font-semibold text-white">
+                  {modalVideo.title}
+                </h3>
+                <p className="mb-3 text-slate-400">{modalVideo.description}</p>
+                <div className="flex items-center gap-4 text-sm text-slate-500">
+                  <span>{modalVideo.media}</span>
+                  <span>•</span>
+                  <span className="text-yellow-400">{modalVideo.production}</span>
+                  <span>•</span>
+                  <span>{modalVideo.year}</span>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }

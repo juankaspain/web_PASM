@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { Shield, Mail, Lock, Eye, Database, UserCheck, FileText, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
@@ -141,9 +140,9 @@ export default function PrivacyPolicy() {
           </p>
           <p className="mt-4">
             <strong>Reclamaciones:</strong> Si consideras que no hemos atendido correctamente tus derechos, puedes presentar una reclamación ante la{' '}
-            <a 
-              href="https://www.aepd.es" 
-              target="_blank" 
+            <a
+              href="https://www.aepd.es"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-yellow-400 hover:text-yellow-300"
             >
@@ -204,14 +203,14 @@ export default function PrivacyPolicy() {
       {/* Header */}
       <div className="relative border-b border-white/10 bg-black/50 backdrop-blur-xl">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl py-8">
-          <Link 
+          <Link
             href="/"
             className="inline-flex items-center gap-2 text-slate-400 hover:text-yellow-400 transition-colors mb-6 group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             Volver al inicio
           </Link>
-          
+
           <div className="flex items-center gap-4 mb-4">
             <div className="w-14 h-14 bg-yellow-400/10 border border-yellow-400/30 rounded-xl flex items-center justify-center">
               <Shield className="w-7 h-7 text-yellow-400" />
@@ -225,7 +224,7 @@ export default function PrivacyPolicy() {
               </p>
             </div>
           </div>
-          
+
           <p className="text-slate-300 leading-relaxed">
             En cumplimiento del Reglamento General de Protección de Datos (RGPD UE 2016/679) y la Ley Orgánica 3/2018, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD), te informamos sobre cómo tratamos tus datos personales.
           </p>
@@ -238,12 +237,10 @@ export default function PrivacyPolicy() {
           {sections.map((section, index) => {
             const Icon = section.icon
             return (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white/[0.02] border border-white/10 rounded-2xl p-6 lg:p-8 hover:border-yellow-400/30 transition-colors"
+                className="animate-fadeInUp bg-white/[0.02] border border-white/10 rounded-2xl p-6 lg:p-8 hover:border-yellow-400/30 transition-colors"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="flex items-start gap-4 mb-4">
                   <div className="w-12 h-12 bg-yellow-400/10 border border-yellow-400/30 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -256,18 +253,13 @@ export default function PrivacyPolicy() {
                 <div className="text-slate-300 leading-relaxed pl-16">
                   {section.content}
                 </div>
-              </motion.div>
+              </div>
             )
           })}
         </div>
 
         {/* Contact Info */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1 }}
-          className="mt-12 bg-gradient-to-br from-yellow-900/10 to-orange-900/5 border border-yellow-400/30 rounded-2xl p-8 text-center"
-        >
+        <div className="mt-12 bg-gradient-to-br from-yellow-900/10 to-orange-900/5 border border-yellow-400/30 rounded-2xl p-8 text-center animate-fadeInUp delay-[1000ms]">
           <Mail className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
           <h3 className="text-2xl font-bold text-white mb-3">
             ¿Tienes alguna pregunta?
@@ -282,7 +274,7 @@ export default function PrivacyPolicy() {
             <Mail className="w-5 h-5" />
             info@almagrosanmiguel.com
           </a>
-        </motion.div>
+        </div>
 
         {/* Footer */}
         <div className="mt-12 text-center">

@@ -1,6 +1,5 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
 import {
   Calendar,
   Award,
@@ -178,16 +177,31 @@ function useInView(options?: IntersectionObserverInit) {
 }
 
 export default function Timeline() {
-  const containerRef = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start center', 'end center'],
-  })
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [lineHeightPct, setLineHeightPct] = useState(0)
 
   const headerInView = useInView({ threshold: 0.1 })
   const footerInView = useInView({ threshold: 0.1 })
 
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
+  useEffect(() => {
+    const handleScroll = () => {
+      const el = containerRef.current
+      if (!el) return
+      const rect = el.getBoundingClientRect()
+      const windowH = window.innerHeight
+      // Map from when the top enters center to when the bottom leaves center
+      const start = rect.top - windowH / 2
+      const end = rect.bottom - windowH / 2
+      const total = end - start
+      if (total <= 0) return
+      const progress = Math.min(1, Math.max(0, -start / total))
+      setLineHeightPct(Math.round(progress * 100))
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <section
@@ -234,9 +248,9 @@ export default function Timeline() {
           <div ref={containerRef} className="relative mx-auto max-w-5xl">
             <div className="absolute bottom-0 left-1/2 top-0 hidden w-[2px] -translate-x-1/2 bg-white/10 md:block" />
 
-            <motion.div
+            <div
               className="absolute left-1/2 top-0 hidden w-[2px] -translate-x-1/2 bg-gradient-to-b from-blue-400 to-purple-500 md:block"
-              style={{ height: lineHeight }}
+              style={{ height: `${lineHeightPct}%` }}
             />
 
             <div className="space-y-12">
@@ -296,11 +310,7 @@ function TimelineEventRow({
       </div>
 
       <div className="absolute left-0 z-10 -translate-x-0 md:left-1/2 md:-translate-x-1/2">
-        <motion.div
-          whileHover={{ scale: 1.2, rotate: 360 }}
-          transition={{ duration: 0.5 }}
-          className="relative"
-        >
+        <div className="relative hover:scale-[1.2] hover:rotate-[360deg] transition-transform duration-500">
           <div
             className={`h-16 w-16 rounded-full bg-gradient-to-br ${event.gradient} flex items-center justify-center shadow-xl`}
           >
@@ -309,7 +319,7 @@ function TimelineEventRow({
           <div
             className={`absolute inset-0 bg-gradient-to-br ${event.gradient} -z-10 rounded-full opacity-40 blur-xl`}
           />
-        </motion.div>
+        </div>
       </div>
 
       <div className="hidden pl-12 md:block md:w-1/2">
@@ -325,7 +335,7 @@ function TimelineEventRow({
 
 function TimelineCard({ event, Icon: _Icon }: { event: TimelineEvent; Icon: any }) {
   return (
-    <motion.div whileHover={{ y: -5 }} className="group relative">
+    <div className="group relative hover-lift">
       <div
         className={`absolute -inset-[1px] bg-gradient-to-br ${event.gradient} rounded-2xl opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-40`}
       />
@@ -353,13 +363,10 @@ function TimelineCard({ event, Icon: _Icon }: { event: TimelineEvent; Icon: any 
         </p>
         <p className="text-sm leading-relaxed text-slate-400">{event.description}</p>
 
-        <motion.div
-          className={`absolute bottom-0 left-0 h-[2px] bg-gradient-to-r ${event.gradient} rounded-b-2xl`}
-          initial={{ width: 0 }}
-          whileHover={{ width: '100%' }}
-          transition={{ duration: 0.4 }}
+        <div
+          className={`absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r ${event.gradient} rounded-b-2xl transition-all duration-[400ms] group-hover:w-full`}
         />
       </div>
-    </motion.div>
+    </div>
   )
 }

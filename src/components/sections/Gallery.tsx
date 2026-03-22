@@ -1,7 +1,7 @@
 'use client'
 
-import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { useState, useRef } from 'react'
+import { useInView } from '@/hooks/useInView'
+import { useState } from 'react'
 import Image from 'next/image'
 import {
   X,
@@ -127,8 +127,7 @@ const categories: Category[] = ['Todas', 'TV', 'Cine', 'Teatro', 'Behind the Sce
 export default function Gallery() {
   const [selectedCategory, setSelectedCategory] = useState<Category>('Todas')
   const [lightboxImage, setLightboxImage] = useState<GalleryImage | null>(null)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const { ref, isInView } = useInView({ once: true, margin: '-80px' })
 
   const filteredImages =
     selectedCategory === 'Todas'
@@ -169,120 +168,91 @@ export default function Gallery() {
       />
 
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
+        <div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
+          className={`transition-all duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
         >
           <div className="mb-20 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm"
+            <div
+              className={`mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm transition-all delay-100 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
             >
               <ImageIcon className="h-4 w-4 text-yellow-400" strokeWidth={2} />
               <span className="text-sm font-medium tracking-wide text-slate-300">
                 Galería Visual
               </span>
-            </motion.div>
+            </div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="mb-6 text-5xl font-bold tracking-tight text-white lg:text-6xl"
+            <h2
+              className={`mb-6 text-5xl font-bold tracking-tight text-white lg:text-6xl transition-all delay-200 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
             >
               Galería Profesional
-            </motion.h2>
+            </h2>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-400"
+            <p
+              className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-400 transition-all delay-300 duration-[500ms] ${isInView ? 'opacity-100' : 'opacity-0'}`}
             >
               Colección de momentos destacados de mi carrera en televisión, cine y teatro
-            </motion.p>
+            </p>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mb-16 flex flex-wrap justify-center gap-3"
+          <div
+            className={`mb-16 flex flex-wrap justify-center gap-3 transition-all delay-[400ms] duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
           >
             {categories.map((category) => {
               const isActive = selectedCategory === category
               return (
-                <motion.button
+                <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`relative rounded-xl px-5 py-2.5 font-semibold transition-all ${
+                  className={`relative rounded-xl px-5 py-2.5 font-semibold transition-all hover:scale-105 active:scale-95 ${
                     isActive
                       ? 'bg-gradient-to-r from-yellow-400 to-amber-500 text-black shadow-lg'
                       : 'border border-white/10 bg-white/[0.03] text-slate-300 hover:border-white/20 hover:bg-white/[0.05]'
                   }`}
                 >
                   {category}
-                </motion.button>
+                </button>
               )
             })}
-          </motion.div>
+          </div>
 
-          <motion.div
-            layout
-            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-          >
-            <AnimatePresence mode="popLayout">
-              {filteredImages.map((image, index) => (
-                <motion.div
-                  key={image.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="group relative aspect-[3/4] cursor-pointer overflow-hidden rounded-2xl shadow-lg transition-shadow hover:shadow-2xl"
-                  onClick={() => setLightboxImage(image)}
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                    quality={80}
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {filteredImages.map((image, index) => (
+              <div
+                key={image.id}
+                className={`group relative aspect-[3/4] cursor-pointer overflow-hidden rounded-2xl shadow-lg transition-all duration-[400ms] hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl ${isInView ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}
+                style={{ transitionDelay: `${index * 50}ms` }}
+                onClick={() => setLightboxImage(image)}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                  quality={80}
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <div className="absolute inset-0 flex flex-col justify-end p-4">
-                      <h3 className="mb-1 text-lg font-bold text-white">{image.title}</h3>
-                      <p className="text-sm text-slate-300">{image.description}</p>
-                    </div>
-
-                    <div className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-yellow-400">
-                      <ZoomIn className="h-5 w-5 text-black" />
-                    </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <div className="absolute inset-0 flex flex-col justify-end p-4">
+                    <h3 className="mb-1 text-lg font-bold text-white">{image.title}</h3>
+                    <p className="text-sm text-slate-300">{image.description}</p>
                   </div>
 
-                  <div className="absolute left-4 top-4 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
-                    {image.category}
+                  <div className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-yellow-400">
+                    <ZoomIn className="h-5 w-5 text-black" />
                   </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
+                </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-16 text-center"
+                <div className="absolute left-4 top-4 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
+                  {image.category}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div
+            className={`mt-16 text-center transition-all delay-[800ms] duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
           >
             <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 backdrop-blur-sm">
               <Sparkles className="h-5 w-5 text-yellow-400" />
@@ -290,60 +260,55 @@ export default function Gallery() {
                 {images.length} imágenes profesionales disponibles
               </span>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
 
-      <AnimatePresence>
-        {lightboxImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-sm"
-            onClick={() => setLightboxImage(null)}
+      {/* Lightbox */}
+      <div
+        className={`fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-sm transition-all duration-300 ${lightboxImage ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}
+        onClick={() => setLightboxImage(null)}
+      >
+        <button
+          onClick={() => setLightboxImage(null)}
+          aria-label="Cerrar visor de imagen"
+          className="absolute right-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md transition-colors hover:border-yellow-400 hover:bg-yellow-400"
+        >
+          <X className="h-6 w-6 text-white hover:text-black" />
+        </button>
+
+        {currentIndex > 0 && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              prevImage()
+            }}
+            aria-label="Imagen anterior"
+            className="absolute left-4 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md transition-colors hover:border-yellow-400 hover:bg-yellow-400"
           >
-            <button
-              onClick={() => setLightboxImage(null)}
-              aria-label="Cerrar visor de imagen"
-              className="absolute right-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md transition-colors hover:border-yellow-400 hover:bg-yellow-400"
-            >
-              <X className="h-6 w-6 text-white hover:text-black" />
-            </button>
+            <ChevronLeft className="h-6 w-6 text-white" />
+          </button>
+        )}
 
-            {currentIndex > 0 && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  prevImage()
-                }}
-                aria-label="Imagen anterior"
-                className="absolute left-4 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md transition-colors hover:border-yellow-400 hover:bg-yellow-400"
-              >
-                <ChevronLeft className="h-6 w-6 text-white" />
-              </button>
-            )}
+        {currentIndex < images.length - 1 && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              nextImage()
+            }}
+            aria-label="Imagen siguiente"
+            className="absolute right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md transition-colors hover:border-yellow-400 hover:bg-yellow-400"
+          >
+            <ChevronRight className="h-6 w-6 text-white" />
+          </button>
+        )}
 
-            {currentIndex < images.length - 1 && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  nextImage()
-                }}
-                aria-label="Imagen siguiente"
-                className="absolute right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md transition-colors hover:border-yellow-400 hover:bg-yellow-400"
-              >
-                <ChevronRight className="h-6 w-6 text-white" />
-              </button>
-            )}
-
-            <motion.div
-              initial={{ scale: 0.8, y: 50 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.8, y: 50 }}
-              className="relative w-full max-w-5xl"
-              onClick={(e) => e.stopPropagation()}
-            >
+        <div
+          className={`relative w-full max-w-5xl transition-all duration-300 ${lightboxImage ? 'scale-100 opacity-100' : 'scale-90 opacity-0 translate-y-12'}`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {lightboxImage && (
+            <>
               <div className="relative aspect-[4/3] w-full">
                 <Image
                   src={lightboxImage.src}
@@ -370,10 +335,10 @@ export default function Gallery() {
                   </span>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </>
+          )}
+        </div>
+      </div>
     </section>
   )
 }

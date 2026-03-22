@@ -2,8 +2,6 @@ import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/sections/Hero'
-import About from '@/components/sections/About'
-import LatestProject from '@/components/sections/LatestProject'
 import Footer from '@/components/Footer'
 import ScrollToTop from '@/components/ui/ScrollToTop'
 import {
@@ -15,7 +13,9 @@ import {
   TimelineSkeleton,
 } from '@/components/ui/Skeleton'
 
-// Lazy load heavy sections
+// Lazy load below-fold sections for code splitting
+const LatestProject = dynamic(() => import('@/components/sections/LatestProject'))
+const About = dynamic(() => import('@/components/sections/About'))
 const Series = dynamic(() => import('@/components/sections/Series'))
 const Cinema = dynamic(() => import('@/components/sections/Cinema'))
 const Theater = dynamic(() => import('@/components/sections/Theater'))
@@ -41,78 +41,112 @@ export default function Home() {
       <Hero />
 
       {/* Latest Project - Immediately after hero to showcase current work */}
-      <LatestProject />
+      <div className="content-auto">
+        <Suspense fallback={<SectionSkeleton />}>
+          <LatestProject />
+        </Suspense>
+      </div>
 
       {/* Core sections - Optimized for casting directors */}
-      <About />
-      <Suspense fallback={<SectionSkeleton />}>
-        <Skills />
-      </Suspense>
+      <div className="content-auto">
+        <Suspense fallback={<SectionSkeleton />}>
+          <About />
+        </Suspense>
+      </div>
+      <div className="content-auto">
+        <Suspense fallback={<SectionSkeleton />}>
+          <Skills />
+        </Suspense>
+      </div>
 
-      {/* Filmography sections - reorganized order with Suspense */}
-      {/* 1. Series de Televisión */}
-      <Suspense fallback={<SectionSkeleton />}>
-        <Series />
-      </Suspense>
-
-      {/* 2. Cine & Cortometrajes */}
-      <Suspense fallback={<SectionSkeleton />}>
-        <Cinema />
-      </Suspense>
-
-      {/* 3. Teatro Profesional */}
-      <Suspense fallback={<SectionSkeleton />}>
-        <Theater />
-      </Suspense>
+      {/* Filmography sections */}
+      <div className="content-auto">
+        <Suspense fallback={<SectionSkeleton />}>
+          <Series />
+        </Suspense>
+      </div>
+      <div className="content-auto">
+        <Suspense fallback={<SectionSkeleton />}>
+          <Cinema />
+        </Suspense>
+      </div>
+      <div className="content-auto">
+        <Suspense fallback={<SectionSkeleton />}>
+          <Theater />
+        </Suspense>
+      </div>
 
       {/* Career sections */}
-      <Suspense fallback={<TimelineSkeleton />}>
-        <Timeline />
-      </Suspense>
-      <Suspense fallback={<SectionSkeleton />}>
-        <Milestones />
-      </Suspense>
-      <Suspense fallback={<SectionSkeleton />}>
-        <Awards />
-      </Suspense>
+      <div className="content-auto">
+        <Suspense fallback={<TimelineSkeleton />}>
+          <Timeline />
+        </Suspense>
+      </div>
+      <div className="content-auto">
+        <Suspense fallback={<SectionSkeleton />}>
+          <Milestones />
+        </Suspense>
+      </div>
+      <div className="content-auto">
+        <Suspense fallback={<SectionSkeleton />}>
+          <Awards />
+        </Suspense>
+      </div>
 
       {/* Events & Schedule */}
-      <Suspense fallback={<SectionSkeleton />}>
-        <Calendar />
-      </Suspense>
+      <div className="content-auto">
+        <Suspense fallback={<SectionSkeleton />}>
+          <Calendar />
+        </Suspense>
+      </div>
 
-      {/* Media sections - Professional photos first */}
-      <Suspense fallback={<GallerySkeleton />}>
-        <Headshots />
-      </Suspense>
-      <Suspense fallback={<GallerySkeleton />}>
-        <Gallery />
-      </Suspense>
+      {/* Media sections */}
+      <div className="content-auto">
+        <Suspense fallback={<GallerySkeleton />}>
+          <Headshots />
+        </Suspense>
+      </div>
+      <div className="content-auto">
+        <Suspense fallback={<GallerySkeleton />}>
+          <Gallery />
+        </Suspense>
+      </div>
 
-      {/* Media & Declarations - Integrated section */}
-      <Suspense fallback={<ShowreelSkeleton />}>
-        <Showreel />
-      </Suspense>
-      <Suspense fallback={<TestimonialsSkeleton />}>
-        <Testimonials />
-      </Suspense>
+      {/* Media & Declarations */}
+      <div className="content-auto">
+        <Suspense fallback={<ShowreelSkeleton />}>
+          <Showreel />
+        </Suspense>
+      </div>
+      <div className="content-auto">
+        <Suspense fallback={<TestimonialsSkeleton />}>
+          <Testimonials />
+        </Suspense>
+      </div>
+      <div className="content-auto">
+        <Suspense fallback={<SectionSkeleton />}>
+          <Press />
+        </Suspense>
+      </div>
 
-      <Suspense fallback={<SectionSkeleton />}>
-        <Press />
-      </Suspense>
-
-      {/* Blog - Noticias y actualizaciones */}
-      <Suspense fallback={<SectionSkeleton />}>
-        <Blog />
-      </Suspense>
+      {/* Blog */}
+      <div className="content-auto">
+        <Suspense fallback={<SectionSkeleton />}>
+          <Blog />
+        </Suspense>
+      </div>
 
       {/* Professional sections */}
-      <Suspense fallback={<SectionSkeleton />}>
-        <PressKit />
-      </Suspense>
-      <Suspense fallback={<ContactSkeleton />}>
-        <Contact />
-      </Suspense>
+      <div className="content-auto">
+        <Suspense fallback={<SectionSkeleton />}>
+          <PressKit />
+        </Suspense>
+      </div>
+      <div className="content-auto">
+        <Suspense fallback={<ContactSkeleton />}>
+          <Contact />
+        </Suspense>
+      </div>
 
       {/* Footer */}
       <Footer />

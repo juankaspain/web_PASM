@@ -1,8 +1,7 @@
 'use client'
 
-import { motion, useInView } from 'framer-motion'
+import { useInView } from '@/hooks/useInView'
 import { Award, Star, Trophy, Calendar, Sparkles, Tv, Film } from 'lucide-react'
-import { useRef } from 'react'
 
 const awards = [
   {
@@ -129,8 +128,7 @@ const recognitions = [
 ]
 
 export default function Awards() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const { ref, isInView } = useInView({ once: true, margin: '-80px' })
 
   return (
     <section
@@ -150,51 +148,37 @@ export default function Awards() {
       />
 
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
+        <div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
+          className={`transition-all duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
         >
           {/* Header ESTANDARIZADO */}
           <div className="mb-16 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm"
+            <div
+              className={`mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm transition-all delay-100 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
             >
               <Trophy className="h-4 w-4 text-yellow-400" strokeWidth={2} />
               <span className="text-sm font-medium tracking-wide text-slate-300">
                 Reconocimientos
               </span>
-            </motion.div>
+            </div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="mb-6 text-4xl font-bold tracking-tight text-white lg:text-5xl"
+            <h2
+              className={`mb-6 text-4xl font-bold tracking-tight text-white lg:text-5xl transition-all delay-200 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
             >
               Premios & Reconocimientos
-            </motion.h2>
+            </h2>
 
-            <motion.div
-              initial={{ opacity: 0, scaleX: 0 }}
-              animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="mx-auto mb-6 h-0.5 w-20 bg-yellow-400"
+            <div
+              className={`mx-auto mb-6 h-0.5 w-20 bg-yellow-400 transition-all delay-300 duration-[800ms] ${isInView ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`}
             />
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-400"
+            <p
+              className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-400 transition-all delay-[400ms] duration-[500ms] ${isInView ? 'opacity-100' : 'opacity-0'}`}
             >
               Trayectoria profesional reconocida por la industria audiovisual nacional e
               internacional
-            </motion.p>
+            </p>
           </div>
 
           {/* Awards */}
@@ -205,13 +189,10 @@ export default function Awards() {
             </h3>
             <div className="space-y-6">
               {awards.map((award, index) => (
-                <motion.div
+                <div
                   key={`${award.year}-${award.organization}`}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                  transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                  whileHover={{ x: 4 }}
-                  className="group"
+                  className={`group hover-right transition-all duration-[600ms] ${isInView ? 'translate-x-0 opacity-100' : '-translate-x-5 opacity-0'}`}
+                  style={{ transitionDelay: `${400 + index * 100}ms` }}
                 >
                   <div className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-all hover:border-yellow-400/30 hover:bg-white/[0.04] lg:p-8">
                     <div className="flex flex-col items-start gap-6 lg:flex-row">
@@ -267,7 +248,7 @@ export default function Awards() {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -280,13 +261,10 @@ export default function Awards() {
             </h3>
             <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
               {recognitions.map((recognition, index) => (
-                <motion.div
+                <div
                   key={recognition.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                  whileHover={{ y: -4 }}
-                  className="group"
+                  className={`group hover-lift transition-all duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
+                  style={{ transitionDelay: `${600 + index * 100}ms` }}
                 >
                   <div
                     className={`relative rounded-2xl border p-6 transition-all hover:border-white/20 ${
@@ -323,17 +301,14 @@ export default function Awards() {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
 
           {/* Emmy Context */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
-            className="mx-auto mt-16 max-w-4xl"
+          <div
+            className={`mx-auto mt-16 max-w-4xl transition-all delay-[900ms] duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
           >
             <div className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-sm">
               <div className="flex flex-col items-center gap-4">
@@ -354,8 +329,8 @@ export default function Awards() {
                 </div>
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   )

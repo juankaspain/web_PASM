@@ -12,7 +12,7 @@ import {
   Cookie,
   Code,
 } from 'lucide-react'
-import { SiTiktok } from 'react-icons/si'
+import { TikTokIcon } from '@/components/icons'
 import Link from 'next/link'
 
 const socialLinks = [
@@ -37,8 +37,8 @@ const socialLinks = [
   {
     name: 'TikTok',
     url: 'https://www.tiktok.com/@almagro.san.migue',
-    icon: SiTiktok,
-    iconType: 'react-icons',
+    icon: TikTokIcon,
+    iconType: 'custom',
   },
   {
     name: 'Facebook',

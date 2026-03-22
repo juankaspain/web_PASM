@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useInView } from 'framer-motion'
+import { useInView } from '@/hooks/useInView'
 import {
   Theater as TheaterIcon,
   Award,
@@ -11,7 +11,6 @@ import {
   Trophy,
   Zap,
 } from 'lucide-react'
-import { useRef } from 'react'
 
 const theaterWorks = [
   {
@@ -83,8 +82,7 @@ const theaterWorks = [
 ]
 
 export default function Theater() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const { ref, isInView } = useInView({ once: true, margin: '-80px' })
 
   return (
     <section
@@ -104,59 +102,42 @@ export default function Theater() {
       />
 
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
+        <div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
+          className={`transition-all duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
         >
           {/* Header ESTANDARIZADO */}
           <div className="mb-16 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm"
+            <div
+              className={`mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm transition-all delay-100 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
             >
               <TheaterIcon className="h-4 w-4 text-yellow-400" strokeWidth={2} />
               <span className="text-sm font-medium tracking-wide text-slate-300">
                 Teatro Profesional
               </span>
-            </motion.div>
+            </div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="mb-6 text-4xl font-bold tracking-tight text-white lg:text-5xl"
+            <h2
+              className={`mb-6 text-4xl font-bold tracking-tight text-white transition-all delay-200 duration-[500ms] lg:text-5xl ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
             >
               Trayectoria Teatral
-            </motion.h2>
+            </h2>
 
-            <motion.div
-              initial={{ opacity: 0, scaleX: 0 }}
-              animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="mx-auto mb-6 h-0.5 w-20 bg-yellow-400"
+            <div
+              className={`mx-auto mb-6 h-0.5 w-20 bg-yellow-400 transition-all delay-300 duration-[800ms] ${isInView ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`}
             />
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-400"
+            <p
+              className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-400 transition-all delay-[400ms] duration-[500ms] ${isInView ? 'opacity-100' : 'opacity-0'}`}
             >
               Formación de élite en la Compañía Nacional de Teatro Clásico bajo dirección
               de Helena Pimenta
-            </motion.p>
+            </p>
           </div>
 
           {/* Feature Box */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mx-auto mb-12 max-w-5xl"
+          <div
+            className={`mx-auto mb-12 max-w-5xl transition-all delay-[400ms] duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
           >
             <div className="group relative">
               <div className="absolute -inset-[1px] rounded-2xl bg-yellow-400/20 opacity-0 blur-xl transition-opacity duration-700 group-hover:opacity-100" />
@@ -183,14 +164,11 @@ export default function Theater() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Awards Grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mx-auto mb-16 max-w-5xl"
+          <div
+            className={`mx-auto mb-16 max-w-5xl transition-all delay-[500ms] duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
           >
             <div className="grid gap-4 md:grid-cols-2">
               <div className="rounded-xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur-sm transition-all hover:border-yellow-400/30 hover:bg-white/[0.04]">
@@ -227,25 +205,19 @@ export default function Theater() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Works List */}
           <div className="mx-auto max-w-6xl space-y-6">
             {theaterWorks.map((work, index) => (
-              <motion.div
+              <div
                 key={work.title}
-                initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                transition={{ duration: 0.5, delay: 0.6 + index * 0.08 }}
-                whileHover={{ x: 4 }}
-                className="group"
+                className={`group transition-all duration-[500ms] hover-right ${isInView ? 'translate-x-0 opacity-100' : '-translate-x-5 opacity-0'}`}
+                style={{ transitionDelay: `${600 + index * 80}ms` }}
               >
                 <div className="relative">
-                  <motion.div
-                    className={`absolute bottom-0 left-0 top-0 w-[2px] ${work.current ? 'bg-green-400' : 'bg-yellow-400'}`}
-                    initial={{ scaleY: 0 }}
-                    whileHover={{ scaleY: 1 }}
-                    transition={{ duration: 0.3 }}
+                  <div
+                    className={`absolute bottom-0 left-0 top-0 w-[2px] origin-top scale-y-0 transition-transform duration-300 group-hover:scale-y-100 ${work.current ? 'bg-green-400' : 'bg-yellow-400'}`}
                   />
 
                   <div
@@ -340,10 +312,10 @@ export default function Theater() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

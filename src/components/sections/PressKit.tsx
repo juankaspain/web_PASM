@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useInView } from 'framer-motion'
+import { useInView } from '@/hooks/useInView'
 import {
   Download,
   FileText,
@@ -14,7 +14,7 @@ import {
   Sparkles,
   ExternalLink,
 } from 'lucide-react'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import SectionHeader from '@/components/ui/SectionHeader'
 
 const DOWNLOAD_ITEMS = [
@@ -130,8 +130,7 @@ export default function PressKit() {
   const [downloading, setDownloading] = useState<string | null>(null)
   // E.6 - Reconstruct email client-side to prevent scraping
   const [displayEmail, setDisplayEmail] = useState('...')
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const { ref, isInView } = useInView({ once: true, margin: '-80px' })
 
   useEffect(() => {
     const parts = ['info', 'almagrosanmiguel.com']
@@ -210,11 +209,9 @@ export default function PressKit() {
       />
 
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
+        <div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
+          className={`transition-all duration-[600ms] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
         >
           {/* Header with golden line */}
           <SectionHeader
@@ -229,12 +226,10 @@ export default function PressKit() {
             {DOWNLOAD_ITEMS.map((item, index) => {
               const Icon = item.icon
               return (
-                <motion.div
+                <div
                   key={item.type}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                  className="group"
+                  className={`group transition-all duration-[600ms] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+                  style={{ transitionDelay: `${400 + index * 100}ms` }}
                 >
                   <div className="relative h-full">
                     {/* Glow effect */}
@@ -275,17 +270,14 @@ export default function PressKit() {
                       </button>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               )
             })}
           </div>
 
           {/* Complete Press Kit Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="mb-20 text-center"
+          <div
+            className={`mb-20 text-center transition-all duration-[600ms] delay-[800ms] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
           >
             <button
               onClick={() => handleDownload('complete', 'Press Kit Completo')}
@@ -298,7 +290,7 @@ export default function PressKit() {
                 : 'Descargar Press Kit Completo'}
               <span className="text-sm text-slate-400">(120 MB)</span>
             </button>
-          </motion.div>
+          </div>
 
           {/* Technical Specs */}
           <div className="mx-auto mb-20 max-w-4xl">
@@ -313,12 +305,10 @@ export default function PressKit() {
               <div className="relative rounded-xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm">
                 <div className="grid gap-6 md:grid-cols-2">
                   {techSpecs.map((spec, index) => (
-                    <motion.div
+                    <div
                       key={spec.label}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                      transition={{ duration: 0.5, delay: 0.9 + index * 0.05 }}
-                      className="group flex items-center justify-between border-b border-white/5 py-3 transition-colors last:border-0 hover:border-white/10"
+                      className={`group flex items-center justify-between border-b border-white/5 py-3 transition-all duration-500 last:border-0 hover:border-white/10 ${isInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-5'}`}
+                      style={{ transitionDelay: `${900 + index * 50}ms` }}
                     >
                       <span className="text-sm font-medium uppercase tracking-wider text-slate-500 transition-colors group-hover:text-slate-400">
                         {spec.label}
@@ -347,7 +337,7 @@ export default function PressKit() {
                           </span>
                         )}
                       </span>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -355,11 +345,8 @@ export default function PressKit() {
           </div>
 
           {/* Press Contact */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
-            className="mx-auto max-w-2xl"
+          <div
+            className={`mx-auto max-w-2xl transition-all duration-[600ms] delay-[1200ms] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
           >
             <div className="relative">
               <div className="absolute -inset-[1px] rounded-xl bg-yellow-400/10 opacity-50 blur-xl" />
@@ -389,19 +376,16 @@ export default function PressKit() {
             </div>
 
             {/* Professional Badge */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ delay: 1.4 }}
-              className="mt-8 flex items-center justify-center gap-2 text-slate-500"
+            <div
+              className={`mt-8 flex items-center justify-center gap-2 text-slate-500 transition-opacity duration-500 delay-[1400ms] ${isInView ? 'opacity-100' : 'opacity-0'}`}
             >
               <CheckCircle2 className="h-4 w-4 text-yellow-400" strokeWidth={1.5} />
               <span className="text-sm">
                 Material de alta calidad para uso profesional
               </span>
-            </motion.div>
-          </motion.div>
-        </motion.div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )

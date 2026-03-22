@@ -1,9 +1,9 @@
 'use client'
 
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { useInView } from '@/hooks/useInView'
 import { Film, Calendar, User, Sparkles, X, Play, Heart, Star, Quote } from 'lucide-react'
 import Image from 'next/image'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 
 interface FilmDetails {
   id: number
@@ -135,8 +135,7 @@ const films: FilmDetails[] = [
 ].sort((a, b) => b.yearSort - a.yearSort)
 
 export default function Cinema() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const { ref, isInView } = useInView({ once: true, margin: '-80px' })
   const [selectedFilm, setSelectedFilm] = useState<FilmDetails | null>(null)
 
   return (
@@ -158,62 +157,57 @@ export default function Cinema() {
         />
 
         <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div
+          <div
             ref={ref}
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6 }}
+            className={`transition-all duration-[600ms] ${
+              isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            }`}
           >
             <div className="mb-16 text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm"
+              <div
+                className={`mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm transition-all duration-[500ms] delay-100 ${
+                  isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+                }`}
               >
                 <Film className="h-4 w-4 text-yellow-400" strokeWidth={2} />
                 <span className="text-sm font-medium tracking-wide text-slate-300">
                   Filmografía
                 </span>
-              </motion.div>
+              </div>
 
-              <motion.h2
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="mb-6 text-5xl font-bold tracking-tight text-white lg:text-6xl"
+              <h2
+                className={`mb-6 text-5xl font-bold tracking-tight text-white lg:text-6xl transition-all duration-[500ms] delay-200 ${
+                  isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+                }`}
               >
                 Cine & Cortometrajes
-              </motion.h2>
+              </h2>
 
               {/* Golden line */}
-              <motion.div
-                initial={{ opacity: 0, scaleX: 0 }}
-                animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-                transition={{ duration: 0.8, delay: 0.25 }}
-                className="mx-auto mb-6 h-0.5 w-20 bg-yellow-400"
+              <div
+                className={`mx-auto mb-6 h-0.5 w-20 bg-yellow-400 transition-all duration-[800ms] delay-[250ms] origin-center ${
+                  isInView ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
+                }`}
               />
 
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-400"
+              <p
+                className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-400 transition-all duration-[500ms] delay-300 ${
+                  isInView ? 'opacity-100' : 'opacity-0'
+                }`}
               >
                 Trabajos destacados en cine y cortometrajes
-              </motion.p>
+              </p>
             </div>
 
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {films.map((film, index) => (
-                <motion.button
+                <button
                   key={film.id}
                   onClick={() => setSelectedFilm(film)}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                  transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                  whileHover={{ y: -8 }}
-                  className="group relative w-full text-left"
+                  className={`group relative w-full text-left hover-lift-8 transition-all duration-[600ms] ${
+                    isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  }`}
+                  style={{ transitionDelay: isInView ? `${400 + index * 100}ms` : '0ms' }}
                 >
                   <div className="absolute -inset-[1px] rounded-2xl bg-yellow-400/20 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
 
@@ -278,32 +272,28 @@ export default function Cinema() {
                       </span>
                     </div>
                   </div>
-                </motion.button>
+                </button>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Modal */}
-      <AnimatePresence>
-        {selectedFilm && selectedFilm.detailedInfo && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md"
-            onClick={() => setSelectedFilm(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl border border-white/10 bg-gradient-to-br from-slate-900 to-black shadow-2xl"
-            >
+      <div
+        className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md transition-all duration-300 ${
+          selectedFilm ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={() => setSelectedFilm(null)}
+      >
+        <div
+          className={`relative max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl border border-white/10 bg-gradient-to-br from-slate-900 to-black shadow-2xl transition-all duration-300 ${
+            selectedFilm ? 'scale-100 opacity-100' : 'scale-90 opacity-0'
+          }`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {selectedFilm && selectedFilm.detailedInfo && (
+            <>
               {/* Close button */}
               <button
                 onClick={() => setSelectedFilm(null)}
@@ -409,10 +399,10 @@ export default function Cinema() {
                   )}
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </>
+          )}
+        </div>
+      </div>
     </>
   )
 }

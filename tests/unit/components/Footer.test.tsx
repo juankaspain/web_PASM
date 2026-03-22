@@ -1,14 +1,6 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import Footer from '@/components/Footer'
-
-// Mock framer-motion
-vi.mock('framer-motion', () => ({
-  motion: {
-    footer: ({ children, ...props }: any) => <footer {...props}>{children}</footer>,
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-  },
-}))
 
 describe('Footer', () => {
   it('should render the footer', () => {

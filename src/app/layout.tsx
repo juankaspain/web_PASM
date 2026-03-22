@@ -183,20 +183,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Humans.txt reference */}
         <link rel="author" href="/humans.txt" />
 
-        {/* Preconnect to critical external domains */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="preconnect"
-          href="https://www.google-analytics.com"
-          crossOrigin="anonymous"
-        />
-        <link rel="preconnect" href="https://formspree.io" crossOrigin="anonymous" />
-
-        {/* DNS prefetch for secondary resources */}
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        {/* DNS prefetch for secondary resources (fonts handled by next/font) */}
         <link rel="dns-prefetch" href="https://www.youtube.com" />
-        <link rel="dns-prefetch" href="https://player.vimeo.com" />
         <link rel="dns-prefetch" href="https://img.youtube.com" />
       </head>
       <body className={inter.className}>

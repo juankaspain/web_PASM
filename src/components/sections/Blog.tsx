@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { useState, useMemo, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import {
@@ -293,10 +292,7 @@ export default function Blog() {
 
             {/* Dropdown menu */}
             {isYearDropdownOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
+              <div
                 className="absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden rounded-lg border border-white/10 bg-slate-900 shadow-xl"
               >
                 <button
@@ -328,7 +324,7 @@ export default function Blog() {
                     {year}
                   </button>
                 ))}
-              </motion.div>
+              </div>
             )}
           </div>
         </div>
@@ -423,11 +419,7 @@ export default function Blog() {
 
         {/* Empty state */}
         {filteredPosts.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="py-20 text-center"
-          >
+          <div className="py-20 text-center animate-fadeIn">
             <div className="mb-6 inline-flex h-20 w-20 items-center justify-center rounded-full border border-white/10 bg-white/5">
               <Newspaper className="h-10 w-10 text-white/40" />
             </div>
@@ -437,7 +429,7 @@ export default function Blog() {
             <p className="text-white/60">
               Prueba con otros filtros para ver más contenido
             </p>
-          </motion.div>
+          </div>
         )}
       </div>
     </section>

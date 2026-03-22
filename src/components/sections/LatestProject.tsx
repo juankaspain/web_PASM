@@ -1,6 +1,5 @@
 'use client'
 
-import { motion, useInView, AnimatePresence } from 'framer-motion'
 import {
   Play,
   Calendar,
@@ -12,14 +11,13 @@ import {
   Sparkles,
   Video,
   ChevronDown,
-  ChevronUp,
 } from 'lucide-react'
 import Image from 'next/image'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
+import { useInView } from '@/hooks/useInView'
 
 export default function LatestProject() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const { ref, isInView } = useInView({ once: true, margin: '-80px' })
   const [showCharacterInfo, setShowCharacterInfo] = useState(false)
 
   return (
@@ -37,29 +35,22 @@ export default function LatestProject() {
       />
 
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
+        <div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
+          className={`transition-all duration-[600ms] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.5 }}
-            className="mb-8 inline-flex items-center gap-2 rounded-full bg-red-600 px-4 py-2 shadow-lg"
+          <div
+            className={`mb-8 inline-flex items-center gap-2 rounded-full bg-red-600 px-4 py-2 shadow-lg transition-all duration-500 ${isInView ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
           >
             <Sparkles className="h-4 w-4 text-white" strokeWidth={2} />
             <span className="text-sm font-bold tracking-wide text-white">
               ÚLTIMO TRABAJO
             </span>
-          </motion.div>
+          </div>
 
           <div className="mb-20 grid items-center gap-12 lg:grid-cols-2">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+            <div
+              className={`transition-all duration-[600ms] delay-200 ${isInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}
             >
               <h2 className="mb-6 text-5xl font-bold leading-tight text-white lg:text-6xl">
                 Un fantasma en la batalla
@@ -94,47 +85,38 @@ export default function LatestProject() {
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <motion.a
+                <a
                   href="https://www.netflix.com/title/81700950"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-2 rounded-full bg-red-600 px-8 py-4 font-bold text-white shadow-xl transition-all hover:bg-red-700"
+                  className="hover-scale inline-flex items-center gap-2 rounded-full bg-red-600 px-8 py-4 font-bold text-white shadow-xl transition-all hover:bg-red-700"
                 >
                   <Play className="h-5 w-5" />
                   Ver en Netflix
-                </motion.a>
-                <motion.a
+                </a>
+                <a
                   href="https://www.youtube.com/watch?v=R0ufJf5SFIU"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-8 py-4 font-bold text-white transition-all hover:bg-white/[0.08]"
+                  className="hover-scale inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-8 py-4 font-bold text-white transition-all hover:bg-white/[0.08]"
                 >
                   <Youtube className="h-5 w-5" />
                   Ver Tráiler
-                </motion.a>
-                <motion.a
+                </a>
+                <a
                   href="https://www.imdb.com/title/tt32129665/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-8 py-4 font-bold text-white transition-all hover:bg-white/[0.08]"
+                  className="hover-scale inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-8 py-4 font-bold text-white transition-all hover:bg-white/[0.08]"
                 >
                   <ExternalLink className="h-5 w-5" />
                   Ver en IMDb
-                </motion.a>
+                </a>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative"
+            <div
+              className={`relative transition-all duration-[600ms] delay-200 ${isInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
             >
               <div className="absolute -inset-[1px] rounded-2xl bg-red-600/20 opacity-60 blur-xl" />
               <div className="group relative h-[500px] overflow-hidden rounded-2xl shadow-2xl md:h-[600px]">
@@ -166,15 +148,12 @@ export default function LatestProject() {
                   <span className="text-sm opacity-80">IMDb</span>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Behind the Scenes - Entrevista Canal Sur con video embebido */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mb-20"
+          <div
+            className={`mb-20 transition-all duration-[600ms] delay-300 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
             <div className="mb-12 text-center">
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-gradient-to-r from-yellow-500/20 to-orange-600/20 px-4 py-1.5 backdrop-blur-sm">
@@ -244,177 +223,142 @@ export default function LatestProject() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Collapsible Character Info Section - Sin título Antonio */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-20"
+          <div
+            className={`mt-20 transition-all duration-[600ms] delay-[400ms] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
             <div className="text-center">
-              <motion.button
+              <button
                 onClick={() => setShowCharacterInfo(!showCharacterInfo)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-gradient-to-r from-white/[0.08] to-white/[0.05] px-8 py-4 font-bold text-white shadow-xl transition-all hover:border-yellow-400/40 hover:bg-white/[0.12]"
+                className="hover-scale inline-flex items-center gap-3 rounded-full border border-white/20 bg-gradient-to-r from-white/[0.08] to-white/[0.05] px-8 py-4 font-bold text-white shadow-xl transition-all hover:border-yellow-400/40 hover:bg-white/[0.12]"
               >
                 <span>¿Quieres saber más sobre mi personaje?</span>
-                <motion.div
-                  animate={{ rotate: showCharacterInfo ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {showCharacterInfo ? (
-                    <ChevronUp className="h-5 w-5 text-yellow-400" />
-                  ) : (
-                    <ChevronDown className="h-5 w-5 text-yellow-400" />
-                  )}
-                </motion.div>
-              </motion.button>
+                <ChevronDown
+                  className={`h-5 w-5 text-yellow-400 transition-transform duration-300 ${showCharacterInfo ? 'rotate-180' : ''}`}
+                />
+              </button>
             </div>
 
-            {/* Animated Collapsible Content - SIN título "Antonio" ni subtítulo */}
-            <AnimatePresence>
-              {showCharacterInfo && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                  animate={{ opacity: 1, height: 'auto', marginTop: 48 }}
-                  exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                  transition={{ duration: 0.5, ease: 'easeInOut' }}
-                  className="overflow-hidden"
-                >
-                  <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: 0.2 }}
-                      className="group relative"
-                    >
-                      <div className="absolute -inset-[1px] rounded-2xl bg-white/10 opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-100" />
-                      <div className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm transition-all hover:bg-white/[0.05]">
-                        <div className="mb-6 flex items-center gap-3">
-                          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
-                            <Heart className="h-6 w-6 text-white" />
-                          </div>
-                          <h4 className="text-xl font-bold text-white">
-                            El Novio de Amaia
-                          </h4>
-                        </div>
-
-                        <div className="space-y-4 leading-relaxed text-slate-300">
-                          <p>
-                            Antonio es{' '}
-                            <span className="font-semibold text-white">
-                              el novio de Amaia
-                            </span>
-                            , la joven guardia civil que se infiltra en ETA durante más de
-                            una década. Su personaje representa{' '}
-                            <span className="font-semibold text-white">
-                              el amor incondicional
-                            </span>{' '}
-                            y el apoyo emocional en medio de una operación extremadamente
-                            peligrosa.
-                          </p>
-                          <p>
-                            Interpreta a un hombre que debe enfrentar la decisión más
-                            difícil:{' '}
-                            <span className="font-semibold text-white">
-                              dejar ir al amor de su vida
-                            </span>{' '}
-                            por el bien de la misión y la seguridad nacional. Un papel
-                            cargado de emoción, sacrificio y tensión dramática.
-                          </p>
-                        </div>
+            {/* CSS-based Collapsible Content */}
+            <div
+              className={`overflow-hidden transition-all duration-500 ease-in-out ${showCharacterInfo ? 'max-h-[2000px] opacity-100 mt-12' : 'max-h-0 opacity-0 mt-0'}`}
+            >
+              <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
+                <div className="group relative">
+                  <div className="absolute -inset-[1px] rounded-2xl bg-white/10 opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm transition-all hover:bg-white/[0.05]">
+                    <div className="mb-6 flex items-center gap-3">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
+                        <Heart className="h-6 w-6 text-white" />
                       </div>
-                    </motion.div>
+                      <h4 className="text-xl font-bold text-white">
+                        El Novio de Amaia
+                      </h4>
+                    </div>
 
-                    <motion.div
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: 0.3 }}
-                      className="group relative"
-                    >
-                      <div className="absolute -inset-[1px] rounded-2xl bg-white/10 opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-100" />
-                      <div className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm transition-all hover:bg-white/[0.05]">
-                        <div className="mb-6 flex items-center gap-3">
-                          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
-                            <Star className="h-6 w-6 text-white" />
-                          </div>
-                          <h4 className="text-xl font-bold text-white">
-                            Sobre el Personaje
-                          </h4>
-                        </div>
-
-                        <div className="space-y-4">
-                          <blockquote className="border-l-4 border-white/20 pl-4 italic text-slate-300">
-                            "Yo al amor de mi vida la esperaría lo que fuera necesario. Es
-                            un personaje que se mueve entre la lealtad y la duda, con una
-                            presencia sobria y contenida."
-                          </blockquote>
-
-                          <div className="space-y-3 rounded-xl border border-white/10 bg-white/[0.03] p-4">
-                            <div className="flex items-start gap-3">
-                              <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-white" />
-                              <p className="text-sm text-slate-300">
-                                <span className="font-semibold text-white">
-                                  Contexto histórico:
-                                </span>{' '}
-                                Basado en la Operación Santuario, la mayor operación
-                                encubierta contra ETA
-                              </p>
-                            </div>
-                            <div className="flex items-start gap-3">
-                              <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-white" />
-                              <p className="text-sm text-slate-300">
-                                <span className="font-semibold text-white">
-                                  Trabajo de investigación:
-                                </span>{' '}
-                                Hablé con personas que vivieron los atentados para
-                                entender el contexto emocional
-                              </p>
-                            </div>
-                            <div className="flex items-start gap-3">
-                              <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-white" />
-                              <p className="text-sm text-slate-300">
-                                <span className="font-semibold text-white">
-                                  Reto interpretativo:
-                                </span>{' '}
-                                Trabajar la química con Susana Abaitua para que se viera
-                                que están muy enamorados
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  </div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                    className="mt-12 text-center"
-                  >
-                    <div className="inline-block max-w-3xl rounded-2xl border border-white/10 bg-white/[0.03] px-8 py-6 backdrop-blur-sm">
-                      <p className="text-lg leading-relaxed text-slate-300">
-                        <span className="text-2xl font-bold text-white">"</span>
-                        Es un proyecto que me gustó desde el primer momento. La historia
-                        sobre la lucha contra ETA es cruda. El trabajo de Susana Abaitua
-                        es de Goya. Ella tiene que rechazar la vida familiar que tenía
-                        previsto, soy su pareja.
-                        <span className="text-2xl font-bold text-white">"</span>
+                    <div className="space-y-4 leading-relaxed text-slate-300">
+                      <p>
+                        Antonio es{' '}
+                        <span className="font-semibold text-white">
+                          el novio de Amaia
+                        </span>
+                        , la joven guardia civil que se infiltra en ETA durante más de
+                        una década. Su personaje representa{' '}
+                        <span className="font-semibold text-white">
+                          el amor incondicional
+                        </span>{' '}
+                        y el apoyo emocional en medio de una operación extremadamente
+                        peligrosa.
                       </p>
-                      <p className="mt-4 font-semibold text-slate-400">
-                        — Almagro San Miguel
+                      <p>
+                        Interpreta a un hombre que debe enfrentar la decisión más
+                        difícil:{' '}
+                        <span className="font-semibold text-white">
+                          dejar ir al amor de su vida
+                        </span>{' '}
+                        por el bien de la misión y la seguridad nacional. Un papel
+                        cargado de emoción, sacrificio y tensión dramática.
                       </p>
                     </div>
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        </motion.div>
+                  </div>
+                </div>
+
+                <div className="group relative">
+                  <div className="absolute -inset-[1px] rounded-2xl bg-white/10 opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm transition-all hover:bg-white/[0.05]">
+                    <div className="mb-6 flex items-center gap-3">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10">
+                        <Star className="h-6 w-6 text-white" />
+                      </div>
+                      <h4 className="text-xl font-bold text-white">
+                        Sobre el Personaje
+                      </h4>
+                    </div>
+
+                    <div className="space-y-4">
+                      <blockquote className="border-l-4 border-white/20 pl-4 italic text-slate-300">
+                        "Yo al amor de mi vida la esperaría lo que fuera necesario. Es
+                        un personaje que se mueve entre la lealtad y la duda, con una
+                        presencia sobria y contenida."
+                      </blockquote>
+
+                      <div className="space-y-3 rounded-xl border border-white/10 bg-white/[0.03] p-4">
+                        <div className="flex items-start gap-3">
+                          <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-white" />
+                          <p className="text-sm text-slate-300">
+                            <span className="font-semibold text-white">
+                              Contexto histórico:
+                            </span>{' '}
+                            Basado en la Operación Santuario, la mayor operación
+                            encubierta contra ETA
+                          </p>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-white" />
+                          <p className="text-sm text-slate-300">
+                            <span className="font-semibold text-white">
+                              Trabajo de investigación:
+                            </span>{' '}
+                            Hablé con personas que vivieron los atentados para
+                            entender el contexto emocional
+                          </p>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-white" />
+                          <p className="text-sm text-slate-300">
+                            <span className="font-semibold text-white">
+                              Reto interpretativo:
+                            </span>{' '}
+                            Trabajar la química con Susana Abaitua para que se viera
+                            que están muy enamorados
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-12 text-center">
+                <div className="inline-block max-w-3xl rounded-2xl border border-white/10 bg-white/[0.03] px-8 py-6 backdrop-blur-sm">
+                  <p className="text-lg leading-relaxed text-slate-300">
+                    <span className="text-2xl font-bold text-white">"</span>
+                    Es un proyecto que me gustó desde el primer momento. La historia
+                    sobre la lucha contra ETA es cruda. El trabajo de Susana Abaitua
+                    es de Goya. Ella tiene que rechazar la vida familiar que tenía
+                    previsto, soy su pareja.
+                    <span className="text-2xl font-bold text-white">"</span>
+                  </p>
+                  <p className="mt-4 font-semibold text-slate-400">
+                    — Almagro San Miguel
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )

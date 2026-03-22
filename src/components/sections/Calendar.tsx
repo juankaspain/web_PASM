@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { useInView } from '@/hooks/useInView'
 import {
   CalendarDays,
   MapPin,
@@ -13,7 +13,7 @@ import {
   X,
   Info,
 } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 
 interface CalendarEvent {
   id: string
@@ -170,8 +170,7 @@ const formatDate = (dateString: string) => {
 }
 
 export default function Calendar() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const { ref, isInView } = useInView({ once: true, margin: '-80px' })
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null)
   const [filterType, setFilterType] = useState<string>('all')
 
@@ -199,58 +198,41 @@ export default function Calendar() {
         />
 
         <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div
+          <div
             ref={ref}
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6 }}
+            className={`transition-all duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
           >
             {/* Header */}
             <div className="mb-16 text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm"
+              <div
+                className={`mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm transition-all delay-100 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
               >
                 <CalendarDays className="h-4 w-4 text-yellow-400" strokeWidth={2} />
                 <span className="text-sm font-medium tracking-wide text-slate-300">
                   Agenda Profesional
                 </span>
-              </motion.div>
+              </div>
 
-              <motion.h2
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="mb-6 text-4xl font-bold tracking-tight text-white lg:text-5xl"
+              <h2
+                className={`mb-6 text-4xl font-bold tracking-tight text-white lg:text-5xl transition-all delay-200 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
               >
                 Próximos Eventos
-              </motion.h2>
+              </h2>
 
-              <motion.div
-                initial={{ opacity: 0, scaleX: 0 }}
-                animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="mx-auto mb-6 h-0.5 w-20 bg-yellow-400"
+              <div
+                className={`mx-auto mb-6 h-0.5 w-20 bg-yellow-400 transition-all delay-300 duration-[800ms] ${isInView ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`}
               />
 
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-400"
+              <p
+                className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-400 transition-all delay-[400ms] duration-[500ms] ${isInView ? 'opacity-100' : 'opacity-0'}`}
               >
                 Calendario de actuaciones, estrenos y eventos confirmados 2025-2026
-              </motion.p>
+              </p>
             </div>
 
             {/* Filters */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="mb-12 flex flex-wrap justify-center gap-3"
+            <div
+              className={`mb-12 flex flex-wrap justify-center gap-3 transition-all delay-500 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
             >
               {types.map((type) => {
                 const Icon = type === 'all' ? CalendarDays : getTypeIcon(type)
@@ -271,139 +253,126 @@ export default function Calendar() {
                   </button>
                 )
               })}
-            </motion.div>
+            </div>
 
             {/* Events Timeline */}
             <div className="mx-auto max-w-5xl space-y-6">
-              <AnimatePresence mode="popLayout">
-                {filteredEvents.map((event, index) => {
-                  const TypeIcon = getTypeIcon(event.type)
-                  return (
-                    <motion.div
-                      key={event.id}
-                      layout
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      transition={{ duration: 0.4, delay: index * 0.05 }}
-                      whileHover={{ x: 4 }}
-                      onClick={() => setSelectedEvent(event)}
-                      className="group cursor-pointer"
-                    >
-                      <div className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-all hover:border-yellow-400/30 hover:bg-white/[0.04] lg:p-8">
-                        <div className="flex flex-col items-start gap-6 lg:flex-row">
-                          <div className="flex-shrink-0">
-                            <div
-                              className={`flex h-16 w-16 items-center justify-center rounded-xl border ${getTypeColor(event.type)}`}
+              {filteredEvents.map((event, index) => {
+                const TypeIcon = getTypeIcon(event.type)
+                return (
+                  <div
+                    key={event.id}
+                    onClick={() => setSelectedEvent(event)}
+                    className={`group hover-right cursor-pointer transition-all duration-[400ms] ${isInView ? 'translate-x-0 opacity-100' : '-translate-x-5 opacity-0'}`}
+                    style={{ transitionDelay: `${index * 50}ms` }}
+                  >
+                    <div className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-all hover:border-yellow-400/30 hover:bg-white/[0.04] lg:p-8">
+                      <div className="flex flex-col items-start gap-6 lg:flex-row">
+                        <div className="flex-shrink-0">
+                          <div
+                            className={`flex h-16 w-16 items-center justify-center rounded-xl border ${getTypeColor(event.type)}`}
+                          >
+                            <TypeIcon className="h-8 w-8" />
+                          </div>
+                        </div>
+
+                        <div className="flex-1">
+                          <div className="mb-3 flex flex-wrap items-center gap-3">
+                            <h3 className="text-xl font-bold text-white lg:text-2xl">
+                              {event.title}
+                            </h3>
+                            <span
+                              className={`rounded-full border px-3 py-1 text-xs font-bold ${getStatusColor(event.status)}`}
                             >
-                              <TypeIcon className="h-8 w-8" />
+                              {event.status === 'en-curso'
+                                ? 'EN CARTEL'
+                                : event.status === 'confirmado'
+                                  ? 'CONFIRMADO'
+                                  : 'PRÓXIMAMENTE'}
+                            </span>
+                            <span
+                              className={`rounded-full border px-3 py-1 text-xs font-semibold ${getTypeColor(event.type)}`}
+                            >
+                              {event.type.toUpperCase()}
+                            </span>
+                          </div>
+
+                          <p className="mb-4 leading-relaxed text-slate-400">
+                            {event.description}
+                          </p>
+
+                          <div className="grid gap-3 text-sm sm:grid-cols-2">
+                            <div className="flex items-center gap-2 text-slate-500">
+                              <CalendarDays className="h-4 w-4 text-yellow-400" />
+                              <span>
+                                {formatDate(event.date)}
+                                {event.endDate && ` - ${formatDate(event.endDate)}`}
+                              </span>
+                            </div>
+                            {event.time && (
+                              <div className="flex items-center gap-2 text-slate-500">
+                                <Clock className="h-4 w-4 text-yellow-400" />
+                                <span>{event.time}</span>
+                              </div>
+                            )}
+                            <div className="flex items-center gap-2 text-slate-500">
+                              <MapPin className="h-4 w-4 text-yellow-400" />
+                              <span>
+                                {event.venue} - {event.city}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-2 text-slate-500">
+                              <TheaterIcon className="h-4 w-4 text-yellow-400" />
+                              <span className="font-semibold text-white">
+                                {event.role}
+                              </span>
                             </div>
                           </div>
 
-                          <div className="flex-1">
-                            <div className="mb-3 flex flex-wrap items-center gap-3">
-                              <h3 className="text-xl font-bold text-white lg:text-2xl">
-                                {event.title}
-                              </h3>
-                              <span
-                                className={`rounded-full border px-3 py-1 text-xs font-bold ${getStatusColor(event.status)}`}
+                          <div className="mt-4 flex items-center gap-3 border-t border-white/10 pt-4">
+                            {event.ticketsUrl && (
+                              <a
+                                href={event.ticketsUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                aria-label={`Comprar Entradas para ${event.title} (se abre en nueva ventana)`}
+                                className="inline-flex items-center gap-2 rounded-lg bg-yellow-400 px-4 py-2 text-sm font-semibold text-black transition-all hover:bg-yellow-300"
                               >
-                                {event.status === 'en-curso'
-                                  ? 'EN CARTEL'
-                                  : event.status === 'confirmado'
-                                    ? 'CONFIRMADO'
-                                    : 'PRÓXIMAMENTE'}
-                              </span>
-                              <span
-                                className={`rounded-full border px-3 py-1 text-xs font-semibold ${getTypeColor(event.type)}`}
-                              >
-                                {event.type.toUpperCase()}
-                              </span>
-                            </div>
-
-                            <p className="mb-4 leading-relaxed text-slate-400">
-                              {event.description}
-                            </p>
-
-                            <div className="grid gap-3 text-sm sm:grid-cols-2">
-                              <div className="flex items-center gap-2 text-slate-500">
-                                <CalendarDays className="h-4 w-4 text-yellow-400" />
-                                <span>
-                                  {formatDate(event.date)}
-                                  {event.endDate && ` - ${formatDate(event.endDate)}`}
-                                </span>
-                              </div>
-                              {event.time && (
-                                <div className="flex items-center gap-2 text-slate-500">
-                                  <Clock className="h-4 w-4 text-yellow-400" />
-                                  <span>{event.time}</span>
-                                </div>
-                              )}
-                              <div className="flex items-center gap-2 text-slate-500">
-                                <MapPin className="h-4 w-4 text-yellow-400" />
-                                <span>
-                                  {event.venue} - {event.city}
-                                </span>
-                              </div>
-                              <div className="flex items-center gap-2 text-slate-500">
-                                <TheaterIcon className="h-4 w-4 text-yellow-400" />
-                                <span className="font-semibold text-white">
-                                  {event.role}
-                                </span>
-                              </div>
-                            </div>
-
-                            <div className="mt-4 flex items-center gap-3 border-t border-white/10 pt-4">
-                              {event.ticketsUrl && (
-                                <a
-                                  href={event.ticketsUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  onClick={(e) => e.stopPropagation()}
-                                  aria-label={`Comprar Entradas para ${event.title} (se abre en nueva ventana)`}
-                                  className="inline-flex items-center gap-2 rounded-lg bg-yellow-400 px-4 py-2 text-sm font-semibold text-black transition-all hover:bg-yellow-300"
-                                >
-                                  <Ticket className="h-4 w-4" />
-                                  Comprar Entradas
-                                </a>
-                              )}
-                              <button
-                                onClick={() => setSelectedEvent(event)}
-                                className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-white/10"
-                              >
-                                <Info className="h-4 w-4" />
-                                Más Detalles
-                              </button>
-                            </div>
+                                <Ticket className="h-4 w-4" />
+                                Comprar Entradas
+                              </a>
+                            )}
+                            <button
+                              onClick={() => setSelectedEvent(event)}
+                              className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-white/10"
+                            >
+                              <Info className="h-4 w-4" />
+                              Más Detalles
+                            </button>
                           </div>
                         </div>
                       </div>
-                    </motion.div>
-                  )
-                })}
-              </AnimatePresence>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Event Detail Modal */}
-      <AnimatePresence>
-        {selectedEvent && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-md"
-            onClick={() => setSelectedEvent(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-3xl"
-              onClick={(e) => e.stopPropagation()}
-            >
+      <div
+        className={`fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-md transition-all duration-300 ${selectedEvent ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}
+        onClick={() => setSelectedEvent(null)}
+      >
+        <div
+          className={`relative w-full max-w-3xl transition-all duration-300 ${selectedEvent ? 'scale-100 opacity-100' : 'scale-90 opacity-0'}`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {selectedEvent && (
+            <>
               <button
                 onClick={() => setSelectedEvent(null)}
                 aria-label="Cerrar detalles del evento"
@@ -533,10 +502,10 @@ export default function Calendar() {
                   )}
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </>
+          )}
+        </div>
+      </div>
     </>
   )
 }
