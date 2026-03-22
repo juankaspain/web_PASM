@@ -8,7 +8,7 @@ Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
 
   // Adjust this value in production, or use tracesSampler for greater control
-  tracesSampleRate: 1.0,
+  tracesSampleRate: 0.2,
 
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
   debug: false,
@@ -33,7 +33,7 @@ Sentry.init({
   // `release` value here - use the environment variable `SENTRY_RELEASE`, so
   // that it will also get attached to your source maps
 
-  beforeSend(event, hint) {
+  beforeSend(event) {
     // Filter out errors in development
     if (process.env.NODE_ENV === 'development') {
       console.error('Sentry Event:', event)

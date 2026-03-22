@@ -34,8 +34,8 @@ export default function Analytics() {
     }
   })
 
-  // Only load in production
-  if (process.env.NODE_ENV !== 'production') {
+  // Don't load if not production or if GA_ID is placeholder
+  if (process.env.NODE_ENV !== 'production' || GA_ID === 'G-XXXXXXXXXX') {
     return null
   }
 

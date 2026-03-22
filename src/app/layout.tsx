@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Suspense } from 'react'
 import './globals.css'
 import Analytics from '@/components/Analytics'
 import PWAInstall from '@/components/PWAInstall'
@@ -7,12 +8,19 @@ import CookieConsent from '@/components/CookieConsent'
 import Script from 'next/script'
 
 // Optimized font configuration with display swap and fallbacks
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
   preload: true,
-  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Arial', 'sans-serif']
+  fallback: [
+    'system-ui',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'Segoe UI',
+    'Arial',
+    'sans-serif',
+  ],
 })
 
 export const metadata: Metadata = {
@@ -29,7 +37,7 @@ export const metadata: Metadata = {
     'Pedro Francisco Almagro Gordillo',
     'Almagro actor',
     'San Miguel actor',
-    
+
     // Series principales
     'La Moderna TVE',
     'La Moderna actor',
@@ -41,14 +49,14 @@ export const metadata: Metadata = {
     'La Caza Guadiana',
     'Estoy vivo TVE',
     'Operación Barrio Inglés',
-    
+
     // Localización
     'actor español',
     'actor Sevilla',
     'actor Madrid',
     'actor andaluz',
     'actor sevillano',
-    
+
     // Tipo de actor
     'actor profesional',
     'actor televisión',
@@ -56,27 +64,27 @@ export const metadata: Metadata = {
     'actor teatro',
     'galán actor',
     'protagonista series',
-    
+
     // Formación
     'ESAD Sevilla',
     'CNTC actor',
     'Compañía Nacional Teatro Clásico',
     'verso clásico español',
-    
+
     // Habilidades
     'esgrima teatral',
     'combate escénico',
     'equitación actor',
     'actor musical',
     'actor bilingüe',
-    
+
     // Plataformas
     'actor TVE',
     'actor Prime Video',
     'actor Fox',
     'actor Netflix',
     'actor HBO',
-    
+
     // Profesional
     'casting actor',
     'portfolio actor',
@@ -85,7 +93,7 @@ export const metadata: Metadata = {
     'headshots actor',
     'representación actor',
     'agencia actores',
-    
+
     // Teatro específico
     'Oliver Twist musical',
     'Fuente Ovejuna CNTC',
@@ -104,16 +112,16 @@ export const metadata: Metadata = {
     locale: 'es_ES',
     url: 'https://almagrosanmiguel.com',
     siteName: 'Almagro San Miguel - Actor Profesional',
-    title: 'Almagro San Miguel - Actor Profesional | 300+ Episodios | TVE, Prime Video, Fox',
+    title:
+      'Almagro San Miguel - Actor Profesional | 300+ Episodios | TVE, Prime Video, Fox',
     description:
       'Actor con 13+ años de experiencia. Más de 300 episodios en TV. Protagonista de La Moderna (TVE) y Vis a vis: El Oasis (Fox). Formación ESAD Sevilla y CNTC. Especialista en verso clásico, combate escénico y equitación.',
     images: [
       {
-        url: '/og-image.jpg',
+        url: 'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
         width: 1200,
         height: 630,
         alt: 'Almagro San Miguel - Actor Profesional',
-        type: 'image/jpeg',
       },
     ],
   },
@@ -124,7 +132,9 @@ export const metadata: Metadata = {
     title: 'Almagro San Miguel - Actor Profesional',
     description:
       'Actor con 13+ años de experiencia. Más de 300 episodios en TV. La Moderna (TVE), Vis a vis: El Oasis (Fox), Hernán (Prime Video).',
-    images: ['/twitter-image.jpg'],
+    images: [
+      'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
+    ],
   },
   robots: {
     index: true,
@@ -138,88 +148,75 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico', sizes: 'any' },
-    ],
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
     shortcut: '/favicon.svg',
-    apple: '/apple-touch-icon.png',
   },
   manifest: '/site.webmanifest',
   alternates: {
     canonical: 'https://almagrosanmiguel.com',
     languages: {
       'es-ES': 'https://almagrosanmiguel.com',
-      'en-US': 'https://almagrosanmiguel.com/en',
     },
-  },
-  verification: {
-    google: 'pending-verification',
   },
   category: 'entertainment',
   applicationName: 'Almagro San Miguel Portfolio',
   referrer: 'origin-when-cross-origin',
   other: {
     'font-display': 'swap',
-    'theme-color': '#000000',
     'color-scheme': 'dark',
     'mobile-web-app-capable': 'yes',
     'apple-mobile-web-app-status-bar-style': 'black-translucent',
-  }
+  },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={inter.variable} suppressHydrationWarning>
       <head>
-        {/* Theme Color for PWA */}
-        <meta name="theme-color" content="#000000" />
+        {/* Theme Color for PWA - unified with site.webmanifest */}
+        <meta name="theme-color" content="#f59e0b" />
         <meta name="color-scheme" content="dark" />
-        
-        {/* Apple-specific meta tags - usando solo los no deprecados */}
+
+        {/* Apple-specific meta tags */}
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="format-detection" content="telephone=no" />
 
         {/* Humans.txt reference */}
         <link rel="author" href="/humans.txt" />
 
-        {/* Preconnect to critical external domains - mejora DNS y TLS handshake */}
+        {/* Preconnect to critical external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://www.google-analytics.com"
+          crossOrigin="anonymous"
+        />
         <link rel="preconnect" href="https://formspree.io" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://github.com" />
-        
-        {/* DNS prefetch para recursos secundarios */}
+
+        {/* DNS prefetch for secondary resources */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.youtube.com" />
         <link rel="dns-prefetch" href="https://player.vimeo.com" />
         <link rel="dns-prefetch" href="https://img.youtube.com" />
         <link rel="dns-prefetch" href="https://user-images.githubusercontent.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
-        
-        {/* 
-          IMPORTANTE: NO hacer preload de imágenes específicas
-          - Next.js Image component ya optimiza la carga automáticamente
-          - Los preloads manuales causan warnings si la imagen no se usa inmediatamente
-          - La imagen del Hero se carga con priority={true} en el componente
-        */}
-
-        {/* Prefetch important routes on idle */}
-        <link rel="prefetch" href="/#about" />
-        <link rel="prefetch" href="/#series" />
-        <link rel="prefetch" href="/#contact" />
       </head>
-      <body className={inter.className} suppressHydrationWarning>
+      <body className={inter.className}>
+        {/* D.1 - Skip to content link for keyboard/screen reader users */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-yellow-400 focus:px-4 focus:py-2 focus:font-semibold focus:text-black focus:outline-none"
+        >
+          Saltar al contenido principal
+        </a>
         {children}
-        <Analytics />
+        <Suspense fallback={null}>
+          <Analytics />
+        </Suspense>
         <PWAInstall />
         <CookieConsent />
-        
+
         {/* Enhanced Schema.org Person Markup - Deferred for performance */}
         <Script
           id="person-schema"
@@ -254,12 +251,7 @@ export default function RootLayout({
                 '@type': 'Country',
                 name: 'Spain',
               },
-              jobTitle: [
-                'Actor',
-                'Television Actor',
-                'Film Actor',
-                'Theater Actor',
-              ],
+              jobTitle: ['Actor', 'Television Actor', 'Film Actor', 'Theater Actor'],
               hasOccupation: {
                 '@type': 'Occupation',
                 name: 'Actor',
@@ -321,7 +313,8 @@ export default function RootLayout({
                 },
               ],
               url: 'https://almagrosanmiguel.com',
-              image: 'https://almagrosanmiguel.com/profile-image.jpg',
+              image:
+                'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
               sameAs: [
                 'https://www.imdb.com/name/nm9017709/',
                 'https://es.wikipedia.org/wiki/Almagro_San_Miguel',
@@ -495,15 +488,6 @@ export default function RootLayout({
                 '@id': 'https://almagrosanmiguel.com/#person',
               },
               inLanguage: 'es-ES',
-              potentialAction: {
-                '@type': 'SearchAction',
-                target: {
-                  '@type': 'EntryPoint',
-                  urlTemplate:
-                    'https://almagrosanmiguel.com/?s={search_term_string}',
-                },
-                'query-input': 'required name=search_term_string',
-              },
             }),
           }}
         />
@@ -537,7 +521,8 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'VideoObject',
               name: 'Almagro San Miguel - Showreel Profesional',
-              description: 'Showreel profesional del actor Almagro San Miguel con escenas de sus trabajos en televisión, cine y teatro',
+              description:
+                'Showreel profesional del actor Almagro San Miguel con escenas de sus trabajos en televisión, cine y teatro',
               thumbnailUrl: 'https://img.youtube.com/vi/JjPtvXw-gyo/maxresdefault.jpg',
               uploadDate: '2024-01-01',
               duration: 'PT2M',

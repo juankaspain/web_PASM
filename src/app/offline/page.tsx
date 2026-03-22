@@ -1,5 +1,6 @@
-import { WifiOff, RefreshCw, Home } from 'lucide-react'
+import { WifiOff, Home } from 'lucide-react'
 import Link from 'next/link'
+import ReloadButton from '@/components/ReloadButton'
 
 export const metadata = {
   title: 'Sin conexión | Almagro San Miguel',
@@ -12,40 +13,33 @@ export const metadata = {
 
 export default function OfflinePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-slate-950 to-slate-900 flex items-center justify-center p-4">
-      <div className="max-w-md w-full text-center">
-        <div className="mb-8 inline-flex p-6 bg-slate-900/50 rounded-full border border-slate-700/50">
-          <WifiOff className="w-16 h-16 text-yellow-400" />
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-black via-slate-950 to-slate-900 p-4">
+      <div className="w-full max-w-md text-center">
+        <div className="mb-8 inline-flex rounded-full border border-slate-700/50 bg-slate-900/50 p-6">
+          <WifiOff className="h-16 w-16 text-yellow-400" />
         </div>
 
-        <h1 className="text-4xl font-bold text-white mb-4">
-          Sin conexión a Internet
-        </h1>
+        <h1 className="mb-4 text-4xl font-bold text-white">Sin conexión a Internet</h1>
 
-        <p className="text-lg text-gray-300 mb-8">
-          Parece que no tienes conexión a Internet. Por favor, verifica tu conexión e intenta nuevamente.
+        <p className="mb-8 text-lg text-gray-300">
+          Parece que no tienes conexión a Internet. Por favor, verifica tu conexión e
+          intenta nuevamente.
         </p>
 
         <div className="space-y-4">
-          <button
-            onClick={() => window.location.reload()}
-            className="w-full inline-flex items-center justify-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-4 px-6 rounded-xl transition-all transform hover:scale-105 active:scale-95"
-          >
-            <RefreshCw className="w-5 h-5" />
-            Reintentar
-          </button>
+          <ReloadButton />
 
           <Link
             href="/"
-            className="w-full inline-flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-semibold py-4 px-6 rounded-xl transition-all transform hover:scale-105 active:scale-95"
+            className="inline-flex w-full transform items-center justify-center gap-2 rounded-xl bg-slate-800 px-6 py-4 font-semibold text-white transition-all hover:scale-105 hover:bg-slate-700 active:scale-95"
           >
-            <Home className="w-5 h-5" />
+            <Home className="h-5 w-5" />
             Volver al inicio
           </Link>
         </div>
 
-        <div className="mt-12 p-6 bg-slate-900/50 rounded-xl border border-slate-700/50">
-          <h2 className="text-sm font-semibold text-yellow-400 mb-3 uppercase tracking-wider">
+        <div className="mt-12 rounded-xl border border-slate-700/50 bg-slate-900/50 p-6">
+          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-yellow-400">
             Contenido en caché
           </h2>
           <p className="text-sm text-gray-400">

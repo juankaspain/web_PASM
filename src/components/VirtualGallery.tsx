@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { generateShimmerDataURL, imageSizes } from '@/lib/image-utils'
 import { X } from 'lucide-react'
@@ -63,7 +63,9 @@ export default function VirtualGallery({
       if (e.key === 'Escape') {
         setSelectedImage(null)
       } else if (e.key === 'ArrowRight') {
-        setSelectedImage((prev) => (prev !== null && prev < images.length - 1 ? prev + 1 : prev))
+        setSelectedImage((prev) =>
+          prev !== null && prev < images.length - 1 ? prev + 1 : prev
+        )
       } else if (e.key === 'ArrowLeft') {
         setSelectedImage((prev) => (prev !== null && prev > 0 ? prev - 1 : prev))
       }
@@ -96,15 +98,11 @@ export default function VirtualGallery({
 
   return (
     <>
-      <div
-        ref={galleryRef}
-        className={`grid ${columnClass}`}
-        style={{ gap: `${gap}px` }}
-      >
+      <div ref={galleryRef} className={`grid ${columnClass}`} style={{ gap: `${gap}px` }}>
         {visibleImages.map((image, index) => (
           <div
             key={index}
-            className="gallery-item group relative aspect-[4/3] overflow-hidden rounded-xl bg-slate-900/50 cursor-pointer"
+            className="gallery-item group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-xl bg-slate-900/50"
             onClick={() => setSelectedImage(index)}
           >
             <Image
@@ -118,19 +116,19 @@ export default function VirtualGallery({
               quality={75}
               loading="lazy"
             />
-            
+
             {/* Overlay on hover */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               {image.caption && (
                 <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="text-sm text-white font-medium">{image.caption}</p>
+                  <p className="text-sm font-medium text-white">{image.caption}</p>
                 </div>
               )}
             </div>
 
             {/* Loading indicator */}
-            <div className="absolute inset-0 flex items-center justify-center bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div className="w-12 h-12 border-2 border-yellow-400 border-t-transparent rounded-full animate-spin" />
+            <div className="absolute inset-0 flex items-center justify-center bg-slate-900/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <div className="h-12 w-12 animate-spin rounded-full border-2 border-yellow-400 border-t-transparent" />
             </div>
           </div>
         ))}
@@ -138,9 +136,9 @@ export default function VirtualGallery({
 
       {/* Sentinel for infinite loading */}
       {hasMore && (
-        <div ref={sentinelRef} className="h-20 flex items-center justify-center mt-8">
+        <div ref={sentinelRef} className="mt-8 flex h-20 items-center justify-center">
           <div className="flex items-center gap-3 text-gray-400">
-            <div className="w-8 h-8 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-gray-400 border-t-transparent" />
             <span className="text-sm">Cargando más imágenes...</span>
           </div>
         </div>
@@ -149,16 +147,16 @@ export default function VirtualGallery({
       {/* Lightbox */}
       {selectedImage !== null && (
         <div
-          className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 p-4 backdrop-blur-sm"
           onClick={() => setSelectedImage(null)}
         >
           {/* Close button */}
           <button
             onClick={() => setSelectedImage(null)}
-            className="absolute top-4 right-4 z-10 p-2 bg-slate-900/80 hover:bg-slate-800 rounded-full transition-colors"
+            className="absolute right-4 top-4 z-10 rounded-full bg-slate-900/80 p-2 transition-colors hover:bg-slate-800"
             aria-label="Cerrar"
           >
-            <X className="w-6 h-6 text-white" />
+            <X className="h-6 w-6 text-white" />
           </button>
 
           {/* Navigation buttons */}
@@ -168,11 +166,21 @@ export default function VirtualGallery({
                 e.stopPropagation()
                 setSelectedImage((prev) => (prev !== null && prev > 0 ? prev - 1 : prev))
               }}
-              className="absolute left-4 z-10 p-3 bg-slate-900/80 hover:bg-slate-800 rounded-full transition-colors"
+              className="absolute left-4 z-10 rounded-full bg-slate-900/80 p-3 transition-colors hover:bg-slate-800"
               aria-label="Anterior"
             >
-              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              <svg
+                className="h-6 w-6 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
             </button>
           )}
@@ -181,20 +189,32 @@ export default function VirtualGallery({
             <button
               onClick={(e) => {
                 e.stopPropagation()
-                setSelectedImage((prev) => (prev !== null && prev < images.length - 1 ? prev + 1 : prev))
+                setSelectedImage((prev) =>
+                  prev !== null && prev < images.length - 1 ? prev + 1 : prev
+                )
               }}
-              className="absolute right-4 z-10 p-3 bg-slate-900/80 hover:bg-slate-800 rounded-full transition-colors"
+              className="absolute right-4 z-10 rounded-full bg-slate-900/80 p-3 transition-colors hover:bg-slate-800"
               aria-label="Siguiente"
             >
-              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              <svg
+                className="h-6 w-6 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </button>
           )}
 
           {/* Image container */}
           <div
-            className="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center"
+            className="relative flex h-full max-h-[90vh] w-full max-w-7xl items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
@@ -202,7 +222,7 @@ export default function VirtualGallery({
               alt={images[selectedImage].alt}
               width={images[selectedImage].width || 1920}
               height={images[selectedImage].height || 1080}
-              className="object-contain max-w-full max-h-full"
+              className="max-h-full max-w-full object-contain"
               quality={90}
               priority
             />
@@ -210,13 +230,15 @@ export default function VirtualGallery({
             {/* Caption */}
             {images[selectedImage].caption && (
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                <p className="text-white text-center font-medium">{images[selectedImage].caption}</p>
+                <p className="text-center font-medium text-white">
+                  {images[selectedImage].caption}
+                </p>
               </div>
             )}
 
             {/* Counter */}
-            <div className="absolute top-4 left-4 bg-slate-900/80 px-4 py-2 rounded-full">
-              <span className="text-white text-sm font-medium">
+            <div className="absolute left-4 top-4 rounded-full bg-slate-900/80 px-4 py-2">
+              <span className="text-sm font-medium text-white">
                 {selectedImage + 1} / {images.length}
               </span>
             </div>

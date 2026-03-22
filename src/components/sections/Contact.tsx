@@ -18,11 +18,34 @@ import {
   Clock,
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 import { trackEvent } from '@/lib/analytics'
 import { SiTiktok } from 'react-icons/si'
 import Link from 'next/link'
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xlggrndl'
+
+// F.4 - Zod schema for client-side validation
+const contactSchema = z.object({
+  name: z
+    .string()
+    .min(2, 'El nombre debe tener al menos 2 caracteres')
+    .max(100, 'El nombre no puede exceder 100 caracteres'),
+  email: z.string().email('Correo electrónico inválido'),
+  category: z.string().min(1, 'Selecciona una categoría'),
+  message: z
+    .string()
+    .min(10, 'El mensaje debe tener al menos 10 caracteres')
+    .max(2000, 'El mensaje no puede exceder 2000 caracteres'),
+  acceptPrivacy: z.literal(true, {
+    errorMap: () => ({ message: 'Debes aceptar la Política de Privacidad' }),
+  }),
+  acceptNewsletter: z.boolean().optional(),
+})
+
+type ContactFormValues = z.infer<typeof contactSchema>
 
 const categories = [
   'Casting / Audición',
@@ -96,34 +119,34 @@ interface Particle {
 // Skeleton Loader Component
 function ContactSkeleton() {
   return (
-    <section className="relative py-24 sm:py-32 overflow-hidden bg-black">
+    <section className="relative overflow-hidden bg-black py-24 sm:py-32">
       <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-yellow-500/10 rounded-full blur-[150px]" />
+      <div className="absolute left-1/2 top-0 h-[500px] w-[1000px] -translate-x-1/2 rounded-full bg-yellow-500/10 blur-[150px]" />
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 sm:mb-20">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-16 text-center sm:mb-20">
           {/* Skeleton Header */}
-          <div className="inline-flex items-center gap-2 px-5 py-2 bg-white/5 border border-white/10 rounded-full mb-6">
-            <div className="w-4 h-4 bg-white/10 rounded animate-pulse" />
-            <div className="w-20 h-4 bg-white/10 rounded animate-pulse" />
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2">
+            <div className="h-4 w-4 animate-pulse rounded bg-white/10" />
+            <div className="h-4 w-20 animate-pulse rounded bg-white/10" />
           </div>
-          
-          <div className="w-96 h-12 bg-white/5 rounded mx-auto mb-6 animate-pulse" />
-          <div className="w-full max-w-2xl h-6 bg-white/5 rounded mx-auto animate-pulse" />
+
+          <div className="mx-auto mb-6 h-12 w-96 animate-pulse rounded bg-white/5" />
+          <div className="mx-auto h-6 w-full max-w-2xl animate-pulse rounded bg-white/5" />
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-7xl mx-auto">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2 lg:gap-12">
           {/* Skeleton Form */}
           <div className="space-y-6">
-            <div className="bg-white/[0.02] rounded-3xl p-8 border border-white/10">
+            <div className="rounded-3xl border border-white/10 bg-white/[0.02] p-8">
               <div className="space-y-6">
                 {[...Array(4)].map((_, i) => (
                   <div key={i}>
-                    <div className="w-32 h-4 bg-white/10 rounded mb-2 animate-pulse" />
-                    <div className="w-full h-12 bg-white/5 rounded-xl animate-pulse" />
+                    <div className="mb-2 h-4 w-32 animate-pulse rounded bg-white/10" />
+                    <div className="h-12 w-full animate-pulse rounded-xl bg-white/5" />
                   </div>
                 ))}
-                <div className="w-full h-14 bg-yellow-400/20 rounded-xl animate-pulse" />
+                <div className="h-14 w-full animate-pulse rounded-xl bg-yellow-400/20" />
               </div>
             </div>
           </div>
@@ -131,11 +154,14 @@ function ContactSkeleton() {
           {/* Skeleton Info */}
           <div className="space-y-6">
             {[...Array(3)].map((_, i) => (
-              <div key={i} className="flex items-center gap-4 p-5 bg-white/[0.02] rounded-2xl border border-white/10">
-                <div className="w-14 h-14 bg-yellow-400/20 rounded-xl animate-pulse" />
+              <div
+                key={i}
+                className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.02] p-5"
+              >
+                <div className="h-14 w-14 animate-pulse rounded-xl bg-yellow-400/20" />
                 <div className="flex-1">
-                  <div className="w-20 h-3 bg-white/10 rounded mb-2 animate-pulse" />
-                  <div className="w-32 h-5 bg-white/10 rounded animate-pulse" />
+                  <div className="mb-2 h-3 w-20 animate-pulse rounded bg-white/10" />
+                  <div className="h-5 w-32 animate-pulse rounded bg-white/10" />
                 </div>
               </div>
             ))}
@@ -147,28 +173,35 @@ function ContactSkeleton() {
 }
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    category: categories[0],
-    message: '',
-    acceptPrivacy: false,
-    acceptNewsletter: false,
+  const {
+    register,
+    handleSubmit: handleFormSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm<ContactFormValues>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      category: categories[0],
+      message: '',
+      acceptPrivacy: undefined as unknown as true,
+      acceptNewsletter: false,
+    },
   })
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>(
-    'idle',
-  )
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const [particles, setParticles] = useState<Particle[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
+  const messageValue = watch('message', '')
+
   useEffect(() => {
-    // Simulate initial loading
     const timer = setTimeout(() => {
       setIsLoading(false)
     }, 100)
 
-    // Generate particles only on client side
     if (typeof window !== 'undefined') {
       const newParticles = [...Array(30)].map((_, i) => ({
         id: i,
@@ -181,16 +214,7 @@ export default function Contact() {
     return () => clearTimeout(timer)
   }, [])
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    // Validate privacy checkbox
-    if (!formData.acceptPrivacy) {
-      setStatus('error')
-      setErrorMessage('Debes aceptar la Política de Privacidad para continuar.')
-      return
-    }
-    
+  const handleSubmit = async (data: ContactFormValues) => {
     setStatus('sending')
     setErrorMessage('')
 
@@ -199,33 +223,29 @@ export default function Contact() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          category: formData.category,
-          message: formData.message,
-          acceptNewsletter: formData.acceptNewsletter,
-          _subject: `Nuevo mensaje de ${formData.name} - ${formData.category}`,
-          _replyto: formData.email,
+          name: data.name,
+          email: data.email,
+          category: data.category,
+          message: data.message,
+          acceptNewsletter: data.acceptNewsletter,
+          _subject: `Nuevo mensaje de ${data.name} - ${data.category}`,
+          _replyto: data.email,
         }),
       })
 
-      const data = await response.json()
+      const responseData = await response.json()
 
       if (response.ok) {
         setStatus('success')
-        trackEvent('submit_contact_form', 'engagement', formData.category)
-        
-        setFormData({
-          name: '',
-          email: '',
-          category: categories[0],
-          message: '',
-          acceptPrivacy: false,
-          acceptNewsletter: false,
+        trackEvent('submit_contact_form', {
+          category: 'engagement',
+          label: data.category,
         })
+
+        reset()
 
         setTimeout(() => {
           setStatus('idle')
@@ -233,14 +253,14 @@ export default function Contact() {
       } else {
         setStatus('error')
         setErrorMessage(
-          data.error || data.errors?.[0]?.message || 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.'
+          responseData.error ||
+            responseData.errors?.[0]?.message ||
+            'Error al enviar el mensaje. Por favor, inténtalo de nuevo.'
         )
       }
     } catch (error) {
       setStatus('error')
-      setErrorMessage(
-        'Error de conexión. Verifica tu internet e inténtalo de nuevo.'
-      )
+      setErrorMessage('Error de conexión. Verifica tu internet e inténtalo de nuevo.')
       console.error('Contact form error:', error)
     }
   }
@@ -251,16 +271,16 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-24 sm:py-32 overflow-hidden bg-black">
+    <section id="contact" className="relative overflow-hidden bg-black py-24 sm:py-32">
       <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-yellow-500/10 rounded-full blur-[150px]" />
+      <div className="absolute left-1/2 top-0 h-[500px] w-[1000px] -translate-x-1/2 rounded-full bg-yellow-500/10 blur-[150px]" />
 
       {particles.length > 0 && (
         <div className="absolute inset-0 opacity-20">
           {particles.map((particle) => (
             <motion.div
               key={particle.id}
-              className="absolute w-1 h-1 bg-yellow-400 rounded-full"
+              className="absolute h-1 w-1 rounded-full bg-yellow-400"
               initial={{
                 x: particle.x,
                 y: particle.y,
@@ -279,47 +299,49 @@ export default function Contact() {
         </div>
       )}
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <div className="text-center mb-16 sm:mb-20">
+          <div className="mb-16 text-center sm:mb-20">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-5 py-2 bg-white/5 border border-white/10 rounded-full mb-6 backdrop-blur-sm"
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 backdrop-blur-sm"
             >
-              <Sparkles className="w-4 h-4 text-yellow-400" />
-              <span className="text-slate-300 text-sm font-bold uppercase tracking-wider">Hablemos</span>
+              <Sparkles className="h-4 w-4 text-yellow-400" />
+              <span className="text-sm font-bold uppercase tracking-wider text-slate-300">
+                Hablemos
+              </span>
             </motion.div>
-            
-            <motion.h2 
+
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-white"
+              className="mb-6 text-4xl font-bold text-white sm:text-5xl lg:text-6xl"
             >
               Contacto Profesional
             </motion.h2>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-              className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed"
+              className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-300 sm:text-xl"
             >
               Disponible para castings, colaboraciones y consultas profesionales
             </motion.p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-7xl mx-auto">
+          <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2 lg:gap-12">
             {/* Columna izquierda: Formulario + Tiempo de Respuesta */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -329,123 +351,162 @@ export default function Contact() {
               className="space-y-6"
             >
               <div className="relative">
-                <div className="absolute -inset-1 bg-yellow-400/20 rounded-3xl blur-2xl opacity-50" />
-                
-                <div className="relative bg-white/[0.02] rounded-3xl p-8 border border-white/10 backdrop-blur-xl shadow-2xl">
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="absolute -inset-1 rounded-3xl bg-yellow-400/20 opacity-50 blur-2xl" />
+
+                <div className="relative rounded-3xl border border-white/10 bg-white/[0.02] p-8 shadow-2xl backdrop-blur-xl">
+                  <form onSubmit={handleFormSubmit(handleSubmit)} className="space-y-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-bold mb-2 text-slate-200">
+                      <label
+                        htmlFor="name"
+                        className="mb-2 block text-sm font-bold text-slate-200"
+                      >
                         Nombre Completo *
                       </label>
                       <input
                         type="text"
                         id="name"
-                        required
-                        minLength={2}
-                        maxLength={100}
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        {...register('name')}
                         disabled={status === 'sending'}
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-400 focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all disabled:opacity-50"
+                        className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-slate-400 transition-all focus:border-transparent focus:ring-2 focus:ring-yellow-400 disabled:opacity-50"
                         placeholder="Tu nombre"
                       />
+                      {errors.name && (
+                        <p className="mt-1 text-xs text-red-400">{errors.name.message}</p>
+                      )}
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-sm font-bold mb-2 text-slate-200">
+                      <label
+                        htmlFor="email"
+                        className="mb-2 block text-sm font-bold text-slate-200"
+                      >
                         Email *
                       </label>
                       <input
                         type="email"
                         id="email"
-                        required
-                        maxLength={100}
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        {...register('email')}
                         disabled={status === 'sending'}
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-400 focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all disabled:opacity-50"
+                        className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-slate-400 transition-all focus:border-transparent focus:ring-2 focus:ring-yellow-400 disabled:opacity-50"
                         placeholder="tu@email.com"
                       />
+                      {errors.email && (
+                        <p className="mt-1 text-xs text-red-400">
+                          {errors.email.message}
+                        </p>
+                      )}
                     </div>
 
                     <div>
-                      <label htmlFor="category" className="block text-sm font-bold mb-2 text-slate-200">
+                      <label
+                        htmlFor="category"
+                        className="mb-2 block text-sm font-bold text-slate-200"
+                      >
                         Categoría *
                       </label>
                       <div className="relative">
                         <select
                           id="category"
-                          required
-                          value={formData.category}
-                          onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                          {...register('category')}
                           disabled={status === 'sending'}
-                          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all disabled:opacity-50 appearance-none cursor-pointer"
+                          className="w-full cursor-pointer appearance-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white transition-all focus:border-transparent focus:ring-2 focus:ring-yellow-400 disabled:opacity-50"
                         >
                           {categories.map((cat) => (
-                            <option key={cat} value={cat} className="bg-neutral-900 text-white py-2">
+                            <option
+                              key={cat}
+                              value={cat}
+                              className="bg-neutral-900 py-2 text-white"
+                            >
                               {cat}
                             </option>
                           ))}
                         </select>
-                        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                          <svg
+                            className="h-5 w-5 text-white"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
                           </svg>
                         </div>
                       </div>
+                      {errors.category && (
+                        <p className="mt-1 text-xs text-red-400">
+                          {errors.category.message}
+                        </p>
+                      )}
                     </div>
 
                     <div>
-                      <label htmlFor="message" className="block text-sm font-bold mb-2 text-slate-200">
+                      <label
+                        htmlFor="message"
+                        className="mb-2 block text-sm font-bold text-slate-200"
+                      >
                         Mensaje *
                       </label>
                       <textarea
                         id="message"
-                        required
-                        minLength={10}
-                        maxLength={2000}
                         rows={6}
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        {...register('message')}
                         disabled={status === 'sending'}
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-slate-400 focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all resize-none disabled:opacity-50"
+                        className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-slate-400 transition-all focus:border-transparent focus:ring-2 focus:ring-yellow-400 disabled:opacity-50"
                         placeholder="Cuéntame sobre tu proyecto o consulta..."
                       />
-                      <p className="text-xs text-slate-400 mt-1">
-                        {formData.message.length} / 2000 caracteres
+                      <p className="mt-1 text-xs text-slate-400">
+                        {messageValue.length} / 2000 caracteres
                       </p>
+                      {errors.message && (
+                        <p className="mt-1 text-xs text-red-400">
+                          {errors.message.message}
+                        </p>
+                      )}
                     </div>
 
                     {/* Legal Checkboxes */}
-                    <div className="space-y-3 p-4 bg-white/[0.02] rounded-xl border border-white/10">
-                      <label className="flex items-start gap-3 cursor-pointer group">
+                    <div className="space-y-3 rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                      <label className="group flex cursor-pointer items-start gap-3">
                         <input
                           type="checkbox"
-                          required
-                          checked={formData.acceptPrivacy}
-                          onChange={(e) => setFormData({ ...formData, acceptPrivacy: e.target.checked })}
+                          {...register('acceptPrivacy')}
                           disabled={status === 'sending'}
-                          className="mt-0.5 w-5 h-5 rounded border-white/20 bg-white/5 text-yellow-400 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-0 cursor-pointer disabled:opacity-50"
+                          className="mt-0.5 h-5 w-5 cursor-pointer rounded border-white/20 bg-white/5 text-yellow-400 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-0 disabled:opacity-50"
                         />
-                        <span className="text-sm text-slate-300 leading-relaxed">
+                        <span className="text-sm leading-relaxed text-slate-300">
                           He leído y acepto la{' '}
-                          <Link href="/privacy" target="_blank" className="text-yellow-400 hover:text-yellow-300 font-semibold underline">
+                          <Link
+                            href="/privacy"
+                            target="_blank"
+                            className="font-semibold text-yellow-400 underline hover:text-yellow-300"
+                          >
                             Política de Privacidad
-                          </Link>
-                          {' '}*
+                          </Link>{' '}
+                          *
                         </span>
                       </label>
+                      {errors.acceptPrivacy && (
+                        <p className="text-xs text-red-400">
+                          {errors.acceptPrivacy.message}
+                        </p>
+                      )}
 
-                      <label className="flex items-start gap-3 cursor-pointer group">
+                      <label className="group flex cursor-pointer items-start gap-3">
                         <input
                           type="checkbox"
-                          checked={formData.acceptNewsletter}
-                          onChange={(e) => setFormData({ ...formData, acceptNewsletter: e.target.checked })}
+                          {...register('acceptNewsletter')}
                           disabled={status === 'sending'}
-                          className="mt-0.5 w-5 h-5 rounded border-white/20 bg-white/5 text-yellow-400 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-0 cursor-pointer disabled:opacity-50"
+                          className="mt-0.5 h-5 w-5 cursor-pointer rounded border-white/20 bg-white/5 text-yellow-400 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-0 disabled:opacity-50"
                         />
-                        <span className="text-sm text-slate-300 leading-relaxed">
-                          Deseo recibir noticias y actualizaciones sobre proyectos (opcional)
+                        <span className="text-sm leading-relaxed text-slate-300">
+                          Deseo recibir noticias y actualizaciones sobre proyectos
+                          (opcional)
                         </span>
                       </label>
                     </div>
@@ -454,9 +515,9 @@ export default function Contact() {
                       <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="flex items-center gap-3 p-4 bg-white/[0.05] border border-white/10 rounded-xl"
+                        className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.05] p-4"
                       >
-                        <CheckCircle className="w-5 h-5 text-white flex-shrink-0" />
+                        <CheckCircle className="h-5 w-5 flex-shrink-0 text-white" />
                         <span className="text-sm font-semibold text-white">
                           ¡Mensaje enviado! Te responderé en menos de 48 horas.
                         </span>
@@ -467,10 +528,12 @@ export default function Contact() {
                       <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/30 rounded-xl"
+                        className="flex items-center gap-3 rounded-xl border border-red-500/30 bg-red-500/10 p-4"
                       >
-                        <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
-                        <span className="text-sm font-semibold text-red-300">{errorMessage}</span>
+                        <AlertCircle className="h-5 w-5 flex-shrink-0 text-red-400" />
+                        <span className="text-sm font-semibold text-red-300">
+                          {errorMessage}
+                        </span>
                       </motion.div>
                     )}
 
@@ -479,22 +542,22 @@ export default function Contact() {
                       disabled={status === 'sending'}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full px-8 py-4 bg-yellow-400 hover:bg-yellow-300 text-black rounded-xl transition-all font-bold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg"
+                      className="flex w-full items-center justify-center gap-3 rounded-xl bg-yellow-400 px-8 py-4 font-bold text-black shadow-lg transition-all hover:bg-yellow-300 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {status === 'sending' ? (
                         <>
-                          <Loader2 className="w-5 h-5 animate-spin" />
+                          <Loader2 className="h-5 w-5 animate-spin" />
                           <span>Enviando...</span>
                         </>
                       ) : (
                         <>
-                          <Send className="w-5 h-5" />
+                          <Send className="h-5 w-5" />
                           <span>Enviar Mensaje</span>
                         </>
                       )}
                     </motion.button>
 
-                    <p className="text-xs text-center text-slate-400">
+                    <p className="text-center text-xs text-slate-400">
                       Formulario protegido por Formspree • Tus datos son privados
                     </p>
                   </form>
@@ -502,26 +565,29 @@ export default function Contact() {
               </div>
 
               {/* Tiempo de Respuesta - Ahora debajo del formulario */}
-              <motion.div 
-                whileHover={{ scale: 1.02 }} 
+              <motion.div
+                whileHover={{ scale: 1.02 }}
                 className="relative"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.7 }}
                 viewport={{ once: true }}
               >
-                <div className="absolute -inset-0.5 bg-yellow-400/20 rounded-2xl blur-lg opacity-40" />
-                <div className="relative p-6 bg-white/[0.03] rounded-2xl border border-white/10 backdrop-blur-xl">
+                <div className="absolute -inset-0.5 rounded-2xl bg-yellow-400/20 opacity-40 blur-lg" />
+                <div className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-yellow-400 flex items-center justify-center flex-shrink-0">
-                      <Clock className="w-6 h-6 text-black" />
+                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-yellow-400">
+                      <Clock className="h-6 w-6 text-black" />
                     </div>
                     <div>
-                      <h4 className="font-bold mb-2 text-white text-lg">Tiempo de Respuesta</h4>
-                      <p className="text-sm text-slate-300 leading-relaxed">
-                        Respondo personalmente a todos los mensajes en un plazo
-                        máximo de <strong className="text-white">48 horas hábiles</strong>. Para consultas urgentes,
-                        contacta directamente por email o redes sociales.
+                      <h4 className="mb-2 text-lg font-bold text-white">
+                        Tiempo de Respuesta
+                      </h4>
+                      <p className="text-sm leading-relaxed text-slate-300">
+                        Respondo personalmente a todos los mensajes en un plazo máximo de{' '}
+                        <strong className="text-white">48 horas hábiles</strong>. Para
+                        consultas urgentes, contacta directamente por email o redes
+                        sociales.
                       </p>
                     </div>
                   </div>
@@ -538,29 +604,32 @@ export default function Contact() {
               className="space-y-6"
             >
               <div className="space-y-4">
-                {contactInfo.map((info, index) => {
+                {contactInfo.map((info) => {
                   const Icon = info.icon
                   return (
                     <motion.div
-                      key={index}
+                      key={info.label}
                       whileHover={{ y: -4, scale: 1.02 }}
                       className="group relative"
                     >
-                      <div className="absolute -inset-0.5 bg-yellow-400/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <div className="relative flex items-center gap-4 p-5 bg-white/[0.02] rounded-2xl border border-white/10 backdrop-blur-xl">
-                        <div className="w-14 h-14 rounded-xl bg-yellow-400 flex items-center justify-center flex-shrink-0 shadow-lg">
-                          <Icon className="w-7 h-7 text-black" />
+                      <div className="absolute -inset-0.5 rounded-2xl bg-yellow-400/20 opacity-0 blur-lg transition-opacity group-hover:opacity-100" />
+                      <div className="relative flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.02] p-5 backdrop-blur-xl">
+                        <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl bg-yellow-400 shadow-lg">
+                          <Icon className="h-7 w-7 text-black" />
                         </div>
                         <div className="flex-1">
-                          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
+                          <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-400">
                             {info.label}
                           </p>
                           {info.link ? (
-                            <a href={info.link} className="text-white hover:text-yellow-400 transition-colors font-bold">
+                            <a
+                              href={info.link}
+                              className="font-bold text-white transition-colors hover:text-yellow-400"
+                            >
                               {info.value}
                             </a>
                           ) : (
-                            <p className="text-white font-bold">{info.value}</p>
+                            <p className="font-bold text-white">{info.value}</p>
                           )}
                         </div>
                       </div>
@@ -570,29 +639,34 @@ export default function Contact() {
               </div>
 
               <div>
-                <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-yellow-400" />
+                <h3 className="mb-4 flex items-center gap-2 text-2xl font-bold text-white">
+                  <Sparkles className="h-5 w-5 text-yellow-400" />
                   Sígueme
                 </h3>
                 <div className="space-y-3">
-                  {socialLinks.map((social, index) => {
+                  {socialLinks.map((social) => {
                     const Icon = social.icon
                     return (
                       <motion.a
-                        key={index}
+                        key={social.label}
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        onClick={() => trackEvent('click_social', 'engagement', social.label)}
+                        onClick={() =>
+                          trackEvent('click_social', {
+                            category: 'engagement',
+                            label: social.label,
+                          })
+                        }
                         whileHover={{ x: 5, scale: 1.02 }}
-                        className="group relative flex items-center justify-between p-4 bg-white/[0.02] rounded-2xl border border-white/10 backdrop-blur-xl transition-all"
+                        className="group relative flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.02] p-4 backdrop-blur-xl transition-all"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center shadow-lg">
+                          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 shadow-lg">
                             {Icon === 'tiktok' ? (
-                              <SiTiktok className="w-6 h-6 text-white" />
+                              <SiTiktok className="h-6 w-6 text-white" />
                             ) : (
-                              <Icon className="w-6 h-6 text-white" />
+                              <Icon className="h-6 w-6 text-white" />
                             )}
                           </div>
                           <div>
@@ -600,7 +674,7 @@ export default function Contact() {
                             <p className="text-sm text-slate-400">{social.handle}</p>
                           </div>
                         </div>
-                        <ExternalLink className="w-5 h-5 text-slate-500 group-hover:text-yellow-400 transition-colors" />
+                        <ExternalLink className="h-5 w-5 text-slate-500 transition-colors group-hover:text-yellow-400" />
                       </motion.a>
                     )
                   })}
@@ -611,7 +685,7 @@ export default function Contact() {
         </motion.div>
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
     </section>
   )
 }

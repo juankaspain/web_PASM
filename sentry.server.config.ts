@@ -17,7 +17,7 @@ Sentry.init({
   // `release` value here - use the environment variable `SENTRY_RELEASE`, so
   // that it will also get attached to your source maps
 
-  beforeSend(event, hint) {
+  beforeSend(event) {
     // Filter out errors in development
     if (process.env.NODE_ENV === 'development') {
       console.error('Sentry Event:', event)

@@ -1,32 +1,28 @@
 /**
  * Analytics Tracking Library
- * 
+ *
  * Custom event tracking for Google Analytics 4
  * Usage: Import and call tracking functions throughout the app
- * 
+ *
  * @example
  * ```typescript
  * import { analytics } from '@/lib/analytics'
- * 
+ *
  * // Track form submission
  * analytics.trackFormSubmit('contact_form')
- * 
+ *
  * // Track external link click
  * analytics.trackExternalLink('https://imdb.com/...', 'imdb')
  * ```
  */
 
-// Type definitions
-interface GTMWindow extends Window {
-  gtag?: (
-    command: string,
-    action: string,
-    params?: Record<string, any>
-  ) => void
+// Type definitions - use global Window augmented by gtag.d.ts
+declare const window: Window & {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  gtag?: (...args: any[]) => void
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dataLayer?: any[]
 }
-
-declare const window: GTMWindow
 
 /**
  * Generic event tracking function
@@ -38,11 +34,11 @@ export const trackEvent = (
   eventParams?: Record<string, any>
 ): void => {
   if (typeof window === 'undefined') return
-  
+
   // Check if gtag is available
   if (window.gtag) {
     window.gtag('event', eventName, eventParams)
-    
+
     // Log in development
     if (process.env.NODE_ENV === 'development') {
       console.log('[Analytics]', eventName, eventParams)
@@ -84,10 +80,7 @@ export const analytics = {
    * @param percentage - Progress percentage (25, 50, 75, 100)
    * @param videoProvider - Video hosting provider
    */
-  trackReelProgress: (
-    percentage: number,
-    videoProvider: string = 'vimeo'
-  ) => {
+  trackReelProgress: (percentage: number, videoProvider: string = 'vimeo') => {
     trackEvent('reel_progress', {
       milestone: `${percentage}%`,
       video_provider: videoProvider,
@@ -106,7 +99,7 @@ export const analytics = {
       form_location: 'contact_section',
       success,
     })
-    
+
     // Mark as conversion if successful
     if (success) {
       trackEvent('conversion', {
@@ -127,7 +120,7 @@ export const analytics = {
       file_name: fileName || `press-kit-${fileType}`,
       content_type: 'press_material',
     })
-    
+
     // Mark as conversion
     trackEvent('conversion', {
       conversion_type: 'press_kit_download',
@@ -166,10 +159,7 @@ export const analytics = {
    * @param platform - Social media platform ('instagram', 'twitter', 'facebook', etc.)
    * @param action - Action performed ('profile_click', 'share', etc.)
    */
-  trackSocialClick: (
-    platform: string,
-    action: string = 'profile_click'
-  ) => {
+  trackSocialClick: (platform: string, action: string = 'profile_click') => {
     trackEvent('social_interaction', {
       platform,
       action,
@@ -311,9 +301,7 @@ export const initAnalytics = (
  * Set user properties
  * @param properties - User properties to set
  */
-export const setUserProperties = (
-  properties: Record<string, any>
-): void => {
+export const setUserProperties = (properties: Record<string, any>): void => {
   if (typeof window === 'undefined' || !window.gtag) return
 
   window.gtag('set', 'user_properties', properties)
