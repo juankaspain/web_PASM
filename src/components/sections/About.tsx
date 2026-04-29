@@ -10,7 +10,7 @@ import {
   Users,
   Compass,
 } from 'lucide-react'
-import Image from 'next/image'
+import Image from '@/components/ui/SafeImage'
 import { generateShimmerDataURL, imageSizes } from '@/lib/image-utils'
 import { useInView } from '@/hooks/useInView'
 
@@ -64,7 +64,7 @@ export default function About() {
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div
           ref={ref}
-          className={`transition-all duration-[600ms] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+          className={`transition-all duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
         >
           <div className="mb-20 text-center">
             <div className="fade-in-up mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm">
@@ -200,7 +200,7 @@ export default function About() {
                   <div
                     key={value.title}
                     style={{ transitionDelay: `${(index + 1) * 100}ms` }}
-                    className={`group transition-all duration-[600ms] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+                    className={`group transition-all duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
                   >
                     <div className="relative h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm transition-all hover:border-yellow-400/30 hover:bg-white/[0.05]">
                       <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-yellow-400/30 bg-yellow-400/10 transition-transform group-hover:scale-110">
@@ -219,7 +219,7 @@ export default function About() {
 
           {/* Personal Reflection */}
           <div
-            className={`mx-auto max-w-4xl transition-all duration-[600ms] delay-500 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+            className={`mx-auto max-w-4xl transition-all delay-500 duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
           >
             <div className="rounded-2xl border border-yellow-500/30 bg-gradient-to-br from-yellow-900/10 to-orange-900/5 p-8 backdrop-blur-sm lg:p-12">
               <div className="flex items-start gap-6">
@@ -264,7 +264,7 @@ export default function About() {
 
           {/* Final Quote */}
           <div
-            className={`mx-auto mt-16 max-w-3xl text-center transition-all duration-[600ms] delay-700 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+            className={`mx-auto mt-16 max-w-3xl text-center transition-all delay-700 duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
           >
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-8 py-6 backdrop-blur-sm">
               <Quote className="mx-auto mb-4 h-8 w-8 text-yellow-400" />

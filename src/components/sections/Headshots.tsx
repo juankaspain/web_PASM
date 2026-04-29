@@ -2,8 +2,8 @@
 
 import { useInView } from '@/hooks/useInView'
 import { Camera, X, Filter, ChevronLeft, ChevronRight } from 'lucide-react'
-import { useState, useEffect } from 'react'
-import Image from 'next/image'
+import { useCallback, useEffect, useState } from 'react'
+import Image from '@/components/ui/SafeImage'
 
 interface Headshot {
   url: string
@@ -23,16 +23,16 @@ const headshots: Headshot[] = [
     category: 'comercial',
     alt: 'Almagro San Miguel - Headshot Comercial 2',
   },
-  // Dram�tico - Looks intensos y serios
+  // Dramático - Looks intensos y serios
   {
     url: '/assets/headshots/dramatico-1.jpg',
     category: 'dramatico',
-    alt: 'Almagro San Miguel - Headshot Dram�tico 1',
+    alt: 'Almagro San Miguel - Headshot Dramático 1',
   },
   {
     url: '/assets/headshots/dramatico-2.jpg',
     category: 'dramatico',
-    alt: 'Almagro San Miguel - Headshot Dram�tico 2',
+    alt: 'Almagro San Miguel - Headshot Dramático 2',
   },
   // Personaje - Diferentes caracteres
   {
@@ -61,7 +61,7 @@ const headshots: Headshot[] = [
 const categories = [
   { id: 'all', label: 'Todas', color: 'yellow' },
   { id: 'comercial', label: 'Comercial', color: 'blue' },
-  { id: 'dramatico', label: 'Dram�tico', color: 'red' },
+  { id: 'dramatico', label: 'Dramático', color: 'red' },
   { id: 'personaje', label: 'Personaje', color: 'green' },
   { id: 'fullbody', label: 'Full Body', color: 'purple' },
 ]
@@ -79,6 +79,22 @@ export default function Headshots() {
   const selectedImage =
     selectedImageIndex !== null ? filteredHeadshots[selectedImageIndex] : null
 
+  const navigatePrevious = useCallback(() => {
+    setSelectedImageIndex((prev) =>
+      prev === null ? prev : prev === 0 ? filteredHeadshots.length - 1 : prev - 1
+    )
+  }, [filteredHeadshots.length])
+
+  const navigateNext = useCallback(() => {
+    setSelectedImageIndex((prev) =>
+      prev === null ? prev : prev === filteredHeadshots.length - 1 ? 0 : prev + 1
+    )
+  }, [filteredHeadshots.length])
+
+  const closeModal = useCallback(() => {
+    setSelectedImageIndex(null)
+  }, [])
+
   // Keyboard navigation
   useEffect(() => {
     if (selectedImageIndex === null) return
@@ -95,27 +111,7 @@ export default function Headshots() {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [selectedImageIndex, filteredHeadshots.length])
-
-  const navigatePrevious = () => {
-    if (selectedImageIndex !== null) {
-      setSelectedImageIndex((prev) =>
-        prev === 0 ? filteredHeadshots.length - 1 : (prev as number) - 1
-      )
-    }
-  }
-
-  const navigateNext = () => {
-    if (selectedImageIndex !== null) {
-      setSelectedImageIndex((prev) =>
-        prev === filteredHeadshots.length - 1 ? 0 : (prev as number) + 1
-      )
-    }
-  }
-
-  const closeModal = () => {
-    setSelectedImageIndex(null)
-  }
+  }, [closeModal, navigateNext, navigatePrevious, selectedImageIndex])
 
   // Prevent right-click and drag on images
   const handleImageProtection = (e: React.MouseEvent) => {
@@ -154,7 +150,7 @@ export default function Headshots() {
               >
                 <Camera className="h-4 w-4 text-yellow-400" strokeWidth={2} />
                 <span className="text-sm font-medium tracking-wide text-slate-300">
-                  Fotograf�a Profesional
+                  Fotografía Profesional
                 </span>
               </div>
 
@@ -171,7 +167,7 @@ export default function Headshots() {
               <p
                 className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-400 transition-all delay-[400ms] duration-[500ms] ${isInView ? 'opacity-100' : 'opacity-0'}`}
               >
-                Selecci�n de fotograf�as profesionales para casting directors y
+                Selección de fotografías profesionales para casting directors y
                 productoras
               </p>
             </div>
@@ -240,10 +236,10 @@ export default function Headshots() {
             >
               <p className="text-slate-400">
                 <span className="font-semibold text-white">Nota:</span> Headshots
-                actualizados regularmente. Para solicitar fotograf�as en alta resoluci�n o
-                sesiones espec�ficas, contactar a trav�s de{' '}
+                actualizados regularmente. Para solicitar fotografías en alta resolución o
+                sesiones específicas, contactar a través de{' '}
                 <a href="#contact" className="text-yellow-400 hover:underline">
-                  representaci�n
+                  representación
                 </a>
                 .
               </p>
@@ -340,7 +336,7 @@ export default function Headshots() {
         {/* Instructions */}
         <div className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md">
           <span className="text-xs font-medium text-white/60">
-            Usa ? ? o los botones para navegar � ESC para cerrar
+            Usa las flechas o los botones para navegar | ESC para cerrar
           </span>
         </div>
       </div>

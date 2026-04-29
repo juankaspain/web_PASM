@@ -2,7 +2,7 @@
 
 import { useInView } from '@/hooks/useInView'
 import { Film, Calendar, User, Sparkles, X, Play, Heart, Star, Quote } from 'lucide-react'
-import Image from 'next/image'
+import Image from '@/components/ui/SafeImage'
 import { useState } from 'react'
 
 interface FilmDetails {
@@ -160,13 +160,13 @@ export default function Cinema() {
           <div
             ref={ref}
             className={`transition-all duration-[600ms] ${
-              isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+              isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'
             }`}
           >
             <div className="mb-16 text-center">
               <div
-                className={`mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm transition-all duration-[500ms] delay-100 ${
-                  isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+                className={`mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm transition-all delay-100 duration-[500ms] ${
+                  isInView ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
                 }`}
               >
                 <Film className="h-4 w-4 text-yellow-400" strokeWidth={2} />
@@ -176,8 +176,8 @@ export default function Cinema() {
               </div>
 
               <h2
-                className={`mb-6 text-5xl font-bold tracking-tight text-white lg:text-6xl transition-all duration-[500ms] delay-200 ${
-                  isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+                className={`mb-6 text-5xl font-bold tracking-tight text-white transition-all delay-200 duration-[500ms] lg:text-6xl ${
+                  isInView ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
                 }`}
               >
                 Cine & Cortometrajes
@@ -185,13 +185,13 @@ export default function Cinema() {
 
               {/* Golden line */}
               <div
-                className={`mx-auto mb-6 h-0.5 w-20 bg-yellow-400 transition-all duration-[800ms] delay-[250ms] origin-center ${
-                  isInView ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
+                className={`mx-auto mb-6 h-0.5 w-20 origin-center bg-yellow-400 transition-all delay-[250ms] duration-[800ms] ${
+                  isInView ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
                 }`}
               />
 
               <p
-                className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-400 transition-all duration-[500ms] delay-300 ${
+                className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-400 transition-all delay-300 duration-[500ms] ${
                   isInView ? 'opacity-100' : 'opacity-0'
                 }`}
               >
@@ -204,8 +204,8 @@ export default function Cinema() {
                 <button
                   key={film.id}
                   onClick={() => setSelectedFilm(film)}
-                  className={`group relative w-full text-left hover-lift-8 transition-all duration-[600ms] ${
-                    isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  className={`hover-lift-8 group relative w-full text-left transition-all duration-[600ms] ${
+                    isInView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                   }`}
                   style={{ transitionDelay: isInView ? `${400 + index * 100}ms` : '0ms' }}
                 >
@@ -282,7 +282,7 @@ export default function Cinema() {
       {/* Modal */}
       <div
         className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md transition-all duration-300 ${
-          selectedFilm ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          selectedFilm ? 'opacity-100' : 'pointer-events-none opacity-0'
         }`}
         onClick={() => setSelectedFilm(null)}
       >

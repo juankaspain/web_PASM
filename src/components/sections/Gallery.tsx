@@ -2,7 +2,7 @@
 
 import { useInView } from '@/hooks/useInView'
 import { useState } from 'react'
-import Image from 'next/image'
+import Image from '@/components/ui/SafeImage'
 import {
   X,
   ZoomIn,
@@ -183,7 +183,7 @@ export default function Gallery() {
             </div>
 
             <h2
-              className={`mb-6 text-5xl font-bold tracking-tight text-white lg:text-6xl transition-all delay-200 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
+              className={`mb-6 text-5xl font-bold tracking-tight text-white transition-all delay-200 duration-[500ms] lg:text-6xl ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
             >
               Galería Profesional
             </h2>
@@ -304,7 +304,7 @@ export default function Gallery() {
         )}
 
         <div
-          className={`relative w-full max-w-5xl transition-all duration-300 ${lightboxImage ? 'scale-100 opacity-100' : 'scale-90 opacity-0 translate-y-12'}`}
+          className={`relative w-full max-w-5xl transition-all duration-300 ${lightboxImage ? 'scale-100 opacity-100' : 'translate-y-12 scale-90 opacity-0'}`}
           onClick={(e) => e.stopPropagation()}
         >
           {lightboxImage && (

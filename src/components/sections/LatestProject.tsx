@@ -12,7 +12,7 @@ import {
   Video,
   ChevronDown,
 } from 'lucide-react'
-import Image from 'next/image'
+import Image from '@/components/ui/SafeImage'
 import { useState } from 'react'
 import { useInView } from '@/hooks/useInView'
 
@@ -44,7 +44,7 @@ export default function LatestProject() {
           >
             <Sparkles className="h-4 w-4 text-white" strokeWidth={2} />
             <span className="text-sm font-bold tracking-wide text-white">
-              �LTIMO TRABAJO
+              ÚLTIMO TRABAJO
             </span>
           </div>
 
@@ -68,8 +68,8 @@ export default function LatestProject() {
               </div>
 
               <p className="mb-6 text-xl leading-relaxed text-slate-300">
-                Pel�cula dram�tica dirigida por{' '}
-                <span className="font-semibold text-white">Agust�n D�az Yanes</span> sobre
+                Película dramática dirigida por{' '}
+                <span className="font-semibold text-white">Agustín Díaz Yanes</span> sobre
                 ETA y sus consecuencias. Estrenada en cines en octubre de 2025 y{' '}
                 <span className="font-semibold text-white">disponible en Netflix</span>.
               </p>
@@ -80,7 +80,7 @@ export default function LatestProject() {
                   Junto a <span className="font-semibold text-white">Susana Abaitua</span>
                   , <span className="font-semibold text-white">Aitor Luna</span>,{' '}
                   <span className="font-semibold text-white">Luis Callejo</span> y{' '}
-                  <span className="font-semibold text-white">Ruth D�az</span>
+                  <span className="font-semibold text-white">Ruth Díaz</span>
                 </p>
               </div>
 
@@ -101,7 +101,7 @@ export default function LatestProject() {
                   className="hover-scale inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-8 py-4 font-bold text-white transition-all hover:bg-white/[0.08]"
                 >
                   <Youtube className="h-5 w-5" />
-                  Ver Tr�iler
+                  Ver Tráiler
                 </a>
                 <a
                   href="https://www.imdb.com/title/tt32129665/"
@@ -166,7 +166,7 @@ export default function LatestProject() {
                 Entre Bastidores
               </h3>
               <p className="text-lg text-slate-400">
-                C�mo fue trabajar en esta producci�n
+                Cómo fue trabajar en esta producción
               </p>
             </div>
 
@@ -195,21 +195,21 @@ export default function LatestProject() {
                     <p className="mb-4 leading-relaxed text-slate-300">
                       El actor sevillano{' '}
                       <span className="font-semibold text-white">Almagro San Miguel</span>{' '}
-                      cuenta c�mo ha sido trabajar en{' '}
+                      cuenta cómo ha sido trabajar en{' '}
                       <span className="font-semibold text-white">
                         "Un fantasma en la batalla"
                       </span>{' '}
                       junto al director{' '}
-                      <span className="font-semibold text-white">Agust�n D�az Yanes</span>
-                      . Tambi�n habla sobre su participaci�n en{' '}
+                      <span className="font-semibold text-white">Agustín Díaz Yanes</span>
+                      . También habla sobre su participación en{' '}
                       <span className="font-semibold text-white">"Carta Blanca"</span> de
                       Gerardo Herrero.
                     </p>
                     <div className="flex items-center gap-4 text-sm text-slate-400">
                       <span>?? Canal Sur</span>
-                      <span>�</span>
+                      <span>|</span>
                       <span>?? 14 nov 2025</span>
-                      <span>�</span>
+                      <span>|</span>
                       <a
                         href="https://www.youtube.com/watch?v=MV5kUBPfd9U"
                         target="_blank"
@@ -225,7 +225,7 @@ export default function LatestProject() {
             </div>
           </div>
 
-          {/* Collapsible Character Info Section - Sin t�tulo Antonio */}
+          {/* Collapsible Character Info Section - Sin título Antonio */}
           <div
             className={`mt-20 transition-all delay-[400ms] duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
           >
@@ -234,7 +234,7 @@ export default function LatestProject() {
                 onClick={() => setShowCharacterInfo(!showCharacterInfo)}
                 className="hover-scale inline-flex items-center gap-3 rounded-full border border-white/20 bg-gradient-to-r from-white/[0.08] to-white/[0.05] px-8 py-4 font-bold text-white shadow-xl transition-all hover:border-yellow-400/40 hover:bg-white/[0.12]"
               >
-                <span>�Quieres saber m�s sobre mi personaje?</span>
+                <span>¿Quieres saber más sobre mi personaje?</span>
                 <ChevronDown
                   className={`h-5 w-5 text-yellow-400 transition-transform duration-300 ${showCharacterInfo ? 'rotate-180' : ''}`}
                 />
@@ -262,21 +262,21 @@ export default function LatestProject() {
                         <span className="font-semibold text-white">
                           el novio de Amaia
                         </span>
-                        , la joven guardia civil que se infiltra en ETA durante m�s de una
-                        d�cada. Su personaje representa{' '}
+                        , la joven guardia civil que se infiltra en ETA durante más de una
+                        década. Su personaje representa{' '}
                         <span className="font-semibold text-white">
                           el amor incondicional
                         </span>{' '}
-                        y el apoyo emocional en medio de una operaci�n extremadamente
+                        y el apoyo emocional en medio de una operación extremadamente
                         peligrosa.
                       </p>
                       <p>
-                        Interpreta a un hombre que debe enfrentar la decisi�n m�s dif�cil:{' '}
+                        Interpreta a un hombre que debe enfrentar la decisión más difícil:{' '}
                         <span className="font-semibold text-white">
                           dejar ir al amor de su vida
                         </span>{' '}
-                        por el bien de la misi�n y la seguridad nacional. Un papel cargado
-                        de emoci�n, sacrificio y tensi�n dram�tica.
+                        por el bien de la misión y la seguridad nacional. Un papel cargado
+                        de emoción, sacrificio y tensión dramática.
                       </p>
                     </div>
                   </div>
@@ -294,7 +294,7 @@ export default function LatestProject() {
 
                     <div className="space-y-4">
                       <blockquote className="border-l-4 border-white/20 pl-4 italic text-slate-300">
-                        "Yo al amor de mi vida la esperar�a lo que fuera necesario. Es un
+                        "Yo al amor de mi vida la esperaría lo que fuera necesario. Es un
                         personaje que se mueve entre la lealtad y la duda, con una
                         presencia sobria y contenida."
                       </blockquote>
@@ -304,9 +304,9 @@ export default function LatestProject() {
                           <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-white" />
                           <p className="text-sm text-slate-300">
                             <span className="font-semibold text-white">
-                              Contexto hist�rico:
+                              Contexto histórico:
                             </span>{' '}
-                            Basado en la Operaci�n Santuario, la mayor operaci�n
+                            Basado en la Operación Santuario, la mayor operación
                             encubierta contra ETA
                           </p>
                         </div>
@@ -314,9 +314,9 @@ export default function LatestProject() {
                           <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-white" />
                           <p className="text-sm text-slate-300">
                             <span className="font-semibold text-white">
-                              Trabajo de investigaci�n:
+                              Trabajo de investigación:
                             </span>{' '}
-                            Habl� con personas que vivieron los atentados para entender el
+                            Hablé con personas que vivieron los atentados para entender el
                             contexto emocional
                           </p>
                         </div>
@@ -326,8 +326,8 @@ export default function LatestProject() {
                             <span className="font-semibold text-white">
                               Reto interpretativo:
                             </span>{' '}
-                            Trabajar la qu�mica con Susana Abaitua para que se viera que
-                            est�n muy enamorados
+                            Trabajar la química con Susana Abaitua para que se viera que
+                            están muy enamorados
                           </p>
                         </div>
                       </div>
@@ -340,14 +340,14 @@ export default function LatestProject() {
                 <div className="inline-block max-w-3xl rounded-2xl border border-white/10 bg-white/[0.03] px-8 py-6 backdrop-blur-sm">
                   <p className="text-lg leading-relaxed text-slate-300">
                     <span className="text-2xl font-bold text-white">"</span>
-                    Es un proyecto que me gust� desde el primer momento. La historia sobre
+                    Es un proyecto que me gustó desde el primer momento. La historia sobre
                     la lucha contra ETA es cruda. El trabajo de Susana Abaitua es de Goya.
-                    Ella tiene que rechazar la vida familiar que ten�a previsto, soy su
+                    Ella tiene que rechazar la vida familiar que tenía previsto, soy su
                     pareja.
                     <span className="text-2xl font-bold text-white">"</span>
                   </p>
                   <p className="mt-4 font-semibold text-slate-400">
-                    � Almagro San Miguel
+                    - Almagro San Miguel
                   </p>
                 </div>
               </div>

@@ -4,6 +4,7 @@ import { useInView } from '@/hooks/useInView'
 import { Newspaper, Quote, Play, Tv, X } from 'lucide-react'
 import { useState } from 'react'
 import YouTubeEmbed from '@/components/ui/YouTubeEmbed'
+import Image from '@/components/ui/SafeImage'
 
 interface Interview {
   title: string
@@ -252,7 +253,7 @@ export default function Press() {
 
                       <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] shadow-2xl backdrop-blur-xl transition-all duration-500 hover:border-yellow-400/30">
                         <div className="relative aspect-video overflow-hidden bg-black">
-                          <img
+                          <Image
                             src={`https://img.youtube.com/vi/${interview.youtubeId}/mqdefault.jpg`}
                             alt={interview.title}
                             width={320}

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import Image from 'next/image'
+import Image from '@/components/ui/SafeImage'
 import { generateShimmerDataURL, imageSizes } from '@/lib/image-utils'
 import { X } from 'lucide-react'
 
