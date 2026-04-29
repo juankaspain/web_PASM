@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useRef, useState } from 'react'
 import {
   Calendar,
   Award,
@@ -9,15 +10,16 @@ import {
   TrendingUp,
   Sparkles,
   Theater,
+  type LucideIcon,
 } from 'lucide-react'
-import { useRef, useState, useEffect } from 'react'
+import { useOneShotInView } from '@/hooks/useOneShotInView'
 
 interface TimelineEvent {
   year: string
   title: string
   subtitle: string
   description: string
-  icon: any
+  icon: LucideIcon
   gradient: string
   type: 'education' | 'work' | 'award' | 'milestone'
 }
@@ -155,33 +157,11 @@ const events: TimelineEvent[] = [
   },
 ]
 
-function useInView(options?: IntersectionObserverInit) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [isInView, setIsInView] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsInView(true)
-        observer.unobserve(el)
-      }
-    }, options)
-    observer.observe(el)
-    return () => observer.disconnect()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  return { ref, isInView }
-}
-
 export default function Timeline() {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement | null>(null)
   const [lineHeightPct, setLineHeightPct] = useState(0)
-
-  const headerInView = useInView({ threshold: 0.1 })
-  const footerInView = useInView({ threshold: 0.1 })
+  const [headerRef, headerInView] = useOneShotInView({ threshold: 0.1 })
+  const [footerRef, footerInView] = useOneShotInView({ threshold: 0.1 })
 
   useEffect(() => {
     const handleScroll = () => {
@@ -222,8 +202,8 @@ export default function Timeline() {
 
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div
-          ref={headerInView.ref}
-          className={`transition-all duration-[600ms] ${headerInView.isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
+          ref={headerRef}
+          className={`transition-all duration-[600ms] ${headerInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
         >
           <div className="mb-20 text-center">
             <h2 className="mb-8 text-5xl font-bold tracking-tight lg:text-6xl">
@@ -271,8 +251,8 @@ export default function Timeline() {
           </div>
 
           <div
-            ref={footerInView.ref}
-            className={`mt-20 text-center transition-all delay-300 duration-[600ms] ${footerInView.isInView ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}
+            ref={footerRef}
+            className={`mt-20 text-center transition-all delay-300 duration-[600ms] ${footerInView ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}
           >
             <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 backdrop-blur-sm">
               <Sparkles className="h-5 w-5 text-blue-400" />
@@ -293,24 +273,27 @@ function TimelineEventRow({
   isLeft,
 }: {
   event: TimelineEvent
-  Icon: any
+  Icon: LucideIcon
   isLeft: boolean
 }) {
-  const row = useInView({ threshold: 0.1, rootMargin: '-100px' })
+  const [rowRef, rowInView] = useOneShotInView({
+    threshold: 0.1,
+    rootMargin: '-100px',
+  })
 
   return (
     <div
-      ref={row.ref}
+      ref={rowRef}
       className={`relative flex items-center transition-all delay-100 duration-[600ms] ${
         isLeft ? 'md:justify-end' : 'md:justify-start'
-      } ${row.isInView ? 'translate-x-0 opacity-100' : `opacity-0 ${isLeft ? '-translate-x-[50px]' : 'translate-x-[50px]'}`}`}
+      } ${rowInView ? 'translate-x-0 opacity-100' : `opacity-0 ${isLeft ? '-translate-x-[50px]' : 'translate-x-[50px]'}`}`}
     >
       <div className="hidden pr-12 md:block md:w-1/2">
-        {isLeft && <TimelineCard event={event} Icon={Icon} />}
+        {isLeft && <TimelineCard event={event} />}
       </div>
 
       <div className="absolute left-0 z-10 -translate-x-0 md:left-1/2 md:-translate-x-1/2">
-        <div className="relative hover:scale-[1.2] hover:rotate-[360deg] transition-transform duration-500">
+        <div className="relative transition-transform duration-500 hover:rotate-[360deg] hover:scale-[1.2]">
           <div
             className={`h-16 w-16 rounded-full bg-gradient-to-br ${event.gradient} flex items-center justify-center shadow-xl`}
           >
@@ -323,19 +306,19 @@ function TimelineEventRow({
       </div>
 
       <div className="hidden pl-12 md:block md:w-1/2">
-        {!isLeft && <TimelineCard event={event} Icon={Icon} />}
+        {!isLeft && <TimelineCard event={event} />}
       </div>
 
       <div className="w-full pl-24 md:hidden">
-        <TimelineCard event={event} Icon={Icon} />
+        <TimelineCard event={event} />
       </div>
     </div>
   )
 }
 
-function TimelineCard({ event, Icon: _Icon }: { event: TimelineEvent; Icon: any }) {
+function TimelineCard({ event }: { event: TimelineEvent }) {
   return (
-    <div className="group relative hover-lift">
+    <div className="hover-lift group relative">
       <div
         className={`absolute -inset-[1px] bg-gradient-to-br ${event.gradient} rounded-2xl opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-40`}
       />

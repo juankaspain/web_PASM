@@ -20,10 +20,10 @@ test.describe('Navigation', () => {
     await expect(page).toHaveURL(/#about/)
   })
 
-  test('should navigate to Portfolio section', async ({ page }) => {
-    await page.click('a[href="#portfolio"]')
+  test('should navigate to Series section', async ({ page }) => {
+    await page.click('a[href="#series"]')
     await page.waitForTimeout(500)
-    await expect(page).toHaveURL(/#portfolio/)
+    await expect(page).toHaveURL(/#series/)
   })
 
   test('should navigate to Contact section', async ({ page }) => {
@@ -35,8 +35,8 @@ test.describe('Navigation', () => {
   test('should have all main navigation links', async ({ page }) => {
     const links = [
       'a[href="#about"]',
-      'a[href="#portfolio"]',
-      'a[href="#skills"]',
+      'a[href="#series"]',
+      'a[href="#filmografia"]',
       'a[href="#contact"]',
     ]
 
@@ -48,7 +48,7 @@ test.describe('Navigation', () => {
   test('should have working footer links', async ({ page }) => {
     const footer = page.locator('footer')
     await expect(footer).toBeVisible()
-    
+
     // Check for social media links
     const socialLinks = footer.locator('a[target="_blank"]')
     const count = await socialLinks.count()

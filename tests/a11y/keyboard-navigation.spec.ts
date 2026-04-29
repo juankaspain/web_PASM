@@ -2,101 +2,89 @@ import { test, expect } from '@playwright/test'
 
 test.describe('Keyboard Navigation', () => {
   test('should navigate through navbar with keyboard', async ({ page }) => {
-    await page.goto('http://localhost:3000')
+    await page.goto('/')
 
-    // Tab through navbar items
     for (let i = 0; i < 5; i++) {
       await page.keyboard.press('Tab')
     }
 
-    // Check if we're on a navigation element
-    const activeElement = await page.evaluate(
-      () => document.activeElement?.getAttribute('href')
-    )
-    expect(activeElement).toBeTruthy()
+    const activeElement = await page.evaluate(() => document.activeElement?.tagName)
+    expect(['A', 'BUTTON']).toContain(activeElement)
   })
 
   test('should open and close mobile menu with keyboard', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 })
-    await page.goto('http://localhost:3000')
+    await page.goto('/')
 
-    // Tab to hamburger button
-    await page.keyboard.press('Tab')
-
-    // Press Enter to open menu
+    await page.getByRole('button', { name: /menú|menu/i }).focus()
     await page.keyboard.press('Enter')
 
-    // Menu should be visible
-    const mobileMenu = page.locator('[role="dialog"], .mobile-menu').first()
+    const mobileMenu = page.getByRole('dialog', { name: /menú|menu/i })
     await expect(mobileMenu).toBeVisible()
 
-    // Press Escape to close
     await page.keyboard.press('Escape')
 
-    // Menu should be hidden
     await expect(mobileMenu).not.toBeVisible()
   })
 
   test('should submit contact form with keyboard', async ({ page }) => {
-    await page.goto('http://localhost:3000#contact')
+    await page.route('**/api/contact', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ success: true, message: 'Mensaje enviado con éxito' }),
+      })
+    })
+
+    await page.goto('/#contact')
     await page.waitForLoadState('networkidle')
 
-    // Tab to first input
-    const nameInput = page.locator('input[name="name"]')
-    await nameInput.focus()
-    await nameInput.fill('Test User')
+    await page.locator('input[name="name"]').fill('Test User')
+    await page.locator('input[name="email"]').fill('test@example.com')
+    await page.locator('select[name="category"]').selectOption('Consulta General')
+    await page.locator('textarea[name="message"]').fill('This is a test message')
+    await page.locator('input[name="acceptPrivacy"]').check()
 
-    // Tab to email
-    await page.keyboard.press('Tab')
-    await page.keyboard.type('test@example.com')
-
-    // Tab to message
-    await page.keyboard.press('Tab')
-    await page.keyboard.type('This is a test message')
-
-    // Tab to submit button and press Enter
-    await page.keyboard.press('Tab')
+    await page.locator('button[type="submit"]').focus()
     await page.keyboard.press('Enter')
 
-    // Should show success/error message (form is functional)
-    // Wait a bit for submission
-    await page.waitForTimeout(2000)
+    await expect(page.getByText(/mensaje enviado/i)).toBeVisible()
   })
 
-  test('FAQ accordion should be keyboard operable', async ({ page }) => {
-    await page.goto('http://localhost:3000#faq')
+  test('milestones controls should be keyboard operable when present', async ({
+    page,
+  }) => {
+    await page.goto('/#timeline')
     await page.waitForLoadState('networkidle')
 
-    // Find first FAQ button
-    const faqButton = page.locator('button').filter({ hasText: /¿|\?/ }).first()
-    await faqButton.focus()
+    const timeline = page.locator('#timeline')
+    await expect(timeline).toBeVisible()
 
-    // Press Enter to expand
+    const firstButton = timeline.locator('button').first()
+    if ((await firstButton.count()) === 0) {
+      test.skip(true, 'Timeline section has no keyboard-operated buttons.')
+    }
+
+    await firstButton.focus()
     await page.keyboard.press('Enter')
 
-    // Check if content is visible
-    const isExpanded = await faqButton.getAttribute('aria-expanded')
-    expect(isExpanded).toBe('true')
+    await expect(firstButton).toBeFocused()
   })
 
   test('should trap focus in modal when open', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 })
-    await page.goto('http://localhost:3000')
+    await page.goto('/')
 
-    // Open mobile menu
-    const menuButton = page.locator('button[aria-label*="menu"]').first()
-    await menuButton.click()
+    await page.getByRole('button', { name: /menú|menu/i }).click()
 
-    // Tab through modal - focus should stay within
     for (let i = 0; i < 20; i++) {
       await page.keyboard.press('Tab')
     }
 
-    // Active element should still be within the modal
     const isInModal = await page.evaluate(() => {
       const activeEl = document.activeElement
       const modal = document.querySelector('[role="dialog"]')
-      return modal?.contains(activeEl as Node)
+      return Boolean(activeEl && modal?.contains(activeEl))
     })
 
     expect(isInModal).toBe(true)

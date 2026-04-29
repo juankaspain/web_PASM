@@ -3,6 +3,7 @@
 import { useInView } from '@/hooks/useInView'
 import { Newspaper, Quote, Play, Tv, X } from 'lucide-react'
 import { useState } from 'react'
+import YouTubeEmbed from '@/components/ui/YouTubeEmbed'
 
 interface Interview {
   title: string
@@ -374,15 +375,12 @@ export default function Press() {
             </button>
 
             <div className="relative rounded-2xl border-2 border-yellow-400/30 bg-white/[0.02] p-2 shadow-2xl backdrop-blur-sm">
-              <div className="relative aspect-video overflow-hidden rounded-xl bg-black">
-                <iframe
-                  src={`https://www.youtube.com/embed/${modalVideo.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
-                  title={modalVideo.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="absolute inset-0 h-full w-full"
-                />
-              </div>
+              <YouTubeEmbed
+                videoId={modalVideo.youtubeId}
+                title={modalVideo.title}
+                autoplay
+                className="rounded-xl"
+              />
 
               <div className="p-6">
                 <h3 className="mb-2 text-2xl font-semibold text-white">

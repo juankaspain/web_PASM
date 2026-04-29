@@ -29,8 +29,9 @@ vi.mock('@/components/sections/SkillsGraph', () => ({
 
 // Mock dynamic imports
 vi.mock('next/dynamic', () => ({
-  default: (importFn: any) => {
-    const componentName = importFn.toString().match(/import\('.*\/(\w+)'\)/)?.[1] || 'Component'
+  default: (importFn: () => Promise<unknown>) => {
+    const componentName =
+      importFn.toString().match(/import\('.*\/(\w+)'\)/)?.[1] || 'Component'
     return () => <div data-testid={componentName.toLowerCase()}>{componentName}</div>
   },
 }))

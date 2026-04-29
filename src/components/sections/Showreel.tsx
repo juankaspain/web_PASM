@@ -36,7 +36,7 @@ const showreels: ShowreelVideo[] = [
     year: '2024',
     title: 'Showreel Profesional 2024',
     description:
-      'Recopilación actualizada de mis mejores trabajos recientes en televisión y cine. Incluye escenas de La Moderna (TVE), Un fantasma en la batalla (Netflix) y otros proyectos destacados.',
+      'Recopilaci�n actualizada de mis mejores trabajos recientes en televisi�n y cine. Incluye escenas de La Moderna (TVE), Un fantasma en la batalla (Netflix) y otros proyectos destacados.',
     duration: '3:24',
     youtubeId: 'kS39Q8KXT1U',
   },
@@ -45,7 +45,7 @@ const showreels: ShowreelVideo[] = [
     year: '2021',
     title: 'Showreel 2021',
     description:
-      'Archivo de trabajos previos destacando interpretaciones en Vis a vis: El Oasis, La caza. Tramuntana y otros proyectos de televisión y cine.',
+      'Archivo de trabajos previos destacando interpretaciones en Vis a vis: El Oasis, La caza. Tramuntana y otros proyectos de televisi�n y cine.',
     duration: '2:45',
     youtubeId: 'x1ie5yWs5mQ',
   },
@@ -54,7 +54,7 @@ const showreels: ShowreelVideo[] = [
 const clips: ClipVideo[] = [
   {
     title: 'La Caza: Guadiana',
-    description: 'Actuación en la serie de TVE',
+    description: 'Actuaci�n en la serie de TVE',
     project: 'La Caza (TVE)',
     year: '2024',
     duration: '2:11',
@@ -69,9 +69,9 @@ const clips: ClipVideo[] = [
     youtubeId: 'ursuF5r4_Ms',
   },
   {
-    title: 'Operación: Barrio Inglés',
-    description: 'Participación en la serie de TVE',
-    project: 'Operación: Barrio Inglés (TVE)',
+    title: 'Operaci�n: Barrio Ingl�s',
+    description: 'Participaci�n en la serie de TVE',
+    project: 'Operaci�n: Barrio Ingl�s (TVE)',
     year: '2024',
     duration: '2:54',
     youtubeId: '1t0JcwYR-so',
@@ -86,7 +86,7 @@ const clips: ClipVideo[] = [
   },
   {
     title: 'Desconocidas',
-    description: 'Actuación en la serie',
+    description: 'Actuaci�n en la serie',
     project: 'Desconocidas (Serie)',
     year: '2022',
     duration: '3:19',
@@ -109,25 +109,25 @@ const clips: ClipVideo[] = [
     youtubeId: 'kw3SvwH4khQ',
   },
   {
-    title: 'Hernán Cortés',
+    title: 'Hern�n Cort�s',
     description: 'Gonzalo de Sandoval - Escenas',
-    project: 'Hernán Cortés',
+    project: 'Hern�n Cort�s',
     year: '2020',
     duration: '3:33',
     youtubeId: '2P7Ha4u3qBA',
   },
   {
-    title: 'Centro Médico',
-    description: 'Raúl Cuevas - Escena completa',
-    project: 'Centro Médico (TVE)',
+    title: 'Centro M�dico',
+    description: 'Ra�l Cuevas - Escena completa',
+    project: 'Centro M�dico (TVE)',
     year: '2017',
     duration: '7:55',
     youtubeId: '6YOHYHYj8Qk',
   },
   {
-    title: 'Actuación Destacada',
+    title: 'Actuaci�n Destacada',
     description: 'Escena de trabajo',
-    project: 'Producción Audiovisual',
+    project: 'Producci�n Audiovisual',
     year: '2020',
     duration: '3:15',
     youtubeId: 'xitfEzmseG4',
@@ -136,51 +136,51 @@ const clips: ClipVideo[] = [
 
 const pressInterviews: PressInterview[] = [
   {
-    title: '"Al principio tenía una voz en la cabeza que me decía que era muy mal actor"',
+    title: '"Al principio ten�a una voz en la cabeza que me dec�a que era muy mal actor"',
     publication: 'La Vanguardia',
     date: '17 de octubre, 2025',
     excerpt:
-      'El actor sevillano habla sobre el síndrome del impostor, su papel en Un fantasma en la batalla y cómo las señoras mayores le hablan como a su personaje de La Moderna.',
+      'El actor sevillano habla sobre el s�ndrome del impostor, su papel en Un fantasma en la batalla y c�mo las se�oras mayores le hablan como a su personaje de La Moderna.',
     url: 'https://www.lavanguardia.com/gente/20251017/11166920/almagro-san-miguel-principio-tenia-voz-cabeza-me-decia-mal-actor-me-fustiga',
   },
   {
-    title: 'Entrevista a Almagro San Miguel, el galán de La Moderna',
+    title: 'Entrevista a Almagro San Miguel, el gal�n de La Moderna',
     publication: 'RTVE',
     date: '2 de diciembre, 2023',
     excerpt:
-      '"Me trabajé mucho las audiciones porque la oportunidad así lo requería". Se siente muy agradecido con Boomerang y RTVE por la confianza depositada.',
+      '"Me trabaj� mucho las audiciones porque la oportunidad as� lo requer�a". Se siente muy agradecido con Boomerang y RTVE por la confianza depositada.',
     url: 'https://www.rtve.es/television/20231202/moderna-entrevista-almagro-san-miguel-inigo-penalver/2463590.shtml',
   },
   {
-    title: 'De La Moderna a la película sobre ETA producida por Bayona',
+    title: 'De La Moderna a la pel�cula sobre ETA producida por Bayona',
     publication: 'Diario de Sevilla',
     date: '17 de octubre, 2024',
     excerpt:
-      'Almagro San Miguel habla sobre Un fantasma en la batalla. "Es un privilegio trabajar con Agustín Díaz Yanes. Crea un ambiente muy tranquilo, se percibe su experiencia".',
+      'Almagro San Miguel habla sobre Un fantasma en la batalla. "Es un privilegio trabajar con Agust�n D�az Yanes. Crea un ambiente muy tranquilo, se percibe su experiencia".',
     url: 'https://www.diariodesevilla.es/television/almagro-san-miguel-moderna-pelicula_0_2004995240.html',
   },
   {
-    title: '"Cuando llegué a La Moderna pensé: dónde me he metido, voy a morir"',
-    publication: 'La Razón',
+    title: '"Cuando llegu� a La Moderna pens�: d�nde me he metido, voy a morir"',
+    publication: 'La Raz�n',
     date: '26 de noviembre, 2023',
     excerpt:
-      'El actor sevillano explica cómo tuvo que cambiar su ritmo de vida para adaptarse a una serie diaria. El equipo de arte ha reconstruido el Madrid de los años 30.',
+      'El actor sevillano explica c�mo tuvo que cambiar su ritmo de vida para adaptarse a una serie diaria. El equipo de arte ha reconstruido el Madrid de los a�os 30.',
     url: 'https://www.larazon.es/television/series/almagro-san-miguel-cuando-llegue-moderna-pense-donde-metido-voy-morir_202311266562edda5',
   },
   {
-    title: 'La pasión por actuar y el respeto a los clásicos del cine',
+    title: 'La pasi�n por actuar y el respeto a los cl�sicos del cine',
     publication: 'El Plural TV',
     date: '22 de diciembre, 2024',
     excerpt:
-      'Descubre sus inicios en actuaciones callejeras, la irrupción de influencers en la industria y la idealización de la figura del actor.',
+      'Descubre sus inicios en actuaciones callejeras, la irrupci�n de influencers en la industria y la idealizaci�n de la figura del actor.',
     url: 'https://www.youtube.com/watch?v=ts2qSZpSO_I',
   },
   {
-    title: 'Un té con Almagro San Miguel en el Salón de La Moderna',
+    title: 'Un t� con Almagro San Miguel en el Sal�n de La Moderna',
     publication: 'RTVE Play',
     date: '15 de noviembre, 2023',
     excerpt:
-      'El actor habla de su paso por La Moderna, del personaje de Íñigo, de las tramas que más nos preocupan y del futuro que le espera.',
+      'El actor habla de su paso por La Moderna, del personaje de ��igo, de las tramas que m�s nos preocupan y del futuro que le espera.',
     url: 'https://www.rtve.es/play/videos/salon-de-te-la-moderna/almagro-san-miguel/16137829/',
   },
 ]
@@ -249,7 +249,7 @@ export default function Showreel() {
               <p
                 className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-400 transition-all delay-[400ms] duration-[500ms] ${isInView ? 'opacity-100' : 'opacity-0'}`}
               >
-                Selección de mis mejores interpretaciones en televisión, cine y teatro
+                Selecci�n de mis mejores interpretaciones en televisi�n, cine y teatro
               </p>
             </div>
 
@@ -308,7 +308,7 @@ export default function Showreel() {
                     <div className="flex items-center gap-6 border-t border-white/10 pt-4">
                       <div className="flex items-center gap-2 text-sm text-slate-500">
                         <Calendar className="h-4 w-4" strokeWidth={1.5} />
-                        <span>Año {currentShowreel.year}</span>
+                        <span>A�o {currentShowreel.year}</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm text-slate-500">
                         <Play className="h-4 w-4" strokeWidth={1.5} />
@@ -328,7 +328,7 @@ export default function Showreel() {
                 </h3>
                 <div className="mx-auto mb-4 h-0.5 w-20 bg-yellow-400" />
                 <p className="text-slate-400">
-                  Escenas destacadas de mis principales trabajos en televisión y cine
+                  Escenas destacadas de mis principales trabajos en televisi�n y cine
                 </p>
               </div>
 
@@ -396,7 +396,7 @@ export default function Showreel() {
                 <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm">
                   <Newspaper className="h-4 w-4 text-yellow-400" strokeWidth={2} />
                   <span className="text-sm font-medium tracking-wide text-slate-300">
-                    Cobertura Mediática
+                    Cobertura Medi�tica
                   </span>
                 </div>
 
@@ -437,7 +437,7 @@ export default function Showreel() {
                             </h4>
                             <div className="mb-3 flex items-center gap-2 text-xs text-slate-500">
                               <span className="font-medium">{interview.publication}</span>
-                              <span>•</span>
+                              <span>�</span>
                               <span>{interview.date}</span>
                             </div>
                           </div>
@@ -499,9 +499,9 @@ export default function Showreel() {
                     <p className="mb-3 text-slate-400">{modalVideo.description}</p>
                     <div className="flex items-center gap-4 text-sm text-slate-500">
                       <span>{modalVideo.project}</span>
-                      <span>•</span>
+                      <span>�</span>
                       <span>{modalVideo.year}</span>
-                      <span>•</span>
+                      <span>�</span>
                       <span>{modalVideo.duration}</span>
                     </div>
                   </div>

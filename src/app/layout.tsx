@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import CookieConsent from '@/components/CookieConsent'
 import Script from 'next/script'
-import PassiveEvents from '@/components/PassiveEvents'
 
 // Optimized font configuration with display swap and fallbacks
 // preload: false avoids unnecessary preconnect hints to Google Fonts CDN
@@ -118,7 +117,7 @@ export const metadata: Metadata = {
       'Actor con 13+ años de experiencia. Más de 300 episodios en TV. Protagonista de La Moderna (TVE) y Vis a vis: El Oasis (Fox). Formación ESAD Sevilla y CNTC. Especialista en verso clásico, combate escénico y equitación.',
     images: [
       {
-        url: '/assets/og/main.jpg',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
         alt: 'Almagro San Miguel - Actor Profesional',
@@ -132,7 +131,7 @@ export const metadata: Metadata = {
     title: 'Almagro San Miguel - Actor Profesional',
     description:
       'Actor con 13+ años de experiencia. Más de 300 episodios en TV. La Moderna (TVE), Vis a vis: El Oasis (Fox), Hernán (Prime Video).',
-    images: ['/assets/og/main.jpg'],
+    images: ['/twitter-image'],
   },
   robots: {
     index: true,
@@ -182,11 +181,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Humans.txt reference */}
         <link rel="author" href="/humans.txt" />
 
-        {/* Preload hero image for faster LCP */}
-        <link rel="preload" as="image" href="/assets/hero/main.jpg" />
+        {/* Preconnect only to services needed before user interaction */}
+        <link rel="preconnect" href="https://formspree.io" crossOrigin="anonymous" />
+
+        {/* DNS prefetch for secondary resources */}
+        <link rel="dns-prefetch" href="https://img.youtube.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
       </head>
       <body className={inter.className}>
-        <PassiveEvents />
         {/* D.1 - Skip to content link for keyboard/screen reader users */}
         <a
           href="#main-content"
@@ -292,7 +294,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 },
               ],
               url: 'https://almagrosanmiguel.com',
-              image: '/assets/og/main.jpg',
+              image: 'https://almagrosanmiguel.com/opengraph-image',
               sameAs: [
                 'https://www.imdb.com/name/nm9017709/',
                 'https://es.wikipedia.org/wiki/Almagro_San_Miguel',
@@ -417,6 +419,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'BreadcrumbList',
+              '@id': 'https://almagrosanmiguel.com/#breadcrumb',
               itemListElement: [
                 {
                   '@type': 'ListItem',
@@ -479,6 +482,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'ProfilePage',
+              '@id': 'https://almagrosanmiguel.com/#profile-page',
+              url: 'https://almagrosanmiguel.com',
+              inLanguage: 'es-ES',
               mainEntity: {
                 '@id': 'https://almagrosanmiguel.com/#person',
               },
@@ -505,7 +511,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               uploadDate: '2024-01-01',
               duration: 'PT2M',
               contentUrl: 'https://www.youtube.com/watch?v=JjPtvXw-gyo',
-              embedUrl: 'https://www.youtube.com/embed/JjPtvXw-gyo',
+              embedUrl: 'https://www.youtube-nocookie.com/embed/JjPtvXw-gyo',
               publisher: {
                 '@type': 'Person',
                 '@id': 'https://almagrosanmiguel.com/#person',

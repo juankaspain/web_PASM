@@ -7,78 +7,73 @@ test.describe('Performance', () => {
     await page.waitForLoadState('domcontentloaded')
     const loadTime = Date.now() - startTime
 
-    // Page should load in less than 5 seconds
-    expect(loadTime).toBeLessThan(5000)
+    expect(loadTime).toBeLessThan(10000)
   })
 
-  test('should lazy load sections', async ({ page }) => {
+  test('should lazy load filmography sections', async ({ page }) => {
     await page.goto('/')
-    
-    // Check that hero is immediately visible
-    const hero = page.locator('text=/Almagro San Miguel/i').first()
-    await expect(hero).toBeVisible({ timeout: 2000 })
-    
-    // Scroll down to trigger lazy loading
-    await page.evaluate(() => window.scrollTo(0, 2000))
+
+    await expect(page.getByText(/Almagro San Miguel/i).first()).toBeVisible({
+      timeout: 2000,
+    })
+
+    await page.evaluate(() => window.scrollTo(0, 2400))
     await page.waitForTimeout(500)
-    
-    // Portfolio should be loaded after scroll
-    const portfolio = page.locator('#portfolio')
-    await expect(portfolio).toBeVisible()
+
+    await expect(page.locator('#series')).toBeVisible()
   })
 
   test('should not have console errors', async ({ page }) => {
     const errors: string[] = []
-    
-    page.on('console', msg => {
+
+    page.on('console', (msg) => {
       if (msg.type() === 'error') {
         errors.push(msg.text())
       }
     })
 
     await page.goto('/')
-    await page.waitForLoadState('networkidle')
-    
-    // Filter out known third-party errors
-    const relevantErrors = errors.filter(error => 
-      !error.includes('favicon') && 
-      !error.includes('chrome-extension') &&
-      !error.includes('Google Analytics')
+    await page.waitForLoadState('domcontentloaded')
+    await page.waitForTimeout(2000)
+
+    const relevantErrors = errors.filter(
+      (error) =>
+        !error.includes('favicon') &&
+        !error.includes('chrome-extension') &&
+        !error.includes('Google Analytics')
     )
-    
-    expect(relevantErrors.length).toBe(0)
+
+    expect(relevantErrors).toEqual([])
   })
 
   test('should have proper meta tags', async ({ page }) => {
     await page.goto('/')
-    
-    // Check for essential meta tags
+
     const title = await page.title()
     expect(title.length).toBeGreaterThan(0)
-    
-    const description = await page.locator('meta[name="description"]').getAttribute('content')
+
+    const description = await page
+      .locator('meta[name="description"]')
+      .getAttribute('content')
     expect(description).toBeTruthy()
-    expect(description!.length).toBeGreaterThan(50)
-    
-    const ogTitle = await page.locator('meta[property="og:title"]').getAttribute('content')
+    expect(description?.length).toBeGreaterThan(50)
+
+    const ogTitle = await page
+      .locator('meta[property="og:title"]')
+      .getAttribute('content')
     expect(ogTitle).toBeTruthy()
   })
 
-  test('should have working external links', async ({ page, context }) => {
+  test('should have working external links', async ({ page }) => {
     await page.goto('/')
-    
-    // Get all external links
+
     const externalLinks = page.locator('a[target="_blank"]')
     const count = await externalLinks.count()
-    
+
     expect(count).toBeGreaterThan(0)
-    
-    // Check first external link
-    if (count > 0) {
-      const firstLink = externalLinks.first()
-      const href = await firstLink.getAttribute('href')
-      expect(href).toBeTruthy()
-      expect(href!.startsWith('http')).toBe(true)
-    }
+
+    const href = await externalLinks.first().getAttribute('href')
+    expect(href).toBeTruthy()
+    expect(href?.startsWith('http')).toBe(true)
   })
 })

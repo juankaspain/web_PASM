@@ -21,54 +21,67 @@ interface CookiePreferences {
 
 const COOKIE_CONSENT_KEY = 'cookie-consent-pasm'
 const COOKIE_PREFERENCES_KEY = 'cookie-preferences-pasm'
+const COOKIE_PREFERENCES_EVENT = 'pasm-cookie-preferences-change'
+
+const DEFAULT_COOKIE_PREFERENCES: CookiePreferences = {
+  necessary: true,
+  analytics: false,
+  marketing: false,
+  preferences: false,
+}
+
+function readSavedCookiePreferences(): CookiePreferences | null {
+  if (typeof window === 'undefined') return null
+
+  try {
+    const savedPreferences = localStorage.getItem(COOKIE_PREFERENCES_KEY)
+    if (!savedPreferences) return null
+
+    return {
+      ...DEFAULT_COOKIE_PREFERENCES,
+      ...(JSON.parse(savedPreferences) as Partial<CookiePreferences>),
+      necessary: true,
+    }
+  } catch {
+    localStorage.removeItem(COOKIE_CONSENT_KEY)
+    localStorage.removeItem(COOKIE_PREFERENCES_KEY)
+    return null
+  }
+}
+
+function applyCookiePreferences(prefs: CookiePreferences) {
+  window.gtag?.('consent', 'update', {
+    analytics_storage: prefs.analytics ? 'granted' : 'denied',
+    ad_storage: prefs.marketing ? 'granted' : 'denied',
+    ad_user_data: prefs.marketing ? 'granted' : 'denied',
+    ad_personalization: prefs.marketing ? 'granted' : 'denied',
+  })
+
+  window.dispatchEvent(
+    new CustomEvent(COOKIE_PREFERENCES_EVENT, {
+      detail: prefs,
+    })
+  )
+}
 
 export default function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
-  const [preferences, setPreferences] = useState<CookiePreferences>({
-    necessary: true, // Siempre activas
-    analytics: false,
-    marketing: false,
-    preferences: false,
-  })
+  const [preferences, setPreferences] = useState<CookiePreferences>(
+    () => readSavedCookiePreferences() || DEFAULT_COOKIE_PREFERENCES
+  )
 
   useEffect(() => {
-    // Comprobar si ya hay consentimiento guardado
     const consent = localStorage.getItem(COOKIE_CONSENT_KEY)
-    const savedPreferences = localStorage.getItem(COOKIE_PREFERENCES_KEY)
+    const savedPreferences = readSavedCookiePreferences()
 
-    if (!consent) {
-      // Mostrar banner después de un pequeño delay para mejor UX
-      setTimeout(() => setShowBanner(true), 1000)
-    } else if (savedPreferences) {
-      // Cargar preferencias guardadas
-      setPreferences(JSON.parse(savedPreferences))
-      // Aplicar cookies según preferencias
-      applyPreferences(JSON.parse(savedPreferences))
+    if (!consent || !savedPreferences) {
+      const timer = setTimeout(() => setShowBanner(true), 1000)
+      return () => clearTimeout(timer)
     }
+
+    applyCookiePreferences(savedPreferences)
   }, [])
-
-  const applyPreferences = (prefs: CookiePreferences) => {
-    // Aquí implementarías la lógica real de activación de cookies
-    // Por ejemplo, inicializar Google Analytics solo si analytics está activo
-
-    if (prefs.analytics) {
-      // Inicializar Google Analytics u otras herramientas de analítica
-      console.log('Analytics cookies enabled')
-      // window.gtag('consent', 'update', { 'analytics_storage': 'granted' })
-    }
-
-    if (prefs.marketing) {
-      // Inicializar cookies de marketing
-      console.log('Marketing cookies enabled')
-      // window.gtag('consent', 'update', { 'ad_storage': 'granted' })
-    }
-
-    if (prefs.preferences) {
-      // Habilitar cookies de preferencias
-      console.log('Preference cookies enabled')
-    }
-  }
 
   const handleAcceptAll = () => {
     const allAccepted = {
@@ -79,7 +92,7 @@ export default function CookieConsent() {
     }
     setPreferences(allAccepted)
     saveConsent(allAccepted)
-    applyPreferences(allAccepted)
+    applyCookiePreferences(allAccepted)
     setShowBanner(false)
     setShowSettings(false)
   }
@@ -93,14 +106,14 @@ export default function CookieConsent() {
     }
     setPreferences(onlyNecessary)
     saveConsent(onlyNecessary)
-    applyPreferences(onlyNecessary)
+    applyCookiePreferences(onlyNecessary)
     setShowBanner(false)
     setShowSettings(false)
   }
 
   const handleSavePreferences = () => {
     saveConsent(preferences)
-    applyPreferences(preferences)
+    applyCookiePreferences(preferences)
     setShowBanner(false)
     setShowSettings(false)
   }
@@ -108,6 +121,11 @@ export default function CookieConsent() {
   const saveConsent = (prefs: CookiePreferences) => {
     localStorage.setItem(COOKIE_CONSENT_KEY, 'true')
     localStorage.setItem(COOKIE_PREFERENCES_KEY, JSON.stringify(prefs))
+    window.dispatchEvent(
+      new CustomEvent(COOKIE_PREFERENCES_EVENT, {
+        detail: prefs,
+      })
+    )
   }
 
   const togglePreference = (key: keyof CookiePreferences) => {
@@ -170,10 +188,10 @@ export default function CookieConsent() {
     <>
       {/* Banner Principal */}
       <div
-        className={`fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 transition-all duration-500 ${
+        className={`fixed bottom-0 left-0 right-0 z-50 p-4 transition-all duration-500 md:p-6 ${
           showBanner && !showSettings
             ? 'translate-y-0 opacity-100'
-            : 'translate-y-full opacity-0 pointer-events-none'
+            : 'pointer-events-none translate-y-full opacity-0'
         }`}
       >
         <div className="mx-auto max-w-7xl">
@@ -196,9 +214,9 @@ export default function CookieConsent() {
                       Respetamos tu Privacidad
                     </h3>
                     <p className="mb-4 text-sm leading-relaxed text-slate-300">
-                      Utilizamos cookies para mejorar tu experiencia, analizar el
-                      tráfico del sitio y personalizar el contenido. Puedes aceptar
-                      todas las cookies o personalizar tus preferencias.
+                      Utilizamos cookies para mejorar tu experiencia, analizar el tráfico
+                      del sitio y personalizar el contenido. Puedes aceptar todas las
+                      cookies o personalizar tus preferencias.
                     </p>
                     <button
                       onClick={() => setShowSettings(true)}
@@ -234,7 +252,7 @@ export default function CookieConsent() {
       {/* Panel de Configuración */}
       <div
         className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm transition-all duration-300 ${
-          showSettings ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          showSettings ? 'opacity-100' : 'pointer-events-none opacity-0'
         }`}
         onClick={() => setShowSettings(false)}
       >

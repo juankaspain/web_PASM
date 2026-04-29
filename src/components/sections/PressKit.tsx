@@ -14,16 +14,16 @@ import {
   Sparkles,
   ExternalLink,
 } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import SectionHeader from '@/components/ui/SectionHeader'
 
 const DOWNLOAD_ITEMS = [
   {
     icon: FileText,
     title: 'Biografía Completa',
-    description: 'Bio profesional en formato PDF con trayectoria completa',
+    description: 'Bio profesional en formato texto con trayectoria completa',
     size: '250 KB',
-    format: 'PDF',
+    format: 'TXT',
     type: 'bio',
     color: 'from-blue-500/10 to-cyan-500/10',
     iconBg: 'bg-blue-500/10',
@@ -32,9 +32,9 @@ const DOWNLOAD_ITEMS = [
   {
     icon: ImageIcon,
     title: 'Fotos en Alta Resolución',
-    description: 'Pack de 10 fotografías profesionales (300 DPI)',
-    size: '45 MB',
-    format: 'ZIP',
+    description: 'Material bajo solicitud para prensa y productoras',
+    size: 'A solicitar',
+    format: 'Solicitud',
     type: 'photos',
     color: 'from-purple-500/10 to-pink-500/10',
     iconBg: 'bg-purple-500/10',
@@ -43,9 +43,9 @@ const DOWNLOAD_ITEMS = [
   {
     icon: Video,
     title: 'Showreel 2024',
-    description: 'Recopilatorio de escenas destacadas',
-    size: '120 MB',
-    format: 'MP4',
+    description: 'Material bajo solicitud para prensa y productoras',
+    size: 'A solicitar',
+    format: 'Solicitud',
     type: 'showreel',
     color: 'from-red-500/10 to-orange-500/10',
     iconBg: 'bg-red-500/10',
@@ -56,7 +56,7 @@ const DOWNLOAD_ITEMS = [
     title: 'Premios y Reconocimientos',
     description: 'Lista completa de premios y nominaciones',
     size: '180 KB',
-    format: 'PDF',
+    format: 'TXT',
     type: 'awards',
     color: 'from-yellow-500/10 to-amber-500/10',
     iconBg: 'bg-yellow-500/10',
@@ -67,7 +67,7 @@ const DOWNLOAD_ITEMS = [
     title: 'Filmografía Completa',
     description: 'TV, cine y teatro con fechas y personajes',
     size: '320 KB',
-    format: 'PDF',
+    format: 'TXT',
     type: 'filmography',
     color: 'from-green-500/10 to-emerald-500/10',
     iconBg: 'bg-green-500/10',
@@ -78,7 +78,7 @@ const DOWNLOAD_ITEMS = [
     title: 'Ficha Técnica',
     description: 'Habilidades, formación y datos de contacto',
     size: '150 KB',
-    format: 'PDF',
+    format: 'TXT',
     type: 'techsheet',
     color: 'from-indigo-500/10 to-violet-500/10',
     iconBg: 'bg-indigo-500/10',
@@ -128,60 +128,40 @@ const techSpecs: TechSpec[] = [
 
 export default function PressKit() {
   const [downloading, setDownloading] = useState<string | null>(null)
-  // E.6 - Reconstruct email client-side to prevent scraping
-  const [displayEmail, setDisplayEmail] = useState('...')
+  const displayEmail = ['info', 'almagrosanmiguel.com'].join('@')
   const { ref, isInView } = useInView({ once: true, margin: '-80px' })
-
-  useEffect(() => {
-    const parts = ['info', 'almagrosanmiguel.com']
-    setDisplayEmail(parts.join('@'))
-  }, [])
 
   const handleDownload = async (type: string, title: string) => {
     setDownloading(type)
     try {
-      const {
-        generateBioPDF,
-        generateFilmographyPDF,
-        generateAwardsPDF,
-        generateTechSheetPDF,
-      } = await import('@/lib/generatePDF')
+      const response = await fetch(`/api/download?type=${type}`)
+      const contentType = response.headers.get('content-type') || ''
 
-      let blob: Blob | null = null
-      let filename = ''
-
-      switch (type) {
-        case 'bio':
-          blob = await generateBioPDF()
-          filename = 'Almagro_San_Miguel_Biografia.txt'
-          break
-        case 'filmography':
-          blob = await generateFilmographyPDF()
-          filename = 'Almagro_San_Miguel_Filmografia.txt'
-          break
-        case 'awards':
-          blob = await generateAwardsPDF()
-          filename = 'Almagro_San_Miguel_Premios.txt'
-          break
-        case 'techsheet':
-          blob = await generateTechSheetPDF()
-          filename = 'Almagro_San_Miguel_Ficha_Tecnica.txt'
-          break
-        default:
-          alert(`${title} — Descarga no disponible`)
-          return
+      if (!response.ok) {
+        const data = contentType.includes('application/json')
+          ? ((await response.json()) as { error?: string; action?: string })
+          : null
+        alert(
+          [data?.error || `No se pudo descargar ${title}.`, data?.action]
+            .filter(Boolean)
+            .join('\n\n')
+        )
+        return
       }
 
-      if (blob) {
-        const url = URL.createObjectURL(blob)
-        const a = document.createElement('a')
-        a.href = url
-        a.download = filename
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
-        URL.revokeObjectURL(url)
-      }
+      const blob = await response.blob()
+      const disposition = response.headers.get('content-disposition') || ''
+      const filename =
+        disposition.match(/filename="([^"]+)"/)?.[1] || `Almagro_San_Miguel_${type}.txt`
+
+      const url = window.URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = filename
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      window.URL.revokeObjectURL(url)
     } catch {
       alert('Error al descargar. Inténtalo de nuevo.')
     } finally {
@@ -211,7 +191,7 @@ export default function PressKit() {
       <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div
           ref={ref}
-          className={`transition-all duration-[600ms] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+          className={`transition-all duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
         >
           {/* Header with golden line */}
           <SectionHeader
@@ -228,7 +208,7 @@ export default function PressKit() {
               return (
                 <div
                   key={item.type}
-                  className={`group transition-all duration-[600ms] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+                  className={`group transition-all duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
                   style={{ transitionDelay: `${400 + index * 100}ms` }}
                 >
                   <div className="relative h-full">
@@ -266,7 +246,11 @@ export default function PressKit() {
                         className="flex w-full items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-slate-300 transition-all duration-300 hover:border-yellow-400/50 hover:bg-white/10 hover:text-white disabled:opacity-50"
                       >
                         <Download className="h-4 w-4" strokeWidth={1.5} />
-                        {downloading === item.type ? 'Descargando...' : 'Descargar'}
+                        {downloading === item.type
+                          ? 'Descargando...'
+                          : item.format === 'Solicitud'
+                            ? 'Solicitar'
+                            : 'Descargar'}
                       </button>
                     </div>
                   </div>
@@ -277,7 +261,7 @@ export default function PressKit() {
 
           {/* Complete Press Kit Button */}
           <div
-            className={`mb-20 text-center transition-all duration-[600ms] delay-[800ms] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+            className={`mb-20 text-center transition-all delay-[800ms] duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
           >
             <button
               onClick={() => handleDownload('complete', 'Press Kit Completo')}
@@ -287,8 +271,8 @@ export default function PressKit() {
               <Download className="h-5 w-5" strokeWidth={1.5} />
               {downloading === 'complete'
                 ? 'Descargando...'
-                : 'Descargar Press Kit Completo'}
-              <span className="text-sm text-slate-400">(120 MB)</span>
+                : 'Solicitar Press Kit Completo'}
+              <span className="text-sm text-slate-400">Bajo solicitud</span>
             </button>
           </div>
 
@@ -307,7 +291,7 @@ export default function PressKit() {
                   {techSpecs.map((spec, index) => (
                     <div
                       key={spec.label}
-                      className={`group flex items-center justify-between border-b border-white/5 py-3 transition-all duration-500 last:border-0 hover:border-white/10 ${isInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-5'}`}
+                      className={`group flex items-center justify-between border-b border-white/5 py-3 transition-all duration-500 last:border-0 hover:border-white/10 ${isInView ? 'translate-x-0 opacity-100' : '-translate-x-5 opacity-0'}`}
                       style={{ transitionDelay: `${900 + index * 50}ms` }}
                     >
                       <span className="text-sm font-medium uppercase tracking-wider text-slate-500 transition-colors group-hover:text-slate-400">
@@ -346,7 +330,7 @@ export default function PressKit() {
 
           {/* Press Contact */}
           <div
-            className={`mx-auto max-w-2xl transition-all duration-[600ms] delay-[1200ms] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+            className={`mx-auto max-w-2xl transition-all delay-[1200ms] duration-[600ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
           >
             <div className="relative">
               <div className="absolute -inset-[1px] rounded-xl bg-yellow-400/10 opacity-50 blur-xl" />
@@ -377,7 +361,7 @@ export default function PressKit() {
 
             {/* Professional Badge */}
             <div
-              className={`mt-8 flex items-center justify-center gap-2 text-slate-500 transition-opacity duration-500 delay-[1400ms] ${isInView ? 'opacity-100' : 'opacity-0'}`}
+              className={`mt-8 flex items-center justify-center gap-2 text-slate-500 transition-opacity delay-[1400ms] duration-500 ${isInView ? 'opacity-100' : 'opacity-0'}`}
             >
               <CheckCircle2 className="h-4 w-4 text-yellow-400" strokeWidth={1.5} />
               <span className="text-sm">

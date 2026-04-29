@@ -183,7 +183,7 @@ export default function Footer() {
               © {new Date().getFullYear()} Almagro San Miguel. Todos los derechos
               reservados.
             </p>
-            <p className="text-xs font-light text-gray-500">
+            <p className="text-xs font-light text-gray-400">
               Actor profesional | Madrid y Sevilla, España
             </p>
           </div>
@@ -194,7 +194,7 @@ export default function Footer() {
               href="https://github.com/juankaspain"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 text-xs text-gray-500 transition-colors hover:text-yellow-400"
+              className="group inline-flex items-center gap-2 text-xs text-gray-400 transition-colors hover:text-yellow-400"
               aria-label="Developed by JuankaSpain (se abre en nueva ventana)"
             >
               <Code

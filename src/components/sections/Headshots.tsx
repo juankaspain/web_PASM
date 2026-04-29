@@ -23,16 +23,16 @@ const headshots: Headshot[] = [
     category: 'comercial',
     alt: 'Almagro San Miguel - Headshot Comercial 2',
   },
-  // Dramático - Looks intensos y serios
+  // Dram�tico - Looks intensos y serios
   {
     url: '/assets/headshots/dramatico-1.jpg',
     category: 'dramatico',
-    alt: 'Almagro San Miguel - Headshot Dramático 1',
+    alt: 'Almagro San Miguel - Headshot Dram�tico 1',
   },
   {
     url: '/assets/headshots/dramatico-2.jpg',
     category: 'dramatico',
-    alt: 'Almagro San Miguel - Headshot Dramático 2',
+    alt: 'Almagro San Miguel - Headshot Dram�tico 2',
   },
   // Personaje - Diferentes caracteres
   {
@@ -61,7 +61,7 @@ const headshots: Headshot[] = [
 const categories = [
   { id: 'all', label: 'Todas', color: 'yellow' },
   { id: 'comercial', label: 'Comercial', color: 'blue' },
-  { id: 'dramatico', label: 'Dramático', color: 'red' },
+  { id: 'dramatico', label: 'Dram�tico', color: 'red' },
   { id: 'personaje', label: 'Personaje', color: 'green' },
   { id: 'fullbody', label: 'Full Body', color: 'purple' },
 ]
@@ -154,12 +154,12 @@ export default function Headshots() {
               >
                 <Camera className="h-4 w-4 text-yellow-400" strokeWidth={2} />
                 <span className="text-sm font-medium tracking-wide text-slate-300">
-                  Fotografía Profesional
+                  Fotograf�a Profesional
                 </span>
               </div>
 
               <h2
-                className={`mb-6 text-4xl font-bold tracking-tight text-white lg:text-5xl transition-all delay-200 duration-[500ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
+                className={`mb-6 text-4xl font-bold tracking-tight text-white transition-all delay-200 duration-[500ms] lg:text-5xl ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'}`}
               >
                 Professional Headshots
               </h2>
@@ -171,7 +171,7 @@ export default function Headshots() {
               <p
                 className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-400 transition-all delay-[400ms] duration-[500ms] ${isInView ? 'opacity-100' : 'opacity-0'}`}
               >
-                Selección de fotografías profesionales para casting directors y
+                Selecci�n de fotograf�as profesionales para casting directors y
                 productoras
               </p>
             </div>
@@ -204,12 +204,12 @@ export default function Headshots() {
               {filteredHeadshots.map((headshot, index) => (
                 <div
                   key={`${headshot.category}-${index}`}
-                  className="group relative cursor-pointer select-none hover:-translate-y-2 hover:scale-[1.03] transition-all duration-300"
+                  className="group relative cursor-pointer select-none transition-all duration-300 hover:-translate-y-2 hover:scale-[1.03]"
                   onClick={() => setSelectedImageIndex(index)}
                   onContextMenu={handleImageProtection}
                 >
                   <div className="relative">
-                    <div className="absolute -inset-[2px] rounded-2xl bg-yellow-400/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-[400ms]" />
+                    <div className="absolute -inset-[2px] rounded-2xl bg-yellow-400/30 opacity-0 blur-xl transition-opacity duration-[400ms] group-hover:opacity-100" />
 
                     <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-white/10 bg-black transition-all duration-500 hover:border-yellow-400/30">
                       <Image
@@ -240,10 +240,10 @@ export default function Headshots() {
             >
               <p className="text-slate-400">
                 <span className="font-semibold text-white">Nota:</span> Headshots
-                actualizados regularmente. Para solicitar fotografías en alta resolución o
-                sesiones específicas, contactar a través de{' '}
+                actualizados regularmente. Para solicitar fotograf�as en alta resoluci�n o
+                sesiones espec�ficas, contactar a trav�s de{' '}
                 <a href="#contact" className="text-yellow-400 hover:underline">
-                  representación
+                  representaci�n
                 </a>
                 .
               </p>
@@ -271,7 +271,7 @@ export default function Headshots() {
             e.stopPropagation()
             navigatePrevious()
           }}
-          className="group absolute left-4 top-1/2 z-10 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition-all hover:scale-110 hover:-translate-x-1 hover:border-yellow-400 hover:bg-yellow-400 active:scale-90"
+          className="group absolute left-4 top-1/2 z-10 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition-all hover:-translate-x-1 hover:scale-110 hover:border-yellow-400 hover:bg-yellow-400 active:scale-90"
           aria-label="Imagen anterior"
         >
           <ChevronLeft
@@ -286,7 +286,7 @@ export default function Headshots() {
             e.stopPropagation()
             navigateNext()
           }}
-          className="group absolute right-4 top-1/2 z-10 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition-all hover:scale-110 hover:translate-x-1 hover:border-yellow-400 hover:bg-yellow-400 active:scale-90"
+          className="group absolute right-4 top-1/2 z-10 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition-all hover:translate-x-1 hover:scale-110 hover:border-yellow-400 hover:bg-yellow-400 active:scale-90"
           aria-label="Siguiente imagen"
         >
           <ChevronRight
@@ -340,7 +340,7 @@ export default function Headshots() {
         {/* Instructions */}
         <div className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md">
           <span className="text-xs font-medium text-white/60">
-            Usa ← → o los botones para navegar • ESC para cerrar
+            Usa ? ? o los botones para navegar � ESC para cerrar
           </span>
         </div>
       </div>

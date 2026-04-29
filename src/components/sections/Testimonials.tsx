@@ -1,7 +1,8 @@
 'use client'
 
 import { Quote } from 'lucide-react'
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
+import { useOneShotInView } from '@/hooks/useOneShotInView'
 
 type Category = 'series' | 'cine' | 'teatro'
 
@@ -205,31 +206,12 @@ const sortedTestimonials = [...testimonials].sort(
   (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
 )
 
-function useInView(options?: IntersectionObserverInit) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [isInView, setIsInView] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsInView(true)
-        observer.unobserve(el)
-      }
-    }, options)
-    observer.observe(el)
-    return () => observer.disconnect()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  return { ref, isInView }
-}
-
 export default function Testimonials() {
   const [activeCategory, setActiveCategory] = useState<Category>('series')
-  const sectionHeader = useInView({ threshold: 0.1 })
-  const stats = useInView({ threshold: 0.1 })
+  const [sectionHeaderRef, sectionHeaderInView] = useOneShotInView({
+    threshold: 0.1,
+  })
+  const [statsRef, statsInView] = useOneShotInView({ threshold: 0.1 })
 
   const filteredTestimonials = sortedTestimonials.filter(
     (t) => t.category === activeCategory
@@ -245,8 +227,8 @@ export default function Testimonials() {
     <section id="testimonials" className="bg-slate-900 py-20 text-white">
       <div className="container mx-auto px-4">
         <div
-          ref={sectionHeader.ref}
-          className={`transition-all duration-[600ms] ${sectionHeader.isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
+          ref={sectionHeaderRef}
+          className={`transition-all duration-[600ms] ${sectionHeaderInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
         >
           <div className="mb-4 flex items-center justify-center gap-3">
             <Quote className="h-8 w-8 text-yellow-500" />
@@ -263,8 +245,10 @@ export default function Testimonials() {
           <div className="mb-12 flex flex-wrap justify-center gap-3">
             {categories.map((cat) => (
               <button
+                type="button"
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
+                aria-pressed={activeCategory === cat.id}
                 className={`rounded-full px-6 py-2 font-medium transition-all duration-300 ${
                   activeCategory === cat.id
                     ? 'bg-yellow-500 text-slate-900'
@@ -311,8 +295,8 @@ export default function Testimonials() {
 
           {/* Stats Summary */}
           <div
-            ref={stats.ref}
-            className={`mx-auto mt-16 grid max-w-2xl grid-cols-3 gap-6 transition-all delay-300 duration-[600ms] ${stats.isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
+            ref={statsRef}
+            className={`mx-auto mt-16 grid max-w-2xl grid-cols-3 gap-6 transition-all delay-300 duration-[600ms] ${statsInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
           >
             {categories.map((cat) => {
               const count = testimonials.filter((t) => t.category === cat.id).length

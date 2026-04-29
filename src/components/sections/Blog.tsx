@@ -1,6 +1,5 @@
 'use client'
-
-import { useState, useMemo, useRef, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import Image from 'next/image'
 import {
   Calendar,
@@ -11,6 +10,7 @@ import {
   ExternalLink,
   Newspaper,
 } from 'lucide-react'
+import { useOneShotInView } from '@/hooks/useOneShotInView'
 
 interface BlogPost {
   id: number
@@ -82,7 +82,8 @@ const blogPosts: BlogPost[] = [
     year: 2020,
     date: '20 Abr 2020',
     fullDate: '2020-04-20',
-    image: '/assets/blog/vis-a-vis-citizen.jpg',
+    image:
+      'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
     production: 'Vis a vis: El Oasis',
     medium: 'The Citizen',
     link: 'https://thecitizen.es/cultura/almagro-san-miguel-entrv/',
@@ -97,7 +98,8 @@ const blogPosts: BlogPost[] = [
     year: 2020,
     date: '20 Abr 2020',
     fullDate: '2020-04-20',
-    image: '/assets/blog/vis-a-vis-yourway.jpg',
+    image:
+      'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
     production: 'Vis a vis: El Oasis',
     medium: 'YourWay Magazine',
     link: 'https://www.yourwaymagazine.com/entrevista-almagro-san-miguel-el-oasis/',
@@ -111,7 +113,8 @@ const blogPosts: BlogPost[] = [
     year: 2020,
     date: '13 May 2020',
     fullDate: '2020-05-13',
-    image: '/assets/blog/vis-a-vis-youtube.jpg',
+    image:
+      'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
     production: 'Vis a vis: El Oasis',
     medium: 'YouTube Interview',
     link: 'https://www.youtube.com/watch?v=eVzy4GL1BoY',
@@ -139,7 +142,8 @@ const blogPosts: BlogPost[] = [
     year: 2019,
     date: '21 Nov 2019',
     fullDate: '2019-11-21',
-    image: '/assets/blog/hernan-imdb.jpg',
+    image:
+      'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4',
     production: 'Hernán',
     medium: 'IMDb',
     link: 'https://www.imdb.com/name/nm9017709/',
@@ -167,37 +171,18 @@ const getCategoryIcon = (category: string) => {
   }
 }
 
-function useInView(options?: IntersectionObserverInit) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [isInView, setIsInView] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsInView(true)
-        observer.unobserve(el)
-      }
-    }, options)
-    observer.observe(el)
-    return () => observer.disconnect()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  return { ref, isInView }
-}
-
 export default function Blog() {
   const [selectedCategory, setSelectedCategory] = useState<Category>('Todas')
   const [selectedYear, setSelectedYear] = useState<number | null>(null)
   const [isYearDropdownOpen, setIsYearDropdownOpen] = useState(false)
 
-  const header = useInView({ threshold: 0.1 })
-  const badge = useInView({ threshold: 0.1 })
-  const filters = useInView({ threshold: 0.1 })
-  const resultsCount = useInView({ threshold: 0.1 })
-  const grid = useInView({ threshold: 0.05 })
+  const [headerRef, headerInView] = useOneShotInView({ threshold: 0.1 })
+  const [badgeRef, badgeInView] = useOneShotInView({ threshold: 0.1 })
+  const [filtersRef, filtersInView] = useOneShotInView({ threshold: 0.1 })
+  const [resultsCountRef, resultsCountInView] = useOneShotInView({
+    threshold: 0.1,
+  })
+  const [gridRef, gridInView] = useOneShotInView({ threshold: 0.05 })
 
   // Obtener años únicos ordenados descendentemente
   const availableYears = useMemo(() => {
@@ -229,12 +214,12 @@ export default function Blog() {
       <div className="container relative z-10 mx-auto px-4">
         {/* Header */}
         <div
-          ref={header.ref}
-          className={`mb-16 text-center transition-all duration-[600ms] ${header.isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
+          ref={headerRef}
+          className={`mb-16 text-center transition-all duration-[600ms] ${headerInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
         >
           <div
-            ref={badge.ref}
-            className={`mb-6 inline-flex items-center gap-2 rounded-full border border-yellow-500/20 bg-yellow-500/10 px-4 py-2 transition-transform duration-500 ${badge.isInView ? 'scale-100' : 'scale-0'}`}
+            ref={badgeRef}
+            className={`mb-6 inline-flex items-center gap-2 rounded-full border border-yellow-500/20 bg-yellow-500/10 px-4 py-2 transition-transform duration-500 ${badgeInView ? 'scale-100' : 'scale-0'}`}
           >
             <Newspaper className="h-4 w-4 text-yellow-400" />
             <span className="text-sm font-medium tracking-wide text-yellow-400">
@@ -253,15 +238,17 @@ export default function Blog() {
 
         {/* Filters */}
         <div
-          ref={filters.ref}
-          className={`mb-12 flex flex-col items-center justify-center gap-4 transition-all delay-200 duration-[600ms] md:flex-row ${filters.isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
+          ref={filtersRef}
+          className={`mb-12 flex flex-col items-center justify-center gap-4 transition-all delay-200 duration-[600ms] md:flex-row ${filtersInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
         >
           {/* Category filters */}
           <div className="flex flex-wrap justify-center gap-2">
             {categories.map((category) => (
               <button
+                type="button"
                 key={category}
                 onClick={() => setSelectedCategory(category)}
+                aria-pressed={selectedCategory === category}
                 className={`rounded-lg px-6 py-3 font-medium transition-all duration-300 ${
                   selectedCategory === category
                     ? 'bg-yellow-400 text-black shadow-lg shadow-yellow-400/30'
@@ -276,6 +263,7 @@ export default function Blog() {
           {/* Year dropdown */}
           <div className="relative">
             <button
+              type="button"
               onClick={() => setIsYearDropdownOpen(!isYearDropdownOpen)}
               aria-expanded={isYearDropdownOpen}
               aria-label={`Filtrar por año: ${selectedYear || 'Todos los años'}`}
@@ -292,10 +280,9 @@ export default function Blog() {
 
             {/* Dropdown menu */}
             {isYearDropdownOpen && (
-              <div
-                className="absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden rounded-lg border border-white/10 bg-slate-900 shadow-xl"
-              >
+              <div className="absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden rounded-lg border border-white/10 bg-slate-900 shadow-xl">
                 <button
+                  type="button"
                   onClick={() => {
                     setSelectedYear(null)
                     setIsYearDropdownOpen(false)
@@ -310,6 +297,7 @@ export default function Blog() {
                 </button>
                 {availableYears.map((year) => (
                   <button
+                    type="button"
                     key={year}
                     onClick={() => {
                       setSelectedYear(year)
@@ -331,8 +319,8 @@ export default function Blog() {
 
         {/* Results count */}
         <p
-          ref={resultsCount.ref}
-          className={`mb-8 text-center text-white/40 transition-opacity duration-[600ms] ${resultsCount.isInView ? 'opacity-100' : 'opacity-0'}`}
+          ref={resultsCountRef}
+          className={`mb-8 text-center text-white/40 transition-opacity duration-[600ms] ${resultsCountInView ? 'opacity-100' : 'opacity-0'}`}
         >
           {filteredPosts.length}{' '}
           {filteredPosts.length === 1 ? 'noticia encontrada' : 'noticias encontradas'}
@@ -340,13 +328,14 @@ export default function Blog() {
 
         {/* Blog posts grid */}
         <div
-          ref={grid.ref}
+          ref={gridRef}
           className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
         >
           {filteredPosts.map((post, index) => (
             <article
               key={post.id}
-              className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-500 hover:border-yellow-400/50 hover:shadow-2xl hover:shadow-yellow-400/20 ${grid.isInView ? 'translate-y-0 opacity-100' : 'translate-y-[30px] opacity-0'}`}
+              aria-labelledby={`blog-post-${post.id}`}
+              className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-500 hover:border-yellow-400/50 hover:shadow-2xl hover:shadow-yellow-400/20 ${gridInView ? 'translate-y-0 opacity-100' : 'translate-y-[30px] opacity-0'}`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               {/* Image */}
@@ -382,7 +371,7 @@ export default function Blog() {
                   </div>
                   <div className="flex items-center gap-1.5 text-white/40">
                     <Calendar className="h-3.5 w-3.5" />
-                    <time>{post.date}</time>
+                    <time dateTime={post.fullDate}>{post.date}</time>
                   </div>
                 </div>
 
@@ -392,7 +381,10 @@ export default function Blog() {
                 </div>
 
                 {/* Title */}
-                <h3 className="mb-3 line-clamp-2 font-serif text-lg font-bold text-white transition-colors duration-300 group-hover:text-yellow-400">
+                <h3
+                  id={`blog-post-${post.id}`}
+                  className="mb-3 line-clamp-2 font-serif text-lg font-bold text-white transition-colors duration-300 group-hover:text-yellow-400"
+                >
                   {post.title}
                 </h3>
 
@@ -419,7 +411,7 @@ export default function Blog() {
 
         {/* Empty state */}
         {filteredPosts.length === 0 && (
-          <div className="py-20 text-center animate-fadeIn">
+          <div className="animate-fadeIn py-20 text-center">
             <div className="mb-6 inline-flex h-20 w-20 items-center justify-center rounded-full border border-white/10 bg-white/5">
               <Newspaper className="h-10 w-10 text-white/40" />
             </div>

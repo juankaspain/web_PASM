@@ -45,3 +45,6 @@ test-results/
 # ide
 .vscode/
 .idea/
+
+# local recovery artifacts
+.conflict-backups/

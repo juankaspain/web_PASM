@@ -16,14 +16,6 @@
  * ```
  */
 
-// Type definitions - use global Window augmented by gtag.d.ts
-declare const window: Window & {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  gtag?: (...args: any[]) => void
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  dataLayer?: any[]
-}
-
 /**
  * Generic event tracking function
  * @param eventName - Name of the event to track
@@ -31,18 +23,12 @@ declare const window: Window & {
  */
 export const trackEvent = (
   eventName: string,
-  eventParams?: Record<string, any>
+  eventParams?: Record<string, unknown>
 ): void => {
   if (typeof window === 'undefined') return
 
-  // Check if gtag is available
   if (window.gtag) {
     window.gtag('event', eventName, eventParams)
-
-    // Log in development
-    if (process.env.NODE_ENV === 'development') {
-      console.log('[Analytics]', eventName, eventParams)
-    }
   }
 }
 
@@ -285,7 +271,7 @@ export const analytics = {
  */
 export const initAnalytics = (
   userId?: string,
-  properties?: Record<string, any>
+  properties?: Record<string, unknown>
 ): void => {
   if (typeof window === 'undefined' || !window.gtag) return
 
@@ -301,7 +287,7 @@ export const initAnalytics = (
  * Set user properties
  * @param properties - User properties to set
  */
-export const setUserProperties = (properties: Record<string, any>): void => {
+export const setUserProperties = (properties: Record<string, unknown>): void => {
   if (typeof window === 'undefined' || !window.gtag) return
 
   window.gtag('set', 'user_properties', properties)

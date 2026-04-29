@@ -1,6 +1,48 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import { createElement, type ReactNode } from 'react'
 import Contact from '@/components/sections/Contact'
+
+vi.mock('framer-motion', () => {
+  const motionOnlyProps = [
+    'initial',
+    'animate',
+    'exit',
+    'transition',
+    'viewport',
+    'whileHover',
+    'whileInView',
+    'whileTap',
+  ]
+
+  type MotionElement = 'div' | 'section' | 'a' | 'button' | 'h2' | 'p'
+  type MotionProps = Record<string, unknown> & { children?: ReactNode }
+
+  const createMotionMock = (Element: MotionElement) => {
+    function MotionMock({ children, ...props }: MotionProps) {
+      const cleanProps: Record<string, unknown> = { ...props }
+      motionOnlyProps.forEach((prop) => {
+        delete cleanProps[prop]
+      })
+
+      return createElement(Element, cleanProps, children)
+    }
+
+    MotionMock.displayName = `motion.${Element}`
+    return MotionMock
+  }
+
+  return {
+    motion: {
+      div: createMotionMock('div'),
+      section: createMotionMock('section'),
+      a: createMotionMock('a'),
+      button: createMotionMock('button'),
+      h2: createMotionMock('h2'),
+      p: createMotionMock('p'),
+    },
+  }
+})
 
 // Mock analytics
 vi.mock('@/lib/analytics', () => ({
@@ -12,49 +54,51 @@ describe('Contact Component', () => {
     vi.clearAllMocks()
   })
 
-  it('should render contact form', () => {
+  it('should render contact form', async () => {
     render(<Contact />)
-    expect(screen.getByRole('form') || screen.getByText(/contacto/i)).toBeInTheDocument()
+    expect(
+      await screen.findByRole('form', { name: /formulario de contacto/i })
+    ).toBeInTheDocument()
   })
 
-  it('should have all form fields', () => {
+  it('should have all form fields', async () => {
     render(<Contact />)
-    
-    const nameInput = screen.getByLabelText(/nombre/i) || screen.getByPlaceholderText(/nombre/i)
-    const emailInput = screen.getByLabelText(/email/i) || screen.getByPlaceholderText(/email/i)
-    const messageInput = screen.getByLabelText(/mensaje/i) || screen.getByPlaceholderText(/mensaje/i)
-    
+
+    const nameInput = await screen.findByLabelText(/nombre/i)
+    const emailInput = await screen.findByLabelText(/email/i)
+    const messageInput = await screen.findByLabelText(/mensaje/i)
+
     expect(nameInput).toBeInTheDocument()
     expect(emailInput).toBeInTheDocument()
     expect(messageInput).toBeInTheDocument()
   })
 
-  it('should display contact information', () => {
+  it('should display contact information', async () => {
     render(<Contact />)
-    expect(screen.getByText(/info@almagrosanmiguel\.com/i)).toBeInTheDocument()
-    expect(screen.getByText(/sevilla/i)).toBeInTheDocument()
+    expect(await screen.findByText(/info@almagrosanmiguel\.com/i)).toBeInTheDocument()
+    expect(await screen.findByText(/sevilla/i)).toBeInTheDocument()
   })
 
-  it('should have submit button', () => {
+  it('should have submit button', async () => {
     render(<Contact />)
-    const submitButton = screen.getByRole('button', { name: /enviar/i })
+    const submitButton = await screen.findByRole('button', { name: /enviar/i })
     expect(submitButton).toBeInTheDocument()
   })
 
-  it('should show character counter for message', () => {
+  it('should show character counter for message', async () => {
     render(<Contact />)
-    const counter = screen.getByText(/2000/)
+    const counter = await screen.findByText(/2000/)
     expect(counter).toBeInTheDocument()
   })
 
-  it('should display social media links', () => {
+  it('should display social media links', async () => {
     render(<Contact />)
-    expect(screen.getByText(/instagram/i)).toBeInTheDocument()
-    expect(screen.getByText(/facebook/i) || screen.getByText(/twitter/i)).toBeInTheDocument()
+    expect(await screen.findByText(/instagram/i)).toBeInTheDocument()
+    expect(await screen.findByText(/facebook/i)).toBeInTheDocument()
   })
 
-  it('should have response time information', () => {
+  it('should have response time information', async () => {
     render(<Contact />)
-    expect(screen.getByText(/48 horas/i) || screen.getByText(/respuesta/i)).toBeInTheDocument()
+    expect(await screen.findByText(/48 horas/i)).toBeInTheDocument()
   })
 })

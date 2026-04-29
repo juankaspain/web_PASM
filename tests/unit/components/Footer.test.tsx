@@ -1,6 +1,25 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
+import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 import Footer from '@/components/Footer'
+
+// Mock framer-motion
+vi.mock('framer-motion', () => ({
+  motion: {
+    footer: ({
+      children,
+      ...props
+    }: ComponentPropsWithoutRef<'footer'> & { children?: ReactNode }) => (
+      <footer {...props}>{children}</footer>
+    ),
+    div: ({
+      children,
+      ...props
+    }: ComponentPropsWithoutRef<'div'> & { children?: ReactNode }) => (
+      <div {...props}>{children}</div>
+    ),
+  },
+}))
 
 describe('Footer', () => {
   it('should render the footer', () => {
@@ -22,15 +41,14 @@ describe('Footer', () => {
 
   it('should have Instagram link', () => {
     render(<Footer />)
-    const instagramLink = screen.getByLabelText(/instagram/i) || 
-                         screen.getByText(/instagram/i).closest('a')
+    const instagramLink =
+      screen.getByLabelText(/instagram/i) || screen.getByText(/instagram/i).closest('a')
     expect(instagramLink).toBeInTheDocument()
   })
 
-  it('should have IMDb link', () => {
+  it('should have YouTube link', () => {
     render(<Footer />)
-    const imdbText = screen.getByText(/IMDb/i)
-    expect(imdbText).toBeInTheDocument()
+    expect(screen.getByLabelText(/youtube/i)).toBeInTheDocument()
   })
 
   it('should display actor name', () => {
@@ -41,13 +59,14 @@ describe('Footer', () => {
   it('should have external links with correct attributes', () => {
     render(<Footer />)
     const externalLinks = screen.getAllByRole('link')
-    const socialLinks = externalLinks.filter(link => 
-      link.getAttribute('href')?.includes('instagram') ||
-      link.getAttribute('href')?.includes('imdb') ||
-      link.getAttribute('href')?.includes('facebook')
+    const socialLinks = externalLinks.filter(
+      (link) =>
+        link.getAttribute('href')?.includes('instagram') ||
+        link.getAttribute('href')?.includes('youtube') ||
+        link.getAttribute('href')?.includes('facebook')
     )
-    
-    socialLinks.forEach(link => {
+
+    socialLinks.forEach((link) => {
       expect(link).toHaveAttribute('target', '_blank')
       expect(link).toHaveAttribute('rel', 'noopener noreferrer')
     })

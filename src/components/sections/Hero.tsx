@@ -13,7 +13,13 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { TikTokIcon, ImdbIcon, WikipediaIcon, FilmAffinityIcon, SensaCineIcon } from '@/components/icons'
+import {
+  TikTokIcon,
+  ImdbIcon,
+  WikipediaIcon,
+  FilmAffinityIcon,
+  SensaCineIcon,
+} from '@/components/icons'
 import { Tv, Film, Award, Users } from 'lucide-react'
 
 export default function Hero() {
@@ -40,7 +46,7 @@ export default function Hero() {
       name: 'FilmAffinity',
       url: 'https://www.filmaffinity.com/es/name.php?name-id=231727420',
       icon: FilmAffinityIcon,
-      description: 'Filmografía completa',
+      description: 'Filmograf�a completa',
       gradient: 'from-blue-400/20 to-blue-600/20',
       borderColor: 'border-blue-400/30',
       iconColor: 'text-blue-400',
@@ -64,7 +70,7 @@ export default function Hero() {
       name: 'Wikipedia',
       url: 'https://es.wikipedia.org/wiki/Almagro_San_Miguel',
       icon: WikipediaIcon,
-      description: 'Biografía',
+      description: 'Biograf�a',
       gradient: 'from-slate-400/20 to-slate-600/20',
       borderColor: 'border-slate-400/30',
       iconColor: 'text-slate-300',
@@ -117,7 +123,7 @@ export default function Hero() {
     },
   ]
 
-  // Estadísticas profesionales actualizadas con datos REALES
+  // Estad�sticas profesionales actualizadas con datos REALES
   const careerStats = [
     {
       icon: Tv,
@@ -130,7 +136,7 @@ export default function Hero() {
     {
       icon: Film,
       value: '5',
-      label: 'Películas',
+      label: 'Pel�culas',
       gradient: 'from-purple-500/20 to-purple-600/20',
       iconColor: 'text-purple-400',
       borderColor: 'border-purple-400/30',
@@ -146,14 +152,14 @@ export default function Hero() {
     {
       icon: Users,
       value: '12+',
-      label: 'Años Exp.',
+      label: 'A�os Exp.',
       gradient: 'from-green-500/20 to-green-600/20',
       iconColor: 'text-green-400',
       borderColor: 'border-green-400/30',
     },
   ]
 
-  const specialties = ['Drama', 'Comedia', 'Acción', 'Verso Clásico']
+  const specialties = ['Drama', 'Comedia', 'Acci�n', 'Verso Cl�sico']
 
   return (
     <section
@@ -336,7 +342,7 @@ export default function Hero() {
               <div className="hero-image-container relative aspect-[2.5/4] overflow-hidden rounded-[28px] shadow-[0_50px_150px_rgba(0,0,0,0.95)] lg:rounded-[36px]">
                 <Image
                   src="/assets/hero/main.jpg"
-                  alt="Almagro San Miguel - Actor profesional de televisión, cine y teatro"
+                  alt="Almagro San Miguel - Actor profesional de televisi�n, cine y teatro"
                   fill
                   className="scale-105 object-cover object-[center_15%]"
                   sizes="(min-width: 1024px) 520px, 90vw"
@@ -371,7 +377,7 @@ export default function Hero() {
                 className="fade-in-up text-lg font-semibold text-slate-300 sm:text-xl md:text-2xl"
                 style={{ animationDelay: '0.2s' }}
               >
-                Actor de Televisión, Cine y Teatro
+                Actor de Televisi�n, Cine y Teatro
               </p>
 
               {/* Especialidades */}
@@ -395,7 +401,7 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Sección de Bienvenida Profesional con Estadísticas */}
+            {/* Secci�n de Bienvenida Profesional con Estad�sticas */}
             <div className="fade-in-up relative" style={{ animationDelay: '0.3s' }}>
               <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-yellow-400/20 via-yellow-500/20 to-yellow-400/20 opacity-60 blur-2xl" />
 
@@ -414,7 +420,7 @@ export default function Hero() {
                   <p className="text-sm leading-relaxed text-slate-300">
                     Actor profesional con{' '}
                     <span className="font-bold text-yellow-400">
-                      +12 años de trayectoria
+                      +12 a�os de trayectoria
                     </span>{' '}
                     en producciones nacionales e internacionales. He participado en series
                     de <span className="font-bold text-yellow-400">Prime Video</span>,{' '}
@@ -425,7 +431,7 @@ export default function Hero() {
                   </p>
                 </div>
 
-                {/* Estadísticas actualizadas */}
+                {/* Estad�sticas actualizadas */}
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                   {careerStats.map((stat) => {
                     const Icon = stat.icon
@@ -503,7 +509,7 @@ export default function Hero() {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`${link.name} — ${link.description} (se abre en nueva ventana)`}
+                      aria-label={`${link.name} � ${link.description} (se abre en nueva ventana)`}
                       className={`profile-card group relative flex flex-col items-center gap-3 rounded-2xl border bg-gradient-to-br from-slate-900/90 to-slate-950/90 px-4 py-5 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all ${link.borderColor} ${link.hoverBg} ${link.hoverBorder}`}
                     >
                       <div

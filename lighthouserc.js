@@ -1,8 +1,13 @@
 module.exports = {
   ci: {
     collect: {
-      startServerCommand: 'pnpm start',
-      url: ['http://localhost:3000'],
+      startServerCommand: 'npm start',
+      url: [
+        'http://localhost:3000',
+        'http://localhost:3000/#about',
+        'http://localhost:3000/#series',
+        'http://localhost:3000/#contact',
+      ],
       numberOfRuns: 3,
     },
     assert: {

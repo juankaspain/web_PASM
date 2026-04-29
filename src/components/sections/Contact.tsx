@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import {
   Mail,
   MapPin,
@@ -16,13 +17,13 @@ import {
   Sparkles,
   Clock,
 } from 'lucide-react'
-import { useState, useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+import { useState } from 'react'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { trackEvent } from '@/lib/analytics'
 import { contactFormSchema } from '@/lib/validators'
 import { z } from 'zod'
-import { TikTokIcon } from '@/components/icons'
+import { SiTiktok } from 'react-icons/si'
 import Link from 'next/link'
 import { useInView } from '@/hooks/useInView'
 
@@ -33,6 +34,7 @@ const contactSchema = contactFormSchema.extend({
     errorMap: () => ({ message: 'Debes aceptar la Política de Privacidad' }),
   }),
   acceptNewsletter: z.boolean().optional(),
+  company: z.string().max(0).optional(),
 })
 
 type ContactFormValues = z.infer<typeof contactSchema>
@@ -107,69 +109,33 @@ interface Particle {
   id: number
   x: number
   y: number
+  duration: number
+  delay: number
 }
 
-// Skeleton Loader Component
-function ContactSkeleton() {
-  return (
-    <section className="relative overflow-hidden bg-black py-24 sm:py-32">
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black" />
-      <div className="absolute left-1/2 top-0 h-[500px] w-[1000px] -translate-x-1/2 rounded-full bg-yellow-500/10 blur-[150px]" />
-
-      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-16 text-center sm:mb-20">
-          {/* Skeleton Header */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2">
-            <div className="h-4 w-4 animate-pulse rounded bg-white/10" />
-            <div className="h-4 w-20 animate-pulse rounded bg-white/10" />
-          </div>
-
-          <div className="mx-auto mb-6 h-12 w-96 animate-pulse rounded bg-white/5" />
-          <div className="mx-auto h-6 w-full max-w-2xl animate-pulse rounded bg-white/5" />
-        </div>
-
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2 lg:gap-12">
-          {/* Skeleton Form */}
-          <div className="space-y-6">
-            <div className="rounded-3xl border border-white/10 bg-white/[0.02] p-8">
-              <div className="space-y-6">
-                {[...Array(4)].map((_, i) => (
-                  <div key={i}>
-                    <div className="mb-2 h-4 w-32 animate-pulse rounded bg-white/10" />
-                    <div className="h-12 w-full animate-pulse rounded-xl bg-white/5" />
-                  </div>
-                ))}
-                <div className="h-14 w-full animate-pulse rounded-xl bg-yellow-400/20" />
-              </div>
-            </div>
-          </div>
-
-          {/* Skeleton Info */}
-          <div className="space-y-6">
-            {[...Array(3)].map((_, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.02] p-5"
-              >
-                <div className="h-14 w-14 animate-pulse rounded-xl bg-yellow-400/20" />
-                <div className="flex-1">
-                  <div className="mb-2 h-3 w-20 animate-pulse rounded bg-white/10" />
-                  <div className="h-5 w-32 animate-pulse rounded bg-white/10" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
+const CONTACT_PARTICLES: Particle[] = [
+  { id: 0, x: 8, y: 18, duration: 7.2, delay: 0.4 },
+  { id: 1, x: 14, y: 72, duration: 6.4, delay: 1.1 },
+  { id: 2, x: 21, y: 34, duration: 8.1, delay: 2.2 },
+  { id: 3, x: 27, y: 86, duration: 5.8, delay: 0.9 },
+  { id: 4, x: 34, y: 16, duration: 7.7, delay: 1.8 },
+  { id: 5, x: 41, y: 58, duration: 6.9, delay: 0.3 },
+  { id: 6, x: 48, y: 28, duration: 8.4, delay: 2.7 },
+  { id: 7, x: 55, y: 78, duration: 6.2, delay: 1.5 },
+  { id: 8, x: 61, y: 40, duration: 7.1, delay: 0.7 },
+  { id: 9, x: 69, y: 66, duration: 8.6, delay: 2.4 },
+  { id: 10, x: 75, y: 12, duration: 5.9, delay: 1.2 },
+  { id: 11, x: 81, y: 50, duration: 7.8, delay: 0.6 },
+  { id: 12, x: 87, y: 82, duration: 6.6, delay: 1.9 },
+  { id: 13, x: 92, y: 26, duration: 8.2, delay: 2.9 },
+  { id: 14, x: 96, y: 60, duration: 6.1, delay: 1.4 },
+]
 
 export default function Contact() {
   const {
     register,
+    control,
     handleSubmit: handleFormSubmit,
-    watch,
     reset,
     formState: { errors },
   } = useForm<ContactFormValues>({
@@ -181,38 +147,19 @@ export default function Contact() {
       message: '',
       acceptPrivacy: undefined as unknown as true,
       acceptNewsletter: false,
+      company: '',
     },
   })
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
-  const [particles, setParticles] = useState<Particle[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-  // E.6 - Reconstruct email client-side to prevent scraping
-  const [displayEmail, setDisplayEmail] = useState('...')
-
+  const displayEmail = ['info', 'almagrosanmiguel.com'].join('@')
   const { ref: sectionRef, isInView } = useInView({ once: true, margin: '-80px' })
 
-  const messageValue = watch('message', '')
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 100)
-
-    // A.5 - Use percentage-based positioning and reduce particle count
-    const newParticles = [...Array(15)].map((_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-    }))
-    setParticles(newParticles)
-
-    // E.6 - Reconstruct email client-side to prevent scraping
-    const parts = ['info', 'almagrosanmiguel.com']
-    setDisplayEmail(parts.join('@'))
-
-    return () => clearTimeout(timer)
-  }, [])
+  const messageValue = useWatch({
+    control,
+    name: 'message',
+    defaultValue: '',
+  })
 
   const handleSubmit = async (data: ContactFormValues) => {
     setStatus('sending')
@@ -231,8 +178,8 @@ export default function Contact() {
           email: data.email,
           category: data.category,
           message: data.message,
-          _subject: `Nuevo mensaje de ${data.name} - ${data.category}`,
-          _replyto: data.email,
+          acceptNewsletter: data.acceptNewsletter === true,
+          company: data.company,
         }),
       })
 
@@ -265,25 +212,29 @@ export default function Contact() {
     }
   }
 
-  // Show skeleton while loading
-  if (isLoading) {
-    return <ContactSkeleton />
-  }
-
   return (
     <section id="contact" className="relative overflow-hidden bg-black py-24 sm:py-32">
       <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-950 to-black" />
       <div className="absolute left-1/2 top-0 h-[500px] w-[1000px] -translate-x-1/2 rounded-full bg-yellow-500/10 blur-[150px]" />
 
-      {particles.length > 0 && (
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
-          {particles.map((particle) => (
-            <div
+      {CONTACT_PARTICLES.length > 0 && (
+        <div className="absolute inset-0 opacity-20">
+          {CONTACT_PARTICLES.map((particle) => (
+            <motion.div
               key={particle.id}
-              className="absolute h-1 w-1 rounded-full bg-yellow-400 animate-fadeIn"
+              className="animate-fadeIn absolute h-1 w-1 rounded-full bg-yellow-400"
               style={{
                 left: `${particle.x}%`,
                 top: `${particle.y}%`,
+              }}
+              animate={{
+                y: [0, -300],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: particle.duration,
+                repeat: Infinity,
+                delay: particle.delay,
               }}
             />
           ))}
@@ -293,11 +244,11 @@ export default function Contact() {
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         <div
           ref={sectionRef}
-          className={`transition-all duration-[800ms] ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          className={`transition-all duration-[800ms] ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
         >
           <div className="mb-16 text-center sm:mb-20">
             <div
-              className={`mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 backdrop-blur-sm transition-all duration-[600ms] delay-200 ${isInView ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
+              className={`mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 backdrop-blur-sm transition-all delay-200 duration-[600ms] ${isInView ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}
             >
               <Sparkles className="h-4 w-4 text-yellow-400" />
               <span className="text-sm font-bold uppercase tracking-wider text-slate-300">
@@ -306,13 +257,13 @@ export default function Contact() {
             </div>
 
             <h2
-              className={`mb-6 text-4xl font-bold text-white sm:text-5xl lg:text-6xl transition-all duration-[600ms] delay-300 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+              className={`mb-6 text-4xl font-bold text-white transition-all delay-300 duration-[600ms] sm:text-5xl lg:text-6xl ${isInView ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}
             >
               Contacto Profesional
             </h2>
 
             <p
-              className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-300 sm:text-xl transition-all duration-[600ms] delay-[400ms] ${isInView ? 'opacity-100' : 'opacity-0'}`}
+              className={`mx-auto max-w-3xl text-lg leading-relaxed text-slate-300 transition-all delay-[400ms] duration-[600ms] sm:text-xl ${isInView ? 'opacity-100' : 'opacity-0'}`}
             >
               Disponible para castings, colaboraciones y consultas profesionales
             </p>
@@ -321,13 +272,26 @@ export default function Contact() {
           <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2 lg:gap-12">
             {/* Columna izquierda: Formulario + Tiempo de Respuesta */}
             <div
-              className={`space-y-6 transition-all duration-700 delay-500 ${isInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}
+              className={`space-y-6 transition-all delay-500 duration-700 ${isInView ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`}
             >
               <div className="relative">
                 <div className="absolute -inset-1 rounded-3xl bg-yellow-400/20 opacity-50 blur-2xl" />
 
                 <div className="relative rounded-3xl border border-white/10 bg-white/[0.02] p-8 shadow-2xl backdrop-blur-xl">
-                  <form onSubmit={handleFormSubmit(handleSubmit)} className="space-y-6">
+                  <form
+                    onSubmit={handleFormSubmit(handleSubmit)}
+                    className="space-y-6"
+                    aria-label="Formulario de contacto"
+                  >
+                    <input
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      {...register('company')}
+                      className="hidden"
+                      aria-hidden="true"
+                    />
+
                     <div>
                       <label
                         htmlFor="name"
@@ -485,7 +449,7 @@ export default function Contact() {
                     </div>
 
                     {status === 'success' && (
-                      <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.05] p-4 animate-fadeInUp">
+                      <div className="animate-fadeInUp flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.05] p-4">
                         <CheckCircle className="h-5 w-5 flex-shrink-0 text-white" />
                         <span className="text-sm font-semibold text-white">
                           ¡Mensaje enviado! Te responderé en menos de 48 horas.
@@ -494,7 +458,7 @@ export default function Contact() {
                     )}
 
                     {status === 'error' && (
-                      <div className="flex items-center gap-3 rounded-xl border border-red-500/30 bg-red-500/10 p-4 animate-fadeInUp">
+                      <div className="animate-fadeInUp flex items-center gap-3 rounded-xl border border-red-500/30 bg-red-500/10 p-4">
                         <AlertCircle className="h-5 w-5 flex-shrink-0 text-red-400" />
                         <span className="text-sm font-semibold text-red-300">
                           {errorMessage}
@@ -505,7 +469,7 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={status === 'sending'}
-                      className="flex w-full items-center justify-center gap-3 rounded-xl bg-yellow-400 px-8 py-4 font-bold text-black shadow-lg transition-all hover:bg-yellow-300 hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                      className="flex w-full items-center justify-center gap-3 rounded-xl bg-yellow-400 px-8 py-4 font-bold text-black shadow-lg transition-all hover:scale-[1.02] hover:bg-yellow-300 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {status === 'sending' ? (
                         <>
@@ -528,7 +492,7 @@ export default function Contact() {
               </div>
 
               {/* Tiempo de Respuesta - Ahora debajo del formulario */}
-              <div className="relative hover:scale-[1.02] transition-transform duration-300">
+              <div className="relative transition-transform duration-300 hover:scale-[1.02]">
                 <div className="absolute -inset-0.5 rounded-2xl bg-yellow-400/20 opacity-40 blur-lg" />
                 <div className="relative rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl">
                   <div className="flex items-start gap-4">
@@ -553,7 +517,7 @@ export default function Contact() {
 
             {/* Columna derecha: Info de contacto y Redes Sociales */}
             <div
-              className={`space-y-6 transition-all duration-700 delay-[600ms] ${isInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
+              className={`space-y-6 transition-all delay-[600ms] duration-700 ${isInView ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}
             >
               <div className="space-y-4">
                 {contactInfo.map((info) => {
@@ -563,12 +527,12 @@ export default function Contact() {
                   return (
                     <div
                       key={info.label}
-                      className="group relative hover:-translate-y-1 hover:scale-[1.02] transition-transform duration-300"
+                      className="group relative transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02]"
                     >
                       <div className="absolute -inset-0.5 rounded-2xl bg-yellow-400/20 opacity-0 blur-lg transition-opacity group-hover:opacity-100" />
                       <div className="relative flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.02] p-5 backdrop-blur-xl">
                         <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl bg-yellow-400 shadow-lg">
-                          <Icon className="h-7 w-7 text-black" />
+                          <Icon className="h-7 w-7 text-black" aria-hidden="true" />
                         </div>
                         <div className="flex-1">
                           <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-300">
@@ -616,9 +580,12 @@ export default function Contact() {
                         <div className="flex items-center gap-3">
                           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 shadow-lg">
                             {Icon === 'tiktok' ? (
-                              <TikTokIcon className="h-6 w-6 text-white" />
+                              <SiTiktok
+                                className="h-6 w-6 text-white"
+                                aria-hidden="true"
+                              />
                             ) : (
-                              <Icon className="h-6 w-6 text-white" />
+                              <Icon className="h-6 w-6 text-white" aria-hidden="true" />
                             )}
                           </div>
                           <div>
