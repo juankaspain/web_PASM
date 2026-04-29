@@ -12,7 +12,7 @@ const nextConfig = {
   reactStrictMode: false,
 
   // Static export for Hostinger shared hosting
-  output: 'export',
+  //output: 'export',
 
   // Images: unoptimized for static export (no server-side optimization)
   images: {
