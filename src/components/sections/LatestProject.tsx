@@ -13,6 +13,7 @@ import {
   ChevronDown,
 } from 'lucide-react'
 import Image from '@/components/ui/SafeImage'
+import YouTubeEmbed from '@/components/ui/YouTubeEmbed'
 import { useState } from 'react'
 import { useInView } from '@/hooks/useInView'
 
@@ -174,16 +175,10 @@ export default function LatestProject() {
               <div className="relative">
                 <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-yellow-500/30 to-orange-600/30 opacity-60 blur-xl" />
                 <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-white/[0.02] backdrop-blur-sm">
-                  {/* Embedded YouTube Player */}
-                  <div className="relative aspect-video">
-                    <iframe
-                      src="https://www.youtube.com/embed/MV5kUBPfd9U"
-                      title="Una de cine - Canal Sur - Almagro San Miguel"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                      className="absolute inset-0 h-full w-full"
-                    />
-                  </div>
+                  <YouTubeEmbed
+                    videoId="MV5kUBPfd9U"
+                    title="Una de cine - Canal Sur - Almagro San Miguel"
+                  />
 
                   <div className="p-6">
                     <div className="mb-3 flex items-center gap-3">
@@ -206,17 +201,18 @@ export default function LatestProject() {
                       Gerardo Herrero.
                     </p>
                     <div className="flex items-center gap-4 text-sm text-slate-400">
-                      <span>?? Canal Sur</span>
-                      <span>|</span>
-                      <span>?? 14 nov 2025</span>
-                      <span>|</span>
+                      <span>Canal Sur</span>
+                      <span aria-hidden="true">/</span>
+                      <span>14 nov 2025</span>
+                      <span aria-hidden="true">/</span>
                       <a
                         href="https://www.youtube.com/watch?v=MV5kUBPfd9U"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="font-semibold text-yellow-400 transition-colors hover:text-yellow-300"
                       >
-                        Ver en YouTube ?
+                        Ver en YouTube
+                        <ExternalLink className="inline h-3.5 w-3.5" aria-hidden="true" />
                       </a>
                     </div>
                   </div>
