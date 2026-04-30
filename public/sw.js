@@ -8,7 +8,7 @@ const IMAGE_CACHE = `image-cache-v${CACHE_VERSION}`;
 // Assets to cache on install
 const STATIC_ASSETS = [
   '/',
-  '/offline',
+  '/offline/',
   '/site.webmanifest',
   '/favicon.svg',
 ];
@@ -77,7 +77,7 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(request)
         .catch(() => {
-          return caches.match('/offline');
+          return caches.match('/offline/');
         })
     );
     return;

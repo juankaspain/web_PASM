@@ -118,7 +118,7 @@ export const metadata: Metadata = {
       'Actor con 13+ años de experiencia. Más de 300 episodios en TV. Protagonista de La Moderna (TVE) y Vis a vis: El Oasis (Fox). Formación ESAD Sevilla y CNTC. Especialista en verso clásico, combate escénico y equitación.',
     images: [
       {
-        url: '/opengraph-image',
+        url: '/og-image.svg',
         width: 1200,
         height: 630,
         alt: 'Almagro San Miguel - Actor Profesional',
@@ -132,7 +132,7 @@ export const metadata: Metadata = {
     title: 'Almagro San Miguel - Actor Profesional',
     description:
       'Actor con 13+ años de experiencia. Más de 300 episodios en TV. La Moderna (TVE), Vis a vis: El Oasis (Fox), Hernán (Prime Video).',
-    images: ['/twitter-image'],
+    images: ['/twitter-image.svg'],
   },
   robots: {
     index: true,
@@ -296,7 +296,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 },
               ],
               url: 'https://almagrosanmiguel.com',
-              image: 'https://almagrosanmiguel.com/opengraph-image',
+              image: 'https://almagrosanmiguel.com/og-image.svg',
               sameAs: [
                 'https://www.imdb.com/name/nm9017709/',
                 'https://es.wikipedia.org/wiki/Almagro_San_Miguel',

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Almagro San Miguel - Portfolio actor</title>
+  <desc id="desc">Imagen para compartir el portfolio profesional de Almagro San Miguel</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#020617"/>
+      <stop offset=".55" stop-color="#000000"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="68" y="60" width="1064" height="510" rx="30" fill="#020617" fill-opacity=".68" stroke="#facc15" stroke-opacity=".24" stroke-width="2"/>
+  <text x="116" y="136" fill="#fde68a" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="700" letter-spacing="2">ACTOR PROFESIONAL</text>
+  <text x="116" y="284" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="88" font-weight="800">Almagro</text>
+  <text x="116" y="378" fill="#facc15" font-family="Inter, Arial, sans-serif" font-size="88" font-weight="800">San Miguel</text>
+  <text x="118" y="442" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="32">Series, cine, teatro y materiales profesionales</text>
+  <text x="118" y="492" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="32">para casting y prensa</text>
+  <text x="118" y="540" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="26">@almagroSM</text>
+  <text x="820" y="540" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="26">almagrosanmiguel.com</text>
+</svg>

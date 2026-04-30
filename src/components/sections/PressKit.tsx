@@ -16,6 +16,12 @@ import {
 } from 'lucide-react'
 import { useState } from 'react'
 import SectionHeader from '@/components/ui/SectionHeader'
+import {
+  generateAwardsPDF,
+  generateBioPDF,
+  generateFilmographyPDF,
+  generateTechSheetPDF,
+} from '@/lib/generatePDF'
 
 const DOWNLOAD_ITEMS = [
   {
@@ -86,6 +92,28 @@ const DOWNLOAD_ITEMS = [
   },
 ]
 
+const DOWNLOAD_GENERATORS: Record<
+  string,
+  { generate: () => Promise<Blob>; filename: string }
+> = {
+  bio: {
+    generate: generateBioPDF,
+    filename: 'Almagro_San_Miguel_Biografia.txt',
+  },
+  filmography: {
+    generate: generateFilmographyPDF,
+    filename: 'Almagro_San_Miguel_Filmografia.txt',
+  },
+  awards: {
+    generate: generateAwardsPDF,
+    filename: 'Almagro_San_Miguel_Premios.txt',
+  },
+  techsheet: {
+    generate: generateTechSheetPDF,
+    filename: 'Almagro_San_Miguel_Ficha_Tecnica.txt',
+  },
+}
+
 interface TechSpec {
   label: string
   value: string | { text: string; links?: Array<{ text: string; url: string }> }
@@ -134,30 +162,21 @@ export default function PressKit() {
   const handleDownload = async (type: string, title: string) => {
     setDownloading(type)
     try {
-      const response = await fetch(`/api/download?type=${type}`)
-      const contentType = response.headers.get('content-type') || ''
+      const download = DOWNLOAD_GENERATORS[type]
 
-      if (!response.ok) {
-        const data = contentType.includes('application/json')
-          ? ((await response.json()) as { error?: string; action?: string })
-          : null
+      if (!download) {
         alert(
-          [data?.error || `No se pudo descargar ${title}.`, data?.action]
-            .filter(Boolean)
-            .join('\n\n')
+          `${title} se entrega bajo solicitud para evitar publicar archivos simulados.\n\nSolicítalo desde el formulario de contacto profesional.`
         )
         return
       }
 
-      const blob = await response.blob()
-      const disposition = response.headers.get('content-disposition') || ''
-      const filename =
-        disposition.match(/filename="([^"]+)"/)?.[1] || `Almagro_San_Miguel_${type}.txt`
+      const blob = await download.generate()
 
       const url = window.URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
-      link.download = filename
+      link.download = download.filename
       document.body.appendChild(link)
       link.click()
       link.remove()
