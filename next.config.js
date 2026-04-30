@@ -96,6 +96,39 @@ const nextConfig = {
           },
         ],
       },
+      // The shell HTML must not be cached across deploys. Otherwise browsers/CDNs can
+      // keep an old document that references chunks removed by a newer deployment.
+      {
+        source: '/',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-cache, no-store, must-revalidate',
+          },
+        ],
+      },
+      {
+        source: '/sw.js',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-cache, no-store, must-revalidate',
+          },
+          {
+            key: 'Service-Worker-Allowed',
+            value: '/',
+          },
+        ],
+      },
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
       // Cache static assets aggressively
       {
         source: '/images/:path*',

@@ -20,6 +20,20 @@ function isChunkLoadFailure(error: unknown): boolean {
   )
 }
 
+function isFailedNextAsset(event: Event): boolean {
+  const target = event.target
+
+  if (target instanceof HTMLScriptElement && target.src.includes('/_next/static/')) {
+    return true
+  }
+
+  if (target instanceof HTMLLinkElement && target.href.includes('/_next/static/')) {
+    return true
+  }
+
+  return false
+}
+
 function reloadWithFreshDocument() {
   if (sessionStorage.getItem(RECOVERY_FLAG) === '1') return
 
@@ -32,7 +46,11 @@ function reloadWithFreshDocument() {
 export default function ChunkLoadRecovery() {
   useEffect(() => {
     const handleError = (event: ErrorEvent) => {
-      if (isChunkLoadFailure(event.error) || isChunkLoadFailure(event.message)) {
+      if (
+        isFailedNextAsset(event) ||
+        isChunkLoadFailure(event.error) ||
+        isChunkLoadFailure(event.message)
+      ) {
         reloadWithFreshDocument()
       }
     }
@@ -43,11 +61,11 @@ export default function ChunkLoadRecovery() {
       }
     }
 
-    window.addEventListener('error', handleError)
+    window.addEventListener('error', handleError, true)
     window.addEventListener('unhandledrejection', handleUnhandledRejection)
 
     return () => {
-      window.removeEventListener('error', handleError)
+      window.removeEventListener('error', handleError, true)
       window.removeEventListener('unhandledrejection', handleUnhandledRejection)
     }
   }, [])
