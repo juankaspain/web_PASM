@@ -33,6 +33,15 @@ interface PressInterview {
 
 const showreels: ShowreelVideo[] = [
   {
+    id: '2026',
+    year: '2026',
+    title: 'Showreel Profesional 2026',
+    description:
+      'Nueva pieza de showreel profesional con material actualizado para casting, producción audiovisual y nuevos proyectos.',
+    duration: 'Nuevo',
+    youtubeId: 'Zxdbq6W4Go8',
+  },
+  {
     id: '2024',
     year: '2024',
     title: 'Showreel Profesional 2024',
@@ -188,7 +197,7 @@ const pressInterviews: PressInterview[] = [
 
 export default function Showreel() {
   const { ref, isInView } = useInView({ once: true, margin: '-80px' })
-  const [activeVideo, setActiveVideo] = useState<string>('2024')
+  const [activeVideo, setActiveVideo] = useState<string>('2026')
   const [modalVideo, setModalVideo] = useState<ClipVideo | null>(null)
 
   const currentShowreel =

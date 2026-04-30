@@ -68,7 +68,7 @@ export default function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   const [preferences, setPreferences] = useState<CookiePreferences>(
-    () => readSavedCookiePreferences() || DEFAULT_COOKIE_PREFERENCES
+    DEFAULT_COOKIE_PREFERENCES
   )
 
   useEffect(() => {

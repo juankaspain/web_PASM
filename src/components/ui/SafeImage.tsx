@@ -25,12 +25,61 @@ const FALLBACK_SVG = `
 
 const FALLBACK_SRC = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(FALLBACK_SVG)}`
 
+const HERO_IMAGE =
+  'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4'
+const ABOUT_IMAGE =
+  'https://github.com/user-attachments/assets/0c09e17f-1983-4ad0-8926-a0d6ef6ae5cf'
+
+const TEMPORARY_ASSET_OVERRIDES: Record<string, string> = {
+  '/assets/hero/main.jpg': HERO_IMAGE,
+  '/assets/about/profile.jpg': ABOUT_IMAGE,
+  '/assets/cinema/fantasma-en-la-batalla.jpg':
+    'https://img.youtube.com/vi/R0ufJf5SFIU/hqdefault.jpg',
+  '/assets/series/operacion-barrio-ingles.jpg':
+    'https://img.youtube.com/vi/1t0JcwYR-so/hqdefault.jpg',
+  '/assets/series/la-moderna.jpg': 'https://img.youtube.com/vi/ursuF5r4_Ms/hqdefault.jpg',
+  '/assets/series/la-caza-guadiana.jpg':
+    'https://img.youtube.com/vi/AHUe0aYf9S8/hqdefault.jpg',
+  '/assets/series/honor.jpg': 'https://img.youtube.com/vi/grtiShqUAkg/hqdefault.jpg',
+  '/assets/series/desconocidas.jpg':
+    'https://img.youtube.com/vi/Xel0dzOmHLA/hqdefault.jpg',
+  '/assets/series/estoy-vivo.jpg': 'https://img.youtube.com/vi/kw3SvwH4khQ/hqdefault.jpg',
+  '/assets/series/vis-a-vis-el-oasis.jpg':
+    'https://img.youtube.com/vi/t4LYYroY5bo/hqdefault.jpg',
+  '/assets/series/hernan.jpg': 'https://img.youtube.com/vi/CRlE3_JI7ZY/hqdefault.jpg',
+  '/assets/blog/la-moderna-rtve-2024.jpg': HERO_IMAGE,
+  '/assets/blog/la-moderna-rtve-2023.jpg': HERO_IMAGE,
+  '/assets/blog/la-moderna-20minutos.jpg': HERO_IMAGE,
+  '/assets/blog/la-moderna-imdb.jpg': HERO_IMAGE,
+}
+
+function resolveTemporaryAsset(src: ImageProps['src']) {
+  if (typeof src !== 'string' || !src.startsWith('/assets/')) {
+    return src
+  }
+
+  if (TEMPORARY_ASSET_OVERRIDES[src]) {
+    return TEMPORARY_ASSET_OVERRIDES[src]
+  }
+
+  if (src.includes('/headshots/') || src.includes('/gallery/')) {
+    return HERO_IMAGE
+  }
+
+  if (src.includes('/press/') || src.includes('/cinema/')) {
+    return ABOUT_IMAGE
+  }
+
+  return HERO_IMAGE
+}
+
 export default function SafeImage({ src, alt, onError, ...props }: ImageProps) {
   const srcKey = typeof src === 'string' ? src : JSON.stringify(src)
   const [failedSrcs, setFailedSrcs] = useState<ReadonlySet<string>>(() => new Set())
+  const temporarySrc = useMemo(() => resolveTemporaryAsset(src), [src])
   const currentSrc = useMemo(
-    () => (failedSrcs.has(srcKey) ? FALLBACK_SRC : src),
-    [failedSrcs, src, srcKey]
+    () => (failedSrcs.has(srcKey) ? FALLBACK_SRC : temporarySrc),
+    [failedSrcs, srcKey, temporarySrc]
   )
 
   return (
@@ -38,6 +87,7 @@ export default function SafeImage({ src, alt, onError, ...props }: ImageProps) {
       {...props}
       src={currentSrc}
       alt={alt}
+      data-original-src={srcKey}
       onError={(event) => {
         onError?.(event)
         setFailedSrcs((previous) => {
