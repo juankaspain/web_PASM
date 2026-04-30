@@ -1,6 +1,6 @@
 // Service Worker for Progressive Web App
 // B.5 - Update cache version manually when deploying new content
-const CACHE_VERSION = '2';
+const CACHE_VERSION = '3';
 const CACHE_NAME = `almagro-portfolio-v${CACHE_VERSION}`;
 const RUNTIME_CACHE = `runtime-cache-v${CACHE_VERSION}`;
 const IMAGE_CACHE = `image-cache-v${CACHE_VERSION}`;
@@ -56,30 +56,28 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Never cache API responses or React Server Component payloads.
+  // Never cache Next.js build assets, API responses or React Server Component payloads.
+  // Hashed chunks must always come from the network so stale deploys do not cause
+  // ChunkLoadError loops after a new production release.
   if (
+    url.pathname.startsWith('/_next/static/') ||
     url.pathname.startsWith('/api/') ||
     url.pathname.startsWith('/_next/data/') ||
-    request.headers.get('accept')?.includes('text/x-component')
+    request.headers.get('accept')?.includes('text/x-component') ||
+    request.destination === 'script' ||
+    request.destination === 'style' ||
+    request.destination === 'worker'
   ) {
     return;
   }
 
-  // Handle navigation requests
+  // Handle navigation requests. Avoid caching HTML shells because old HTML can point
+  // at chunks that no longer exist after a deployment.
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
-        .then((response) => {
-          const responseClone = response.clone();
-          caches.open(RUNTIME_CACHE).then((cache) => {
-            cache.put(request, responseClone);
-          });
-          return response;
-        })
         .catch(() => {
-          return caches.match(request).then((response) => {
-            return response || caches.match('/offline');
-          });
+          return caches.match('/offline');
         })
     );
     return;

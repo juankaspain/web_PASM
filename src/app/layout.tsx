@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import CookieConsent from '@/components/CookieConsent'
+import ChunkLoadRecovery from '@/components/ChunkLoadRecovery'
 import Script from 'next/script'
 
 // Optimized font configuration with display swap and fallbacks
@@ -196,6 +197,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Saltar al contenido principal
         </a>
+        <ChunkLoadRecovery />
         {children}
         <CookieConsent />
 

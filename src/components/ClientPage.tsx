@@ -1,9 +1,26 @@
 'use client'
 
 import { Suspense } from 'react'
-import dynamic from 'next/dynamic'
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/sections/Hero'
+import LatestProject from '@/components/sections/LatestProject'
+import About from '@/components/sections/About'
+import Series from '@/components/sections/Series'
+import Cinema from '@/components/sections/Cinema'
+import Theater from '@/components/sections/Theater'
+import Skills from '@/components/sections/Skills'
+import Headshots from '@/components/sections/Headshots'
+import Timeline from '@/components/sections/Timeline'
+import Milestones from '@/components/sections/Milestones'
+import Awards from '@/components/sections/Awards'
+import Calendar from '@/components/sections/Calendar'
+import Gallery from '@/components/sections/Gallery'
+import Showreel from '@/components/sections/Showreel'
+import Testimonials from '@/components/sections/Testimonials'
+import Press from '@/components/sections/Press'
+import Blog from '@/components/sections/Blog'
+import PressKit from '@/components/sections/PressKit'
+import Contact from '@/components/sections/Contact'
 import Footer from '@/components/Footer'
 import ScrollToTop from '@/components/ui/ScrollToTop'
 import {
@@ -15,33 +32,8 @@ import {
   TimelineSkeleton,
 } from '@/components/ui/Skeleton'
 
-// Lazy load below-fold sections — ssr:false keeps them out of the initial server bundle
-const LatestProject = dynamic(() => import('@/components/sections/LatestProject'), {
-  ssr: false,
-})
-const About = dynamic(() => import('@/components/sections/About'), { ssr: false })
-const Series = dynamic(() => import('@/components/sections/Series'), { ssr: false })
-const Cinema = dynamic(() => import('@/components/sections/Cinema'), { ssr: false })
-const Theater = dynamic(() => import('@/components/sections/Theater'), { ssr: false })
-const Skills = dynamic(() => import('@/components/sections/Skills'), { ssr: false })
-const Headshots = dynamic(() => import('@/components/sections/Headshots'), { ssr: false })
-const Timeline = dynamic(() => import('@/components/sections/Timeline'), { ssr: false })
-const Milestones = dynamic(() => import('@/components/sections/Milestones'), {
-  ssr: false,
-})
-const Awards = dynamic(() => import('@/components/sections/Awards'), { ssr: false })
-const Calendar = dynamic(() => import('@/components/sections/Calendar'), { ssr: false })
-const Gallery = dynamic(() => import('@/components/sections/Gallery'), { ssr: false })
-const Showreel = dynamic(() => import('@/components/sections/Showreel'), { ssr: false })
-const Testimonials = dynamic(() => import('@/components/sections/Testimonials'), {
-  ssr: false,
-})
-const Press = dynamic(() => import('@/components/sections/Press'), { ssr: false })
-const Blog = dynamic(() => import('@/components/sections/Blog'), { ssr: false })
-const PressKit = dynamic(() => import('@/components/sections/PressKit'), { ssr: false })
-const Contact = dynamic(() => import('@/components/sections/Contact'), { ssr: false })
-
-/** Wrapper that reserves vertical space for lazy-loaded sections to prevent CLS */
+// Keep home sections in the main route bundle to avoid fragile post-deploy chunk loads.
+/** Wrapper that reserves vertical space for below-fold sections to prevent CLS */
 function LazySection({
   children,
   fallback,
