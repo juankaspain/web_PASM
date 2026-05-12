@@ -44,7 +44,7 @@ function LazySection({
   minHeight?: string
 }) {
   return (
-    <div className={`content-auto ${minHeight}`}>
+    <div data-testid="lazy-section" className={`content-auto ${minHeight}`}>
       <Suspense fallback={<div className={minHeight}>{fallback}</div>}>
         {children}
       </Suspense>

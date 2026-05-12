@@ -112,7 +112,11 @@ export default function Navbar() {
         <div className="container mx-auto px-4">
           <div className="flex h-20 items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="font-serif text-2xl font-bold">
+            <Link
+              href="/"
+              aria-label="Almagro San Miguel"
+              className="font-serif text-2xl font-bold"
+            >
               <span className="text-white">Almagro</span>
               <span className="text-yellow-400"> San Miguel</span>
             </Link>
@@ -214,7 +218,9 @@ export default function Navbar() {
         ref={mobileMenuRef}
         role="dialog"
         aria-modal="true"
+        aria-hidden={!isMobileMenuOpen}
         aria-label="Menú de navegación"
+        inert={!isMobileMenuOpen}
         className={`bg-black/98 fixed inset-y-0 right-0 z-40 w-full border-l border-white/5 shadow-2xl backdrop-blur-xl transition-transform duration-300 ease-out sm:w-80 ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}

@@ -21,7 +21,7 @@ export default function YouTubeEmbed({
   const [isLoaded, setIsLoaded] = useState(false)
   const params = new URLSearchParams({
     rel: '0',
-    : '1',
+    modestbranding: '1',
     playsinline: '1',
   })
 

@@ -54,8 +54,10 @@ describe('Navbar', () => {
     render(<Navbar />)
     fireEvent.click(screen.getByRole('button', { name: /más/i }))
 
-    const contactLink = screen.getByText(/contacto/i).closest('a')
-    expect(contactLink).toHaveAttribute('href', '#contact')
+    expect(screen.getByRole('link', { name: /contacto/i })).toHaveAttribute(
+      'href',
+      '#contact'
+    )
   })
 
   it('should toggle mobile menu on button click', () => {
@@ -74,7 +76,9 @@ describe('Navbar', () => {
     const expectedSections = ['Sobre mí', 'Series TV', 'Cine', 'Teatro', 'Showreel']
 
     expectedSections.forEach((section) => {
-      expect(screen.getByText(new RegExp(section, 'i'))).toBeInTheDocument()
+      expect(
+        screen.getAllByRole('link', { name: new RegExp(section, 'i') }).length
+      ).toBeGreaterThan(0)
     })
   })
 })
