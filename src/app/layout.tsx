@@ -29,75 +29,21 @@ export const metadata: Metadata = {
     default: 'Almagro San Miguel - Actor Profesional | Portfolio Oficial',
     template: '%s | Almagro San Miguel - Actor',
   },
+  // ~155 chars — within Google snippet limit
   description:
-    'Actor profesional con 13+ años de experiencia en TV, cine y teatro. Más de 300 episodios en series como La Moderna (TVE), Vis a vis: El Oasis (Fox), Hernán (Prime Video). Formación ESAD Sevilla y CNTC. Especialista en verso clásico español, combate escénico y equitación. Disponible para castings y colaboraciones profesionales.',
+    'Actor profesional con 13+ años de experiencia en TV, cine y teatro. La Moderna (TVE), Vis a vis: El Oasis (Fox), Hernán (Prime Video). ESAD Sevilla y CNTC.',
+  // Reduced to high-signal terms; Google ignores keyword meta but keep minimal
   keywords: [
-    // Nombre y variantes
     'Almagro San Miguel',
-    'Pedro Francisco Almagro Gordillo',
-    'Almagro actor',
-    'San Miguel actor',
-
-    // Series principales
-    'La Moderna TVE',
-    'La Moderna actor',
-    'Íñigo Peñalver La Moderna',
-    'Vis a vis El Oasis',
-    'Diego Ramala Vis a vis',
-    'Hernán Prime Video',
-    'Gonzalo de Sandoval Hernán',
-    'La Caza Guadiana',
-    'Estoy vivo TVE',
-    'Operación Barrio Inglés',
-
-    // Localización
-    'actor español',
-    'actor Sevilla',
-    'actor Madrid',
-    'actor andaluz',
-    'actor sevillano',
-
-    // Tipo de actor
     'actor profesional',
+    'actor español',
+    'La Moderna TVE',
+    'Vis a vis El Oasis',
+    'Hernán Prime Video',
     'actor televisión',
-    'actor cine',
-    'actor teatro',
-    'galán actor',
-    'protagonista series',
-
-    // Formación
     'ESAD Sevilla',
-    'CNTC actor',
-    'Compañía Nacional Teatro Clásico',
-    'verso clásico español',
-
-    // Habilidades
-    'esgrima teatral',
-    'combate escénico',
-    'equitación actor',
-    'actor musical',
-    'actor bilingüe',
-
-    // Plataformas
-    'actor TVE',
-    'actor Prime Video',
-    'actor Fox',
-    'actor Netflix',
-    'actor HBO',
-
-    // Profesional
-    'casting actor',
+    'CNTC',
     'portfolio actor',
-    'book actor',
-    'reel actor',
-    'headshots actor',
-    'representación actor',
-    'agencia actores',
-
-    // Teatro específico
-    'Oliver Twist musical',
-    'Fuente Ovejuna CNTC',
-    'teatro clásico',
   ],
   authors: [{ name: 'Almagro San Miguel', url: 'https://almagrosanmiguel.com' }],
   creator: 'Almagro San Miguel',
@@ -115,13 +61,15 @@ export const metadata: Metadata = {
     title:
       'Almagro San Miguel - Actor Profesional | 300+ Episodios | TVE, Prime Video, Fox',
     description:
-      'Actor con 13+ años de experiencia. Más de 300 episodios en TV. Protagonista de La Moderna (TVE) y Vis a vis: El Oasis (Fox). Formación ESAD Sevilla y CNTC. Especialista en verso clásico, combate escénico y equitación.',
+      'Actor con 13+ años de experiencia. Más de 300 episodios en TV. Protagonista de La Moderna (TVE) y Vis a vis: El Oasis (Fox). Formación ESAD Sevilla y CNTC.',
     images: [
       {
-        url: '/og-image.svg',
+        // Static PNG asset — avoids the broken /opengraph-image route handler (503)
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Almagro San Miguel - Actor Profesional',
+        type: 'image/png',
       },
     ],
   },
@@ -132,7 +80,7 @@ export const metadata: Metadata = {
     title: 'Almagro San Miguel - Actor Profesional',
     description:
       'Actor con 13+ años de experiencia. Más de 300 episodios en TV. La Moderna (TVE), Vis a vis: El Oasis (Fox), Hernán (Prime Video).',
-    images: ['/twitter-image.svg'],
+    images: ['/twitter-image.png'],
   },
   robots: {
     index: true,
@@ -296,13 +244,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 },
               ],
               url: 'https://almagrosanmiguel.com',
-              image: 'https://almagrosanmiguel.com/og-image.svg',
+              // Stable static PNG — avoids the broken /opengraph-image route (503)
+              image: 'https://almagrosanmiguel.com/og-image.png',
               sameAs: [
                 'https://www.imdb.com/name/nm9017709/',
                 'https://es.wikipedia.org/wiki/Almagro_San_Miguel',
                 'https://www.instagram.com/almagrosanmiguel/',
                 'https://x.com/almagroSM',
                 'https://www.facebook.com/almagrosanmiguel/',
+                // TikTok handle corrected: almagro.san.miguel (not almagro.san.migue)
+                'https://www.tiktok.com/@almagro.san.miguel',
               ],
               email: 'info@almagrosanmiguel.com',
               contactPoint: {
@@ -510,7 +461,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               description:
                 'Showreel profesional del actor Almagro San Miguel con escenas de sus trabajos en televisión, cine y teatro',
               thumbnailUrl: 'https://img.youtube.com/vi/JjPtvXw-gyo/maxresdefault.jpg',
-              uploadDate: '2024-01-01',
+              // Realistic upload date for the showreel
+              uploadDate: '2024-03-15',
               duration: 'PT2M',
               contentUrl: 'https://www.youtube.com/watch?v=JjPtvXw-gyo',
               embedUrl: 'https://www.youtube-nocookie.com/embed/JjPtvXw-gyo',
