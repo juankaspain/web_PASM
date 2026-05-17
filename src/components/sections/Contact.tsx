@@ -88,8 +88,8 @@ const socialLinks = [
   {
     icon: 'tiktok',
     label: 'TikTok',
-    handle: '@almagro.san.migue',
-    url: 'https://www.tiktok.com/@almagro.san.migue',
+    handle: '@almagro.san.miguel',
+    url: 'https://www.tiktok.com/@almagro.san.miguel',
   },
   {
     icon: Youtube,

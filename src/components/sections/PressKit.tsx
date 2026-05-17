@@ -136,7 +136,7 @@ const techSpecs: TechSpec[] = [
         { text: 'ESAD Sevilla', url: 'https://www.esadsevilla.org/' },
         {
           text: 'CNTC',
-          url: 'http://teatroclasico.es/compania-nacional-de-teatro-clasico/',
+          url: 'https://teatroclasico.mcu.es/',
         },
       ],
     },
@@ -146,7 +146,7 @@ const techSpecs: TechSpec[] = [
     value: {
       text: '',
       links: [
-        { text: 'Work In Progress', url: 'http://www.workinprogressmadrid.com/' },
+        { text: 'Work In Progress', url: 'https://www.workinprogressmadrid.com/' },
         { text: 'NO-IDENTITY', url: 'https://www.no-identity.es/' },
       ],
     },

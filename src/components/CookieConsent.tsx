@@ -65,6 +65,7 @@ function applyCookiePreferences(prefs: CookiePreferences) {
 }
 
 export default function CookieConsent() {
+  const [isMounted, setIsMounted] = useState(false)
   const [showBanner, setShowBanner] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   const [preferences, setPreferences] = useState<CookiePreferences>(
@@ -72,6 +73,12 @@ export default function CookieConsent() {
   )
 
   useEffect(() => {
+    const timer = window.setTimeout(() => setIsMounted(true), 0)
+    return () => window.clearTimeout(timer)
+  }, [])
+
+  useEffect(() => {
+    if (!isMounted) return
     const consent = localStorage.getItem(COOKIE_CONSENT_KEY)
     const savedPreferences = readSavedCookiePreferences()
 
@@ -81,7 +88,11 @@ export default function CookieConsent() {
     }
 
     applyCookiePreferences(savedPreferences)
-  }, [])
+  }, [isMounted])
+
+  if (!isMounted) {
+    return null
+  }
 
   const handleAcceptAll = () => {
     const allAccepted = {
@@ -188,6 +199,8 @@ export default function CookieConsent() {
     <>
       {/* Banner Principal */}
       <div
+        aria-hidden={!showBanner || showSettings}
+        inert={!showBanner || showSettings}
         className={`fixed bottom-0 left-0 right-0 z-50 p-4 transition-all duration-500 md:p-6 ${
           showBanner && !showSettings
             ? 'translate-y-0 opacity-100'
@@ -251,6 +264,11 @@ export default function CookieConsent() {
 
       {/* Panel de Configuración */}
       <div
+        aria-hidden={!showSettings}
+        inert={!showSettings}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cookie-preferences-title"
         className={`fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm transition-all duration-300 ${
           showSettings ? 'opacity-100' : 'pointer-events-none opacity-0'
         }`}
@@ -270,7 +288,10 @@ export default function CookieConsent() {
                   <Settings className="h-5 w-5 text-yellow-400" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-white">
+                  <h2
+                    id="cookie-preferences-title"
+                    className="text-2xl font-bold text-white"
+                  >
                     Centro de Preferencias de Cookies
                   </h2>
                   <p className="text-sm text-slate-400">Personaliza tu experiencia</p>
@@ -278,6 +299,7 @@ export default function CookieConsent() {
               </div>
               <button
                 onClick={() => setShowSettings(false)}
+                aria-label="Cerrar preferencias de cookies"
                 className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 transition-colors hover:bg-white/10"
               >
                 <X className="h-5 w-5 text-white" />
@@ -328,6 +350,8 @@ export default function CookieConsent() {
                           ) : (
                             <button
                               onClick={() => togglePreference(category.id)}
+                              aria-label={`${isEnabled ? 'Desactivar' : 'Activar'} ${category.title}`}
+                              aria-pressed={isEnabled}
                               className={`relative h-7 w-14 rounded-full transition-all ${
                                 isEnabled ? 'bg-yellow-400' : 'bg-white/10'
                               }`}

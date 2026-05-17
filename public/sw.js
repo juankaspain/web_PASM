@@ -1,6 +1,6 @@
 // Service Worker for Progressive Web App
 // B.5 - Update cache version manually when deploying new content
-const CACHE_VERSION = '3';
+const CACHE_VERSION = '4';
 const CACHE_NAME = `almagro-portfolio-v${CACHE_VERSION}`;
 const RUNTIME_CACHE = `runtime-cache-v${CACHE_VERSION}`;
 const IMAGE_CACHE = `image-cache-v${CACHE_VERSION}`;
@@ -11,6 +11,8 @@ const STATIC_ASSETS = [
   '/offline/',
   '/site.webmanifest',
   '/favicon.svg',
+  '/icon-192.png',
+  '/icon-512.png',
 ];
 
 // Install event - cache static assets

@@ -36,7 +36,7 @@ const socialLinks = [
   },
   {
     name: 'TikTok',
-    url: 'https://www.tiktok.com/@almagro.san.migue',
+    url: 'https://www.tiktok.com/@almagro.san.miguel',
     icon: TikTokIcon,
     iconType: 'custom',
   },

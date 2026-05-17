@@ -152,7 +152,7 @@ const pressInterviews: PressInterview[] = [
     date: '17 de octubre, 2025',
     excerpt:
       'El actor sevillano habla sobre el síndrome del impostor, su papel en Un fantasma en la batalla y cómo las señoras mayores le hablan como a su personaje de La Moderna.',
-    url: 'https://www.lavanguardia.com/gente/20251017/11166920/almagro-san-miguel-principio-tenia-voz-cabeza-me-decia-mal-actor-me-fustiga',
+    url: 'https://www.lavanguardia.com/gente/20251017/11166920/almagro-san-miguel-principio-tenia-voz-cabeza-me-decia-mal-actor-me-fustigaba.html',
   },
   {
     title: 'Entrevista a Almagro San Miguel, el galán de La Moderna',
@@ -176,7 +176,7 @@ const pressInterviews: PressInterview[] = [
     date: '26 de noviembre, 2023',
     excerpt:
       'El actor sevillano explica cómo tuvo que cambiar su ritmo de vida para adaptarse a una serie diaria. El equipo de arte ha reconstruido el Madrid de los años 30.',
-    url: 'https://www.larazon.es/television/series/almagro-san-miguel-cuando-llegue-moderna-pense-donde-metido-voy-morir_202311266562edda5',
+    url: 'https://www.larazon.es/television/series/almagro-san-miguel-cuando-llegue-moderna-pense-donde-metido-voy-morir_202311266562edda533bd20001f4ed9f.html',
   },
   {
     title: 'La pasión por actuar y el respeto a los clásicos del cine',

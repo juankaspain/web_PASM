@@ -99,7 +99,7 @@ export default function Hero() {
     },
     {
       name: 'TikTok',
-      url: 'https://www.tiktok.com/@almagro.san.migue',
+      url: 'https://www.tiktok.com/@almagro.san.miguel',
       icon: TikTokIcon,
       color: 'hover:text-white',
       bgHover: 'hover:bg-white/10',
@@ -224,8 +224,7 @@ export default function Hero() {
         }
 
         .fade-in-up {
-          animation: fadeInUp 0.6s ease-out forwards;
-          opacity: 0;
+          opacity: 1;
         }
 
         .card-hover {
@@ -328,7 +327,7 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.25fr] xl:gap-12">
-          <div className="order-2 flex justify-center lg:order-1 lg:justify-start">
+          <div className="order-2 hidden justify-center lg:order-1 lg:flex lg:justify-start">
             <div className="relative w-full max-w-[480px] lg:max-w-[520px]">
               <div className="absolute inset-0 rounded-[28px] bg-yellow-400/10 blur-3xl lg:rounded-[36px]" />
 
@@ -339,8 +338,6 @@ export default function Hero() {
                   fill
                   className="scale-105 object-cover object-[center_15%]"
                   sizes="(min-width: 1024px) 520px, 90vw"
-                  priority
-                  fetchPriority="high"
                   quality={90}
                   style={{
                     filter: 'brightness(1.05) contrast(1.08) saturate(0.95)',

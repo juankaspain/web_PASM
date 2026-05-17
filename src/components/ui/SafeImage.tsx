@@ -25,14 +25,10 @@ const FALLBACK_SVG = `
 
 const FALLBACK_SRC = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(FALLBACK_SVG)}`
 
-const HERO_IMAGE =
-  'https://github.com/user-attachments/assets/43e8482d-f288-4cd0-b1ad-31e054eafdf4'
-const ABOUT_IMAGE =
-  'https://github.com/user-attachments/assets/0c09e17f-1983-4ad0-8926-a0d6ef6ae5cf'
+const HERO_IMAGE = '/assets/hero/main.jpg'
+const ABOUT_IMAGE = '/assets/about/profile.jpg'
 
 const TEMPORARY_ASSET_OVERRIDES: Record<string, string> = {
-  '/assets/hero/main.jpg': HERO_IMAGE,
-  '/assets/about/profile.jpg': ABOUT_IMAGE,
   '/assets/cinema/fantasma-en-la-batalla.jpg':
     'https://img.youtube.com/vi/R0ufJf5SFIU/hqdefault.jpg',
   '/assets/series/operacion-barrio-ingles.jpg':

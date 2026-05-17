@@ -252,7 +252,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 'https://www.instagram.com/almagrosanmiguel/',
                 'https://x.com/almagroSM',
                 'https://www.facebook.com/almagrosanmiguel/',
-                // TikTok handle corrected: almagro.san.miguel (not almagro.san.migue)
                 'https://www.tiktok.com/@almagro.san.miguel',
               ],
               email: 'info@almagrosanmiguel.com',

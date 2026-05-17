@@ -2,25 +2,25 @@
 RewriteEngine On
 
 # --- P1: Canonical domain --- redirect www to apex (301 permanent)
-RewriteCond %{HTTP_HOST} ^www\.almagrosanmiguel\.com$ [NC]
-RewriteRule ^(.*)$ https://almagrosanmiguel.com/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} ^www\.almagrosanmiguel\.com$ [NC,OR]
+RewriteCond %{HTTP:X-Forwarded-Host} ^www\.almagrosanmiguel\.com$ [NC]
+RewriteRule ^ https://almagrosanmiguel.com%{REQUEST_URI} [R=301,L,NE]
 
 # Security headers
 <IfModule mod_headers.c>
-    Header set X-Content-Type-Options "nosniff"
-    Header set X-Frame-Options "SAMEORIGIN"
-    Header set Referrer-Policy "strict-origin-when-cross-origin"
-    Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" "expr=%{HTTPS} == 'on'"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
     # Improved CSP for HTML pages: default-src self, allow YouTube frames, formspree, etc.
-    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://ssl.google-analytics.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://www.google-analytics.com https://formspree.io; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; media-src 'self' https:; object-src 'none'; base-uri 'self'; frame-ancestors 'self'"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://ssl.google-analytics.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://www.google-analytics.com https://formspree.io; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; media-src 'self' https:; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
 </IfModule>
 
-# HTML - no cache (ensures updates are picked up immediately)
+# HTML - browser revalidates while shared/CDN caches can keep a stable shell.
 <FilesMatch "\.(html)$">
     <IfModule mod_headers.c>
-        Header set Cache-Control "no-cache, no-store, must-revalidate"
-        Header set Pragma "no-cache"
-        Header set Expires 0
+        Header set Cache-Control "public, max-age=0, s-maxage=31536000, stale-while-revalidate=86400"
     </IfModule>
 </FilesMatch>
 

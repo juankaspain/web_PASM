@@ -1,28 +1,11 @@
 'use client'
 
-import { Suspense } from 'react'
+import dynamic from 'next/dynamic'
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/sections/Hero'
-import LatestProject from '@/components/sections/LatestProject'
-import About from '@/components/sections/About'
-import Series from '@/components/sections/Series'
-import Cinema from '@/components/sections/Cinema'
-import Theater from '@/components/sections/Theater'
-import Skills from '@/components/sections/Skills'
-import Headshots from '@/components/sections/Headshots'
-import Timeline from '@/components/sections/Timeline'
-import Milestones from '@/components/sections/Milestones'
-import Awards from '@/components/sections/Awards'
-import Calendar from '@/components/sections/Calendar'
-import Gallery from '@/components/sections/Gallery'
-import Showreel from '@/components/sections/Showreel'
-import Testimonials from '@/components/sections/Testimonials'
-import Press from '@/components/sections/Press'
-import Blog from '@/components/sections/Blog'
-import PressKit from '@/components/sections/PressKit'
-import Contact from '@/components/sections/Contact'
 import Footer from '@/components/Footer'
 import ScrollToTop from '@/components/ui/ScrollToTop'
+import { useOneShotInView } from '@/hooks/useOneShotInView'
 import {
   SectionSkeleton,
   ShowreelSkeleton,
@@ -32,22 +15,96 @@ import {
   TimelineSkeleton,
 } from '@/components/ui/Skeleton'
 
-// Keep home sections in the main route bundle to avoid fragile post-deploy chunk loads.
-/** Wrapper that reserves vertical space for below-fold sections to prevent CLS */
-function LazySection({
-  children,
+const LatestProject = dynamic(() => import('@/components/sections/LatestProject'), {
+  loading: () => <SectionSkeleton />,
+  ssr: false,
+})
+const About = dynamic(() => import('@/components/sections/About'), {
+  loading: () => <SectionSkeleton />,
+  ssr: false,
+})
+const Skills = dynamic(() => import('@/components/sections/Skills'), {
+  loading: () => <SectionSkeleton />,
+  ssr: false,
+})
+const Series = dynamic(() => import('@/components/sections/Series'), {
+  loading: () => <SectionSkeleton />,
+  ssr: false,
+})
+const Cinema = dynamic(() => import('@/components/sections/Cinema'), {
+  loading: () => <SectionSkeleton />,
+  ssr: false,
+})
+const Theater = dynamic(() => import('@/components/sections/Theater'), {
+  loading: () => <SectionSkeleton />,
+  ssr: false,
+})
+const Timeline = dynamic(() => import('@/components/sections/Timeline'), {
+  loading: () => <TimelineSkeleton />,
+  ssr: false,
+})
+const Milestones = dynamic(() => import('@/components/sections/Milestones'), {
+  loading: () => <SectionSkeleton />,
+  ssr: false,
+})
+const Awards = dynamic(() => import('@/components/sections/Awards'), {
+  loading: () => <SectionSkeleton />,
+  ssr: false,
+})
+const Calendar = dynamic(() => import('@/components/sections/Calendar'), {
+  loading: () => <SectionSkeleton />,
+  ssr: false,
+})
+const Headshots = dynamic(() => import('@/components/sections/Headshots'), {
+  loading: () => <GallerySkeleton />,
+  ssr: false,
+})
+const Gallery = dynamic(() => import('@/components/sections/Gallery'), {
+  loading: () => <GallerySkeleton />,
+  ssr: false,
+})
+const Showreel = dynamic(() => import('@/components/sections/Showreel'), {
+  loading: () => <ShowreelSkeleton />,
+  ssr: false,
+})
+const Testimonials = dynamic(() => import('@/components/sections/Testimonials'), {
+  loading: () => <TestimonialsSkeleton />,
+  ssr: false,
+})
+const Press = dynamic(() => import('@/components/sections/Press'), {
+  loading: () => <SectionSkeleton />,
+  ssr: false,
+})
+const Blog = dynamic(() => import('@/components/sections/Blog'), {
+  loading: () => <SectionSkeleton />,
+  ssr: false,
+})
+const PressKit = dynamic(() => import('@/components/sections/PressKit'), {
+  loading: () => <SectionSkeleton />,
+  ssr: false,
+})
+const Contact = dynamic(() => import('@/components/sections/Contact'), {
+  loading: () => <ContactSkeleton />,
+  ssr: false,
+})
+
+function DeferredSection({
+  Component,
   fallback,
   minHeight = 'min-h-[400px]',
 }: {
-  children: React.ReactNode
+  Component: React.ComponentType
   fallback: React.ReactNode
   minHeight?: string
 }) {
+  const [ref, isInView] = useOneShotInView({
+    rootMargin: '150px 0px',
+    threshold: 0,
+  })
+
   return (
-    <div data-testid="lazy-section" className={`content-auto ${minHeight}`}>
-      <Suspense fallback={<div className={minHeight}>{fallback}</div>}>
-        {children}
-      </Suspense>
+    <div ref={ref} data-testid="lazy-section" className={`content-auto ${minHeight}`}>
+      {isInView ? <Component /> : fallback}
     </div>
   )
 }
@@ -60,76 +117,52 @@ export default function ClientPage() {
       <Hero />
 
       {/* Latest Project - Immediately after hero to showcase current work */}
-      <LazySection fallback={<SectionSkeleton />}>
-        <LatestProject />
-      </LazySection>
+      <DeferredSection Component={LatestProject} fallback={<SectionSkeleton />} />
 
       {/* Core sections - Optimized for casting directors */}
-      <LazySection fallback={<SectionSkeleton />}>
-        <About />
-      </LazySection>
-      <LazySection fallback={<SectionSkeleton />}>
-        <Skills />
-      </LazySection>
+      <DeferredSection Component={About} fallback={<SectionSkeleton />} />
+      <DeferredSection Component={Skills} fallback={<SectionSkeleton />} />
 
       {/* Filmography sections */}
-      <LazySection fallback={<SectionSkeleton />}>
-        <Series />
-      </LazySection>
-      <LazySection fallback={<SectionSkeleton />}>
-        <Cinema />
-      </LazySection>
-      <LazySection fallback={<SectionSkeleton />}>
-        <Theater />
-      </LazySection>
+      <DeferredSection Component={Series} fallback={<SectionSkeleton />} />
+      <DeferredSection Component={Cinema} fallback={<SectionSkeleton />} />
+      <DeferredSection Component={Theater} fallback={<SectionSkeleton />} />
 
       {/* Career sections */}
-      <LazySection fallback={<TimelineSkeleton />}>
-        <Timeline />
-      </LazySection>
-      <LazySection fallback={<SectionSkeleton />}>
-        <Milestones />
-      </LazySection>
-      <LazySection fallback={<SectionSkeleton />}>
-        <Awards />
-      </LazySection>
+      <DeferredSection Component={Timeline} fallback={<TimelineSkeleton />} />
+      <DeferredSection Component={Milestones} fallback={<SectionSkeleton />} />
+      <DeferredSection Component={Awards} fallback={<SectionSkeleton />} />
 
       {/* Events & Schedule */}
-      <LazySection fallback={<SectionSkeleton />}>
-        <Calendar />
-      </LazySection>
+      <DeferredSection Component={Calendar} fallback={<SectionSkeleton />} />
 
       {/* Media sections */}
-      <LazySection fallback={<GallerySkeleton />} minHeight="min-h-[500px]">
-        <Headshots />
-      </LazySection>
-      <LazySection fallback={<GallerySkeleton />} minHeight="min-h-[500px]">
-        <Gallery />
-      </LazySection>
+      <DeferredSection
+        Component={Headshots}
+        fallback={<GallerySkeleton />}
+        minHeight="min-h-[500px]"
+      />
+      <DeferredSection
+        Component={Gallery}
+        fallback={<GallerySkeleton />}
+        minHeight="min-h-[500px]"
+      />
 
       {/* Media & Declarations */}
-      <LazySection fallback={<ShowreelSkeleton />} minHeight="min-h-[500px]">
-        <Showreel />
-      </LazySection>
-      <LazySection fallback={<TestimonialsSkeleton />}>
-        <Testimonials />
-      </LazySection>
-      <LazySection fallback={<SectionSkeleton />}>
-        <Press />
-      </LazySection>
+      <DeferredSection
+        Component={Showreel}
+        fallback={<ShowreelSkeleton />}
+        minHeight="min-h-[500px]"
+      />
+      <DeferredSection Component={Testimonials} fallback={<TestimonialsSkeleton />} />
+      <DeferredSection Component={Press} fallback={<SectionSkeleton />} />
 
       {/* Blog */}
-      <LazySection fallback={<SectionSkeleton />}>
-        <Blog />
-      </LazySection>
+      <DeferredSection Component={Blog} fallback={<SectionSkeleton />} />
 
       {/* Professional sections */}
-      <LazySection fallback={<SectionSkeleton />}>
-        <PressKit />
-      </LazySection>
-      <LazySection fallback={<ContactSkeleton />}>
-        <Contact />
-      </LazySection>
+      <DeferredSection Component={PressKit} fallback={<SectionSkeleton />} />
+      <DeferredSection Component={Contact} fallback={<ContactSkeleton />} />
 
       {/* Footer */}
       <Footer />

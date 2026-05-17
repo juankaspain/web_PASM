@@ -134,6 +134,7 @@ export default function LatestProject() {
                   href="https://www.youtube.com/watch?v=R0ufJf5SFIU"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Ver tráiler de Un fantasma en la batalla en YouTube"
                   className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                 >
                   <div className="flex h-20 w-20 items-center justify-center rounded-full bg-red-600 shadow-2xl transition-transform hover:scale-110">

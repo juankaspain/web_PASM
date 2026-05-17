@@ -8,6 +8,9 @@ export const metadata: Metadata = {
     index: false,
     follow: false,
   },
+  alternates: {
+    canonical: 'https://almagrosanmiguel.com/404/',
+  },
 }
 
 export default function NotFound() {
